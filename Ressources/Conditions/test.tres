@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="GroupCondition" load_steps=5 format=3 uid="uid://c6ubcr3c0kkto"]
+
+[ext_resource type="Script" uid="uid://ufcpgmdje658" path="res://Ressources/Conditions/condition.gd" id="1_nuujg"]
+[ext_resource type="Script" uid="uid://tvgcv4p54p7o" path="res://Ressources/Conditions/condition_state.gd" id="2_87nul"]
+[ext_resource type="Script" uid="uid://bmamsrvsbn2aw" path="res://Ressources/Conditions/group_condition.gd" id="3_um5gx"]
+
+[sub_resource type="Resource" id="Resource_qekax"]
+script = ExtResource("2_87nul")
+valid_state = Array[NodePath]([NodePath("StateMachine/Charge")])
+metadata/_custom_type_script = "uid://tvgcv4p54p7o"
+
+[resource]
+script = ExtResource("3_um5gx")
+conditions = Array[ExtResource("1_nuujg")]([SubResource("Resource_qekax")])
+metadata/_custom_type_script = "uid://bmamsrvsbn2aw"

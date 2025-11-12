@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8wa1bb4e5mxe"]
+
+[ext_resource type="PackedScene" uid="uid://b74kbwhwtmiu5" path="res://Components/BasiqueMovement/bassqiue_movement_component.tscn" id="1_qhpp6"]
+
+[sub_resource type="GDScript" id="GDScript_5hxnu"]
+script/source = "extends BMC
+class_name BMC_Player
+
+signal try_to_bent_down
+
+func _input(_event: InputEvent) -> void:
+	dir.x = Input.get_axis(\"look left\", \"look right\")
+	
+	if Input.is_action_just_pressed(\"Jump\") and object.is_on_floor():
+		state_machine_y.set_state_with_string(\"Jump\")
+	else:
+		state_machine_y.set_state_with_string(\"Fall\")
+	
+	if state_machine_y.get_state_name() == \"Grounded\":
+		if Input.is_action_pressed(\"BentDown\"):
+			try_to_bent_down.emit()
+		else :
+			state_machine_y.current_state = state_machine_y.previous_state
+"
+
+[node name="BMC_Player" instance=ExtResource("1_qhpp6")]
+script = SubResource("GDScript_5hxnu")

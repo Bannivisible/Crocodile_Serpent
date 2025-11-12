@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="AdditionalState" load_steps=9 format=3 uid="uid://dlk3k1su5qv0a"]
+
+[ext_resource type="Script" uid="uid://ufcpgmdje658" path="res://Ressources/Conditions/condition.gd" id="1_5y106"]
+[ext_resource type="Script" uid="uid://dl6go1jt8ttpm" path="res://Ressources/AdditionalStates/additional_state.gd" id="1_vnjfd"]
+[ext_resource type="Script" uid="uid://b730gnwe3got2" path="res://Ressources/Conditions/Inputs/condition_input.gd" id="2_2mne8"]
+[ext_resource type="Script" uid="uid://t1y8h2xnlvsi" path="res://Components/BasiqueMovement/States/bent_down.gd" id="3_2mne8"]
+[ext_resource type="Script" uid="uid://tvgcv4p54p7o" path="res://Ressources/Conditions/condition_state.gd" id="3_7lvfi"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_2mne8"]
+action = &"look down"
+
+[sub_resource type="Resource" id="Resource_7lvfi"]
+script = ExtResource("2_2mne8")
+input_action = SubResource("InputEventAction_2mne8")
+metadata/_custom_type_script = "uid://b730gnwe3got2"
+
+[sub_resource type="Resource" id="Resource_bcun2"]
+script = ExtResource("3_7lvfi")
+who = "COMPONENT"
+state_machine_path = NodePath("StateMachineY")
+valid_state = Array[NodePath]([NodePath(".")])
+metadata/_custom_type_script = "uid://tvgcv4p54p7o"
+
+[resource]
+script = ExtResource("1_vnjfd")
+name = "BentDown"
+state_script = ExtResource("3_2mne8")
+conditions = Array[ExtResource("1_5y106")]([SubResource("Resource_7lvfi"), SubResource("Resource_bcun2")])
+metadata/_custom_type_script = "uid://dl6go1jt8ttpm"

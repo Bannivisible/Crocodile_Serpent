@@ -1,0 +1,8 @@
+[gd_resource type="SkeletonModification2DLookAt" format=3 uid="uid://b22cehgl1aw1a"]
+
+[resource]
+enabled = false
+bone_index = 3
+bone2d_node = NodePath("Center/Body/Torso/Head")
+target_nodepath = NodePath("../SkeletonTargets/HeadLookAt")
+editor/draw_gizmo = false

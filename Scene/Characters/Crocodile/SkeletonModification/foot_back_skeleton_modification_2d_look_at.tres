@@ -1,0 +1,12 @@
+[gd_resource type="SkeletonModification2DLookAt" format=3 uid="uid://ipi3j2b3sdth"]
+
+[resource]
+bone_index = 21
+bone2d_node = NodePath("Center/ThighBack/LegBack/FootBack")
+target_nodepath = NodePath("../SkeletonTargets/AnkleBack/FootBackLookAt")
+enable_constraint = true
+constraint_angle_min = 289.151
+constraint_angle_max = 110.76888
+constraint_angle_invert = true
+constraint_in_localspace = true
+editor/draw_gizmo = false

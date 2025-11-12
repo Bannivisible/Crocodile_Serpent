@@ -1,0 +1,46 @@
+[gd_resource type="Resource" script_class="ConditionForAction" load_steps=14 format=3 uid="uid://doc8s1ijgpu2r"]
+
+[ext_resource type="Script" uid="uid://d0v33ys2dynyh" path="res://Ressources/Actions/action.gd" id="1_ea6su"]
+[ext_resource type="Script" uid="uid://duk8detg00tcg" path="res://Ressources/Actions/action_set_state.gd" id="2_81p1g"]
+[ext_resource type="Script" uid="uid://bfpqvky0w7btn" path="res://Ressources/Actions/action_rotated.gd" id="3_pncun"]
+[ext_resource type="Resource" uid="uid://b6ywrgfssk86r" path="res://Ressources/Actions/Usefull/free_immobilize_bmc.tres" id="4_81p1g"]
+[ext_resource type="Script" uid="uid://ufcpgmdje658" path="res://Ressources/Conditions/condition.gd" id="4_eprjb"]
+[ext_resource type="Script" uid="uid://b730gnwe3got2" path="res://Ressources/Conditions/Inputs/condition_input.gd" id="5_ht0y1"]
+[ext_resource type="Script" uid="uid://dyglpbhv533ei" path="res://Ressources/ConditionForAction/condition_for_action.gd" id="6_ke7ha"]
+[ext_resource type="Script" uid="uid://tvgcv4p54p7o" path="res://Ressources/Conditions/condition_state.gd" id="7_pncun"]
+
+[sub_resource type="Resource" id="Resource_8rc7h"]
+script = ExtResource("2_81p1g")
+who = "CONTEXT"
+context_object_name = "current_projectile"
+state = NodePath("LinearMovement")
+metadata/_custom_type_script = "uid://duk8detg00tcg"
+
+[sub_resource type="Resource" id="Resource_24cs5"]
+script = ExtResource("3_pncun")
+who = "CONTEXT"
+context_object_name = "current_projectile"
+instant = true
+metadata/_custom_type_script = "uid://bfpqvky0w7btn"
+
+[sub_resource type="InputEventAction" id="InputEventAction_kuxmm"]
+action = &"attack"
+
+[sub_resource type="Resource" id="Resource_qh2ib"]
+script = ExtResource("5_ht0y1")
+input_action = SubResource("InputEventAction_kuxmm")
+input_type = "JustRealease"
+metadata/_custom_type_script = "uid://b730gnwe3got2"
+
+[sub_resource type="Resource" id="Resource_eprjb"]
+script = ExtResource("7_pncun")
+who = "CONTEXT"
+context_object_name = "current_projectile"
+valid_state = Array[NodePath]([NodePath("StateMachine/Appear")])
+metadata/_custom_type_script = "uid://tvgcv4p54p7o"
+
+[resource]
+script = ExtResource("6_ke7ha")
+conditions = Array[ExtResource("4_eprjb")]([SubResource("Resource_qh2ib"), SubResource("Resource_eprjb")])
+actions = Array[ExtResource("1_ea6su")]([SubResource("Resource_8rc7h"), SubResource("Resource_24cs5"), ExtResource("4_81p1g")])
+metadata/_custom_type_script = "uid://dyglpbhv533ei"

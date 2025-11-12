@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="ConditionForAction" load_steps=9 format=3 uid="uid://3bj8o7rae20l"]
+
+[ext_resource type="Script" uid="uid://d0v33ys2dynyh" path="res://Ressources/Actions/action.gd" id="1_kof22"]
+[ext_resource type="Script" uid="uid://38fflrbqudfk" path="res://Ressources/Actions/action_modify_property.gd" id="2_5rptp"]
+[ext_resource type="Script" uid="uid://ufcpgmdje658" path="res://Ressources/Conditions/condition.gd" id="2_7e5lu"]
+[ext_resource type="Script" uid="uid://1iit2714x0s4" path="res://Ressources/Conditions/Inputs/condition_joy_stick_used.gd" id="3_5rptp"]
+[ext_resource type="Script" uid="uid://dyglpbhv533ei" path="res://Ressources/ConditionForAction/condition_for_action.gd" id="4_ua2st"]
+[ext_resource type="Resource" uid="uid://7tjdj8lohdgc" path="res://Ressources/Actions/Usefull/modify_linear_movement_direction.tres" id="5_us3jy"]
+
+[sub_resource type="Resource" id="Resource_ua2st"]
+script = ExtResource("2_5rptp")
+who = "CONTEXT"
+context_node_name = "current_projectile"
+node_path = NodePath("StateMachine/LinearMovement")
+property_name = &"direction"
+method_type = "CONTEXT KEY"
+value_arbitrary = null
+value_context_key = &"dir"
+metadata/_custom_type_script = "uid://38fflrbqudfk"
+
+[sub_resource type="Resource" id="Resource_rlp0t"]
+script = ExtResource("3_5rptp")
+metadata/_custom_type_script = "uid://1iit2714x0s4"
+
+[resource]
+script = ExtResource("4_ua2st")
+conditions = Array[ExtResource("2_7e5lu")]([SubResource("Resource_rlp0t")])
+actions = Array[ExtResource("1_kof22")]([SubResource("Resource_ua2st")])
+reversed_actions = Array[ExtResource("1_kof22")]([ExtResource("5_us3jy")])
+metadata/_custom_type_script = "uid://dyglpbhv533ei"

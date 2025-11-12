@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ConditionForAction" load_steps=7 format=3 uid="uid://dawluqjictx7s"]
+
+[ext_resource type="Script" uid="uid://d0v33ys2dynyh" path="res://Ressources/Actions/action.gd" id="1_8wj2o"]
+[ext_resource type="Script" uid="uid://ufcpgmdje658" path="res://Ressources/Conditions/condition.gd" id="2_014nq"]
+[ext_resource type="Script" uid="uid://dyi5yj0mrb18g" path="res://Ressources/Conditions/Inputs/condition_charge_input.gd" id="3_sqprr"]
+[ext_resource type="Script" uid="uid://dyglpbhv533ei" path="res://Ressources/ConditionForAction/condition_for_action.gd" id="4_splvc"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_njupg"]
+action = &"attack"
+
+[sub_resource type="Resource" id="Resource_jopo8"]
+script = ExtResource("3_sqprr")
+input_action = SubResource("InputEventAction_njupg")
+minimum_rate = 0.2
+metadata/_custom_type_script = "uid://dyi5yj0mrb18g"
+
+[resource]
+script = ExtResource("4_splvc")
+conditions = Array[ExtResource("2_014nq")]([SubResource("Resource_jopo8")])
+metadata/_custom_type_script = "uid://dyglpbhv533ei"

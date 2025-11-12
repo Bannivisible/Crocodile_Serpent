@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="ConditionForAction" load_steps=11 format=3 uid="uid://m4wd7fjlc83p"]
+
+[ext_resource type="Script" uid="uid://d0v33ys2dynyh" path="res://Ressources/Actions/action.gd" id="1_d5k58"]
+[ext_resource type="Script" uid="uid://duk8detg00tcg" path="res://Ressources/Actions/action_set_state.gd" id="2_jvo12"]
+[ext_resource type="Script" uid="uid://ufcpgmdje658" path="res://Ressources/Conditions/condition.gd" id="3_i7458"]
+[ext_resource type="Script" uid="uid://b730gnwe3got2" path="res://Ressources/Conditions/Inputs/condition_input.gd" id="4_x2m71"]
+[ext_resource type="Script" uid="uid://tvgcv4p54p7o" path="res://Ressources/Conditions/condition_state.gd" id="5_b1301"]
+[ext_resource type="Script" uid="uid://dyglpbhv533ei" path="res://Ressources/ConditionForAction/condition_for_action.gd" id="5_ux81a"]
+
+[sub_resource type="Resource" id="Resource_ulrdj"]
+script = ExtResource("2_jvo12")
+who = "COMPONENT"
+state_machine_path = NodePath("StateMachineY/Air")
+state = NodePath("StateMachineY/Air/Jump")
+metadata/_custom_type_script = "uid://duk8detg00tcg"
+
+[sub_resource type="InputEventAction" id="InputEventAction_s5mob"]
+action = &"Jump"
+
+[sub_resource type="Resource" id="Resource_1etbk"]
+script = ExtResource("4_x2m71")
+input_action = SubResource("InputEventAction_s5mob")
+metadata/_custom_type_script = "uid://b730gnwe3got2"
+
+[sub_resource type="Resource" id="Resource_su0up"]
+script = ExtResource("5_b1301")
+who = "COMPONENT"
+state_machine_path = NodePath("StateMachineY")
+valid_state = Array[NodePath]([NodePath("StateMachineY/Air")])
+reversed = true
+metadata/_custom_type_script = "uid://tvgcv4p54p7o"
+
+[resource]
+script = ExtResource("5_ux81a")
+conditions = Array[ExtResource("3_i7458")]([SubResource("Resource_1etbk"), SubResource("Resource_su0up")])
+actions = Array[ExtResource("1_d5k58")]([SubResource("Resource_ulrdj")])
+metadata/_custom_type_script = "uid://dyglpbhv533ei"

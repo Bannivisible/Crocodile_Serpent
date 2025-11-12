@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="ConditionForAction" load_steps=11 format=3 uid="uid://c6h00dt7fpxnb"]
+
+[ext_resource type="Script" uid="uid://d0v33ys2dynyh" path="res://Ressources/Actions/action.gd" id="1_vnsyt"]
+[ext_resource type="PackedScene" uid="uid://t1buea63lkc4" path="res://Scene/Projectile/FireBall/SuperFireBall/projectile_super_fire_ball.tscn" id="2_vt2re"]
+[ext_resource type="Script" uid="uid://dg6bs3dyq4hca" path="res://Ressources/Actions/action_spawn_projectile.gd" id="3_7f888"]
+[ext_resource type="Script" uid="uid://ufcpgmdje658" path="res://Ressources/Conditions/condition.gd" id="4_cndmg"]
+[ext_resource type="Resource" uid="uid://clhln7c3lxw3e" path="res://Ressources/Actions/Usefull/immobilize_bmc.tres" id="4_vt2re"]
+[ext_resource type="Script" uid="uid://b730gnwe3got2" path="res://Ressources/Conditions/Inputs/condition_input.gd" id="5_y1e1x"]
+[ext_resource type="Script" uid="uid://dyglpbhv533ei" path="res://Ressources/ConditionForAction/condition_for_action.gd" id="6_yqeii"]
+
+[sub_resource type="Resource" id="Resource_1mv2l"]
+script = ExtResource("3_7f888")
+projectile_scene = ExtResource("2_vt2re")
+metadata/_custom_type_script = "uid://dg6bs3dyq4hca"
+
+[sub_resource type="InputEventAction" id="InputEventAction_4qa3w"]
+action = &"attack"
+
+[sub_resource type="Resource" id="Resource_kuxmm"]
+script = ExtResource("5_y1e1x")
+input_action = SubResource("InputEventAction_4qa3w")
+metadata/_custom_type_script = "uid://b730gnwe3got2"
+
+[resource]
+script = ExtResource("6_yqeii")
+conditions = Array[ExtResource("4_cndmg")]([SubResource("Resource_kuxmm")])
+actions = Array[ExtResource("1_vnsyt")]([SubResource("Resource_1mv2l"), ExtResource("4_vt2re")])
+metadata/_custom_type_script = "uid://dyglpbhv533ei"

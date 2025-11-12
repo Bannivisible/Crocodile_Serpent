@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="ConditionForAction" load_steps=11 format=3 uid="uid://do40clfmul0jk"]
+
+[ext_resource type="Script" uid="uid://d0v33ys2dynyh" path="res://Ressources/Actions/action.gd" id="1_gopou"]
+[ext_resource type="Script" uid="uid://duk8detg00tcg" path="res://Ressources/Actions/action_set_state.gd" id="2_m7o7n"]
+[ext_resource type="Script" uid="uid://ufcpgmdje658" path="res://Ressources/Conditions/condition.gd" id="2_vbmmq"]
+[ext_resource type="Script" uid="uid://dyglpbhv533ei" path="res://Ressources/ConditionForAction/condition_for_action.gd" id="3_hcgcs"]
+[ext_resource type="Script" uid="uid://tvgcv4p54p7o" path="res://Ressources/Conditions/condition_state.gd" id="4_sr2ot"]
+[ext_resource type="Script" uid="uid://b730gnwe3got2" path="res://Ressources/Conditions/Inputs/condition_input.gd" id="5_tf4hu"]
+
+[sub_resource type="Resource" id="Resource_h385j"]
+script = ExtResource("2_m7o7n")
+who = "COMPONENT"
+state_machine_path = NodePath("StateMachineY/Air")
+state = NodePath("StateMachineY/Air/Fall")
+metadata/_custom_type_script = "uid://duk8detg00tcg"
+
+[sub_resource type="Resource" id="Resource_8xwd6"]
+script = ExtResource("4_sr2ot")
+who = "COMPONENT"
+state_machine_path = NodePath("StateMachineY/Air")
+valid_state = Array[NodePath]([NodePath("StateMachineY/Air/Jump")])
+metadata/_custom_type_script = "uid://tvgcv4p54p7o"
+
+[sub_resource type="InputEventAction" id="InputEventAction_4bery"]
+action = &"Jump"
+
+[sub_resource type="Resource" id="Resource_5etog"]
+script = ExtResource("5_tf4hu")
+input_action = SubResource("InputEventAction_4bery")
+input_type = "JustRealease"
+metadata/_custom_type_script = "uid://b730gnwe3got2"
+
+[resource]
+script = ExtResource("3_hcgcs")
+conditions = Array[ExtResource("2_vbmmq")]([SubResource("Resource_8xwd6"), SubResource("Resource_5etog")])
+actions = Array[ExtResource("1_gopou")]([SubResource("Resource_h385j")])
+metadata/_custom_type_script = "uid://dyglpbhv533ei"

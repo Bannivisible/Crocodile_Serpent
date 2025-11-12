@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ActionModifyProperty" load_steps=2 format=3 uid="uid://7tjdj8lohdgc"]
+
+[ext_resource type="Script" uid="uid://38fflrbqudfk" path="res://Ressources/Actions/action_modify_property.gd" id="1_id1h2"]
+
+[resource]
+script = ExtResource("1_id1h2")
+who = "CONTEXT"
+context_node_name = "current_projectile"
+node_path = NodePath("StateMachine/LinearMovement")
+property_name = &"direction"
+method_type = "ATTRIBUTE"
+value_arbitrary = null
+attr_attribute_name = &"facing_direction"
+attr_node_path = NodePath("BMC")
+metadata/_custom_type_script = "uid://38fflrbqudfk"

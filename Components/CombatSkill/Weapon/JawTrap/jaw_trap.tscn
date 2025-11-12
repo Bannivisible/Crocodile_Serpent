@@ -1,0 +1,134 @@
+[gd_scene load_steps=24 format=3 uid="uid://ds4i8cup57akf"]
+
+[ext_resource type="PackedScene" uid="uid://cpouj03mf7op6" path="res://Components/CombatSkill/Weapon/weapon.tscn" id="1_r7s7m"]
+[ext_resource type="Script" uid="uid://bhcip3r7gigab" path="res://Components/CombatSkill/Weapon/JawTrap/jaw_trap.gd" id="2_g4jcv"]
+[ext_resource type="Script" uid="uid://c20oatp4y0el5" path="res://Ressources/Statistics/Stats/critical_rate.gd" id="3_4d2f6"]
+[ext_resource type="Script" uid="uid://42c2b5rma8ot" path="res://Components/CombatSkill/Weapon/weapon_hit_box.gd" id="4_5pxtx"]
+[ext_resource type="Texture2D" uid="uid://qkqqtx1bnvjk" path="res://Components/CombatSkill/Weapon/JawTrap/Assets/jaw_trap_texture.tres" id="4_jeet7"]
+[ext_resource type="Script" uid="uid://bpo8hybdit330" path="res://Ressources/Attack/WeaponAttack/weapon_attack_data.gd" id="5_4d2f6"]
+[ext_resource type="Script" uid="uid://ce7ave72wm32j" path="res://Ressources/Attack/attack_data.gd" id="5_v0eml"]
+[ext_resource type="Script" uid="uid://danilkv671r1y" path="res://Ressources/Attack/AttackType/attack_type.gd" id="6_jeet7"]
+[ext_resource type="Texture2D" uid="uid://bppfppgp3n74q" path="res://Components/CombatSkill/Weapon/JawTrap/Assets/piege_a_machoire_back_up/En main.PNG" id="8_v0eml"]
+
+[sub_resource type="Resource" id="Resource_v0eml"]
+script = ExtResource("3_4d2f6")
+value = 0.5
+metadata/_custom_type_script = "uid://c20oatp4y0el5"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jeet7"]
+atlas = ExtResource("4_jeet7")
+region = Rect2(0, 128, 101, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dp6s7"]
+atlas = ExtResource("4_jeet7")
+region = Rect2(101, 0, 101, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_86vhf"]
+atlas = ExtResource("4_jeet7")
+region = Rect2(102, 64, 101, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nise0"]
+atlas = ExtResource("4_jeet7")
+region = Rect2(0, 128, 101, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2xnf2"]
+atlas = ExtResource("4_jeet7")
+region = Rect2(101, 0, 101, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ld3kv"]
+atlas = ExtResource("4_jeet7")
+region = Rect2(102, 64, 101, 64)
+
+[sub_resource type="Resource" id="Resource_jeet7"]
+script = ExtResource("3_4d2f6")
+metadata/_custom_type_script = "uid://c20oatp4y0el5"
+
+[sub_resource type="Resource" id="Resource_86vhf"]
+script = ExtResource("5_4d2f6")
+add_crit_rate = SubResource("Resource_jeet7")
+metadata/_custom_type_script = "uid://bpo8hybdit330"
+
+[sub_resource type="Resource" id="Resource_dp6s7"]
+script = ExtResource("6_jeet7")
+type = 1
+metadata/_custom_type_script = "uid://danilkv671r1y"
+
+[sub_resource type="Resource" id="Resource_nise0"]
+script = ExtResource("5_v0eml")
+type = SubResource("Resource_dp6s7")
+metadata/_custom_type_script = "uid://ce7ave72wm32j"
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jeet7"]
+radius = 35.0
+height = 232.0
+
+[sub_resource type="Animation" id="Animation_jeet7"]
+resource_name = "AttackSlash1"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_86vhf"]
+_data = {
+&"AttackSlash1": SubResource("Animation_jeet7")
+}
+
+[node name="JawTrap" instance=ExtResource("1_r7s7m")]
+rotation = -1.5707964
+script = ExtResource("2_g4jcv")
+critical_rate = SubResource("Resource_v0eml")
+gap = Vector2(100, -100)
+
+[node name="Visual" type="Node2D" parent="." index="0"]
+
+[node name="Front" type="Node2D" parent="Visual" index="0"]
+
+[node name="Offest" type="Marker2D" parent="Visual/Front" index="0"]
+position = Vector2(0, -49)
+
+[node name="Sleeve" type="Sprite2D" parent="Visual/Front/Offest" index="0"]
+position = Vector2(-2.3841858e-07, 52)
+texture = SubResource("AtlasTexture_jeet7")
+
+[node name="Iron" type="Sprite2D" parent="Visual/Front/Offest" index="1"]
+position = Vector2(1, 19.999998)
+texture = SubResource("AtlasTexture_dp6s7")
+
+[node name="Jaw" type="Sprite2D" parent="Visual/Front/Offest" index="2"]
+position = Vector2(1.0000001, -35)
+texture = SubResource("AtlasTexture_86vhf")
+
+[node name="Back" type="Node2D" parent="Visual" index="1"]
+visible = false
+
+[node name="Offest" type="Marker2D" parent="Visual/Back" index="0"]
+position = Vector2(0, -49)
+
+[node name="Sleeve" type="Sprite2D" parent="Visual/Back/Offest" index="0"]
+position = Vector2(-2.3841858e-07, 52)
+texture = SubResource("AtlasTexture_nise0")
+
+[node name="Iron" type="Sprite2D" parent="Visual/Back/Offest" index="1"]
+position = Vector2(1, 19.999998)
+texture = SubResource("AtlasTexture_2xnf2")
+
+[node name="Jaw" type="Sprite2D" parent="Visual/Back/Offest" index="2"]
+position = Vector2(1.0000001, -35)
+texture = SubResource("AtlasTexture_ld3kv")
+
+[node name="WeaponHitBox" type="Area2D" parent="." index="1"]
+script = ExtResource("4_5pxtx")
+weapon_attck_data = SubResource("Resource_86vhf")
+attack_data = SubResource("Resource_nise0")
+metadata/_custom_type_script = "uid://42c2b5rma8ot"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponHitBox" index="0"]
+shape = SubResource("CapsuleShape2D_jeet7")
+debug_color = Color(1, 0, 0, 0.41960785)
+
+[node name="EnMain" type="Sprite2D" parent="." index="2"]
+visible = false
+modulate = Color(1, 1, 1, 0.30980393)
+texture = ExtResource("8_v0eml")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
+libraries = {
+&"": SubResource("AnimationLibrary_86vhf")
+}

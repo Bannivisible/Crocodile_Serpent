@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ConditionForAction" load_steps=8 format=3 uid="uid://c6ky0coupkow4"]
+
+[ext_resource type="Script" uid="uid://d0v33ys2dynyh" path="res://Ressources/Actions/action.gd" id="1_tptf1"]
+[ext_resource type="Script" uid="uid://bfpqvky0w7btn" path="res://Ressources/Actions/action_rotated.gd" id="2_qxgmw"]
+[ext_resource type="Script" uid="uid://ufcpgmdje658" path="res://Ressources/Conditions/condition.gd" id="3_ucqsk"]
+[ext_resource type="Script" uid="uid://1iit2714x0s4" path="res://Ressources/Conditions/Inputs/condition_joy_stick_used.gd" id="4_q41cf"]
+[ext_resource type="Script" uid="uid://dyglpbhv533ei" path="res://Ressources/ConditionForAction/condition_for_action.gd" id="5_cbalt"]
+
+[sub_resource type="Resource" id="Resource_4dnrl"]
+script = ExtResource("2_qxgmw")
+who = "COMPONENT"
+metadata/_custom_type_script = "uid://bfpqvky0w7btn"
+
+[sub_resource type="Resource" id="Resource_6hnjf"]
+script = ExtResource("4_q41cf")
+metadata/_custom_type_script = "uid://1iit2714x0s4"
+
+[resource]
+script = ExtResource("5_cbalt")
+conditions = Array[ExtResource("3_ucqsk")]([SubResource("Resource_6hnjf")])
+actions = Array[ExtResource("1_tptf1")]([SubResource("Resource_4dnrl")])
+metadata/_custom_type_script = "uid://dyglpbhv533ei"

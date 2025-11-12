@@ -1,0 +1,8 @@
+[gd_resource type="SkeletonModification2DLookAt" format=3 uid="uid://c1r2otw42oxmc"]
+
+[resource]
+enabled = false
+bone_index = 15
+bone2d_node = NodePath("Center/Body/Torso/ArmBack/ForeArmBack/HandBack")
+target_nodepath = NodePath("../SkeletonTargets/WristBack/HandBackLookAt")
+editor/draw_gizmo = false

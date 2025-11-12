@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="ConditionForAction" load_steps=11 format=3 uid="uid://6fu0faqgxlw"]
+
+[ext_resource type="Script" uid="uid://ufcpgmdje658" path="res://Ressources/Conditions/condition.gd" id="1_5y106"]
+[ext_resource type="Script" uid="uid://d0v33ys2dynyh" path="res://Ressources/Actions/action.gd" id="1_yridx"]
+[ext_resource type="Script" uid="uid://b730gnwe3got2" path="res://Ressources/Conditions/Inputs/condition_input.gd" id="2_2mne8"]
+[ext_resource type="Script" uid="uid://duk8detg00tcg" path="res://Ressources/Actions/action_set_state.gd" id="2_bcun2"]
+[ext_resource type="Script" uid="uid://tvgcv4p54p7o" path="res://Ressources/Conditions/condition_state.gd" id="3_7lvfi"]
+[ext_resource type="Script" uid="uid://dyglpbhv533ei" path="res://Ressources/ConditionForAction/condition_for_action.gd" id="5_cwh70"]
+
+[sub_resource type="Resource" id="Resource_yridx"]
+script = ExtResource("2_bcun2")
+who = "COMPONENT"
+state_machine_path = NodePath("StateMachineY/Grounded")
+state = NodePath("StateMachineY/Grounded/BentDown")
+metadata/_custom_type_script = "uid://duk8detg00tcg"
+
+[sub_resource type="InputEventAction" id="InputEventAction_4saux"]
+action = &"look down"
+
+[sub_resource type="Resource" id="Resource_cwh70"]
+script = ExtResource("2_2mne8")
+input_action = SubResource("InputEventAction_4saux")
+metadata/_custom_type_script = "uid://b730gnwe3got2"
+
+[sub_resource type="Resource" id="Resource_5rdfr"]
+script = ExtResource("3_7lvfi")
+who = "COMPONENT"
+state_machine_path = NodePath("StateMachineY")
+valid_state = Array[NodePath]([NodePath("StateMachineY/Grounded")])
+metadata/_custom_type_script = "uid://tvgcv4p54p7o"
+
+[resource]
+script = ExtResource("5_cwh70")
+conditions = Array[ExtResource("1_5y106")]([SubResource("Resource_cwh70"), SubResource("Resource_5rdfr")])
+actions = Array[ExtResource("1_yridx")]([SubResource("Resource_yridx")])
+metadata/_custom_type_script = "uid://dyglpbhv533ei"

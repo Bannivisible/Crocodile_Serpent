@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://btwx2p5coprot"]
+
+[ext_resource type="PackedScene" uid="uid://p01jbybk32p1" path="res://Ui/BookInterface/AttackChoiceInterface/attack_choice_interface.tscn" id="1_gov8l"]
+[ext_resource type="Script" uid="uid://b76b0rorv1dcc" path="res://Ui/BookInterface/AttackChoiceInterface/SpellChoice/spell_choice.gd" id="2_gn8f0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2os6u"]
+bg_color = Color(0.2048817, 0.073360614, 0.04110297, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_size = 20
+
+[node name="SpellChoice" instance=ExtResource("1_gov8l")]
+script = ExtResource("2_gn8f0")
+
+[node name="PanelContainer" parent="." index="0"]
+theme_override_styles/panel = SubResource("StyleBoxFlat_2os6u")

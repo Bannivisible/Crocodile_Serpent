@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cpouj03mf7op6"]
+
+[ext_resource type="PackedScene" uid="uid://inuip5dwww14" path="res://Components/CombatSkill/combat_skill.tscn" id="1_6w7ug"]
+[ext_resource type="Script" uid="uid://dmed7cuudrlqx" path="res://Components/CombatSkill/Weapon/weapon.gd" id="2_v01dj"]
+
+[node name="Weapon" instance=ExtResource("1_6w7ug")]
+script = ExtResource("2_v01dj")
+critical_rate = null

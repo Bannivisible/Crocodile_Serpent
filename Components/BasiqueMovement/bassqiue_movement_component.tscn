@@ -1,0 +1,59 @@
+[gd_scene load_steps=9 format=3 uid="uid://b74kbwhwtmiu5"]
+
+[ext_resource type="Script" uid="uid://cfbujs1d0b1s6" path="res://Components/BasiqueMovement/bassqiue_movement_component.gd" id="1_vbi1o"]
+[ext_resource type="Script" uid="uid://bcmokx1bwyftw" path="res://StateMachine/state_machine.gd" id="2_mpqfr"]
+[ext_resource type="Script" uid="uid://1ow5qrqjgci3" path="res://Components/BasiqueMovement/States/bmc_move.gd" id="4_d3kww"]
+[ext_resource type="Script" uid="uid://dsv464pbap684" path="res://Components/BasiqueMovement/States/bmc_idle.gd" id="4_jboap"]
+[ext_resource type="Script" uid="uid://d38qkfrf1wj1a" path="res://StateMachine/state_label.gd" id="5_knfml"]
+[ext_resource type="Script" uid="uid://rbct5cq3581w" path="res://Components/BasiqueMovement/States/bmc_air.gd" id="7_8bdri"]
+[ext_resource type="Script" uid="uid://5ic5uuxnursm" path="res://Components/BasiqueMovement/States/bmc_jump.gd" id="7_q5rr5"]
+[ext_resource type="Script" uid="uid://bffvks1uysb0j" path="res://Components/BasiqueMovement/States/bmc_fall.gd" id="8_gl71s"]
+
+[node name="BMC" type="Node2D"]
+script = ExtResource("1_vbi1o")
+
+[node name="StateMachineX" type="Node2D" parent="."]
+script = ExtResource("2_mpqfr")
+
+[node name="Idle" type="Node" parent="StateMachineX"]
+script = ExtResource("4_jboap")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="Move" type="Node" parent="StateMachineX"]
+script = ExtResource("4_d3kww")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="StateLabel" type="Label" parent="StateMachineX"]
+offset_left = 31.0
+offset_top = -80.0
+offset_right = 71.0
+offset_bottom = -57.0
+script = ExtResource("5_knfml")
+metadata/_custom_type_script = "uid://d38qkfrf1wj1a"
+
+[node name="StateMachineY" type="Node2D" parent="."]
+script = ExtResource("2_mpqfr")
+
+[node name="Grounded" type="Node" parent="StateMachineY"]
+script = ExtResource("2_mpqfr")
+metadata/_custom_type_script = "uid://bcmokx1bwyftw"
+
+[node name="Air" type="Node" parent="StateMachineY"]
+script = ExtResource("7_8bdri")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="Fall" type="Node" parent="StateMachineY/Air"]
+script = ExtResource("8_gl71s")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="Jump" type="Node" parent="StateMachineY/Air"]
+script = ExtResource("7_q5rr5")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="StateLabel" type="Label" parent="StateMachineY"]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("5_knfml")
+metadata/_custom_type_script = "uid://d38qkfrf1wj1a"
+
+[connection signal="dir_changed" from="." to="." method="_on_dir_changed"]

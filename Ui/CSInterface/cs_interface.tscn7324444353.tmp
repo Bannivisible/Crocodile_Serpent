@@ -1,0 +1,243 @@
+[gd_scene load_steps=16 format=3 uid="uid://dgndeir7aqk0o"]
+
+[ext_resource type="Theme" uid="uid://dxxn1u7fah8ng" path="res://Ui/BookInterface/Theme/Book.tres" id="1_nh015"]
+[ext_resource type="Script" uid="uid://dijsmuk5xxrv7" path="res://Ui/CSInterface/cs_interface.gd" id="2_lhy7a"]
+[ext_resource type="Script" uid="uid://b1e0vwa7x3w0j" path="res://Ui/CSInterface/cs_interface_data_manager.gd" id="3_lhy7a"]
+[ext_resource type="Script" uid="uid://b2qh2de0kbwt" path="res://Ui/CSInterface/spell_category_button.gd" id="4_ddx0q"]
+[ext_resource type="Resource" uid="uid://dd26cydaugi7p" path="res://Scene/Characters/Crocodile/crocodile_stat.tres" id="4_ix3v8"]
+[ext_resource type="Script" uid="uid://ihcg87coc1pm" path="res://Ui/CSInterface/tab_container.gd" id="4_vyjhn"]
+[ext_resource type="Script" uid="uid://dkeybkucf0o12" path="res://Ui/CSInterface/grid_container.gd" id="6_ddx0q"]
+[ext_resource type="Script" uid="uid://gc7yieoshcty" path="res://Ressources/CombatSkillData/Spell/spell_data.gd" id="8_2x71p"]
+[ext_resource type="Resource" uid="uid://cx84vorgutpdq" path="res://Ressources/CombatSkillData/Spell/Water/spell_geyser.tres" id="9_ix3v8"]
+[ext_resource type="Resource" uid="uid://ila888nuoopt" path="res://Ressources/CombatSkillData/Spell/Fire/spell_fire_ball.tres" id="10_un5qs"]
+[ext_resource type="Resource" uid="uid://d2urmmxyqwlit" path="res://Ressources/CombatSkillData/Spell/Fire/spell_super_fire_ball.tres" id="11_qiots"]
+[ext_resource type="Script" uid="uid://dwdvwibtk7pc6" path="res://Ui/CSInterface/spell_grid_container.gd" id="13_un5qs"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i5yi8"]
+bg_color = Color(0.2969628, 0.10500003, 0.115467034, 1)
+
+[sub_resource type="Gradient" id="Gradient_ei2b5"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_i5yi8"]
+gradient = SubResource("Gradient_ei2b5")
+
+[node name="CSInterface" type="Control"]
+custom_minimum_size = Vector2(576, 324)
+layout_mode = 3
+anchor_left = 0.75
+anchor_right = 0.75
+offset_left = -576.0
+offset_top = -324.0
+theme = ExtResource("1_nh015")
+script = ExtResource("2_lhy7a")
+show_animation_ease = 1
+show_animation_trans = 11
+metadata/_edit_lock_ = true
+
+[node name="CSInterfaceDataManager" type="Node" parent="."]
+script = ExtResource("3_lhy7a")
+player_statistics = ExtResource("4_ix3v8")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_i5yi8")
+metadata/_edit_lock_ = true
+
+[node name="TabContainer" type="TabContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.025
+anchor_right = 0.975
+anchor_bottom = 0.95
+grow_horizontal = 2
+grow_vertical = 2
+tab_alignment = 2
+current_tab = 0
+tab_focus_mode = 0
+deselect_enabled = true
+script = ExtResource("4_vyjhn")
+metadata/_edit_lock_ = true
+
+[node name="CS_Selection" type="HBoxContainer" parent="Panel/TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Panel" type="Panel" parent="Panel/TabContainer/CS_Selection"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/TabContainer/CS_Selection/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/TabContainer/CS_Selection/Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="HealthLabel" type="Label" parent="Panel/TabContainer/CS_Selection/Panel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "PV "
+
+[node name="ManaLabel" type="Label" parent="Panel/TabContainer/CS_Selection/Panel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Mana: "
+
+[node name="StrenghtLabel" type="Label" parent="Panel/TabContainer/CS_Selection/Panel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Force: "
+
+[node name="DefenseLabel" type="Label" parent="Panel/TabContainer/CS_Selection/Panel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Defense: "
+
+[node name="SpeedLabel" type="Label" parent="Panel/TabContainer/CS_Selection/Panel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Vitesse: "
+
+[node name="Panel2" type="Panel" parent="Panel/TabContainer/CS_Selection"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/TabContainer/CS_Selection/Panel2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 4
+
+[node name="CSGridContainer" type="GridContainer" parent="Panel/TabContainer/CS_Selection/Panel2/MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 10
+columns = 2
+script = ExtResource("6_ddx0q")
+
+[node name="WeaponButton" type="Button" parent="Panel/TabContainer/CS_Selection/Panel2/MarginContainer/CSGridContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="SpellCategoryButton" type="Button" parent="Panel/TabContainer/CS_Selection/Panel2/MarginContainer/CSGridContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "Eau"
+script = ExtResource("4_ddx0q")
+spells = Array[ExtResource("8_2x71p")]([ExtResource("9_ix3v8")])
+
+[node name="SpellCategoryButton2" type="Button" parent="Panel/TabContainer/CS_Selection/Panel2/MarginContainer/CSGridContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "Feu"
+script = ExtResource("4_ddx0q")
+spells = Array[ExtResource("8_2x71p")]([ExtResource("10_un5qs"), ExtResource("11_qiots")])
+
+[node name="SpellCategoryButton3" type="Button" parent="Panel/TabContainer/CS_Selection/Panel2/MarginContainer/CSGridContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "Eau"
+script = ExtResource("4_ddx0q")
+spells = Array[ExtResource("8_2x71p")]([ExtResource("9_ix3v8")])
+
+[node name="SpellCategoryButton4" type="Button" parent="Panel/TabContainer/CS_Selection/Panel2/MarginContainer/CSGridContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "Eau"
+script = ExtResource("4_ddx0q")
+spells = Array[ExtResource("8_2x71p")]([ExtResource("9_ix3v8")])
+
+[node name="SpellCategoryButton5" type="Button" parent="Panel/TabContainer/CS_Selection/Panel2/MarginContainer/CSGridContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "Eau"
+script = ExtResource("4_ddx0q")
+spells = Array[ExtResource("8_2x71p")]([ExtResource("9_ix3v8")])
+
+[node name="Page" type="Sprite2D" parent="Panel/TabContainer/CS_Selection/Panel2"]
+modulate = Color(1, 1, 1, 0.37254903)
+rotation = 1.5707964
+texture = SubResource("GradientTexture2D_i5yi8")
+offset = Vector2(32, -32)
+metadata/_edit_lock_ = true
+
+[node name="SpellSelection" type="HBoxContainer" parent="Panel/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="Panel" type="Panel" parent="Panel/TabContainer/SpellSelection"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Panel2" type="Panel" parent="Panel/TabContainer/SpellSelection"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/TabContainer/SpellSelection/Panel2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 4
+
+[node name="SpellGridContainer" type="GridContainer" parent="Panel/TabContainer/SpellSelection/Panel2/MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 10
+columns = 2
+script = ExtResource("13_un5qs")
+
+[connection signal="cancel" from="." to="Panel/TabContainer" method="_on_cs_interface_cancel"]
+[connection signal="on_screen_changed" from="." to="Panel/TabContainer" method="_on_cs_interface_on_screen_changed"]
+[connection signal="on_screen_changed" from="." to="Panel/TabContainer/CS_Selection/Panel2/MarginContainer/CSGridContainer/SpellCategoryButton" method="_on_cs_interface_on_screen_changed"]
+[connection signal="spell_category_selected" from="." to="Panel/TabContainer" method="_on_cs_interface_spell_category_selected"]
+[connection signal="spell_category_sellected" from="CSInterfaceDataManager" to="Panel/TabContainer/SpellSelection/Panel2/MarginContainer/SpellGridContainer" method="_on_cs_interface_data_manager_spell_category_sellected"]
+[connection signal="tab_changed" from="Panel/TabContainer" to="Panel/TabContainer/CS_Selection/Panel2/MarginContainer/CSGridContainer" method="_on_tab_container_tab_changed"]
+[connection signal="tab_changed" from="Panel/TabContainer" to="Panel/TabContainer/SpellSelection/Panel2/MarginContainer/SpellGridContainer" method="_on_tab_container_tab_changed"]
+[connection signal="spell_category_selected" from="Panel/TabContainer/CS_Selection/Panel2/MarginContainer/CSGridContainer/SpellCategoryButton" to="." method="_on_spell_category_button_spell_category_selected"]
+[connection signal="spell_category_selected" from="Panel/TabContainer/CS_Selection/Panel2/MarginContainer/CSGridContainer/SpellCategoryButton" to="CSInterfaceDataManager" method="_on_spell_category_button_spell_category_selected"]
+[connection signal="spell_category_selected" from="Panel/TabContainer/CS_Selection/Panel2/MarginContainer/CSGridContainer/SpellCategoryButton2" to="." method="_on_spell_category_button_spell_category_selected"]
+[connection signal="spell_category_selected" from="Panel/TabContainer/CS_Selection/Panel2/MarginContainer/CSGridContainer/SpellCategoryButton2" to="CSInterfaceDataManager" method="_on_spell_category_button_spell_category_selected"]
+[connection signal="spell_category_selected" from="Panel/TabContainer/CS_Selection/Panel2/MarginContainer/CSGridContainer/SpellCategoryButton3" to="." method="_on_spell_category_button_spell_category_selected"]
+[connection signal="spell_category_selected" from="Panel/TabContainer/CS_Selection/Panel2/MarginContainer/CSGridContainer/SpellCategoryButton3" to="CSInterfaceDataManager" method="_on_spell_category_button_spell_category_selected"]
+[connection signal="spell_category_selected" from="Panel/TabContainer/CS_Selection/Panel2/MarginContainer/CSGridContainer/SpellCategoryButton4" to="." method="_on_spell_category_button_spell_category_selected"]
+[connection signal="spell_category_selected" from="Panel/TabContainer/CS_Selection/Panel2/MarginContainer/CSGridContainer/SpellCategoryButton4" to="CSInterfaceDataManager" method="_on_spell_category_button_spell_category_selected"]
+[connection signal="spell_category_selected" from="Panel/TabContainer/CS_Selection/Panel2/MarginContainer/CSGridContainer/SpellCategoryButton5" to="." method="_on_spell_category_button_spell_category_selected"]
+[connection signal="spell_category_selected" from="Panel/TabContainer/CS_Selection/Panel2/MarginContainer/CSGridContainer/SpellCategoryButton5" to="CSInterfaceDataManager" method="_on_spell_category_button_spell_category_selected"]

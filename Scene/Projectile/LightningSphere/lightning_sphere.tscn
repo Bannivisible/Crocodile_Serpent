@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://7waxkd4kq5sy"]
+
+[ext_resource type="Script" uid="uid://5k2m213mfxu5" path="res://Scene/Projectile/LightningSphere/lightning_sphere.gd" id="1_0necr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0necr"]
+
+[sub_resource type="Gradient" id="Gradient_8ol6t"]
+colors = PackedColorArray(0, 1, 0, 1, 1, 1, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5pjbt"]
+gradient = SubResource("Gradient_8ol6t")
+
+[node name="LightningSphere" type="Area2D"]
+script = ExtResource("1_0necr")
+metadata/_custom_type_script = "uid://chr8o48oxdfvk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_0necr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture2D_5pjbt")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,0 +1,86 @@
+[gd_scene load_steps=12 format=3 uid="uid://db3svq7yn6jg2"]
+
+[ext_resource type="Script" uid="uid://bworwc5ecslii" path="res://Scene/Level/CanvasLayers/ui_attack.gd" id="1_x20r8"]
+[ext_resource type="PackedScene" uid="uid://co83mwtrx04x1" path="res://Ui/BookInterface/AttackChoiceInterface/AttackChoice/attack_choice.tscn" id="2_rxcpp"]
+[ext_resource type="PackedScene" uid="uid://r70hdnan6k1h" path="res://Scene/Characters/Crocodile/crocodile.tscn" id="2_x20r8"]
+[ext_resource type="Shader" uid="uid://deqiavwg6kjok" path="res://Scene/Level/CanvasLayers/Page/page.gdshader" id="4_sseyr"]
+
+[sub_resource type="Gradient" id="Gradient_4jjjg"]
+colors = PackedColorArray(0, 1, 0, 1, 0, 1, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rxcpp"]
+gradient = SubResource("Gradient_4jjjg")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x20r8"]
+size = Vector2(64, 45.9669)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_k1goc"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_sseyr"]
+noise = SubResource("FastNoiseLite_k1goc")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pwhjf"]
+shader = ExtResource("4_sseyr")
+shader_parameter/noise = SubResource("NoiseTexture2D_sseyr")
+shader_parameter/mix_amount = 0.10000000149012
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_k1goc"]
+viewport_path = NodePath("UI_Attack/SubViewport")
+
+[node name="Level" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(271, 432)
+collision_layer = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+scale = Vector2(7.09095, 1.28876)
+texture = SubResource("GradientTexture2D_rxcpp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 11.6201)
+scale = Vector2(7.09095, 1.28876)
+shape = SubResource("RectangleShape2D_x20r8")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(795, 390)
+collision_layer = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D2"]
+scale = Vector2(7.09095, 1.28876)
+texture = SubResource("GradientTexture2D_rxcpp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(1, 12)
+scale = Vector2(7.09095, 1.28876)
+shape = SubResource("RectangleShape2D_x20r8")
+
+[node name="UI_Attack" type="CanvasLayer" parent="."]
+offset = Vector2(500, 0)
+scale = Vector2(0.35, 0.35)
+transform = Transform2D(0.35, 0, 0, 0.35, 500, 0)
+script = ExtResource("1_x20r8")
+
+[node name="AttackChoice" parent="UI_Attack" instance=ExtResource("2_rxcpp")]
+
+[node name="SubViewport" type="SubViewport" parent="UI_Attack"]
+size = Vector2i(1152, 648)
+
+[node name="Page" type="Node2D" parent="UI_Attack"]
+position = Vector2(576, 37)
+rotation = 1.5707964
+
+[node name="Sprite2D" type="Sprite2D" parent="UI_Attack/Page"]
+material = SubResource("ShaderMaterial_pwhjf")
+position = Vector2(288, -269)
+rotation = 1.5707964
+scale = Vector2(-1, -1)
+texture = SubResource("ViewportTexture_k1goc")
+region_enabled = true
+region_rect = Rect2(576, 36, 536, 576)
+
+[node name="Crocodile" parent="." instance=ExtResource("2_x20r8")]
+position = Vector2(258, 127)
+
+[editable path="Crocodile"]
+[editable path="Crocodile/BMC_Player"]

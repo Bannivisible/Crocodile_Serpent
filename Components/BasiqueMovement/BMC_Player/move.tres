@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="ConditionForAction" load_steps=9 format=3 uid="uid://b78jgtikxl7q0"]
+
+[ext_resource type="Script" uid="uid://d0v33ys2dynyh" path="res://Ressources/Actions/action.gd" id="1_tyaur"]
+[ext_resource type="Script" uid="uid://38fflrbqudfk" path="res://Ressources/Actions/action_modify_property.gd" id="2_1iga4"]
+[ext_resource type="Script" uid="uid://ufcpgmdje658" path="res://Ressources/Conditions/condition.gd" id="2_fu45a"]
+[ext_resource type="Script" uid="uid://dyglpbhv533ei" path="res://Ressources/ConditionForAction/condition_for_action.gd" id="3_1iga4"]
+[ext_resource type="Script" uid="uid://1iit2714x0s4" path="res://Ressources/Conditions/Inputs/condition_joy_stick_used.gd" id="4_m8x6y"]
+
+[sub_resource type="Resource" id="Resource_8qgty"]
+script = ExtResource("2_1iga4")
+who = "COMPONENT"
+property_name = &"dir"
+method_type = "CONTEXT KEY"
+value_arbitrary = null
+value_context_key = &"dir"
+metadata/_custom_type_script = "uid://38fflrbqudfk"
+
+[sub_resource type="Resource" id="Resource_l7if4"]
+script = ExtResource("4_m8x6y")
+metadata/_custom_type_script = "uid://1iit2714x0s4"
+
+[sub_resource type="Resource" id="Resource_1iga4"]
+script = ExtResource("2_1iga4")
+who = "COMPONENT"
+property_name = &"dir"
+value_arbitrary = Vector2(0, 0)
+metadata/_custom_type_script = "uid://38fflrbqudfk"
+
+[resource]
+script = ExtResource("3_1iga4")
+conditions = Array[ExtResource("2_fu45a")]([SubResource("Resource_l7if4")])
+actions = Array[ExtResource("1_tyaur")]([SubResource("Resource_8qgty")])
+reversed_actions = Array[ExtResource("1_tyaur")]([SubResource("Resource_1iga4")])
+metadata/_custom_type_script = "uid://dyglpbhv533ei"

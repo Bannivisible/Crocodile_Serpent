@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="SpellData" load_steps=5 format=3 uid="uid://c04uu7w2nnej1"]
+
+[ext_resource type="Script" uid="uid://gc7yieoshcty" path="res://Ressources/CombatSkillData/Spell/spell_data.gd" id="1_choq7"]
+[ext_resource type="PackedScene" uid="uid://ixbubbq3qifp" path="res://Components/CombatSkill/Spell/Electricity/SpellLightningCage/spell_lightning_cage.tscn" id="1_jrkrf"]
+[ext_resource type="Script" uid="uid://mcrao1da8rcg" path="res://Ressources/Statistics/Stats/strenght_stat.gd" id="3_d8xrw"]
+
+[sub_resource type="Resource" id="Resource_1bn6b"]
+script = ExtResource("3_d8xrw")
+value = 20.0
+metadata/_custom_type_script = "uid://mcrao1da8rcg"
+
+[resource]
+script = ExtResource("1_choq7")
+name = "Cage Electrique"
+strenght = SubResource("Resource_1bn6b")
+combat_skill_scene = ExtResource("1_jrkrf")
+metadata/_custom_type_script = "uid://gc7yieoshcty"

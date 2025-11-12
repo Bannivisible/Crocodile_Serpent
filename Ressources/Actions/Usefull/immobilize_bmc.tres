@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ActionCallMethod" load_steps=2 format=3 uid="uid://clhln7c3lxw3e"]
+
+[ext_resource type="Script" uid="uid://bramtakjhrjig" path="res://Ressources/Actions/action_call_method.gd" id="1_olakh"]
+
+[resource]
+script = ExtResource("1_olakh")
+target_path = NodePath("BMC")
+method_name = "immobilize"
+metadata/_custom_type_script = "uid://bramtakjhrjig"

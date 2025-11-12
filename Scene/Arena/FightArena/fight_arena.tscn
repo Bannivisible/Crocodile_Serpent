@@ -1,0 +1,60 @@
+[gd_scene load_steps=12 format=3 uid="uid://f188bqv4kk26"]
+
+[ext_resource type="PackedScene" uid="uid://dvhhcev5ikxgt" path="res://Scene/Arena/arena.tscn" id="1_0264e"]
+[ext_resource type="Script" uid="uid://rclgvctg748s" path="res://Scene/Arena/FightArena/fight_arena.gd" id="2_1ato1"]
+[ext_resource type="PackedScene" uid="uid://dgndeir7aqk0o" path="res://Ui/CSInterface/cs_interface.tscn" id="2_j78hf"]
+[ext_resource type="Script" uid="uid://bcmokx1bwyftw" path="res://StateMachine/state_machine.gd" id="4_7lhif"]
+[ext_resource type="Script" uid="uid://bey7t8h4m0yyp" path="res://StateMachine/state.gd" id="5_3wvjj"]
+[ext_resource type="Script" uid="uid://s1ya3aadtjn5" path="res://Scene/Arena/FightArena/choose.gd" id="5_7lhif"]
+[ext_resource type="PackedScene" uid="uid://bgxumcv6rrpm1" path="res://Scene/Characters/Crocodile/crocodile.tscn" id="7_3wvjj"]
+[ext_resource type="PackedScene" uid="uid://do3y7dxe754f4" path="res://Scene/Characters/Enemies/enemy.tscn" id="8_wp1n5"]
+
+[sub_resource type="Gradient" id="Gradient_3wvjj"]
+colors = PackedColorArray(0, 1, 0, 1, 0, 1, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wp1n5"]
+gradient = SubResource("Gradient_3wvjj")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wp1n5"]
+size = Vector2(64, 46.12616)
+
+[node name="FightArena" instance=ExtResource("1_0264e")]
+script = ExtResource("2_1ato1")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." index="0"]
+z_index = -10
+position = Vector2(961, 859)
+scale = Vector2(30, -2)
+collision_layer = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" index="0"]
+texture = SubResource("GradientTexture2D_wp1n5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" index="1"]
+position = Vector2(0, -8.93692)
+shape = SubResource("RectangleShape2D_wp1n5")
+
+[node name="CSInterface" parent="UI" index="1" instance=ExtResource("2_j78hf")]
+
+[node name="StateMachine" type="Node" parent="." index="2"]
+script = ExtResource("4_7lhif")
+set_to_default_state_at_ready = true
+metadata/_custom_type_script = "uid://bcmokx1bwyftw"
+
+[node name="Choose" type="Node" parent="StateMachine" index="0"]
+script = ExtResource("5_7lhif")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="Attaque" type="Node" parent="StateMachine" index="1"]
+script = ExtResource("5_3wvjj")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="Defense" type="Node" parent="StateMachine" index="2"]
+script = ExtResource("5_3wvjj")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="Crocodile" parent="." index="3" instance=ExtResource("7_3wvjj")]
+position = Vector2(195, 302)
+
+[node name="Enemy" parent="." index="4" instance=ExtResource("8_wp1n5")]
+position = Vector2(1559, 606)

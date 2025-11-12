@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="ConditionForAction" load_steps=12 format=3 uid="uid://chjyjnv3y4eyy"]
+
+[ext_resource type="Script" uid="uid://d0v33ys2dynyh" path="res://Ressources/Actions/action.gd" id="1_pe25m"]
+[ext_resource type="Script" uid="uid://duk8detg00tcg" path="res://Ressources/Actions/action_set_state.gd" id="2_5hgoo"]
+[ext_resource type="Resource" uid="uid://clhln7c3lxw3e" path="res://Ressources/Actions/Usefull/immobilize_bmc.tres" id="3_5hgoo"]
+[ext_resource type="Script" uid="uid://ufcpgmdje658" path="res://Ressources/Conditions/condition.gd" id="3_ko4uc"]
+[ext_resource type="Script" uid="uid://b730gnwe3got2" path="res://Ressources/Conditions/Inputs/condition_input.gd" id="4_soroj"]
+[ext_resource type="Script" uid="uid://tvgcv4p54p7o" path="res://Ressources/Conditions/condition_state.gd" id="5_260o0"]
+[ext_resource type="Script" uid="uid://dyglpbhv533ei" path="res://Ressources/ConditionForAction/condition_for_action.gd" id="6_l4ru2"]
+
+[sub_resource type="Resource" id="Resource_0qab3"]
+script = ExtResource("2_5hgoo")
+who = "COMPONENT"
+state = NodePath("StateMachine/Charge")
+metadata/_custom_type_script = "uid://duk8detg00tcg"
+
+[sub_resource type="InputEventAction" id="InputEventAction_oj56q"]
+action = &"attack"
+
+[sub_resource type="Resource" id="Resource_40au6"]
+script = ExtResource("4_soroj")
+input_action = SubResource("InputEventAction_oj56q")
+metadata/_custom_type_script = "uid://b730gnwe3got2"
+
+[sub_resource type="Resource" id="Resource_w5r3u"]
+script = ExtResource("5_260o0")
+who = "COMPONENT"
+valid_state = Array[NodePath]([NodePath("StateMachine/Desactivate")])
+metadata/_custom_type_script = "uid://tvgcv4p54p7o"
+
+[resource]
+script = ExtResource("6_l4ru2")
+conditions = Array[ExtResource("3_ko4uc")]([SubResource("Resource_40au6"), SubResource("Resource_w5r3u")])
+actions = Array[ExtResource("1_pe25m")]([SubResource("Resource_0qab3"), ExtResource("3_5hgoo")])
+metadata/_custom_type_script = "uid://dyglpbhv533ei"

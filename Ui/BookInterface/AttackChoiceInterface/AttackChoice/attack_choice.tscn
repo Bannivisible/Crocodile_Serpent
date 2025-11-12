@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://co83mwtrx04x1"]
+
+[ext_resource type="PackedScene" uid="uid://p01jbybk32p1" path="res://Ui/BookInterface/AttackChoiceInterface/attack_choice_interface.tscn" id="1_j3lbb"]
+[ext_resource type="Script" uid="uid://cxc5xdkerp5gg" path="res://Ui/BookInterface/AttackChoiceInterface/AttackChoice/attack_choice.gd" id="2_j3lbb"]
+
+[node name="AttackChoice" instance=ExtResource("1_j3lbb")]
+script = ExtResource("2_j3lbb")

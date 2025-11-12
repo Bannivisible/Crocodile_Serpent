@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="ConditionForAction" load_steps=9 format=3 uid="uid://ds24g3ssmkdy"]
+
+[ext_resource type="Script" uid="uid://d0v33ys2dynyh" path="res://Ressources/Actions/action.gd" id="1_8l0uo"]
+[ext_resource type="Script" uid="uid://duk8detg00tcg" path="res://Ressources/Actions/action_set_state.gd" id="2_rtc5d"]
+[ext_resource type="Script" uid="uid://ufcpgmdje658" path="res://Ressources/Conditions/condition.gd" id="3_hnfyc"]
+[ext_resource type="Script" uid="uid://b730gnwe3got2" path="res://Ressources/Conditions/Inputs/condition_input.gd" id="4_3sofw"]
+[ext_resource type="Script" uid="uid://dyglpbhv533ei" path="res://Ressources/ConditionForAction/condition_for_action.gd" id="5_jqvkq"]
+
+[sub_resource type="Resource" id="Resource_rxapl"]
+script = ExtResource("2_rtc5d")
+who = "COMPONENT"
+state = NodePath("StateMachine/Cast")
+metadata/_custom_type_script = "uid://duk8detg00tcg"
+
+[sub_resource type="InputEventAction" id="InputEventAction_qmnli"]
+action = &"attack"
+
+[sub_resource type="Resource" id="Resource_3fo8m"]
+script = ExtResource("4_3sofw")
+input_action = SubResource("InputEventAction_qmnli")
+input_type = "JustRealease"
+metadata/_custom_type_script = "uid://b730gnwe3got2"
+
+[resource]
+script = ExtResource("5_jqvkq")
+conditions = Array[ExtResource("3_hnfyc")]([SubResource("Resource_3fo8m")])
+actions = Array[ExtResource("1_8l0uo")]([SubResource("Resource_rxapl")])
+metadata/_custom_type_script = "uid://dyglpbhv533ei"

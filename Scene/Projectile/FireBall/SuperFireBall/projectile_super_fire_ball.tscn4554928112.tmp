@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://t1buea63lkc4"]
+
+[ext_resource type="PackedScene" uid="uid://b56xaxpssthc3" path="res://Scene/Projectile/FireBall/projectile_fire_ball.tscn" id="1_ld2dj"]
+[ext_resource type="Script" uid="uid://dhjrj2u16kcy3" path="res://Scene/Projectile/FireBall/ExplosiveFireBall/projectile_super_fire_ball.gd" id="2_7y2s5"]
+[ext_resource type="Script" uid="uid://bey7t8h4m0yyp" path="res://StateMachine/state.gd" id="3_t5xak"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v2h8a"]
+radius = 25.298222
+
+[node name="ProjectileSuperFireBall" instance=ExtResource("1_ld2dj")]
+script = ExtResource("2_7y2s5")
+damage = 50.0
+explosion_mult_range = 6.0
+p_ratio = null
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("CircleShape2D_v2h8a")
+
+[node name="LinearMovement" parent="StateMachine" index="1"]
+distance = 125.0
+speed = 0.75
+ease_type = 0
+transition_type = 0
+
+[node name="Explode" type="Node" parent="StateMachine" index="2"]
+script = ExtResource("3_t5xak")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"

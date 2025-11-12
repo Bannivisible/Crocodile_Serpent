@@ -1,0 +1,6 @@
+[gd_resource type="CanvasTexture" load_steps=2 format=3 uid="uid://qkqqtx1bnvjk"]
+
+[ext_resource type="Texture2D" uid="uid://b2tp5qw2h4seo" path="res://Components/CombatSkill/Weapon/JawTrap/Assets/spritesheet.png" id="1_wdh30"]
+
+[resource]
+diffuse_texture = ExtResource("1_wdh30")

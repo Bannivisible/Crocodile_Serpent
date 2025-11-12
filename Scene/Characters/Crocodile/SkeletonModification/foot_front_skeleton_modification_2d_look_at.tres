@@ -1,0 +1,7 @@
+[gd_resource type="SkeletonModification2DLookAt" format=3 uid="uid://dakqfb5g8q8ai"]
+
+[resource]
+bone_index = 18
+bone2d_node = NodePath("Center/ThighFront/LegFront/FootFront")
+target_nodepath = NodePath("../SkeletonTargets/AnkleFront/FootFrontLookAt")
+editor/draw_gizmo = false

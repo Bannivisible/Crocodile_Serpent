@@ -1,0 +1,12 @@
+[gd_resource type="SkeletonModification2DCCDIK" format=3 uid="uid://rhdke4ficgri"]
+
+[resource]
+target_nodepath = NodePath("../SkeletonTargets/WristBack")
+tip_nodepath = NodePath("Center/Body/Torso/ArmBack/ForeArmBack/HandBack")
+ccdik_data_chain_length = 1
+joint_data/0/bone_index = 14
+joint_data/0/bone2d_node = NodePath("Center/Body/Torso/ArmBack/ForeArmBack")
+joint_data/0/rotate_from_joint = true
+joint_data/0/enable_constraint = false
+joint_data/0/editor_draw_gizmo = true
+editor/draw_gizmo = false
