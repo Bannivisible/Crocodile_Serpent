@@ -104,3 +104,9 @@ static func compute_collision_lenght(collision: Node2D) -> float:
 		if shape is CapsuleShape2D: return shape.radius/2
 	
 	return 0.0
+
+static func add_child_to_root(parent: Node ,child: Node) -> void:
+	if child.get_parent():
+		child.get_parent().remove_child(child)
+	
+	parent.get_tree().root.get_child(0).add_child(child)
