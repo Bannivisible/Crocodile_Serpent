@@ -1,4 +1,4 @@
-[gd_scene load_steps=120 format=3 uid="uid://bgxumcv6rrpm1"]
+[gd_scene load_steps=119 format=3 uid="uid://bgxumcv6rrpm1"]
 
 [ext_resource type="PackedScene" uid="uid://mmkgsg3lueu" path="res://Scene/Characters/character.tscn" id="1_pp85c"]
 [ext_resource type="PackedScene" uid="uid://b74kbwhwtmiu5" path="res://Components/BasiqueMovement/bassqiue_movement_component.tscn" id="2_pp85c"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://cwkl4nep4hgvb" path="res://Scene/Characters/Crocodile/Assets/crocodile_texture.tres" id="3_0ft5j"]
 [ext_resource type="SkeletonModification2DCCDIK" uid="uid://cihlocwu0e7qb" path="res://Scene/Characters/Crocodile/SkeletonModification/elbow_front_skeleton_modification_2dccdik.tres" id="3_gtnt8"]
 [ext_resource type="SkeletonModification2DCCDIK" uid="uid://cotjbcwl1mrpr" path="res://Scene/Characters/Crocodile/SkeletonModification/wrist_front_skeleton_modification_2dccdik.tres" id="4_mru5n"]
-[ext_resource type="Script" uid="uid://u3fqynaw5l1g" path="res://Other/procedural_line.gd" id="4_nn2k0"]
 [ext_resource type="Resource" uid="uid://m4wd7fjlc83p" path="res://Components/BasiqueMovement/BMC_Player/jump.tres" id="4_wwopw"]
 [ext_resource type="SkeletonModification2DLookAt" uid="uid://c1r2otw42oxmc" path="res://Scene/Characters/Crocodile/SkeletonModification/hand_back_skeleton_modification_2d_look_at.tres" id="5_fs2r1"]
 [ext_resource type="SkeletonModification2DCCDIK" uid="uid://rhdke4ficgri" path="res://Scene/Characters/Crocodile/SkeletonModification/wrist_back_skeleton_modification_2dccdik.tres" id="5_hsnmx"]
@@ -39,7 +38,7 @@
 [ext_resource type="Script" uid="uid://bpo8hybdit330" path="res://Ressources/Attack/WeaponAttack/weapon_attack_data.gd" id="33_nn2k0"]
 [ext_resource type="Script" uid="uid://ce7ave72wm32j" path="res://Ressources/Attack/attack_data.gd" id="34_utiys"]
 [ext_resource type="Script" uid="uid://danilkv671r1y" path="res://Ressources/Attack/AttackType/attack_type.gd" id="35_qvnx8"]
-[ext_resource type="Script" uid="uid://lnbdh25h7yvf" path="res://Tools/procedural_line.gd" id="39_e5ikc"]
+[ext_resource type="Script" uid="uid://lnbdh25h7yvf" path="res://Other/procedural_line.gd" id="39_e5ikc"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pp85c"]
 radius = 35.0
@@ -100,10 +99,6 @@ region = Rect2(390, 497, 130, 165)
 atlas = ExtResource("3_0ft5j")
 region = Rect2(524, 0, 130, 165)
 
-[sub_resource type="Curve" id="Curve_jlbrr"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.61035424, 0.47446805), -1.0449626, -1.0449626, 0, 0, Vector2(0.9945504, 0.004255295), 0.0, 0.0, 0, 0]
-point_count = 3
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_e5ikc"]
 atlas = ExtResource("3_0ft5j")
 region = Rect2(392, 330, 131, 165)
@@ -115,6 +110,10 @@ region = Rect2(0, 330, 130, 165)
 [sub_resource type="AtlasTexture" id="AtlasTexture_6d12l"]
 atlas = ExtResource("3_0ft5j")
 region = Rect2(523, 1320, 131, 165)
+
+[sub_resource type="Curve" id="Curve_jlbrr"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.61035424, 0.47446805), -1.0449626, -1.0449626, 0, 0, Vector2(0.9945504, 0.004255295), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jbjqy"]
 atlas = ExtResource("3_0ft5j")
@@ -2099,23 +2098,23 @@ shape = SubResource("CapsuleShape2D_pp85c")
 modulate = Color(0.735357, 0.735357, 0.735357, 1)
 z_index = -1
 position = Vector2(52.996723, -200.13513)
-rotation = 3.0692005
+rotation = 3.0692008
 scale = Vector2(0.9999994, -0.9999994)
 texture = SubResource("AtlasTexture_71p2d")
 offset = Vector2(-10, 17.333)
 
 [node name="ForearmBack" type="Sprite2D" parent="SpriteContainer/ArmBack" index="0"]
-position = Vector2(-26.57631, 35.837418)
-rotation = 0.042423703
+position = Vector2(-26.576317, 35.837402)
+rotation = 0.042423725
 scale = Vector2(0.99997, 0.99997)
 texture = SubResource("AtlasTexture_pigwd")
 offset = Vector2(-7.7521763, 23.060297)
 
 [node name="HandBack" type="Sprite2D" parent="SpriteContainer/ArmBack/ForearmBack" index="0"]
 z_index = 2
-position = Vector2(-32.235374, 51.346146)
-rotation = -0.30502623
-scale = Vector2(1.0000005, 1.0000005)
+position = Vector2(-32.235367, 51.34616)
+rotation = -0.3050262
+scale = Vector2(1.0000006, 1.0000006)
 texture = SubResource("AtlasTexture_ifobo")
 offset = Vector2(-9.287, 11.465)
 
@@ -2186,21 +2185,7 @@ scale = Vector2(0.9999982, 0.9999982)
 texture = SubResource("AtlasTexture_jlbrr")
 offset = Vector2(-3.7380104, 14.7932205)
 
-[node name="Tail" type="Line2D" parent="SpriteContainer/Pelvis" index="0"]
-visible = false
-points = PackedVector2Array(0, 0, 0, 0, 0, 0)
-width = 100.0
-width_curve = SubResource("Curve_jlbrr")
-default_color = Color(0.7647059, 0.8352941, 0.40784314, 1)
-joint_mode = 2
-begin_cap_mode = 2
-round_precision = 32
-script = ExtResource("39_e5ikc")
-distance = 75.0
-velocity = 30.0
-init_dir = Vector2(-1, 0)
-
-[node name="Belt" type="Sprite2D" parent="SpriteContainer/Pelvis" index="1"]
+[node name="Belt" type="Sprite2D" parent="SpriteContainer/Pelvis" index="0"]
 texture = SubResource("AtlasTexture_e5ikc")
 offset = Vector2(-3.014, -11.701)
 
@@ -2214,12 +2199,19 @@ z_index = 1
 position = Vector2(13.263962, -11.877173)
 texture = SubResource("AtlasTexture_6d12l")
 
-[node name="ProceduralLine" type="Node2D" parent="SpriteContainer/Pelvis" index="2"]
-script = ExtResource("4_nn2k0")
-size = 6
-distance = 40.0
-velocity = 10.0
-init_dir = Vector2(-1, 0)
+[node name="AnchorTail" type="Node2D" parent="SpriteContainer/Pelvis" index="1"]
+
+[node name="Tail" type="Line2D" parent="SpriteContainer/Pelvis/AnchorTail" index="0"]
+points = PackedVector2Array(0, 0, 0, 0, 0, 0)
+width = 100.0
+width_curve = SubResource("Curve_jlbrr")
+default_color = Color(0.7647059, 0.8352941, 0.40784314, 1)
+joint_mode = 2
+begin_cap_mode = 2
+round_precision = 32
+script = ExtResource("39_e5ikc")
+distance = 100.0
+velocity = 2000.0
 
 [node name="ThighFront" type="Sprite2D" parent="SpriteContainer" index="4"]
 position = Vector2(-35.667114, -117.332825)
@@ -2246,27 +2238,27 @@ offset = Vector2(2.2518923, 17.591896)
 [node name="Head" type="Node2D" parent="SpriteContainer" index="5"]
 z_index = 3
 position = Vector2(0.00047874366, -246.98297)
-rotation = -0.037567914
-scale = Vector2(0.99991155, 0.99911386)
+rotation = -0.03756797
+scale = Vector2(0.99991155, 0.9991136)
 
 [node name="Jaw" type="Sprite2D" parent="SpriteContainer/Head" index="0"]
 position = Vector2(-27.001165, -3.3358154)
-scale = Vector2(1.0038062, 0.998333)
+scale = Vector2(1.0038062, 0.9983332)
 texture = SubResource("AtlasTexture_wfuh6")
 offset = Vector2(34.667, -0.667)
 
 [node name="StrandBack" type="Sprite2D" parent="SpriteContainer/Head/Jaw" index="0"]
 z_index = 1
-position = Vector2(-11.290516, 17.04271)
-rotation = -0.35108408
-scale = Vector2(1.0000713, 1.0001942)
-skew = 0.0040272474
+position = Vector2(-11.290516, 17.042725)
+rotation = -0.35108414
+scale = Vector2(1.0000713, 1.0001936)
+skew = 0.0040273666
 texture = SubResource("AtlasTexture_weadw")
 offset = Vector2(14.333, -9.667)
 
 [node name="Face" type="Sprite2D" parent="SpriteContainer/Head" index="1"]
 position = Vector2(-27.001165, -3.3358154)
-scale = Vector2(1.0038062, 0.998333)
+scale = Vector2(1.0038062, 0.9983332)
 texture = SubResource("AtlasTexture_usnsk")
 offset = Vector2(38.097843, -20.378845)
 
@@ -2325,31 +2317,31 @@ texture = SubResource("AtlasTexture_hb14a")
 
 [node name="StrandFront" type="Sprite2D" parent="SpriteContainer/Head/Face/HairBack/HairFront" index="1"]
 z_index = 1
-position = Vector2(11.088964, -17.509888)
-scale = Vector2(1.000424, 1.0225172)
+position = Vector2(11.088964, -17.509857)
+scale = Vector2(1.0004239, 1.0225171)
 texture = SubResource("AtlasTexture_24sqv")
 offset = Vector2(1, 19.667)
 
 [node name="ArmFront" type="Sprite2D" parent="SpriteContainer" index="6"]
 z_index = 3
 position = Vector2(-56.33362, -199.66608)
-rotation = -0.021970095
-scale = Vector2(0.99996847, 0.99996847)
+rotation = -0.021970093
+scale = Vector2(0.99996483, 0.99996483)
 texture = SubResource("AtlasTexture_kwm2e")
 offset = Vector2(-10, 17.333)
 
 [node name="ForearmFront" type="Sprite2D" parent="SpriteContainer/ArmFront" index="0"]
 z_index = 1
-position = Vector2(-21.667164, 32.333084)
-rotation = -0.050168857
+position = Vector2(-21.667168, 32.33307)
+rotation = -0.050168917
 scale = Vector2(0.9999736, 0.9999736)
 texture = SubResource("AtlasTexture_l1deg")
 offset = Vector2(-14, 25.667)
 
 [node name="HandFront" type="Sprite2D" parent="SpriteContainer/ArmFront/ForearmFront" index="0"]
-position = Vector2(-26.667175, 48.000443)
-rotation = -0.18696143
-scale = Vector2(1.000004, 1.000004)
+position = Vector2(-26.66719, 48.00045)
+rotation = -0.1869614
+scale = Vector2(1.0000042, 1.0000042)
 texture = SubResource("AtlasTexture_fs2r1")
 offset = Vector2(-12, 15)
 
@@ -2441,7 +2433,7 @@ update_scale = false
 [node name="ArmFront" type="Bone2D" parent="Skeleton2D/Center/Body/Torso" index="2"]
 position = Vector2(-56.333717, -78.666214)
 rotation = -0.021970093
-scale = Vector2(0.99997026, 0.99997026)
+scale = Vector2(0.9999666, 0.9999666)
 rest = Transform2D(0.9997533, -0.021968212, 0.021968212, 0.9997533, -56.333717, -78.666214)
 
 [node name="ArmFront" type="RemoteTransform2D" parent="Skeleton2D/Center/Body/Torso/ArmFront" index="0"]
