@@ -53,8 +53,8 @@ metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 script = ExtResource("5_3wvjj")
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 
-[node name="Crocodile" parent="." index="3" instance=ExtResource("7_3wvjj")]
-position = Vector2(195, 302)
-
-[node name="Enemy" parent="." index="4" instance=ExtResource("8_wp1n5")]
+[node name="Enemy" parent="." index="3" instance=ExtResource("8_wp1n5")]
 position = Vector2(1559, 606)
+
+[node name="Crocodile" parent="." index="4" instance=ExtResource("7_3wvjj")]
+position = Vector2(316, 446)

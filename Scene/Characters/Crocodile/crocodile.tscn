@@ -1,9 +1,10 @@
-[gd_scene load_steps=119 format=3 uid="uid://bgxumcv6rrpm1"]
+[gd_scene load_steps=99 format=3 uid="uid://bgxumcv6rrpm1"]
 
 [ext_resource type="PackedScene" uid="uid://mmkgsg3lueu" path="res://Scene/Characters/character.tscn" id="1_pp85c"]
 [ext_resource type="PackedScene" uid="uid://b74kbwhwtmiu5" path="res://Components/BasiqueMovement/bassqiue_movement_component.tscn" id="2_pp85c"]
 [ext_resource type="Script" uid="uid://dyglpbhv533ei" path="res://Ressources/ConditionForAction/condition_for_action.gd" id="3_0dmsc"]
 [ext_resource type="Texture2D" uid="uid://cwkl4nep4hgvb" path="res://Scene/Characters/Crocodile/Assets/crocodile_texture.tres" id="3_0ft5j"]
+[ext_resource type="Script" uid="uid://lnbdh25h7yvf" path="res://Other/procedural_line.gd" id="3_e5ikc"]
 [ext_resource type="SkeletonModification2DCCDIK" uid="uid://cihlocwu0e7qb" path="res://Scene/Characters/Crocodile/SkeletonModification/elbow_front_skeleton_modification_2dccdik.tres" id="3_gtnt8"]
 [ext_resource type="SkeletonModification2DCCDIK" uid="uid://cotjbcwl1mrpr" path="res://Scene/Characters/Crocodile/SkeletonModification/wrist_front_skeleton_modification_2dccdik.tres" id="4_mru5n"]
 [ext_resource type="Resource" uid="uid://m4wd7fjlc83p" path="res://Components/BasiqueMovement/BMC_Player/jump.tres" id="4_wwopw"]
@@ -29,16 +30,8 @@
 [ext_resource type="SkeletonModification2DLookAt" uid="uid://c8bnrs2ge68xr" path="res://Scene/Characters/Crocodile/SkeletonModification/hand_front_skeleton_modification_2d_look_at.tres" id="14_umomj"]
 [ext_resource type="Animation" uid="uid://ccbyb3j0w0168" path="res://Scene/Characters/Crocodile/AnimationTree/Idle.res" id="16_jlbrr"]
 [ext_resource type="Animation" uid="uid://vvcmi77hql7t" path="res://Components/CombatSkill/Weapon/JawTrap/Animations/JawTrapSlashAttack1.res" id="17_jlbrr"]
-[ext_resource type="Script" uid="uid://mcrao1da8rcg" path="res://Ressources/Statistics/Stats/strenght_stat.gd" id="27_m1odn"]
+[ext_resource type="PackedScene" uid="uid://ds4i8cup57akf" path="res://Components/CombatSkill/Weapon/JawTrap/jaw_trap.tscn" id="28_fjl3l"]
 [ext_resource type="Texture2D" uid="uid://bppfppgp3n74q" path="res://Components/CombatSkill/Weapon/JawTrap/Assets/piege_a_machoire_back_up/En main.PNG" id="28_wbk6g"]
-[ext_resource type="Script" uid="uid://bhcip3r7gigab" path="res://Components/CombatSkill/Weapon/JawTrap/jaw_trap.gd" id="29_m1odn"]
-[ext_resource type="Texture2D" uid="uid://qkqqtx1bnvjk" path="res://Components/CombatSkill/Weapon/JawTrap/Assets/jaw_trap_texture.tres" id="30_yvpvj"]
-[ext_resource type="Script" uid="uid://42c2b5rma8ot" path="res://Components/CombatSkill/Weapon/weapon_hit_box.gd" id="31_jlbrr"]
-[ext_resource type="Script" uid="uid://c20oatp4y0el5" path="res://Ressources/Statistics/Stats/critical_rate.gd" id="32_e5ikc"]
-[ext_resource type="Script" uid="uid://bpo8hybdit330" path="res://Ressources/Attack/WeaponAttack/weapon_attack_data.gd" id="33_nn2k0"]
-[ext_resource type="Script" uid="uid://ce7ave72wm32j" path="res://Ressources/Attack/attack_data.gd" id="34_utiys"]
-[ext_resource type="Script" uid="uid://danilkv671r1y" path="res://Ressources/Attack/AttackType/attack_type.gd" id="35_qvnx8"]
-[ext_resource type="Script" uid="uid://lnbdh25h7yvf" path="res://Other/procedural_line.gd" id="39_e5ikc"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pp85c"]
 radius = 35.0
@@ -111,8 +104,8 @@ region = Rect2(0, 330, 130, 165)
 atlas = ExtResource("3_0ft5j")
 region = Rect2(523, 1320, 131, 165)
 
-[sub_resource type="Curve" id="Curve_jlbrr"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.61035424, 0.47446805), -1.0449626, -1.0449626, 0, 0, Vector2(0.9945504, 0.004255295), 0.0, 0.0, 0, 0]
+[sub_resource type="Curve" id="Curve_e5ikc"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.86220473, 0.4916805), -0.8909476, -0.8909476, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jbjqy"]
@@ -1800,10 +1793,10 @@ tracks/1/path = NodePath("CSManager/JawTrap/Visual/Front:rotation")
 tracks/1/interp = 4
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 2.25, 2.5, 2.75),
+"times": PackedFloat32Array(0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 2.25, 2.5, 2.75, 37.233334),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [5.2496834, 4.928745, 4.3300624, 4.8772984, 5.2496834, 4.928745, 4.3300624, 4.8772984, 5.2496834, 3.8222106, 2.8293762, 3.7986047]
+"values": [4.928745, 4.3300624, 4.8772984, 5.2496834, 4.928745, 4.3300624, 4.8772984, 5.2496834, 3.8222106, 2.8293762, 3.7986047, 5.2496834]
 }
 
 [sub_resource type="Animation" id="Animation_nn2k0"]
@@ -2024,68 +2017,10 @@ states/MoveSpace/position = Vector2(408, 100)
 transitions = ["Start", "MoveSpace", SubResource("AnimationNodeStateMachineTransition_jbjqy"), "MoveSpace", "Jump", SubResource("AnimationNodeStateMachineTransition_7cm0d"), "Jump", "Fall", SubResource("AnimationNodeStateMachineTransition_p0okl"), "Fall", "MoveSpace", SubResource("AnimationNodeStateMachineTransition_rsvc4"), "Fall", "End", SubResource("AnimationNodeStateMachineTransition_hgdcd"), "Jump", "End", SubResource("AnimationNodeStateMachineTransition_n380g"), "MoveSpace", "End", SubResource("AnimationNodeStateMachineTransition_3po1k"), "MoveSpace", "Fall", SubResource("AnimationNodeStateMachineTransition_pvels")]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_7cm0d"]
-graph_offset = Vector2(-475.6926, 49.116226)
 nodes/output/position = Vector2(400, 200)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_qvnx8")
 nodes/StateMachine/position = Vector2(0, 140)
 node_connections = [&"output", 0, &"StateMachine"]
-
-[sub_resource type="Resource" id="Resource_yvpvj"]
-script = ExtResource("32_e5ikc")
-value = 40.0
-metadata/_custom_type_script = "uid://c20oatp4y0el5"
-
-[sub_resource type="Resource" id="Resource_jlbrr"]
-script = ExtResource("27_m1odn")
-value = 10.0
-metadata/_custom_type_script = "uid://mcrao1da8rcg"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_p0okl"]
-atlas = ExtResource("30_yvpvj")
-region = Rect2(305, 130, 102, 65)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rsvc4"]
-atlas = ExtResource("30_yvpvj")
-region = Rect2(204, 0, 101, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hgdcd"]
-atlas = ExtResource("30_yvpvj")
-region = Rect2(306, 65, 101, 65)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_n380g"]
-atlas = ExtResource("30_yvpvj")
-region = Rect2(0, 128, 101, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3po1k"]
-atlas = ExtResource("30_yvpvj")
-region = Rect2(101, 0, 101, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pvels"]
-atlas = ExtResource("30_yvpvj")
-region = Rect2(102, 64, 101, 64)
-
-[sub_resource type="Resource" id="Resource_jeet7"]
-script = ExtResource("32_e5ikc")
-metadata/_custom_type_script = "uid://c20oatp4y0el5"
-
-[sub_resource type="Resource" id="Resource_71p2d"]
-script = ExtResource("33_nn2k0")
-add_crit_rate = SubResource("Resource_jeet7")
-metadata/_custom_type_script = "uid://bpo8hybdit330"
-
-[sub_resource type="Resource" id="Resource_dp6s7"]
-script = ExtResource("35_qvnx8")
-type = 1
-metadata/_custom_type_script = "uid://danilkv671r1y"
-
-[sub_resource type="Resource" id="Resource_wfuh6"]
-script = ExtResource("34_utiys")
-type = SubResource("Resource_dp6s7")
-metadata/_custom_type_script = "uid://ce7ave72wm32j"
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_weadw"]
-radius = 0.0
-height = 0.0
 
 [node name="Crocodile" instance=ExtResource("1_pp85c")]
 
@@ -2104,40 +2039,40 @@ texture = SubResource("AtlasTexture_71p2d")
 offset = Vector2(-10, 17.333)
 
 [node name="ForearmBack" type="Sprite2D" parent="SpriteContainer/ArmBack" index="0"]
-position = Vector2(-26.576317, 35.837402)
-rotation = 0.042423725
+position = Vector2(-26.57631, 35.837402)
+rotation = 0.042423718
 scale = Vector2(0.99997, 0.99997)
 texture = SubResource("AtlasTexture_pigwd")
 offset = Vector2(-7.7521763, 23.060297)
 
 [node name="HandBack" type="Sprite2D" parent="SpriteContainer/ArmBack/ForearmBack" index="0"]
 z_index = 2
-position = Vector2(-32.235367, 51.34616)
-rotation = -0.3050262
-scale = Vector2(1.0000006, 1.0000006)
+position = Vector2(-32.235382, 51.346153)
+rotation = -0.30502623
+scale = Vector2(1.0000005, 1.0000005)
 texture = SubResource("AtlasTexture_ifobo")
 offset = Vector2(-9.287, 11.465)
 
 [node name="ThighBack" type="Sprite2D" parent="SpriteContainer" index="1"]
 modulate = Color(0.735357, 0.735357, 0.735357, 1)
 position = Vector2(30.667131, -118.065956)
-rotation = -0.3031281
-scale = Vector2(0.9999421, 0.9999421)
+rotation = -0.6180027
+scale = Vector2(0.99993855, 0.99993855)
 texture = SubResource("AtlasTexture_utiys")
 offset = Vector2(18, 26.333)
 
 [node name="LegBack" type="Sprite2D" parent="SpriteContainer/ThighBack" index="0"]
 z_index = -1
 position = Vector2(33.99031, 53.686012)
-rotation = 0.41904747
-scale = Vector2(0.99997044, 0.99997044)
+rotation = 0.58698887
+scale = Vector2(0.99996823, 0.99996823)
 texture = SubResource("AtlasTexture_3ua5h")
 offset = Vector2(0, 17)
 
 [node name="FootBack" type="Sprite2D" parent="SpriteContainer/ThighBack/LegBack" index="0"]
-position = Vector2(-4.000618, 40.01089)
-rotation = -0.23277885
-scale = Vector2(0.99998605, 0.99998605)
+position = Vector2(-4.0006104, 40.0109)
+rotation = -0.661679
+scale = Vector2(0.99998397, 0.99998397)
 texture = SubResource("AtlasTexture_6et86")
 offset = Vector2(9.333, 10.667)
 
@@ -2201,64 +2136,69 @@ texture = SubResource("AtlasTexture_6d12l")
 
 [node name="AnchorTail" type="Node2D" parent="SpriteContainer/Pelvis" index="1"]
 
-[node name="Tail" type="Line2D" parent="SpriteContainer/Pelvis/AnchorTail" index="0"]
-points = PackedVector2Array(0, 0, 0, 0, 0, 0)
-width = 100.0
-width_curve = SubResource("Curve_jlbrr")
-default_color = Color(0.7647059, 0.8352941, 0.40784314, 1)
+[node name="ProceduralLine" type="Line2D" parent="SpriteContainer/Pelvis/AnchorTail" index="0"]
+z_index = -1
+points = PackedVector2Array(0, 0, -40, 0, -80, 0, -120, 0, -160, 0, -200, 0)
+width = 70.0
+width_curve = SubResource("Curve_e5ikc")
+default_color = Color(0.76862746, 0.8352941, 0.4117647, 1)
 joint_mode = 2
 begin_cap_mode = 2
-round_precision = 32
-script = ExtResource("39_e5ikc")
-distance = 100.0
-velocity = 2000.0
+end_cap_mode = 2
+script = ExtResource("3_e5ikc")
+distance = 40.0
+init_dir = Vector2(-1, 0)
+gravity_amount = 125.0
+gravity_increase_amount = 10.0
+outline_color = Color(0.5019608, 0.58431375, 0.16470589, 1)
+metadata/_custom_type_script = "uid://lnbdh25h7yvf"
 
 [node name="ThighFront" type="Sprite2D" parent="SpriteContainer" index="4"]
 position = Vector2(-35.667114, -117.332825)
-rotation = 0.266719
-scale = Vector2(0.9999651, 0.9999651)
+rotation = 0.83291465
+scale = Vector2(0.9999632, 0.9999632)
 texture = SubResource("AtlasTexture_jbjqy")
 offset = Vector2(-5.667, 21)
 
 [node name="LegFront" type="Sprite2D" parent="SpriteContainer/ThighFront" index="0"]
 z_index = -1
-position = Vector2(-15.266029, 48.21392)
-rotation = -0.19699554
-scale = Vector2(0.9999722, 0.9999722)
+position = Vector2(-15.266037, 48.213924)
+rotation = -0.981645
+scale = Vector2(0.99997073, 0.99997073)
 texture = SubResource("AtlasTexture_qvnx8")
 offset = Vector2(2.667, 21.333)
 
 [node name="FootFront" type="Sprite2D" parent="SpriteContainer/ThighFront/LegFront" index="0"]
-position = Vector2(-0.78639984, 45.135765)
-rotation = -0.07021528
-scale = Vector2(0.99999505, 0.99999505)
+position = Vector2(-0.78639984, 45.13577)
+rotation = 0.16572285
+scale = Vector2(0.99999255, 0.99999255)
 texture = SubResource("AtlasTexture_7cm0d")
 offset = Vector2(2.2518923, 17.591896)
 
 [node name="Head" type="Node2D" parent="SpriteContainer" index="5"]
 z_index = 3
 position = Vector2(0.00047874366, -246.98297)
-rotation = -0.03756797
-scale = Vector2(0.99991155, 0.9991136)
+rotation = -0.037568048
+scale = Vector2(0.9999164, 0.9991134)
 
 [node name="Jaw" type="Sprite2D" parent="SpriteContainer/Head" index="0"]
-position = Vector2(-27.001165, -3.3358154)
-scale = Vector2(1.0038062, 0.9983332)
+position = Vector2(-27.000975, -3.335785)
+scale = Vector2(1.0038189, 0.9983409)
 texture = SubResource("AtlasTexture_wfuh6")
 offset = Vector2(34.667, -0.667)
 
 [node name="StrandBack" type="Sprite2D" parent="SpriteContainer/Head/Jaw" index="0"]
 z_index = 1
-position = Vector2(-11.290516, 17.042725)
-rotation = -0.35108414
-scale = Vector2(1.0000713, 1.0001936)
-skew = 0.0040273666
+position = Vector2(-11.290295, 17.042557)
+rotation = -0.3510874
+scale = Vector2(1.0000728, 1.0002235)
+skew = 0.004033804
 texture = SubResource("AtlasTexture_weadw")
 offset = Vector2(14.333, -9.667)
 
 [node name="Face" type="Sprite2D" parent="SpriteContainer/Head" index="1"]
-position = Vector2(-27.001165, -3.3358154)
-scale = Vector2(1.0038062, 0.9983332)
+position = Vector2(-27.000975, -3.335785)
+scale = Vector2(1.0038189, 0.9983409)
 texture = SubResource("AtlasTexture_usnsk")
 offset = Vector2(38.097843, -20.378845)
 
@@ -2317,8 +2257,8 @@ texture = SubResource("AtlasTexture_hb14a")
 
 [node name="StrandFront" type="Sprite2D" parent="SpriteContainer/Head/Face/HairBack/HairFront" index="1"]
 z_index = 1
-position = Vector2(11.088964, -17.509857)
-scale = Vector2(1.0004239, 1.0225171)
+position = Vector2(11.0881195, -17.509369)
+scale = Vector2(1.0004209, 1.0224723)
 texture = SubResource("AtlasTexture_24sqv")
 offset = Vector2(1, 19.667)
 
@@ -2326,21 +2266,21 @@ offset = Vector2(1, 19.667)
 z_index = 3
 position = Vector2(-56.33362, -199.66608)
 rotation = -0.021970093
-scale = Vector2(0.99996483, 0.99996483)
+scale = Vector2(0.9999522, 0.9999522)
 texture = SubResource("AtlasTexture_kwm2e")
 offset = Vector2(-10, 17.333)
 
 [node name="ForearmFront" type="Sprite2D" parent="SpriteContainer/ArmFront" index="0"]
 z_index = 1
-position = Vector2(-21.667168, 32.33307)
-rotation = -0.050168917
-scale = Vector2(0.9999736, 0.9999736)
+position = Vector2(-21.667168, 32.333054)
+rotation = -0.05016898
+scale = Vector2(0.9999708, 0.9999708)
 texture = SubResource("AtlasTexture_l1deg")
 offset = Vector2(-14, 25.667)
 
 [node name="HandFront" type="Sprite2D" parent="SpriteContainer/ArmFront/ForearmFront" index="0"]
-position = Vector2(-26.66719, 48.00045)
-rotation = -0.1869614
+position = Vector2(-26.667168, 48.00045)
+rotation = -0.18696141
 scale = Vector2(1.0000042, 1.0000042)
 texture = SubResource("AtlasTexture_fs2r1")
 offset = Vector2(-12, 15)
@@ -2371,7 +2311,7 @@ remote_path = NodePath("../../../../../SpriteContainer/Torso")
 [node name="Head" type="Bone2D" parent="Skeleton2D/Center/Body/Torso" index="1"]
 position = Vector2(0.0004787445, -125.9832)
 rotation = -0.037568048
-scale = Vector2(0.9999565, 0.9999565)
+scale = Vector2(0.9999543, 0.9999543)
 rest = Transform2D(0.9992742, -0.03755845, 0.03755845, 0.9992742, 0.0004787445, -125.9832)
 
 [node name="Head" type="RemoteTransform2D" parent="Skeleton2D/Center/Body/Torso/Head" index="0"]
@@ -2433,7 +2373,7 @@ update_scale = false
 [node name="ArmFront" type="Bone2D" parent="Skeleton2D/Center/Body/Torso" index="2"]
 position = Vector2(-56.333717, -78.666214)
 rotation = -0.021970093
-scale = Vector2(0.9999666, 0.9999666)
+scale = Vector2(0.999954, 0.999954)
 rest = Transform2D(0.9997533, -0.021968212, 0.021968212, 0.9997533, -56.333717, -78.666214)
 
 [node name="ArmFront" type="RemoteTransform2D" parent="Skeleton2D/Center/Body/Torso/ArmFront" index="0"]
@@ -2442,7 +2382,7 @@ remote_path = NodePath("../../../../../../SpriteContainer/ArmFront")
 [node name="ForeArmFront" type="Bone2D" parent="Skeleton2D/Center/Body/Torso/ArmFront" index="1"]
 position = Vector2(-21.667164, 32.33307)
 rotation = -0.05016899
-scale = Vector2(0.99997354, 0.99997354)
+scale = Vector2(0.9999707, 0.9999707)
 rest = Transform2D(0.9987342, -0.050147384, 0.050147384, 0.9987342, -21.667164, 32.33307)
 
 [node name="ForeArmFront" type="RemoteTransform2D" parent="Skeleton2D/Center/Body/Torso/ArmFront/ForeArmFront" index="0"]
@@ -2496,7 +2436,7 @@ remote_path = NodePath("../../../../../../../../SpriteContainer/ArmBack/ForearmB
 [node name="ThighFront" type="Bone2D" parent="Skeleton2D/Center" index="1"]
 position = Vector2(-35.66718, 3.667183)
 rotation = 0.266719
-scale = Vector2(0.99996686, 0.99996686)
+scale = Vector2(0.999965, 0.999965)
 rest = Transform2D(0.964623, 0.263563, -0.263563, 0.964623, -35.66718, 3.667183)
 
 [node name="ThighFront" type="RemoteTransform2D" parent="Skeleton2D/Center/ThighFront" index="0"]
@@ -2505,7 +2445,7 @@ remote_path = NodePath("../../../../SpriteContainer/ThighFront")
 [node name="LegFront" type="Bone2D" parent="Skeleton2D/Center/ThighFront" index="1"]
 position = Vector2(-15.266029, 48.21392)
 rotation = -0.19699557
-scale = Vector2(0.99997216, 0.99997216)
+scale = Vector2(0.9999707, 0.9999707)
 rest = Transform2D(0.98064965, -0.195722, 0.195722, 0.98064965, -15.266029, 48.21392)
 
 [node name="LegFront" type="RemoteTransform2D" parent="Skeleton2D/Center/ThighFront/LegFront" index="0"]
@@ -2514,7 +2454,7 @@ remote_path = NodePath("../../../../../SpriteContainer/ThighFront/LegFront")
 [node name="FootFront" type="Bone2D" parent="Skeleton2D/Center/ThighFront/LegFront" index="1"]
 position = Vector2(-0.78639984, 45.13577)
 rotation = -0.0702153
-scale = Vector2(0.9999951, 0.9999951)
+scale = Vector2(0.99999267, 0.99999267)
 rest = Transform2D(0.9975388, -0.07015757, 0.07015757, 0.9975388, -0.78639984, 45.13577)
 auto_calculate_length_and_angle = false
 length = 26.667
@@ -2526,7 +2466,7 @@ remote_path = NodePath("../../../../../../SpriteContainer/ThighFront/LegFront/Fo
 [node name="ThighBack" type="Bone2D" parent="Skeleton2D/Center" index="2"]
 position = Vector2(30.667187, 2.9340515)
 rotation = -0.30312806
-scale = Vector2(0.999944, 0.999944)
+scale = Vector2(0.99994034, 0.99994034)
 rest = Transform2D(0.95439744, -0.29850402, 0.29850402, 0.95439744, 30.667187, 2.9340515)
 
 [node name="ThighBack" type="RemoteTransform2D" parent="Skeleton2D/Center/ThighBack" index="0"]
@@ -2535,7 +2475,7 @@ remote_path = NodePath("../../../../SpriteContainer/ThighBack")
 [node name="LegBack" type="Bone2D" parent="Skeleton2D/Center/ThighBack" index="1"]
 position = Vector2(33.99031, 53.686005)
 rotation = 0.41904745
-scale = Vector2(0.9999704, 0.9999704)
+scale = Vector2(0.9999682, 0.9999682)
 rest = Transform2D(0.9134653, 0.40688533, -0.40688533, 0.9134653, 33.99031, 53.686005)
 
 [node name="LegBack" type="RemoteTransform2D" parent="Skeleton2D/Center/ThighBack/LegBack" index="0"]
@@ -2544,7 +2484,7 @@ remote_path = NodePath("../../../../../SpriteContainer/ThighBack/LegBack")
 [node name="FootBack" type="Bone2D" parent="Skeleton2D/Center/ThighBack/LegBack" index="1"]
 position = Vector2(-4.0006027, 40.010902)
 rotation = -0.23277885
-scale = Vector2(0.99998605, 0.99998605)
+scale = Vector2(0.999984, 0.999984)
 rest = Transform2D(0.97303295, -0.23068322, 0.23068322, 0.97303295, -4.0006027, 40.010902)
 auto_calculate_length_and_angle = false
 length = 43.383
@@ -2629,73 +2569,12 @@ metadata/_edit_use_anchors_ = true
 [node name="CSManager" type="Node2D" parent="." index="7"]
 script = ExtResource("6_wwopw")
 
-[node name="JawTrap" type="Node2D" parent="CSManager" index="0"]
-visible = false
-script = ExtResource("29_m1odn")
-critical_rate = SubResource("Resource_yvpvj")
-strenght = SubResource("Resource_jlbrr")
+[node name="JawTrap" parent="CSManager" index="0" instance=ExtResource("28_fjl3l")]
 
-[node name="Visual" type="Node2D" parent="CSManager/JawTrap" index="0"]
-
-[node name="Front" type="Node2D" parent="CSManager/JawTrap/Visual" index="0"]
-z_index = 4
-position = Vector2(-82, -185)
-rotation = 2.6770787
-
-[node name="VFX" type="Polygon2D" parent="CSManager/JawTrap/Visual/Front" index="0"]
-visible = false
-modulate = Color(1, 1, 1, 0.7411765)
-position = Vector2(179.79565, 37.35675)
-rotation = -1.5911038
-color = Color(0.72156864, 0.69411767, 0.72156864, 1)
-
-[node name="Offest" type="Marker2D" parent="CSManager/JawTrap/Visual/Front" index="1"]
-position = Vector2(0.1759777, -45.967045)
-
-[node name="Sleeve" type="Sprite2D" parent="CSManager/JawTrap/Visual/Front/Offest" index="0"]
-z_index = -1
-position = Vector2(-2.3841858e-07, 52)
-texture = SubResource("AtlasTexture_p0okl")
-
-[node name="Iron" type="Sprite2D" parent="CSManager/JawTrap/Visual/Front/Offest" index="1"]
-position = Vector2(1, 19.999998)
-texture = SubResource("AtlasTexture_rsvc4")
-
-[node name="Jaw" type="Sprite2D" parent="CSManager/JawTrap/Visual/Front/Offest" index="2"]
-position = Vector2(1.0000001, -35)
-texture = SubResource("AtlasTexture_hgdcd")
-
-[node name="Back" type="Node2D" parent="CSManager/JawTrap/Visual" index="1"]
-visible = false
-
-[node name="Offest" type="Marker2D" parent="CSManager/JawTrap/Visual/Back" index="0"]
-position = Vector2(0, -49)
-
-[node name="Sleeve" type="Sprite2D" parent="CSManager/JawTrap/Visual/Back/Offest" index="0"]
-position = Vector2(-2.3841858e-07, 52)
-texture = SubResource("AtlasTexture_n380g")
-
-[node name="Iron" type="Sprite2D" parent="CSManager/JawTrap/Visual/Back/Offest" index="1"]
-position = Vector2(1, 19.999998)
-texture = SubResource("AtlasTexture_3po1k")
-
-[node name="Jaw" type="Sprite2D" parent="CSManager/JawTrap/Visual/Back/Offest" index="2"]
-position = Vector2(1.0000001, -35)
-texture = SubResource("AtlasTexture_pvels")
-
-[node name="WeaponHitBox" type="Area2D" parent="CSManager/JawTrap" index="1" node_paths=PackedStringArray("cs")]
-position = Vector2(-54.999992, -183.99998)
-rotation = 1.5220718
-script = ExtResource("31_jlbrr")
-weapon_attck_data = SubResource("Resource_71p2d")
-attack_data = SubResource("Resource_wfuh6")
-cs = NodePath("..")
-metadata/_custom_type_script = "uid://42c2b5rma8ot"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CSManager/JawTrap/WeaponHitBox" index="0"]
-z_index = 3
-shape = SubResource("CapsuleShape2D_weadw")
-debug_color = Color(1, 0, 0, 0.41960785)
+[node name="CollisionShape2D" parent="CSManager/JawTrap/WeaponHitBox" index="0"]
+position = Vector2(17.610125, -176.3516)
+rotation = 3.1491725
+disabled = true
 
 [node name="HealthComponent" parent="." index="8" instance=ExtResource("10_51sid")]
 visible = false
@@ -2715,4 +2594,5 @@ modulate = Color(1, 1, 1, 0.30980393)
 texture = ExtResource("28_wbk6g")
 
 [editable path="BMC"]
+[editable path="CSManager/JawTrap"]
 [editable path="HealthComponent"]

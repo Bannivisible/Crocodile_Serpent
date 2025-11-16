@@ -1,49 +1,66 @@
-[gd_scene load_steps=24 format=3 uid="uid://ds4i8cup57akf"]
+[gd_scene load_steps=26 format=3 uid="uid://ds4i8cup57akf"]
 
-[ext_resource type="PackedScene" uid="uid://cpouj03mf7op6" path="res://Components/CombatSkill/Weapon/weapon.tscn" id="1_r7s7m"]
 [ext_resource type="Script" uid="uid://bhcip3r7gigab" path="res://Components/CombatSkill/Weapon/JawTrap/jaw_trap.gd" id="2_g4jcv"]
 [ext_resource type="Script" uid="uid://c20oatp4y0el5" path="res://Ressources/Statistics/Stats/critical_rate.gd" id="3_4d2f6"]
+[ext_resource type="Script" uid="uid://mcrao1da8rcg" path="res://Ressources/Statistics/Stats/strenght_stat.gd" id="3_v0eml"]
 [ext_resource type="Script" uid="uid://42c2b5rma8ot" path="res://Components/CombatSkill/Weapon/weapon_hit_box.gd" id="4_5pxtx"]
 [ext_resource type="Texture2D" uid="uid://qkqqtx1bnvjk" path="res://Components/CombatSkill/Weapon/JawTrap/Assets/jaw_trap_texture.tres" id="4_jeet7"]
 [ext_resource type="Script" uid="uid://bpo8hybdit330" path="res://Ressources/Attack/WeaponAttack/weapon_attack_data.gd" id="5_4d2f6"]
 [ext_resource type="Script" uid="uid://ce7ave72wm32j" path="res://Ressources/Attack/attack_data.gd" id="5_v0eml"]
 [ext_resource type="Script" uid="uid://danilkv671r1y" path="res://Ressources/Attack/AttackType/attack_type.gd" id="6_jeet7"]
-[ext_resource type="Texture2D" uid="uid://bppfppgp3n74q" path="res://Components/CombatSkill/Weapon/JawTrap/Assets/piege_a_machoire_back_up/En main.PNG" id="8_v0eml"]
 
-[sub_resource type="Resource" id="Resource_v0eml"]
+[sub_resource type="Resource" id="Resource_yvpvj"]
 script = ExtResource("3_4d2f6")
-value = 0.5
+value = 40.0
 metadata/_custom_type_script = "uid://c20oatp4y0el5"
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jeet7"]
-atlas = ExtResource("4_jeet7")
-region = Rect2(0, 128, 101, 64)
+[sub_resource type="Resource" id="Resource_jlbrr"]
+script = ExtResource("3_v0eml")
+value = 10.0
+metadata/_custom_type_script = "uid://mcrao1da8rcg"
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_dp6s7"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_p0okl"]
 atlas = ExtResource("4_jeet7")
-region = Rect2(101, 0, 101, 64)
+region = Rect2(305, 130, 102, 65)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_86vhf"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_rsvc4"]
 atlas = ExtResource("4_jeet7")
-region = Rect2(102, 64, 101, 64)
+region = Rect2(204, 0, 101, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_nise0"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_hgdcd"]
 atlas = ExtResource("4_jeet7")
-region = Rect2(0, 128, 101, 64)
+region = Rect2(306, 65, 101, 65)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_2xnf2"]
-atlas = ExtResource("4_jeet7")
-region = Rect2(101, 0, 101, 64)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v0eml"]
+size = Vector2(88, 20)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ld3kv"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_n380g"]
 atlas = ExtResource("4_jeet7")
-region = Rect2(102, 64, 101, 64)
+region = Rect2(303, 130, 101, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3po1k"]
+atlas = ExtResource("4_jeet7")
+region = Rect2(202, 0, 101, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pvels"]
+atlas = ExtResource("4_jeet7")
+region = Rect2(202, 65, 101, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3uvr3"]
+atlas = ExtResource("4_jeet7")
+region = Rect2(101, 132, 101, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dpfyk"]
+atlas = ExtResource("4_jeet7")
+region = Rect2(0, 132, 101, 65)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jeet7"]
 
 [sub_resource type="Resource" id="Resource_jeet7"]
 script = ExtResource("3_4d2f6")
 metadata/_custom_type_script = "uid://c20oatp4y0el5"
 
-[sub_resource type="Resource" id="Resource_86vhf"]
+[sub_resource type="Resource" id="Resource_71p2d"]
 script = ExtResource("5_4d2f6")
 add_crit_rate = SubResource("Resource_jeet7")
 metadata/_custom_type_script = "uid://bpo8hybdit330"
@@ -53,82 +70,182 @@ script = ExtResource("6_jeet7")
 type = 1
 metadata/_custom_type_script = "uid://danilkv671r1y"
 
-[sub_resource type="Resource" id="Resource_nise0"]
+[sub_resource type="Resource" id="Resource_wfuh6"]
 script = ExtResource("5_v0eml")
 type = SubResource("Resource_dp6s7")
 metadata/_custom_type_script = "uid://ce7ave72wm32j"
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jeet7"]
-radius = 35.0
-height = 232.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_weadw"]
+radius = 0.0
+height = 0.0
 
-[sub_resource type="Animation" id="Animation_jeet7"]
-resource_name = "AttackSlash1"
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_86vhf"]
-_data = {
-&"AttackSlash1": SubResource("Animation_jeet7")
-}
-
-[node name="JawTrap" instance=ExtResource("1_r7s7m")]
-rotation = -1.5707964
+[node name="JawTrap" type="Node2D"]
+position = Vector2(389, 203)
 script = ExtResource("2_g4jcv")
-critical_rate = SubResource("Resource_v0eml")
-gap = Vector2(100, -100)
+critical_rate = SubResource("Resource_yvpvj")
+strenght = SubResource("Resource_jlbrr")
 
-[node name="Visual" type="Node2D" parent="." index="0"]
+[node name="Front" type="StaticBody2D" parent="."]
+z_index = 4
+position = Vector2(-58, -2)
+collision_layer = 0
+collision_mask = 0
 
-[node name="Front" type="Node2D" parent="Visual" index="0"]
-
-[node name="Offest" type="Marker2D" parent="Visual/Front" index="0"]
-position = Vector2(0, -49)
-
-[node name="Sleeve" type="Sprite2D" parent="Visual/Front/Offest" index="0"]
-position = Vector2(-2.3841858e-07, 52)
-texture = SubResource("AtlasTexture_jeet7")
-
-[node name="Iron" type="Sprite2D" parent="Visual/Front/Offest" index="1"]
-position = Vector2(1, 19.999998)
-texture = SubResource("AtlasTexture_dp6s7")
-
-[node name="Jaw" type="Sprite2D" parent="Visual/Front/Offest" index="2"]
-position = Vector2(1.0000001, -35)
-texture = SubResource("AtlasTexture_86vhf")
-
-[node name="Back" type="Node2D" parent="Visual" index="1"]
+[node name="VFX" type="Polygon2D" parent="Front"]
 visible = false
+modulate = Color(1, 1, 1, 0.7411765)
+position = Vector2(179.79565, 37.35675)
+rotation = -1.5911038
+color = Color(0.72156864, 0.69411767, 0.72156864, 1)
 
-[node name="Offest" type="Marker2D" parent="Visual/Back" index="0"]
-position = Vector2(0, -49)
+[node name="Offest" type="Marker2D" parent="Front"]
+position = Vector2(0.1759777, -45.967045)
 
-[node name="Sleeve" type="Sprite2D" parent="Visual/Back/Offest" index="0"]
+[node name="Sleeve" type="Sprite2D" parent="Front/Offest"]
+z_index = -1
 position = Vector2(-2.3841858e-07, 52)
-texture = SubResource("AtlasTexture_nise0")
+texture = SubResource("AtlasTexture_p0okl")
 
-[node name="Iron" type="Sprite2D" parent="Visual/Back/Offest" index="1"]
+[node name="Iron" type="Sprite2D" parent="Front/Offest"]
 position = Vector2(1, 19.999998)
-texture = SubResource("AtlasTexture_2xnf2")
+texture = SubResource("AtlasTexture_rsvc4")
 
-[node name="Jaw" type="Sprite2D" parent="Visual/Back/Offest" index="2"]
+[node name="Jaw" type="Sprite2D" parent="Front/Offest"]
 position = Vector2(1.0000001, -35)
-texture = SubResource("AtlasTexture_ld3kv")
+texture = SubResource("AtlasTexture_hgdcd")
 
-[node name="WeaponHitBox" type="Area2D" parent="." index="1"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Front"]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_v0eml")
+
+[node name="Back" type="StaticBody2D" parent="."]
+position = Vector2(62, 4)
+collision_layer = 0
+collision_mask = 0
+
+[node name="Offest" type="Marker2D" parent="Back"]
+position = Vector2(5, -51)
+
+[node name="Sleeve" type="Sprite2D" parent="Back/Offest"]
+position = Vector2(-2.3841858e-07, 52)
+texture = SubResource("AtlasTexture_n380g")
+
+[node name="Iron" type="Sprite2D" parent="Back/Offest"]
+position = Vector2(1, 19.999998)
+texture = SubResource("AtlasTexture_3po1k")
+
+[node name="Jaw" type="Sprite2D" parent="Back/Offest"]
+position = Vector2(1.0000001, -35)
+texture = SubResource("AtlasTexture_pvels")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Back"]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_v0eml")
+
+[node name="Links" type="Node2D" parent="."]
+
+[node name="PinJoint2D4" type="PinJoint2D" parent="Links"]
+position = Vector2(-22, -1)
+node_a = NodePath("../../Front")
+node_b = NodePath("../Link")
+
+[node name="Link" type="RigidBody2D" parent="Links"]
+position = Vector2(-19, 14)
+disable_mode = 1
+collision_layer = 0
+collision_mask = 0
+
+[node name="Sprite2d" type="Sprite2D" parent="Links/Link"]
+position = Vector2(-3, 0)
+texture = SubResource("AtlasTexture_3uvr3")
+
+[node name="Sprite2D" type="Sprite2D" parent="Links/Link"]
+position = Vector2(3, 0)
+texture = SubResource("AtlasTexture_dpfyk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Links/Link"]
+shape = SubResource("CircleShape2D_jeet7")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="Links"]
+position = Vector2(-16, 18)
+node_a = NodePath("../Link")
+node_b = NodePath("../Link2")
+
+[node name="Link2" type="RigidBody2D" parent="Links"]
+position = Vector2(-4, 24)
+rotation = -0.9847531
+collision_layer = 0
+collision_mask = 0
+
+[node name="Sprite2d" type="Sprite2D" parent="Links/Link2"]
+position = Vector2(-3, 0)
+texture = SubResource("AtlasTexture_3uvr3")
+
+[node name="Sprite2D" type="Sprite2D" parent="Links/Link2"]
+position = Vector2(3, 0)
+texture = SubResource("AtlasTexture_dpfyk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Links/Link2"]
+shape = SubResource("CircleShape2D_jeet7")
+
+[node name="PinJoint2D2" type="PinJoint2D" parent="Links"]
+position = Vector2(5, 31)
+node_a = NodePath("../Link2")
+node_b = NodePath("../Link3")
+
+[node name="Link3" type="RigidBody2D" parent="Links"]
+position = Vector2(15, 26)
+rotation = 0.92282885
+collision_layer = 0
+collision_mask = 0
+
+[node name="Sprite2d" type="Sprite2D" parent="Links/Link3"]
+position = Vector2(-3, 0)
+texture = SubResource("AtlasTexture_3uvr3")
+
+[node name="Sprite2D" type="Sprite2D" parent="Links/Link3"]
+position = Vector2(3, 0)
+texture = SubResource("AtlasTexture_dpfyk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Links/Link3"]
+shape = SubResource("CircleShape2D_jeet7")
+
+[node name="PinJoint2D3" type="PinJoint2D" parent="Links"]
+position = Vector2(26, 21)
+node_a = NodePath("../Link3")
+node_b = NodePath("../Link4")
+
+[node name="Link4" type="RigidBody2D" parent="Links"]
+position = Vector2(29, 18)
+collision_layer = 0
+collision_mask = 0
+
+[node name="Sprite2d" type="Sprite2D" parent="Links/Link4"]
+position = Vector2(-3, 0)
+texture = SubResource("AtlasTexture_3uvr3")
+
+[node name="Sprite2D" type="Sprite2D" parent="Links/Link4"]
+position = Vector2(3, 0)
+texture = SubResource("AtlasTexture_dpfyk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Links/Link4"]
+shape = SubResource("CircleShape2D_jeet7")
+
+[node name="PinJoint2D5" type="PinJoint2D" parent="Links"]
+position = Vector2(35, 4)
+node_a = NodePath("../Link4")
+node_b = NodePath("../../Back")
+
+[node name="WeaponHitBox" type="Area2D" parent="." node_paths=PackedStringArray("cs")]
+position = Vector2(-54.999992, -183.99998)
+rotation = 1.5220718
 script = ExtResource("4_5pxtx")
-weapon_attck_data = SubResource("Resource_86vhf")
-attack_data = SubResource("Resource_nise0")
+weapon_attck_data = SubResource("Resource_71p2d")
+attack_data = SubResource("Resource_wfuh6")
+cs = NodePath("..")
 metadata/_custom_type_script = "uid://42c2b5rma8ot"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponHitBox" index="0"]
-shape = SubResource("CapsuleShape2D_jeet7")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponHitBox"]
+z_index = 3
+shape = SubResource("CapsuleShape2D_weadw")
 debug_color = Color(1, 0, 0, 0.41960785)
-
-[node name="EnMain" type="Sprite2D" parent="." index="2"]
-visible = false
-modulate = Color(1, 1, 1, 0.30980393)
-texture = ExtResource("8_v0eml")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
-libraries = {
-&"": SubResource("AnimationLibrary_86vhf")
-}
