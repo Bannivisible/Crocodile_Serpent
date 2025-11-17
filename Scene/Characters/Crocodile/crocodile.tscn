@@ -1,9 +1,10 @@
-[gd_scene load_steps=99 format=3 uid="uid://bgxumcv6rrpm1"]
+[gd_scene load_steps=101 format=3 uid="uid://bgxumcv6rrpm1"]
 
 [ext_resource type="PackedScene" uid="uid://mmkgsg3lueu" path="res://Scene/Characters/character.tscn" id="1_pp85c"]
 [ext_resource type="PackedScene" uid="uid://b74kbwhwtmiu5" path="res://Components/BasiqueMovement/bassqiue_movement_component.tscn" id="2_pp85c"]
 [ext_resource type="Script" uid="uid://dyglpbhv533ei" path="res://Ressources/ConditionForAction/condition_for_action.gd" id="3_0dmsc"]
 [ext_resource type="Texture2D" uid="uid://cwkl4nep4hgvb" path="res://Scene/Characters/Crocodile/Assets/crocodile_texture.tres" id="3_0ft5j"]
+[ext_resource type="Script" uid="uid://c52mpns0vhqs6" path="res://Other/procedural_line_outline.gd" id="3_dr3s2"]
 [ext_resource type="Script" uid="uid://lnbdh25h7yvf" path="res://Other/procedural_line.gd" id="3_e5ikc"]
 [ext_resource type="SkeletonModification2DCCDIK" uid="uid://cihlocwu0e7qb" path="res://Scene/Characters/Crocodile/SkeletonModification/elbow_front_skeleton_modification_2dccdik.tres" id="3_gtnt8"]
 [ext_resource type="SkeletonModification2DCCDIK" uid="uid://cotjbcwl1mrpr" path="res://Scene/Characters/Crocodile/SkeletonModification/wrist_front_skeleton_modification_2dccdik.tres" id="4_mru5n"]
@@ -103,6 +104,10 @@ region = Rect2(0, 330, 130, 165)
 [sub_resource type="AtlasTexture" id="AtlasTexture_6d12l"]
 atlas = ExtResource("3_0ft5j")
 region = Rect2(523, 1320, 131, 165)
+
+[sub_resource type="Curve" id="Curve_dr3s2"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.86220473, 0.4916805), -0.8909476, -0.8909476, 0, 0, Vector2(1, 0.123595595), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="Curve" id="Curve_e5ikc"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.86220473, 0.4916805), -0.8909476, -0.8909476, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -1106,134 +1111,98 @@ tracks/55/keys = {
 tracks/56/type = "value"
 tracks/56/imported = false
 tracks/56/enabled = true
-tracks/56/path = NodePath("CSManager/JawTrap/Visual/Front/Offest/Sleeve:z_index")
+tracks/56/path = NodePath("SpriteContainer/Head/Face/EyeFront/EyelidsFront:texture:region")
 tracks/56/interp = 1
 tracks/56/loop_wrap = true
 tracks/56/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [-1]
+"update": 0,
+"values": [Rect2(261, 990, 131, 165)]
 }
 tracks/57/type = "value"
 tracks/57/imported = false
 tracks/57/enabled = true
-tracks/57/path = NodePath("CSManager/JawTrap/Visual/Front:z_index")
+tracks/57/path = NodePath("SpriteContainer/Head/Face/EyeBack/EyelidsBack:texture:region")
 tracks/57/interp = 1
 tracks/57/loop_wrap = true
 tracks/57/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
+"update": 0,
+"values": [Rect2(261, 990, 131, 165)]
 }
 tracks/58/type = "value"
 tracks/58/imported = false
 tracks/58/enabled = true
-tracks/58/path = NodePath("CSManager/JawTrap/Visual/Front:position")
+tracks/58/path = NodePath("SpriteContainer/ArmFront/ForearmFront/HandFront:texture:region")
 tracks/58/interp = 1
 tracks/58/loop_wrap = true
 tracks/58/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-82, -185)]
+"values": [Rect2(262, 825, 130, 165)]
 }
 tracks/59/type = "value"
 tracks/59/imported = false
 tracks/59/enabled = true
-tracks/59/path = NodePath("CSManager/JawTrap/Visual/Front:rotation")
+tracks/59/path = NodePath("SpriteContainer/Head/Face/EyeFront/EyeFront:position")
 tracks/59/interp = 1
 tracks/59/loop_wrap = true
 tracks/59/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [2.6770787]
+"values": [Vector2(-1.1078534, 2.9678955)]
 }
 tracks/60/type = "value"
 tracks/60/imported = false
 tracks/60/enabled = true
-tracks/60/path = NodePath("SpriteContainer/Head/Face/EyeFront/EyelidsFront:texture:region")
+tracks/60/path = NodePath("SpriteContainer/Head/Face/EyeFront/EyeFront:rotation")
 tracks/60/interp = 1
 tracks/60/loop_wrap = true
 tracks/60/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Rect2(261, 990, 131, 165)]
+"values": [0.0]
 }
 tracks/61/type = "value"
 tracks/61/imported = false
 tracks/61/enabled = true
-tracks/61/path = NodePath("SpriteContainer/Head/Face/EyeBack/EyelidsBack:texture:region")
+tracks/61/path = NodePath("SpriteContainer/Head/Face/EyeBack/EyeBack:position")
 tracks/61/interp = 1
 tracks/61/loop_wrap = true
 tracks/61/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Rect2(261, 990, 131, 165)]
+"values": [Vector2(-1.1078534, 2.9678955)]
 }
 tracks/62/type = "value"
 tracks/62/imported = false
 tracks/62/enabled = true
-tracks/62/path = NodePath("SpriteContainer/ArmFront/ForearmFront/HandFront:texture:region")
+tracks/62/path = NodePath("SpriteContainer/Head/Face/EyeBack/EyeBack:rotation")
 tracks/62/interp = 1
 tracks/62/loop_wrap = true
 tracks/62/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Rect2(262, 825, 130, 165)]
+"values": [0.0]
 }
 tracks/63/type = "value"
 tracks/63/imported = false
 tracks/63/enabled = true
-tracks/63/path = NodePath("SpriteContainer/Head/Face/EyeFront/EyeFront:position")
+tracks/63/path = NodePath("AnimationPlayer:speed_scale")
 tracks/63/interp = 1
 tracks/63/loop_wrap = true
 tracks/63/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-1.1078534, 2.9678955)]
-}
-tracks/64/type = "value"
-tracks/64/imported = false
-tracks/64/enabled = true
-tracks/64/path = NodePath("SpriteContainer/Head/Face/EyeFront/EyeFront:rotation")
-tracks/64/interp = 1
-tracks/64/loop_wrap = true
-tracks/64/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/65/type = "value"
-tracks/65/imported = false
-tracks/65/enabled = true
-tracks/65/path = NodePath("SpriteContainer/Head/Face/EyeBack/EyeBack:position")
-tracks/65/interp = 1
-tracks/65/loop_wrap = true
-tracks/65/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-1.1078534, 2.9678955)]
-}
-tracks/66/type = "value"
-tracks/66/imported = false
-tracks/66/enabled = true
-tracks/66/path = NodePath("SpriteContainer/Head/Face/EyeBack/EyeBack:rotation")
-tracks/66/interp = 1
-tracks/66/loop_wrap = true
-tracks/66/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
+"values": [1.0]
 }
 
 [sub_resource type="Animation" id="Animation_jlbrr"]
@@ -1774,182 +1743,14 @@ _data = {
 resource_name = "Idle2"
 length = 3.0
 loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CSManager/JawTrap/Visual/Front:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.76666665, 1, 1.25, 1.5, 1.75, 2, 2.25, 2.5, 2.75),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(3.9999962, -145), Vector2(28.000002, -132), Vector2(42, -165.00002), Vector2(30, -141), Vector2(3.9999962, -145), Vector2(28.000002, -132), Vector2(42, -165.00002), Vector2(30, -141), Vector2(3.9999962, -145), Vector2(-14.999996, -197), Vector2(-83.99999, -188.99998), Vector2(-16, -198)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CSManager/JawTrap/Visual/Front:rotation")
-tracks/1/interp = 4
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 2.25, 2.5, 2.75, 37.233334),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [4.928745, 4.3300624, 4.8772984, 5.2496834, 4.928745, 4.3300624, 4.8772984, 5.2496834, 3.8222106, 2.8293762, 3.7986047, 5.2496834]
-}
 
 [sub_resource type="Animation" id="Animation_nn2k0"]
 resource_name = "IdleaAncien"
 length = 5.0
 loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CSManager/JawTrap/Visual/Front:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1.5, 2, 2.75, 3.25, 3.5, 4),
-"transitions": PackedFloat32Array(1, 1, 0.5, 0.5, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(-47.000008, -215.00002), Vector2(-16.000006, -130), Vector2(-47.000008, -215.00002), Vector2(-16.000006, -130), Vector2(-39.000008, -248.99998), Vector2(-117.99999, -136.99998), Vector2(-110, -123), Vector2(-38.999992, -209)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CSManager/JawTrap/Visual/Front:rotation")
-tracks/1/interp = 4
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5, 1.5, 2, 2.75, 3.25, 3.5, 4),
-"transitions": PackedFloat32Array(1, 1, 0.5, 0.5, 1, 1, 1, 1),
-"update": 0,
-"values": [-2.5915418, -1.1832697, -2.5915418, -1.1832697, 4.2200613, 6.747921, 0.34022918, 3.8473988]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("CSManager/JawTrap/Visual/Front:z_index")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("CSManager/JawTrap/Visual/Front/Offest/Sleeve:z_index")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [-2]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("AnimationPlayer:speed_scale")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.75]
-}
 
 [sub_resource type="Animation" id="Animation_utiys"]
 resource_name = "RESET"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CSManager/JawTrap/Visual/Front:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -172)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CSManager/JawTrap/Visual/Front:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.5707964]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("CSManager/JawTrap/Visual/Front/Offest/Jaw:texture:region")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Rect2(306, 65, 101, 65)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("CSManager/JawTrap/Visual/Front/Offest/Jaw:z_index")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("CSManager/JawTrap/Visual/Front/Offest/Iron:z_index")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("CSManager/JawTrap/Visual/Front:z_index")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("CSManager/JawTrap/Visual/Front/Offest/Sleeve:z_index")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [-1]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_utiys"]
 _data = {
@@ -2039,40 +1840,40 @@ texture = SubResource("AtlasTexture_71p2d")
 offset = Vector2(-10, 17.333)
 
 [node name="ForearmBack" type="Sprite2D" parent="SpriteContainer/ArmBack" index="0"]
-position = Vector2(-26.57631, 35.837402)
-rotation = 0.042423718
+position = Vector2(-26.576317, 35.837402)
+rotation = 0.04242355
 scale = Vector2(0.99997, 0.99997)
 texture = SubResource("AtlasTexture_pigwd")
 offset = Vector2(-7.7521763, 23.060297)
 
 [node name="HandBack" type="Sprite2D" parent="SpriteContainer/ArmBack/ForearmBack" index="0"]
 z_index = 2
-position = Vector2(-32.235382, 51.346153)
-rotation = -0.30502623
-scale = Vector2(1.0000005, 1.0000005)
+position = Vector2(-32.235382, 51.34616)
+rotation = -0.30502626
+scale = Vector2(1.0000006, 1.0000006)
 texture = SubResource("AtlasTexture_ifobo")
 offset = Vector2(-9.287, 11.465)
 
 [node name="ThighBack" type="Sprite2D" parent="SpriteContainer" index="1"]
 modulate = Color(0.735357, 0.735357, 0.735357, 1)
 position = Vector2(30.667131, -118.065956)
-rotation = -0.6180027
-scale = Vector2(0.99993855, 0.99993855)
+rotation = -0.3031281
+scale = Vector2(0.99993414, 0.99993414)
 texture = SubResource("AtlasTexture_utiys")
 offset = Vector2(18, 26.333)
 
 [node name="LegBack" type="Sprite2D" parent="SpriteContainer/ThighBack" index="0"]
 z_index = -1
-position = Vector2(33.99031, 53.686012)
-rotation = 0.58698887
-scale = Vector2(0.99996823, 0.99996823)
+position = Vector2(33.99032, 53.68601)
+rotation = 0.41904745
+scale = Vector2(0.99996454, 0.99996454)
 texture = SubResource("AtlasTexture_3ua5h")
 offset = Vector2(0, 17)
 
 [node name="FootBack" type="Sprite2D" parent="SpriteContainer/ThighBack/LegBack" index="0"]
-position = Vector2(-4.0006104, 40.0109)
-rotation = -0.661679
-scale = Vector2(0.99998397, 0.99998397)
+position = Vector2(-4.0006104, 40.010895)
+rotation = -0.23277886
+scale = Vector2(0.99997926, 0.99997926)
 texture = SubResource("AtlasTexture_6et86")
 offset = Vector2(9.333, 10.667)
 
@@ -2136,7 +1937,20 @@ texture = SubResource("AtlasTexture_6d12l")
 
 [node name="AnchorTail" type="Node2D" parent="SpriteContainer/Pelvis" index="1"]
 
-[node name="ProceduralLine" type="Line2D" parent="SpriteContainer/Pelvis/AnchorTail" index="0"]
+[node name="LineOutline" type="Line2D" parent="SpriteContainer/Pelvis/AnchorTail" index="0" node_paths=PackedStringArray("line")]
+z_index = -2
+points = PackedVector2Array(0, 0, -40, 0, -80, 0, -120, 0, -160, 0, -200, 0)
+width = 90.0
+width_curve = SubResource("Curve_dr3s2")
+default_color = Color(0.43529412, 0.5058824, 0.14509805, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+script = ExtResource("3_dr3s2")
+line = NodePath("../ProceduralLine")
+metadata/_custom_type_script = "uid://lnbdh25h7yvf"
+
+[node name="ProceduralLine" type="Line2D" parent="SpriteContainer/Pelvis/AnchorTail" index="1"]
 z_index = -1
 points = PackedVector2Array(0, 0, -40, 0, -80, 0, -120, 0, -160, 0, -200, 0)
 width = 70.0
@@ -2151,54 +1965,55 @@ init_dir = Vector2(-1, 0)
 gravity_amount = 125.0
 gravity_increase_amount = 10.0
 outline_color = Color(0.5019608, 0.58431375, 0.16470589, 1)
+outline_width = 4.0
 metadata/_custom_type_script = "uid://lnbdh25h7yvf"
 
 [node name="ThighFront" type="Sprite2D" parent="SpriteContainer" index="4"]
 position = Vector2(-35.667114, -117.332825)
-rotation = 0.83291465
-scale = Vector2(0.9999632, 0.9999632)
+rotation = 0.266719
+scale = Vector2(0.9999603, 0.9999603)
 texture = SubResource("AtlasTexture_jbjqy")
 offset = Vector2(-5.667, 21)
 
 [node name="LegFront" type="Sprite2D" parent="SpriteContainer/ThighFront" index="0"]
 z_index = -1
-position = Vector2(-15.266037, 48.213924)
-rotation = -0.981645
-scale = Vector2(0.99997073, 0.99997073)
+position = Vector2(-15.266029, 48.21392)
+rotation = -0.19699556
+scale = Vector2(0.9999665, 0.9999665)
 texture = SubResource("AtlasTexture_qvnx8")
 offset = Vector2(2.667, 21.333)
 
 [node name="FootFront" type="Sprite2D" parent="SpriteContainer/ThighFront/LegFront" index="0"]
-position = Vector2(-0.78639984, 45.13577)
-rotation = 0.16572285
-scale = Vector2(0.99999255, 0.99999255)
+position = Vector2(-0.78639984, 45.135773)
+rotation = -0.07021506
+scale = Vector2(0.99998677, 0.99998677)
 texture = SubResource("AtlasTexture_7cm0d")
 offset = Vector2(2.2518923, 17.591896)
 
 [node name="Head" type="Node2D" parent="SpriteContainer" index="5"]
 z_index = 3
 position = Vector2(0.00047874366, -246.98297)
-rotation = -0.037568048
-scale = Vector2(0.9999164, 0.9991134)
+rotation = -0.037567917
+scale = Vector2(0.9999144, 0.9991134)
 
 [node name="Jaw" type="Sprite2D" parent="SpriteContainer/Head" index="0"]
-position = Vector2(-27.000975, -3.335785)
-scale = Vector2(1.0038189, 0.9983409)
+position = Vector2(-27.000898, -3.335785)
+scale = Vector2(1.0037671, 0.998296)
 texture = SubResource("AtlasTexture_wfuh6")
 offset = Vector2(34.667, -0.667)
 
 [node name="StrandBack" type="Sprite2D" parent="SpriteContainer/Head/Jaw" index="0"]
 z_index = 1
-position = Vector2(-11.290295, 17.042557)
-rotation = -0.3510874
-scale = Vector2(1.0000728, 1.0002235)
-skew = 0.004033804
+position = Vector2(-11.290844, 17.043243)
+rotation = -0.35108456
+scale = Vector2(1.0000752, 1.000238)
+skew = 0.004028201
 texture = SubResource("AtlasTexture_weadw")
 offset = Vector2(14.333, -9.667)
 
 [node name="Face" type="Sprite2D" parent="SpriteContainer/Head" index="1"]
-position = Vector2(-27.000975, -3.335785)
-scale = Vector2(1.0038189, 0.9983409)
+position = Vector2(-27.000898, -3.335785)
+scale = Vector2(1.0037671, 0.998296)
 texture = SubResource("AtlasTexture_usnsk")
 offset = Vector2(38.097843, -20.378845)
 
@@ -2257,30 +2072,30 @@ texture = SubResource("AtlasTexture_hb14a")
 
 [node name="StrandFront" type="Sprite2D" parent="SpriteContainer/Head/Face/HairBack/HairFront" index="1"]
 z_index = 1
-position = Vector2(11.0881195, -17.509369)
-scale = Vector2(1.0004209, 1.0224723)
+position = Vector2(11.090227, -17.511597)
+scale = Vector2(1.0004565, 1.0225031)
 texture = SubResource("AtlasTexture_24sqv")
 offset = Vector2(1, 19.667)
 
 [node name="ArmFront" type="Sprite2D" parent="SpriteContainer" index="6"]
 z_index = 3
 position = Vector2(-56.33362, -199.66608)
-rotation = -0.021970093
-scale = Vector2(0.9999522, 0.9999522)
+rotation = -0.021970097
+scale = Vector2(0.999946, 0.999946)
 texture = SubResource("AtlasTexture_kwm2e")
 offset = Vector2(-10, 17.333)
 
 [node name="ForearmFront" type="Sprite2D" parent="SpriteContainer/ArmFront" index="0"]
 z_index = 1
-position = Vector2(-21.667168, 32.333054)
-rotation = -0.05016898
-scale = Vector2(0.9999708, 0.9999708)
+position = Vector2(-21.667164, 32.333084)
+rotation = -0.050168816
+scale = Vector2(0.9999661, 0.9999661)
 texture = SubResource("AtlasTexture_l1deg")
 offset = Vector2(-14, 25.667)
 
 [node name="HandFront" type="Sprite2D" parent="SpriteContainer/ArmFront/ForearmFront" index="0"]
-position = Vector2(-26.667168, 48.00045)
-rotation = -0.18696141
+position = Vector2(-26.667183, 48.000443)
+rotation = -0.18696143
 scale = Vector2(1.0000042, 1.0000042)
 texture = SubResource("AtlasTexture_fs2r1")
 offset = Vector2(-12, 15)
@@ -2311,7 +2126,7 @@ remote_path = NodePath("../../../../../SpriteContainer/Torso")
 [node name="Head" type="Bone2D" parent="Skeleton2D/Center/Body/Torso" index="1"]
 position = Vector2(0.0004787445, -125.9832)
 rotation = -0.037568048
-scale = Vector2(0.9999543, 0.9999543)
+scale = Vector2(0.9999496, 0.9999496)
 rest = Transform2D(0.9992742, -0.03755845, 0.03755845, 0.9992742, 0.0004787445, -125.9832)
 
 [node name="Head" type="RemoteTransform2D" parent="Skeleton2D/Center/Body/Torso/Head" index="0"]
@@ -2373,7 +2188,7 @@ update_scale = false
 [node name="ArmFront" type="Bone2D" parent="Skeleton2D/Center/Body/Torso" index="2"]
 position = Vector2(-56.333717, -78.666214)
 rotation = -0.021970093
-scale = Vector2(0.999954, 0.999954)
+scale = Vector2(0.9999478, 0.9999478)
 rest = Transform2D(0.9997533, -0.021968212, 0.021968212, 0.9997533, -56.333717, -78.666214)
 
 [node name="ArmFront" type="RemoteTransform2D" parent="Skeleton2D/Center/Body/Torso/ArmFront" index="0"]
@@ -2382,7 +2197,7 @@ remote_path = NodePath("../../../../../../SpriteContainer/ArmFront")
 [node name="ForeArmFront" type="Bone2D" parent="Skeleton2D/Center/Body/Torso/ArmFront" index="1"]
 position = Vector2(-21.667164, 32.33307)
 rotation = -0.05016899
-scale = Vector2(0.9999707, 0.9999707)
+scale = Vector2(0.9999661, 0.9999661)
 rest = Transform2D(0.9987342, -0.050147384, 0.050147384, 0.9987342, -21.667164, 32.33307)
 
 [node name="ForeArmFront" type="RemoteTransform2D" parent="Skeleton2D/Center/Body/Torso/ArmFront/ForeArmFront" index="0"]
@@ -2436,7 +2251,7 @@ remote_path = NodePath("../../../../../../../../SpriteContainer/ArmBack/ForearmB
 [node name="ThighFront" type="Bone2D" parent="Skeleton2D/Center" index="1"]
 position = Vector2(-35.66718, 3.667183)
 rotation = 0.266719
-scale = Vector2(0.999965, 0.999965)
+scale = Vector2(0.99996203, 0.99996203)
 rest = Transform2D(0.964623, 0.263563, -0.263563, 0.964623, -35.66718, 3.667183)
 
 [node name="ThighFront" type="RemoteTransform2D" parent="Skeleton2D/Center/ThighFront" index="0"]
@@ -2445,7 +2260,7 @@ remote_path = NodePath("../../../../SpriteContainer/ThighFront")
 [node name="LegFront" type="Bone2D" parent="Skeleton2D/Center/ThighFront" index="1"]
 position = Vector2(-15.266029, 48.21392)
 rotation = -0.19699557
-scale = Vector2(0.9999707, 0.9999707)
+scale = Vector2(0.9999666, 0.9999666)
 rest = Transform2D(0.98064965, -0.195722, 0.195722, 0.98064965, -15.266029, 48.21392)
 
 [node name="LegFront" type="RemoteTransform2D" parent="Skeleton2D/Center/ThighFront/LegFront" index="0"]
@@ -2454,7 +2269,7 @@ remote_path = NodePath("../../../../../SpriteContainer/ThighFront/LegFront")
 [node name="FootFront" type="Bone2D" parent="Skeleton2D/Center/ThighFront/LegFront" index="1"]
 position = Vector2(-0.78639984, 45.13577)
 rotation = -0.0702153
-scale = Vector2(0.99999267, 0.99999267)
+scale = Vector2(0.9999867, 0.9999867)
 rest = Transform2D(0.9975388, -0.07015757, 0.07015757, 0.9975388, -0.78639984, 45.13577)
 auto_calculate_length_and_angle = false
 length = 26.667
@@ -2466,7 +2281,7 @@ remote_path = NodePath("../../../../../../SpriteContainer/ThighFront/LegFront/Fo
 [node name="ThighBack" type="Bone2D" parent="Skeleton2D/Center" index="2"]
 position = Vector2(30.667187, 2.9340515)
 rotation = -0.30312806
-scale = Vector2(0.99994034, 0.99994034)
+scale = Vector2(0.999936, 0.999936)
 rest = Transform2D(0.95439744, -0.29850402, 0.29850402, 0.95439744, 30.667187, 2.9340515)
 
 [node name="ThighBack" type="RemoteTransform2D" parent="Skeleton2D/Center/ThighBack" index="0"]
@@ -2475,7 +2290,7 @@ remote_path = NodePath("../../../../SpriteContainer/ThighBack")
 [node name="LegBack" type="Bone2D" parent="Skeleton2D/Center/ThighBack" index="1"]
 position = Vector2(33.99031, 53.686005)
 rotation = 0.41904745
-scale = Vector2(0.9999682, 0.9999682)
+scale = Vector2(0.9999645, 0.9999645)
 rest = Transform2D(0.9134653, 0.40688533, -0.40688533, 0.9134653, 33.99031, 53.686005)
 
 [node name="LegBack" type="RemoteTransform2D" parent="Skeleton2D/Center/ThighBack/LegBack" index="0"]
@@ -2484,7 +2299,7 @@ remote_path = NodePath("../../../../../SpriteContainer/ThighBack/LegBack")
 [node name="FootBack" type="Bone2D" parent="Skeleton2D/Center/ThighBack/LegBack" index="1"]
 position = Vector2(-4.0006027, 40.010902)
 rotation = -0.23277885
-scale = Vector2(0.999984, 0.999984)
+scale = Vector2(0.99997926, 0.99997926)
 rest = Transform2D(0.97303295, -0.23068322, 0.23068322, 0.97303295, -4.0006027, 40.010902)
 auto_calculate_length_and_angle = false
 length = 43.383

@@ -26,8 +26,12 @@ func set_anchor(value: NodePath) -> void:
 
 @export var init_dir:= Vector2.RIGHT
 
-@export_subgroup("Gravity", "gravity")
+@export var collide: bool= true
+@export_subgroup("Collision", "collision")
+@export var collision_mask: Game.COLLISION_MASK= Game.COLLISION_MASK.GROUND
 
+@export var get_gravity: bool= true
+@export_subgroup("Gravity", "gravity")
 @export var gravity_amount: float= 100.0
 @export var gravity_increase_amount: float= 0.0
 
@@ -43,10 +47,9 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint(): return
-	_process_gravity(delta)
+	if get_gravity: _process_gravity(delta)
+	if collide: _process_collisions()
 	_process_points()
-	_process_collisions()
-	queue_redraw()
 
 #### LOGIC ###
 
@@ -85,7 +88,7 @@ func _process_collisions() -> void:
 		var point_widht: float= _get_point_widht(i)
 		var to: Vector2 = points[i] + Vector2.DOWN * point_widht
 		var ray_query := PhysicsRayQueryParameters2D.create(
-			points[i], to, Game.COLLISION_MASK.GROUND)
+			points[i], to, collision_mask)
 		
 		var collision: Dictionary= space_state.intersect_ray(ray_query)
 		
@@ -99,17 +102,20 @@ func _get_point_widht(pos_id: int) -> float:
 	
 	return result / 2
 
-func _draw() -> void:
-	for i in range(points.size() -2):
-		var from: Vector2= _get_pos_for_outline(i)
-		var to: Vector2= _get_pos_for_outline(i+1)
-		
-		draw_line(from, to, outline_color, outline_width)
-
-func _get_pos_for_outline(pos_id: int) -> Vector2:
-	var dir: Vector2= points[pos_id] - points[pos_id + 1]
-	dir = dir.normalized()
-	var normal := Vector2(-dir.y, dir.x)
-	
-	var pos: Vector2= points[pos_id] + normal * _get_point_widht(pos_id)
-	return pos
+#func _draw() -> void:
+	#var pos_point: Array[Vector2]
+	#for i in range(points.size()):
+		#var pos: Vector2= _get_pos_for_outline(i)
+		#pos_point.append(pos)
+	#
+		#draw_multiline(pos_point, outline_color, outline_width)
+#
+#func _get_pos_for_outline(pos_id: int) -> Vector2:
+	#if pos_id == points.size()-1: return points[pos_id]
+	#
+	#var dir: Vector2= points[pos_id] - points[pos_id + 1]
+	#dir = dir.normalized()
+	#var normal := Vector2(-dir.y, dir.x)
+	#
+	#var pos: Vector2= points[pos_id] + normal * _get_point_widht(pos_id)
+	#return pos
