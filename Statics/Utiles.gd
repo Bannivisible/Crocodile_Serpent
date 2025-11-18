@@ -105,8 +105,21 @@ static func compute_collision_lenght(collision: Node2D) -> float:
 	
 	return 0.0
 
-static func add_child_to_root(parent: Node ,child: Node) -> void:
-	if child.get_parent():
-		child.get_parent().remove_child(child)
+static func add_child_to_root(child: Node, root: Node= child.get_tree().root.get_child(0)) -> void:
+	var parent: Node= child.get_parent()
 	
-	parent.get_tree().root.get_child(0).add_child(child)
+	if parent:
+		var replace_child: Callable= (func():
+			parent.remove_child(child)
+			root.add_child(child)).bind()
+		
+		if not parent.is_node_ready():
+			parent.ready.connect(replace_child)
+		else : replace_child.call()
+	
+	else : root.add_child(child)
+
+static func append_with_temp(list: Array, value: Variant) -> void:
+	var array: Array= list
+	array.append(value)
+	list = array

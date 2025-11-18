@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dgndeir7aqk0o"]
+[gd_scene load_steps=19 format=3 uid="uid://dgndeir7aqk0o"]
 
 [ext_resource type="Theme" uid="uid://dxxn1u7fah8ng" path="res://Ui/BookInterface/Theme/Book.tres" id="1_nh015"]
 [ext_resource type="Script" uid="uid://dijsmuk5xxrv7" path="res://Ui/CSInterface/cs_interface.gd" id="2_lhy7a"]
@@ -14,6 +14,7 @@
 [ext_resource type="Resource" uid="uid://d2urmmxyqwlit" path="res://Ressources/CombatSkillData/Spell/Fire/spell_super_fire_ball.tres" id="11_qiots"]
 [ext_resource type="Resource" uid="uid://c04uu7w2nnej1" path="res://Ressources/CombatSkillData/Spell/Electricity/lightning_caga.tres" id="12_un5qs"]
 [ext_resource type="Script" uid="uid://dwdvwibtk7pc6" path="res://Ui/CSInterface/spell_grid_container.gd" id="13_un5qs"]
+[ext_resource type="Script" uid="uid://yi1uvna27jmy" path="res://Other/hider.gd" id="15_ilqmr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i5yi8"]
 bg_color = Color(0.2969628, 0.10500003, 0.115467034, 1)
@@ -234,6 +235,10 @@ theme_override_constants/h_separation = 6
 theme_override_constants/v_separation = 10
 columns = 2
 script = ExtResource("13_un5qs")
+
+[node name="Hider" type="VisibleOnScreenNotifier2D" parent="."]
+rect = Rect2(0, 0, 960, 540)
+script = ExtResource("15_ilqmr")
 
 [connection signal="cancel" from="." to="Panel/TabContainer" method="_on_cs_interface_cancel"]
 [connection signal="on_screen_changed" from="." to="Panel/TabContainer" method="_on_cs_interface_on_screen_changed"]
