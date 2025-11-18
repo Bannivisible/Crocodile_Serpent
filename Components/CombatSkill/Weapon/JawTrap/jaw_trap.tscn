@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://ds4i8cup57akf"]
+[gd_scene load_steps=26 format=3 uid="uid://ds4i8cup57akf"]
 
 [ext_resource type="Script" uid="uid://bhcip3r7gigab" path="res://Components/CombatSkill/Weapon/JawTrap/jaw_trap.gd" id="2_g4jcv"]
 [ext_resource type="Script" uid="uid://c20oatp4y0el5" path="res://Ressources/Statistics/Stats/critical_rate.gd" id="3_4d2f6"]
@@ -35,17 +35,6 @@ region = Rect2(306, 65, 101, 65)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v0eml"]
 height = 86.60971
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3uvr3"]
-atlas = ExtResource("4_jeet7")
-region = Rect2(101, 132, 101, 65)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dpfyk"]
-atlas = ExtResource("4_jeet7")
-region = Rect2(0, 132, 101, 65)
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_86vhf"]
-height = 34.043976
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n380g"]
 atlas = ExtResource("4_jeet7")
@@ -132,122 +121,13 @@ node_a = NodePath("../Front")
 
 [node name="Links" type="Node2D" parent="." node_paths=PackedStringArray("front_part", "back_part")]
 script = ExtResource("5_jeet7")
+nb_link = 5
 front_part = NodePath("../Front")
 back_part = NodePath("../Back")
 jaw_trap_texture = ExtResource("4_jeet7")
 region_link_left = Rect2(101, 132, 101, 65)
 region_link_right = Rect2(0, 132, 101, 65)
 shape = ExtResource("6_86vhf")
-
-[node name="Link" type="RigidBody2D" parent="Links"]
-position = Vector2(-160, 0)
-rotation = 1.5707964
-disable_mode = 1
-collision_layer = 0
-collision_mask = 0
-
-[node name="Sprite2d" type="Sprite2D" parent="Links/Link"]
-position = Vector2(-3, 0)
-texture = SubResource("AtlasTexture_3uvr3")
-offset = Vector2(0, 3)
-
-[node name="Sprite2D" type="Sprite2D" parent="Links/Link"]
-position = Vector2(3, 0)
-texture = SubResource("AtlasTexture_dpfyk")
-offset = Vector2(0, 3)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Links/Link"]
-shape = ExtResource("6_86vhf")
-
-[node name="PinJoint2D1" type="PinJoint2D" parent="Links"]
-position = Vector2(-150, 0)
-node_a = NodePath("../Link")
-node_b = NodePath("../Link2")
-
-[node name="Link5" type="RigidBody2D" parent="Links"]
-position = Vector2(-140, 0)
-rotation = 1.5707964
-disable_mode = 1
-collision_layer = 0
-collision_mask = 0
-
-[node name="Sprite2d" type="Sprite2D" parent="Links/Link5"]
-z_index = -1
-position = Vector2(-3, 0)
-texture = SubResource("AtlasTexture_3uvr3")
-offset = Vector2(0, 3)
-
-[node name="Sprite2D" type="Sprite2D" parent="Links/Link5"]
-z_index = 1
-position = Vector2(2.9999995, 0)
-texture = SubResource("AtlasTexture_dpfyk")
-offset = Vector2(0, 3)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Links/Link5"]
-visible = false
-position = Vector2(-0.08783207, -2.998714)
-shape = SubResource("CapsuleShape2D_86vhf")
-
-[node name="PinJoint2D2" type="PinJoint2D" parent="Links"]
-position = Vector2(-130, 0)
-node_a = NodePath("../Link")
-node_b = NodePath("../Link2")
-
-[node name="Link6" type="RigidBody2D" parent="Links"]
-position = Vector2(-120, 0)
-rotation = 1.5707964
-disable_mode = 1
-collision_layer = 0
-collision_mask = 0
-
-[node name="Sprite2d" type="Sprite2D" parent="Links/Link6"]
-position = Vector2(-3, 0)
-texture = SubResource("AtlasTexture_3uvr3")
-offset = Vector2(0, 3)
-
-[node name="Sprite2D" type="Sprite2D" parent="Links/Link6"]
-position = Vector2(3, 0)
-texture = SubResource("AtlasTexture_dpfyk")
-offset = Vector2(0, 3)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Links/Link6"]
-visible = false
-position = Vector2(-0.08783207, -2.998714)
-shape = SubResource("CapsuleShape2D_86vhf")
-
-[node name="PinJoint2D3" type="PinJoint2D" parent="Links"]
-position = Vector2(-110, 0)
-node_a = NodePath("../Link")
-node_b = NodePath("../Link2")
-
-[node name="Link7" type="RigidBody2D" parent="Links"]
-position = Vector2(-100, 0)
-rotation = 1.5707964
-disable_mode = 1
-collision_layer = 0
-collision_mask = 0
-
-[node name="Sprite2d" type="Sprite2D" parent="Links/Link7"]
-z_index = -1
-position = Vector2(-3, 0)
-texture = SubResource("AtlasTexture_3uvr3")
-offset = Vector2(0, 3)
-
-[node name="Sprite2D" type="Sprite2D" parent="Links/Link7"]
-z_index = 1
-position = Vector2(2.9999995, 0)
-texture = SubResource("AtlasTexture_dpfyk")
-offset = Vector2(0, 3)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Links/Link7"]
-visible = false
-position = Vector2(-0.08783207, -2.998714)
-shape = SubResource("CapsuleShape2D_86vhf")
-
-[node name="PinJoint2D4" type="PinJoint2D" parent="Links"]
-position = Vector2(-90, 0)
-node_a = NodePath("../Link")
-node_b = NodePath("../Link2")
 
 [node name="PinJointBack" type="PinJoint2D" parent="."]
 position = Vector2(35, 4)

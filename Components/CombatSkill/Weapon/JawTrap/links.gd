@@ -1,22 +1,25 @@
+@tool
 extends Node2D
 
 @export var nb_link: int:
 	set = _set_nb_link
 
 func _set_nb_link(value: int) -> void:
-	var prev_nb: int= nb_link
 	nb_link = value
-	if nb_link < prev_nb:
-		for i in range(nb_link, prev_nb):
-			remove_child(_get_link(i))
-			var joint: Node= get_child(get_child_count()-1)
-			if joint is PinJoint2D: remove_child(joint)
-	else :
-		for i in range(prev_nb ,nb_link):
-			_add_link(i)
+	
+	_remove_all_child()
+	for i in range(nb_link):
+		_add_link(i)
+
+func _remove_all_child() -> void:
+	for child in get_children():
+		remove_child(child)
 
 @export var front_part: StaticBody2D
+@onready var pin_joint_front: PinJoint2D = $"../PinJointFront"
+
 @export var back_part: StaticBody2D
+@onready var pin_joint_back: PinJoint2D = $"../PinJointBack"
 
 @export var jaw_trap_texture: Texture
 
@@ -27,15 +30,23 @@ func _set_nb_link(value: int) -> void:
 
 var pair: bool= false
 
+func _ready() -> void:
+	if not Engine.is_editor_hint():
+		for i in range(nb_link):
+			_add_link(i)
+		pin_joint_front.node_b = "../Links/" + "Link1"
+		pin_joint_back.node_a = "../Links/" + "Link" + str(nb_link)
+		print(pin_joint_front.get_node("../Links/" + "Link1").name)
+
+
 func _add_link(i: int) -> void:
 	var link := RigidBody2D.new()
 	_set_visual(link)
 	_set_position(link, i)
 	
-	link.name = "Link" + str(i)
+	link.name = "Link" + str(i+1)
 	add_child(link)
 	_add_joint(link, i)
-	print(get_children())
 
 func _set_visual(link: RigidBody2D) -> void:
 	var sprite_left: Sprite2D= _create_sprite_link(true)
@@ -53,12 +64,14 @@ func _create_sprite_link(left: bool) -> Sprite2D:
 	var atlas_texture := AtlasTexture.new()
 	atlas_texture.atlas = jaw_trap_texture
 	atlas_texture.region = region_link_left if left else region_link_right
+	sprite.texture =atlas_texture
 	
 	sprite.name = "LeftPart" if left else "RightPart"
 	return sprite
 
 func _set_position(link: RigidBody2D, i: int) -> void:
 	link.position.x = 20.0 * float(i)
+	link.rotation = PI/2
 
 func _add_collision(link: RigidBody2D) -> void:
 	var collision := CollisionShape2D.new()
@@ -75,9 +88,12 @@ func _add_joint(link: RigidBody2D, i: int) -> void:
 	var joint := PinJoint2D.new()
 	joint.position.x = 10.0 * float(i)
 	
+	joint.name = "Joint" + str(i+1) + str(i+2)
+	
 	add_child(joint)
-	joint.node_a = _get_link(i-1).get_path()
-	joint.node_a = link.get_path()
+	joint.node_a = "../" + link.name
+	joint.node_a = "../" + "Link" + _get_link(i+2).name
+	prints(joint.node_a, joint.node_b)
 
 func _get_link(i: int) -> RigidBody2D:
 	@warning_ignore("integer_division")
