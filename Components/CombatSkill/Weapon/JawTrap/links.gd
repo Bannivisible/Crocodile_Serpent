@@ -6,6 +6,7 @@ extends Node2D
 
 func _set_nb_link(value: int) -> void:
 	nb_link = value
+	if not Engine.is_editor_hint(): return
 	
 	_remove_all_child()
 	for i in range(nb_link):
@@ -16,10 +17,10 @@ func _remove_all_child() -> void:
 		remove_child(child)
 
 @export var front_part: StaticBody2D
-@onready var pin_joint_front: PinJoint2D = $"../PinJointFront"
+@onready var pin_joint_front: PinJoint2D = $"../Front/PinJointFront"
 
 @export var back_part: StaticBody2D
-@onready var pin_joint_back: PinJoint2D = $"../PinJointBack"
+@onready var pin_joint_back: PinJoint2D = $"../Back/PinJointBack"
 
 @export var jaw_trap_texture: Texture
 
@@ -31,22 +32,25 @@ func _remove_all_child() -> void:
 var pair: bool= false
 
 func _ready() -> void:
-	if not Engine.is_editor_hint():
+	if not Engine.is_editor_hint() and nb_link > 0:
 		for i in range(nb_link):
 			_add_link(i)
-		pin_joint_front.node_b = "../Links/" + "Link1"
-		pin_joint_back.node_a = "../Links/" + "Link" + str(nb_link)
-		print(pin_joint_front.get_node("../Links/" + "Link1").name)
-
+		
+		for i in range(nb_link-1):
+			_add_joint(i)
+		
+		pin_joint_front.node_b = NodePath("../../Links/Link1")
+		#pin_joint_back.node_a = NodePath("../../Links/" + "Link" + str(nb_link))
+		print(get_children())
 
 func _add_link(i: int) -> void:
 	var link := RigidBody2D.new()
+	_add_collision(link)
 	_set_visual(link)
 	_set_position(link, i)
 	
 	link.name = "Link" + str(i+1)
 	add_child(link)
-	_add_joint(link, i)
 
 func _set_visual(link: RigidBody2D) -> void:
 	var sprite_left: Sprite2D= _create_sprite_link(true)
@@ -82,20 +86,19 @@ func _add_collision(link: RigidBody2D) -> void:
 	
 	link.add_child(collision)
 
-func _add_joint(link: RigidBody2D, i: int) -> void:
+func _add_joint(i: int) -> void:
 	if nb_link < 2: return
 	
 	var joint := PinJoint2D.new()
 	joint.position.x = 10.0 * float(i)
 	
-	joint.name = "Joint" + str(i+1) + str(i+2)
+	joint.name = "Joint" + str(i+1) + "_" + str(i+2)
+	#joint.bias = 0.9
+	joint.softness = 0.2
 	
+	joint.node_a = "../" + _get_link(i+1).name
+	joint.node_b = "../" + _get_link(i+2).name
 	add_child(joint)
-	joint.node_a = "../" + link.name
-	joint.node_a = "../" + "Link" + _get_link(i+2).name
-	prints(joint.node_a, joint.node_b)
 
 func _get_link(i: int) -> RigidBody2D:
-	@warning_ignore("integer_division")
-	return get_child(i/2 -1)
-	
+	return get_node("Link" + str(i))

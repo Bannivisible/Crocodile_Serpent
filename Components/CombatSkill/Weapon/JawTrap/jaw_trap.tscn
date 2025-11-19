@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://ds4i8cup57akf"]
+[gd_scene load_steps=28 format=3 uid="uid://ds4i8cup57akf"]
 
 [ext_resource type="Script" uid="uid://bhcip3r7gigab" path="res://Components/CombatSkill/Weapon/JawTrap/jaw_trap.gd" id="2_g4jcv"]
 [ext_resource type="Script" uid="uid://c20oatp4y0el5" path="res://Ressources/Statistics/Stats/critical_rate.gd" id="3_4d2f6"]
@@ -75,6 +75,14 @@ metadata/_custom_type_script = "uid://ce7ave72wm32j"
 radius = 0.0
 height = 0.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_86vhf"]
+atlas = ExtResource("4_jeet7")
+region = Rect2(0, 130, 101, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dp6s7"]
+atlas = ExtResource("4_jeet7")
+region = Rect2(101, 130, 101, 65)
+
 [node name="JawTrap" type="Node2D"]
 position = Vector2(545, 219)
 script = ExtResource("2_g4jcv")
@@ -83,7 +91,7 @@ strenght = SubResource("Resource_jlbrr")
 
 [node name="Front" type="StaticBody2D" parent="."]
 z_index = 4
-position = Vector2(-290, -3)
+position = Vector2(-56, 1)
 collision_layer = 0
 collision_mask = 0
 
@@ -115,13 +123,15 @@ position = Vector2(-3, 1)
 rotation = 1.5039136
 shape = SubResource("CapsuleShape2D_v0eml")
 
-[node name="PinJointFront" type="PinJoint2D" parent="."]
-position = Vector2(-231, -21)
-node_a = NodePath("../Front")
+[node name="PinJointFront" type="PinJoint2D" parent="Front"]
+position = Vector2(38, 0)
+node_a = NodePath("..")
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Front"]
 
 [node name="Links" type="Node2D" parent="." node_paths=PackedStringArray("front_part", "back_part")]
 script = ExtResource("5_jeet7")
-nb_link = 5
+nb_link = 10
 front_part = NodePath("../Front")
 back_part = NodePath("../Back")
 jaw_trap_texture = ExtResource("4_jeet7")
@@ -129,12 +139,8 @@ region_link_left = Rect2(101, 132, 101, 65)
 region_link_right = Rect2(0, 132, 101, 65)
 shape = ExtResource("6_86vhf")
 
-[node name="PinJointBack" type="PinJoint2D" parent="."]
-position = Vector2(35, 4)
-node_b = NodePath("../Back")
-
 [node name="Back" type="StaticBody2D" parent="."]
-position = Vector2(62, 4)
+position = Vector2(228, 1)
 collision_layer = 0
 collision_mask = 0
 
@@ -158,6 +164,11 @@ position = Vector2(5, -4)
 rotation = -1.6192627
 shape = SubResource("CapsuleShape2D_jeet7")
 
+[node name="PinJointBack" type="PinJoint2D" parent="Back"]
+position = Vector2(-31, -1)
+node_b = NodePath("..")
+bias = 0.9
+
 [node name="WeaponHitBox" type="Area2D" parent="." node_paths=PackedStringArray("cs")]
 position = Vector2(-54.999992, -183.99998)
 rotation = 1.5220718
@@ -171,3 +182,20 @@ metadata/_custom_type_script = "uid://42c2b5rma8ot"
 z_index = 3
 shape = SubResource("CapsuleShape2D_weadw")
 debug_color = Color(1, 0, 0, 0.41960785)
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+visible = false
+position = Vector2(-288, -54)
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = ExtResource("6_86vhf")
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+texture = SubResource("AtlasTexture_86vhf")
+offset = Vector2(3, 0)
+
+[node name="Sprite2D2" type="Sprite2D" parent="RigidBody2D"]
+texture = SubResource("AtlasTexture_dp6s7")
+offset = Vector2(-3, 0)
