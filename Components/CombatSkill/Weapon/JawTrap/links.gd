@@ -29,6 +29,8 @@ func _remove_all_child() -> void:
 
 @export var shape: Shape2D
 
+@export var physics_material: PhysicsMaterial
+
 var pair: bool= false
 
 func _ready() -> void:
@@ -40,14 +42,15 @@ func _ready() -> void:
 			_add_joint(i)
 		
 		pin_joint_front.node_b = NodePath("../../Links/Link1")
-		#pin_joint_back.node_a = NodePath("../../Links/" + "Link" + str(nb_link))
-		print(get_children())
+		pin_joint_back.node_a = NodePath("../../Links/" + "Link" + str(nb_link))
 
 func _add_link(i: int) -> void:
 	var link := RigidBody2D.new()
 	_add_collision(link)
 	_set_visual(link)
 	_set_position(link, i)
+	
+	link.physics_material_override = physics_material
 	
 	link.name = "Link" + str(i+1)
 	add_child(link)
@@ -90,15 +93,13 @@ func _add_joint(i: int) -> void:
 	if nb_link < 2: return
 	
 	var joint := PinJoint2D.new()
-	joint.position.x = 10.0 * float(i)
+	joint.position.x = 10.0
 	
 	joint.name = "Joint" + str(i+1) + "_" + str(i+2)
-	#joint.bias = 0.9
-	joint.softness = 0.2
 	
-	joint.node_a = "../" + _get_link(i+1).name
-	joint.node_b = "../" + _get_link(i+2).name
-	add_child(joint)
+	joint.node_a = "../"
+	joint.node_b = "../../" + _get_link(i+2).name
+	_get_link(i+1).add_child(joint)
 
 func _get_link(i: int) -> RigidBody2D:
 	return get_node("Link" + str(i))
