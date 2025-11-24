@@ -1,5 +1,0 @@
-[gd_resource type="AnimationNodeOneShot" format=3 uid="uid://djnmp4pl0fudq"]
-
-[resource]
-filter_enabled = true
-filters = ["CSManager/JawTrap/Visual/Front/Offest/Iron:z_index", "CSManager/JawTrap/Visual/Front/Offest/Jaw:scale", "CSManager/JawTrap/Visual/Front/Offest/Jaw:texture:region", "CSManager/JawTrap/Visual/Front/Offest/Jaw:z_index", "CSManager/JawTrap/Visual/Front/Offest/Sleeve:z_index", "CSManager/JawTrap/Visual/Front/VFX:polygon", "CSManager/JawTrap/Visual/Front/VFX:visible", "CSManager/JawTrap/Visual/Front:position", "CSManager/JawTrap/Visual/Front:rotation", "CSManager/JawTrap/Visual/Front:skew", "CSManager/JawTrap/Visual/Front:z_index", "CSManager/JawTrap/WeaponHitBox/CollisionShape2D:disabled", "CSManager/JawTrap/WeaponHitBox/CollisionShape2D:position", "CSManager/JawTrap/WeaponHitBox/CollisionShape2D:rotation", "CSManager/JawTrap/WeaponHitBox/CollisionShape2D:shape:height", "CSManager/JawTrap/WeaponHitBox/CollisionShape2D:shape:radius", "SkeletonConfiguration/SkeletonTargets/ElbowFront:position", "SkeletonConfiguration/SkeletonTargets/HandFront/HandFrontLookAt:position", "SkeletonConfiguration/SkeletonTargets/HandFront:position"]

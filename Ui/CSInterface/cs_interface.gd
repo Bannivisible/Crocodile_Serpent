@@ -19,12 +19,13 @@ var tween: Tween
 const SHOW_ANIMATION_DURATION: float= 0.5
 
 signal on_screen_animation_finished()
-signal spell_category_selected()
+signal cs_category_selected()
 signal cancel()
 
 #### BUILT_IN ####
 func _ready() -> void:
 	data_manager.player_statistics.reactive_changed.connect(_on_player_statistics_stat_changed)
+	_connect_cs_category_buttons_signals()
 	
 	for stat_name in data_manager.player_statistics.statistics.keys():
 		_set_stat_label_text(data_manager.player_statistics.get(stat_name))
@@ -62,9 +63,14 @@ func _set_stat_label_text(stat: Stat) -> void:
 	if label:
 		label.text += " " + str(stat.value)
 
+func _connect_cs_category_buttons_signals() -> void:
+	for child in %CSCategoryGridContainer.get_children():
+		var cs_categ_button: CSCategoryButton= child
+		cs_categ_button.pressed.connect(_on_cs_category_button_pressed)
+
 #### SIGNAL RESPONSES ####
-func _on_spell_category_button_spell_category_selected(_spells_data: Array[SpellData]) -> void:
-	spell_category_selected.emit()
+func _on_cs_category_button_pressed() -> void:
+	cs_category_selected.emit()
 
 func _on_cs_selected(cs_data: CombatSkillData) -> void:
 	display()

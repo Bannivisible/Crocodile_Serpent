@@ -1,0 +1,5 @@
+[gd_resource type="AnimationNodeOneShot" format=3 uid="uid://djnmp4pl0fudq"]
+
+[resource]
+filter_enabled = true
+filters = ["CSManager/JawTrap/Front/Offest/Iron:z_index", "CSManager/JawTrap/Front/Offest/Jaw:scale", "CSManager/JawTrap/Front/Offest/Jaw:texture:region", "CSManager/JawTrap/Front/Offest/Jaw:z_index", "CSManager/JawTrap/Front/Offest/Sleeve:z_index", "CSManager/JawTrap/Front:position", "CSManager/JawTrap/Front:rotation", "Skeleton2D/Center/Body/Torso/ArmFront/ForeArmFront:position", "Skeleton2D/Center/Body/Torso/ArmFront/ForeArmFront:rotation", "Skeleton2D/Center/Body/Torso/ArmFront:rotation", "SpriteContainer/ArmFrontGroup/HandFront:texture:region"]

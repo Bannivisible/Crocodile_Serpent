@@ -1,7 +1,7 @@
 extends Node
 class_name Component
 
-@onready var object = _get_object()
+@onready var object = get_object()
 
 @export var auto_trigger: bool= false
 @export var conditions_for_actions_array: Array[ConditionForAction]
@@ -15,9 +15,14 @@ func process_trigger(delta: float, own: Node= null, component: Node= null, manag
 	for conditions_for_actions in conditions_for_actions_array:
 		conditions_for_actions.trigger(delta, own, component, manager, contex)
 
-func _get_object() -> Node:
+func get_object() -> Node:
 	if object != null: return object
 	
-	if owner is Component:
-		return owner._get_object()
+	if owner is Component: return owner.get_object()
+	elif get_parent() is Component: return get_parent().get_object()
+	
 	return owner
+
+func get_object_node(node_path: NodePath) -> Node:
+	if not object: return null
+	return object.get_node_or_null(node_path)

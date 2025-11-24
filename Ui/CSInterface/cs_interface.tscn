@@ -3,16 +3,16 @@
 [ext_resource type="Theme" uid="uid://dxxn1u7fah8ng" path="res://Ui/BookInterface/Theme/Book.tres" id="1_nh015"]
 [ext_resource type="Script" uid="uid://dijsmuk5xxrv7" path="res://Ui/CSInterface/cs_interface.gd" id="2_lhy7a"]
 [ext_resource type="Script" uid="uid://b1e0vwa7x3w0j" path="res://Ui/CSInterface/cs_interface_data_manager.gd" id="3_lhy7a"]
-[ext_resource type="Script" uid="uid://b2qh2de0kbwt" path="res://Ui/CSInterface/spell_category_button.gd" id="4_ddx0q"]
+[ext_resource type="Script" uid="uid://b2qh2de0kbwt" path="res://Ui/CSInterface/cs_category_button.gd" id="4_ddx0q"]
 [ext_resource type="Resource" uid="uid://dd26cydaugi7p" path="res://Scene/Characters/Crocodile/crocodile_stat.tres" id="4_ix3v8"]
 [ext_resource type="Script" uid="uid://ihcg87coc1pm" path="res://Ui/CSInterface/tab_container.gd" id="4_vyjhn"]
 [ext_resource type="Script" uid="uid://dkeybkucf0o12" path="res://Ui/CSInterface/grid_container.gd" id="6_ddx0q"]
-[ext_resource type="Script" uid="uid://d0i8sw3h6amd0" path="res://Ui/CSInterface/weapon_button.gd" id="7_qiots"]
-[ext_resource type="Script" uid="uid://gc7yieoshcty" path="res://Ressources/CombatSkillData/Spell/spell_data.gd" id="8_2x71p"]
-[ext_resource type="Resource" uid="uid://cx84vorgutpdq" path="res://Ressources/CombatSkillData/Spell/Water/spell_geyser.tres" id="9_ix3v8"]
-[ext_resource type="Resource" uid="uid://ila888nuoopt" path="res://Ressources/CombatSkillData/Spell/Fire/spell_fire_ball.tres" id="10_un5qs"]
-[ext_resource type="Resource" uid="uid://d2urmmxyqwlit" path="res://Ressources/CombatSkillData/Spell/Fire/spell_super_fire_ball.tres" id="11_qiots"]
-[ext_resource type="Resource" uid="uid://c04uu7w2nnej1" path="res://Ressources/CombatSkillData/Spell/Electricity/lightning_caga.tres" id="12_un5qs"]
+[ext_resource type="Script" uid="uid://db4jcia3pwpd3" path="res://Ressources/CombatSkillData/combat_skill_data.gd" id="8_5tmjq"]
+[ext_resource type="Resource" uid="uid://cnx36oinkwin0" path="res://Ressources/CombatSkillData/Weapon/jaw_trap_data.tres" id="9_ix3v8"]
+[ext_resource type="Resource" uid="uid://cx84vorgutpdq" path="res://Ressources/CombatSkillData/Spell/Water/spell_geyser.tres" id="10_ilqmr"]
+[ext_resource type="Resource" uid="uid://ila888nuoopt" path="res://Ressources/CombatSkillData/Spell/Fire/spell_fire_ball.tres" id="11_5kfsq"]
+[ext_resource type="Resource" uid="uid://d2urmmxyqwlit" path="res://Ressources/CombatSkillData/Spell/Fire/spell_super_fire_ball.tres" id="12_idbfo"]
+[ext_resource type="Resource" uid="uid://c04uu7w2nnej1" path="res://Ressources/CombatSkillData/Spell/Electricity/lightning_caga.tres" id="13_k2css"]
 [ext_resource type="Script" uid="uid://dwdvwibtk7pc6" path="res://Ui/CSInterface/spell_grid_container.gd" id="13_un5qs"]
 [ext_resource type="Script" uid="uid://yi1uvna27jmy" path="res://Other/hider.gd" id="15_ilqmr"]
 
@@ -39,6 +39,7 @@ show_animation_trans = 11
 metadata/_edit_lock_ = true
 
 [node name="CSInterfaceDataManager" type="Node" parent="."]
+unique_name_in_owner = true
 script = ExtResource("3_lhy7a")
 player_statistics = ExtResource("4_ix3v8")
 
@@ -67,15 +68,15 @@ deselect_enabled = true
 script = ExtResource("4_vyjhn")
 metadata/_edit_lock_ = true
 
-[node name="CS_Selection" type="HBoxContainer" parent="Panel/TabContainer"]
+[node name="CSCategorySelection" type="HBoxContainer" parent="Panel/TabContainer"]
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="Panel" type="Panel" parent="Panel/TabContainer/CS_Selection"]
+[node name="Panel" type="Panel" parent="Panel/TabContainer/CSCategorySelection"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/TabContainer/CS_Selection/Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel/TabContainer/CSCategorySelection/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -87,39 +88,39 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/TabContainer/CS_Selection/Panel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer"]
 layout_mode = 2
 
-[node name="HealthLabel" type="Label" parent="Panel/TabContainer/CS_Selection/Panel/MarginContainer/VBoxContainer"]
+[node name="HealthLabel" type="Label" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "PV "
 
-[node name="StardustLabel" type="Label" parent="Panel/TabContainer/CS_Selection/Panel/MarginContainer/VBoxContainer"]
+[node name="StardustLabel" type="Label" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Stardust: "
 
-[node name="StrenghtLabel" type="Label" parent="Panel/TabContainer/CS_Selection/Panel/MarginContainer/VBoxContainer"]
+[node name="StrenghtLabel" type="Label" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Force: "
 
-[node name="DefenseLabel" type="Label" parent="Panel/TabContainer/CS_Selection/Panel/MarginContainer/VBoxContainer"]
+[node name="DefenseLabel" type="Label" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Defense: "
 
-[node name="SpeedLabel" type="Label" parent="Panel/TabContainer/CS_Selection/Panel/MarginContainer/VBoxContainer"]
+[node name="SpeedLabel" type="Label" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Vitesse: "
 
-[node name="Panel2" type="Panel" parent="Panel/TabContainer/CS_Selection"]
+[node name="Panel2" type="Panel" parent="Panel/TabContainer/CSCategorySelection"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/TabContainer/CS_Selection/Panel2"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel/TabContainer/CSCategorySelection/Panel2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -131,22 +132,26 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 4
 
-[node name="CSGridContainer" type="GridContainer" parent="Panel/TabContainer/CS_Selection/Panel2/MarginContainer"]
+[node name="CSCategoryGridContainer" type="GridContainer" parent="Panel/TabContainer/CSCategorySelection/Panel2/MarginContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/h_separation = 6
 theme_override_constants/v_separation = 10
 columns = 2
 script = ExtResource("6_ddx0q")
 
-[node name="WeaponButton" type="Button" parent="Panel/TabContainer/CS_Selection/Panel2/MarginContainer/CSGridContainer"]
+[node name="WeaponButton" type="Button" parent="Panel/TabContainer/CSCategorySelection/Panel2/MarginContainer/CSCategoryGridContainer"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 24
-script = ExtResource("7_qiots")
+text = "Armes"
+script = ExtResource("4_ddx0q")
+cs_data_array = Array[ExtResource("8_5tmjq")]([ExtResource("9_ix3v8")])
+metadata/_custom_type_script = "uid://b2qh2de0kbwt"
 
-[node name="SpellCategoryButton" type="Button" parent="Panel/TabContainer/CS_Selection/Panel2/MarginContainer/CSGridContainer"]
+[node name="WaterButton" type="Button" parent="Panel/TabContainer/CSCategorySelection/Panel2/MarginContainer/CSCategoryGridContainer"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -154,9 +159,10 @@ size_flags_vertical = 4
 theme_override_font_sizes/font_size = 24
 text = "Eau"
 script = ExtResource("4_ddx0q")
-spells = Array[ExtResource("8_2x71p")]([ExtResource("9_ix3v8")])
+cs_data_array = Array[ExtResource("8_5tmjq")]([ExtResource("10_ilqmr")])
+metadata/_custom_type_script = "uid://b2qh2de0kbwt"
 
-[node name="SpellCategoryButton2" type="Button" parent="Panel/TabContainer/CS_Selection/Panel2/MarginContainer/CSGridContainer"]
+[node name="FireButton" type="Button" parent="Panel/TabContainer/CSCategorySelection/Panel2/MarginContainer/CSCategoryGridContainer"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -164,9 +170,10 @@ size_flags_vertical = 4
 theme_override_font_sizes/font_size = 24
 text = "Feu"
 script = ExtResource("4_ddx0q")
-spells = Array[ExtResource("8_2x71p")]([ExtResource("10_un5qs"), ExtResource("11_qiots")])
+cs_data_array = Array[ExtResource("8_5tmjq")]([ExtResource("11_5kfsq"), ExtResource("12_idbfo")])
+metadata/_custom_type_script = "uid://b2qh2de0kbwt"
 
-[node name="SpellCategoryButton3" type="Button" parent="Panel/TabContainer/CS_Selection/Panel2/MarginContainer/CSGridContainer"]
+[node name="LightningButton" type="Button" parent="Panel/TabContainer/CSCategorySelection/Panel2/MarginContainer/CSCategoryGridContainer"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -174,29 +181,30 @@ size_flags_vertical = 4
 theme_override_font_sizes/font_size = 24
 text = "Electricité"
 script = ExtResource("4_ddx0q")
-spells = Array[ExtResource("8_2x71p")]([ExtResource("12_un5qs")])
+cs_data_array = Array[ExtResource("8_5tmjq")]([ExtResource("13_k2css")])
+metadata/_custom_type_script = "uid://b2qh2de0kbwt"
 
-[node name="SpellCategoryButton4" type="Button" parent="Panel/TabContainer/CS_Selection/Panel2/MarginContainer/CSGridContainer"]
+[node name="WindButton" type="Button" parent="Panel/TabContainer/CSCategorySelection/Panel2/MarginContainer/CSCategoryGridContainer"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 24
-text = "Eau"
+text = "Vent"
 script = ExtResource("4_ddx0q")
-spells = Array[ExtResource("8_2x71p")]([ExtResource("9_ix3v8")])
+metadata/_custom_type_script = "uid://b2qh2de0kbwt"
 
-[node name="SpellCategoryButton5" type="Button" parent="Panel/TabContainer/CS_Selection/Panel2/MarginContainer/CSGridContainer"]
+[node name="IceButton" type="Button" parent="Panel/TabContainer/CSCategorySelection/Panel2/MarginContainer/CSCategoryGridContainer"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 24
-text = "Eau"
+text = "Glace"
 script = ExtResource("4_ddx0q")
-spells = Array[ExtResource("8_2x71p")]([ExtResource("9_ix3v8")])
+metadata/_custom_type_script = "uid://b2qh2de0kbwt"
 
-[node name="Page" type="Sprite2D" parent="Panel/TabContainer/CS_Selection/Panel2"]
+[node name="Page" type="Sprite2D" parent="Panel/TabContainer/CSCategorySelection/Panel2"]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.37254903)
 rotation = 1.5707964
@@ -204,20 +212,20 @@ texture = SubResource("GradientTexture2D_i5yi8")
 offset = Vector2(32, -32)
 metadata/_edit_lock_ = true
 
-[node name="SpellSelection" type="HBoxContainer" parent="Panel/TabContainer"]
+[node name="CSSelection" type="HBoxContainer" parent="Panel/TabContainer"]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="Panel" type="Panel" parent="Panel/TabContainer/SpellSelection"]
+[node name="Panel" type="Panel" parent="Panel/TabContainer/CSSelection"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Panel2" type="Panel" parent="Panel/TabContainer/SpellSelection"]
+[node name="Panel2" type="Panel" parent="Panel/TabContainer/CSSelection"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/TabContainer/SpellSelection/Panel2"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel/TabContainer/CSSelection/Panel2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -229,7 +237,7 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 4
 
-[node name="SpellGridContainer" type="GridContainer" parent="Panel/TabContainer/SpellSelection/Panel2/MarginContainer"]
+[node name="CSGridContainer" type="GridContainer" parent="Panel/TabContainer/CSSelection/Panel2/MarginContainer"]
 layout_mode = 2
 theme_override_constants/h_separation = 6
 theme_override_constants/v_separation = 10
@@ -241,20 +249,9 @@ rect = Rect2(0, 0, 960, 540)
 script = ExtResource("15_ilqmr")
 
 [connection signal="cancel" from="." to="Panel/TabContainer" method="_on_cs_interface_cancel"]
+[connection signal="cs_category_selected" from="." to="Panel/TabContainer" method="_on_cs_interface_cs_category_selected"]
 [connection signal="on_screen_changed" from="." to="Panel/TabContainer" method="_on_cs_interface_on_screen_changed"]
-[connection signal="on_screen_changed" from="." to="Panel/TabContainer/CS_Selection/Panel2/MarginContainer/CSGridContainer/WeaponButton" method="_on_cs_interface_on_screen_changed"]
-[connection signal="on_screen_changed" from="." to="Panel/TabContainer/CS_Selection/Panel2/MarginContainer/CSGridContainer/SpellCategoryButton" method="_on_cs_interface_on_screen_changed"]
-[connection signal="spell_category_selected" from="." to="Panel/TabContainer" method="_on_cs_interface_spell_category_selected"]
-[connection signal="spell_category_sellected" from="CSInterfaceDataManager" to="Panel/TabContainer/SpellSelection/Panel2/MarginContainer/SpellGridContainer" method="_on_cs_interface_data_manager_spell_category_sellected"]
-[connection signal="tab_changed" from="Panel/TabContainer" to="Panel/TabContainer/CS_Selection/Panel2/MarginContainer/CSGridContainer" method="_on_tab_container_tab_changed"]
-[connection signal="tab_changed" from="Panel/TabContainer" to="Panel/TabContainer/SpellSelection/Panel2/MarginContainer/SpellGridContainer" method="_on_tab_container_tab_changed"]
-[connection signal="spell_category_selected" from="Panel/TabContainer/CS_Selection/Panel2/MarginContainer/CSGridContainer/SpellCategoryButton" to="." method="_on_spell_category_button_spell_category_selected"]
-[connection signal="spell_category_selected" from="Panel/TabContainer/CS_Selection/Panel2/MarginContainer/CSGridContainer/SpellCategoryButton" to="CSInterfaceDataManager" method="_on_spell_category_button_spell_category_selected"]
-[connection signal="spell_category_selected" from="Panel/TabContainer/CS_Selection/Panel2/MarginContainer/CSGridContainer/SpellCategoryButton2" to="." method="_on_spell_category_button_spell_category_selected"]
-[connection signal="spell_category_selected" from="Panel/TabContainer/CS_Selection/Panel2/MarginContainer/CSGridContainer/SpellCategoryButton2" to="CSInterfaceDataManager" method="_on_spell_category_button_spell_category_selected"]
-[connection signal="spell_category_selected" from="Panel/TabContainer/CS_Selection/Panel2/MarginContainer/CSGridContainer/SpellCategoryButton3" to="." method="_on_spell_category_button_spell_category_selected"]
-[connection signal="spell_category_selected" from="Panel/TabContainer/CS_Selection/Panel2/MarginContainer/CSGridContainer/SpellCategoryButton3" to="CSInterfaceDataManager" method="_on_spell_category_button_spell_category_selected"]
-[connection signal="spell_category_selected" from="Panel/TabContainer/CS_Selection/Panel2/MarginContainer/CSGridContainer/SpellCategoryButton4" to="." method="_on_spell_category_button_spell_category_selected"]
-[connection signal="spell_category_selected" from="Panel/TabContainer/CS_Selection/Panel2/MarginContainer/CSGridContainer/SpellCategoryButton4" to="CSInterfaceDataManager" method="_on_spell_category_button_spell_category_selected"]
-[connection signal="spell_category_selected" from="Panel/TabContainer/CS_Selection/Panel2/MarginContainer/CSGridContainer/SpellCategoryButton5" to="." method="_on_spell_category_button_spell_category_selected"]
-[connection signal="spell_category_selected" from="Panel/TabContainer/CS_Selection/Panel2/MarginContainer/CSGridContainer/SpellCategoryButton5" to="CSInterfaceDataManager" method="_on_spell_category_button_spell_category_selected"]
+[connection signal="on_screen_changed" from="." to="Panel/TabContainer/CSCategorySelection/Panel2/MarginContainer/CSCategoryGridContainer/WeaponButton" method="_on_cs_interface_on_screen_changed"]
+[connection signal="cs_category_sellected" from="CSInterfaceDataManager" to="Panel/TabContainer/CSSelection/Panel2/MarginContainer/CSGridContainer" method="_on_cs_interface_data_manager_cs_category_sellected"]
+[connection signal="tab_changed" from="Panel/TabContainer" to="Panel/TabContainer/CSCategorySelection/Panel2/MarginContainer/CSCategoryGridContainer" method="_on_tab_container_tab_changed"]
+[connection signal="tab_changed" from="Panel/TabContainer" to="Panel/TabContainer/CSSelection/Panel2/MarginContainer/CSGridContainer" method="_on_tab_container_tab_changed"]

@@ -1,11 +1,10 @@
-[gd_scene load_steps=102 format=3 uid="uid://bgxumcv6rrpm1"]
+[gd_scene load_steps=92 format=3 uid="uid://bgxumcv6rrpm1"]
 
 [ext_resource type="PackedScene" uid="uid://mmkgsg3lueu" path="res://Scene/Characters/character.tscn" id="1_pp85c"]
 [ext_resource type="PackedScene" uid="uid://b74kbwhwtmiu5" path="res://Components/BasiqueMovement/bassqiue_movement_component.tscn" id="2_pp85c"]
 [ext_resource type="Script" uid="uid://dyglpbhv533ei" path="res://Ressources/ConditionForAction/condition_for_action.gd" id="3_0dmsc"]
 [ext_resource type="Texture2D" uid="uid://cwkl4nep4hgvb" path="res://Scene/Characters/Crocodile/Assets/crocodile_texture.tres" id="3_0ft5j"]
-[ext_resource type="Script" uid="uid://c52mpns0vhqs6" path="res://Other/procedural_line_outline.gd" id="3_dr3s2"]
-[ext_resource type="Script" uid="uid://lnbdh25h7yvf" path="res://Other/procedural_line.gd" id="3_e5ikc"]
+[ext_resource type="Script" uid="uid://lnbdh25h7yvf" path="res://Other/ProceduralLine/procedural_line.gd" id="3_e5ikc"]
 [ext_resource type="SkeletonModification2DCCDIK" uid="uid://cihlocwu0e7qb" path="res://Scene/Characters/Crocodile/SkeletonModification/elbow_front_skeleton_modification_2dccdik.tres" id="3_gtnt8"]
 [ext_resource type="SkeletonModification2DCCDIK" uid="uid://cotjbcwl1mrpr" path="res://Scene/Characters/Crocodile/SkeletonModification/wrist_front_skeleton_modification_2dccdik.tres" id="4_mru5n"]
 [ext_resource type="Resource" uid="uid://m4wd7fjlc83p" path="res://Components/BasiqueMovement/BMC_Player/jump.tres" id="4_wwopw"]
@@ -30,9 +29,6 @@
 [ext_resource type="Resource" uid="uid://dd26cydaugi7p" path="res://Scene/Characters/Crocodile/crocodile_stat.tres" id="13_22jbs"]
 [ext_resource type="SkeletonModification2DLookAt" uid="uid://c8bnrs2ge68xr" path="res://Scene/Characters/Crocodile/SkeletonModification/hand_front_skeleton_modification_2d_look_at.tres" id="14_umomj"]
 [ext_resource type="Animation" uid="uid://ccbyb3j0w0168" path="res://Scene/Characters/Crocodile/AnimationTree/Idle.res" id="16_jlbrr"]
-[ext_resource type="Animation" uid="uid://vvcmi77hql7t" path="res://Components/CombatSkill/Weapon/JawTrap/Animations/JawTrapSlashAttack1.res" id="17_jlbrr"]
-[ext_resource type="PackedScene" uid="uid://ds4i8cup57akf" path="res://Components/CombatSkill/Weapon/JawTrap/jaw_trap.tscn" id="28_fjl3l"]
-[ext_resource type="Texture2D" uid="uid://bppfppgp3n74q" path="res://Components/CombatSkill/Weapon/JawTrap/Assets/piege_a_machoire_back_up/En main.PNG" id="28_wbk6g"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pp85c"]
 radius = 35.0
@@ -53,13 +49,13 @@ region = Rect2(393, 2, 130, 165)
 atlas = ExtResource("3_0ft5j")
 region = Rect2(262, 827, 130, 165)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_utiys"]
-atlas = ExtResource("3_0ft5j")
-region = Rect2(0, 660, 130, 165)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_3ua5h"]
 atlas = ExtResource("3_0ft5j")
 region = Rect2(0, 0, 130, 165)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_utiys"]
+atlas = ExtResource("3_0ft5j")
+region = Rect2(0, 660, 130, 165)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6et86"]
 atlas = ExtResource("3_0ft5j")
@@ -81,13 +77,18 @@ region = Rect2(131, 165, 130, 165)
 atlas = ExtResource("3_0ft5j")
 region = Rect2(262, 165, 130, 165)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tm4wk"]
-atlas = ExtResource("3_0ft5j")
-region = Rect2(520, 497, 130, 165)
+[sub_resource type="Curve" id="Curve_e5ikc"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.86220473, 0.4916805), -0.8909476, -0.8909476, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qk5md"]
-atlas = ExtResource("3_0ft5j")
-region = Rect2(390, 497, 130, 165)
+[sub_resource type="Gradient" id="Gradient_fjl3l"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.75686276, 0.827451, 0.39607844, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dr3s2"]
+gradient = SubResource("Gradient_fjl3l")
+width = 1
+height = 1
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jlbrr"]
 atlas = ExtResource("3_0ft5j")
@@ -105,49 +106,17 @@ region = Rect2(0, 330, 130, 165)
 atlas = ExtResource("3_0ft5j")
 region = Rect2(523, 1320, 131, 165)
 
-[sub_resource type="Curve" id="Curve_dr3s2"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.86220473, 0.4916805), -0.8909476, -0.8909476, 0, 0, Vector2(1, 0.123595595), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="Curve" id="Curve_e5ikc"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.86220473, 0.4916805), -0.8909476, -0.8909476, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jbjqy"]
-atlas = ExtResource("3_0ft5j")
-region = Rect2(130, 660, 131, 165)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qvnx8"]
-atlas = ExtResource("3_0ft5j")
-region = Rect2(131, 0, 130, 165)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7cm0d"]
-atlas = ExtResource("3_0ft5j")
-region = Rect2(393, 1155, 130, 165)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_wfuh6"]
 atlas = ExtResource("3_0ft5j")
 region = Rect2(523, 660, 131, 165)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_weadw"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_wk535"]
 atlas = ExtResource("3_0ft5j")
-region = Rect2(524, 825, 130, 165)
+region = Rect2(524, 330, 130, 165)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_usnsk"]
 atlas = ExtResource("3_0ft5j")
 region = Rect2(0, 1485, 130, 165)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fjl3l"]
-atlas = ExtResource("3_0ft5j")
-region = Rect2(260, 662, 130, 165)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_j0hnv"]
-atlas = ExtResource("3_0ft5j")
-region = Rect2(261, 990, 131, 165)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dr3s2"]
-atlas = ExtResource("3_0ft5j")
-region = Rect2(524, 1155, 130, 165)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0jkvw"]
 atlas = ExtResource("3_0ft5j")
@@ -161,9 +130,17 @@ region = Rect2(261, 990, 131, 165)
 atlas = ExtResource("3_0ft5j")
 region = Rect2(524, 1155, 130, 165)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wk535"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjl3l"]
 atlas = ExtResource("3_0ft5j")
-region = Rect2(524, 330, 130, 165)
+region = Rect2(260, 662, 130, 165)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j0hnv"]
+atlas = ExtResource("3_0ft5j")
+region = Rect2(261, 990, 131, 165)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dr3s2"]
+atlas = ExtResource("3_0ft5j")
+region = Rect2(524, 1155, 130, 165)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ooqhq"]
 atlas = ExtResource("3_0ft5j")
@@ -172,6 +149,10 @@ region = Rect2(0, 495, 130, 165)
 [sub_resource type="AtlasTexture" id="AtlasTexture_hb14a"]
 atlas = ExtResource("3_0ft5j")
 region = Rect2(0, 990, 130, 165)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_weadw"]
+atlas = ExtResource("3_0ft5j")
+region = Rect2(524, 825, 130, 165)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_24sqv"]
 atlas = ExtResource("3_0ft5j")
@@ -188,6 +169,18 @@ region = Rect2(262, 0, 130, 165)
 [sub_resource type="AtlasTexture" id="AtlasTexture_fs2r1"]
 atlas = ExtResource("3_0ft5j")
 region = Rect2(262, 825, 130, 165)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qvnx8"]
+atlas = ExtResource("3_0ft5j")
+region = Rect2(131, 0, 130, 165)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jbjqy"]
+atlas = ExtResource("3_0ft5j")
+region = Rect2(130, 660, 131, 165)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7cm0d"]
+atlas = ExtResource("3_0ft5j")
+region = Rect2(393, 1155, 130, 165)
 
 [sub_resource type="SkeletonModificationStack2D" id="SkeletonModificationStack2D_1etbk"]
 modification_count = 13
@@ -482,7 +475,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [-0.021970093]
+"values": [-0.021970097]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -499,7 +492,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("SpriteContainer/ArmBack/ForearmBack:z_index")
+tracks/5/path = NodePath("SpriteContainer/ArmBackGroup/ForearmBack:z_index")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -619,7 +612,7 @@ tracks/14/keys = {
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("SpriteContainer/Torso:texture:region")
+tracks/15/path = NodePath("SpriteContainer/TorsoGroup/Torso:texture:region")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
@@ -631,7 +624,7 @@ tracks/15/keys = {
 tracks/16/type = "value"
 tracks/16/imported = false
 tracks/16/enabled = true
-tracks/16/path = NodePath("SpriteContainer/Torso/Jacket:texture:region")
+tracks/16/path = NodePath("SpriteContainer/TorsoGroup/Jacket:texture:region")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
@@ -643,7 +636,7 @@ tracks/16/keys = {
 tracks/17/type = "value"
 tracks/17/imported = false
 tracks/17/enabled = true
-tracks/17/path = NodePath("SpriteContainer/Torso/Jacket/JacketTipBack:visible")
+tracks/17/path = NodePath("SpriteContainer/TorsoGroup/JacketTipBack:visible")
 tracks/17/interp = 1
 tracks/17/loop_wrap = true
 tracks/17/keys = {
@@ -655,7 +648,7 @@ tracks/17/keys = {
 tracks/18/type = "value"
 tracks/18/imported = false
 tracks/18/enabled = true
-tracks/18/path = NodePath("SpriteContainer/Torso/Jacket/JacketTipFront:texture:region")
+tracks/18/path = NodePath("SpriteContainer/TorsoGroup/JacketTipFront:texture:region")
 tracks/18/interp = 1
 tracks/18/loop_wrap = true
 tracks/18/keys = {
@@ -667,19 +660,19 @@ tracks/18/keys = {
 tracks/19/type = "value"
 tracks/19/imported = false
 tracks/19/enabled = true
-tracks/19/path = NodePath("SpriteContainer/Torso/Jacket/JacketTipFront:position")
+tracks/19/path = NodePath("SpriteContainer/TorsoGroup/JacketTipFront:position")
 tracks/19/interp = 1
 tracks/19/loop_wrap = true
 tracks/19/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-41.61395, -28.192993)]
+"values": [Vector2(-41.613945, -31.192993)]
 }
 tracks/20/type = "value"
 tracks/20/imported = false
 tracks/20/enabled = true
-tracks/20/path = NodePath("SpriteContainer/Pelvis/Belt:texture:region")
+tracks/20/path = NodePath("SpriteContainer/PelvisGroup/Belt:texture:region")
 tracks/20/interp = 1
 tracks/20/loop_wrap = true
 tracks/20/keys = {
@@ -691,7 +684,7 @@ tracks/20/keys = {
 tracks/21/type = "value"
 tracks/21/imported = false
 tracks/21/enabled = true
-tracks/21/path = NodePath("SpriteContainer/Pelvis/Belt/Symbol:texture:region")
+tracks/21/path = NodePath("SpriteContainer/PelvisGroup/Symbol:texture:region")
 tracks/21/interp = 1
 tracks/21/loop_wrap = true
 tracks/21/keys = {
@@ -703,7 +696,7 @@ tracks/21/keys = {
 tracks/22/type = "value"
 tracks/22/imported = false
 tracks/22/enabled = true
-tracks/22/path = NodePath("SpriteContainer/Pelvis/Belt/Symbol:position")
+tracks/22/path = NodePath("SpriteContainer/PelvisGroup/Symbol:position")
 tracks/22/interp = 1
 tracks/22/loop_wrap = true
 tracks/22/keys = {
@@ -715,7 +708,7 @@ tracks/22/keys = {
 tracks/23/type = "value"
 tracks/23/imported = false
 tracks/23/enabled = true
-tracks/23/path = NodePath("SpriteContainer/Pelvis:texture:region")
+tracks/23/path = NodePath("SpriteContainer/PelvisGroup/Pelvis:texture:region")
 tracks/23/interp = 1
 tracks/23/loop_wrap = true
 tracks/23/keys = {
@@ -727,7 +720,7 @@ tracks/23/keys = {
 tracks/24/type = "value"
 tracks/24/imported = false
 tracks/24/enabled = true
-tracks/24/path = NodePath("SpriteContainer/ThighFront/LegFront/FootFront:texture:region")
+tracks/24/path = NodePath("SpriteContainer/LegFrontGroup/FootFront:texture:region")
 tracks/24/interp = 1
 tracks/24/loop_wrap = true
 tracks/24/keys = {
@@ -739,7 +732,7 @@ tracks/24/keys = {
 tracks/25/type = "value"
 tracks/25/imported = false
 tracks/25/enabled = true
-tracks/25/path = NodePath("SpriteContainer/ThighFront/LegFront/FootFront:offset")
+tracks/25/path = NodePath("SpriteContainer/LegFrontGroup/FootFront:offset")
 tracks/25/interp = 1
 tracks/25/loop_wrap = true
 tracks/25/keys = {
@@ -751,7 +744,7 @@ tracks/25/keys = {
 tracks/26/type = "value"
 tracks/26/imported = false
 tracks/26/enabled = true
-tracks/26/path = NodePath("SpriteContainer/Torso/Jacket:position")
+tracks/26/path = NodePath("SpriteContainer/TorsoGroup/Jacket:position")
 tracks/26/interp = 1
 tracks/26/loop_wrap = true
 tracks/26/keys = {
@@ -775,7 +768,7 @@ tracks/27/keys = {
 tracks/28/type = "value"
 tracks/28/imported = false
 tracks/28/enabled = true
-tracks/28/path = NodePath("SpriteContainer/Pelvis/Belt/FloatingBob:texture:region")
+tracks/28/path = NodePath("SpriteContainer/PelvisGroup/FloatingBob:texture:region")
 tracks/28/interp = 1
 tracks/28/loop_wrap = true
 tracks/28/keys = {
@@ -787,7 +780,7 @@ tracks/28/keys = {
 tracks/29/type = "value"
 tracks/29/imported = false
 tracks/29/enabled = true
-tracks/29/path = NodePath("SpriteContainer/Head/Face/EyeFront/EyeFront:texture:region")
+tracks/29/path = NodePath("SpriteContainer/HeadGroup/FaceGroup/Face/EyeFront:texture:region")
 tracks/29/interp = 1
 tracks/29/loop_wrap = true
 tracks/29/keys = {
@@ -799,7 +792,7 @@ tracks/29/keys = {
 tracks/30/type = "value"
 tracks/30/imported = false
 tracks/30/enabled = true
-tracks/30/path = NodePath("SpriteContainer/Head/Face/EyeFront/EyebrowsFront:texture:region")
+tracks/30/path = NodePath("SpriteContainer/HeadGroup/FaceGroup/Face/EyeFront/EyebrowsFront:texture:region")
 tracks/30/interp = 1
 tracks/30/loop_wrap = true
 tracks/30/keys = {
@@ -811,7 +804,7 @@ tracks/30/keys = {
 tracks/31/type = "value"
 tracks/31/imported = false
 tracks/31/enabled = true
-tracks/31/path = NodePath("SpriteContainer/Head/Face/EyeFront/EyebrowsFront:position")
+tracks/31/path = NodePath("SpriteContainer/HeadGroup/FaceGroup/Face/EyeFront/EyebrowsFront:position")
 tracks/31/interp = 1
 tracks/31/loop_wrap = true
 tracks/31/keys = {
@@ -823,7 +816,7 @@ tracks/31/keys = {
 tracks/32/type = "value"
 tracks/32/imported = false
 tracks/32/enabled = true
-tracks/32/path = NodePath("SpriteContainer/Head/Face/EyeBack/EyeBack:texture:region")
+tracks/32/path = NodePath("SpriteContainer/HeadGroup/FaceGroup/Face/EyeBack:texture:region")
 tracks/32/interp = 1
 tracks/32/loop_wrap = true
 tracks/32/keys = {
@@ -835,7 +828,7 @@ tracks/32/keys = {
 tracks/33/type = "value"
 tracks/33/imported = false
 tracks/33/enabled = true
-tracks/33/path = NodePath("SpriteContainer/Head/Face/EyeBack/EyebrowsBack:texture:region")
+tracks/33/path = NodePath("SpriteContainer/HeadGroup/FaceGroup/Face/EyeBack/EyebrowsBack:texture:region")
 tracks/33/interp = 1
 tracks/33/loop_wrap = true
 tracks/33/keys = {
@@ -847,7 +840,7 @@ tracks/33/keys = {
 tracks/34/type = "value"
 tracks/34/imported = false
 tracks/34/enabled = true
-tracks/34/path = NodePath("SpriteContainer/Head/Face/EyeBack/EyebrowsBack:position")
+tracks/34/path = NodePath("SpriteContainer/HeadGroup/FaceGroup/Face/EyeBack/EyebrowsBack:position")
 tracks/34/interp = 1
 tracks/34/loop_wrap = true
 tracks/34/keys = {
@@ -859,7 +852,7 @@ tracks/34/keys = {
 tracks/35/type = "value"
 tracks/35/imported = false
 tracks/35/enabled = true
-tracks/35/path = NodePath("SpriteContainer/Head/Face/EyeBack/EyebrowsBack:rotation")
+tracks/35/path = NodePath("SpriteContainer/HeadGroup/FaceGroup/Face/EyeBack/EyebrowsBack:rotation")
 tracks/35/interp = 1
 tracks/35/loop_wrap = true
 tracks/35/keys = {
@@ -871,7 +864,7 @@ tracks/35/keys = {
 tracks/36/type = "value"
 tracks/36/imported = false
 tracks/36/enabled = true
-tracks/36/path = NodePath("SpriteContainer/Pelvis/Belt/FloatingBob:position")
+tracks/36/path = NodePath("SpriteContainer/PelvisGroup/FloatingBob:position")
 tracks/36/interp = 1
 tracks/36/loop_wrap = true
 tracks/36/keys = {
@@ -883,7 +876,7 @@ tracks/36/keys = {
 tracks/37/type = "value"
 tracks/37/imported = false
 tracks/37/enabled = true
-tracks/37/path = NodePath("SpriteContainer/Pelvis/Belt:position")
+tracks/37/path = NodePath("SpriteContainer/PelvisGroup/Belt:position")
 tracks/37/interp = 1
 tracks/37/loop_wrap = true
 tracks/37/keys = {
@@ -895,7 +888,7 @@ tracks/37/keys = {
 tracks/38/type = "value"
 tracks/38/imported = false
 tracks/38/enabled = true
-tracks/38/path = NodePath("SpriteContainer/ThighFront/LegFront:texture:region")
+tracks/38/path = NodePath("SpriteContainer/LegFrontGroup/LegFront:texture:region")
 tracks/38/interp = 1
 tracks/38/loop_wrap = true
 tracks/38/keys = {
@@ -907,7 +900,7 @@ tracks/38/keys = {
 tracks/39/type = "value"
 tracks/39/imported = false
 tracks/39/enabled = true
-tracks/39/path = NodePath("SpriteContainer/ThighFront:texture:region")
+tracks/39/path = NodePath("SpriteContainer/LegFrontGroup/ThighFront:texture:region")
 tracks/39/interp = 1
 tracks/39/loop_wrap = true
 tracks/39/keys = {
@@ -919,7 +912,7 @@ tracks/39/keys = {
 tracks/40/type = "value"
 tracks/40/imported = false
 tracks/40/enabled = true
-tracks/40/path = NodePath("SpriteContainer/ThighFront:offset")
+tracks/40/path = NodePath("SpriteContainer/LegFrontGroup/ThighFront:offset")
 tracks/40/interp = 1
 tracks/40/loop_wrap = true
 tracks/40/keys = {
@@ -931,7 +924,7 @@ tracks/40/keys = {
 tracks/41/type = "value"
 tracks/41/imported = false
 tracks/41/enabled = true
-tracks/41/path = NodePath("SpriteContainer/ThighFront/LegFront:offset")
+tracks/41/path = NodePath("SpriteContainer/LegFrontGroup/LegFront:offset")
 tracks/41/interp = 1
 tracks/41/loop_wrap = true
 tracks/41/keys = {
@@ -991,7 +984,7 @@ tracks/45/keys = {
 tracks/46/type = "value"
 tracks/46/imported = false
 tracks/46/enabled = true
-tracks/46/path = NodePath("SpriteContainer/ThighFront:z_index")
+tracks/46/path = NodePath("SpriteContainer/LegFrontGroup/ThighFront:z_index")
 tracks/46/interp = 1
 tracks/46/loop_wrap = true
 tracks/46/keys = {
@@ -1003,7 +996,7 @@ tracks/46/keys = {
 tracks/47/type = "value"
 tracks/47/imported = false
 tracks/47/enabled = true
-tracks/47/path = NodePath("SpriteContainer/ThighBack:modulate")
+tracks/47/path = NodePath("SpriteContainer/LegBackGroup/ThighBack:modulate")
 tracks/47/interp = 1
 tracks/47/loop_wrap = true
 tracks/47/keys = {
@@ -1015,7 +1008,7 @@ tracks/47/keys = {
 tracks/48/type = "value"
 tracks/48/imported = false
 tracks/48/enabled = true
-tracks/48/path = NodePath("SpriteContainer/ArmBack:modulate")
+tracks/48/path = NodePath("SpriteContainer/ArmBackGroup/ArmBack:modulate")
 tracks/48/interp = 1
 tracks/48/loop_wrap = true
 tracks/48/keys = {
@@ -1051,7 +1044,7 @@ tracks/50/keys = {
 tracks/51/type = "value"
 tracks/51/imported = false
 tracks/51/enabled = true
-tracks/51/path = NodePath("SpriteContainer/ArmBack:z_index")
+tracks/51/path = NodePath("SpriteContainer/ArmBackGroup/ArmBack:z_index")
 tracks/51/interp = 1
 tracks/51/loop_wrap = true
 tracks/51/keys = {
@@ -1075,7 +1068,7 @@ tracks/52/keys = {
 tracks/53/type = "value"
 tracks/53/imported = false
 tracks/53/enabled = true
-tracks/53/path = NodePath("SpriteContainer/ArmBack/ForearmBack/HandBack:texture:region")
+tracks/53/path = NodePath("SpriteContainer/ArmBackGroup/HandBack:texture:region")
 tracks/53/interp = 1
 tracks/53/loop_wrap = true
 tracks/53/keys = {
@@ -1087,7 +1080,7 @@ tracks/53/keys = {
 tracks/54/type = "value"
 tracks/54/imported = false
 tracks/54/enabled = true
-tracks/54/path = NodePath("SpriteContainer/Head:z_index")
+tracks/54/path = NodePath("SpriteContainer/HeadGroup:z_index")
 tracks/54/interp = 1
 tracks/54/loop_wrap = true
 tracks/54/keys = {
@@ -1111,7 +1104,7 @@ tracks/55/keys = {
 tracks/56/type = "value"
 tracks/56/imported = false
 tracks/56/enabled = true
-tracks/56/path = NodePath("SpriteContainer/Head/Face/EyeFront/EyelidsFront:texture:region")
+tracks/56/path = NodePath("SpriteContainer/HeadGroup/FaceGroup/Face/EyeFront/EyelidsFront:texture:region")
 tracks/56/interp = 1
 tracks/56/loop_wrap = true
 tracks/56/keys = {
@@ -1123,7 +1116,7 @@ tracks/56/keys = {
 tracks/57/type = "value"
 tracks/57/imported = false
 tracks/57/enabled = true
-tracks/57/path = NodePath("SpriteContainer/Head/Face/EyeBack/EyelidsBack:texture:region")
+tracks/57/path = NodePath("SpriteContainer/HeadGroup/FaceGroup/Face/EyeBack/EyelidsBack:texture:region")
 tracks/57/interp = 1
 tracks/57/loop_wrap = true
 tracks/57/keys = {
@@ -1135,7 +1128,7 @@ tracks/57/keys = {
 tracks/58/type = "value"
 tracks/58/imported = false
 tracks/58/enabled = true
-tracks/58/path = NodePath("SpriteContainer/ArmFront/ForearmFront/HandFront:texture:region")
+tracks/58/path = NodePath("SpriteContainer/ArmFrontGroup/HandFront:texture:region")
 tracks/58/interp = 1
 tracks/58/loop_wrap = true
 tracks/58/keys = {
@@ -1147,7 +1140,7 @@ tracks/58/keys = {
 tracks/59/type = "value"
 tracks/59/imported = false
 tracks/59/enabled = true
-tracks/59/path = NodePath("SpriteContainer/Head/Face/EyeFront/EyeFront:position")
+tracks/59/path = NodePath("SpriteContainer/HeadGroup/FaceGroup/Face/EyeFront:position")
 tracks/59/interp = 1
 tracks/59/loop_wrap = true
 tracks/59/keys = {
@@ -1159,7 +1152,7 @@ tracks/59/keys = {
 tracks/60/type = "value"
 tracks/60/imported = false
 tracks/60/enabled = true
-tracks/60/path = NodePath("SpriteContainer/Head/Face/EyeFront/EyeFront:rotation")
+tracks/60/path = NodePath("SpriteContainer/HeadGroup/FaceGroup/Face/EyeFront:rotation")
 tracks/60/interp = 1
 tracks/60/loop_wrap = true
 tracks/60/keys = {
@@ -1171,7 +1164,7 @@ tracks/60/keys = {
 tracks/61/type = "value"
 tracks/61/imported = false
 tracks/61/enabled = true
-tracks/61/path = NodePath("SpriteContainer/Head/Face/EyeBack/EyeBack:position")
+tracks/61/path = NodePath("SpriteContainer/HeadGroup/FaceGroup/Face/EyeBack:position")
 tracks/61/interp = 1
 tracks/61/loop_wrap = true
 tracks/61/keys = {
@@ -1183,7 +1176,7 @@ tracks/61/keys = {
 tracks/62/type = "value"
 tracks/62/imported = false
 tracks/62/enabled = true
-tracks/62/path = NodePath("SpriteContainer/Head/Face/EyeBack/EyeBack:rotation")
+tracks/62/path = NodePath("SpriteContainer/HeadGroup/FaceGroup/Face/EyeBack:rotation")
 tracks/62/interp = 1
 tracks/62/loop_wrap = true
 tracks/62/keys = {
@@ -1207,50 +1200,14 @@ tracks/63/keys = {
 tracks/64/type = "value"
 tracks/64/imported = false
 tracks/64/enabled = true
-tracks/64/path = NodePath("CSManager/JawTrap/Front:position")
+tracks/64/path = NodePath("SpriteContainer/TorsoGroup/JacketTipBack:position")
 tracks/64/interp = 1
 tracks/64/loop_wrap = true
 tracks/64/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-103, -98)]
-}
-tracks/65/type = "value"
-tracks/65/imported = false
-tracks/65/enabled = true
-tracks/65/path = NodePath("CSManager/JawTrap/Front:rotation")
-tracks/65/interp = 1
-tracks/65/loop_wrap = true
-tracks/65/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.5621965]
-}
-tracks/66/type = "value"
-tracks/66/imported = false
-tracks/66/enabled = true
-tracks/66/path = NodePath("CSManager/JawTrap/Back:position")
-tracks/66/interp = 1
-tracks/66/loop_wrap = true
-tracks/66/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(127, -104)]
-}
-tracks/67/type = "value"
-tracks/67/imported = false
-tracks/67/enabled = true
-tracks/67/path = NodePath("CSManager/JawTrap/Back:rotation")
-tracks/67/interp = 1
-tracks/67/loop_wrap = true
-tracks/67/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [-0.43057778]
+"values": [Vector2(46.16206, -44.423187)]
 }
 
 [sub_resource type="Animation" id="Animation_jlbrr"]
@@ -1298,7 +1255,7 @@ resource_name = "ToSideRight"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("SpriteContainer/Torso:texture:region")
+tracks/0/path = NodePath("SpriteContainer/TorsoGroup/Torso:texture:region")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -1310,7 +1267,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("SpriteContainer/Torso/Jacket:texture:region")
+tracks/1/path = NodePath("SpriteContainer/TorsoGroup/Jacket:texture:region")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -1322,7 +1279,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("SpriteContainer/Torso/Jacket/JacketTipBack:visible")
+tracks/2/path = NodePath("SpriteContainer/TorsoGroup/JacketTipBack:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -1334,7 +1291,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("SpriteContainer/Torso/Jacket/JacketTipFront:texture:region")
+tracks/3/path = NodePath("SpriteContainer/TorsoGroup/JacketTipFront:texture:region")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -1346,7 +1303,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("SpriteContainer/Torso/Jacket/JacketTipFront:position")
+tracks/4/path = NodePath("SpriteContainer/TorsoGroup/JacketTipFront:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -1358,7 +1315,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("SpriteContainer/Pelvis/Belt:texture:region")
+tracks/5/path = NodePath("SpriteContainer/PelvisGroup/Belt:texture:region")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -1370,7 +1327,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("SpriteContainer/Pelvis/Belt/Symbol:texture:region")
+tracks/6/path = NodePath("SpriteContainer/PelvisGroup/Symbol:texture:region")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -1382,7 +1339,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("SpriteContainer/Pelvis/Belt/Symbol:position")
+tracks/7/path = NodePath("SpriteContainer/PelvisGroup/Symbol:position")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -1394,7 +1351,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("SpriteContainer/Pelvis:texture:region")
+tracks/8/path = NodePath("SpriteContainer/PelvisGroup/Pelvis:texture:region")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -1406,7 +1363,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("SpriteContainer/ThighFront/LegFront/FootFront:texture:region")
+tracks/9/path = NodePath("SpriteContainer/LegFrontGroup/FootFront:texture:region")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -1418,7 +1375,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("SpriteContainer/ThighFront/LegFront/FootFront:offset")
+tracks/10/path = NodePath("SpriteContainer/LegFrontGroup/FootFront:offset")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -1430,7 +1387,7 @@ tracks/10/keys = {
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("SpriteContainer/Pelvis/Belt/FloatingBob:texture:region")
+tracks/11/path = NodePath("SpriteContainer/PelvisGroup/FloatingBob:texture:region")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
@@ -1442,7 +1399,7 @@ tracks/11/keys = {
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("SpriteContainer/Torso/Jacket:position")
+tracks/12/path = NodePath("SpriteContainer/TorsoGroup/Jacket:position")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
@@ -1454,7 +1411,7 @@ tracks/12/keys = {
 tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("SpriteContainer/Pelvis/Belt/FloatingBob:position")
+tracks/13/path = NodePath("SpriteContainer/PelvisGroup/FloatingBob:position")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
@@ -1466,7 +1423,7 @@ tracks/13/keys = {
 tracks/14/type = "value"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("SpriteContainer/Pelvis/Belt:position")
+tracks/14/path = NodePath("SpriteContainer/PelvisGroup/Belt:position")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
@@ -1478,7 +1435,7 @@ tracks/14/keys = {
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("SpriteContainer/ThighFront/LegFront:texture:region")
+tracks/15/path = NodePath("SpriteContainer/LegFrontGroup/LegFront:texture:region")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
@@ -1490,7 +1447,7 @@ tracks/15/keys = {
 tracks/16/type = "value"
 tracks/16/imported = false
 tracks/16/enabled = true
-tracks/16/path = NodePath("SpriteContainer/ThighFront:texture:region")
+tracks/16/path = NodePath("SpriteContainer/LegFrontGroup/ThighFront:texture:region")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
@@ -1502,7 +1459,7 @@ tracks/16/keys = {
 tracks/17/type = "value"
 tracks/17/imported = false
 tracks/17/enabled = true
-tracks/17/path = NodePath("SpriteContainer/ThighFront:offset")
+tracks/17/path = NodePath("SpriteContainer/LegFrontGroup/ThighFront:offset")
 tracks/17/interp = 1
 tracks/17/loop_wrap = true
 tracks/17/keys = {
@@ -1514,7 +1471,7 @@ tracks/17/keys = {
 tracks/18/type = "value"
 tracks/18/imported = false
 tracks/18/enabled = true
-tracks/18/path = NodePath("SpriteContainer/ThighFront/LegFront:offset")
+tracks/18/path = NodePath("SpriteContainer/LegFrontGroup/LegFront:offset")
 tracks/18/interp = 1
 tracks/18/loop_wrap = true
 tracks/18/keys = {
@@ -1598,7 +1555,7 @@ tracks/24/keys = {
 tracks/25/type = "value"
 tracks/25/imported = false
 tracks/25/enabled = true
-tracks/25/path = NodePath("SpriteContainer/ThighFront:z_index")
+tracks/25/path = NodePath("SpriteContainer/LegFrontGroup/ThighFront:z_index")
 tracks/25/interp = 1
 tracks/25/loop_wrap = true
 tracks/25/keys = {
@@ -1646,7 +1603,7 @@ tracks/28/keys = {
 tracks/29/type = "value"
 tracks/29/imported = false
 tracks/29/enabled = true
-tracks/29/path = NodePath("SpriteContainer/ThighBack:modulate")
+tracks/29/path = NodePath("SpriteContainer/LegBackGroup/ThighBack:modulate")
 tracks/29/interp = 1
 tracks/29/loop_wrap = true
 tracks/29/keys = {
@@ -1658,7 +1615,7 @@ tracks/29/keys = {
 tracks/30/type = "value"
 tracks/30/imported = false
 tracks/30/enabled = true
-tracks/30/path = NodePath("SpriteContainer/ArmBack:modulate")
+tracks/30/path = NodePath("SpriteContainer/ArmBackGroup/ArmBack:modulate")
 tracks/30/interp = 1
 tracks/30/loop_wrap = true
 tracks/30/keys = {
@@ -1706,7 +1663,7 @@ tracks/33/keys = {
 tracks/34/type = "value"
 tracks/34/imported = false
 tracks/34/enabled = true
-tracks/34/path = NodePath("SpriteContainer/ArmBack:z_index")
+tracks/34/path = NodePath("SpriteContainer/ArmBackGroup/ArmBack:z_index")
 tracks/34/interp = 1
 tracks/34/loop_wrap = true
 tracks/34/keys = {
@@ -1754,7 +1711,7 @@ tracks/37/keys = {
 tracks/38/type = "value"
 tracks/38/imported = false
 tracks/38/enabled = true
-tracks/38/path = NodePath("SpriteContainer/ArmBack/ForearmBack/HandBack:texture:region")
+tracks/38/path = NodePath("SpriteContainer/ArmBackGroup/HandBack:texture:region")
 tracks/38/interp = 1
 tracks/38/loop_wrap = true
 tracks/38/keys = {
@@ -1766,7 +1723,7 @@ tracks/38/keys = {
 tracks/39/type = "value"
 tracks/39/imported = false
 tracks/39/enabled = true
-tracks/39/path = NodePath("SpriteContainer/Head:z_index")
+tracks/39/path = NodePath("SpriteContainer/HeadGroup:z_index")
 tracks/39/interp = 1
 tracks/39/loop_wrap = true
 tracks/39/keys = {
@@ -1785,91 +1742,6 @@ _data = {
 &"RESET": SubResource("Animation_7cm0d"),
 &"Run": SubResource("Animation_jlbrr"),
 &"ToSideRight": SubResource("Animation_qvnx8")
-}
-
-[sub_resource type="Animation" id="Animation_yvpvj"]
-resource_name = "Idle2"
-length = 3.0
-loop_mode = 1
-
-[sub_resource type="Animation" id="Animation_nn2k0"]
-resource_name = "IdleaAncien"
-length = 5.0
-loop_mode = 1
-
-[sub_resource type="Animation" id="Animation_utiys"]
-resource_name = "RESET"
-
-[sub_resource type="Animation" id="Animation_dr3s2"]
-resource_name = "JawTrapSlashAttack"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CSManager/JawTrap/Front:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-107, -99)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CSManager/JawTrap/Front:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.5053452]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("CSManager/JawTrap/Back:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(122, -101)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("CSManager/JawTrap/Back:rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [-0.4687214]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("CSManager/JawTrap/Back:z_index")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [-2]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_utiys"]
-_data = {
-&"Idle": SubResource("Animation_yvpvj"),
-&"IdleaAncien": SubResource("Animation_nn2k0"),
-&"JawTrapSlashAttack": SubResource("Animation_dr3s2"),
-&"JawTrapSlashAttack1": ExtResource("17_jlbrr"),
-&"RESET": SubResource("Animation_utiys")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_utiys"]
@@ -1930,7 +1802,6 @@ states/MoveSpace/position = Vector2(408, 100)
 transitions = ["Start", "MoveSpace", SubResource("AnimationNodeStateMachineTransition_jbjqy"), "MoveSpace", "Jump", SubResource("AnimationNodeStateMachineTransition_7cm0d"), "Jump", "Fall", SubResource("AnimationNodeStateMachineTransition_p0okl"), "Fall", "MoveSpace", SubResource("AnimationNodeStateMachineTransition_rsvc4"), "Fall", "End", SubResource("AnimationNodeStateMachineTransition_hgdcd"), "Jump", "End", SubResource("AnimationNodeStateMachineTransition_n380g"), "MoveSpace", "End", SubResource("AnimationNodeStateMachineTransition_3po1k"), "MoveSpace", "Fall", SubResource("AnimationNodeStateMachineTransition_pvels")]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_7cm0d"]
-graph_offset = Vector2(-435.30777, 0)
 nodes/output/position = Vector2(400, 200)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_qvnx8")
 nodes/StateMachine/position = Vector2(0, 140)
@@ -1943,132 +1814,100 @@ visible = false
 position = Vector2(0, -150)
 shape = SubResource("CapsuleShape2D_pp85c")
 
-[node name="ArmBack" type="Sprite2D" parent="SpriteContainer" index="0"]
+[node name="ArmBackGroup" type="Node2D" parent="SpriteContainer" index="0"]
+z_index = -1
+
+[node name="ArmBack" type="Sprite2D" parent="SpriteContainer/ArmBackGroup" index="0"]
 modulate = Color(0.735357, 0.735357, 0.735357, 1)
 z_index = -1
 position = Vector2(52.996723, -200.13513)
 rotation = 3.0692008
-scale = Vector2(0.9999994, -0.9999994)
+scale = Vector2(0.9999711, -0.9999711)
 texture = SubResource("AtlasTexture_71p2d")
 offset = Vector2(-10, 17.333)
 
-[node name="ForearmBack" type="Sprite2D" parent="SpriteContainer/ArmBack" index="0"]
-position = Vector2(-26.57631, 35.837402)
-rotation = 0.04242355
-scale = Vector2(0.99997, 0.99997)
+[node name="ForearmBack" type="Sprite2D" parent="SpriteContainer/ArmBackGroup" index="1"]
+position = Vector2(82.094666, -166.3148)
+rotation = 3.026777
+scale = Vector2(0.9999122, -0.9999122)
 texture = SubResource("AtlasTexture_pigwd")
 offset = Vector2(-7.7521763, 23.060297)
 
-[node name="HandBack" type="Sprite2D" parent="SpriteContainer/ArmBack/ForearmBack" index="0"]
-z_index = 2
-position = Vector2(-32.23539, 51.34617)
-rotation = -0.30502626
-scale = Vector2(1.0000006, 1.0000006)
+[node name="HandBack" type="Sprite2D" parent="SpriteContainer/ArmBackGroup" index="2"]
+position = Vector2(119.99687, -119.00386)
+rotation = -2.951382
+scale = Vector2(0.9999128, -0.9999128)
 texture = SubResource("AtlasTexture_ifobo")
 offset = Vector2(-9.287, 11.465)
 
-[node name="ThighBack" type="Sprite2D" parent="SpriteContainer" index="1"]
-modulate = Color(0.735357, 0.735357, 0.735357, 1)
-position = Vector2(30.667131, -118.065956)
-rotation = -0.3031281
-scale = Vector2(0.99993414, 0.99993414)
-texture = SubResource("AtlasTexture_utiys")
-offset = Vector2(18, 26.333)
+[node name="LegBackGroup" type="Node2D" parent="SpriteContainer" index="1"]
 
-[node name="LegBack" type="Sprite2D" parent="SpriteContainer/ThighBack" index="0"]
+[node name="LegBack" type="Sprite2D" parent="SpriteContainer/LegBackGroup" index="0"]
 z_index = -1
-position = Vector2(33.99032, 53.68601)
-rotation = 0.41904745
-scale = Vector2(0.99996454, 0.99996454)
+position = Vector2(79.13015, -76.97673)
+rotation = 0.1159194
+scale = Vector2(0.99989706, 0.99989706)
 texture = SubResource("AtlasTexture_3ua5h")
 offset = Vector2(0, 17)
 
-[node name="FootBack" type="Sprite2D" parent="SpriteContainer/ThighBack/LegBack" index="0"]
-position = Vector2(-4.0006104, 40.010895)
-rotation = -0.23277886
-scale = Vector2(0.99997926, 0.99997926)
+[node name="ThighBack" type="Sprite2D" parent="SpriteContainer/LegBackGroup" index="1"]
+modulate = Color(0.735357, 0.735357, 0.735357, 1)
+position = Vector2(30.667131, -118.065956)
+rotation = -0.3031281
+scale = Vector2(0.9999331, 0.9999331)
+texture = SubResource("AtlasTexture_utiys")
+offset = Vector2(18, 26.333)
+
+[node name="FootBack" type="Sprite2D" parent="SpriteContainer/LegBackGroup" index="2"]
+position = Vector2(70.52962, -37.7011)
+rotation = -0.11685946
+scale = Vector2(0.9998763, 0.9998763)
 texture = SubResource("AtlasTexture_6et86")
 offset = Vector2(9.333, 10.667)
 
-[node name="Torso" type="Sprite2D" parent="SpriteContainer" index="2"]
+[node name="TorsoGroup" type="Node2D" parent="SpriteContainer" index="2"]
 position = Vector2(0, -121)
+scale = Vector2(0.9999982, 0.9999982)
+
+[node name="Torso" type="Sprite2D" parent="SpriteContainer/TorsoGroup" index="0"]
 scale = Vector2(0.9999982, 0.9999982)
 texture = SubResource("AtlasTexture_wbk6g")
 offset = Vector2(-5.667, -55.667)
 
-[node name="Jacket" type="Sprite2D" parent="SpriteContainer/Torso" index="0"]
+[node name="Jacket" type="Sprite2D" parent="SpriteContainer/TorsoGroup" index="1"]
 z_index = 2
 position = Vector2(0, -3.0000076)
+scale = Vector2(0.9999982, 0.9999982)
 texture = SubResource("AtlasTexture_m1odn")
 offset = Vector2(-4.667, -72)
 
-[node name="JacketTipBack" type="Sprite2D" parent="SpriteContainer/Torso/Jacket" index="0"]
-z_index = -3
-position = Vector2(45.162136, -41.42325)
-scale = Vector2(0.99999994, 0.99999994)
+[node name="JacketTipBack" type="Sprite2D" parent="SpriteContainer/TorsoGroup" index="2"]
+z_index = -1
+position = Vector2(46.16206, -44.423187)
+scale = Vector2(0.99999815, 0.99999815)
 texture = SubResource("AtlasTexture_umomj")
 offset = Vector2(2.667, 14.333)
 
-[node name="JacketTipFront" type="Sprite2D" parent="SpriteContainer/Torso/Jacket" index="1"]
-position = Vector2(-41.61395, -28.192993)
-scale = Vector2(0.99999994, 0.99999994)
+[node name="JacketTipFront" type="Sprite2D" parent="SpriteContainer/TorsoGroup" index="3"]
+z_index = 2
+position = Vector2(-41.613945, -31.192993)
+scale = Vector2(0.99999815, 0.99999815)
 texture = SubResource("AtlasTexture_yvpvj")
 offset = Vector2(-3.6564293, 14.088539)
 
-[node name="Fang" type="Sprite2D" parent="SpriteContainer/Torso" index="1"]
-clip_children = 1
-z_index = 2
-position = Vector2(39.00007, -78.00014)
-rotation = -0.10159245
-texture = SubResource("AtlasTexture_tm4wk")
-
-[node name="Fang2" type="Sprite2D" parent="SpriteContainer/Torso" index="2"]
-clip_children = 1
-z_index = 2
-position = Vector2(-21.000038, -58.000107)
-texture = SubResource("AtlasTexture_qk5md")
-
-[node name="Pelvis" type="Sprite2D" parent="SpriteContainer" index="3"]
+[node name="PelvisGroup" type="Node2D" parent="SpriteContainer" index="3"]
 position = Vector2(0, -121)
 scale = Vector2(0.9999982, 0.9999982)
-texture = SubResource("AtlasTexture_jlbrr")
-offset = Vector2(-3.7380104, 14.7932205)
 
-[node name="Belt" type="Sprite2D" parent="SpriteContainer/Pelvis" index="0"]
-texture = SubResource("AtlasTexture_e5ikc")
-offset = Vector2(-3.014, -11.701)
-
-[node name="FloatingBob" type="Sprite2D" parent="SpriteContainer/Pelvis/Belt" index="0"]
-z_index = 1
-position = Vector2(-0.059484124, -11.180192)
-texture = SubResource("AtlasTexture_nn2k0")
-
-[node name="Symbol" type="Sprite2D" parent="SpriteContainer/Pelvis/Belt" index="1"]
-z_index = 1
-position = Vector2(13.263962, -11.877173)
-texture = SubResource("AtlasTexture_6d12l")
-
-[node name="AnchorTail" type="Node2D" parent="SpriteContainer/Pelvis" index="1"]
-
-[node name="LineOutline" type="Line2D" parent="SpriteContainer/Pelvis/AnchorTail" index="0" node_paths=PackedStringArray("line")]
-z_index = -2
-points = PackedVector2Array(0, 0, -40, 0, -80, 0, -120, 0, -160, 0, -200, 0)
-width = 90.0
-width_curve = SubResource("Curve_dr3s2")
-default_color = Color(0.43529412, 0.5058824, 0.14509805, 1)
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
-script = ExtResource("3_dr3s2")
-line = NodePath("../ProceduralLine")
-metadata/_custom_type_script = "uid://lnbdh25h7yvf"
-
-[node name="ProceduralLine" type="Line2D" parent="SpriteContainer/Pelvis/AnchorTail" index="1"]
+[node name="AnchorTail" type="Node2D" parent="SpriteContainer/PelvisGroup" index="0"]
 z_index = -1
+scale = Vector2(0.9999982, 0.9999982)
+
+[node name="ProceduralLine" type="Line2D" parent="SpriteContainer/PelvisGroup/AnchorTail" index="0"]
 points = PackedVector2Array(0, 0, -40, 0, -80, 0, -120, 0, -160, 0, -200, 0)
 width = 70.0
 width_curve = SubResource("Curve_e5ikc")
-default_color = Color(0.76862746, 0.8352941, 0.4117647, 1)
+texture = SubResource("GradientTexture2D_dr3s2")
 joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
@@ -2081,140 +1920,158 @@ outline_color = Color(0.5019608, 0.58431375, 0.16470589, 1)
 outline_width = 4.0
 metadata/_custom_type_script = "uid://lnbdh25h7yvf"
 
-[node name="ThighFront" type="Sprite2D" parent="SpriteContainer" index="4"]
-position = Vector2(-35.667114, -117.332825)
-rotation = 0.266719
-scale = Vector2(0.9999603, 0.9999603)
-texture = SubResource("AtlasTexture_jbjqy")
-offset = Vector2(-5.667, 21)
+[node name="Pelvis" type="Sprite2D" parent="SpriteContainer/PelvisGroup" index="1"]
+scale = Vector2(0.9999982, 0.9999982)
+texture = SubResource("AtlasTexture_jlbrr")
+offset = Vector2(-3.7380104, 14.7932205)
 
-[node name="LegFront" type="Sprite2D" parent="SpriteContainer/ThighFront" index="0"]
-z_index = -1
-position = Vector2(-15.266029, 48.21392)
-rotation = -0.19699556
-scale = Vector2(0.9999665, 0.9999665)
-texture = SubResource("AtlasTexture_qvnx8")
-offset = Vector2(2.667, 21.333)
+[node name="Belt" type="Sprite2D" parent="SpriteContainer/PelvisGroup" index="2"]
+scale = Vector2(0.9999982, 0.9999982)
+texture = SubResource("AtlasTexture_e5ikc")
+offset = Vector2(-3.014, -11.701)
 
-[node name="FootFront" type="Sprite2D" parent="SpriteContainer/ThighFront/LegFront" index="0"]
-position = Vector2(-0.78639984, 45.135773)
-rotation = -0.07021506
-scale = Vector2(0.9999871, 0.9999871)
-texture = SubResource("AtlasTexture_7cm0d")
-offset = Vector2(2.2518923, 17.591896)
+[node name="FloatingBob" type="Sprite2D" parent="SpriteContainer/PelvisGroup" index="3"]
+z_index = 1
+position = Vector2(-0.059484124, -11.180192)
+scale = Vector2(0.9999982, 0.9999982)
+texture = SubResource("AtlasTexture_nn2k0")
 
-[node name="Head" type="Node2D" parent="SpriteContainer" index="5"]
+[node name="Symbol" type="Sprite2D" parent="SpriteContainer/PelvisGroup" index="4"]
+z_index = 1
+position = Vector2(13.263962, -11.877173)
+scale = Vector2(0.9999982, 0.9999982)
+texture = SubResource("AtlasTexture_6d12l")
+
+[node name="HeadGroup" type="Node2D" parent="SpriteContainer" index="4"]
 z_index = 3
 position = Vector2(0.00047874366, -246.98297)
-rotation = -0.037567917
-scale = Vector2(0.9999144, 0.9991134)
+rotation = -0.037568048
 
-[node name="Jaw" type="Sprite2D" parent="SpriteContainer/Head" index="0"]
-position = Vector2(-27.000898, -3.335785)
-scale = Vector2(1.0037671, 0.998296)
+[node name="Jaw" type="Sprite2D" parent="SpriteContainer/HeadGroup" index="0"]
+position = Vector2(37.035, -2.896)
+scale = Vector2(1.003767, 0.9982907)
 texture = SubResource("AtlasTexture_wfuh6")
-offset = Vector2(34.667, -0.667)
+offset = Vector2(-32.014824, -0.21961975)
 
-[node name="StrandBack" type="Sprite2D" parent="SpriteContainer/Head/Jaw" index="0"]
+[node name="FaceGroup" type="Node2D" parent="SpriteContainer/HeadGroup" index="1"]
+position = Vector2(-32.017555, -0.21982992)
+
+[node name="HairBack" type="Sprite2D" parent="SpriteContainer/HeadGroup/FaceGroup" index="0"]
+z_index = -1
+position = Vector2(41.235, -15.28)
+scale = Vector2(1.0037671, 0.998296)
+texture = SubResource("AtlasTexture_wk535")
+
+[node name="Face" type="Sprite2D" parent="SpriteContainer/HeadGroup/FaceGroup" index="1"]
+position = Vector2(42.11564, -23.532814)
+scale = Vector2(1.003767, 0.99829066)
+texture = SubResource("AtlasTexture_usnsk")
+
+[node name="EyeFront" type="Sprite2D" parent="SpriteContainer/HeadGroup/FaceGroup/Face" index="0"]
+position = Vector2(-1.1078534, 2.9678955)
+scale = Vector2(0.99999976, 0.9999998)
+texture = SubResource("AtlasTexture_0jkvw")
+
+[node name="EyelidsFront" type="Sprite2D" parent="SpriteContainer/HeadGroup/FaceGroup/Face/EyeFront" index="0"]
+position = Vector2(1.1078539, -2.9678955)
+scale = Vector2(1, 0.99999994)
+texture = SubResource("AtlasTexture_owqoc")
+
+[node name="EyebrowsFront" type="Sprite2D" parent="SpriteContainer/HeadGroup/FaceGroup/Face/EyeFront" index="1"]
 z_index = 1
-position = Vector2(-11.290844, 17.043243)
-rotation = -0.35108462
-scale = Vector2(1.000081, 1.0002428)
-skew = 0.004028201
+position = Vector2(-0.12825763, -15.333522)
+scale = Vector2(0.9999999, 0.99999994)
+texture = SubResource("AtlasTexture_8e5hb")
+
+[node name="EyeBack" type="Sprite2D" parent="SpriteContainer/HeadGroup/FaceGroup/Face" index="1"]
+position = Vector2(-1.1078534, 2.9678955)
+scale = Vector2(0.7199998, 0.7999998)
+texture = SubResource("AtlasTexture_fjl3l")
+
+[node name="EyelidsBack" type="Sprite2D" parent="SpriteContainer/HeadGroup/FaceGroup/Face/EyeBack" index="0"]
+position = Vector2(1.538681, -3.7098694)
+scale = Vector2(1.0000001, 1)
+texture = SubResource("AtlasTexture_j0hnv")
+
+[node name="EyebrowsBack" type="Sprite2D" parent="SpriteContainer/HeadGroup/FaceGroup/Face/EyeBack" index="1"]
+z_index = 1
+position = Vector2(1.2675483, -12.003131)
+scale = Vector2(1.0792211, 1.0343353)
+skew = -0.09623921
+texture = SubResource("AtlasTexture_dr3s2")
+
+[node name="HairFront" type="Sprite2D" parent="SpriteContainer/HeadGroup/FaceGroup" index="2"]
+position = Vector2(37.22, -42.234)
+scale = Vector2(1.0037671, 0.998296)
+texture = SubResource("AtlasTexture_ooqhq")
+
+[node name="StrandSide" type="Sprite2D" parent="SpriteContainer/HeadGroup/FaceGroup/HairFront" index="0"]
+position = Vector2(3.0087547, 3.258667)
+texture = SubResource("AtlasTexture_hb14a")
+
+[node name="StrandBack" type="Sprite2D" parent="SpriteContainer/HeadGroup" index="2"]
+position = Vector2(-38.33156, 13.678619)
+rotation = -0.34932327
+scale = Vector2(1.0032488, 0.99917465)
+skew = 0.00051498413
 texture = SubResource("AtlasTexture_weadw")
 offset = Vector2(14.333, -9.667)
 
-[node name="Face" type="Sprite2D" parent="SpriteContainer/Head" index="1"]
-position = Vector2(-27.000898, -3.335785)
-scale = Vector2(1.0037671, 0.998296)
-texture = SubResource("AtlasTexture_usnsk")
-offset = Vector2(38.097843, -20.378845)
-
-[node name="EyeBack" type="Node2D" parent="SpriteContainer/Head/Face" index="0"]
-position = Vector2(55.92404, -31.915874)
-scale = Vector2(0.99999994, 1)
-
-[node name="EyeBack" type="Sprite2D" parent="SpriteContainer/Head/Face/EyeBack" index="0"]
-position = Vector2(-1.1078534, 2.9678955)
-scale = Vector2(0.71999985, 0.79999983)
-texture = SubResource("AtlasTexture_fjl3l")
-
-[node name="EyelidsBack" type="Sprite2D" parent="SpriteContainer/Head/Face/EyeBack" index="1"]
-scale = Vector2(0.71999985, 0.79999983)
-texture = SubResource("AtlasTexture_j0hnv")
-
-[node name="EyebrowsBack" type="Sprite2D" parent="SpriteContainer/Head/Face/EyeBack" index="2"]
+[node name="StrandFront" type="Sprite2D" parent="SpriteContainer/HeadGroup" index="3"]
 z_index = 1
-position = Vector2(1.2675483, -12.003131)
-scale = Vector2(0.777039, 0.8267419)
-skew = -0.08666599
-texture = SubResource("AtlasTexture_dr3s2")
-
-[node name="EyeFront" type="Node2D" parent="SpriteContainer/Head/Face" index="1"]
-position = Vector2(24.648909, -32.8306)
-scale = Vector2(0.9999999, 1)
-
-[node name="EyeFront" type="Sprite2D" parent="SpriteContainer/Head/Face/EyeFront" index="0"]
-position = Vector2(-1.1078534, 2.9678955)
-scale = Vector2(0.9999999, 1)
-texture = SubResource("AtlasTexture_0jkvw")
-
-[node name="EyelidsFront" type="Sprite2D" parent="SpriteContainer/Head/Face/EyeFront" index="1"]
-scale = Vector2(0.9999999, 1)
-texture = SubResource("AtlasTexture_owqoc")
-
-[node name="EyebrowsFront" type="Sprite2D" parent="SpriteContainer/Head/Face/EyeFront" index="2"]
-z_index = 1
-position = Vector2(-0.12825763, -15.333522)
-scale = Vector2(0.9999998, 1)
-texture = SubResource("AtlasTexture_8e5hb")
-
-[node name="HairBack" type="Sprite2D" parent="SpriteContainer/Head/Face" index="2"]
-z_index = -1
-position = Vector2(36.081593, -11.964676)
-texture = SubResource("AtlasTexture_wk535")
-
-[node name="HairFront" type="Sprite2D" parent="SpriteContainer/Head/Face/HairBack" index="0"]
-z_index = 1
-position = Vector2(-4.000002, -27)
-texture = SubResource("AtlasTexture_ooqhq")
-
-[node name="StrandSide" type="Sprite2D" parent="SpriteContainer/Head/Face/HairBack/HairFront" index="0"]
-position = Vector2(5.0000076, 3.3339844)
-texture = SubResource("AtlasTexture_hb14a")
-
-[node name="StrandFront" type="Sprite2D" parent="SpriteContainer/Head/Face/HairBack/HairFront" index="1"]
-z_index = 1
-position = Vector2(11.090227, -17.511597)
-scale = Vector2(1.0004565, 1.0225048)
+position = Vector2(13.7416315, -59.805817)
+scale = Vector2(1.0037671, 0.9982961)
 texture = SubResource("AtlasTexture_24sqv")
-offset = Vector2(1, 19.667)
+offset = Vector2(3.4628582, 19.757607)
 
-[node name="ArmFront" type="Sprite2D" parent="SpriteContainer" index="6"]
+[node name="ArmFrontGroup" type="Node2D" parent="SpriteContainer" index="5"]
 z_index = 3
+
+[node name="ArmFront" type="Sprite2D" parent="SpriteContainer/ArmFrontGroup" index="0"]
 position = Vector2(-56.33362, -199.66608)
 rotation = -0.021970099
-scale = Vector2(0.99994534, 0.99994534)
+scale = Vector2(0.99989265, 0.99989265)
 texture = SubResource("AtlasTexture_kwm2e")
 offset = Vector2(-10, 17.333)
 
-[node name="ForearmFront" type="Sprite2D" parent="SpriteContainer/ArmFront" index="0"]
-z_index = 1
-position = Vector2(-21.667168, 32.333084)
-rotation = -0.05016881
-scale = Vector2(0.9999661, 0.9999661)
+[node name="ForearmFront" type="Sprite2D" parent="SpriteContainer/ArmFrontGroup" index="1"]
+position = Vector2(-77.283005, -166.86835)
+rotation = -0.07213909
+scale = Vector2(0.99976236, 0.99976236)
 texture = SubResource("AtlasTexture_l1deg")
 offset = Vector2(-14, 25.667)
 
-[node name="HandFront" type="Sprite2D" parent="SpriteContainer/ArmFront/ForearmFront" index="0"]
-position = Vector2(-26.667175, 48.000427)
-rotation = -0.18696146
-scale = Vector2(1.0000042, 1.0000042)
+[node name="HandFront" type="Sprite2D" parent="SpriteContainer/ArmFrontGroup" index="2"]
+position = Vector2(-100.41563, -117.082504)
+rotation = -0.2591005
+scale = Vector2(0.9997665, 0.9997665)
 texture = SubResource("AtlasTexture_fs2r1")
 offset = Vector2(-12, 15)
 
+[node name="LegFrontGroup" type="Node2D" parent="SpriteContainer" index="6"]
+
+[node name="LegFront" type="Sprite2D" parent="SpriteContainer/LegFrontGroup" index="0"]
+position = Vector2(-63.09987, -74.84908)
+rotation = 0.06972345
+scale = Vector2(0.99992573, 0.99992573)
+texture = SubResource("AtlasTexture_qvnx8")
+offset = Vector2(2.667, 21.333)
+
+[node name="ThighFront" type="Sprite2D" parent="SpriteContainer/LegFrontGroup" index="1"]
+position = Vector2(-35.667114, -117.332825)
+rotation = 0.266719
+scale = Vector2(0.9999591, 0.9999591)
+texture = SubResource("AtlasTexture_jbjqy")
+offset = Vector2(-5.667, 21)
+
+[node name="FootFront" type="Sprite2D" parent="SpriteContainer/LegFrontGroup" index="2"]
+position = Vector2(-67.02854, -29.881107)
+rotation = -0.00049185514
+scale = Vector2(0.99991405, 0.99991405)
+texture = SubResource("AtlasTexture_7cm0d")
+offset = Vector2(2.2518923, 17.591896)
+
 [node name="Skeleton2D" type="Skeleton2D" parent="." index="2"]
-visible = false
 modulate = Color(1, 1, 1, 0.1254902)
 position = Vector2(0, 20)
 modification_stack = SubResource("SkeletonModificationStack2D_1etbk")
@@ -2228,13 +2085,13 @@ rest = Transform2D(0.9999982, 0, 0, 0.9999982, 0, -141)
 rest = Transform2D(1, 0, 0, 1, 0, 0)
 
 [node name="Pelvis" type="RemoteTransform2D" parent="Skeleton2D/Center/Body" index="0"]
-remote_path = NodePath("../../../../SpriteContainer/Pelvis")
+remote_path = NodePath("../../../../SpriteContainer/PelvisGroup")
 
 [node name="Torso" type="Bone2D" parent="Skeleton2D/Center/Body" index="1"]
 rest = Transform2D(1, 0, 0, 1, 0, 0)
 
 [node name="Torso" type="RemoteTransform2D" parent="Skeleton2D/Center/Body/Torso" index="0"]
-remote_path = NodePath("../../../../../SpriteContainer/Torso")
+remote_path = NodePath("../../../../../SpriteContainer/TorsoGroup")
 
 [node name="Head" type="Bone2D" parent="Skeleton2D/Center/Body/Torso" index="1"]
 position = Vector2(0.0004787445, -125.9832)
@@ -2244,7 +2101,6 @@ rest = Transform2D(0.9992742, -0.03755845, 0.03755845, 0.9992742, 0.0004787445, 
 
 [node name="Head" type="RemoteTransform2D" parent="Skeleton2D/Center/Body/Torso/Head" index="0"]
 scale = Vector2(1, 0.787127)
-remote_path = NodePath("../../../../../../SpriteContainer/Head")
 update_scale = false
 
 [node name="HeadFacing" type="Bone2D" parent="Skeleton2D/Center/Body/Torso/Head" index="1"]
@@ -2256,12 +2112,11 @@ position = Vector2(-64.333, 1.667)
 rest = Transform2D(1, 0, 0, 1, -64.333, 1.667)
 
 [node name="Jaw" type="Bone2D" parent="Skeleton2D/Center/Body/Torso/Head/HeadFacing/NeckFacing" index="0"]
-position = Vector2(-27, -3.333)
+position = Vector2(-32.016495, -0.2196536)
 rest = Transform2D(1, 0, 0, 1, -27, -3.333)
 
 [node name="Jaw" type="RemoteTransform2D" parent="Skeleton2D/Center/Body/Torso/Head/HeadFacing/NeckFacing/Jaw" index="0"]
 scale = Vector2(1, 0.9774936)
-remote_path = NodePath("../../../../../../../../../SpriteContainer/Head/Jaw")
 update_scale = false
 
 [node name="StrandBack" type="Bone2D" parent="Skeleton2D/Center/Body/Torso/Head/HeadFacing/NeckFacing/Jaw" index="1"]
@@ -2274,16 +2129,14 @@ length = 33.333
 bone_angle = -27.539976
 
 [node name="StrandBack" type="RemoteTransform2D" parent="Skeleton2D/Center/Body/Torso/Head/HeadFacing/NeckFacing/Jaw/StrandBack" index="0"]
-remote_path = NodePath("../../../../../../../../../../SpriteContainer/Head/Jaw/StrandBack")
 update_scale = false
 
 [node name="Face" type="Bone2D" parent="Skeleton2D/Center/Body/Torso/Head/HeadFacing/NeckFacing" index="1"]
-position = Vector2(-27, -3.333)
+position = Vector2(-32.016495, -0.2196536)
 rest = Transform2D(1, 0, 0, 1, -27, -3.333)
 
 [node name="Face" type="RemoteTransform2D" parent="Skeleton2D/Center/Body/Torso/Head/HeadFacing/NeckFacing/Face" index="0"]
 scale = Vector2(1, 0.9774936)
-remote_path = NodePath("../../../../../../../../../SpriteContainer/Head/Face")
 update_scale = false
 
 [node name="StrandFront" type="Bone2D" parent="Skeleton2D/Center/Body/Torso/Head/HeadFacing/NeckFacing/Face" index="1"]
@@ -2295,26 +2148,25 @@ bone_angle = 83.0
 
 [node name="StrandFront" type="RemoteTransform2D" parent="Skeleton2D/Center/Body/Torso/Head/HeadFacing/NeckFacing/Face/StrandFront" index="0"]
 scale = Vector2(1, 0.99969375)
-remote_path = NodePath("../../../../../../../../../../SpriteContainer/Head/Face/HairBack/HairFront/StrandFront")
 update_scale = false
 
 [node name="ArmFront" type="Bone2D" parent="Skeleton2D/Center/Body/Torso" index="2"]
 position = Vector2(-56.333717, -78.666214)
-rotation = -0.021970093
-scale = Vector2(0.99994713, 0.99994713)
+rotation = -0.021970097
+scale = Vector2(0.99989444, 0.99989444)
 rest = Transform2D(0.9997533, -0.021968212, 0.021968212, 0.9997533, -56.333717, -78.666214)
 
 [node name="ArmFront" type="RemoteTransform2D" parent="Skeleton2D/Center/Body/Torso/ArmFront" index="0"]
-remote_path = NodePath("../../../../../../SpriteContainer/ArmFront")
+remote_path = NodePath("../../../../../../SpriteContainer/ArmFrontGroup/ArmFront")
 
 [node name="ForeArmFront" type="Bone2D" parent="Skeleton2D/Center/Body/Torso/ArmFront" index="1"]
 position = Vector2(-21.667164, 32.33307)
 rotation = -0.05016899
-scale = Vector2(0.9999661, 0.9999661)
+scale = Vector2(0.99986964, 0.99986964)
 rest = Transform2D(0.9987342, -0.050147384, 0.050147384, 0.9987342, -21.667164, 32.33307)
 
 [node name="ForeArmFront" type="RemoteTransform2D" parent="Skeleton2D/Center/Body/Torso/ArmFront/ForeArmFront" index="0"]
-remote_path = NodePath("../../../../../../../SpriteContainer/ArmFront/ForearmFront")
+remote_path = NodePath("../../../../../../../SpriteContainer/ArmFrontGroup/ForearmFront")
 
 [node name="HandFront" type="Bone2D" parent="Skeleton2D/Center/Body/Torso/ArmFront/ForeArmFront" index="1"]
 position = Vector2(-26.667183, 48.000443)
@@ -2326,27 +2178,27 @@ length = 26.667
 bone_angle = 118.032974
 
 [node name="HandFront" type="RemoteTransform2D" parent="Skeleton2D/Center/Body/Torso/ArmFront/ForeArmFront/HandFront" index="0"]
-remote_path = NodePath("../../../../../../../../SpriteContainer/ArmFront/ForearmFront/HandFront")
+remote_path = NodePath("../../../../../../../../SpriteContainer/ArmFrontGroup/HandFront")
 
 [node name="ArmBack" type="Bone2D" parent="Skeleton2D/Center/Body/Torso" index="3"]
 position = Vector2(52.99682, -79.13528)
 rotation = -0.07239183
-scale = Vector2(1.0000012, 1.0000012)
+scale = Vector2(0.9999728, 0.9999728)
 rest = Transform2D(0.99738204, -0.0723287, 0.0723287, 0.99738204, 52.99682, -79.13528)
 
 [node name="ArmBack" type="RemoteTransform2D" parent="Skeleton2D/Center/Body/Torso/ArmBack" index="0"]
 scale = Vector2(-1, 1)
-remote_path = NodePath("../../../../../../SpriteContainer/ArmBack")
+remote_path = NodePath("../../../../../../SpriteContainer/ArmBackGroup/ArmBack")
 
 [node name="ForeArmBack" type="Bone2D" parent="Skeleton2D/Center/Body/Torso/ArmBack" index="1"]
 position = Vector2(26.576317, 35.837402)
 rotation = -0.042423725
-scale = Vector2(0.99997, 0.99997)
+scale = Vector2(0.99994105, 0.99994105)
 rest = Transform2D(0.9990741, -0.0424097, 0.0424097, 0.9990741, 26.576317, 35.837402)
 
 [node name="ForeArmBack" type="RemoteTransform2D" parent="Skeleton2D/Center/Body/Torso/ArmBack/ForeArmBack" index="0"]
 scale = Vector2(-1, 1)
-remote_path = NodePath("../../../../../../../SpriteContainer/ArmBack/ForearmBack")
+remote_path = NodePath("../../../../../../../SpriteContainer/ArmBackGroup/ForearmBack")
 
 [node name="HandBack" type="Bone2D" parent="Skeleton2D/Center/Body/Torso/ArmBack/ForeArmBack" index="1"]
 position = Vector2(32.23538, 51.346157)
@@ -2359,55 +2211,55 @@ bone_angle = 62.950996
 
 [node name="HandBack" type="RemoteTransform2D" parent="Skeleton2D/Center/Body/Torso/ArmBack/ForeArmBack/HandBack" index="0"]
 scale = Vector2(-1, 1)
-remote_path = NodePath("../../../../../../../../SpriteContainer/ArmBack/ForearmBack/HandBack")
+remote_path = NodePath("../../../../../../../../SpriteContainer/ArmBackGroup/HandBack")
 
 [node name="ThighFront" type="Bone2D" parent="Skeleton2D/Center" index="1"]
 position = Vector2(-35.66718, 3.667183)
 rotation = 0.266719
-scale = Vector2(0.99996203, 0.99996203)
+scale = Vector2(0.9999609, 0.9999609)
 rest = Transform2D(0.964623, 0.263563, -0.263563, 0.964623, -35.66718, 3.667183)
 
 [node name="ThighFront" type="RemoteTransform2D" parent="Skeleton2D/Center/ThighFront" index="0"]
-remote_path = NodePath("../../../../SpriteContainer/ThighFront")
+remote_path = NodePath("../../../../SpriteContainer/LegFrontGroup/ThighFront")
 
 [node name="LegFront" type="Bone2D" parent="Skeleton2D/Center/ThighFront" index="1"]
 position = Vector2(-15.266029, 48.21392)
 rotation = -0.19699557
-scale = Vector2(0.99996656, 0.99996656)
+scale = Vector2(0.9999666, 0.9999666)
 rest = Transform2D(0.98064965, -0.195722, 0.195722, 0.98064965, -15.266029, 48.21392)
 
 [node name="LegFront" type="RemoteTransform2D" parent="Skeleton2D/Center/ThighFront/LegFront" index="0"]
-remote_path = NodePath("../../../../../SpriteContainer/ThighFront/LegFront")
+remote_path = NodePath("../../../../../SpriteContainer/LegFrontGroup/LegFront")
 
 [node name="FootFront" type="Bone2D" parent="Skeleton2D/Center/ThighFront/LegFront" index="1"]
 position = Vector2(-0.78639984, 45.13577)
 rotation = -0.0702153
-scale = Vector2(0.9999871, 0.9999871)
+scale = Vector2(0.9999883, 0.9999883)
 rest = Transform2D(0.9975388, -0.07015757, 0.07015757, 0.9975388, -0.78639984, 45.13577)
 auto_calculate_length_and_angle = false
 length = 26.667
 bone_angle = 90.0
 
 [node name="FootFront" type="RemoteTransform2D" parent="Skeleton2D/Center/ThighFront/LegFront/FootFront" index="0"]
-remote_path = NodePath("../../../../../../SpriteContainer/ThighFront/LegFront/FootFront")
+remote_path = NodePath("../../../../../../SpriteContainer/LegFrontGroup/FootFront")
 
 [node name="ThighBack" type="Bone2D" parent="Skeleton2D/Center" index="2"]
 position = Vector2(30.667187, 2.9340515)
 rotation = -0.30312806
-scale = Vector2(0.999936, 0.999936)
+scale = Vector2(0.999935, 0.999935)
 rest = Transform2D(0.95439744, -0.29850402, 0.29850402, 0.95439744, 30.667187, 2.9340515)
 
 [node name="ThighBack" type="RemoteTransform2D" parent="Skeleton2D/Center/ThighBack" index="0"]
-remote_path = NodePath("../../../../SpriteContainer/ThighBack")
+remote_path = NodePath("../../../../SpriteContainer/LegBackGroup/ThighBack")
 
 [node name="LegBack" type="Bone2D" parent="Skeleton2D/Center/ThighBack" index="1"]
 position = Vector2(33.99031, 53.686005)
 rotation = 0.41904745
-scale = Vector2(0.9999645, 0.9999645)
+scale = Vector2(0.99996394, 0.99996394)
 rest = Transform2D(0.9134653, 0.40688533, -0.40688533, 0.9134653, 33.99031, 53.686005)
 
 [node name="LegBack" type="RemoteTransform2D" parent="Skeleton2D/Center/ThighBack/LegBack" index="0"]
-remote_path = NodePath("../../../../../SpriteContainer/ThighBack/LegBack")
+remote_path = NodePath("../../../../../SpriteContainer/LegBackGroup/LegBack")
 
 [node name="FootBack" type="Bone2D" parent="Skeleton2D/Center/ThighBack/LegBack" index="1"]
 position = Vector2(-4.0006027, 40.010902)
@@ -2419,7 +2271,7 @@ length = 43.383
 bone_angle = 24.999996
 
 [node name="FootBack" type="RemoteTransform2D" parent="Skeleton2D/Center/ThighBack/LegBack/FootBack" index="0"]
-remote_path = NodePath("../../../../../../SpriteContainer/ThighBack/LegBack/FootBack")
+remote_path = NodePath("../../../../../../SpriteContainer/LegBackGroup/FootBack")
 
 [node name="SkeletonTargets" type="Node2D" parent="." index="3"]
 visible = false
@@ -2467,8 +2319,7 @@ position = Vector2(126, -276)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
 libraries = {
-&"": SubResource("AnimationLibrary_0ft5j"),
-&"JawTrap": SubResource("AnimationLibrary_utiys")
+&"": SubResource("AnimationLibrary_0ft5j")
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="5"]
@@ -2497,22 +2348,6 @@ metadata/_edit_use_anchors_ = true
 [node name="CSManager" type="Node2D" parent="." index="7"]
 script = ExtResource("6_wwopw")
 
-[node name="JawTrap" parent="CSManager" index="0" instance=ExtResource("28_fjl3l")]
-
-[node name="Front" parent="CSManager/JawTrap" index="0"]
-position = Vector2(-103, -98)
-rotation = 0.5621965
-
-[node name="Back" parent="CSManager/JawTrap" index="2"]
-z_index = -2
-position = Vector2(127, -104)
-rotation = -0.43057778
-
-[node name="CollisionShape2D" parent="CSManager/JawTrap/WeaponHitBox" index="0"]
-position = Vector2(17.610125, -176.3516)
-rotation = 3.1491725
-disabled = true
-
 [node name="HealthComponent" parent="." index="8" instance=ExtResource("10_51sid")]
 visible = false
 
@@ -2525,11 +2360,5 @@ script = ExtResource("11_xdqw8")
 statistiques = ExtResource("13_22jbs")
 metadata/_custom_type_script = "uid://dat1xibjdbka6"
 
-[node name="EnMain" type="Sprite2D" parent="." index="10"]
-visible = false
-modulate = Color(1, 1, 1, 0.30980393)
-texture = ExtResource("28_wbk6g")
-
 [editable path="BMC"]
-[editable path="CSManager/JawTrap"]
 [editable path="HealthComponent"]

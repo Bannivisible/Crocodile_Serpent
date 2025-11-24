@@ -1,18 +1,7 @@
 extends Button
-class_name SpellCategoryButton
+class_name CSCategoryButton
 
-@export var spells: Array[SpellData]
-
-signal spell_category_selected(spells_data: Array[SpellData])
-
-func _ready() -> void:
-	pressed.connect(_on_pressed)
-
-
-func _on_pressed() -> void:
-	spell_category_selected.emit(spells)
-
-
+@export var cs_data_array: Array[CombatSkillData]
 
 func _on_cs_interface_on_screen_changed(on_screen: Variant) -> void:
 	if on_screen:

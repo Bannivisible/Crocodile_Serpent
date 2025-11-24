@@ -41,8 +41,8 @@ func _ready() -> void:
 		for i in range(nb_link-1):
 			_add_joint(i)
 		
-		pin_joint_front.node_b = NodePath("../../Links/Link1")
-		pin_joint_back.node_a = NodePath("../../Links/" + "Link" + str(nb_link))
+		#pin_joint_front.node_b = NodePath("../../Links/Link1")
+		#pin_joint_back.node_a = NodePath("../../Links/" + "Link" + str(nb_link))
 
 func _add_link(i: int) -> void:
 	var link := RigidBody2D.new()

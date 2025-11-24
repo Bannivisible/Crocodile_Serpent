@@ -1,19 +1,19 @@
 extends Button
-class_name SpellButton
+class_name CSButton
 
-var spell: SpellData
+var cs: CombatSkillData
 
-signal spell_selected(spell_data: SpellData)
+signal cs_selected(cs_data: CombatSkillData)
 
 func _ready() -> void:
-	pressed.connect(func(): spell_selected.emit(spell))
+	pressed.connect(func(): cs_selected.emit(cs))
 
-func _init(spell_data: SpellData) -> void:
-	spell = spell_data
+func _init(cs_data: CombatSkillData) -> void:
+	cs = cs_data
 	_set_up()
 
 func _set_up() -> void:
-	text = spell.name
+	text = cs.name
 	custom_minimum_size = Vector2(0.0, 60.0)
 
 func _on_cs_interface_on_screen_changed(on_screen: bool) -> void:

@@ -7,7 +7,7 @@ class_name CombatSkill
 
 @export var passives: Array[Action]
 
-@export var gap := Vector2(50, -100)
+@export var gap := Vector2.ZERO
 
 var character: Character
 var manager: CSManager

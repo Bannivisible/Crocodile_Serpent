@@ -1,41 +1,41 @@
 extends GridContainer
 
-var current_spells_data: Array[SpellData]= []:
+var current_css_data: Array[CombatSkillData]= []:
 	set(value):
-		if value != current_spells_data:
-			current_spells_data = value
-			current_spells_data_changed.emit(current_spells_data)
+		if value != current_css_data:
+			current_css_data = value
+			current_css_data_changed.emit(current_css_data)
 
-signal current_spells_data_changed(spell_data)
+signal current_css_data_changed(cs_data)
 signal buttons_created()
 
 #### BUILT-IN ####
 
 func _ready() -> void:
-	current_spells_data_changed.connect(_on_current_spells_data_changed)
+	current_css_data_changed.connect(_on_current_css_data_changed)
 
 #### LOGICS ####
 
-func _add_buttons(spell: SpellData) -> void:
-	var button := SpellButton.new(spell)
+func _add_buttons(cs: CombatSkillData) -> void:
+	var button := CSButton.new(cs)
 	var cs_interface: CSInterface= owner
 	
 	cs_interface.on_screen_changed.connect(button._on_cs_interface_on_screen_changed)
-	button.spell_selected.connect(cs_interface._on_cs_selected)
+	button.cs_selected.connect(cs_interface._on_cs_selected)
 	
 	add_child(button)
 
 #### SIGNAL RESPONSES ####
 
-func _on_cs_interface_data_manager_spell_category_sellected(spells_data: Array[SpellData]) -> void:
-	current_spells_data = spells_data
+func _on_cs_interface_data_manager_cs_category_sellected(css_data: Array[CombatSkillData]) -> void:
+	current_css_data = css_data
 	buttons_created.emit()
 
-func _on_current_spells_data_changed(_spell_data) -> void:
+func _on_current_css_data_changed(_cs_data) -> void:
 	Utiles.free_all_children(self)
 	
-	for spell in current_spells_data:
-		_add_buttons(spell)
+	for cs in current_css_data:
+		_add_buttons(cs)
 	
 	Utiles.setup_grid_child_neighbour(self)
 
