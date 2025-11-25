@@ -12,7 +12,7 @@
 [ext_resource type="Script" uid="uid://ce7ave72wm32j" path="res://Ressources/Attack/attack_data.gd" id="5_v0eml"]
 [ext_resource type="Shape2D" uid="uid://bw7u1sj0wx0wf" path="res://Components/CombatSkill/Weapon/JawTrap/Ressources/links_shape.tres" id="6_86vhf"]
 [ext_resource type="Script" uid="uid://danilkv671r1y" path="res://Ressources/Attack/AttackType/attack_type.gd" id="6_jeet7"]
-[ext_resource type="Script" uid="uid://6lekj6yg62r6" path="res://Components/animation_manager/animation_manager_component.gd" id="13_2xnf2"]
+[ext_resource type="Script" uid="uid://dc54v3rlk5wjt" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/jaw_trap_animation_manager_component.gd" id="13_2xnf2"]
 
 [sub_resource type="Resource" id="Resource_yvpvj"]
 script = ExtResource("3_4d2f6")
@@ -175,4 +175,5 @@ debug_color = Color(1, 0, 0, 0.41960785)
 
 [node name="AnimationManagerComponent" type="Node" parent="."]
 script = ExtResource("13_2xnf2")
-metadata/_custom_type_script = "uid://cqkg5u40xq3ar"
+library = ExtResource("2_dp6s7")
+metadata/_custom_type_script = "uid://6lekj6yg62r6"

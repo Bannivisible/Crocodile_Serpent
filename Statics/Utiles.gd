@@ -123,3 +123,18 @@ static func append_with_temp(list: Array, value: Variant) -> void:
 	var array: Array= list
 	array.append(value)
 	list = array
+
+static func get_last_string_of_path(path: String) -> String:
+	var name: String= path
+	
+	for i in range(len(path)):
+		if path[i] == "/":
+			name = path.substr(i+1)
+	
+	return name
+
+static func get_resource_name(resource: Resource) -> String:
+	var resource_name := get_last_string_of_path(resource.resource_path)
+	resource_name = resource_name.erase(len(resource_name)-4, 4)
+	return resource_name
+	
