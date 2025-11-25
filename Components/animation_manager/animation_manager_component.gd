@@ -29,6 +29,7 @@ func add_animation_node(anim_node: AnimationNode, anim_node_name: StringName) ->
 
 func connect_animation_node(output_node_name: StringName, input_id: int, input_node_name: StringName) -> void:
 	if not animation_tree: return
+	#disconnect_in_connection(input_node_name, input_id)
 	tree_root.disconnect_node(input_node_name, input_id)
 	tree_root.connect_node(input_node_name, input_id, output_node_name)
 
@@ -36,7 +37,11 @@ func connect_multiply_animation_node(output_nodes_names: Array[StringName], inpu
 	for i in range(output_nodes_names.size()):
 		connect_animation_node(output_nodes_names[i], i, input_node_name)
 
-func disconnect_animation_node(anim_node_name: StringName, id: int) -> void:
+func disconnect_in_connection(anim_node_name: StringName, id: int) -> void:
+	if not tree_root: return
+	tree_root.disconnect_node(anim_node_name, id)
+
+func disconnect_out_connection(anim_node_name: StringName, id: int) -> void:
 	if not tree_root: return
 	tree_root.disconnect_node(anim_node_name, id)
 

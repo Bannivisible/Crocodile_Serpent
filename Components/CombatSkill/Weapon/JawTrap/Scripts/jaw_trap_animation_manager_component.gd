@@ -4,10 +4,12 @@ extends AnimationManagerComponent
 
 func _ready() -> void:
 	add_library(library)
+	
 	add_in_tree_animation_with_name(libraries[library] + "/SlashAttack1")
+	
 	add_animation_node(AnimationNodeOneShot.new(), "AttackOneShot")
 	set_filter_with_all_track("AttackOneShot", "SlashAttack1")
-	tree_root.disconnect_node("output", 0)
+	disconnect_in_connection("output", 0)
 	connect_multiply_animation_node(["StateMachine", "SlashAttack1"], "AttackOneShot")
 	connect_animation_node("AttackOneShot", 0, "output")
 
