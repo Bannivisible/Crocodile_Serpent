@@ -1951,7 +1951,7 @@ scale = Vector2(0.9999938, 1)
 
 [node name="Jaw" type="Sprite2D" parent="SpriteContainer/HeadGroup" index="0"]
 position = Vector2(-32.015022, -0.21961975)
-scale = Vector2(1.0037683, 0.998297)
+scale = Vector2(1.0037683, 0.99829704)
 texture = SubResource("AtlasTexture_wfuh6")
 offset = Vector2(36.92784, -2.5172439)
 
@@ -2014,8 +2014,8 @@ texture = SubResource("AtlasTexture_hb14a")
 
 [node name="StrandBack" type="Sprite2D" parent="SpriteContainer/HeadGroup" index="2"]
 position = Vector2(-43.347504, 16.779465)
-rotation = -0.3490636
-scale = Vector2(1.0032645, 0.999176)
+rotation = -0.34906363
+scale = Vector2(1.003265, 0.9991767)
 texture = SubResource("AtlasTexture_weadw")
 offset = Vector2(20.086979, -10.858177)
 
@@ -2031,22 +2031,22 @@ z_index = 3
 
 [node name="ArmFront" type="Sprite2D" parent="SpriteContainer/ArmFrontGroup" index="0"]
 position = Vector2(-56.33362, -199.66608)
-rotation = -0.021970099
-scale = Vector2(0.99989086, 0.99989086)
+rotation = -0.021970097
+scale = Vector2(0.9998908, 0.9998908)
 texture = SubResource("AtlasTexture_kwm2e")
 offset = Vector2(-10, 17.333)
 
 [node name="ForearmFront" type="Sprite2D" parent="SpriteContainer/ArmFrontGroup" index="1"]
-position = Vector2(-77.28296, -166.8684)
+position = Vector2(-77.28296, -166.86841)
 rotation = -0.072139084
-scale = Vector2(0.99976057, 0.99976057)
+scale = Vector2(0.9997605, 0.9997605)
 texture = SubResource("AtlasTexture_l1deg")
 offset = Vector2(-14, 25.667)
 
 [node name="HandFront" type="Sprite2D" parent="SpriteContainer/ArmFrontGroup" index="2"]
-position = Vector2(-100.41554, -117.08264)
+position = Vector2(-100.415535, -117.08266)
 rotation = -0.2591005
-scale = Vector2(0.9997648, 0.9997648)
+scale = Vector2(0.99976474, 0.99976474)
 texture = SubResource("AtlasTexture_fs2r1")
 offset = Vector2(-12, 15)
 
@@ -2068,7 +2068,7 @@ offset = Vector2(-5.667, 21)
 
 [node name="FootFront" type="Sprite2D" parent="SpriteContainer/LegFrontGroup" index="2"]
 position = Vector2(-67.028534, -29.881107)
-rotation = -0.0004918553
+rotation = -0.00049186277
 scale = Vector2(0.99991363, 0.99991363)
 texture = SubResource("AtlasTexture_7cm0d")
 offset = Vector2(2.2518923, 17.591896)
@@ -2160,7 +2160,7 @@ update_scale = false
 [node name="ArmFront" type="Bone2D" parent="Skeleton2D/Center/Body/Torso" index="2"]
 position = Vector2(-56.333717, -78.666214)
 rotation = -0.021970097
-scale = Vector2(0.99989265, 0.99989265)
+scale = Vector2(0.9998926, 0.9998926)
 rest = Transform2D(0.99965245, -0.021965997, 0.021965997, 0.99965245, -56.333717, -78.666214)
 
 [node name="ArmFront" type="RemoteTransform2D" parent="Skeleton2D/Center/Body/Torso/ArmFront" index="0"]

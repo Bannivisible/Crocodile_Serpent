@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dgndeir7aqk0o"]
+[gd_scene load_steps=18 format=3 uid="uid://dgndeir7aqk0o"]
 
 [ext_resource type="Theme" uid="uid://dxxn1u7fah8ng" path="res://Ui/BookInterface/Theme/Book.tres" id="1_nh015"]
 [ext_resource type="Script" uid="uid://dijsmuk5xxrv7" path="res://Ui/CSInterface/cs_interface.gd" id="2_lhy7a"]
@@ -19,10 +19,8 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i5yi8"]
 bg_color = Color(0.2969628, 0.10500003, 0.115467034, 1)
 
-[sub_resource type="Gradient" id="Gradient_ei2b5"]
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_i5yi8"]
-gradient = SubResource("Gradient_ei2b5")
+[sub_resource type="ViewportTexture" id="ViewportTexture_ilqmr"]
+viewport_path = NodePath("SubViewport")
 
 [node name="CSInterface" type="Control"]
 custom_minimum_size = Vector2(576, 324)
@@ -54,6 +52,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_i5yi8")
 metadata/_edit_lock_ = true
 
 [node name="TabContainer" type="TabContainer" parent="Panel"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.025
@@ -208,8 +207,8 @@ metadata/_custom_type_script = "uid://b2qh2de0kbwt"
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.37254903)
 rotation = 1.5707964
-texture = SubResource("GradientTexture2D_i5yi8")
-offset = Vector2(32, -32)
+texture = SubResource("ViewportTexture_ilqmr")
+offset = Vector2(256, -256)
 metadata/_edit_lock_ = true
 
 [node name="CSSelection" type="HBoxContainer" parent="Panel/TabContainer"]
@@ -247,6 +246,8 @@ script = ExtResource("13_un5qs")
 [node name="Hider" type="VisibleOnScreenNotifier2D" parent="."]
 rect = Rect2(0, 0, 960, 540)
 script = ExtResource("15_ilqmr")
+
+[node name="SubViewport" type="SubViewport" parent="."]
 
 [connection signal="cancel" from="." to="Panel/TabContainer" method="_on_cs_interface_cancel"]
 [connection signal="cs_category_selected" from="." to="Panel/TabContainer" method="_on_cs_interface_cs_category_selected"]

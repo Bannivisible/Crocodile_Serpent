@@ -7,7 +7,6 @@ var current_css_data: Array[CombatSkillData]= []:
 			current_css_data_changed.emit(current_css_data)
 
 signal current_css_data_changed(cs_data)
-signal buttons_created()
 
 #### BUILT-IN ####
 
@@ -29,7 +28,6 @@ func _add_buttons(cs: CombatSkillData) -> void:
 
 func _on_cs_interface_data_manager_cs_category_sellected(css_data: Array[CombatSkillData]) -> void:
 	current_css_data = css_data
-	buttons_created.emit()
 
 func _on_current_css_data_changed(_cs_data) -> void:
 	Utiles.free_all_children(self)
@@ -40,7 +38,6 @@ func _on_current_css_data_changed(_cs_data) -> void:
 	Utiles.setup_grid_child_neighbour(self)
 
 func _on_tab_container_tab_changed(tab: int) -> void:
-	await buttons_created
 	if tab == 1 and get_child_count() > 0:
 		await get_tree().process_frame
 		get_child(0).grab_focus()
