@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://ds4i8cup57akf"]
+[gd_scene load_steps=34 format=3 uid="uid://ds4i8cup57akf"]
 
 [ext_resource type="AnimationLibrary" uid="uid://ctdrtnjx7txak" path="res://Components/CombatSkill/Weapon/JawTrap/AnimationsData/JawTrapAnimationLibrary.res" id="2_dp6s7"]
 [ext_resource type="Script" uid="uid://bhcip3r7gigab" path="res://Components/CombatSkill/Weapon/JawTrap/jaw_trap.gd" id="2_g4jcv"]
@@ -12,9 +12,11 @@
 [ext_resource type="Shape2D" uid="uid://bw7u1sj0wx0wf" path="res://Components/CombatSkill/Weapon/JawTrap/Ressources/links_shape.tres" id="6_86vhf"]
 [ext_resource type="Script" uid="uid://danilkv671r1y" path="res://Ressources/Attack/AttackType/attack_type.gd" id="6_jeet7"]
 [ext_resource type="Script" uid="uid://dc54v3rlk5wjt" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/jaw_trap_animation_manager_component.gd" id="13_2xnf2"]
-[ext_resource type="Script" uid="uid://x70cfv1c4jxk" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/idle.gd" id="14_2tnll"]
+[ext_resource type="Script" uid="uid://x70cfv1c4jxk" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/on_hand_idle.gd" id="14_2tnll"]
 [ext_resource type="Script" uid="uid://bcmokx1bwyftw" path="res://StateMachine/state_machine.gd" id="14_av258"]
+[ext_resource type="Script" uid="uid://b3ssasrodegel" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/on_hand.gd" id="14_in3ot"]
 [ext_resource type="Script" uid="uid://uf1wtdp1r5or" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/slash_attack_1.gd" id="14_ld3kv"]
+[ext_resource type="Script" uid="uid://bey7t8h4m0yyp" path="res://StateMachine/state.gd" id="16_2tnll"]
 
 [sub_resource type="Resource" id="Resource_yvpvj"]
 script = ExtResource("3_4d2f6")
@@ -183,12 +185,37 @@ script = ExtResource("14_av258")
 set_to_default_state_at_ready = true
 metadata/_custom_type_script = "uid://bcmokx1bwyftw"
 
-[node name="Idle" type="Node" parent="StateMachine"]
+[node name="OnHand" type="Node" parent="StateMachine"]
+script = ExtResource("14_in3ot")
+set_to_default_state_at_ready = true
+metadata/_custom_type_script = "uid://bcmokx1bwyftw"
+
+[node name="Idle" type="Node" parent="StateMachine/OnHand"]
 script = ExtResource("14_2tnll")
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 
-[node name="SlashAttack1" type="Node" parent="StateMachine"]
+[node name="SlashAttack1" type="Node" parent="StateMachine/OnHand"]
 script = ExtResource("14_ld3kv")
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="OnJaw" type="Node" parent="StateMachine"]
+script = ExtResource("14_av258")
+metadata/_custom_type_script = "uid://bcmokx1bwyftw"
+
+[node name="Idle" type="Node" parent="StateMachine/OnJaw"]
+script = ExtResource("16_2tnll")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="ONGround" type="Node" parent="StateMachine"]
+script = ExtResource("14_av258")
+metadata/_custom_type_script = "uid://bcmokx1bwyftw"
+
+[node name="Idle" type="Node" parent="StateMachine/ONGround"]
+script = ExtResource("16_2tnll")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="StateMachine2" type="Node" parent="."]
+script = ExtResource("14_av258")
+metadata/_custom_type_script = "uid://bcmokx1bwyftw"
 
 [connection signal="animation_finished" from="AnimationManagerComponent" to="." method="_on_animation_manager_component_animation_finished"]

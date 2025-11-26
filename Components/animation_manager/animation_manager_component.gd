@@ -10,6 +10,11 @@ class_name AnimationManagerComponent
 
 var libraries: Dictionary[AnimationLibrary, StringName]
 
+var an_animation: AnimationNodeAnimation
+var an_add2: AnimationNodeAdd2
+var an_one_shot: AnimationNodeOneShot
+var an_blend2: AnimationNodeBlend2
+
 signal animation_finished(anim_name: StringName)
 
 func _ready() -> void:
