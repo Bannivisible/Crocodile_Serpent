@@ -10,6 +10,12 @@ class_name AnimationManagerComponent
 
 var libraries: Dictionary[AnimationLibrary, StringName]
 
+signal animation_finished(anim_name: StringName)
+
+func _ready() -> void:
+	animation_player.animation_finished.connect(func(anim_name: StringName):
+		animation_finished.emit(anim_name))
+
 func add_library(library: AnimationLibrary, lib_name :=StringName(Utiles.get_resource_name(library))) -> void:
 	if not animation_tree: return
 	libraries[library] = lib_name
@@ -70,3 +76,6 @@ func get_animation_name(anime: AnimationNode) -> StringName:
 
 func get_animation_node(anim_name: StringName) -> AnimationNode:
 	return tree_root.get_node(anim_name)
+
+func play_animation(anim_name: StringName) -> void:
+	animation_player.play(anim_name)

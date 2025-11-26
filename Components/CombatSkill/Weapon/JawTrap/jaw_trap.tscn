@@ -1,9 +1,8 @@
-[gd_scene load_steps=30 format=3 uid="uid://ds4i8cup57akf"]
+[gd_scene load_steps=32 format=3 uid="uid://ds4i8cup57akf"]
 
 [ext_resource type="AnimationLibrary" uid="uid://ctdrtnjx7txak" path="res://Components/CombatSkill/Weapon/JawTrap/AnimationsData/JawTrapAnimationLibrary.res" id="2_dp6s7"]
 [ext_resource type="Script" uid="uid://bhcip3r7gigab" path="res://Components/CombatSkill/Weapon/JawTrap/jaw_trap.gd" id="2_g4jcv"]
 [ext_resource type="Script" uid="uid://c20oatp4y0el5" path="res://Ressources/Statistics/Stats/critical_rate.gd" id="3_4d2f6"]
-[ext_resource type="AnimationNodeOneShot" uid="uid://djnmp4pl0fudq" path="res://Components/CombatSkill/Weapon/JawTrap/AnimationsData/AnimTreeNode/jaw_trap_attack_slash1_node_one_shot.tres" id="3_nise0"]
 [ext_resource type="Script" uid="uid://mcrao1da8rcg" path="res://Ressources/Statistics/Stats/strenght_stat.gd" id="3_v0eml"]
 [ext_resource type="Script" uid="uid://42c2b5rma8ot" path="res://Components/CombatSkill/Weapon/weapon_hit_box.gd" id="4_5pxtx"]
 [ext_resource type="Texture2D" uid="uid://qkqqtx1bnvjk" path="res://Components/CombatSkill/Weapon/JawTrap/Assets/jaw_trap_texture.tres" id="4_jeet7"]
@@ -13,6 +12,9 @@
 [ext_resource type="Shape2D" uid="uid://bw7u1sj0wx0wf" path="res://Components/CombatSkill/Weapon/JawTrap/Ressources/links_shape.tres" id="6_86vhf"]
 [ext_resource type="Script" uid="uid://danilkv671r1y" path="res://Ressources/Attack/AttackType/attack_type.gd" id="6_jeet7"]
 [ext_resource type="Script" uid="uid://dc54v3rlk5wjt" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/jaw_trap_animation_manager_component.gd" id="13_2xnf2"]
+[ext_resource type="Script" uid="uid://x70cfv1c4jxk" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/idle.gd" id="14_2tnll"]
+[ext_resource type="Script" uid="uid://bcmokx1bwyftw" path="res://StateMachine/state_machine.gd" id="14_av258"]
+[ext_resource type="Script" uid="uid://uf1wtdp1r5or" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/slash_attack_1.gd" id="14_ld3kv"]
 
 [sub_resource type="Resource" id="Resource_yvpvj"]
 script = ExtResource("3_4d2f6")
@@ -34,7 +36,7 @@ region = Rect2(204, 0, 101, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hgdcd"]
 atlas = ExtResource("4_jeet7")
-region = Rect2(202, 65, 101, 65)
+region = Rect2(303, 65, 101, 65)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v0eml"]
 height = 86.60971
@@ -84,8 +86,6 @@ height = 184.50238
 
 [node name="JawTrap" type="Node2D"]
 script = ExtResource("2_g4jcv")
-animations = ExtResource("2_dp6s7")
-node_one_shot = ExtResource("3_nise0")
 critical_rate = SubResource("Resource_yvpvj")
 strenght = SubResource("Resource_jlbrr")
 
@@ -177,3 +177,18 @@ debug_color = Color(1, 0, 0, 0.41960785)
 script = ExtResource("13_2xnf2")
 library = ExtResource("2_dp6s7")
 metadata/_custom_type_script = "uid://6lekj6yg62r6"
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("14_av258")
+set_to_default_state_at_ready = true
+metadata/_custom_type_script = "uid://bcmokx1bwyftw"
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("14_2tnll")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="SlashAttack1" type="Node" parent="StateMachine"]
+script = ExtResource("14_ld3kv")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[connection signal="animation_finished" from="AnimationManagerComponent" to="." method="_on_animation_manager_component_animation_finished"]
