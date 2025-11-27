@@ -10,10 +10,12 @@ class_name AnimationManagerComponent
 
 var libraries: Dictionary[AnimationLibrary, StringName]
 
-var an_animation: AnimationNodeAnimation
-var an_add2: AnimationNodeAdd2
-var an_one_shot: AnimationNodeOneShot
-var an_blend2: AnimationNodeBlend2
+var unique_animation: AnimationNodeAnimation
+var unique_add2: AnimationNodeAdd2
+var unique_one_shot: AnimationNodeOneShot
+var unique_blend2: AnimationNodeBlend2
+
+var tracks_filter: Dictionary[StringName, StringName]= {}
 
 signal animation_finished(anim_name: StringName)
 
@@ -39,8 +41,8 @@ func add_animation_node(anim_node: AnimationNode, anim_node_name: StringName) ->
 	tree_root.add_node(anim_node_name, anim_node)
 
 func connect_animation_node(output_node_name: StringName, input_id: int, input_node_name: StringName) -> void:
-	if not animation_tree: return
-	#disconnect_in_connection(input_node_name, input_id)
+	if not tree_root: return
+	disconnect_in_connection(input_node_name, input_id)
 	tree_root.disconnect_node(input_node_name, input_id)
 	tree_root.connect_node(input_node_name, input_id, output_node_name)
 
@@ -56,13 +58,20 @@ func disconnect_out_connection(anim_node_name: StringName, id: int) -> void:
 	if not tree_root: return
 	tree_root.disconnect_node(anim_node_name, id)
 
-func set_filter_with_all_track(blend_node_name: StringName, node_anime_name: StringName) -> void:
-	var blend_node: AnimationNode= tree_root.get_node(blend_node_name)
-	var anim_name: StringName= tree_root.get_node(node_anime_name).animation
+func set_filter_with_all_track(blend: StringName, anim_node: StringName, activate: bool= true) -> void:
+	tracks_filter[blend] = anim_node
+	var blend_node: AnimationNode= tree_root.get_node(blend)
+	var anim_name: StringName= tree_root.get_node(anim_node).animation
 	var anime: Animation= animation_player.get_animation(anim_name)
 	
 	for prop_path in get_animation_traks(anime):
-		blend_node.set_filter_path(prop_path, true)
+		blend_node.set_filter_path(prop_path, activate)
+
+func reset_filter(blend: StringName) -> void:
+	set_filter_with_all_track(blend, tracks_filter[blend], false)
+
+func is_filtred_by(blend: String, anim_name: String) -> bool:
+	return tracks_filter[blend] == anim_name
 
 func get_animation_traks(anime: Animation) -> Array[NodePath]:
 	var properties: Array[NodePath]
@@ -73,7 +82,7 @@ func get_animation_traks(anime: Animation) -> Array[NodePath]:
 	
 	return properties
 
-func get_animation_name(anime: AnimationNode) -> StringName:
+func get_animation_node_name(anime: AnimationNode) -> StringName:
 	for anim_name in tree_root.get_node_list():
 		if tree_root.get_node(anim_name) == anime:
 			return anim_name
@@ -84,3 +93,14 @@ func get_animation_node(anim_name: StringName) -> AnimationNode:
 
 func play_animation(anim_name: StringName) -> void:
 	animation_player.play(anim_name)
+
+func change_animation(anim_node: StringName, anim_name: StringName) -> void:
+	var anime: AnimationNodeAnimation= tree_root.get_node(anim_node)
+	anime.animation = anim_name
+
+func get_animation_name(anim_node: StringName) -> StringName:
+	var anime: AnimationNodeAnimation= tree_root.get_node(anim_node)
+	return anime.animation
+
+func request_one_shot(one_shot: String, request: AnimationNodeOneShot.OneShotRequest) -> void:
+	animation_tree.set("parameters/%s/request" % one_shot, request)

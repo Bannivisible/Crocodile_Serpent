@@ -198,6 +198,10 @@ metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 script = ExtResource("14_ld3kv")
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 
+[node name="SlashAttack2" type="Node" parent="StateMachine/OnHand"]
+script = ExtResource("16_2tnll")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
 [node name="OnJaw" type="Node" parent="StateMachine"]
 script = ExtResource("14_av258")
 metadata/_custom_type_script = "uid://bcmokx1bwyftw"
