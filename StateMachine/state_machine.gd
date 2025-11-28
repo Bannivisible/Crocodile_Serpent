@@ -89,8 +89,12 @@ func exit() -> void:
 func _on_state_changed(_state: State) -> void:
 	state_changed_recur.emit(current_state, current_state)
 	
-	if state_machine and current_state:
-		state_machine.current_state = self
+	previous_state.state_exited.emit()
+	
+	if current_state:
+		if state_machine: state_machine.current_state = self
+		
+		current_state.state_entered.emit()
 
 func _on_State_state_changed_recur(_state: State ,deep_state: State):
 	state_changed_recur.emit(current_state, deep_state)

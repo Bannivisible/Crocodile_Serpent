@@ -3,6 +3,11 @@ class_name State
 
 @onready var state_machine: StateMachine= _get_state_machine()
 
+@warning_ignore("unused_signal")
+signal state_entered
+@warning_ignore("unused_signal")
+signal state_exited
+
 func _get_state_machine() -> StateMachine:
 	if get_parent() is StateMachine:
 		return get_parent()

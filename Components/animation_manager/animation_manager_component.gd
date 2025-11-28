@@ -10,17 +10,12 @@ class_name AnimationManagerComponent
 
 var libraries: Dictionary[AnimationLibrary, StringName]
 
-var unique_animation: AnimationNodeAnimation
-var unique_add2: AnimationNodeAdd2
-var unique_one_shot: AnimationNodeOneShot
-var unique_blend2: AnimationNodeBlend2
-
 var tracks_filter: Dictionary[StringName, StringName]= {}
 
 signal animation_finished(anim_name: StringName)
 
 func _ready() -> void:
-	animation_player.animation_finished.connect(func(anim_name: StringName):
+	animation_tree.animation_finished.connect(func(anim_name: StringName):
 		animation_finished.emit(anim_name))
 
 func add_library(library: AnimationLibrary, lib_name :=StringName(Utiles.get_resource_name(library))) -> void:
@@ -59,10 +54,11 @@ func disconnect_out_connection(anim_node_name: StringName, id: int) -> void:
 	tree_root.disconnect_node(anim_node_name, id)
 
 func set_filter_with_all_track(blend: StringName, anim_node: StringName, activate: bool= true) -> void:
-	tracks_filter[blend] = anim_node
 	var blend_node: AnimationNode= tree_root.get_node(blend)
+	
 	var anim_name: StringName= tree_root.get_node(anim_node).animation
 	var anime: Animation= animation_player.get_animation(anim_name)
+	tracks_filter[blend] = anim_name
 	
 	for prop_path in get_animation_traks(anime):
 		blend_node.set_filter_path(prop_path, activate)
