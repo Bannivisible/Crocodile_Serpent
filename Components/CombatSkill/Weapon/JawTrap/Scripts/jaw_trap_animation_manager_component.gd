@@ -13,8 +13,8 @@ func _ready() -> void:
 
 func _set_attack_one_shot() -> void:
 	add_in_tree_animation_with_name(libraries[library] + "/SlashAttack1", "Attack")
-	add_animation_node(AnimationNodeOneShot.new(), "AttackOneShot")
-	set_filter_with_all_track("AttackOneShot", "Attack")
+	add_animation_node(AnimationNodeOneShot.new(), "OneShot")
+	set_filter_with_all_track("OneShot", "Attack")
 	disconnect_in_connection("output", 0)
-	connect_multiply_animation_node(["StateMachine", "Attack"], "AttackOneShot")
-	connect_animation_node("AttackOneShot", 0, "output")
+	connect_multiply_animation_node(["StateMachine", "Attack"], "OneShot")
+	connect_animation_node("OneShot", 0, "output")

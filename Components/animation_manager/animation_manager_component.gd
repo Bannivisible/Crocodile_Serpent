@@ -14,14 +14,28 @@ var tracks_filter: Dictionary[StringName, StringName]= {}
 
 signal animation_finished(anim_name: StringName)
 
+#### BUILT-IN ####
+
 func _ready() -> void:
-	animation_tree.animation_finished.connect(func(anim_name: StringName):
-		animation_finished.emit(anim_name))
+	var on_animation_finished: Callable= func(anim_name: StringName): animation_finished.emit(anim_name)
+	
+	animation_player.animation_finished.connect(on_animation_finished)
+	animation_tree.animation_finished.connect(on_animation_finished)
+
+#### LOGIC ####
 
 func add_library(library: AnimationLibrary, lib_name :=StringName(Utiles.get_resource_name(library))) -> void:
 	if not animation_tree: return
 	libraries[library] = lib_name
 	animation_player.add_animation_library(lib_name, library)
+
+func play_animation(anim_name: StringName) -> void:
+	animation_player.play(anim_name)
+
+func get_current_animation_name() -> String:
+	return animation_player.current_animation
+
+### TREE ROOT ###
 
 func add_in_tree_animation_with_name(anim_path: StringName, anim_name: StringName= Utiles.get_last_string_of_path(anim_path)) -> void:
 	if not animation_tree: return
@@ -69,6 +83,26 @@ func reset_filter(blend: StringName) -> void:
 func is_filtred_by(blend: String, anim_name: String) -> bool:
 	return tracks_filter[blend] == anim_name
 
+func change_animation(anim_node: StringName, anim_name: StringName) -> void:
+	var anime: AnimationNodeAnimation= tree_root.get_node(anim_node)
+	var anime_name= anim_name
+	
+	anime.animation = anime_name
+
+func request_one_shot(one_shot: String, request: AnimationNodeOneShot.OneShotRequest) -> void:
+	animation_tree.set("parameters/%s/request" % one_shot, request)
+
+func add_library_to_name(anim_name: StringName, lib: AnimationLibrary) -> StringName:
+	var lib_name: StringName
+	
+	if lib in libraries.keys():
+		lib_name = libraries[lib]
+	else :
+		lib_name = Utiles.get_resource_name(lib)
+	
+	return lib_name + "/" + anim_name
+
+## GETTER ##
 func get_animation_traks(anime: Animation) -> Array[NodePath]:
 	var properties: Array[NodePath]
 	
@@ -87,16 +121,14 @@ func get_animation_node_name(anime: AnimationNode) -> StringName:
 func get_animation_node(anim_name: StringName) -> AnimationNode:
 	return tree_root.get_node(anim_name)
 
-func play_animation(anim_name: StringName) -> void:
-	animation_player.play(anim_name)
-
-func change_animation(anim_node: StringName, anim_name: StringName) -> void:
-	var anime: AnimationNodeAnimation= tree_root.get_node(anim_node)
-	anime.animation = anim_name
-
 func get_animation_name(anim_node: StringName) -> StringName:
 	var anime: AnimationNodeAnimation= tree_root.get_node(anim_node)
 	return anime.animation
 
-func request_one_shot(one_shot: String, request: AnimationNodeOneShot.OneShotRequest) -> void:
-	animation_tree.set("parameters/%s/request" % one_shot, request)
+func get_libraries() -> Array[AnimationLibrary]:
+	var libraries_array: Array[AnimationLibrary]
+	
+	for librarie in libraries.keys():
+		libraries_array.append(librarie)
+	
+	return libraries_array

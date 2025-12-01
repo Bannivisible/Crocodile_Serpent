@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://ds4i8cup57akf"]
+[gd_scene load_steps=40 format=3 uid="uid://ds4i8cup57akf"]
 
 [ext_resource type="AnimationLibrary" uid="uid://ctdrtnjx7txak" path="res://Components/CombatSkill/Weapon/JawTrap/AnimationsData/JawTrapAnimationLibrary.res" id="2_dp6s7"]
 [ext_resource type="Script" uid="uid://bhcip3r7gigab" path="res://Components/CombatSkill/Weapon/JawTrap/jaw_trap.gd" id="2_g4jcv"]
@@ -11,13 +11,11 @@
 [ext_resource type="Script" uid="uid://ce7ave72wm32j" path="res://Ressources/Attack/attack_data.gd" id="5_v0eml"]
 [ext_resource type="Shape2D" uid="uid://bw7u1sj0wx0wf" path="res://Components/CombatSkill/Weapon/JawTrap/Ressources/links_shape.tres" id="6_86vhf"]
 [ext_resource type="Script" uid="uid://danilkv671r1y" path="res://Ressources/Attack/AttackType/attack_type.gd" id="6_jeet7"]
-[ext_resource type="Script" uid="uid://cpwv3i2svu6tt" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/slash_attack_2.gd" id="8_cyaoe"]
 [ext_resource type="Script" uid="uid://dljxw7lqw0vie" path="res://StateMachine/States/AttackState/attack_state.gd" id="9_bxcyf"]
 [ext_resource type="Script" uid="uid://dc54v3rlk5wjt" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/jaw_trap_animation_manager_component.gd" id="13_2xnf2"]
 [ext_resource type="Script" uid="uid://x70cfv1c4jxk" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/on_hand_idle.gd" id="14_2tnll"]
 [ext_resource type="Script" uid="uid://bcmokx1bwyftw" path="res://StateMachine/state_machine.gd" id="14_av258"]
 [ext_resource type="Script" uid="uid://b3ssasrodegel" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/on_hand.gd" id="14_in3ot"]
-[ext_resource type="Script" uid="uid://uf1wtdp1r5or" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/slash_attack_1.gd" id="14_ld3kv"]
 [ext_resource type="Script" uid="uid://bey7t8h4m0yyp" path="res://StateMachine/state.gd" id="16_2tnll"]
 
 [sub_resource type="Resource" id="Resource_yvpvj"]
@@ -29,6 +27,37 @@ metadata/_custom_type_script = "uid://c20oatp4y0el5"
 script = ExtResource("3_v0eml")
 value = 10.0
 metadata/_custom_type_script = "uid://mcrao1da8rcg"
+
+[sub_resource type="Resource" id="Resource_in3ot"]
+script = ExtResource("3_v0eml")
+value = 50.0
+metadata/_custom_type_script = "uid://mcrao1da8rcg"
+
+[sub_resource type="Resource" id="Resource_cyaoe"]
+script = ExtResource("6_jeet7")
+type = 1
+metadata/_custom_type_script = "uid://danilkv671r1y"
+
+[sub_resource type="Resource" id="Resource_bxcyf"]
+script = ExtResource("5_v0eml")
+additionnal_strenght = SubResource("Resource_in3ot")
+type = SubResource("Resource_cyaoe")
+metadata/_custom_type_script = "uid://ce7ave72wm32j"
+
+[sub_resource type="Resource" id="Resource_wdegu"]
+script = ExtResource("3_v0eml")
+metadata/_custom_type_script = "uid://mcrao1da8rcg"
+
+[sub_resource type="Resource" id="Resource_3w3qp"]
+script = ExtResource("6_jeet7")
+type = 2
+metadata/_custom_type_script = "uid://danilkv671r1y"
+
+[sub_resource type="Resource" id="Resource_lj60c"]
+script = ExtResource("5_v0eml")
+additionnal_strenght = SubResource("Resource_wdegu")
+type = SubResource("Resource_3w3qp")
+metadata/_custom_type_script = "uid://ce7ave72wm32j"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p0okl"]
 atlas = ExtResource("4_jeet7")
@@ -107,21 +136,20 @@ metadata/_custom_type_script = "uid://bcmokx1bwyftw"
 script = ExtResource("14_2tnll")
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 
-[node name="SlashAttack1" type="Node" parent="StateMachine/OnHand"]
-script = ExtResource("14_ld3kv")
-metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
-
-[node name="Timer" type="Timer" parent="StateMachine/OnHand/SlashAttack1"]
-wait_time = 0.5
-one_shot = true
+[node name="SlashAttack1" type="Node" parent="StateMachine/OnHand" node_paths=PackedStringArray("next_attack")]
+script = ExtResource("9_bxcyf")
+hit_box_path = NodePath("WeaponHitBox")
+attack_data = SubResource("Resource_bxcyf")
+combo_cooldown = 0.5
+next_attack = NodePath("../SlashAttack2")
+metadata/_custom_type_script = "uid://dljxw7lqw0vie"
 
 [node name="SlashAttack2" type="Node" parent="StateMachine/OnHand"]
-script = ExtResource("8_cyaoe")
-metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
-
-[node name="AttackState" type="Node" parent="StateMachine/OnHand"]
 script = ExtResource("9_bxcyf")
-metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+hit_box_path = NodePath("WeaponHitBox")
+attack_data = SubResource("Resource_lj60c")
+combo_cooldown = 1.0
+metadata/_custom_type_script = "uid://dljxw7lqw0vie"
 
 [node name="OnJaw" type="Node" parent="StateMachine"]
 script = ExtResource("14_av258")

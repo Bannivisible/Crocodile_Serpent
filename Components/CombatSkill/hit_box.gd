@@ -9,6 +9,9 @@ class_name HitBox
 
 @export var cs = _get_cs()
 
+@warning_ignore("unused_signal")
+signal hit(damage: float, hurt_box: HurtBox)
+
 func _ready() -> void:
 	area_entered.connect(_on_area_2d_entered)
 	

@@ -137,4 +137,3 @@ static func get_resource_name(resource: Resource) -> String:
 	var resource_name := get_last_string_of_path(resource.resource_path)
 	resource_name = resource_name.erase(len(resource_name)-4, 4)
 	return resource_name
-	

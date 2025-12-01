@@ -33,8 +33,11 @@ func _ready() -> void:
 		hurt_box.hitted.connect(_on_hurt_box_hitted)
 
 #### LOGICS ####
-func _hurt(damage: float) -> void:
-	health.current_health -= _compute_damage(damage)
+func _hurt(damage: float, hurt_box: HurtBox, hit_box: HitBox) -> void:
+	var dam: float= _compute_damage(damage)
+	health.current_health -= dam
+	
+	hit_box.hit.emit(damage, hurt_box)
 
 func die() -> void:
 	pass
@@ -74,5 +77,5 @@ func _custom_label(label: Label, damage: float, hurt_box: HurtBox) -> void:
 
 #### SIGNAL RESPONSES ####
 func _on_hurt_box_hitted(damage: float, hurt_box: HurtBox, hit_box: HitBox) -> void:
-	_hurt(damage)
+	_hurt(damage, hurt_box, hit_box)
 	_hurt_feed_back(damage, hurt_box, hit_box)
