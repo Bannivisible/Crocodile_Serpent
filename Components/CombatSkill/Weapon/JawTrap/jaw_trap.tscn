@@ -140,7 +140,6 @@ metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 script = ExtResource("9_bxcyf")
 hit_box_path = NodePath("WeaponHitBox")
 attack_data = SubResource("Resource_bxcyf")
-combo_cooldown = 0.5
 next_attack = NodePath("../SlashAttack2")
 metadata/_custom_type_script = "uid://dljxw7lqw0vie"
 
@@ -148,7 +147,8 @@ metadata/_custom_type_script = "uid://dljxw7lqw0vie"
 script = ExtResource("9_bxcyf")
 hit_box_path = NodePath("WeaponHitBox")
 attack_data = SubResource("Resource_lj60c")
-combo_cooldown = 1.0
+combo_cooldown = 6.0
+need_hit_box_hit = true
 metadata/_custom_type_script = "uid://dljxw7lqw0vie"
 
 [node name="OnJaw" type="Node" parent="StateMachine"]

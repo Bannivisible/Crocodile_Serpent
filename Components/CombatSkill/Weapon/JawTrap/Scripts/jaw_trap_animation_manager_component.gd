@@ -10,7 +10,6 @@ func _ready() -> void:
 	
 	add_animation_node(AnimationNodeAdd2.new(), "Add")
 
-
 func _set_attack_one_shot() -> void:
 	add_in_tree_animation_with_name(libraries[library] + "/SlashAttack1", "Attack")
 	add_animation_node(AnimationNodeOneShot.new(), "OneShot")

@@ -89,9 +89,6 @@ func change_animation(anim_node: StringName, anim_name: StringName) -> void:
 	
 	anime.animation = anime_name
 
-func request_one_shot(one_shot: String, request: AnimationNodeOneShot.OneShotRequest) -> void:
-	animation_tree.set("parameters/%s/request" % one_shot, request)
-
 func add_library_to_name(anim_name: StringName, lib: AnimationLibrary) -> StringName:
 	var lib_name: StringName
 	
@@ -101,6 +98,14 @@ func add_library_to_name(anim_name: StringName, lib: AnimationLibrary) -> String
 		lib_name = Utiles.get_resource_name(lib)
 	
 	return lib_name + "/" + anim_name
+
+## ONE SHOT ##
+
+func request_one_shot(one_shot: String, request: AnimationNodeOneShot.OneShotRequest) -> void:
+	animation_tree.set("parameters/%s/request" % one_shot, request)
+
+func is_one_shot_active(one_shot: String) -> bool:
+	return animation_tree.get("parameters/%s/active" % one_shot)
 
 ## GETTER ##
 func get_animation_traks(anime: Animation) -> Array[NodePath]:

@@ -45,23 +45,24 @@ func _ready() -> void:
 		var next_attk_com_timer: Timer= next_attack.combo_timer
 		if next_attk_com_timer:
 			next_attk_com_timer.timeout.connect(_on_next_attack_combo_timer_timeout)
+		#next_attack.hit_box.hit.connect(_on_next_attack_hit_box_hit)
 
 func _input(_event: InputEvent) -> void:
 	if not next_attack: return
 	
 	if Input.is_action_just_pressed(next_attack.input_name):
+		var anim_node_anime: AnimationNodeAnimation = animation_manager.get_animation_node(anim_node)
 		var lib: AnimationLibrary= animation_manager.get_libraries()[0]
-		var anime: StringName= animation_manager.add_library_to_name(anim_name, lib)
+		var anime_name: StringName= animation_manager.add_library_to_name(anim_name, lib)
 		
-		prints(anime, animation_manager.get_current_animation_name())
-		
-		if animation_manager.get_current_animation_name() == anime:
+		if anim_node_anime.animation == anime_name and animation_manager.is_one_shot_active(one_shot_node):
 			await animation_manager.animation_finished
 		
-		elif invalid_combo_condition():
+		elif not next_attack.is_combo_cooldown_running():
 			return
 		
-		state_machine.current_state = next_attack
+		if combo_condition_valid():
+			state_machine.current_state = next_attack
 
 #### INIT ####
 
@@ -74,6 +75,7 @@ func _create_combo_timer() -> Timer:
 	var timer = Timer.new()
 	timer.wait_time = combo_cooldown
 	timer.one_shot = true
+	add_child(timer)
 	return timer
 
 func is_combo_cooldown_running() -> bool:
@@ -102,19 +104,31 @@ func _config_animation() -> void:
 	animation_manager.change_animation(anim_node, anime)
 	animation_manager.set_filter_with_all_track(one_shot_node, anim_node)
 
-func invalid_combo_condition() -> bool:
-	return not next_attack.is_combo_cooldown_running() or not is_hit_box_hit and need_hit_box_hit
+func combo_condition_valid() -> bool:
+	if need_hit_box_hit:
+		return is_hit_box_hit
+	return true
 
 #### SIGNALS RESPONSES ####
 
 func _on_animation_manager_animation_finished(anime: StringName) -> void:
-	if anime == anim_name and next_attack:
-		next_attack.combo_timer.start()
+	var lib: AnimationLibrary= animation_manager.get_libraries()[0]
+	var anime_name: StringName= animation_manager.add_library_to_name(anim_name, lib)
 	
+	if anime == anime_name:
+		if next_attack:
+			if next_attack.combo_timer: next_attack.combo_timer.start()
+		if combo_timer: combo_timer.stop()
+		
 		state_machine.set_state_with_string(idle_state_name)
 
 func _on_hit_box_hit(_damage: float, _hurt_box: HurtBox) -> void:
-	is_hit_box_hit = true
+	if hit_box.attack_data == attack_data:
+		is_hit_box_hit = true
 
 func _on_next_attack_combo_timer_timeout() -> void:
 	is_hit_box_hit = false
+
+func _on_next_attack_hit_box_hit() -> void:
+	if hit_box.attack_data == attack_data:
+		is_hit_box_hit = false
