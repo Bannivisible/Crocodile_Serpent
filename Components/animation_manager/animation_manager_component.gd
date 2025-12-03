@@ -8,6 +8,8 @@ class_name AnimationManagerComponent
 @onready var animation_tree: AnimationTree= get_object_node(anim_tree_path)
 @onready var tree_root: AnimationNodeBlendTree= animation_tree.tree_root if animation_tree else null
 
+@export var reset_animation: StringName= "RESET"
+
 var libraries: Dictionary[AnimationLibrary, StringName]
 
 var tracks_filter: Dictionary[StringName, StringName]= {}
@@ -34,6 +36,10 @@ func play_animation(anim_name: StringName) -> void:
 
 func get_current_animation_name() -> String:
 	return animation_player.current_animation
+
+func play_reset_animation() -> void:
+	if animation_player.has_animation(reset_animation):
+		animation_player.play(reset_animation)
 
 ### TREE ROOT ###
 

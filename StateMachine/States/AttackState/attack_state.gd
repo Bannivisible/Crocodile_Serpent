@@ -18,7 +18,7 @@ class_name AttackState
 
 @export_group("Combo")
 
-@export_range(0.0, 20.0) var combo_cooldown: float
+@export_range(0.0, 60.0) var combo_cooldown: float
 @export var next_attack: AttackState
 @export var need_hit_box_hit: bool
 
@@ -38,13 +38,15 @@ func _ready() -> void:
 	if animation_manager:
 		animation_manager.animation_finished.connect(_on_animation_manager_animation_finished)
 	
-	if need_hit_box_hit and hit_box:
-		hit_box.hit.connect(_on_hit_box_hit)
+	hit_box.hit.connect(_on_hit_box_hit)
 	
 	if next_attack:
 		var next_attk_com_timer: Timer= next_attack.combo_timer
 		if next_attk_com_timer:
 			next_attk_com_timer.timeout.connect(_on_next_attack_combo_timer_timeout)
+		
+		#if not next_attack.is_node_ready():
+			#await next_attack.ready
 		#next_attack.hit_box.hit.connect(_on_next_attack_hit_box_hit)
 
 func _input(_event: InputEvent) -> void:
@@ -91,8 +93,8 @@ func enter() -> void:
 		_config_animation()
 		animation_manager.request_one_shot(one_shot_node, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
-func exit() -> void:
-	is_hit_box_hit = false
+#func exit() -> void:
+	#is_hit_box_hit = false
 
 #### LOGICS ####
 func _config_animation() -> void:
@@ -105,8 +107,9 @@ func _config_animation() -> void:
 	animation_manager.set_filter_with_all_track(one_shot_node, anim_node)
 
 func combo_condition_valid() -> bool:
-	if need_hit_box_hit:
-		return is_hit_box_hit
+	if next_attack:
+		if next_attack.need_hit_box_hit:
+			return is_hit_box_hit
 	return true
 
 #### SIGNALS RESPONSES ####
@@ -121,6 +124,12 @@ func _on_animation_manager_animation_finished(anime: StringName) -> void:
 		if combo_timer: combo_timer.stop()
 		
 		state_machine.set_state_with_string(idle_state_name)
+	
+	elif next_attack:
+		anime_name = animation_manager.add_library_to_name(next_attack.anim_name, lib)
+		
+		if anime == anime_name:
+			is_hit_box_hit = false
 
 func _on_hit_box_hit(_damage: float, _hurt_box: HurtBox) -> void:
 	if hit_box.attack_data == attack_data:
@@ -129,6 +138,6 @@ func _on_hit_box_hit(_damage: float, _hurt_box: HurtBox) -> void:
 func _on_next_attack_combo_timer_timeout() -> void:
 	is_hit_box_hit = false
 
-func _on_next_attack_hit_box_hit() -> void:
-	if hit_box.attack_data == attack_data:
-		is_hit_box_hit = false
+#func _on_next_attack_hit_box_hit(_damage: float, _hurt_box: HurtBox) -> void:
+	#if hit_box.attack_data == next_attack.attack_data:
+		#is_hit_box_hit = false

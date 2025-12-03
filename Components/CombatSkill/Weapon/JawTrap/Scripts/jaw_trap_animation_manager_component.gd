@@ -6,6 +6,9 @@ func _ready() -> void:
 	super._ready()
 	
 	add_library(library)
+	reset_animation = add_library_to_name(reset_animation, library)
+	play_reset_animation()
+	
 	_set_attack_one_shot()
 	
 	add_animation_node(AnimationNodeAdd2.new(), "Add")
