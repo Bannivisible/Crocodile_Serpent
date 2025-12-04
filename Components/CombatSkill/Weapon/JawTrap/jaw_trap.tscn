@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://ds4i8cup57akf"]
+[gd_scene load_steps=42 format=3 uid="uid://ds4i8cup57akf"]
 
 [ext_resource type="AnimationLibrary" uid="uid://ctdrtnjx7txak" path="res://Components/CombatSkill/Weapon/JawTrap/AnimationsData/JawTrapAnimationLibrary.res" id="2_dp6s7"]
 [ext_resource type="Script" uid="uid://bhcip3r7gigab" path="res://Components/CombatSkill/Weapon/JawTrap/jaw_trap.gd" id="2_g4jcv"]
@@ -60,6 +60,16 @@ additionnal_strenght = SubResource("Resource_wdegu")
 type = SubResource("Resource_3w3qp")
 metadata/_custom_type_script = "uid://ce7ave72wm32j"
 
+[sub_resource type="Resource" id="Resource_11eis"]
+script = ExtResource("6_jeet7")
+type = 1
+metadata/_custom_type_script = "uid://danilkv671r1y"
+
+[sub_resource type="Resource" id="Resource_7x2u0"]
+script = ExtResource("5_v0eml")
+type = SubResource("Resource_11eis")
+metadata/_custom_type_script = "uid://ce7ave72wm32j"
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_p0okl"]
 atlas = ExtResource("4_jeet7")
 region = Rect2(305, 130, 102, 65)
@@ -70,7 +80,7 @@ region = Rect2(204, 0, 101, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hgdcd"]
 atlas = ExtResource("4_jeet7")
-region = Rect2(202, 65, 101, 65)
+region = Rect2(303, 65, 101, 65)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v0eml"]
 height = 86.60971
@@ -115,8 +125,8 @@ type = SubResource("Resource_dp6s7")
 metadata/_custom_type_script = "uid://ce7ave72wm32j"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_weadw"]
-radius = 82.9368
-height = 227.77188
+radius = 159.96208
+height = 319.92416
 
 [node name="JawTrap" type="Node2D"]
 script = ExtResource("2_g4jcv")
@@ -150,6 +160,11 @@ hit_box_path = NodePath("WeaponHitBox")
 attack_data = SubResource("Resource_lj60c")
 combo_cooldown = 6.0
 need_hit_box_hit = true
+metadata/_custom_type_script = "uid://dljxw7lqw0vie"
+
+[node name="ConstantRotatingAttack" type="Node" parent="StateMachine/OnHand"]
+script = ExtResource("9_bxcyf")
+attack_data = SubResource("Resource_7x2u0")
 metadata/_custom_type_script = "uid://dljxw7lqw0vie"
 
 [node name="OnJaw" type="Node" parent="StateMachine"]

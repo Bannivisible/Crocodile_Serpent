@@ -1,9 +1,11 @@
 extends State
 class_name AttackState
 
-@export var input_name: String= "attack"
 
 @export var idle_state_name: String= "Idle"
+@export var input_name: String= "attack"
+
+@export_enum("OneShotAttack", "ContinueAttack") var mode: String
 
 @export_group("HitBox")
 
@@ -14,13 +16,12 @@ class_name AttackState
 @export var anim_manager_path: NodePath= "AnimationManagerComponent"
 @export var anim_name: StringName= name
 @export var anim_node: StringName= "Attack"
-@export var one_shot_node: StringName= "OneShot"
+@export var blend_node_name: StringName= "OneShot"
 
 @export_group("Combo")
-
 @export_range(0.0, 60.0) var combo_cooldown: float
-@export var next_attack: AttackState
 @export var need_hit_box_hit: bool
+@export var next_attack: AttackState
 
 
 @onready var animation_manager: AnimationManagerComponent= owner.get_node_or_null(anim_manager_path)
@@ -50,21 +51,13 @@ func _ready() -> void:
 		#next_attack.hit_box.hit.connect(_on_next_attack_hit_box_hit)
 
 func _input(_event: InputEvent) -> void:
-	if not next_attack: return
+	if Input.is_action_just_released(input_name) and mode == "ConstinueAttack":
+		state_machine.set_state_with_string(idle_state_name)
 	
-	if Input.is_action_just_pressed(next_attack.input_name):
-		var anim_node_anime: AnimationNodeAnimation = animation_manager.get_animation_node(anim_node)
-		var lib: AnimationLibrary= animation_manager.get_libraries()[0]
-		var anime_name: StringName= animation_manager.add_library_to_name(anim_name, lib)
-		
-		if anim_node_anime.animation == anime_name and animation_manager.is_one_shot_active(one_shot_node):
-			await animation_manager.animation_finished
-		
-		elif not next_attack.is_combo_cooldown_running():
-			return
-		
-		if combo_condition_valid():
-			state_machine.current_state = next_attack
+	if next_attack:
+		if Input.is_action_just_pressed(next_attack.input_name):
+			_combo_logic()
+	
 
 #### INIT ####
 
@@ -91,12 +84,31 @@ func enter() -> void:
 		hit_box.attack_data = attack_data
 	if animation_manager:
 		_config_animation()
-		animation_manager.request_one_shot(one_shot_node, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
-
-#func exit() -> void:
-	#is_hit_box_hit = false
+		
+		var blend_node: AnimationNode= animation_manager.get_animation_node(blend_node_name)
+		
+		if blend_node is AnimationNodeOneShot:
+			animation_manager.request_one_shot(blend_node_name, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+		
+		elif blend_node is AnimationNodeAdd2:
+			var anime: StringName= _obtain_animation_name_with_lib(anim_name)
+			animation_manager.play_animation(anime)
 
 #### LOGICS ####
+func _combo_logic() -> void:
+	var anim_node_anime: AnimationNodeAnimation = animation_manager.get_animation_node(anim_node)
+	var anime_name: StringName= _obtain_animation_name_with_lib(anim_name)
+	
+	
+	if anim_node_anime.animation == anime_name and animation_manager.is_one_shot_active(blend_node_name):
+		await animation_manager.animation_finished
+	
+	elif not next_attack.is_combo_cooldown_running():
+		return
+	
+	if combo_condition_valid():
+		state_machine.current_state = next_attack
+
 func _config_animation() -> void:
 	if not animation_manager: return
 	
@@ -104,7 +116,7 @@ func _config_animation() -> void:
 	var anime: StringName= animation_manager.add_library_to_name(anim_name, lib)
 	
 	animation_manager.change_animation(anim_node, anime)
-	animation_manager.set_filter_with_all_track(one_shot_node, anim_node)
+	animation_manager.set_filter_with_all_track(blend_node_name, anim_node)
 
 func combo_condition_valid() -> bool:
 	if next_attack:
@@ -112,11 +124,15 @@ func combo_condition_valid() -> bool:
 			return is_hit_box_hit
 	return true
 
+func _obtain_animation_name_with_lib(name_of_anime: StringName) -> StringName:
+	var lib: AnimationLibrary= animation_manager.get_libraries()[0]
+	var anime_name: StringName= animation_manager.add_library_to_name(name_of_anime, lib)
+	return anime_name
+
 #### SIGNALS RESPONSES ####
 
 func _on_animation_manager_animation_finished(anime: StringName) -> void:
-	var lib: AnimationLibrary= animation_manager.get_libraries()[0]
-	var anime_name: StringName= animation_manager.add_library_to_name(anim_name, lib)
+	var anime_name: StringName= _obtain_animation_name_with_lib(anim_name)
 	
 	if anime == anime_name:
 		if next_attack:
@@ -126,7 +142,7 @@ func _on_animation_manager_animation_finished(anime: StringName) -> void:
 		state_machine.set_state_with_string(idle_state_name)
 	
 	elif next_attack:
-		anime_name = animation_manager.add_library_to_name(next_attack.anim_name, lib)
+		anime_name = _obtain_animation_name_with_lib(next_attack.anim_name)
 		
 		if anime == anime_name:
 			is_hit_box_hit = false
