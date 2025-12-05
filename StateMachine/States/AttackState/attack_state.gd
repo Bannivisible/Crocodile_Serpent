@@ -4,8 +4,9 @@ class_name AttackState
 
 @export var idle_state_name: String= "Idle"
 @export var input_name: String= "attack"
+@export_enum("Pressed", "Realease") var input_mode: String= "Pressed"
 
-@export_enum("OneShotAttack", "ContinueAttack") var mode: String
+#@export_enum("OneShotAttack", "ContinueAttack") var mode: String= "OneShotAttack"
 
 @export_group("HitBox")
 
@@ -51,13 +52,13 @@ func _ready() -> void:
 		#next_attack.hit_box.hit.connect(_on_next_attack_hit_box_hit)
 
 func _input(_event: InputEvent) -> void:
-	if Input.is_action_just_released(input_name) and mode == "ConstinueAttack":
-		state_machine.set_state_with_string(idle_state_name)
+	#if Input.is_action_just_released(input_name) and mode == "ConstinueAttack":
+		#state_machine.set_state_with_string(idle_state_name)
 	
 	if next_attack:
-		if Input.is_action_just_pressed(next_attack.input_name):
+		if next_attack._input_condition():
 			_combo_logic()
-	
+
 
 #### INIT ####
 
@@ -91,16 +92,17 @@ func enter() -> void:
 			animation_manager.request_one_shot(blend_node_name, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 		
 		elif blend_node is AnimationNodeAdd2:
-			var anime: StringName= _obtain_animation_name_with_lib(anim_name)
-			animation_manager.play_animation(anime)
+			animation_manager.set_add_amount(blend_node_name, 1.0)
 
 #### LOGICS ####
+func _input_condition() -> bool:
+	match input_mode:
+		"Pressed": return Input.is_action_just_pressed(input_name)
+		"Realease": return Input.is_action_just_released(input_name) 
+	return false
+
 func _combo_logic() -> void:
-	var anim_node_anime: AnimationNodeAnimation = animation_manager.get_animation_node(anim_node)
-	var anime_name: StringName= _obtain_animation_name_with_lib(anim_name)
-	
-	
-	if anim_node_anime.animation == anime_name and animation_manager.is_one_shot_active(blend_node_name):
+	if is_attack_currently_playing():
 		await animation_manager.animation_finished
 	
 	elif not next_attack.is_combo_cooldown_running():
@@ -108,6 +110,12 @@ func _combo_logic() -> void:
 	
 	if combo_condition_valid():
 		state_machine.current_state = next_attack
+
+func is_attack_currently_playing() -> bool:
+	var anim_node_anime: AnimationNodeAnimation = animation_manager.get_animation_node(anim_node)
+	var anime_name: StringName= _obtain_animation_name_with_lib(anim_name)
+	
+	return anim_node_anime.animation == anime_name and animation_manager.is_one_shot_active(blend_node_name)
 
 func _config_animation() -> void:
 	if not animation_manager: return

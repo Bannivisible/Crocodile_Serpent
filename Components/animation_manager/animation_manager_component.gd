@@ -113,6 +113,19 @@ func request_one_shot(one_shot: String, request: AnimationNodeOneShot.OneShotReq
 func is_one_shot_active(one_shot: String) -> bool:
 	return animation_tree.get("parameters/%s/active" % one_shot)
 
+## ADD ##
+
+func set_add_amount(add_node_name: StringName, amount: float) -> void:
+	amount = max(min(amount, 1.0), 0.0)
+	animation_tree.set("parameters/%s/add_amount" %add_node_name, amount)
+
+func tween_add_amount(add_node_name: StringName, duration: float, amount: float= 1.0, tw_ease := Tween.EASE_IN, tw_trans := Tween.TRANS_LINEAR) -> void:
+	var tween_add: Tween= create_tween()
+	tween_add.set_ease(tw_ease).set_trans(tw_trans)
+	var parameter_path: NodePath= NodePath("parameters/%s/add_amount" %add_node_name)
+	
+	tween_add.tween_property(animation_tree, parameter_path, amount, duration)
+
 ## GETTER ##
 func get_animation_traks(anime: Animation) -> Array[NodePath]:
 	var properties: Array[NodePath]

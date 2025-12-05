@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://ds4i8cup57akf"]
+[gd_scene load_steps=43 format=3 uid="uid://ds4i8cup57akf"]
 
 [ext_resource type="AnimationLibrary" uid="uid://ctdrtnjx7txak" path="res://Components/CombatSkill/Weapon/JawTrap/AnimationsData/JawTrapAnimationLibrary.res" id="2_dp6s7"]
 [ext_resource type="Script" uid="uid://bhcip3r7gigab" path="res://Components/CombatSkill/Weapon/JawTrap/jaw_trap.gd" id="2_g4jcv"]
@@ -12,6 +12,7 @@
 [ext_resource type="Shape2D" uid="uid://bw7u1sj0wx0wf" path="res://Components/CombatSkill/Weapon/JawTrap/Ressources/links_shape.tres" id="6_86vhf"]
 [ext_resource type="Script" uid="uid://danilkv671r1y" path="res://Ressources/Attack/AttackType/attack_type.gd" id="6_jeet7"]
 [ext_resource type="Script" uid="uid://dljxw7lqw0vie" path="res://StateMachine/States/AttackState/attack_state.gd" id="9_bxcyf"]
+[ext_resource type="Script" uid="uid://k3m02msk250s" path="res://StateMachine/States/AttackState/continue_attack_state.gd" id="10_cyaoe"]
 [ext_resource type="Script" uid="uid://dc54v3rlk5wjt" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/jaw_trap_animation_manager_component.gd" id="13_2xnf2"]
 [ext_resource type="Script" uid="uid://x70cfv1c4jxk" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/on_hand_idle.gd" id="14_2tnll"]
 [ext_resource type="Script" uid="uid://bcmokx1bwyftw" path="res://StateMachine/state_machine.gd" id="14_av258"]
@@ -165,6 +166,10 @@ metadata/_custom_type_script = "uid://dljxw7lqw0vie"
 [node name="ConstantRotatingAttack" type="Node" parent="StateMachine/OnHand"]
 script = ExtResource("9_bxcyf")
 attack_data = SubResource("Resource_7x2u0")
+metadata/_custom_type_script = "uid://dljxw7lqw0vie"
+
+[node name="ContinueAttackState" type="Node" parent="StateMachine/OnHand"]
+script = ExtResource("10_cyaoe")
 metadata/_custom_type_script = "uid://dljxw7lqw0vie"
 
 [node name="OnJaw" type="Node" parent="StateMachine"]
