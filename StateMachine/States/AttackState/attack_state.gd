@@ -12,6 +12,7 @@ class_name AttackState
 
 @export var hit_box_path: NodePath= _obtain_hit_box_path()
 @export var attack_data: AttackData
+@export_range(0.0, 60.0) var damage_interval: float
 
 @export_group("Animation")
 @export var anim_manager_path: NodePath= "AnimationManagerComponent"
@@ -52,9 +53,6 @@ func _ready() -> void:
 		#next_attack.hit_box.hit.connect(_on_next_attack_hit_box_hit)
 
 func _input(_event: InputEvent) -> void:
-	#if Input.is_action_just_released(input_name) and mode == "ConstinueAttack":
-		#state_machine.set_state_with_string(idle_state_name)
-	
 	if next_attack:
 		if next_attack._input_condition():
 			_combo_logic()
@@ -81,18 +79,26 @@ func is_combo_cooldown_running() -> bool:
 #### INHERITANCE ####
 
 func enter() -> void:
-	if hit_box:
-		hit_box.attack_data = attack_data
-	if animation_manager:
-		_config_animation()
-		
-		var blend_node: AnimationNode= animation_manager.get_animation_node(blend_node_name)
-		
-		if blend_node is AnimationNodeOneShot:
-			animation_manager.request_one_shot(blend_node_name, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
-		
-		elif blend_node is AnimationNodeAdd2:
-			animation_manager.set_add_amount(blend_node_name, 1.0)
+	_update_hit_box()
+	_update_animation_tree()
+	
+	animation_manager.print_all_connections()
+
+func _update_hit_box() -> void:
+	hit_box.attack_data = attack_data
+	hit_box.damage_inteval = damage_interval
+
+func _update_animation_tree() -> void:
+	_config_animation()
+	_config_anim_connection()
+	
+	var blend_node: AnimationNode= animation_manager.get_animation_node(blend_node_name)
+	
+	if blend_node is AnimationNodeOneShot:
+		animation_manager.request_one_shot(blend_node_name, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+	
+	elif blend_node is AnimationNodeAdd2:
+		animation_manager.set_add_amount(blend_node_name, 1.0)
 
 #### LOGICS ####
 func _input_condition() -> bool:
@@ -125,6 +131,13 @@ func _config_animation() -> void:
 	
 	animation_manager.change_animation(anim_node, anime)
 	animation_manager.set_filter_with_all_track(blend_node_name, anim_node)
+
+func _config_anim_connection() -> void:
+	var anim_connection := animation_manager.get_connection_with_from(anim_node)
+	if anim_connection:
+		animation_manager.convert_all_connections(anim_connection.to, blend_node_name)
+	else :
+		animation_manager.connect_animation_node(anim_node, 1, blend_node_name)
 
 func combo_condition_valid() -> bool:
 	if next_attack:

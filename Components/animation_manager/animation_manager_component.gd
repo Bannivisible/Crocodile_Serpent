@@ -10,6 +10,8 @@ class_name AnimationManagerComponent
 
 @export var reset_animation: StringName= "RESET"
 
+@export var anim_connect_list: AnimationConnectionsList
+
 var libraries: Dictionary[AnimationLibrary, StringName]
 
 var tracks_filter: Dictionary[StringName, StringName]= {}
@@ -43,13 +45,13 @@ func play_reset_animation() -> void:
 
 ### TREE ROOT ###
 
-func add_in_tree_animation_with_name(anim_path: StringName, anim_name: StringName= Utiles.get_last_string_of_path(anim_path)) -> void:
+func add_in_tree_animation_with_name(anim_name: StringName, anim_node_name: StringName) -> void:
 	if not animation_tree: return
 	var animation := AnimationNodeAnimation.new()
 	
-	animation.animation = anim_path
+	animation.animation = anim_name
 	
-	tree_root.add_node(anim_name, animation)
+	tree_root.add_node(anim_node_name, animation)
 
 func add_animation_node(anim_node: AnimationNode, anim_node_name: StringName) -> void:
 	if not animation_tree: return
@@ -57,21 +59,30 @@ func add_animation_node(anim_node: AnimationNode, anim_node_name: StringName) ->
 
 func connect_animation_node(output_node_name: StringName, input_id: int, input_node_name: StringName) -> void:
 	if not tree_root: return
+	
 	disconnect_in_connection(input_node_name, input_id)
-	tree_root.disconnect_node(input_node_name, input_id)
+	disconnect_out_connection(output_node_name)
+	
 	tree_root.connect_node(input_node_name, input_id, output_node_name)
+	
+	anim_connect_list.connections.append(AnimationConnection.new(output_node_name, input_node_name, input_id))
 
 func connect_multiply_animation_node(output_nodes_names: Array[StringName], input_node_name: StringName) -> void:
 	for i in range(output_nodes_names.size()):
 		connect_animation_node(output_nodes_names[i], i, input_node_name)
 
-func disconnect_in_connection(anim_node_name: StringName, id: int) -> void:
+func disconnect_in_connection(anim_node_name: StringName, port: int) -> void:
 	if not tree_root: return
-	tree_root.disconnect_node(anim_node_name, id)
+	tree_root.disconnect_node(anim_node_name, port)
+	
+	var connection := get_connection_with_to_and_port(anim_node_name, port)
+	anim_connect_list.connections.erase(connection)
 
-func disconnect_out_connection(anim_node_name: StringName, id: int) -> void:
-	if not tree_root: return
-	tree_root.disconnect_node(anim_node_name, id)
+func disconnect_out_connection(anim_node_name: StringName) -> void:
+	var from_connection := get_connection_with_from(anim_node_name)
+	if not from_connection: return
+	
+	disconnect_in_connection(from_connection.to, from_connection.to_port)
 
 func set_filter_with_all_track(blend: StringName, anim_node: StringName, activate: bool= true) -> void:
 	var blend_node: AnimationNode= tree_root.get_node(blend)
@@ -95,6 +106,27 @@ func change_animation(anim_node: StringName, anim_name: StringName) -> void:
 	
 	anime.animation = anime_name
 
+func convert_all_connections(anim_nd_name1: StringName, anim_nd_name2: StringName) -> void:
+	var nd1_from_connection: AnimationConnection= get_connection_with_from(anim_nd_name1)
+	convert_from_connection(nd1_from_connection, anim_nd_name2)
+	
+	var nd1_to_connections: Array[AnimationConnection]= get_connections_with_to(anim_nd_name1)
+	for connection in nd1_to_connections:
+		convert_to_connection(connection, anim_nd_name2)
+
+func convert_from_connection(connection: AnimationConnection, anim_node_name: StringName) -> void:
+	disconnect_out_connection(connection.from)
+	disconnect_out_connection(anim_node_name)
+	connect_animation_node(anim_node_name, connection.to_port, connection.to)
+
+func convert_to_connection(connection: AnimationConnection, anim_node_name: StringName) -> void:
+	disconnect_in_connection(connection.to, connection.to_port)
+	disconnect_in_connection(anim_node_name, connection.to_port)
+	connect_animation_node(connection.from, connection.to_port, anim_node_name)
+
+func has_out_connection(anim_node_name: StringName) -> bool:
+	return get_connection_with_from(anim_node_name) != null
+
 func add_library_to_name(anim_name: StringName, lib: AnimationLibrary) -> StringName:
 	var lib_name: StringName
 	
@@ -104,6 +136,12 @@ func add_library_to_name(anim_name: StringName, lib: AnimationLibrary) -> String
 		lib_name = Utiles.get_resource_name(lib)
 	
 	return lib_name + "/" + anim_name
+
+func print_all_connections() -> void:
+	print("Connections:")
+	for connection in anim_connect_list.connections:
+		connection.print_connection()
+	print("-----")
 
 ## ONE SHOT ##
 
@@ -156,3 +194,54 @@ func get_libraries() -> Array[AnimationLibrary]:
 		libraries_array.append(librarie)
 	
 	return libraries_array
+
+func get_connection_with_from(from: StringName) -> AnimationConnection:
+	for connection in anim_connect_list.connections:
+		if connection.from == from:
+			return connection
+	return null
+
+func get_connection_with_to_and_port(to: StringName, port: int) -> AnimationConnection:
+	for connection in anim_connect_list.connections:
+		if connection.to == to and connection.to_port == port:
+			return connection
+	return null
+
+func get_connections_with_to(to: StringName) -> Array[AnimationConnection]:
+	var connections: Array[AnimationConnection]= []
+	
+	for connection in anim_connect_list.connections:
+		if connection.to == to:
+			connections.append(connection)
+	
+	return connections
+
+func get_all_connections(anim_node_name: StringName) -> Array[AnimationConnection]:
+	var connections: Array[AnimationConnection]= []
+	
+	var from_connection := get_connection_with_from(anim_node_name)
+	if from_connection: connections.append(from_connection)
+	
+	connections += get_connections_with_to(anim_node_name)
+	
+	return connections
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

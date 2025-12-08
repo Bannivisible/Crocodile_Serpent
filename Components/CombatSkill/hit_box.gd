@@ -41,18 +41,18 @@ func _obtain_cs() -> CombatSkill:
 	if owner is CombatSkill: return owner
 	else : return null
 
-func _init_damage_inteval_timer() -> void:
-	if damage_inteval <= 0.0 and damage_inteval_timer:
-		damage_inteval_timer.timeout.disconnect(_on_damage_interval_timer_timeout)
-		damage_inteval_timer = null
-		return
-	
-	if not damage_inteval_timer: 
-		damage_inteval_timer = Timer.new()
-		add_child(damage_inteval_timer)
-		damage_inteval_timer.timeout.connect(_on_damage_interval_timer_timeout)
-	
-	damage_inteval_timer.wait_time = damage_inteval
+func _init_damage_inteval_timer() -> void: 
+	if damage_inteval == 0.0:
+		if damage_inteval_timer:
+			damage_inteval_timer.timeout.disconnect(_on_damage_interval_timer_timeout)
+			damage_inteval_timer = null
+	else :
+		if not damage_inteval_timer: 
+			damage_inteval_timer = Timer.new()
+			add_child(damage_inteval_timer)
+			damage_inteval_timer.timeout.connect(_on_damage_interval_timer_timeout)
+		
+		damage_inteval_timer.wait_time = damage_inteval
 
 #### LOGICS ####
 

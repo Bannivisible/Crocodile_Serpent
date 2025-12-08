@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://ds4i8cup57akf"]
+[gd_scene load_steps=44 format=3 uid="uid://ds4i8cup57akf"]
 
 [ext_resource type="AnimationLibrary" uid="uid://ctdrtnjx7txak" path="res://Components/CombatSkill/Weapon/JawTrap/AnimationsData/JawTrapAnimationLibrary.res" id="2_dp6s7"]
 [ext_resource type="Script" uid="uid://bhcip3r7gigab" path="res://Components/CombatSkill/Weapon/JawTrap/jaw_trap.gd" id="2_g4jcv"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" uid="uid://bcmokx1bwyftw" path="res://StateMachine/state_machine.gd" id="14_av258"]
 [ext_resource type="Script" uid="uid://b3ssasrodegel" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/on_hand.gd" id="14_in3ot"]
 [ext_resource type="Script" uid="uid://bey7t8h4m0yyp" path="res://StateMachine/state.gd" id="16_2tnll"]
+[ext_resource type="Resource" uid="uid://b85xloi286pt1" path="res://Ressources/AnimationConnection/crocodile_animation_connections.tres" id="19_bxcyf"]
 
 [sub_resource type="Resource" id="Resource_yvpvj"]
 script = ExtResource("3_4d2f6")
@@ -61,14 +62,14 @@ additionnal_strenght = SubResource("Resource_wdegu")
 type = SubResource("Resource_3w3qp")
 metadata/_custom_type_script = "uid://ce7ave72wm32j"
 
-[sub_resource type="Resource" id="Resource_11eis"]
+[sub_resource type="Resource" id="Resource_7x2u0"]
 script = ExtResource("6_jeet7")
 type = 1
 metadata/_custom_type_script = "uid://danilkv671r1y"
 
-[sub_resource type="Resource" id="Resource_7x2u0"]
+[sub_resource type="Resource" id="Resource_11eis"]
 script = ExtResource("5_v0eml")
-type = SubResource("Resource_11eis")
+type = SubResource("Resource_7x2u0")
 metadata/_custom_type_script = "uid://ce7ave72wm32j"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p0okl"]
@@ -164,12 +165,12 @@ need_hit_box_hit = true
 metadata/_custom_type_script = "uid://dljxw7lqw0vie"
 
 [node name="ConstantRotatingAttack" type="Node" parent="StateMachine/OnHand"]
-script = ExtResource("9_bxcyf")
-attack_data = SubResource("Resource_7x2u0")
-metadata/_custom_type_script = "uid://dljxw7lqw0vie"
-
-[node name="ContinueAttackState" type="Node" parent="StateMachine/OnHand"]
 script = ExtResource("10_cyaoe")
+input_mode = "Realease"
+hit_box_path = NodePath("WeaponHitBox")
+attack_data = SubResource("Resource_11eis")
+damage_interval = 0.3
+blend_node_name = &"Add2"
 metadata/_custom_type_script = "uid://dljxw7lqw0vie"
 
 [node name="OnJaw" type="Node" parent="StateMachine"]
@@ -276,6 +277,7 @@ debug_color = Color(1, 0, 0, 0.41960785)
 script = ExtResource("13_2xnf2")
 library = ExtResource("2_dp6s7")
 reset_animation = &"1-RESET"
+anim_connect_list = ExtResource("19_bxcyf")
 metadata/_custom_type_script = "uid://6lekj6yg62r6"
 
 [connection signal="animation_finished" from="AnimationManagerComponent" to="." method="_on_animation_manager_component_animation_finished"]

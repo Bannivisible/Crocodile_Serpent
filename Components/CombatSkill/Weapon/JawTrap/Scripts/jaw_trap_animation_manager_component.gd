@@ -10,13 +10,14 @@ func _ready() -> void:
 	play_reset_animation()
 	
 	_set_attack_one_shot()
-	
-	add_animation_node(AnimationNodeAdd2.new(), "Add2")
+
 
 func _set_attack_one_shot() -> void:
 	add_in_tree_animation_with_name(libraries[library] + "/SlashAttack1", "Attack")
-	add_animation_node(AnimationNodeOneShot.new(), "OneShot")
-	set_filter_with_all_track("OneShot", "Attack")
-	disconnect_in_connection("output", 0)
 	connect_multiply_animation_node(["StateMachine", "Attack"], "OneShot")
+	#connect_animation_node("StateMachine", 0, "OneShot")
 	connect_animation_node("OneShot", 0, "output")
+
+#func _input(event: InputEvent) -> void:
+	#if Input.is_action_just_pressed("BentDown"):
+		#print_all_connections()
