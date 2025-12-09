@@ -5,8 +5,6 @@ class_name HitBox
 
 @export var attack_data: AttackData
 
-#@export var monitoring_at_ready: bool= true
-
 @export var cs = _obtain_cs()
 
 @export_range(0.0, 60.0) var damage_inteval: float= 0.0:

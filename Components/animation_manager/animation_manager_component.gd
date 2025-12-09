@@ -164,6 +164,9 @@ func tween_add_amount(add_node_name: StringName, duration: float, amount: float=
 	
 	tween_add.tween_property(animation_tree, parameter_path, amount, duration)
 
+func get_add_amount(add_node_name: StringName) -> float:
+	return animation_tree.get("parameters/%s/add_amount" %add_node_name)
+
 ## GETTER ##
 func get_animation_traks(anime: Animation) -> Array[NodePath]:
 	var properties: Array[NodePath]

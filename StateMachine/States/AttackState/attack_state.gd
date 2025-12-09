@@ -3,10 +3,12 @@ class_name AttackState
 
 
 @export var idle_state_name: String= "Idle"
-@export var input_name: String= "attack"
-@export_enum("Pressed", "Realease") var input_mode: String= "Pressed"
 
-#@export_enum("OneShotAttack", "ContinueAttack") var mode: String= "OneShotAttack"
+@export_group("Input")
+
+@export var input_name: String= "attack"
+@export var input_await_time: float
+@export_enum("Pressed", "Realease") var input_mode: String= "Pressed"
 
 @export_group("HitBox")
 
@@ -23,13 +25,14 @@ class_name AttackState
 @export_group("Combo")
 @export_range(0.0, 60.0) var combo_cooldown: float
 @export var need_hit_box_hit: bool
-@export var next_attack: AttackState
-
+@export var previous_state: State
 
 @onready var animation_manager: AnimationManagerComponent= owner.get_node_or_null(anim_manager_path)
 @onready var hit_box: HitBox= owner.get_node_or_null(hit_box_path)
 
-@onready var combo_timer = _create_combo_timer()
+@onready var combo_timer: Timer= _create_combo_timer()
+
+@onready var input_timer: Timer= _create_input_timer()
 
 var is_hit_box_hit: bool= false
 
@@ -38,25 +41,31 @@ var is_hit_box_hit: bool= false
 func _ready() -> void:
 	if not anim_name: anim_name= name
 	
-	if animation_manager:
-		animation_manager.animation_finished.connect(_on_animation_manager_animation_finished)
+	if not animation_manager.is_node_ready(): await animation_manager.ready
+	anim_name = _obtain_animation_name_with_lib(anim_name)
 	
+	animation_manager.animation_finished.connect(_on_animation_manager_animation_finished)
 	hit_box.hit.connect(_on_hit_box_hit)
-	
-	if next_attack:
-		var next_attk_com_timer: Timer= next_attack.combo_timer
-		if next_attk_com_timer:
-			next_attk_com_timer.timeout.connect(_on_next_attack_combo_timer_timeout)
+	if combo_timer:
+		combo_timer.timeout.connect(_on_combo_timer_timeout)
+		
+	#if next_attack:
+		#var next_attk_com_timer: Timer= next_attack.combo_timer
+		#if next_attk_com_timer:
+			#next_attk_com_timer.timeout.connect(_on_next_attack_combo_timer_timeout)
 		
 		#if not next_attack.is_node_ready():
 			#await next_attack.ready
 		#next_attack.hit_box.hit.connect(_on_next_attack_hit_box_hit)
 
 func _input(_event: InputEvent) -> void:
-	if next_attack:
-		if next_attack._input_condition():
-			_combo_logic()
-
+	if _input_condition():
+		if input_timer:
+			input_timer.start()
+			await input_timer.timeout
+			if Input.is_action_pressed("attack"):
+				return
+		_combo_logic()
 
 #### INIT ####
 
@@ -72,17 +81,24 @@ func _create_combo_timer() -> Timer:
 	add_child(timer)
 	return timer
 
-func is_combo_cooldown_running() -> bool:
-	if not combo_timer: return true
-	return not combo_timer.is_stopped()
+func _create_input_timer() -> Timer:
+	if input_await_time <= 0.0: return null
+	
+	var timer = Timer.new()
+	timer.wait_time = input_await_time
+	timer.one_shot = true
+	add_child(timer)
+	return timer
+
+#func _obtain_previous_state() -> State:
+	#
+	#return state_machine.get_node_or_null(idle_state_name)
 
 #### INHERITANCE ####
 
 func enter() -> void:
 	_update_hit_box()
 	_update_animation_tree()
-	
-	animation_manager.print_all_connections()
 
 func _update_hit_box() -> void:
 	hit_box.attack_data = attack_data
@@ -108,28 +124,41 @@ func _input_condition() -> bool:
 	return false
 
 func _combo_logic() -> void:
-	if is_attack_currently_playing():
-		await animation_manager.animation_finished
+	if previous_state is AttackState:
+		var prev_attack: AttackState= previous_state
+		
+		if prev_attack.is_attack_currently_playing():
+			await animation_manager.animation_finished
+		elif not is_combo_cooldown_running(): return 
 	
-	elif not next_attack.is_combo_cooldown_running():
+	elif not previous_state.is_current_state():
 		return
 	
-	if combo_condition_valid():
-		state_machine.current_state = next_attack
+	if _combo_condition_valid():
+		state_machine.current_state = self
+
+func _combo_condition_valid() -> bool:
+	if previous_state is AttackState and need_hit_box_hit:
+		return previous_state.is_hit_box_hit
+	return true
 
 func is_attack_currently_playing() -> bool:
 	var anim_node_anime: AnimationNodeAnimation = animation_manager.get_animation_node(anim_node)
-	var anime_name: StringName= _obtain_animation_name_with_lib(anim_name)
+	var blend_node: AnimationNode= animation_manager.get_animation_node(blend_node_name)
 	
-	return anim_node_anime.animation == anime_name and animation_manager.is_one_shot_active(blend_node_name)
+	if blend_node is AnimationNodeOneShot:
+		return anim_node_anime.animation == anim_name and animation_manager.is_one_shot_active(blend_node_name)
+	
+	elif blend_node is AnimationNodeAdd2 or blend_node is AnimationNodeAdd3:
+		return anim_node_anime.animation == anim_name and animation_manager.get_add_amount(blend_node_name) != 0.0
+	
+	else :
+		return animation_manager.get_current_animation_name() == anim_name
 
 func _config_animation() -> void:
 	if not animation_manager: return
 	
-	var lib: AnimationLibrary= animation_manager.get_libraries()[0]
-	var anime: StringName= animation_manager.add_library_to_name(anim_name, lib)
-	
-	animation_manager.change_animation(anim_node, anime)
+	animation_manager.change_animation(anim_node, anim_name)
 	animation_manager.set_filter_with_all_track(blend_node_name, anim_node)
 
 func _config_anim_connection() -> void:
@@ -139,41 +168,38 @@ func _config_anim_connection() -> void:
 	else :
 		animation_manager.connect_animation_node(anim_node, 1, blend_node_name)
 
-func combo_condition_valid() -> bool:
-	if next_attack:
-		if next_attack.need_hit_box_hit:
-			return is_hit_box_hit
-	return true
-
 func _obtain_animation_name_with_lib(name_of_anime: StringName) -> StringName:
 	var lib: AnimationLibrary= animation_manager.get_libraries()[0]
 	var anime_name: StringName= animation_manager.add_library_to_name(name_of_anime, lib)
 	return anime_name
 
+func is_combo_cooldown_running() -> bool:
+	if not combo_timer: return true
+	return not combo_timer.is_stopped()
+
 #### SIGNALS RESPONSES ####
 
 func _on_animation_manager_animation_finished(anime: StringName) -> void:
-	var anime_name: StringName= _obtain_animation_name_with_lib(anim_name)
-	
-	if anime == anime_name:
-		if next_attack:
-			if next_attack.combo_timer: next_attack.combo_timer.start()
-		if combo_timer: combo_timer.stop()
-		
+	if anime == anim_name:
 		state_machine.set_state_with_string(idle_state_name)
-	
-	elif next_attack:
-		anime_name = _obtain_animation_name_with_lib(next_attack.anim_name)
 		
-		if anime == anime_name:
-			is_hit_box_hit = false
+		if combo_timer:
+			combo_timer.timeout.emit()
+			combo_timer.stop()
+		
+		if previous_state is AttackState:
+			previous_state.is_hit_box_hit = false
+	
+	elif previous_state is AttackState:
+		if anime == previous_state.anim_name and combo_timer:
+			combo_timer.start()
 
 func _on_hit_box_hit(_damage: float, _hurt_box: HurtBox) -> void:
 	if hit_box.attack_data == attack_data:
 		is_hit_box_hit = true
 
-func _on_next_attack_combo_timer_timeout() -> void:
-	is_hit_box_hit = false
+func _on_combo_timer_timeout() -> void:
+	pass
 
 #func _on_next_attack_hit_box_hit(_damage: float, _hurt_box: HurtBox) -> void:
 	#if hit_box.attack_data == next_attack.attack_data:

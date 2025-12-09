@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://ds4i8cup57akf"]
+[gd_scene load_steps=43 format=3 uid="uid://ds4i8cup57akf"]
 
 [ext_resource type="AnimationLibrary" uid="uid://ctdrtnjx7txak" path="res://Components/CombatSkill/Weapon/JawTrap/AnimationsData/JawTrapAnimationLibrary.res" id="2_dp6s7"]
 [ext_resource type="Script" uid="uid://bhcip3r7gigab" path="res://Components/CombatSkill/Weapon/JawTrap/jaw_trap.gd" id="2_g4jcv"]
@@ -12,7 +12,6 @@
 [ext_resource type="Shape2D" uid="uid://bw7u1sj0wx0wf" path="res://Components/CombatSkill/Weapon/JawTrap/Ressources/links_shape.tres" id="6_86vhf"]
 [ext_resource type="Script" uid="uid://danilkv671r1y" path="res://Ressources/Attack/AttackType/attack_type.gd" id="6_jeet7"]
 [ext_resource type="Script" uid="uid://dljxw7lqw0vie" path="res://StateMachine/States/AttackState/attack_state.gd" id="9_bxcyf"]
-[ext_resource type="Script" uid="uid://k3m02msk250s" path="res://StateMachine/States/AttackState/continue_attack_state.gd" id="10_cyaoe"]
 [ext_resource type="Script" uid="uid://dc54v3rlk5wjt" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/jaw_trap_animation_manager_component.gd" id="13_2xnf2"]
 [ext_resource type="Script" uid="uid://x70cfv1c4jxk" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/on_hand_idle.gd" id="14_2tnll"]
 [ext_resource type="Script" uid="uid://bcmokx1bwyftw" path="res://StateMachine/state_machine.gd" id="14_av258"]
@@ -62,14 +61,14 @@ additionnal_strenght = SubResource("Resource_wdegu")
 type = SubResource("Resource_3w3qp")
 metadata/_custom_type_script = "uid://ce7ave72wm32j"
 
-[sub_resource type="Resource" id="Resource_7x2u0"]
+[sub_resource type="Resource" id="Resource_11eis"]
 script = ExtResource("6_jeet7")
 type = 1
 metadata/_custom_type_script = "uid://danilkv671r1y"
 
-[sub_resource type="Resource" id="Resource_11eis"]
+[sub_resource type="Resource" id="Resource_7x2u0"]
 script = ExtResource("5_v0eml")
-type = SubResource("Resource_7x2u0")
+type = SubResource("Resource_11eis")
 metadata/_custom_type_script = "uid://ce7ave72wm32j"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p0okl"]
@@ -149,28 +148,33 @@ metadata/_custom_type_script = "uid://bcmokx1bwyftw"
 script = ExtResource("14_2tnll")
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 
-[node name="SlashAttack1" type="Node" parent="StateMachine/OnHand" node_paths=PackedStringArray("next_attack")]
+[node name="SlashAttack1" type="Node" parent="StateMachine/OnHand" node_paths=PackedStringArray("previous_state")]
 script = ExtResource("9_bxcyf")
+input_await_time = 0.1
 hit_box_path = NodePath("WeaponHitBox")
 attack_data = SubResource("Resource_bxcyf")
-next_attack = NodePath("../SlashAttack2")
+previous_state = NodePath("../Idle")
 metadata/_custom_type_script = "uid://dljxw7lqw0vie"
 
-[node name="SlashAttack2" type="Node" parent="StateMachine/OnHand"]
+[node name="SlashAttack2" type="Node" parent="StateMachine/OnHand" node_paths=PackedStringArray("previous_state")]
 script = ExtResource("9_bxcyf")
+input_await_time = 0.1
 hit_box_path = NodePath("WeaponHitBox")
 attack_data = SubResource("Resource_lj60c")
-combo_cooldown = 6.0
+combo_cooldown = 1.0
 need_hit_box_hit = true
+previous_state = NodePath("../SlashAttack1")
 metadata/_custom_type_script = "uid://dljxw7lqw0vie"
 
-[node name="ConstantRotatingAttack" type="Node" parent="StateMachine/OnHand"]
-script = ExtResource("10_cyaoe")
+[node name="ConstantRotatingAttack" type="Node" parent="StateMachine/OnHand" node_paths=PackedStringArray("previous_state")]
+script = ExtResource("9_bxcyf")
+input_name = "a"
 input_mode = "Realease"
 hit_box_path = NodePath("WeaponHitBox")
-attack_data = SubResource("Resource_11eis")
-damage_interval = 0.3
+attack_data = SubResource("Resource_7x2u0")
+damage_interval = 0.4
 blend_node_name = &"Add2"
+previous_state = NodePath("../Idle")
 metadata/_custom_type_script = "uid://dljxw7lqw0vie"
 
 [node name="OnJaw" type="Node" parent="StateMachine"]
@@ -271,6 +275,7 @@ metadata/_custom_type_script = "uid://42c2b5rma8ot"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponHitBox"]
 z_index = 3
 shape = SubResource("CapsuleShape2D_weadw")
+disabled = true
 debug_color = Color(1, 0, 0, 0.41960785)
 
 [node name="AnimationManagerComponent" type="Node" parent="."]
