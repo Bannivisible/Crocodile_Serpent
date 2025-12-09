@@ -228,23 +228,3 @@ func get_all_connections(anim_node_name: StringName) -> Array[AnimationConnectio
 	connections += get_connections_with_to(anim_node_name)
 	
 	return connections
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

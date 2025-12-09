@@ -5,4 +5,3 @@ class_name JawTrap
 @onready var on_hand_machine: Node = $StateMachine/OnHand
 
 @onready var animation_manager_component: Node = $AnimationManagerComponent
-

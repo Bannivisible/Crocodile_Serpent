@@ -7,7 +7,8 @@ class_name AttackState
 @export_group("Input")
 
 @export var input_name: String= "attack"
-@export var input_await_time: float
+@export var input_await_time: Vector2
+@export var active_on_time_limit: bool= false
 @export_enum("Pressed", "Realease") var input_mode: String= "Pressed"
 
 @export_group("HitBox")
@@ -32,9 +33,10 @@ class_name AttackState
 
 @onready var combo_timer: Timer= _create_combo_timer()
 
-@onready var input_timer: Timer= _create_input_timer()
-
 var is_hit_box_hit: bool= false
+
+var input_pressed: bool= false
+var input_time: float= 0.0
 
 #### BUILT-IN ####
 
@@ -59,13 +61,25 @@ func _ready() -> void:
 		#next_attack.hit_box.hit.connect(_on_next_attack_hit_box_hit)
 
 func _input(_event: InputEvent) -> void:
-	if _input_condition():
-		if input_timer:
-			input_timer.start()
-			await input_timer.timeout
-			if Input.is_action_pressed("attack"):
-				return
-		_combo_logic()
+	if Input.is_action_pressed(input_name):
+		input_pressed = true
+		
+		#if input_timer:
+			#input_timer.start()
+			#await input_timer.timeout
+			#if Input.is_action_pressed(input_name):
+				#return
+			
+	
+	if Input.is_action_just_released(input_name):
+		input_pressed = false
+		if input_time > input_await_time.x and input_time < input_await_time.y:
+			_combo_logic()
+		input_time = 0.0
+
+func _physics_process(delta: float) -> void:
+	if input_pressed:
+		input_time += delta
 
 #### INIT ####
 
@@ -77,15 +91,6 @@ func _create_combo_timer() -> Timer:
 	
 	var timer = Timer.new()
 	timer.wait_time = combo_cooldown
-	timer.one_shot = true
-	add_child(timer)
-	return timer
-
-func _create_input_timer() -> Timer:
-	if input_await_time <= 0.0: return null
-	
-	var timer = Timer.new()
-	timer.wait_time = input_await_time
 	timer.one_shot = true
 	add_child(timer)
 	return timer
