@@ -150,7 +150,7 @@ metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 
 [node name="SlashAttack1" type="Node" parent="StateMachine/OnHand" node_paths=PackedStringArray("previous_state")]
 script = ExtResource("9_bxcyf")
-input_await_time = Vector2(0, 3)
+input_time_interval = Vector2(-1, 0.5)
 hit_box_path = NodePath("WeaponHitBox")
 attack_data = SubResource("Resource_bxcyf")
 previous_state = NodePath("../Idle")
@@ -158,6 +158,7 @@ metadata/_custom_type_script = "uid://dljxw7lqw0vie"
 
 [node name="SlashAttack2" type="Node" parent="StateMachine/OnHand" node_paths=PackedStringArray("previous_state")]
 script = ExtResource("9_bxcyf")
+input_time_interval = Vector2(-1, 0.5)
 hit_box_path = NodePath("WeaponHitBox")
 attack_data = SubResource("Resource_lj60c")
 combo_cooldown = 1.0
@@ -167,8 +168,8 @@ metadata/_custom_type_script = "uid://dljxw7lqw0vie"
 
 [node name="ConstantRotatingAttack" type="Node" parent="StateMachine/OnHand" node_paths=PackedStringArray("previous_state")]
 script = ExtResource("9_bxcyf")
-input_await_time = Vector2(3, 0)
-active_on_time_limit = true
+input_time_interval = Vector2(0.5, -1)
+input_mode = "Continue"
 hit_box_path = NodePath("WeaponHitBox")
 attack_data = SubResource("Resource_7x2u0")
 damage_interval = 0.4

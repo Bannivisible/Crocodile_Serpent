@@ -1,15 +1,13 @@
 extends State
 class_name AttackState
 
-
 @export var idle_state_name: String= "Idle"
 
 @export_group("Input")
 
 @export var input_name: String= "attack"
-@export var input_await_time: Vector2
-@export var active_on_time_limit: bool= false
-@export_enum("Pressed", "Realease") var input_mode: String= "Pressed"
+@export var input_time_interval := Vector2.ONE * -1
+@export_enum("OneShot", "Continue") var input_mode: String= "OneShot"
 
 @export_group("HitBox")
 
@@ -63,23 +61,42 @@ func _ready() -> void:
 func _input(_event: InputEvent) -> void:
 	if Input.is_action_pressed(input_name):
 		input_pressed = true
-		
-		#if input_timer:
-			#input_timer.start()
-			#await input_timer.timeout
-			#if Input.is_action_pressed(input_name):
-				#return
-			
 	
 	if Input.is_action_just_released(input_name):
-		input_pressed = false
-		if input_time > input_await_time.x and input_time < input_await_time.y:
+		match input_mode:
+			"OneShot":
+				input_pressed = false
+				if is_input_timer_in_interval():
+					_combo_logic()
+				input_time = 0.0
+			
+			"Continue":
+				state_machine.set_state_with_string(idle_state_name)
+	
+	if Input.is_action_pressed(input_name) and input_mode == "Continue":
+		if is_input_timer_in_interval():
+			input_pressed = false
+			input_time = 0.0
 			_combo_logic()
-		input_time = 0.0
 
 func _physics_process(delta: float) -> void:
 	if input_pressed:
 		input_time += delta
+
+func is_input_timer_in_interval() -> bool:
+	return not is_input_time_under_interval() and not is_input_time_upper_interval()
+
+func is_input_time_under_interval() -> bool:
+	if sign(input_time_interval.x) == -1:
+		return false
+	else :
+		return input_time < input_time_interval.x
+
+func is_input_time_upper_interval() -> bool:
+	if sign(input_time_interval.y) == -1:
+		return false
+	else :
+		return input_time > input_time_interval.y
 
 #### INIT ####
 
@@ -105,6 +122,10 @@ func enter() -> void:
 	_update_hit_box()
 	_update_animation_tree()
 
+func exit() -> void:
+	if blend_node_name:
+		pass
+
 func _update_hit_box() -> void:
 	hit_box.attack_data = attack_data
 	hit_box.damage_inteval = damage_interval
@@ -122,11 +143,11 @@ func _update_animation_tree() -> void:
 		animation_manager.set_add_amount(blend_node_name, 1.0)
 
 #### LOGICS ####
-func _input_condition() -> bool:
-	match input_mode:
-		"Pressed": return Input.is_action_just_pressed(input_name)
-		"Realease": return Input.is_action_just_released(input_name) 
-	return false
+#func _input_condition() -> bool:
+	#match input_mode:
+		#"Pressed": return Input.is_action_just_pressed(input_name)
+		#"Realease": return Input.is_action_just_released(input_name) 
+	#return false
 
 func _combo_logic() -> void:
 	if previous_state is AttackState:
