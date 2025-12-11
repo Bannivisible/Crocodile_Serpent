@@ -31,7 +31,9 @@ func _ready() -> void:
 func add_library(library: AnimationLibrary, lib_name :=StringName(Utiles.get_resource_name(library))) -> void:
 	if not animation_tree: return
 	libraries[library] = lib_name
-	animation_player.add_animation_library(lib_name, library)
+	
+	if not animation_player.has_animation_library(lib_name):
+		animation_player.add_animation_library(lib_name, library)
 
 func play_animation(anim_name: StringName) -> void:
 	animation_player.play(anim_name)
@@ -44,6 +46,12 @@ func play_reset_animation() -> void:
 		animation_player.play(reset_animation)
 
 ### TREE ROOT ###
+
+func request_reset_one_shot(anim_node_name: StringName, one_shot_name) -> void:
+	change_animation(anim_node_name, reset_animation)
+	set_filter_with_all_track(one_shot_name, anim_node_name)
+	connect_animation_node(anim_node_name, 1, one_shot_name)
+	request_one_shot(one_shot_name, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 func add_in_tree_animation_with_name(anim_name: StringName, anim_node_name: StringName) -> void:
 	if not animation_tree: return

@@ -36,6 +36,8 @@ var is_hit_box_hit: bool= false
 var input_pressed: bool= false
 var input_time: float= 0.0
 
+var blend_node: AnimationNode
+
 #### BUILT-IN ####
 
 func _ready() -> void:
@@ -44,19 +46,12 @@ func _ready() -> void:
 	if not animation_manager.is_node_ready(): await animation_manager.ready
 	anim_name = _obtain_animation_name_with_lib(anim_name)
 	
+	blend_node = animation_manager.get_animation_node(blend_node_name)
+	
 	animation_manager.animation_finished.connect(_on_animation_manager_animation_finished)
 	hit_box.hit.connect(_on_hit_box_hit)
 	if combo_timer:
 		combo_timer.timeout.connect(_on_combo_timer_timeout)
-		
-	#if next_attack:
-		#var next_attk_com_timer: Timer= next_attack.combo_timer
-		#if next_attk_com_timer:
-			#next_attk_com_timer.timeout.connect(_on_next_attack_combo_timer_timeout)
-		
-		#if not next_attack.is_node_ready():
-			#await next_attack.ready
-		#next_attack.hit_box.hit.connect(_on_next_attack_hit_box_hit)
 
 func _input(_event: InputEvent) -> void:
 	if Input.is_action_pressed(input_name):
@@ -123,8 +118,10 @@ func enter() -> void:
 	_update_animation_tree()
 
 func exit() -> void:
-	if blend_node_name:
-		pass
+	if blend_node is AnimationNodeAdd2 or blend_node is AnimationNodeAdd3:
+		animation_manager.set_add_amount(blend_node_name, 0.0)
+	
+	animation_manager.play_reset_animation()
 
 func _update_hit_box() -> void:
 	hit_box.attack_data = attack_data
@@ -134,8 +131,6 @@ func _update_animation_tree() -> void:
 	_config_animation()
 	_config_anim_connection()
 	
-	var blend_node: AnimationNode= animation_manager.get_animation_node(blend_node_name)
-	
 	if blend_node is AnimationNodeOneShot:
 		animation_manager.request_one_shot(blend_node_name, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	
@@ -143,11 +138,6 @@ func _update_animation_tree() -> void:
 		animation_manager.set_add_amount(blend_node_name, 1.0)
 
 #### LOGICS ####
-#func _input_condition() -> bool:
-	#match input_mode:
-		#"Pressed": return Input.is_action_just_pressed(input_name)
-		#"Realease": return Input.is_action_just_released(input_name) 
-	#return false
 
 func _combo_logic() -> void:
 	if previous_state is AttackState:
@@ -170,7 +160,6 @@ func _combo_condition_valid() -> bool:
 
 func is_attack_currently_playing() -> bool:
 	var anim_node_anime: AnimationNodeAnimation = animation_manager.get_animation_node(anim_node)
-	var blend_node: AnimationNode= animation_manager.get_animation_node(blend_node_name)
 	
 	if blend_node is AnimationNodeOneShot:
 		return anim_node_anime.animation == anim_name and animation_manager.is_one_shot_active(blend_node_name)
@@ -227,6 +216,3 @@ func _on_hit_box_hit(_damage: float, _hurt_box: HurtBox) -> void:
 func _on_combo_timer_timeout() -> void:
 	pass
 
-#func _on_next_attack_hit_box_hit(_damage: float, _hurt_box: HurtBox) -> void:
-	#if hit_box.attack_data == next_attack.attack_data:
-		#is_hit_box_hit = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://ds4i8cup57akf"]
+[gd_scene load_steps=49 format=3 uid="uid://ds4i8cup57akf"]
 
 [ext_resource type="AnimationLibrary" uid="uid://ctdrtnjx7txak" path="res://Components/CombatSkill/Weapon/JawTrap/AnimationsData/JawTrapAnimationLibrary.res" id="2_dp6s7"]
 [ext_resource type="Script" uid="uid://bhcip3r7gigab" path="res://Components/CombatSkill/Weapon/JawTrap/jaw_trap.gd" id="2_g4jcv"]
@@ -11,7 +11,7 @@
 [ext_resource type="Script" uid="uid://ce7ave72wm32j" path="res://Ressources/Attack/attack_data.gd" id="5_v0eml"]
 [ext_resource type="Shape2D" uid="uid://bw7u1sj0wx0wf" path="res://Components/CombatSkill/Weapon/JawTrap/Ressources/links_shape.tres" id="6_86vhf"]
 [ext_resource type="Script" uid="uid://danilkv671r1y" path="res://Ressources/Attack/AttackType/attack_type.gd" id="6_jeet7"]
-[ext_resource type="Script" uid="uid://dljxw7lqw0vie" path="res://StateMachine/States/AttackState/attack_state.gd" id="9_bxcyf"]
+[ext_resource type="Script" uid="uid://c5stjpuprt08p" path="res://StateMachine/States/AttackState/weapon_attack_state.gd" id="10_bxcyf"]
 [ext_resource type="Script" uid="uid://dc54v3rlk5wjt" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/jaw_trap_animation_manager_component.gd" id="13_2xnf2"]
 [ext_resource type="Script" uid="uid://x70cfv1c4jxk" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/on_hand_idle.gd" id="14_2tnll"]
 [ext_resource type="Script" uid="uid://bcmokx1bwyftw" path="res://StateMachine/state_machine.gd" id="14_av258"]
@@ -29,6 +29,16 @@ script = ExtResource("3_v0eml")
 value = 10.0
 metadata/_custom_type_script = "uid://mcrao1da8rcg"
 
+[sub_resource type="Resource" id="Resource_7etub"]
+script = ExtResource("3_4d2f6")
+value = 10.0
+metadata/_custom_type_script = "uid://c20oatp4y0el5"
+
+[sub_resource type="Resource" id="Resource_kcwly"]
+script = ExtResource("5_4d2f6")
+add_crit_rate = SubResource("Resource_7etub")
+metadata/_custom_type_script = "uid://bpo8hybdit330"
+
 [sub_resource type="Resource" id="Resource_in3ot"]
 script = ExtResource("3_v0eml")
 value = 10.0
@@ -45,6 +55,16 @@ additionnal_strenght = SubResource("Resource_in3ot")
 type = SubResource("Resource_cyaoe")
 metadata/_custom_type_script = "uid://ce7ave72wm32j"
 
+[sub_resource type="Resource" id="Resource_o8o0j"]
+script = ExtResource("3_4d2f6")
+metadata/_custom_type_script = "uid://c20oatp4y0el5"
+
+[sub_resource type="Resource" id="Resource_2xqvd"]
+script = ExtResource("5_4d2f6")
+mult_crit_rate = 1.5
+add_crit_rate = SubResource("Resource_o8o0j")
+metadata/_custom_type_script = "uid://bpo8hybdit330"
+
 [sub_resource type="Resource" id="Resource_wdegu"]
 script = ExtResource("3_v0eml")
 value = 50.0
@@ -60,6 +80,16 @@ script = ExtResource("5_v0eml")
 additionnal_strenght = SubResource("Resource_wdegu")
 type = SubResource("Resource_3w3qp")
 metadata/_custom_type_script = "uid://ce7ave72wm32j"
+
+[sub_resource type="Resource" id="Resource_eaiaj"]
+script = ExtResource("3_4d2f6")
+metadata/_custom_type_script = "uid://c20oatp4y0el5"
+
+[sub_resource type="Resource" id="Resource_fho1j"]
+script = ExtResource("5_4d2f6")
+mult_crit_rate = 1.2
+add_crit_rate = SubResource("Resource_eaiaj")
+metadata/_custom_type_script = "uid://bpo8hybdit330"
 
 [sub_resource type="Resource" id="Resource_11eis"]
 script = ExtResource("6_jeet7")
@@ -126,8 +156,8 @@ type = SubResource("Resource_dp6s7")
 metadata/_custom_type_script = "uid://ce7ave72wm32j"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_weadw"]
-radius = 159.96208
-height = 319.92416
+radius = 154.05058
+height = 446.32965
 
 [node name="JawTrap" type="Node2D"]
 script = ExtResource("2_g4jcv")
@@ -149,25 +179,27 @@ script = ExtResource("14_2tnll")
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 
 [node name="SlashAttack1" type="Node" parent="StateMachine/OnHand" node_paths=PackedStringArray("previous_state")]
-script = ExtResource("9_bxcyf")
+script = ExtResource("10_bxcyf")
+weapon_attack_data = SubResource("Resource_kcwly")
 input_time_interval = Vector2(-1, 0.5)
 hit_box_path = NodePath("WeaponHitBox")
 attack_data = SubResource("Resource_bxcyf")
 previous_state = NodePath("../Idle")
-metadata/_custom_type_script = "uid://dljxw7lqw0vie"
+metadata/_custom_type_script = "uid://c5stjpuprt08p"
 
 [node name="SlashAttack2" type="Node" parent="StateMachine/OnHand" node_paths=PackedStringArray("previous_state")]
-script = ExtResource("9_bxcyf")
+script = ExtResource("10_bxcyf")
+weapon_attack_data = SubResource("Resource_2xqvd")
 input_time_interval = Vector2(-1, 0.5)
-hit_box_path = NodePath("WeaponHitBox")
 attack_data = SubResource("Resource_lj60c")
 combo_cooldown = 1.0
 need_hit_box_hit = true
 previous_state = NodePath("../SlashAttack1")
-metadata/_custom_type_script = "uid://dljxw7lqw0vie"
+metadata/_custom_type_script = "uid://c5stjpuprt08p"
 
 [node name="ConstantRotatingAttack" type="Node" parent="StateMachine/OnHand" node_paths=PackedStringArray("previous_state")]
-script = ExtResource("9_bxcyf")
+script = ExtResource("10_bxcyf")
+weapon_attack_data = SubResource("Resource_fho1j")
 input_time_interval = Vector2(0.5, -1)
 input_mode = "Continue"
 hit_box_path = NodePath("WeaponHitBox")
@@ -175,7 +207,7 @@ attack_data = SubResource("Resource_7x2u0")
 damage_interval = 0.4
 blend_node_name = &"Add2"
 previous_state = NodePath("../Idle")
-metadata/_custom_type_script = "uid://dljxw7lqw0vie"
+metadata/_custom_type_script = "uid://c5stjpuprt08p"
 
 [node name="OnJaw" type="Node" parent="StateMachine"]
 script = ExtResource("14_av258")
