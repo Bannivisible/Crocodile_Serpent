@@ -12,7 +12,7 @@ class_name AnimationManagerComponent
 
 @export var anim_connect_list: AnimationConnectionsList
 
-var libraries: Dictionary[AnimationLibrary, StringName]
+@export var library: AnimationLibrary
 
 var tracks_filter: Dictionary[StringName, StringName]= {}
 
@@ -28,12 +28,11 @@ func _ready() -> void:
 
 #### LOGIC ####
 
-func add_library(library: AnimationLibrary, lib_name :=StringName(Utiles.get_resource_name(library))) -> void:
-	if not animation_tree: return
-	libraries[library] = lib_name
-	
+func _add_library(anim_lib: AnimationLibrary, lib_name :=StringName(Utiles.get_resource_name(anim_lib))) -> void:
 	if not animation_player.has_animation_library(lib_name):
-		animation_player.add_animation_library(lib_name, library)
+		animation_player.add_animation_library(lib_name, anim_lib)
+
+## PUBLIC ##
 
 func play_animation(anim_name: StringName) -> void:
 	animation_player.play(anim_name)
@@ -44,6 +43,9 @@ func get_current_animation_name() -> String:
 func play_reset_animation() -> void:
 	if animation_player.has_animation(reset_animation):
 		animation_player.play(reset_animation)
+
+func has_animation(anim_name: StringName) -> bool:
+	return animation_player.has_animation(anim_name)
 
 ### TREE ROOT ###
 
@@ -92,18 +94,23 @@ func disconnect_out_connection(anim_node_name: StringName) -> void:
 	
 	disconnect_in_connection(from_connection.to, from_connection.to_port)
 
-func set_filter_with_all_track(blend: StringName, anim_node: StringName, activate: bool= true) -> void:
-	var blend_node: AnimationNode= tree_root.get_node(blend)
+func set_filter_with_all_track(blend_nd_name: StringName, anim_node: StringName, activate: bool= true) -> void:
+	var blend_node: AnimationNode= tree_root.get_node(blend_nd_name)
 	
 	var anim_name: StringName= tree_root.get_node(anim_node).animation
 	var anime: Animation= animation_player.get_animation(anim_name)
-	tracks_filter[blend] = anim_name
+	
+	if activate:
+		tracks_filter[blend_nd_name] = anim_name
+	else :
+		tracks_filter[blend_nd_name] = ""
 	
 	for prop_path in get_animation_traks(anime):
 		blend_node.set_filter_path(prop_path, activate)
 
-func reset_filter(blend: StringName) -> void:
-	set_filter_with_all_track(blend, tracks_filter[blend], false)
+func reset_filter(blend_nd_name: StringName) -> void:
+	if not tracks_filter.has(blend_nd_name) or tracks_filter[blend_nd_name] == "": return
+	set_filter_with_all_track(blend_nd_name, tracks_filter[blend_nd_name], false)
 
 func is_filtred_by(blend: String, anim_name: String) -> bool:
 	return tracks_filter[blend] == anim_name
@@ -116,7 +123,8 @@ func change_animation(anim_node: StringName, anim_name: StringName) -> void:
 
 func convert_all_connections(anim_nd_name1: StringName, anim_nd_name2: StringName) -> void:
 	var nd1_from_connection: AnimationConnection= get_connection_with_from(anim_nd_name1)
-	convert_from_connection(nd1_from_connection, anim_nd_name2)
+	if nd1_from_connection:
+		convert_from_connection(nd1_from_connection, anim_nd_name2)
 	
 	var nd1_to_connections: Array[AnimationConnection]= get_connections_with_to(anim_nd_name1)
 	for connection in nd1_to_connections:
@@ -135,13 +143,8 @@ func convert_to_connection(connection: AnimationConnection, anim_node_name: Stri
 func has_out_connection(anim_node_name: StringName) -> bool:
 	return get_connection_with_from(anim_node_name) != null
 
-func add_library_to_name(anim_name: StringName, lib: AnimationLibrary) -> StringName:
-	var lib_name: StringName
-	
-	if lib in libraries.keys():
-		lib_name = libraries[lib]
-	else :
-		lib_name = Utiles.get_resource_name(lib)
+func add_library_to_name(anim_name: StringName, lib: AnimationLibrary= library) -> StringName:
+	var lib_name: StringName = Utiles.get_resource_name(lib)
 	
 	return lib_name + "/" + anim_name
 
@@ -153,7 +156,7 @@ func print_all_connections() -> void:
 
 ## ONE SHOT ##
 
-func request_one_shot(one_shot: String, request: AnimationNodeOneShot.OneShotRequest) -> void:
+func request_one_shot(one_shot: String, request:= AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE) -> void:
 	animation_tree.set("parameters/%s/request" % one_shot, request)
 
 func is_one_shot_active(one_shot: String) -> bool:
@@ -176,6 +179,9 @@ func get_add_amount(add_node_name: StringName) -> float:
 	return animation_tree.get("parameters/%s/add_amount" %add_node_name)
 
 ## GETTER ##
+func get_animation(anim_name: StringName) -> Animation:
+	return animation_player.get_animation(anim_name)
+
 func get_animation_traks(anime: Animation) -> Array[NodePath]:
 	var properties: Array[NodePath]
 	
@@ -197,14 +203,6 @@ func get_animation_node(anim_name: StringName) -> AnimationNode:
 func get_animation_name(anim_node: StringName) -> StringName:
 	var anime: AnimationNodeAnimation= tree_root.get_node(anim_node)
 	return anime.animation
-
-func get_libraries() -> Array[AnimationLibrary]:
-	var libraries_array: Array[AnimationLibrary]
-	
-	for librarie in libraries.keys():
-		libraries_array.append(librarie)
-	
-	return libraries_array
 
 func get_connection_with_from(from: StringName) -> AnimationConnection:
 	for connection in anim_connect_list.connections:
@@ -236,3 +234,53 @@ func get_all_connections(anim_node_name: StringName) -> Array[AnimationConnectio
 	connections += get_connections_with_to(anim_node_name)
 	
 	return connections
+
+func get_anime_complete_name(anim_name: StringName) -> StringName:
+	if library.has_animation(anim_name):
+		return add_library_to_name(anim_name)
+	return anim_name
+
+#### SIGNAL RESPONSES ####
+
+#func _on_state_machine_state_change_recur(_state: State, deep_state: State) -> void:
+	#var anim_name: StringName= get_anime_complete_name(deep_state.name)
+	#print(library.has_animation("JawTrapAnimationLibrary/Idle"))
+	#print(library.get_animation_list())
+	#if deep_state is AttackState: return
+	#
+	#match play_mode:
+		#"Play": play_animation(anim_name)
+		#"Blend":
+			#var anime: Animation= animation_player.get_animation(anim_name)
+			#var connection: AnimationConnection
+			#var blend_is_add: bool
+			#
+			#if anime.loop_mode == Animation.LOOP_NONE:
+				#connection= get_connection_with_from(state_add_anim_name)
+				#blend_is_add = false
+			#else :
+				#connection= get_connection_with_from(state_os_anim_name)
+				#blend_is_add = true
+			#
+			#var add_node_name: StringName= connection.to
+			#
+			#if blend_is_add: tween_add_amount(add_node_name, 0.2, 0.0)
+			#reset_filter(state_add_anim_name)
+			#change_animation(state_add_anim_name, anim_name)
+			#set_filter_with_all_track(add_node_name, state_add_anim_name)
+			#
+			#if blend_is_add: tween_add_amount(add_node_name, 0.2, 1.0)
+			#else : request_one_shot(add_node_name)
+
+#func _config_animation() -> void:
+	#if not animation_manager: return
+	#
+	#animation_manager.change_animation(anim_node, anim_name)
+	#animation_manager.set_filter_with_all_track(blend_node_name, anim_node)
+#
+#func _config_anim_connection() -> void:
+	#var anim_connection := animation_manager.get_connection_with_from(anim_node)
+	#if anim_connection:
+		#animation_manager.convert_all_connections(anim_connection.to, blend_node_name)
+	#else :
+		#animation_manager.connect_animation_node(anim_node, 1, blend_node_name)

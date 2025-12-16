@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://ds4i8cup57akf"]
+[gd_scene load_steps=50 format=3 uid="uid://ds4i8cup57akf"]
 
 [ext_resource type="AnimationLibrary" uid="uid://ctdrtnjx7txak" path="res://Components/CombatSkill/Weapon/JawTrap/AnimationsData/JawTrapAnimationLibrary.res" id="2_dp6s7"]
 [ext_resource type="Script" uid="uid://bhcip3r7gigab" path="res://Components/CombatSkill/Weapon/JawTrap/jaw_trap.gd" id="2_g4jcv"]
@@ -12,12 +12,13 @@
 [ext_resource type="Shape2D" uid="uid://bw7u1sj0wx0wf" path="res://Components/CombatSkill/Weapon/JawTrap/Ressources/links_shape.tres" id="6_86vhf"]
 [ext_resource type="Script" uid="uid://danilkv671r1y" path="res://Ressources/Attack/AttackType/attack_type.gd" id="6_jeet7"]
 [ext_resource type="Script" uid="uid://c5stjpuprt08p" path="res://StateMachine/States/AttackState/weapon_attack_state.gd" id="10_bxcyf"]
-[ext_resource type="Script" uid="uid://dc54v3rlk5wjt" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/jaw_trap_animation_manager_component.gd" id="13_2xnf2"]
 [ext_resource type="Script" uid="uid://x70cfv1c4jxk" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/on_hand_idle.gd" id="14_2tnll"]
 [ext_resource type="Script" uid="uid://bcmokx1bwyftw" path="res://StateMachine/state_machine.gd" id="14_av258"]
 [ext_resource type="Script" uid="uid://b3ssasrodegel" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/on_hand.gd" id="14_in3ot"]
 [ext_resource type="Script" uid="uid://bey7t8h4m0yyp" path="res://StateMachine/state.gd" id="16_2tnll"]
+[ext_resource type="Script" uid="uid://6lekj6yg62r6" path="res://Components/animation_manager/animation_manager_component.gd" id="16_in3ot"]
 [ext_resource type="Resource" uid="uid://b85xloi286pt1" path="res://Ressources/AnimationConnection/crocodile_animation_connections.tres" id="19_bxcyf"]
+[ext_resource type="Script" uid="uid://dgi2a2c0lt17u" path="res://Components/animation_manager/state_animation_manager.gd" id="19_wdegu"]
 
 [sub_resource type="Resource" id="Resource_yvpvj"]
 script = ExtResource("3_4d2f6")
@@ -197,15 +198,19 @@ need_hit_box_hit = true
 previous_state = NodePath("../SlashAttack1")
 metadata/_custom_type_script = "uid://c5stjpuprt08p"
 
+[node name="State" type="Node" parent="StateMachine/OnHand/SlashAttack2"]
+script = ExtResource("16_2tnll")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
 [node name="ConstantRotatingAttack" type="Node" parent="StateMachine/OnHand" node_paths=PackedStringArray("previous_state")]
 script = ExtResource("10_bxcyf")
 weapon_attack_data = SubResource("Resource_fho1j")
-input_time_interval = Vector2(0.5, -1)
+input_time_interval = Vector2(0.6, -1)
 input_mode = "Continue"
 hit_box_path = NodePath("WeaponHitBox")
 attack_data = SubResource("Resource_7x2u0")
 damage_interval = 0.4
-blend_node_name = &"Add2"
+blend_node_name = &"AttackAdd2"
 previous_state = NodePath("../Idle")
 metadata/_custom_type_script = "uid://c5stjpuprt08p"
 
@@ -311,10 +316,18 @@ disabled = true
 debug_color = Color(1, 0, 0, 0.41960785)
 
 [node name="AnimationManagerComponent" type="Node" parent="."]
-script = ExtResource("13_2xnf2")
-library = ExtResource("2_dp6s7")
-reset_animation = &"1-RESET"
+script = ExtResource("16_in3ot")
 anim_connect_list = ExtResource("19_bxcyf")
+library = ExtResource("2_dp6s7")
 metadata/_custom_type_script = "uid://6lekj6yg62r6"
+
+[node name="StateAnimationManager" type="Node" parent="AnimationManagerComponent" node_paths=PackedStringArray("state_machines")]
+script = ExtResource("19_wdegu")
+play_mode = null
+state_machines = [NodePath("../../StateMachine")]
+state_add_anim_name = null
+state_os_anim_name = null
+auto_trigger = null
+conditions_for_actions_array = null
 
 [connection signal="animation_finished" from="AnimationManagerComponent" to="." method="_on_animation_manager_component_animation_finished"]

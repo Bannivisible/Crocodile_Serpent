@@ -19,8 +19,8 @@ var current_state: State = null:
 var previous_state: State
 var state_locked: bool = false
 
-signal state_changed(state)
-signal state_changed_recur(state, deep_state)
+signal state_changed(state: State)
+signal state_changed_recur(state: State, deep_state: State)
 
 #### BUILT-IN ####
 
@@ -40,16 +40,7 @@ func _process(delta: float) -> void:
 	if current_state != null:
 		current_state.update(delta)
 
-#### LOGIC ###
-
-func get_state() :
-	return current_state
-
-func get_state_name() -> String:
-	if current_state == null:
-		return ""
-	else:
-		return current_state.name
+#### LOGIC ####
 
 func set_state_with_string(state_name: String):
 	for state in get_children():
@@ -63,6 +54,9 @@ func set_state_with_string(state_name: String):
 		elif state is StateMachine:
 			state.set_state_with_string(state_name)
 
+func set_to_default_state() -> void:
+	current_state = get_child(0)
+
 func lock_state(state) -> void:
 	if state is String:
 		set_state_with_string(state)
@@ -73,18 +67,51 @@ func lock_state(state) -> void:
 func unlock_state() -> void:
 	state_locked = false
 
-func set_to_default_state() -> void:
-	current_state = get_child(0)
+func is_locked_recur() -> bool:
+	if state_locked: return true
+	if state_machine: return state_machine.is_locked_recur()
+	return false
+
+#### GETTER ####
+
+func get_state() :
+	return current_state
+
+func get_state_name() -> String:
+	if not current_state:
+		return ""
+	else:
+		return current_state.name
 
 func get_deepest_state() -> State:
 	if current_state is StateMachine: return current_state.get_deepest_state()
 	if current_state: return current_state
 	else : return self
 
+func get_chained_state_list() -> Array[State]:
+	var chained: Array[State]= []
+	
+	if current_state:
+		chained.append(current_state)
+		if current_state is StateMachine:
+			chained += current_state.get_chained_state_list()
+	
+	return chained
+
+func get_chained_state_string(separ_symbol: String= "-") -> String:
+	var chained: String= get_state_name()
+	
+	if current_state is StateMachine:
+		chained += separ_symbol + current_state.get_chained_state_string()
+	
+	return chained
+
+#### INHERITENCE ####
+
 func exit() -> void:
 	current_state = null
 
-#### SIGNAL RESPONSES
+#### SIGNAL RESPONSES ####
 
 func _on_state_changed(_state: State) -> void:
 	state_changed_recur.emit(current_state, current_state)
@@ -99,8 +126,3 @@ func _on_state_changed(_state: State) -> void:
 
 func _on_State_state_changed_recur(_state: State ,deep_state: State):
 	state_changed_recur.emit(current_state, deep_state)
-
-func is_locked_recur() -> bool:
-	if state_locked: return true
-	if state_machine: return state_machine.is_locked_recur()
-	return false

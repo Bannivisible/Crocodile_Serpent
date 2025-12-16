@@ -1,4 +1,4 @@
-[gd_scene load_steps=97 format=3 uid="uid://bgxumcv6rrpm1"]
+[gd_scene load_steps=102 format=3 uid="uid://bgxumcv6rrpm1"]
 
 [ext_resource type="PackedScene" uid="uid://mmkgsg3lueu" path="res://Scene/Characters/character.tscn" id="1_pp85c"]
 [ext_resource type="PackedScene" uid="uid://b74kbwhwtmiu5" path="res://Components/BasiqueMovement/bassqiue_movement_component.tscn" id="2_pp85c"]
@@ -30,7 +30,7 @@
 [ext_resource type="SkeletonModification2DLookAt" uid="uid://c8bnrs2ge68xr" path="res://Scene/Characters/Crocodile/SkeletonModification/hand_front_skeleton_modification_2d_look_at.tres" id="14_umomj"]
 [ext_resource type="Animation" uid="uid://ccbyb3j0w0168" path="res://Scene/Characters/Crocodile/AnimationTree/Idle.res" id="16_jlbrr"]
 [ext_resource type="AnimationLibrary" uid="uid://ctdrtnjx7txak" path="res://Components/CombatSkill/Weapon/JawTrap/AnimationsData/JawTrapAnimationLibrary.res" id="18_8e5hb"]
-[ext_resource type="PackedScene" uid="uid://ds4i8cup57akf" path="res://Components/CombatSkill/Weapon/JawTrap/jaw_trap.tscn" id="28_fjl3l"]
+[ext_resource type="PackedScene" uid="uid://ds4i8cup57akf" path="res://Components/CombatSkill/Weapon/JawTrap/jaw_trap.tscn" id="27_0jkvw"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pp85c"]
 radius = 35.0
@@ -202,7 +202,7 @@ modifications/12 = ExtResource("10_ifobo")
 
 [sub_resource type="Animation" id="Animation_rsvc4"]
 resource_name = "Fall"
-loop_mode = 1
+loop_mode = 2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1250,50 +1250,14 @@ tracks/67/keys = {
 tracks/68/type = "value"
 tracks/68/imported = false
 tracks/68/enabled = true
-tracks/68/path = NodePath("CSManager/JawTrap/WeaponHitBox/CollisionShape2D:position")
+tracks/68/path = NodePath("Skeleton2D/Center/Body/Torso/Head:position")
 tracks/68/interp = 1
 tracks/68/loop_wrap = true
 tracks/68/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-132.00002, -26)]
-}
-tracks/69/type = "value"
-tracks/69/imported = false
-tracks/69/enabled = true
-tracks/69/path = NodePath("CSManager/JawTrap/WeaponHitBox/CollisionShape2D:rotation")
-tracks/69/interp = 1
-tracks/69/loop_wrap = true
-tracks/69/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [3.1738734]
-}
-tracks/70/type = "value"
-tracks/70/imported = false
-tracks/70/enabled = true
-tracks/70/path = NodePath("CSManager/JawTrap/WeaponHitBox:rotation")
-tracks/70/interp = 1
-tracks/70/loop_wrap = true
-tracks/70/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.5707964]
-}
-tracks/71/type = "value"
-tracks/71/imported = false
-tracks/71/enabled = true
-tracks/71/path = NodePath("CSManager/JawTrap/WeaponHitBox:position")
-tracks/71/interp = 1
-tracks/71/loop_wrap = true
-tracks/71/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
+"values": [Vector2(0.0004787445, -125.9832)]
 }
 
 [sub_resource type="Animation" id="Animation_jlbrr"]
@@ -1830,9 +1794,17 @@ _data = {
 &"ToSideRight": SubResource("Animation_qvnx8")
 }
 
-[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_ifobo"]
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_8e5hb"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8e5hb"]
+animation = &"RESET"
 
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_0jkvw"]
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_ifobo"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fjl3l"]
+animation = &"RESET"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_utiys"]
 animation = &"Fall"
@@ -1891,16 +1863,30 @@ states/MoveSpace/node = SubResource("AnimationNodeBlendSpace1D_utiys")
 states/MoveSpace/position = Vector2(408, 100)
 transitions = ["Start", "MoveSpace", SubResource("AnimationNodeStateMachineTransition_jbjqy"), "MoveSpace", "Jump", SubResource("AnimationNodeStateMachineTransition_7cm0d"), "Jump", "Fall", SubResource("AnimationNodeStateMachineTransition_p0okl"), "Fall", "MoveSpace", SubResource("AnimationNodeStateMachineTransition_rsvc4"), "Fall", "End", SubResource("AnimationNodeStateMachineTransition_hgdcd"), "Jump", "End", SubResource("AnimationNodeStateMachineTransition_n380g"), "MoveSpace", "End", SubResource("AnimationNodeStateMachineTransition_3po1k"), "MoveSpace", "Fall", SubResource("AnimationNodeStateMachineTransition_pvels")]
 
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_8e5hb"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dr3s2"]
+animation = &"RESET"
+
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_7cm0d"]
-graph_offset = Vector2(-236.23773, -185.40758)
-nodes/output/position = Vector2(400, 200)
+nodes/output/position = Vector2(700, 200)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_qvnx8")
-nodes/StateMachine/position = Vector2(-460, 140)
-nodes/OneShot/node = SubResource("AnimationNodeOneShot_0jkvw")
-nodes/OneShot/position = Vector2(-40, 320)
-nodes/Add2/node = SubResource("AnimationNodeAdd2_ifobo")
-nodes/Add2/position = Vector2(-40, -100)
-node_connections = [&"output", 0, &"StateMachine"]
+nodes/StateMachine/position = Vector2(-1160, 80)
+nodes/AttackOneShot/node = SubResource("AnimationNodeOneShot_0jkvw")
+nodes/AttackOneShot/position = Vector2(260, 320)
+nodes/StateAdd2/node = SubResource("AnimationNodeAdd2_ifobo")
+nodes/StateAdd2/position = Vector2(-740, 140)
+nodes/AttackAdd2/node = SubResource("AnimationNodeAdd2_8e5hb")
+nodes/AttackAdd2/position = Vector2(260, -60)
+nodes/StateAddAnimation/node = SubResource("AnimationNodeAnimation_fjl3l")
+nodes/StateAddAnimation/position = Vector2(-1140, 340)
+nodes/AttackAnimation/node = SubResource("AnimationNodeAnimation_8e5hb")
+nodes/AttackAnimation/position = Vector2(-100, 360)
+nodes/StateOneShot/node = SubResource("AnimationNodeOneShot_8e5hb")
+nodes/StateOneShot/position = Vector2(-380, 120)
+nodes/StateOneShotAnimation/node = SubResource("AnimationNodeAnimation_dr3s2")
+nodes/StateOneShotAnimation/position = Vector2(-760, 460)
+node_connections = [&"output", 0, &"AttackOneShot", &"AttackOneShot", 0, &"StateOneShot", &"AttackOneShot", 1, &"AttackAnimation", &"StateAdd2", 0, &"StateMachine", &"StateAdd2", 1, &"StateAddAnimation", &"StateOneShot", 0, &"StateAdd2", &"StateOneShot", 1, &"StateOneShotAnimation"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jeet7"]
 radius = 10.036705
@@ -1919,23 +1905,23 @@ z_index = -1
 [node name="ArmBack" type="Sprite2D" parent="SpriteContainer/ArmBackGroup" index="0"]
 modulate = Color(0.735357, 0.735357, 0.735357, 1)
 z_index = -1
-position = Vector2(21.999994, -195)
-rotation = -3.083607
-scale = Vector2(0.999914, -0.999914)
+position = Vector2(52.996723, -200.13513)
+rotation = 3.0692008
+scale = Vector2(0.999909, -0.999909)
 texture = SubResource("AtlasTexture_71p2d")
 offset = Vector2(-10, 17.333)
 
 [node name="ForearmBack" type="Sprite2D" parent="SpriteContainer/ArmBackGroup" index="1"]
-position = Vector2(46.452644, -157.68585)
-rotation = 2.4773853
-scale = Vector2(0.99977994, -0.99977994)
+position = Vector2(82.09285, -166.3169)
+rotation = 3.0267773
+scale = Vector2(0.99977297, -0.99977297)
 texture = SubResource("AtlasTexture_pigwd")
 offset = Vector2(-7.7521763, 23.060297)
 
 [node name="HandBack" type="Sprite2D" parent="SpriteContainer/ArmBackGroup" index="2"]
-position = Vector2(103.47398, -137.13113)
-rotation = 2.7824116
-scale = Vector2(0.99978054, -0.99978054)
+position = Vector2(119.98976, -119.012535)
+rotation = -2.9513817
+scale = Vector2(0.9997736, -0.9997736)
 texture = SubResource("AtlasTexture_ifobo")
 offset = Vector2(-9.287, 11.465)
 
@@ -1944,8 +1930,8 @@ offset = Vector2(-9.287, 11.465)
 [node name="LegBack" type="Sprite2D" parent="SpriteContainer/LegBackGroup" index="0"]
 z_index = -1
 position = Vector2(89.46776, -94.00776)
-rotation = -0.031014098
-scale = Vector2(0.9997169, 0.9997169)
+rotation = -0.031013917
+scale = Vector2(0.99971694, 0.99971694)
 texture = SubResource("AtlasTexture_3ua5h")
 offset = Vector2(0, 17)
 
@@ -1958,9 +1944,9 @@ texture = SubResource("AtlasTexture_utiys")
 offset = Vector2(18, 26.333)
 
 [node name="FootBack" type="Sprite2D" parent="SpriteContainer/LegBackGroup" index="2"]
-position = Vector2(86.71056, -53.9034)
-rotation = -0.6926932
-scale = Vector2(0.9995754, 0.9995754)
+position = Vector2(86.710556, -53.9034)
+rotation = -0.692693
+scale = Vector2(0.99957544, 0.99957544)
 texture = SubResource("AtlasTexture_6et86")
 offset = Vector2(9.333, 10.667)
 
@@ -2044,18 +2030,18 @@ texture = SubResource("AtlasTexture_6d12l")
 [node name="HeadGroup" type="Node2D" parent="SpriteContainer" index="4"]
 z_index = 3
 position = Vector2(0.00047874366, -246.98297)
-rotation = -0.037568048
-scale = Vector2(0.999852, 0.99977577)
+rotation = -0.037567917
+scale = Vector2(0.9998521, 0.99977577)
 
 [node name="Jaw" type="Sprite2D" parent="SpriteContainer/HeadGroup" index="0"]
-position = Vector2(-32.01592, -0.21966553)
-scale = Vector2(1.0040702, 0.9985575)
+position = Vector2(-32.015915, -0.21966553)
+scale = Vector2(1.00407, 0.99856085)
 texture = SubResource("AtlasTexture_wfuh6")
 offset = Vector2(36.92784, -2.5172439)
 
 [node name="FaceGroup" type="Node2D" parent="SpriteContainer/HeadGroup" index="1"]
-position = Vector2(-32.01592, -0.21966553)
-scale = Vector2(1.0000256, 1.0000322)
+position = Vector2(-32.015915, -0.21966553)
+scale = Vector2(1.0000211, 1.000039)
 
 [node name="HairBack" type="Sprite2D" parent="SpriteContainer/HeadGroup/FaceGroup" index="0"]
 z_index = -1
@@ -2111,17 +2097,17 @@ position = Vector2(3.0087547, 3.258667)
 texture = SubResource("AtlasTexture_hb14a")
 
 [node name="StrandBack" type="Sprite2D" parent="SpriteContainer/HeadGroup" index="2"]
-position = Vector2(-43.348717, 16.781311)
-rotation = -0.34909013
-scale = Vector2(1.0034328, 0.9996909)
-skew = 4.8995018e-05
+position = Vector2(-43.34871, 16.781311)
+rotation = -0.3490902
+scale = Vector2(1.0034328, 0.9996917)
+skew = 4.9114227e-05
 texture = SubResource("AtlasTexture_weadw")
 offset = Vector2(20.086979, -10.858177)
 
 [node name="StrandFront" type="Sprite2D" parent="SpriteContainer/HeadGroup" index="3"]
 z_index = 1
-position = Vector2(13.39008, -58.47963)
-scale = Vector2(1.0040702, 1.0011213)
+position = Vector2(13.390077, -58.47963)
+scale = Vector2(1.00407, 1.0011326)
 texture = SubResource("AtlasTexture_24sqv")
 offset = Vector2(3.8255405, 18.435066)
 
@@ -2131,21 +2117,21 @@ z_index = 3
 [node name="ArmFront" type="Sprite2D" parent="SpriteContainer/ArmFrontGroup" index="0"]
 position = Vector2(-56.33362, -199.66608)
 rotation = -0.021970097
-scale = Vector2(0.99984854, 0.99984854)
+scale = Vector2(0.9998457, 0.9998457)
 texture = SubResource("AtlasTexture_kwm2e")
 offset = Vector2(-10, 17.333)
 
 [node name="ForearmFront" type="Sprite2D" parent="SpriteContainer/ArmFrontGroup" index="1"]
-position = Vector2(-77.282074, -166.86978)
-rotation = -0.072139084
-scale = Vector2(0.9996966, 0.9996966)
+position = Vector2(-77.28201, -166.86987)
+rotation = -0.07213891
+scale = Vector2(0.99969095, 0.99969095)
 texture = SubResource("AtlasTexture_l1deg")
 offset = Vector2(-14, 25.667)
 
 [node name="HandFront" type="Sprite2D" parent="SpriteContainer/ArmFrontGroup" index="2"]
-position = Vector2(-100.41318, -117.08721)
-rotation = -0.2591005
-scale = Vector2(0.99970084, 0.99970084)
+position = Vector2(-100.412994, -117.08759)
+rotation = -0.25910032
+scale = Vector2(0.9996951, 0.9996951)
 texture = SubResource("AtlasTexture_fs2r1")
 offset = Vector2(-12, 15)
 
@@ -2153,22 +2139,22 @@ offset = Vector2(-12, 15)
 
 [node name="LegFront" type="Sprite2D" parent="SpriteContainer/LegFrontGroup" index="0"]
 position = Vector2(-81.60423, -96.19624)
-rotation = -0.14873031
-scale = Vector2(0.99973327, 0.99973327)
+rotation = -0.14873034
+scale = Vector2(0.9997338, 0.9997338)
 texture = SubResource("AtlasTexture_qvnx8")
 offset = Vector2(2.667, 21.333)
 
 [node name="ThighFront" type="Sprite2D" parent="SpriteContainer/LegFrontGroup" index="1"]
 position = Vector2(-35.667114, -117.332825)
 rotation = 0.83291465
-scale = Vector2(0.9998711, 0.9998711)
+scale = Vector2(0.999871, 0.999871)
 texture = SubResource("AtlasTexture_jbjqy")
 offset = Vector2(-5.667, 21)
 
 [node name="FootFront" type="Sprite2D" parent="SpriteContainer/LegFrontGroup" index="2"]
-position = Vector2(-75.69519, -51.454178)
-rotation = 0.016992483
-scale = Vector2(0.99958134, 0.99958134)
+position = Vector2(-75.69519, -51.45415)
+rotation = 0.016992504
+scale = Vector2(0.99958193, 0.99958193)
 texture = SubResource("AtlasTexture_7cm0d")
 offset = Vector2(2.2518923, 17.591896)
 
@@ -2259,7 +2245,7 @@ update_scale = false
 [node name="ArmFront" type="Bone2D" parent="Skeleton2D/Center/Body/Torso" index="2"]
 position = Vector2(-56.333717, -78.666214)
 rotation = -0.021970097
-scale = Vector2(0.99985033, 0.99985033)
+scale = Vector2(0.9998475, 0.9998475)
 rest = Transform2D(0.99965245, -0.021965997, 0.021965997, 0.99965245, -56.333717, -78.666214)
 
 [node name="ArmFront" type="RemoteTransform2D" parent="Skeleton2D/Center/Body/Torso/ArmFront" index="0"]
@@ -2268,7 +2254,7 @@ remote_path = NodePath("../../../../../../SpriteContainer/ArmFrontGroup/ArmFront
 [node name="ForeArmFront" type="Bone2D" parent="Skeleton2D/Center/Body/Torso/ArmFront" index="1"]
 position = Vector2(-21.667164, 32.33307)
 rotation = -0.05016899
-scale = Vector2(0.99984807, 0.99984807)
+scale = Vector2(0.9998452, 0.9998452)
 rest = Transform2D(0.9986116, -0.05014122, 0.05014122, 0.9986116, -21.667164, 32.33307)
 
 [node name="ForeArmFront" type="RemoteTransform2D" parent="Skeleton2D/Center/Body/Torso/ArmFront/ForeArmFront" index="0"]
@@ -2296,7 +2282,7 @@ update_rotation = false
 [node name="ArmBack" type="Bone2D" parent="Skeleton2D/Center/Body/Torso" index="3"]
 position = Vector2(52.99682, -79.13528)
 rotation = -0.07239183
-scale = Vector2(0.9999158, 0.9999158)
+scale = Vector2(0.9999108, 0.9999108)
 rest = Transform2D(0.99735355, -0.072326615, 0.072326615, 0.99735355, 52.99682, -79.13528)
 
 [node name="ArmBack" type="RemoteTransform2D" parent="Skeleton2D/Center/Body/Torso/ArmBack" index="0"]
@@ -2306,7 +2292,7 @@ remote_path = NodePath("../../../../../../SpriteContainer/ArmBackGroup/ArmBack")
 [node name="ForeArmBack" type="Bone2D" parent="Skeleton2D/Center/Body/Torso/ArmBack" index="1"]
 position = Vector2(26.576317, 35.837402)
 rotation = -0.042423725
-scale = Vector2(0.99986595, 0.99986595)
+scale = Vector2(0.999864, 0.999864)
 rest = Transform2D(0.9990414, -0.042408325, 0.042408325, 0.9990414, 26.576317, 35.837402)
 
 [node name="ForeArmBack" type="RemoteTransform2D" parent="Skeleton2D/Center/Body/Torso/ArmBack/ForeArmBack" index="0"]
@@ -2331,6 +2317,7 @@ position = Vector2(7.4243355, 10.373028)
 gizmo_extents = 60.3
 
 [node name="HandBackTarget" type="RemoteTransform2D" parent="Skeleton2D/Center/Body/Torso/ArmBack/ForeArmBack/HandBack/HandBackTarget" index="0"]
+update_rotation = false
 
 [node name="ThighFront" type="Bone2D" parent="Skeleton2D/Center" index="1"]
 position = Vector2(-35.66718, 3.667183)
@@ -2344,7 +2331,7 @@ remote_path = NodePath("../../../../SpriteContainer/LegFrontGroup/ThighFront")
 [node name="LegFront" type="Bone2D" parent="Skeleton2D/Center/ThighFront" index="1"]
 position = Vector2(-15.266029, 48.21392)
 rotation = -0.19699557
-scale = Vector2(0.99986225, 0.99986225)
+scale = Vector2(0.9998629, 0.9998629)
 rest = Transform2D(0.9806263, -0.19571733, 0.19571733, 0.9806263, -15.266029, 48.21392)
 
 [node name="LegFront" type="RemoteTransform2D" parent="Skeleton2D/Center/ThighFront/LegFront" index="0"]
@@ -2447,10 +2434,14 @@ deterministic = false
 tree_root = SubResource("AnimationNodeBlendTree_7cm0d")
 anim_player = NodePath("../AnimationPlayer")
 parameters/StateMachine/MoveSpace/blend_position = 0.0134932995
-parameters/OneShot/active = false
-parameters/OneShot/internal_active = false
-parameters/OneShot/request = 0
-parameters/Add2/add_amount = 0.0
+parameters/AttackOneShot/active = false
+parameters/AttackOneShot/internal_active = false
+parameters/AttackOneShot/request = 0
+parameters/StateAdd2/add_amount = 0.0
+parameters/AttackAdd2/add_amount = 0.0
+parameters/StateOneShot/active = false
+parameters/StateOneShot/internal_active = false
+parameters/StateOneShot/request = 0
 
 [node name="BMC" parent="." index="6" instance=ExtResource("2_pp85c")]
 auto_trigger = true
@@ -2472,23 +2463,32 @@ metadata/_edit_use_anchors_ = true
 [node name="CSManager" type="Node2D" parent="." index="7"]
 script = ExtResource("6_wwopw")
 
-[node name="JawTrap" parent="CSManager" index="0" instance=ExtResource("28_fjl3l")]
+[node name="JawTrap" parent="CSManager" index="0" instance=ExtResource("27_0jkvw")]
 
 [node name="Front" parent="CSManager/JawTrap" index="1"]
-position = Vector2(-107, -99)
-rotation = 0.5053452
+position = Vector2(72.07811, -197.68535)
+rotation = 1.3624717
+scale = Vector2(0.9996952, 0.9996952)
+
+[node name="Sleeve" parent="CSManager/JawTrap/Front/Offest" index="0"]
+z_index = -2
+
+[node name="Iron" parent="CSManager/JawTrap/Front/Offest" index="1"]
+z_index = -2
+
+[node name="Jaw" parent="CSManager/JawTrap/Front/Offest" index="2"]
+z_index = -2
 
 [node name="Back" parent="CSManager/JawTrap" index="3"]
-position = Vector2(114.068405, -130.03133)
-rotation = -0.35918105
-scale = Vector2(0.99978054, 0.99978054)
+position = Vector2(152.14838, -223.57552)
+rotation = -0.46872127
+scale = Vector2(0.9997736, 0.9997736)
 
 [node name="CollisionShape2D" parent="CSManager/JawTrap/Back" index="1"]
 shape = SubResource("CapsuleShape2D_jeet7")
 
 [node name="CollisionShape2D" parent="CSManager/JawTrap/WeaponHitBox" index="0"]
-position = Vector2(-132.00002, -26)
-rotation = 3.1738734
+position = Vector2(-169, -140)
 
 [node name="HealthComponent" parent="." index="8" instance=ExtResource("10_51sid")]
 visible = false

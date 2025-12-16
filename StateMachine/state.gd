@@ -23,6 +23,20 @@ func update(_delta: float) -> void:
 func exit() -> void:
 	pass
 
-func is_current_state():
+func is_current_state() -> bool:
 	if state_machine is StateMachine:
 		return state_machine.current_state == self
+	return false
+
+func get_chained_string(separ_symbol: String= "-") -> String:
+	var chained: String= ""
+	
+	if state_machine:
+		chained = state_machine.get_chained_string() + separ_symbol + chained
+	
+	return chained
+
+func get_top_state_machine() -> StateMachine:
+	if state_machine:
+		return state_machine.get_top_state_machine()
+	return self

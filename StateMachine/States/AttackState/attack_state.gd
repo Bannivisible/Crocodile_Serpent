@@ -18,8 +18,8 @@ class_name AttackState
 @export_group("Animation")
 @export var anim_manager_path: NodePath= "AnimationManagerComponent"
 @export var anim_name: StringName= name
-@export var anim_node: StringName= "Attack"
-@export var blend_node_name: StringName= "OneShot"
+@export var anim_node: StringName= "AttackAnimation"
+@export var blend_node_name: StringName= "AttackOneShot"
 
 @export_group("Combo")
 @export_range(0.0, 60.0) var combo_cooldown: float
@@ -121,7 +121,7 @@ func exit() -> void:
 	if blend_node is AnimationNodeAdd2 or blend_node is AnimationNodeAdd3:
 		animation_manager.set_add_amount(blend_node_name, 0.0)
 	
-	animation_manager.play_reset_animation()
+	#animation_manager.play_reset_animation()
 
 func _update_hit_box() -> void:
 	hit_box.attack_data = attack_data
@@ -184,9 +184,7 @@ func _config_anim_connection() -> void:
 		animation_manager.connect_animation_node(anim_node, 1, blend_node_name)
 
 func _obtain_animation_name_with_lib(name_of_anime: StringName) -> StringName:
-	var lib: AnimationLibrary= animation_manager.get_libraries()[0]
-	var anime_name: StringName= animation_manager.add_library_to_name(name_of_anime, lib)
-	return anime_name
+	return animation_manager.add_library_to_name(name_of_anime)
 
 func is_combo_cooldown_running() -> bool:
 	if not combo_timer: return true
@@ -215,4 +213,3 @@ func _on_hit_box_hit(_damage: float, _hurt_box: HurtBox) -> void:
 
 func _on_combo_timer_timeout() -> void:
 	pass
-

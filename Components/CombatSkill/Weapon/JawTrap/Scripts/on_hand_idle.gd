@@ -12,4 +12,3 @@ extends State
 	#
 	#if Input.is_action_just_pressed("attack"):
 		#state_machine.set_state_with_string("SlashAttack1")
-
