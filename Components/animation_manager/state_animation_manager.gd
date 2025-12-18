@@ -18,14 +18,38 @@ func _ready() -> void:
 		state_machine.state_changed_recur.connect(_on_state_machine_state_changed_recur)
 
 #### LOGIC ####
-func _get_anim_name(state: State) -> StringName:
-	var anim_name: StringName= &""
+func _get_anim_name(state: State) -> String:
+	var anim_name: String= ""
+	var top_state_machine := state.get_top_state_machine()
 	
 	for i in range(state_machines.size()):
-		anim_name += state_machines[i].get_chained_state_string()
+		if state_machines[i] == top_state_machine:
+			anim_name = state.get_chained_string()
+			anim_name = anim_name.substr(len(top_state_machine.name) + 1)
+			
+		else :
+			anim_name = state_machines[i].get_chained_state_string()
+		
 		if i < state_machines.size() - 1: anim_name += "|"
 	
-	return anim_manager.get_anime_complete_name(anim_name)
+	anim_name = _get_existing_anim_name(anim_name)
+	
+	return anim_name
+
+func _get_existing_anim_name(anim_name: String) -> String:
+	anim_name = anim_manager.get_anime_complete_name(anim_name)
+	
+	if anim_manager.has_animation(anim_name):
+		return anim_name
+	
+	for i in range(state_machines.size() - 1):
+		anim_name = Utiles.end_substr_until_meet(anim_name, "|")
+		anim_name = anim_manager.get_anime_complete_name(anim_name)
+		
+		if anim_manager.has_animation(anim_name):
+			return anim_name
+	
+	return ""
 
 func _add_logic(anim_name: StringName) -> void:
 	var connection: AnimationConnection= anim_manager.get_connection_with_from(state_add_anim_name)
@@ -40,18 +64,20 @@ func _add_logic(anim_name: StringName) -> void:
 	anim_manager.tween_add_amount(add_node_name, 0.2, 1.0)
 
 func _one_shot_logic(anim_name:StringName) -> void:
-	var connection: AnimationConnection= anim_manager.get_connection_with_from(state_add_anim_name)
+	var connection: AnimationConnection= anim_manager.get_connection_with_from(state_os_anim_name)
 	var os_node_name: StringName= connection.to
 	
-	anim_manager.reset_filter(state_add_anim_name)
-	anim_manager.change_animation(state_add_anim_name, anim_name)
-	anim_manager.set_filter_with_all_track(os_node_name, state_add_anim_name)
+	anim_manager.reset_filter(state_os_anim_name)
+	anim_manager.change_animation(state_os_anim_name, anim_name)
+	anim_manager.set_filter_with_all_track(os_node_name, state_os_anim_name)
 	
 	anim_manager.request_one_shot(os_node_name)
 
 func _play_state_anime(state: State) -> void:
 	if state is AttackState: return
-	var anim_name: StringName= state.get_chained_string()
+	var anim_name: StringName= _get_anim_name(state)
+	
+	if not anim_manager.has_animation(anim_name): return
 	
 	match play_mode:
 		"Play": 

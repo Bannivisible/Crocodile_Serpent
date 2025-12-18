@@ -107,6 +107,8 @@ func set_filter_with_all_track(blend_nd_name: StringName, anim_node: StringName,
 	
 	for prop_path in get_animation_traks(anime):
 		blend_node.set_filter_path(prop_path, activate)
+	
+	blend_node.filter_enabled = activate
 
 func reset_filter(blend_nd_name: StringName) -> void:
 	if not tracks_filter.has(blend_nd_name) or tracks_filter[blend_nd_name] == "": return

@@ -137,3 +137,39 @@ static func get_resource_name(resource: Resource) -> String:
 	var resource_name := get_last_string_of_path(resource.resource_path)
 	resource_name = resource_name.erase(len(resource_name)-4, 4)
 	return resource_name
+
+static func start_substr_until_meet(string: String, charc: String) -> String:
+	var substr := string
+	var i := 0
+	
+	while i < len(substr):
+		if substr[i] == charc:
+			substr = substr.substr(0, i)
+			i = 0
+		i += 1
+	
+	return string
+
+static func end_substr_until_meet(string: String, charc: String) -> String:
+	var substr := string
+	var i := len(string) - 1
+	
+	while i >= 0:
+		if substr[i] == charc:
+			substr = substr.substr(0, i)
+			return substr
+		i -= 1
+	
+	return string
+
+static func end_substr_multipy_until_meet(string: String, charc: String) -> String:
+	var substr := string
+	var i := len(string) - 1
+	
+	while i >= 0:
+		if substr[i] == charc:
+			substr = substr.substr(0, i)
+			i = len(substr)
+		i -= 1
+	
+	return substr

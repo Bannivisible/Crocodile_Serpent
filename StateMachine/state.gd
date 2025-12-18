@@ -29,12 +29,16 @@ func is_current_state() -> bool:
 	return false
 
 func get_chained_string(separ_symbol: String= "-") -> String:
-	var chained: String= ""
-	
 	if state_machine:
-		chained = state_machine.get_chained_string() + separ_symbol + chained
-	
-	return chained
+		return state_machine.get_chained_string() + separ_symbol + name
+	else :
+		return name
+
+func get_chained_list() -> Array[State]:
+	if state_machine:
+		return state_machine.get_chained_list() + [self]
+	else :
+		return [self]
 
 func get_top_state_machine() -> StateMachine:
 	if state_machine:
