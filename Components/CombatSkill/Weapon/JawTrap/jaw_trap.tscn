@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://ds4i8cup57akf"]
+[gd_scene load_steps=53 format=3 uid="uid://ds4i8cup57akf"]
 
 [ext_resource type="AnimationLibrary" uid="uid://ctdrtnjx7txak" path="res://Components/CombatSkill/Weapon/JawTrap/AnimationsData/JawTrapAnimationLibrary.res" id="2_dp6s7"]
 [ext_resource type="Script" uid="uid://bhcip3r7gigab" path="res://Components/CombatSkill/Weapon/JawTrap/jaw_trap.gd" id="2_g4jcv"]
@@ -102,6 +102,21 @@ script = ExtResource("5_v0eml")
 type = SubResource("Resource_11eis")
 metadata/_custom_type_script = "uid://ce7ave72wm32j"
 
+[sub_resource type="Resource" id="Resource_mkx5c"]
+script = ExtResource("3_4d2f6")
+value = 30.0
+metadata/_custom_type_script = "uid://c20oatp4y0el5"
+
+[sub_resource type="Resource" id="Resource_vpr7y"]
+script = ExtResource("5_4d2f6")
+add_crit_rate = SubResource("Resource_mkx5c")
+metadata/_custom_type_script = "uid://bpo8hybdit330"
+
+[sub_resource type="Resource" id="Resource_5rtpq"]
+script = ExtResource("5_v0eml")
+multiplier = 2.0
+metadata/_custom_type_script = "uid://ce7ave72wm32j"
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_p0okl"]
 atlas = ExtResource("4_jeet7")
 region = Rect2(305, 130, 102, 65)
@@ -198,10 +213,6 @@ need_hit_box_hit = true
 previous_state = NodePath("../SlashAttack1")
 metadata/_custom_type_script = "uid://c5stjpuprt08p"
 
-[node name="State" type="Node" parent="StateMachine/OnHand/SlashAttack2"]
-script = ExtResource("16_2tnll")
-metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
-
 [node name="ConstantRotatingAttack" type="Node" parent="StateMachine/OnHand" node_paths=PackedStringArray("previous_state")]
 script = ExtResource("10_bxcyf")
 weapon_attack_data = SubResource("Resource_fho1j")
@@ -212,6 +223,13 @@ attack_data = SubResource("Resource_7x2u0")
 damage_interval = 0.4
 blend_node_name = &"AttackAdd2"
 previous_state = NodePath("../Idle")
+metadata/_custom_type_script = "uid://c5stjpuprt08p"
+
+[node name="ThrowAttack" type="Node" parent="StateMachine/OnHand" node_paths=PackedStringArray("previous_state")]
+script = ExtResource("10_bxcyf")
+weapon_attack_data = SubResource("Resource_vpr7y")
+attack_data = SubResource("Resource_5rtpq")
+previous_state = NodePath("../ConstantRotatingAttack")
 metadata/_custom_type_script = "uid://c5stjpuprt08p"
 
 [node name="OnJaw" type="Node" parent="StateMachine"]
