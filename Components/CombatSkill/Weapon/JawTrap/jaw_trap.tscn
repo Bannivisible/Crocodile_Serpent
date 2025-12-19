@@ -228,6 +228,7 @@ metadata/_custom_type_script = "uid://c5stjpuprt08p"
 [node name="ThrowAttack" type="Node" parent="StateMachine/OnHand" node_paths=PackedStringArray("previous_state")]
 script = ExtResource("10_bxcyf")
 weapon_attack_data = SubResource("Resource_vpr7y")
+input_time_interval = Vector2(2, -1)
 attack_data = SubResource("Resource_5rtpq")
 previous_state = NodePath("../ConstantRotatingAttack")
 metadata/_custom_type_script = "uid://c5stjpuprt08p"

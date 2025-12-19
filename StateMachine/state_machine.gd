@@ -4,17 +4,20 @@ class_name StateMachine
 @export var set_to_default_state_at_ready: bool= false
 
 var current_state: State = null:
-	set(state):
-		if state != current_state and not is_locked_recur():
-			if current_state != null:
-				current_state.exit()
-			previous_state = current_state
-			
-			current_state = state
-			if current_state != null:
-				current_state.enter()
-			
-			state_changed.emit(current_state)
+	set = _set_current_state
+
+func _set_current_state(state: State) -> void:
+	if state != current_state and not is_locked_recur():
+		previous_state = current_state
+		current_state = state
+		
+		if previous_state:
+			previous_state.exit()
+		
+		if current_state != null:
+			current_state.enter()
+		
+		state_changed.emit(current_state)
 
 var previous_state: State
 var state_locked: bool = false

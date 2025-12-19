@@ -120,8 +120,7 @@ func enter() -> void:
 func exit() -> void:
 	if blend_node is AnimationNodeAdd2 or blend_node is AnimationNodeAdd3:
 		animation_manager.set_add_amount(blend_node_name, 0.0)
-	
-	#animation_manager.play_reset_animation()
+		animation_manager.animation_finished.emit(anim_name)
 
 func _update_hit_box() -> void:
 	hit_box.attack_data = attack_data
@@ -145,7 +144,8 @@ func _combo_logic() -> void:
 		
 		if prev_attack.is_attack_currently_playing():
 			await animation_manager.animation_finished
-		elif not is_combo_cooldown_running(): return 
+		elif not is_combo_cooldown_running():
+			return 
 	
 	elif not previous_state.is_current_state():
 		return
