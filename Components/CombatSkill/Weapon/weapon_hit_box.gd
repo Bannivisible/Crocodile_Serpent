@@ -15,7 +15,8 @@ func _compute_raw_damage() -> float:
 
 func _is_critical() -> bool:
 	var weapon: Weapon= cs
-	var total_crit: float= weapon.critical_rate.value * weapon_attck_data.mult_crit_rate + weapon_attck_data.add_crit_rate.value
+	var add_crit_rate: float=  weapon_attck_data.add_crit_rate.value if weapon_attck_data.add_crit_rate else 0.0
+	var total_crit: float= weapon.critical_rate.value * weapon_attck_data.mult_crit_rate + add_crit_rate
 	
 	return total_crit > randf()
 

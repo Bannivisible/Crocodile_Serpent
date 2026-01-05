@@ -44,7 +44,7 @@ func _ready() -> void:
 	if not anim_name: anim_name= name
 	
 	if not animation_manager.is_node_ready(): await animation_manager.ready
-	anim_name = _obtain_animation_name_with_lib(anim_name)
+	anim_name = animation_manager.get_anime_complete_name(anim_name)
 	
 	blend_node = animation_manager.get_animation_node(blend_node_name)
 	
@@ -66,7 +66,8 @@ func _input(_event: InputEvent) -> void:
 				input_time = 0.0
 			
 			"Continue":
-				state_machine.set_state_with_string(idle_state_name)
+				if is_current_state():
+					state_machine.set_state_with_string(idle_state_name)
 	
 	if Input.is_action_pressed(input_name) and input_mode == "Continue":
 		if is_input_timer_in_interval():
@@ -100,16 +101,13 @@ func _obtain_hit_box_path() -> String:
 
 func _create_combo_timer() -> Timer:
 	if combo_cooldown <= 0.0: return null
+	if combo_timer: combo_timer.queue_free()
 	
 	var timer = Timer.new()
 	timer.wait_time = combo_cooldown
 	timer.one_shot = true
 	add_child(timer)
 	return timer
-
-#func _obtain_previous_state() -> State:
-	#
-	#return state_machine.get_node_or_null(idle_state_name)
 
 #### INHERITANCE ####
 
@@ -118,8 +116,8 @@ func enter() -> void:
 	_update_animation_tree()
 
 func exit() -> void:
-	if blend_node is AnimationNodeAdd2 or blend_node is AnimationNodeAdd3:
-		animation_manager.set_add_amount(blend_node_name, 0.0)
+	if blend_node is AnimationNodeBlend2 or blend_node is AnimationNodeBlend3:
+		animation_manager.set_blend_amount(blend_node_name, 0.0)
 		animation_manager.animation_finished.emit(anim_name)
 
 func _update_hit_box() -> void:
@@ -133,8 +131,8 @@ func _update_animation_tree() -> void:
 	if blend_node is AnimationNodeOneShot:
 		animation_manager.request_one_shot(blend_node_name, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	
-	elif blend_node is AnimationNodeAdd2:
-		animation_manager.set_add_amount(blend_node_name, 1.0)
+	elif blend_node is AnimationNodeBlend2:
+		animation_manager.set_blend_amount(blend_node_name, 1.0)
 
 #### LOGICS ####
 
@@ -145,7 +143,9 @@ func _combo_logic() -> void:
 		if prev_attack.is_attack_currently_playing():
 			await animation_manager.animation_finished
 		elif not is_combo_cooldown_running():
-			return 
+			return
+		
+		if name == "ThrowAttack": print("ok")
 	
 	elif not previous_state.is_current_state():
 		return
@@ -164,8 +164,8 @@ func is_attack_currently_playing() -> bool:
 	if blend_node is AnimationNodeOneShot:
 		return anim_node_anime.animation == anim_name and animation_manager.is_one_shot_active(blend_node_name)
 	
-	elif blend_node is AnimationNodeAdd2 or blend_node is AnimationNodeAdd3:
-		return anim_node_anime.animation == anim_name and animation_manager.get_add_amount(blend_node_name) != 0.0
+	elif blend_node is AnimationNodeBlend2 or blend_node is AnimationNodeBlend3:
+		return anim_node_anime.animation == anim_name and animation_manager.get_blend_amount(blend_node_name) != 0.0
 	
 	else :
 		return animation_manager.get_current_animation_name() == anim_name

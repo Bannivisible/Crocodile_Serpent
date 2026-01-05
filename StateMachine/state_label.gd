@@ -3,10 +3,13 @@ class_name StateLabel
 
 
 func _ready() -> void:
-	get_parent().state_changed_recur.connect(on_StateMachine_state_changed_recur)
-
-func on_StateMachine_state_changed_recur(state: State, _deep_state: State) -> void:
-	text = get_state_name_recur(state)
+	var state_machine: StateMachine= get_parent()
+	state_machine.state_changed_recur.connect(_on_StateMachine_state_changed_recur)
+	
+	if not state_machine.is_node_ready():
+		await state_machine.ready
+	
+	text = get_state_name_recur(state_machine.current_state)
 
 func get_state_name_recur(state: State) -> String:
 	if state != null:
@@ -16,3 +19,6 @@ func get_state_name_recur(state: State) -> String:
 			return state.name
 	else:
 		return "null"
+
+func _on_StateMachine_state_changed_recur(state: State, _deep_state: State) -> void:
+	text = get_state_name_recur(state)

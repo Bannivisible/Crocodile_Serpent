@@ -30,7 +30,7 @@ signal state_changed_recur(state: State, deep_state: State)
 func _ready() -> void:
 	#Set to default_state
 	if set_to_default_state_at_ready: 
-		await owner.ready
+		if not owner.is_node_ready(): await owner.ready
 		set_to_default_state()
 	
 	#Connect signals
@@ -45,20 +45,28 @@ func _process(delta: float) -> void:
 
 #### LOGIC ####
 
-func set_state_with_string(state_name: String):
+func set_state(state: State) -> void:
+	for child in get_children():
+		if child == state: 
+			current_state = child
+			return
+		
+		elif child is StateMachine:
+			child.set_state(state)
+
+func set_state_with_string(state_name: String) -> void:
 	for state in get_children():
 		if state.name == state_name:
 			current_state = state
-			
-			if state_machine is StateMachine:
-				state_machine.set_state_with_string(self.name)
-			return
 		
 		elif state is StateMachine:
 			state.set_state_with_string(state_name)
 
 func set_to_default_state() -> void:
-	current_state = get_child(0)
+	for child in get_children():
+		if child is State:
+			current_state = child
+			return
 
 func lock_state(state) -> void:
 	if state is String:
@@ -123,9 +131,10 @@ func _on_state_changed(_state: State) -> void:
 		previous_state.state_exited.emit()
 	
 	if current_state:
-		if state_machine: state_machine.current_state = self
-		
 		current_state.state_entered.emit()
+		
+		if not is_current_state() and state_machine != null:
+				state_machine.current_state = self
 
 func _on_State_state_changed_recur(_state: State ,deep_state: State):
 	state_changed_recur.emit(current_state, deep_state)

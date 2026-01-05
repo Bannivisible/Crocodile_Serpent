@@ -3,16 +3,14 @@ class_name BMC
 
 @export var speed: SpeedStat
 
-@export var visual_node: NodePath= "../SpriteContainer"
+@export var facing_node: Node2D
 @onready var anim_player: AnimationPlayer= owner.get_node("AnimationPlayer")
 @onready var anim_tree: AnimationTree= owner.get_node("AnimationTree")
-
 
 @onready var state_machine_x: StateMachine = $StateMachineX
 @onready var state_machine_y: StateMachine = $StateMachineY
 
 @onready var character: Character= object
-
 
 var facing_direction := Vector2.RIGHT:
 	set(value):
@@ -26,8 +24,8 @@ var dir: Vector2:
 			dir = value
 			dir_changed.emit(dir)
 
-signal dir_changed(dir)
-signal facing_direction_changed(face_dir)
+signal dir_changed(dir: Vector2)
+signal facing_direction_changed(face_dir: Vector2)
 
 #### BUILT-IN ####
 func _ready() -> void:
@@ -47,10 +45,10 @@ func _physics_process(delta: float) -> void:
 	
 	character.move_and_slide()
 	
-	if character.is_on_floor():
+	if character.is_on_floor() and $StateMachineY/Air/Fall.is_current_state():
 		state_machine_y.set_state_with_string("Grounded")
 	
-	elif character.velocity.y > 0:
+	elif character.velocity.y > 0 and $StateMachineY/Grounded.is_current_state() or $StateMachineY/Air/Jump.is_current_state():
 		state_machine_y.set_state_with_string("Fall")
 
 func _update_animation() -> void:
@@ -66,6 +64,8 @@ func _update_animation() -> void:
 		anim_player.play(x_state_name)
 
 #### LOGIC ####
+
+
 func immobilize() -> void:
 	state_machine_x.lock_state($StateMachineX/Idle)
 	state_machine_y.lock_state($StateMachineY/Grounded)
@@ -77,16 +77,15 @@ func free_immobilize() -> void:
 #### SIGNAL RESPONSES ####
 func _on_dir_changed(_dir: Vector2) -> void:
 	# X axis
-	if abs(dir.x) != 1.0:
+	if dir.x == 0.0:
 		state_machine_x.set_state_with_string("Idle")
 	else:
 		state_machine_x.set_state_with_string("Move")
-		facing_direction.x = dir.x
+		facing_direction.x = sign(dir.x)
 
 func _on_face_dir_changed(_dir: Vector2) -> void:
-	pass
-	#var visual: Node2D = get_node(visual_node)
-	#visual.scale.x = facing_direction.x
+	if facing_node:
+		facing_node.scale.x = facing_direction.x
 
 func _on_state_machine_state_change_recur(_state: State, _deep_state: State) -> void:
 	_update_animation()

@@ -34,7 +34,7 @@ func _add_library(anim_lib: AnimationLibrary, lib_name :=StringName(Utiles.get_r
 
 ## PUBLIC ##
 
-func play_animation(anim_name: StringName) -> void:
+func play(anim_name: StringName) -> void:
 	animation_player.play(anim_name)
 
 func get_current_animation_name() -> String:
@@ -42,7 +42,7 @@ func get_current_animation_name() -> String:
 
 func play_reset_animation() -> void:
 	if animation_player.has_animation(reset_animation):
-		animation_player.play(reset_animation)
+		play(reset_animation)
 
 func has_animation(anim_name: StringName) -> bool:
 	return animation_player.has_animation(anim_name)
@@ -164,6 +164,22 @@ func request_one_shot(one_shot: String, request:= AnimationNodeOneShot.ONE_SHOT_
 func is_one_shot_active(one_shot: String) -> bool:
 	return animation_tree.get("parameters/%s/active" % one_shot)
 
+## BLEND ##
+
+func set_blend_amount(blend_node_name: StringName, amount: float) -> void:
+	amount = max(min(amount, 1.0), 0.0)
+	animation_tree.set("parameters/%s/blend_amount" %blend_node_name, amount)
+
+func tween_blend_amount(blend_node_name: StringName, duration: float, amount: float= 1.0, tw_ease := Tween.EASE_IN, tw_trans := Tween.TRANS_LINEAR) -> void:
+	var tween_add: Tween= create_tween()
+	tween_add.set_ease(tw_ease).set_trans(tw_trans)
+	var parameter_path: NodePath= NodePath("parameters/%s/blend_amount" %blend_node_name)
+	
+	tween_add.tween_property(animation_tree, parameter_path, amount, duration)
+
+func get_blend_amount(blend_node_name: StringName) -> float:
+	return animation_tree.get("parameters/%s/blend_amount" %blend_node_name)
+
 ## ADD ##
 
 func set_add_amount(add_node_name: StringName, amount: float) -> void:
@@ -185,7 +201,9 @@ func get_animation(anim_name: StringName) -> Animation:
 	return animation_player.get_animation(anim_name)
 
 func get_animation_traks(anime: Animation) -> Array[NodePath]:
-	var properties: Array[NodePath]
+	var properties: Array[NodePath]= []
+	
+	if anime == null: return properties
 	
 	for i in anime.get_track_count():
 		var prop_path: NodePath= anime.track_get_path(i)
@@ -242,4 +260,16 @@ func get_anime_complete_name(anim_name: StringName) -> StringName:
 		return add_library_to_name(anim_name)
 	return anim_name
 
+func get_all_current_anim_name_in_tree() -> Array[StringName]:
+	var anim_list: Array[StringName]= []
+	
+	for anim_node_name in tree_root.get_node_list():
+		var anim_node := tree_root.get_node(anim_node_name)
+		
+		if anim_node is AnimationNodeAnimation:
+			anim_list.append(anim_node.animation)
+	
+	return anim_list
+
 #### SIGNAL RESPONSES ####
+

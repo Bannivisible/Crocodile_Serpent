@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://ds4i8cup57akf"]
+[gd_scene load_steps=82 format=3 uid="uid://ds4i8cup57akf"]
 
 [ext_resource type="AnimationLibrary" uid="uid://ctdrtnjx7txak" path="res://Components/CombatSkill/Weapon/JawTrap/AnimationsData/JawTrapAnimationLibrary.res" id="2_dp6s7"]
 [ext_resource type="Script" uid="uid://bhcip3r7gigab" path="res://Components/CombatSkill/Weapon/JawTrap/jaw_trap.gd" id="2_g4jcv"]
@@ -8,17 +8,31 @@
 [ext_resource type="Texture2D" uid="uid://qkqqtx1bnvjk" path="res://Components/CombatSkill/Weapon/JawTrap/Assets/jaw_trap_texture.tres" id="4_jeet7"]
 [ext_resource type="Script" uid="uid://bpo8hybdit330" path="res://Ressources/Attack/WeaponAttack/weapon_attack_data.gd" id="5_4d2f6"]
 [ext_resource type="Script" uid="uid://c8pciq7v5fjbx" path="res://Components/CombatSkill/Weapon/JawTrap/links.gd" id="5_jeet7"]
+[ext_resource type="Script" uid="uid://c8v3lc10f3wrg" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/on_hand_idle.gd" id="5_o8o0j"]
 [ext_resource type="Script" uid="uid://ce7ave72wm32j" path="res://Ressources/Attack/attack_data.gd" id="5_v0eml"]
 [ext_resource type="Shape2D" uid="uid://bw7u1sj0wx0wf" path="res://Components/CombatSkill/Weapon/JawTrap/Ressources/links_shape.tres" id="6_86vhf"]
 [ext_resource type="Script" uid="uid://danilkv671r1y" path="res://Ressources/Attack/AttackType/attack_type.gd" id="6_jeet7"]
 [ext_resource type="Script" uid="uid://c5stjpuprt08p" path="res://StateMachine/States/AttackState/weapon_attack_state.gd" id="10_bxcyf"]
-[ext_resource type="Script" uid="uid://x70cfv1c4jxk" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/on_hand_idle.gd" id="14_2tnll"]
+[ext_resource type="Script" uid="uid://db3rpivekg2pa" path="res://Components/CombatSkill/Weapon/JawTrap/constant_rotating_attack.gd" id="10_vpr7y"]
+[ext_resource type="Script" uid="uid://crp34hnmuet64" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/throw_attack.gd" id="11_wdegu"]
+[ext_resource type="Script" uid="uid://cll5pib1n7cl3" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/recall_attack.gd" id="12_3w3qp"]
+[ext_resource type="Script" uid="uid://djbip8wqhfqhp" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/to_ground.gd" id="12_11eis"]
+[ext_resource type="Script" uid="uid://7erslqswf2f2" path="res://StateMachine/States/state_intermediate.gd" id="13_lj60c"]
+[ext_resource type="Script" uid="uid://d38qkfrf1wj1a" path="res://StateMachine/state_label.gd" id="14_11eis"]
 [ext_resource type="Script" uid="uid://bcmokx1bwyftw" path="res://StateMachine/state_machine.gd" id="14_av258"]
-[ext_resource type="Script" uid="uid://b3ssasrodegel" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/on_hand.gd" id="14_in3ot"]
+[ext_resource type="Script" uid="uid://cxq77fba02j8h" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/on_jaw.gd" id="14_kcwly"]
+[ext_resource type="Script" uid="uid://dk7hh1x5du862" path="res://Other/dynamic_timer.gd" id="15_2xqvd"]
+[ext_resource type="Script" uid="uid://dn31df61ur2vl" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/on_ground.gd" id="15_7x2u0"]
 [ext_resource type="Script" uid="uid://bey7t8h4m0yyp" path="res://StateMachine/state.gd" id="16_2tnll"]
+[ext_resource type="Script" uid="uid://dcjv5pdoy3ubs" path="res://Ui/timer_range.gd" id="16_fho1j"]
 [ext_resource type="Script" uid="uid://6lekj6yg62r6" path="res://Components/animation_manager/animation_manager_component.gd" id="16_in3ot"]
+[ext_resource type="Script" uid="uid://e0ej46y7q5uy" path="res://Other/ProceduralNode/procedural_link.gd" id="16_kcwly"]
+[ext_resource type="Script" uid="uid://bsmm7c0f2k3hr" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/bite_attack.gd" id="18_5rtpq"]
+[ext_resource type="Script" uid="uid://x1tg260g65b0" path="res://Other/timer_label.gd" id="18_eaiaj"]
 [ext_resource type="Resource" uid="uid://b85xloi286pt1" path="res://Ressources/AnimationConnection/crocodile_animation_connections.tres" id="19_bxcyf"]
+[ext_resource type="Script" uid="uid://c78u4kmgq07op" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/devastating_attack.gd" id="19_mkx5c"]
 [ext_resource type="Script" uid="uid://dgi2a2c0lt17u" path="res://Components/animation_manager/state_animation_manager.gd" id="19_wdegu"]
+[ext_resource type="Shape2D" uid="uid://dehxsdpvhda4g" path="res://Components/CombatSkill/Weapon/JawTrap/Ressources/ToGroundShape.tres" id="25_7etub"]
 
 [sub_resource type="Resource" id="Resource_yvpvj"]
 script = ExtResource("3_4d2f6")
@@ -112,22 +126,76 @@ script = ExtResource("5_4d2f6")
 add_crit_rate = SubResource("Resource_mkx5c")
 metadata/_custom_type_script = "uid://bpo8hybdit330"
 
+[sub_resource type="Resource" id="Resource_tlny7"]
+script = ExtResource("6_jeet7")
+type = 1
+metadata/_custom_type_script = "uid://danilkv671r1y"
+
 [sub_resource type="Resource" id="Resource_5rtpq"]
 script = ExtResource("5_v0eml")
 multiplier = 2.0
+type = SubResource("Resource_tlny7")
 metadata/_custom_type_script = "uid://ce7ave72wm32j"
+
+[sub_resource type="Resource" id="Resource_jlvaw"]
+script = ExtResource("5_4d2f6")
+mult_crit_rate = 2.0
+metadata/_custom_type_script = "uid://bpo8hybdit330"
+
+[sub_resource type="Resource" id="Resource_yvmfl"]
+script = ExtResource("6_jeet7")
+type = 2
+metadata/_custom_type_script = "uid://danilkv671r1y"
+
+[sub_resource type="Resource" id="Resource_1shtc"]
+script = ExtResource("5_v0eml")
+multiplier = 1.75
+type = SubResource("Resource_yvmfl")
+metadata/_custom_type_script = "uid://ce7ave72wm32j"
+
+[sub_resource type="Resource" id="Resource_jn0tm"]
+script = ExtResource("5_4d2f6")
+metadata/_custom_type_script = "uid://bpo8hybdit330"
+
+[sub_resource type="Resource" id="Resource_rddj4"]
+script = ExtResource("6_jeet7")
+type = 1
+metadata/_custom_type_script = "uid://danilkv671r1y"
+
+[sub_resource type="Resource" id="Resource_nlvaj"]
+script = ExtResource("5_v0eml")
+multiplier = 1.5
+type = SubResource("Resource_rddj4")
+metadata/_custom_type_script = "uid://ce7ave72wm32j"
+
+[sub_resource type="Resource" id="Resource_hjahh"]
+script = ExtResource("5_4d2f6")
+metadata/_custom_type_script = "uid://bpo8hybdit330"
+
+[sub_resource type="Resource" id="Resource_n0i6p"]
+script = ExtResource("5_v0eml")
+metadata/_custom_type_script = "uid://ce7ave72wm32j"
+
+[sub_resource type="Gradient" id="Gradient_o8o0j"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 0.74509805, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_eaiaj"]
+gradient = SubResource("Gradient_o8o0j")
+width = 128
+height = 128
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p0okl"]
 atlas = ExtResource("4_jeet7")
-region = Rect2(305, 130, 102, 65)
+region = Rect2(202, 130, 101, 65)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rsvc4"]
 atlas = ExtResource("4_jeet7")
-region = Rect2(204, 0, 101, 64)
+region = Rect2(101, 0, 101, 65)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hgdcd"]
 atlas = ExtResource("4_jeet7")
-region = Rect2(202, 65, 101, 65)
+region = Rect2(101, 65, 101, 65)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v0eml"]
 height = 86.60971
@@ -138,15 +206,15 @@ bounce = 1.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n380g"]
 atlas = ExtResource("4_jeet7")
-region = Rect2(303, 130, 101, 65)
+region = Rect2(202, 130, 101, 65)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3po1k"]
 atlas = ExtResource("4_jeet7")
-region = Rect2(202, 0, 101, 65)
+region = Rect2(101, 0, 101, 65)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pvels"]
 atlas = ExtResource("4_jeet7")
-region = Rect2(303, 65, 101, 65)
+region = Rect2(101, 65, 101, 65)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jeet7"]
 radius = 10.036705
@@ -172,10 +240,315 @@ type = SubResource("Resource_dp6s7")
 metadata/_custom_type_script = "uid://ce7ave72wm32j"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_weadw"]
-radius = 62.999992
-height = 198.00002
+radius = 110.0
+height = 252.0
 
-[node name="JawTrap" type="Node2D"]
+[sub_resource type="Animation" id="Animation_2xqvd"]
+resource_name = "OnGround(EditorHelp)"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Back/Offest/Iron:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-29.602692, 51.933586)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Back/Offest/Jaw:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-66.61364, 48.932693)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Front/Offest/Jaw:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-66.61364, 48.932693)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Front/Offest/Iron:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-29.602692, 51.933586)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Front:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-9, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Back:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(9, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Back:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("WeaponHitBox/CollisionShape2D:shape:height")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [252.0]
+}
+
+[sub_resource type="Animation" id="Animation_7etub"]
+resource_name = "OnGround-CatchAttackTrue"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Front:rotation")
+tracks/0/interp = 4
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 0.25, 5, 1),
+"update": 0,
+"values": [0.0, -0.8726646259971648, 1.5707963267948966, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Back:rotation")
+tracks/1/interp = 4
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 0.25, 5, 1),
+"update": 0,
+"values": [0.0, 0.8726646259971648, -1.5707963267948966, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Front/Offest/Jaw:scale")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.5, 1.5), Vector2(1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Back/Offest/Jaw:scale")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.5, 1.5), Vector2(1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("WeaponHitBox/CollisionShape2D:shape:radius")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.25),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [110.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("WeaponHitBox/CollisionShape2D:shape:height")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.25),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [252.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("WeaponHitBox/CollisionShape2D:disabled")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("WeaponHitBox/CollisionShape2D:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-7, 3.8146973e-06)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("WeaponHitBox/CollisionShape2D:rotation")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath(".:rotation")
+tracks/9/interp = 4
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_kcwly"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Front:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Back:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Front/Offest/Jaw:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Back/Offest/Jaw:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("WeaponHitBox/CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kcwly"]
+_data = {
+&"OnGround(EditorHelp)": SubResource("Animation_2xqvd"),
+&"OnGround-CatchAttackTrue": SubResource("Animation_7etub"),
+&"RESET": SubResource("Animation_kcwly")
+}
+
+[node name="JawTrap" type="StaticBody2D"]
+collision_mask = 2
 script = ExtResource("2_g4jcv")
 critical_rate = SubResource("Resource_yvpvj")
 strenght = SubResource("Resource_jlbrr")
@@ -186,12 +559,13 @@ set_to_default_state_at_ready = true
 metadata/_custom_type_script = "uid://bcmokx1bwyftw"
 
 [node name="OnHand" type="Node" parent="StateMachine"]
-script = ExtResource("14_in3ot")
+script = ExtResource("14_av258")
 set_to_default_state_at_ready = true
 metadata/_custom_type_script = "uid://bcmokx1bwyftw"
 
-[node name="Idle" type="Node" parent="StateMachine/OnHand"]
-script = ExtResource("14_2tnll")
+[node name="Idle" type="Node" parent="StateMachine/OnHand" node_paths=PackedStringArray("next_state")]
+script = ExtResource("5_o8o0j")
+next_state = NodePath("../../OnJaw/IdleJ")
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 
 [node name="SlashAttack1" type="Node" parent="StateMachine/OnHand" node_paths=PackedStringArray("previous_state")]
@@ -214,44 +588,131 @@ previous_state = NodePath("../SlashAttack1")
 metadata/_custom_type_script = "uid://c5stjpuprt08p"
 
 [node name="ConstantRotatingAttack" type="Node" parent="StateMachine/OnHand" node_paths=PackedStringArray("previous_state")]
-script = ExtResource("10_bxcyf")
+script = ExtResource("10_vpr7y")
 weapon_attack_data = SubResource("Resource_fho1j")
-input_time_interval = Vector2(0.6, -1)
+input_time_interval = Vector2(1, -1)
 input_mode = "Continue"
-hit_box_path = NodePath("WeaponHitBox")
 attack_data = SubResource("Resource_7x2u0")
 damage_interval = 0.4
-blend_node_name = &"AttackAdd2"
+blend_node_name = &"AttackBlend2"
 previous_state = NodePath("../Idle")
 metadata/_custom_type_script = "uid://c5stjpuprt08p"
 
 [node name="ThrowAttack" type="Node" parent="StateMachine/OnHand" node_paths=PackedStringArray("previous_state")]
-script = ExtResource("10_bxcyf")
+script = ExtResource("11_wdegu")
+distance = 630.299
+time = 0.5
 weapon_attack_data = SubResource("Resource_vpr7y")
-input_time_interval = Vector2(2, -1)
+idle_state_name = "ThrowIntermediate"
+input_time_interval = Vector2(1, -1)
 attack_data = SubResource("Resource_5rtpq")
+combo_cooldown = 0.2
 previous_state = NodePath("../ConstantRotatingAttack")
 metadata/_custom_type_script = "uid://c5stjpuprt08p"
 
-[node name="OnJaw" type="Node" parent="StateMachine"]
-script = ExtResource("14_av258")
+[node name="ThrowIntermediate" type="Node" parent="StateMachine/OnHand" node_paths=PackedStringArray("next_state")]
+script = ExtResource("13_lj60c")
+next_state = NodePath("../ToGround")
+wait_time = 999.9
+metadata/_custom_type_script = "uid://7erslqswf2f2"
+
+[node name="ToGround" type="Node" parent="StateMachine/OnHand" node_paths=PackedStringArray("next_state")]
+script = ExtResource("12_11eis")
+next_state = NodePath("../../OnGround/IdleG")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="RecallAttack" type="Node" parent="StateMachine/OnHand" node_paths=PackedStringArray("previous_state")]
+script = ExtResource("12_3w3qp")
+weapon_attack_data = SubResource("Resource_jlvaw")
+attack_data = SubResource("Resource_1shtc")
+combo_cooldown = 0.4
+previous_state = NodePath("../ThrowAttack")
+metadata/_custom_type_script = "uid://c5stjpuprt08p"
+
+[node name="OnJaw" type="Node" parent="StateMachine" node_paths=PackedStringArray("next_state")]
+script = ExtResource("14_kcwly")
+next_state = NodePath("../OnHand/Idle")
+remote_f_parent_path = NodePath("../../../../Skeleton2D/Center/Body/Torso/Head/HeadFacing/NeckFacing/Face")
+remote_b_parent_path = NodePath("../../../../Skeleton2D/Center/Body/Torso/Head/HeadFacing/NeckFacing/Jaw")
+remote_f_name = &"RemoteJTF"
+remote_b_name = &"RemoteJTB"
 metadata/_custom_type_script = "uid://bcmokx1bwyftw"
 
-[node name="Idle" type="Node" parent="StateMachine/OnJaw"]
+[node name="IdleJ" type="Node" parent="StateMachine/OnJaw"]
 script = ExtResource("16_2tnll")
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 
-[node name="ONGround" type="Node" parent="StateMachine"]
-script = ExtResource("14_av258")
+[node name="DynamicTimer" type="Timer" parent="StateMachine/OnJaw"]
+wait_time = 10.0
+one_shot = true
+script = ExtResource("15_2xqvd")
+
+[node name="TimerLabel" type="Label" parent="StateMachine/OnJaw" node_paths=PackedStringArray("timer")]
+offset_left = 1603.0
+offset_top = 96.0
+offset_right = 1887.0
+offset_bottom = 373.0
+script = ExtResource("18_eaiaj")
+timer = NodePath("../DynamicTimer")
+
+[node name="BiteAttack" type="Node" parent="StateMachine/OnJaw" node_paths=PackedStringArray("previous_state")]
+script = ExtResource("18_5rtpq")
+weapon_attack_data = SubResource("Resource_jn0tm")
+idle_state_name = "IdleJ"
+input_time_interval = Vector2(-1, 0.8)
+attack_data = SubResource("Resource_nlvaj")
+previous_state = NodePath("../IdleJ")
+metadata/_custom_type_script = "uid://c5stjpuprt08p"
+
+[node name="DevastatingAttack" type="Node" parent="StateMachine/OnJaw" node_paths=PackedStringArray("previous_state")]
+script = ExtResource("19_mkx5c")
+weapon_attack_data = SubResource("Resource_hjahh")
+idle_state_name = "IdleJ"
+input_time_interval = Vector2(1, -1)
+attack_data = SubResource("Resource_n0i6p")
+damage_interval = 0.4
+previous_state = NodePath("../IdleJ")
+metadata/_custom_type_script = "uid://c5stjpuprt08p"
+
+[node name="OnGround" type="Node" parent="StateMachine"]
+script = ExtResource("15_7x2u0")
+gravity = 200.0
 metadata/_custom_type_script = "uid://bcmokx1bwyftw"
 
-[node name="Idle" type="Node" parent="StateMachine/ONGround"]
+[node name="IdleG" type="Node" parent="StateMachine/OnGround"]
 script = ExtResource("16_2tnll")
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="CatchAttack" type="Node" parent="StateMachine/OnGround" node_paths=PackedStringArray("previous_state")]
+script = ExtResource("10_bxcyf")
+previous_state = NodePath("../IdleG")
+metadata/_custom_type_script = "uid://c5stjpuprt08p"
+
+[node name="ProceduralLink" type="Node" parent="StateMachine/OnGround" node_paths=PackedStringArray("node_b")]
+script = ExtResource("16_kcwly")
+node_b = NodePath("../../..")
+max_dist = 600.0
+
+[node name="StateLabel" type="Label" parent="StateMachine"]
+offset_right = 272.0
+offset_bottom = 142.0
+script = ExtResource("14_11eis")
+metadata/_custom_type_script = "uid://d38qkfrf1wj1a"
+
+[node name="TimerRange" type="TextureProgressBar" parent="." node_paths=PackedStringArray("timer")]
+z_index = 10
+offset_left = -265.0
+offset_top = -327.0
+offset_right = -137.0
+offset_bottom = -199.0
+fill_mode = 5
+texture_progress = SubResource("GradientTexture2D_eaiaj")
+script = ExtResource("16_fho1j")
+timer = NodePath("../StateMachine/OnJaw/DynamicTimer")
 
 [node name="Front" type="StaticBody2D" parent="."]
-z_index = 4
-position = Vector2(-56, 1)
+z_index = 5
+position = Vector2(-9, 0)
 collision_layer = 0
 collision_mask = 0
 
@@ -264,11 +725,11 @@ position = Vector2(-2.3841858e-07, 52)
 texture = SubResource("AtlasTexture_p0okl")
 
 [node name="Iron" type="Sprite2D" parent="Front/Offest"]
-position = Vector2(1, 19.999998)
+position = Vector2(-29.602692, 51.933586)
 texture = SubResource("AtlasTexture_rsvc4")
 
 [node name="Jaw" type="Sprite2D" parent="Front/Offest"]
-position = Vector2(-1, -35)
+position = Vector2(-66.61364, 48.932693)
 texture = SubResource("AtlasTexture_hgdcd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Front"]
@@ -291,7 +752,9 @@ shape = ExtResource("6_86vhf")
 physics_material = SubResource("PhysicsMaterial_86vhf")
 
 [node name="Back" type="StaticBody2D" parent="."]
-position = Vector2(228, 1)
+z_index = 4
+position = Vector2(9, 0)
+scale = Vector2(-1, 1)
 collision_layer = 0
 collision_mask = 0
 
@@ -303,11 +766,11 @@ position = Vector2(-2.3841858e-07, 52)
 texture = SubResource("AtlasTexture_n380g")
 
 [node name="Iron" type="Sprite2D" parent="Back/Offest"]
-position = Vector2(1, 19.999998)
+position = Vector2(-29.602692, 51.933586)
 texture = SubResource("AtlasTexture_3po1k")
 
 [node name="Jaw" type="Sprite2D" parent="Back/Offest"]
-position = Vector2(1.0000001, -35)
+position = Vector2(-66.61364, 48.932693)
 texture = SubResource("AtlasTexture_pvels")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Back"]
@@ -330,6 +793,7 @@ metadata/_custom_type_script = "uid://42c2b5rma8ot"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponHitBox"]
 z_index = 3
+position = Vector2(-7, 3.8146973e-06)
 shape = SubResource("CapsuleShape2D_weadw")
 disabled = true
 debug_color = Color(1, 0, 0, 0.41960785)
@@ -344,4 +808,12 @@ metadata/_custom_type_script = "uid://6lekj6yg62r6"
 script = ExtResource("19_wdegu")
 state_machines = [NodePath("../../StateMachine")]
 
-[connection signal="animation_finished" from="AnimationManagerComponent" to="." method="_on_animation_manager_component_animation_finished"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5707964
+shape = ExtResource("25_7etub")
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_kcwly")
+}

@@ -6,19 +6,19 @@
 [sub_resource type="Resource" id="Resource_72sr6"]
 script = ExtResource("1_72sr6")
 from = &"StateMachine"
-to = &"StateAdd2"
+to = &"StateBlenf2"
 metadata/_custom_type_script = "uid://bmm1oqvjaxa4m"
 
 [sub_resource type="Resource" id="Resource_qlhte"]
 script = ExtResource("1_72sr6")
-from = &"StateAddAnimation"
-to = &"StateAdd2"
+from = &"StateBlendAnimation"
+to = &"StateBlend2"
 to_port = 1
 metadata/_custom_type_script = "uid://bmm1oqvjaxa4m"
 
 [sub_resource type="Resource" id="Resource_qxw88"]
 script = ExtResource("1_72sr6")
-from = &"StateAdd2"
+from = &"StateBlend2"
 to = &"StateOneShot"
 metadata/_custom_type_script = "uid://bmm1oqvjaxa4m"
 

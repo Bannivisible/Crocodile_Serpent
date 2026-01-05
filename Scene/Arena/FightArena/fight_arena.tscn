@@ -55,6 +55,10 @@ metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 
 [node name="Enemy" parent="." index="3" instance=ExtResource("8_wp1n5")]
 position = Vector2(1559, 606)
+platform_floor_layers = 4294967295
+platform_wall_layers = 0
 
 [node name="Crocodile" parent="." index="4" instance=ExtResource("7_3wvjj")]
 position = Vector2(316, 446)
+platform_floor_layers = 4294967295
+platform_wall_layers = 0

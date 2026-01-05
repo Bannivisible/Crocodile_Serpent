@@ -173,3 +173,19 @@ static func end_substr_multipy_until_meet(string: String, charc: String) -> Stri
 		i -= 1
 	
 	return substr
+
+static func get_joy_dir(neutral_dir := Vector2.ZERO, left_stick := true ,device := 0, min_lenght := 0.2):
+	var joy_x = JOY_AXIS_LEFT_X if left_stick else JOY_AXIS_RIGHT_X
+	var joy_y = JOY_AXIS_LEFT_Y if left_stick else JOY_AXIS_RIGHT_Y
+	
+	var x = Input.get_joy_axis(device, joy_x)
+	var y = Input.get_joy_axis(device, joy_y)
+	
+	var dir := Vector2(x, y)
+	
+	if dir.length() < min_lenght:
+		dir = neutral_dir
+	else:
+		dir = dir.normalized()
+	
+	return dir
