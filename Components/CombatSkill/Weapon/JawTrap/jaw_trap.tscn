@@ -669,8 +669,10 @@ script = ExtResource("19_mkx5c")
 weapon_attack_data = SubResource("Resource_hjahh")
 idle_state_name = "IdleJ"
 input_time_interval = Vector2(1, -1)
+input_mode = "Continue"
 attack_data = SubResource("Resource_n0i6p")
 damage_interval = 0.4
+blend_node_name = &"AttackBlend2"
 previous_state = NodePath("../IdleJ")
 metadata/_custom_type_script = "uid://c5stjpuprt08p"
 

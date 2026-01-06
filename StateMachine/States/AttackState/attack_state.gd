@@ -144,8 +144,6 @@ func _combo_logic() -> void:
 			await animation_manager.animation_finished
 		elif not is_combo_cooldown_running():
 			return
-		
-		if name == "ThrowAttack": print("ok")
 	
 	elif not previous_state.is_current_state():
 		return
