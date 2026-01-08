@@ -272,4 +272,3 @@ func get_all_current_anim_name_in_tree() -> Array[StringName]:
 	return anim_list
 
 #### SIGNAL RESPONSES ####
-
