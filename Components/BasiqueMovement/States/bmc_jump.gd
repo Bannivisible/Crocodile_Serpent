@@ -5,3 +5,4 @@ class_name BMC_JumpState
 
 func enter() -> void:
 	owner.object.velocity.y = -force
+	print("ok")

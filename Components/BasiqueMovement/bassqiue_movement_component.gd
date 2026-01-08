@@ -64,11 +64,12 @@ func _update_animation() -> void:
 		anim_player.play(x_state_name)
 
 #### LOGIC ####
-
+func update_velocity_with_dir() -> void:
+	character.velocity = dir * speed.value * BMC_MoveState.MULT_SPEED
 
 func immobilize() -> void:
-	state_machine_x.lock_state($StateMachineX/Idle)
-	state_machine_y.lock_state($StateMachineY/Grounded)
+	state_machine_x.lock_state($StateMachineX/BaseState/Idle)
+	state_machine_y.lock_state($StateMachineY/Grounded/Idle)
 
 func free_immobilize() -> void:
 	state_machine_x.unlock_state()
@@ -77,10 +78,7 @@ func free_immobilize() -> void:
 #### SIGNAL RESPONSES ####
 func _on_dir_changed(_dir: Vector2) -> void:
 	# X axis
-	if dir.x == 0.0:
-		state_machine_x.set_state_with_string("Idle")
-	else:
-		state_machine_x.set_state_with_string("Move")
+	if dir.x != 0.0:
 		facing_direction.x = sign(dir.x)
 
 func _on_face_dir_changed(_dir: Vector2) -> void:

@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://b74kbwhwtmiu5"]
+[gd_scene load_steps=10 format=3 uid="uid://b74kbwhwtmiu5"]
 
 [ext_resource type="Script" uid="uid://cfbujs1d0b1s6" path="res://Components/BasiqueMovement/bassqiue_movement_component.gd" id="1_vbi1o"]
 [ext_resource type="Script" uid="uid://bcmokx1bwyftw" path="res://StateMachine/state_machine.gd" id="2_mpqfr"]
 [ext_resource type="Script" uid="uid://1ow5qrqjgci3" path="res://Components/BasiqueMovement/States/bmc_move.gd" id="4_d3kww"]
+[ext_resource type="Script" uid="uid://bey7t8h4m0yyp" path="res://StateMachine/state.gd" id="4_gl71s"]
 [ext_resource type="Script" uid="uid://dsv464pbap684" path="res://Components/BasiqueMovement/States/bmc_idle.gd" id="4_jboap"]
 [ext_resource type="Script" uid="uid://d38qkfrf1wj1a" path="res://StateMachine/state_label.gd" id="5_knfml"]
 [ext_resource type="Script" uid="uid://rbct5cq3581w" path="res://Components/BasiqueMovement/States/bmc_air.gd" id="7_8bdri"]
@@ -15,11 +16,15 @@ script = ExtResource("1_vbi1o")
 [node name="StateMachineX" type="Node2D" parent="."]
 script = ExtResource("2_mpqfr")
 
-[node name="Idle" type="Node" parent="StateMachineX"]
+[node name="BaseState" type="Node" parent="StateMachineX"]
+script = ExtResource("2_mpqfr")
+metadata/_custom_type_script = "uid://bcmokx1bwyftw"
+
+[node name="Idle" type="Node" parent="StateMachineX/BaseState"]
 script = ExtResource("4_jboap")
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 
-[node name="Move" type="Node" parent="StateMachineX"]
+[node name="Move" type="Node" parent="StateMachineX/BaseState"]
 script = ExtResource("4_d3kww")
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 
@@ -37,6 +42,10 @@ script = ExtResource("2_mpqfr")
 [node name="Grounded" type="Node" parent="StateMachineY"]
 script = ExtResource("2_mpqfr")
 metadata/_custom_type_script = "uid://bcmokx1bwyftw"
+
+[node name="Idle" type="Node" parent="StateMachineY/Grounded"]
+script = ExtResource("4_gl71s")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 
 [node name="Air" type="Node" parent="StateMachineY"]
 script = ExtResource("7_8bdri")

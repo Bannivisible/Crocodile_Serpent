@@ -72,7 +72,7 @@ func lock_state(state) -> void:
 	if state is String:
 		set_state_with_string(state)
 	else:
-		current_state = state
+		set_state(state)
 	state_locked = true
 
 func unlock_state() -> void:
