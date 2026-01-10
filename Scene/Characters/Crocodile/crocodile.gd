@@ -13,8 +13,8 @@ func _input(_event: InputEvent) -> void:
 		state_machine_x.set_state_with_string("ConstantDash")
 		state_machine_y.set_state($BMC/StateMachineY/Air/Free/RotateDir)
 	
-	if Input.is_action_just_pressed("ui_up"):
-		rotate_dir.angle = PI/2
+	#if Input.is_action_just_pressed("ui_up"):
+		#rotate_dir.angle += PI/6
 
 func set_free_idle() -> void:
 	free.set_state_with_string("FreeIdle")

@@ -46,10 +46,11 @@ func _physics_process(delta: float) -> void:
 	character.move_and_slide()
 	
 	if character.is_on_floor() and $StateMachineY/Air/Fall.is_current_state():
-		state_machine_y.set_state_with_string("Grounded")
+		state_machine_y.set_state($StateMachineY/Grounded/Idle)
 	
-	elif character.velocity.y > 0 and $StateMachineY/Grounded.is_current_state() or $StateMachineY/Air/Jump.is_current_state():
-		state_machine_y.set_state_with_string("Fall")
+	elif character.velocity.y > 0:
+		if $StateMachineY/Grounded.is_current_state() or $StateMachineY/Air/Jump.is_current_state():
+			state_machine_y.set_state_with_string("Fall")
 
 func _update_animation() -> void:
 	var x_state_name: String= state_machine_x.get_deepest_state().name

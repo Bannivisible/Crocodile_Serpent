@@ -5,3 +5,4 @@ enum COLLISION_MASK{
 	GROUND,
 	HURT_BOX
 }
+

@@ -2199,7 +2199,7 @@ texture = SubResource("AtlasTexture_hb14a")
 [node name="StrandBack" type="Sprite2D" parent="SpriteContainer/HeadGroup" index="2"]
 position = Vector2(-43.347466, 16.778397)
 rotation = -0.34907058
-scale = Vector2(1.0035422, 0.9989663)
+scale = Vector2(1.0035422, 0.99897015)
 texture = SubResource("AtlasTexture_weadw")
 offset = Vector2(20.086979, -10.858177)
 
@@ -2215,7 +2215,7 @@ z_index = 3
 
 [node name="ArmFront" type="Sprite2D" parent="SpriteContainer/ArmFrontGroup" index="0"]
 position = Vector2(-56.33241, -220.66438)
-rotation = -0.021970041
+rotation = -0.021970078
 scale = Vector2(0.99983484, 0.99983484)
 texture = SubResource("AtlasTexture_kwm2e")
 offset = Vector2(-10, 17.333)
@@ -2223,7 +2223,7 @@ offset = Vector2(-10, 17.333)
 [node name="ForearmFront" type="Sprite2D" parent="SpriteContainer/ArmFrontGroup" index="1"]
 z_index = 3
 position = Vector2(-77.28058, -187.86855)
-rotation = -0.07213903
+rotation = -0.07213907
 scale = Vector2(0.9996777, 0.9996777)
 texture = SubResource("AtlasTexture_l1deg")
 offset = Vector2(-14, 25.667)
@@ -2231,8 +2231,8 @@ offset = Vector2(-14, 25.667)
 [node name="HandFront" type="Sprite2D" parent="SpriteContainer/ArmFrontGroup" index="2"]
 z_index = 3
 position = Vector2(-100.41124, -138.08691)
-rotation = -0.2591005
-scale = Vector2(0.99968195, 0.99968195)
+rotation = -0.25910056
+scale = Vector2(0.9996819, 0.9996819)
 texture = SubResource("AtlasTexture_fs2r1")
 offset = Vector2(-12, 15)
 
@@ -2254,8 +2254,8 @@ offset = Vector2(-5.667, 21)
 
 [node name="FootFront" type="Sprite2D" parent="SpriteContainer/LegFrontGroup" index="2"]
 position = Vector2(-67.02341, -50.89708)
-rotation = -0.0004916186
-scale = Vector2(0.99953127, 0.99953127)
+rotation = -0.0004918635
+scale = Vector2(0.9995334, 0.9995334)
 texture = SubResource("AtlasTexture_7cm0d")
 offset = Vector2(2.2518923, 17.591896)
 
@@ -2452,7 +2452,7 @@ remote_path = NodePath("../../../../../SpriteContainer/LegFrontGroup/LegFront")
 [node name="FootFront" type="Bone2D" parent="Skeleton2D/Center/ThighFront/LegFront" index="1"]
 position = Vector2(-0.78639984, 45.13577)
 rotation = -0.0702153
-scale = Vector2(0.99984056, 0.99984056)
+scale = Vector2(0.9998428, 0.9998428)
 rest = Transform2D(0.9973769, -0.07014619, 0.07014619, 0.9973769, -0.78639984, 45.13577)
 auto_calculate_length_and_angle = false
 length = 26.667
@@ -2567,10 +2567,14 @@ set_to_default_state_at_ready = true
 
 [node name="ConstantDash" type="Node" parent="BMC/StateMachineX" index="1"]
 script = ExtResource("27_yvpvj")
-mult_speed = 1.2
+mult_speed = 0.2
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 
 [node name="StateLabel" parent="BMC/StateMachineX" index="2"]
+offset_left = 291.0
+offset_top = -325.0
+offset_right = 331.0
+offset_bottom = -302.0
 metadata/_edit_use_anchors_ = true
 
 [node name="StateMachineY" parent="BMC" index="1"]
@@ -2599,9 +2603,14 @@ metadata/_custom_type_script = "uid://b2ht1wi0b2hvw"
 
 [node name="RotateDir" type="Node" parent="BMC/StateMachineY/Air/Free" index="2"]
 script = ExtResource("32_yvpvj")
+angle_range = Vector2(-1.571, 1.571)
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 
 [node name="StateLabel" parent="BMC/StateMachineY" index="2"]
+offset_left = 173.0
+offset_top = 15.0
+offset_right = 213.0
+offset_bottom = 38.0
 metadata/_edit_use_anchors_ = true
 
 [node name="CSManager" type="Node2D" parent="." index="7"]
