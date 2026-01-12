@@ -6,7 +6,7 @@
 [sub_resource type="Resource" id="Resource_72sr6"]
 script = ExtResource("1_72sr6")
 from = &"StateMachine"
-to = &"StateBlenf2"
+to = &"StateBlend2"
 metadata/_custom_type_script = "uid://bmm1oqvjaxa4m"
 
 [sub_resource type="Resource" id="Resource_qlhte"]

@@ -568,18 +568,20 @@ script = ExtResource("5_o8o0j")
 next_state = NodePath("../../OnJaw/IdleJ")
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 
-[node name="SlashAttack1" type="Node" parent="StateMachine/OnHand" node_paths=PackedStringArray("previous_state")]
+[node name="SlashAttack1" type="Node" parent="StateMachine/OnHand" node_paths=PackedStringArray("idle_state", "previous_state")]
 script = ExtResource("10_bxcyf")
 weapon_attack_data = SubResource("Resource_kcwly")
+idle_state = NodePath("../Idle")
 input_time_interval = Vector2(-1, 0.5)
 hit_box_path = NodePath("WeaponHitBox")
 attack_data = SubResource("Resource_bxcyf")
 previous_state = NodePath("../Idle")
 metadata/_custom_type_script = "uid://c5stjpuprt08p"
 
-[node name="SlashAttack2" type="Node" parent="StateMachine/OnHand" node_paths=PackedStringArray("previous_state")]
+[node name="SlashAttack2" type="Node" parent="StateMachine/OnHand" node_paths=PackedStringArray("idle_state", "previous_state")]
 script = ExtResource("10_bxcyf")
 weapon_attack_data = SubResource("Resource_2xqvd")
+idle_state = NodePath("../Idle")
 input_time_interval = Vector2(-1, 0.5)
 attack_data = SubResource("Resource_lj60c")
 combo_cooldown = 1.0
@@ -587,9 +589,10 @@ need_hit_box_hit = true
 previous_state = NodePath("../SlashAttack1")
 metadata/_custom_type_script = "uid://c5stjpuprt08p"
 
-[node name="ConstantRotatingAttack" type="Node" parent="StateMachine/OnHand" node_paths=PackedStringArray("previous_state")]
+[node name="ConstantRotatingAttack" type="Node" parent="StateMachine/OnHand" node_paths=PackedStringArray("idle_state", "previous_state")]
 script = ExtResource("10_vpr7y")
 weapon_attack_data = SubResource("Resource_fho1j")
+idle_state = NodePath("../Idle")
 input_time_interval = Vector2(1, -1)
 input_mode = "Continue"
 attack_data = SubResource("Resource_7x2u0")
@@ -598,12 +601,12 @@ blend_node_name = &"AttackBlend2"
 previous_state = NodePath("../Idle")
 metadata/_custom_type_script = "uid://c5stjpuprt08p"
 
-[node name="ThrowAttack" type="Node" parent="StateMachine/OnHand" node_paths=PackedStringArray("previous_state")]
+[node name="ThrowAttack" type="Node" parent="StateMachine/OnHand" node_paths=PackedStringArray("idle_state", "previous_state")]
 script = ExtResource("11_wdegu")
 distance = 630.299
 time = 0.5
 weapon_attack_data = SubResource("Resource_vpr7y")
-idle_state_name = "ThrowIntermediate"
+idle_state = NodePath("../ThrowIntermediate")
 input_time_interval = Vector2(1, -1)
 attack_data = SubResource("Resource_5rtpq")
 combo_cooldown = 0.2
@@ -621,9 +624,10 @@ script = ExtResource("12_11eis")
 next_state = NodePath("../../OnGround/IdleG")
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 
-[node name="RecallAttack" type="Node" parent="StateMachine/OnHand" node_paths=PackedStringArray("previous_state")]
+[node name="RecallAttack" type="Node" parent="StateMachine/OnHand" node_paths=PackedStringArray("idle_state", "previous_state")]
 script = ExtResource("12_3w3qp")
 weapon_attack_data = SubResource("Resource_jlvaw")
+idle_state = NodePath("../Idle")
 attack_data = SubResource("Resource_1shtc")
 combo_cooldown = 0.4
 previous_state = NodePath("../ThrowAttack")
@@ -655,19 +659,19 @@ offset_bottom = 373.0
 script = ExtResource("18_eaiaj")
 timer = NodePath("../DynamicTimer")
 
-[node name="BiteAttack" type="Node" parent="StateMachine/OnJaw" node_paths=PackedStringArray("previous_state")]
+[node name="BiteAttack" type="Node" parent="StateMachine/OnJaw" node_paths=PackedStringArray("idle_state", "previous_state")]
 script = ExtResource("18_5rtpq")
 weapon_attack_data = SubResource("Resource_jn0tm")
-idle_state_name = "IdleJ"
+idle_state = NodePath("../IdleJ")
 input_time_interval = Vector2(-1, 0.8)
 attack_data = SubResource("Resource_nlvaj")
 previous_state = NodePath("../IdleJ")
 metadata/_custom_type_script = "uid://c5stjpuprt08p"
 
-[node name="DevastatingAttack" type="Node" parent="StateMachine/OnJaw" node_paths=PackedStringArray("previous_state")]
+[node name="DevastatingAttack" type="Node" parent="StateMachine/OnJaw" node_paths=PackedStringArray("idle_state", "previous_state")]
 script = ExtResource("19_mkx5c")
 weapon_attack_data = SubResource("Resource_hjahh")
-idle_state_name = "IdleJ"
+idle_state = NodePath("../IdleJ")
 input_time_interval = Vector2(1, -1)
 input_mode = "Continue"
 attack_data = SubResource("Resource_n0i6p")
@@ -685,8 +689,9 @@ metadata/_custom_type_script = "uid://bcmokx1bwyftw"
 script = ExtResource("16_2tnll")
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 
-[node name="CatchAttack" type="Node" parent="StateMachine/OnGround" node_paths=PackedStringArray("previous_state")]
+[node name="CatchAttack" type="Node" parent="StateMachine/OnGround" node_paths=PackedStringArray("idle_state", "previous_state")]
 script = ExtResource("10_bxcyf")
+idle_state = NodePath("../IdleG")
 previous_state = NodePath("../IdleG")
 metadata/_custom_type_script = "uid://c5stjpuprt08p"
 

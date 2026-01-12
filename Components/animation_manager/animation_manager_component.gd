@@ -110,6 +110,16 @@ func set_filter_with_all_track(blend_nd_name: StringName, anim_node: StringName,
 	
 	blend_node.filter_enabled = activate
 
+func verif_filter(blend_nd_name: StringName, anime: Animation) -> Dictionary[NodePath, bool]:
+	var dict: Dictionary[NodePath, bool]
+	
+	var blend_node: AnimationNode= tree_root.get_node(blend_nd_name)
+	
+	for prop_path in get_animation_traks(anime):
+		dict[prop_path] = blend_node.is_path_filtered(prop_path)
+	
+	return dict
+
 func reset_filter(blend_nd_name: StringName) -> void:
 	if not tracks_filter.has(blend_nd_name) or tracks_filter[blend_nd_name] == "": return
 	set_filter_with_all_track(blend_nd_name, tracks_filter[blend_nd_name], false)
@@ -158,8 +168,11 @@ func print_all_connections() -> void:
 
 ## ONE SHOT ##
 
-func request_one_shot(one_shot: String, request:= AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE) -> void:
-	animation_tree.set("parameters/%s/request" % one_shot, request)
+func request_one_shot(one_shot_name: String, request:= AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE) -> void:
+	animation_tree.set("parameters/%s/request" % one_shot_name, request)
+
+func get_request_one_shot(one_shot_name: String) -> AnimationNodeOneShot.OneShotRequest:
+	return animation_tree.get("parameters/%s/request" % one_shot_name)
 
 func is_one_shot_active(one_shot: String) -> bool:
 	return animation_tree.get("parameters/%s/active" % one_shot)

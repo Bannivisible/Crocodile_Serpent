@@ -1,7 +1,7 @@
 extends State
 class_name AttackState
 
-@export var idle_state_name: String= "Idle"
+@export var idle_state: State
 
 @export_group("Input")
 
@@ -67,7 +67,7 @@ func _input(_event: InputEvent) -> void:
 			
 			"Continue":
 				if is_current_state():
-					state_machine.set_state_with_string(idle_state_name)
+					_set_idle_state()
 	
 	if Input.is_action_pressed(input_name) and input_mode == "Continue":
 		if is_input_timer_in_interval():
@@ -184,15 +184,20 @@ func _config_anim_connection() -> void:
 func _obtain_animation_name_with_lib(name_of_anime: StringName) -> StringName:
 	return animation_manager.add_library_to_name(name_of_anime)
 
+func _set_idle_state() -> void:
+	get_top_state_machine().set_state(idle_state)
+
 func is_combo_cooldown_running() -> bool:
 	if not combo_timer: return true
 	return not combo_timer.is_stopped()
+
 
 #### SIGNALS RESPONSES ####
 
 func _on_animation_manager_animation_finished(anime: StringName) -> void:
 	if anime == anim_name:
-		state_machine.set_state_with_string(idle_state_name)
+		if is_current_state():
+			_set_idle_state()
 		
 		if combo_timer:
 			combo_timer.timeout.emit()

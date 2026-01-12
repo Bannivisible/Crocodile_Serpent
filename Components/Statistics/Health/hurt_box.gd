@@ -49,8 +49,8 @@ func _modify_label_damage(label: Label) -> Label:
 func _compute_resistance(attack_type: AttackType, res_type: ResistanceType) -> float:
 	var result: float= 0.0
 	
-	var bit_atck: int= attack_type.type
-	var bit_res: int= res_type.type.type
+	var bit_atck: int= attack_type.type if attack_type else 0
+	var bit_res: int= res_type.type.type 
 	var bit := 1
 	
 	for i in range(Utiles.count_bits(bit_res)):

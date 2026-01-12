@@ -6,7 +6,7 @@ class_name BMC_ConstantDashState
 @onready var bmc: BMC= _obtain_bmc()
 
 var dir := Vector2.RIGHT
-
+var prev_speed: float
 
 func _obtain_bmc() -> BMC:
 	var parent: Node= get_parent()
@@ -20,5 +20,13 @@ func _obtain_bmc() -> BMC:
 
 func enter() -> void:
 	bmc.dir = dir
-	bmc.character.velocity = bmc.dir * bmc.speed.value * BMC_MoveState.MULT_SPEED * mult_speed
+	prev_speed = bmc.speed.value
+	bmc.speed.value *= mult_speed
 
+####### FAIRE UN BUFF A LA PLACE
+
+func update(_delta: float) -> void:
+	bmc.update_velocity_with_dir()
+
+func exit() -> void:
+	bmc.speed.value = prev_speed
