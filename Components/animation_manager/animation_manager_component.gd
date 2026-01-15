@@ -284,4 +284,17 @@ func get_all_current_anim_name_in_tree() -> Array[StringName]:
 	
 	return anim_list
 
+func get_string_all_current_anim_name_in_tree() -> Array[String]:
+	var anim_list: Array[String]= []
+	
+	for anim_node_name in tree_root.get_node_list():
+		var anim_node := tree_root.get_node(anim_node_name)
+		
+		if anim_node is AnimationNodeAnimation:
+			var string: String= anim_node_name + " : " + get_animation_name(anim_node_name)
+			
+			anim_list.append(string)
+	
+	return anim_list
+
 #### SIGNAL RESPONSES ####

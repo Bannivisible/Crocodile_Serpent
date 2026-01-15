@@ -187,15 +187,15 @@ height = 128
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p0okl"]
 atlas = ExtResource("4_jeet7")
-region = Rect2(202, 130, 101, 65)
+region = Rect2(305, 130, 102, 65)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rsvc4"]
 atlas = ExtResource("4_jeet7")
-region = Rect2(101, 0, 101, 65)
+region = Rect2(204, 0, 101, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hgdcd"]
 atlas = ExtResource("4_jeet7")
-region = Rect2(101, 65, 101, 65)
+region = Rect2(303, 65, 101, 65)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v0eml"]
 height = 86.60971
@@ -206,15 +206,15 @@ bounce = 1.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n380g"]
 atlas = ExtResource("4_jeet7")
-region = Rect2(202, 130, 101, 65)
+region = Rect2(303, 130, 101, 65)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3po1k"]
 atlas = ExtResource("4_jeet7")
-region = Rect2(101, 0, 101, 65)
+region = Rect2(202, 0, 101, 65)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pvels"]
 atlas = ExtResource("4_jeet7")
-region = Rect2(101, 65, 101, 65)
+region = Rect2(303, 65, 101, 65)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jeet7"]
 radius = 10.036705
@@ -670,6 +670,7 @@ metadata/_custom_type_script = "uid://c5stjpuprt08p"
 
 [node name="DevastatingAttack" type="Node" parent="StateMachine/OnJaw" node_paths=PackedStringArray("idle_state", "previous_state")]
 script = ExtResource("19_mkx5c")
+center_bone_path = NodePath("Skeleton2D/Center")
 weapon_attack_data = SubResource("Resource_hjahh")
 idle_state = NodePath("../IdleJ")
 input_time_interval = Vector2(1, -1)

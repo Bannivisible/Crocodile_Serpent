@@ -8,7 +8,7 @@ class_name Statistcs
 @export var speed: SpeedStat
 
 var statistics: Dictionary[String, Stat]:
-	get: return get_statistics()
+	get =  get_statistics
 
 var buffs: Array[BuffStat]
 

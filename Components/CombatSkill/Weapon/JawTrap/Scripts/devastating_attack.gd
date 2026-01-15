@@ -1,5 +1,6 @@
 extends WeaponAttackState
 
+@export var center_bone_path: NodePath
 
 var state_machine_x: StateMachine
 var state_machine_y: StateMachine
@@ -22,3 +23,5 @@ func exit() -> void:
 	
 	state_machine_x.set_state_with_string("Idle")
 	state_machine_y.set_state_with_string("Fall")
+	
+	object.get_node(center_bone_path).rotation = 0.0

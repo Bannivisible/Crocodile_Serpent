@@ -7,36 +7,36 @@
 [ext_resource type="Script" uid="uid://cbrdrpld87ccj" path="res://Ressources/Statistics/Stats/speed_stat.gd" id="5_ptbsg"]
 [ext_resource type="Script" uid="uid://mcrao1da8rcg" path="res://Ressources/Statistics/Stats/strenght_stat.gd" id="6_6okaq"]
 
-[sub_resource type="Resource" id="Resource_oairm"]
+[sub_resource type="Resource" id="Resource_3dghu"]
 script = ExtResource("1_3dghu")
 value = 40.0
 metadata/_custom_type_script = "uid://bhm4lgjssqqrc"
 
-[sub_resource type="Resource" id="Resource_ulrdj"]
+[sub_resource type="Resource" id="Resource_mh1gw"]
 script = ExtResource("2_mh1gw")
 value = 100.0
 metadata/_custom_type_script = "uid://duv2wxetutjux"
 
-[sub_resource type="Resource" id="Resource_mru5n"]
+[sub_resource type="Resource" id="Resource_u5plc"]
 script = ExtResource("5_ptbsg")
-value = 40.0
+value = 80.0
 metadata/_custom_type_script = "uid://cbrdrpld87ccj"
 
-[sub_resource type="Resource" id="Resource_3dghu"]
+[sub_resource type="Resource" id="Resource_e5byb"]
 script = ExtResource("3_u5plc")
 value = 100.0
 metadata/_custom_type_script = "uid://bbva01ahnfxq1"
 
-[sub_resource type="Resource" id="Resource_hsnmx"]
+[sub_resource type="Resource" id="Resource_ptbsg"]
 script = ExtResource("6_6okaq")
-value = 60.0
+value = 40.0
 metadata/_custom_type_script = "uid://mcrao1da8rcg"
 
 [resource]
 script = ExtResource("4_e5byb")
-health = SubResource("Resource_ulrdj")
-stardust = SubResource("Resource_3dghu")
-strenght = SubResource("Resource_hsnmx")
-defense = SubResource("Resource_oairm")
-speed = SubResource("Resource_mru5n")
+health = SubResource("Resource_mh1gw")
+stardust = SubResource("Resource_e5byb")
+strenght = SubResource("Resource_ptbsg")
+defense = SubResource("Resource_3dghu")
+speed = SubResource("Resource_u5plc")
 metadata/_custom_type_script = "uid://df1lvqntv5vya"
