@@ -1,6 +1,7 @@
-[gd_resource type="Theme" load_steps=7 format=3 uid="uid://dxxn1u7fah8ng"]
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://dxxn1u7fah8ng"]
 
 [ext_resource type="StyleBox" uid="uid://cwnq1kp63vdo7" path="res://Ui/BookInterface/AttackChoiceInterface/buttons_style_box.tres" id="1_0fnj3"]
+[ext_resource type="FontFile" uid="uid://bj11jpwxyuetp" path="res://Ui/Font/monofonto rg.otf" id="2_21u5j"]
 [ext_resource type="FontFile" uid="uid://cjdkbl1pk2wec" path="res://Ui/BookInterface/Theme/Font/Philosopher/Philosopher-Regular.ttf" id="2_enqyv"]
 
 [sub_resource type="SystemFont" id="SystemFont_n0qtx"]
@@ -31,4 +32,6 @@ Button/styles/focus = SubResource("StyleBoxFlat_11fwh")
 Button/styles/normal = ExtResource("1_0fnj3")
 Button/styles/pressed = ExtResource("1_0fnj3")
 HSplitContainer/styles/split_bar_background = SubResource("StyleBoxLine_5tyer")
+Label/font_sizes/font_size = 32
+Label/fonts/font = ExtResource("2_21u5j")
 Panel/styles/panel = SubResource("StyleBoxFlat_0ve60")

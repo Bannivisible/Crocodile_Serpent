@@ -5,8 +5,6 @@ class_name HitBox
 
 @export var attack_data: AttackData
 
-@export var cs = _obtain_cs()
-
 @export_range(0.0, 60.0) var damage_inteval: float= 0.0:
 	set(value):
 		damage_inteval = value
@@ -24,20 +22,12 @@ func _ready() -> void:
 	area_entered.connect(_on_area_2d_entered)
 	area_exited.connect(_on_area_2d_exited)
 	
-	
-	#if not monitoring_at_ready: monitoring= false
 	monitorable = false
 	
 	set_collision_layer_value(1, false)
 	set_collision_mask_value(3, true)
 
 #### INIT ####
-
-func _obtain_cs() -> CombatSkill:
-	if cs != null: return cs
-	
-	if owner is CombatSkill: return owner
-	else : return null
 
 func _init_damage_inteval_timer() -> void: 
 	if damage_inteval == 0.0:
@@ -55,14 +45,7 @@ func _init_damage_inteval_timer() -> void:
 #### LOGICS ####
 
 func _compute_raw_damage() -> float:
-	var total_damage: float = 0.0
-	if cs:
-		total_damage += cs.strenght.value * attack_data.multiplier
-	
-	if attack_data.additionnal_strenght:
-		total_damage += attack_data.additionnal_strenght.value
-	
-	return total_damage
+	return attack_data.add_damage * attack_data.mult_damage
 
 func modify_label_damage(_label: Label) -> void:
 	return

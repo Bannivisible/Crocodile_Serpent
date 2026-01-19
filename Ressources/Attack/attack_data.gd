@@ -1,8 +1,8 @@
 extends Resource
 class_name AttackData
 
-@export var multiplier: float= 1.0
+@export var mult_damage: float= 1.0
 
-@export var additionnal_strenght: StrenghtStat
+@export var add_damage: float
 
 @export var type: AttackType

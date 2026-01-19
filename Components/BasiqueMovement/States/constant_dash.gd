@@ -1,7 +1,7 @@
 extends State
 class_name BMC_ConstantDashState
 
-@export var mult_speed: float= 1.0
+@export var buff_speed: Buff
 
 @onready var bmc: BMC= _obtain_bmc()
 
@@ -20,8 +20,8 @@ func _obtain_bmc() -> BMC:
 
 func enter() -> void:
 	bmc.dir = dir
-	prev_speed = bmc.speed.value
-	bmc.speed.value *= mult_speed
+	
+	bmc.charc_stat.append_buff(buff_speed)
 
 ####### FAIRE UN BUFF A LA PLACE
 
@@ -29,4 +29,4 @@ func update(_delta: float) -> void:
 	bmc.update_velocity_with_dir()
 
 func exit() -> void:
-	bmc.speed.value = prev_speed
+	bmc.charc_stat.remove_buff(buff_speed)

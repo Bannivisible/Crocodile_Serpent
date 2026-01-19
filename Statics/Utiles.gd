@@ -87,6 +87,30 @@ static func uppercase_first_letter(text: String) -> String:
 		return text
 	return text[0].to_upper() + text.substr(1)
 
+static func snake_case_to_camel_case(string: String) -> String:
+	var camel_case: String= string[0].to_upper()
+	
+	for i in range(1, len(string)):
+		if string[i] == "_": continue
+		
+		if string[i-1] == "_":
+			camel_case += string[i].to_upper()
+		else :
+			camel_case += string[i]
+	
+	return camel_case
+
+static func camel_case_to_snake_case(string: String) -> String:
+	var snake_case: String= string[0].to_lower()
+	
+	for i in range(1, len(string)):
+		if string[i] == string[i].to_upper():
+			snake_case += "_" + string[i].to_lower()
+		else :
+			snake_case += string[i]
+	
+	return snake_case
+
 static func compute_collision_height(collision: Node2D) -> float:
 	if collision is CollisionShape2D:
 		var shape: Shape2D= collision.shape

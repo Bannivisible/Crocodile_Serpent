@@ -12,7 +12,7 @@ func _ready() -> void:
 	bmc.dir_changed.connect(_on_bmc_dir_changed)
 
 func update(_delta: float) -> void:
-	var velocity_x: float= lerp(bmc.object.velocity.x, bmc.speed.value * bmc.dir.x * MULT_SPEED, acceleration)
+	var velocity_x: float= lerp(bmc.object.velocity.x, bmc.charc_stat.speed * bmc.dir.x * MULT_SPEED, acceleration)
 	bmc.object.velocity.x = velocity_x
 
 func exit() -> void:

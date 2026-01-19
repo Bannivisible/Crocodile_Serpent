@@ -1,8 +1,7 @@
-[gd_scene load_steps=82 format=3 uid="uid://ds4i8cup57akf"]
+[gd_scene load_steps=73 format=3 uid="uid://ds4i8cup57akf"]
 
 [ext_resource type="AnimationLibrary" uid="uid://ctdrtnjx7txak" path="res://Components/CombatSkill/Weapon/JawTrap/AnimationsData/JawTrapAnimationLibrary.res" id="2_dp6s7"]
 [ext_resource type="Script" uid="uid://bhcip3r7gigab" path="res://Components/CombatSkill/Weapon/JawTrap/jaw_trap.gd" id="2_g4jcv"]
-[ext_resource type="Script" uid="uid://c20oatp4y0el5" path="res://Ressources/Statistics/Stats/critical_rate.gd" id="3_4d2f6"]
 [ext_resource type="Script" uid="uid://mcrao1da8rcg" path="res://Ressources/Statistics/Stats/strenght_stat.gd" id="3_v0eml"]
 [ext_resource type="Script" uid="uid://42c2b5rma8ot" path="res://Components/CombatSkill/Weapon/weapon_hit_box.gd" id="4_5pxtx"]
 [ext_resource type="Texture2D" uid="uid://qkqqtx1bnvjk" path="res://Components/CombatSkill/Weapon/JawTrap/Assets/jaw_trap_texture.tres" id="4_jeet7"]
@@ -34,30 +33,14 @@
 [ext_resource type="Script" uid="uid://dgi2a2c0lt17u" path="res://Components/animation_manager/state_animation_manager.gd" id="19_wdegu"]
 [ext_resource type="Shape2D" uid="uid://dehxsdpvhda4g" path="res://Components/CombatSkill/Weapon/JawTrap/Ressources/ToGroundShape.tres" id="25_7etub"]
 
-[sub_resource type="Resource" id="Resource_yvpvj"]
-script = ExtResource("3_4d2f6")
-value = 0.4
-metadata/_custom_type_script = "uid://c20oatp4y0el5"
-
 [sub_resource type="Resource" id="Resource_jlbrr"]
 script = ExtResource("3_v0eml")
 value = 10.0
 metadata/_custom_type_script = "uid://mcrao1da8rcg"
 
-[sub_resource type="Resource" id="Resource_7etub"]
-script = ExtResource("3_4d2f6")
-value = 10.0
-metadata/_custom_type_script = "uid://c20oatp4y0el5"
-
 [sub_resource type="Resource" id="Resource_kcwly"]
 script = ExtResource("5_4d2f6")
-add_crit_rate = SubResource("Resource_7etub")
 metadata/_custom_type_script = "uid://bpo8hybdit330"
-
-[sub_resource type="Resource" id="Resource_in3ot"]
-script = ExtResource("3_v0eml")
-value = 10.0
-metadata/_custom_type_script = "uid://mcrao1da8rcg"
 
 [sub_resource type="Resource" id="Resource_cyaoe"]
 script = ExtResource("6_jeet7")
@@ -66,24 +49,13 @@ metadata/_custom_type_script = "uid://danilkv671r1y"
 
 [sub_resource type="Resource" id="Resource_bxcyf"]
 script = ExtResource("5_v0eml")
-additionnal_strenght = SubResource("Resource_in3ot")
 type = SubResource("Resource_cyaoe")
 metadata/_custom_type_script = "uid://ce7ave72wm32j"
-
-[sub_resource type="Resource" id="Resource_o8o0j"]
-script = ExtResource("3_4d2f6")
-metadata/_custom_type_script = "uid://c20oatp4y0el5"
 
 [sub_resource type="Resource" id="Resource_2xqvd"]
 script = ExtResource("5_4d2f6")
 mult_crit_rate = 1.5
-add_crit_rate = SubResource("Resource_o8o0j")
 metadata/_custom_type_script = "uid://bpo8hybdit330"
-
-[sub_resource type="Resource" id="Resource_wdegu"]
-script = ExtResource("3_v0eml")
-value = 50.0
-metadata/_custom_type_script = "uid://mcrao1da8rcg"
 
 [sub_resource type="Resource" id="Resource_3w3qp"]
 script = ExtResource("6_jeet7")
@@ -92,18 +64,12 @@ metadata/_custom_type_script = "uid://danilkv671r1y"
 
 [sub_resource type="Resource" id="Resource_lj60c"]
 script = ExtResource("5_v0eml")
-additionnal_strenght = SubResource("Resource_wdegu")
 type = SubResource("Resource_3w3qp")
 metadata/_custom_type_script = "uid://ce7ave72wm32j"
-
-[sub_resource type="Resource" id="Resource_eaiaj"]
-script = ExtResource("3_4d2f6")
-metadata/_custom_type_script = "uid://c20oatp4y0el5"
 
 [sub_resource type="Resource" id="Resource_fho1j"]
 script = ExtResource("5_4d2f6")
 mult_crit_rate = 1.2
-add_crit_rate = SubResource("Resource_eaiaj")
 metadata/_custom_type_script = "uid://bpo8hybdit330"
 
 [sub_resource type="Resource" id="Resource_11eis"]
@@ -116,14 +82,8 @@ script = ExtResource("5_v0eml")
 type = SubResource("Resource_11eis")
 metadata/_custom_type_script = "uid://ce7ave72wm32j"
 
-[sub_resource type="Resource" id="Resource_mkx5c"]
-script = ExtResource("3_4d2f6")
-value = 30.0
-metadata/_custom_type_script = "uid://c20oatp4y0el5"
-
 [sub_resource type="Resource" id="Resource_vpr7y"]
 script = ExtResource("5_4d2f6")
-add_crit_rate = SubResource("Resource_mkx5c")
 metadata/_custom_type_script = "uid://bpo8hybdit330"
 
 [sub_resource type="Resource" id="Resource_tlny7"]
@@ -133,7 +93,6 @@ metadata/_custom_type_script = "uid://danilkv671r1y"
 
 [sub_resource type="Resource" id="Resource_5rtpq"]
 script = ExtResource("5_v0eml")
-multiplier = 2.0
 type = SubResource("Resource_tlny7")
 metadata/_custom_type_script = "uid://ce7ave72wm32j"
 
@@ -149,7 +108,6 @@ metadata/_custom_type_script = "uid://danilkv671r1y"
 
 [sub_resource type="Resource" id="Resource_1shtc"]
 script = ExtResource("5_v0eml")
-multiplier = 1.75
 type = SubResource("Resource_yvmfl")
 metadata/_custom_type_script = "uid://ce7ave72wm32j"
 
@@ -164,7 +122,6 @@ metadata/_custom_type_script = "uid://danilkv671r1y"
 
 [sub_resource type="Resource" id="Resource_nlvaj"]
 script = ExtResource("5_v0eml")
-multiplier = 1.5
 type = SubResource("Resource_rddj4")
 metadata/_custom_type_script = "uid://ce7ave72wm32j"
 
@@ -220,13 +177,8 @@ region = Rect2(303, 65, 101, 65)
 radius = 10.036705
 height = 88.18735
 
-[sub_resource type="Resource" id="Resource_jeet7"]
-script = ExtResource("3_4d2f6")
-metadata/_custom_type_script = "uid://c20oatp4y0el5"
-
 [sub_resource type="Resource" id="Resource_71p2d"]
 script = ExtResource("5_4d2f6")
-add_crit_rate = SubResource("Resource_jeet7")
 metadata/_custom_type_script = "uid://bpo8hybdit330"
 
 [sub_resource type="Resource" id="Resource_dp6s7"]
@@ -550,7 +502,6 @@ _data = {
 [node name="JawTrap" type="StaticBody2D"]
 collision_mask = 2
 script = ExtResource("2_g4jcv")
-critical_rate = SubResource("Resource_yvpvj")
 strenght = SubResource("Resource_jlbrr")
 
 [node name="StateMachine" type="Node" parent="."]
@@ -791,12 +742,11 @@ position = Vector2(-31, -1)
 node_b = NodePath("..")
 bias = 0.9
 
-[node name="WeaponHitBox" type="Area2D" parent="." node_paths=PackedStringArray("cs")]
+[node name="WeaponHitBox" type="Area2D" parent="."]
 rotation = 1.5707964
 script = ExtResource("4_5pxtx")
 weapon_attck_data = SubResource("Resource_71p2d")
 attack_data = SubResource("Resource_wfuh6")
-cs = NodePath("..")
 metadata/_custom_type_script = "uid://42c2b5rma8ot"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponHitBox"]

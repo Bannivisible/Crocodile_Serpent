@@ -1,42 +1,19 @@
-extends Resource
+extends Statistics
 class_name CharcStatistics
 
-@export var health: float
-@export var strenght: float
-@export var defense: float
-@export var speed: float
+@export var base_max_health: float
+@export var base_strenght: float
+@export var base_defense: float
+@export var base_speed: float
 
-enum STATS{
-	HEALTH,
-	STARDUST,
-	STRENGHT,
-	DEFENSE,
-	SPEED,
-}
-
-var statistics: Dictionary[String, float]:
-	get =  get_statistics
-
-#class Buff:
-	#var stat: STATS
-	#var type: BUFFS_TYPES
-	#
-	#func _init(_stat: STATS, _type: BUFFS_TYPES) -> void:
-		#stat = _stat
-		#type = _type
-
-var add_buffs: Array[Buff]
-var mult_buffs: Array[Buff]
+var max_health: float
+var strenght: float
+var defense: float
+var speed: float
 
 func get_statistics() -> Dictionary[String, float]:
 	return {
-		"health" = health,
+		"max_health" = max_health,
 		"strenght" = strenght,
 		"defense" = defense,
 		"speed" = speed }
-
-func append_buff(buff: Buff) -> void:
-	pass
-
-func _add_buff(stat: StringName, amount: Variant) -> void:
-	set(stat, amount)

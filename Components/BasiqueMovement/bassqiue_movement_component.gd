@@ -1,7 +1,7 @@
 extends Component
 class_name BMC
 
-@export var speed: SpeedStat
+@export var charc_stat: CharcStatistics
 
 @export var facing_node: Node2D
 @onready var anim_player: AnimationPlayer= owner.get_node("AnimationPlayer")
@@ -66,7 +66,7 @@ func _update_animation() -> void:
 
 #### LOGIC ####
 func update_velocity_with_dir() -> void:
-	character.velocity = dir * speed.value * BMC_MoveState.MULT_SPEED
+	character.velocity = dir * charc_stat.speed * BMC_MoveState.MULT_SPEED
 
 func immobilize() -> void:
 	state_machine_x.lock_state($StateMachineX/BaseState/Idle)

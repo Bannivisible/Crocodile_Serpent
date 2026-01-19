@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://dijsmuk5xxrv7" path="res://Ui/CSInterface/cs_interface.gd" id="2_lhy7a"]
 [ext_resource type="Script" uid="uid://b1e0vwa7x3w0j" path="res://Ui/CSInterface/cs_interface_data_manager.gd" id="3_lhy7a"]
 [ext_resource type="Script" uid="uid://b2qh2de0kbwt" path="res://Ui/CSInterface/cs_category_button.gd" id="4_ddx0q"]
-[ext_resource type="Resource" uid="uid://dd26cydaugi7p" path="res://Scene/Characters/Crocodile/crocodile_stat.tres" id="4_ix3v8"]
+[ext_resource type="Resource" uid="uid://iq6c7ofn104r" path="res://Scene/Characters/Crocodile/crocodile_stati.tres" id="4_ilqmr"]
 [ext_resource type="Script" uid="uid://ihcg87coc1pm" path="res://Ui/CSInterface/tab_container.gd" id="4_vyjhn"]
 [ext_resource type="Script" uid="uid://dkeybkucf0o12" path="res://Ui/CSInterface/grid_container.gd" id="6_ddx0q"]
 [ext_resource type="Script" uid="uid://db4jcia3pwpd3" path="res://Ressources/CombatSkillData/combat_skill_data.gd" id="8_5tmjq"]
@@ -39,7 +39,7 @@ metadata/_edit_lock_ = true
 [node name="CSInterfaceDataManager" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("3_lhy7a")
-player_statistics = ExtResource("4_ix3v8")
+player_statistics = ExtResource("4_ilqmr")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -90,30 +90,88 @@ theme_override_constants/margin_bottom = 4
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer"]
 layout_mode = 2
 
-[node name="HealthLabel" type="Label" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
+
+[node name="HealthLabel" type="Label" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 text = "PV "
 
+[node name="HealthValueLabel" type="Label" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "60 / 60"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="StrenghtLabel" type="Label" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Force   "
+
+[node name="StrenghtValueLabel" type="Label" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "80"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="DefenseLabel" type="Label" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Defense"
+
+[node name="DefenseValueLabel" type="Label" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "70"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SpeedLabel" type="Label" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Vitesse"
+
+[node name="SpeedValueLabel" type="Label" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer/HBoxContainer4"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "30"
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="CritRateLabel" type="Label" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Critique"
+
+[node name="CriteRateValueLabel" type="Label" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer/HBoxContainer5"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "700 %"
+
 [node name="StardustLabel" type="Label" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
 layout_mode = 2
-text = "Stardust: "
+text = "Stardust"
+horizontal_alignment = 1
 
-[node name="StrenghtLabel" type="Label" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
+[node name="ProgressBar" type="ProgressBar" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer"]
+modulate = Color(0.06666667, 0.09803922, 0.72156864, 1)
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
-text = "Force: "
-
-[node name="DefenseLabel" type="Label" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Defense: "
-
-[node name="SpeedLabel" type="Label" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Vitesse: "
+step = 1.0
+value = 50.0
+show_percentage = false
 
 [node name="Panel2" type="Panel" parent="Panel/TabContainer/CSCategorySelection"]
 layout_mode = 2

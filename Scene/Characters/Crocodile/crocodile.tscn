@@ -1,4 +1,4 @@
-[gd_scene load_steps=106 format=3 uid="uid://bgxumcv6rrpm1"]
+[gd_scene load_steps=108 format=3 uid="uid://bgxumcv6rrpm1"]
 
 [ext_resource type="PackedScene" uid="uid://mmkgsg3lueu" path="res://Scene/Characters/character.tscn" id="1_pp85c"]
 [ext_resource type="Script" uid="uid://b4gx6mrenb5rh" path="res://Scene/Characters/Crocodile/crocodile.gd" id="2_fjl3l"]
@@ -21,11 +21,11 @@
 [ext_resource type="SkeletonModification2DLookAt" uid="uid://ipi3j2b3sdth" path="res://Scene/Characters/Crocodile/SkeletonModification/foot_back_skeleton_modification_2d_look_at.tres" id="10_ifobo"]
 [ext_resource type="Script" uid="uid://dat1xibjdbka6" path="res://Components/Statistics/statistics_manager.gd" id="11_xdqw8"]
 [ext_resource type="Script" uid="uid://t1y8h2xnlvsi" path="res://Components/BasiqueMovement/States/bent_down.gd" id="12_1etbk"]
-[ext_resource type="Resource" uid="uid://dd26cydaugi7p" path="res://Scene/Characters/Crocodile/crocodile_stat.tres" id="13_22jbs"]
 [ext_resource type="SkeletonModification2DLookAt" uid="uid://c8bnrs2ge68xr" path="res://Scene/Characters/Crocodile/SkeletonModification/hand_front_skeleton_modification_2d_look_at.tres" id="14_umomj"]
 [ext_resource type="Animation" uid="uid://ccbyb3j0w0168" path="res://Scene/Characters/Crocodile/AnimationTree/Idle.res" id="16_jlbrr"]
 [ext_resource type="AnimationLibrary" uid="uid://ctdrtnjx7txak" path="res://Components/CombatSkill/Weapon/JawTrap/AnimationsData/JawTrapAnimationLibrary.res" id="18_8e5hb"]
 [ext_resource type="Script" uid="uid://ce5dn7234e16y" path="res://Components/BasiqueMovement/BMC_Player/base_state.gd" id="22_usnsk"]
+[ext_resource type="Script" uid="uid://byhe3mep5poar" path="res://Ressources/Statistics/buff.gd" id="23_usnsk"]
 [ext_resource type="Script" uid="uid://cj4k60put1qnc" path="res://Components/BasiqueMovement/BMC_Player/jump.gd" id="25_usnsk"]
 [ext_resource type="PackedScene" uid="uid://ds4i8cup57akf" path="res://Components/CombatSkill/Weapon/JawTrap/jaw_trap.tscn" id="27_0jkvw"]
 [ext_resource type="Script" uid="uid://b2ht1wi0b2hvw" path="res://Components/BasiqueMovement/States/bmc_free.gd" id="27_dr3s2"]
@@ -33,6 +33,7 @@
 [ext_resource type="Script" uid="uid://dnvqquim7c7xk" path="res://Components/BasiqueMovement/States/free_idle.gd" id="28_usnsk"]
 [ext_resource type="Script" uid="uid://kwdw0pmhwwqr" path="res://Scene/Characters/Crocodile/Scripts/free_idle.gd" id="29_wbk6g"]
 [ext_resource type="Script" uid="uid://m551wfdyvjyg" path="res://Components/BasiqueMovement/States/rotate_dir.gd" id="32_yvpvj"]
+[ext_resource type="Resource" uid="uid://iq6c7ofn104r" path="res://Scene/Characters/Crocodile/crocodile_stati.tres" id="34_usnsk"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pp85c"]
 radius = 35.0
@@ -1983,6 +1984,13 @@ nodes/StateBlend2/node = SubResource("AnimationNodeBlend2_dr3s2")
 nodes/StateBlend2/position = Vector2(-760, 140)
 node_connections = [&"output", 0, &"AttackOneShot", &"AttackOneShot", 0, &"StateOneShot", &"AttackOneShot", 1, &"AttackAnimation", &"StateOneShot", 0, &"StateBlend2", &"StateOneShot", 1, &"StateOneShotAnimation", &"StateBlend2", 0, &"StateMachine", &"StateBlend2", 1, &"StateBlendAnimation"]
 
+[sub_resource type="Resource" id="Resource_wbk6g"]
+script = ExtResource("23_usnsk")
+stat_name = "speed"
+type = 1
+amount = 1.5
+metadata/_custom_type_script = "uid://byhe3mep5poar"
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jeet7"]
 radius = 10.036705
 height = 88.18735
@@ -2045,7 +2053,7 @@ offset = Vector2(18, 26.333)
 
 [node name="FootBack" type="Sprite2D" parent="SpriteContainer/LegBackGroup" index="2"]
 position = Vector2(70.516106, -58.725555)
-rotation = -0.11685945
+rotation = -0.116859466
 scale = Vector2(0.99938935, 0.99938935)
 texture = SubResource("AtlasTexture_6et86")
 offset = Vector2(9.333, 10.667)
@@ -2557,6 +2565,7 @@ parameters/StateOneShot/request = 0
 parameters/StateBlend2/blend_amount = 0.0
 
 [node name="BMC" parent="." index="6" node_paths=PackedStringArray("facing_node") instance=ExtResource("2_pp85c")]
+charc_stat = ExtResource("34_usnsk")
 facing_node = NodePath("../Skeleton2D")
 
 [node name="StateMachineX" parent="BMC" index="0"]
@@ -2568,6 +2577,7 @@ set_to_default_state_at_ready = true
 
 [node name="ConstantDash" type="Node" parent="BMC/StateMachineX" index="1"]
 script = ExtResource("27_yvpvj")
+buff_speed = SubResource("Resource_wbk6g")
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 
 [node name="StateLabel" parent="BMC/StateMachineX" index="2"]
@@ -2666,7 +2676,7 @@ shape = SubResource("CapsuleShape2D_pp85c")
 
 [node name="StatisticsManager" type="Node" parent="." index="9"]
 script = ExtResource("11_xdqw8")
-statistiques = ExtResource("13_22jbs")
+statistiques = ExtResource("34_usnsk")
 metadata/_custom_type_script = "uid://dat1xibjdbka6"
 
 [connection signal="dir_changed" from="BMC" to="BMC/StateMachineY/Air/Free/FreeIdle" method="_on_bmc_dir_changed"]

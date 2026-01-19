@@ -9,20 +9,20 @@ enum FACTIONS{
 
 @export var faction : FACTIONS
 
-@export var health: HealthStat:
-	set(value):
-		if value != health:
-			health = value
-			if health != null:
-				health.die.connect(die)
+@export var stat: CharcStatistics:
+	set = set_stat
 
-@export var defense: DefenseStat
+var health: float:
+	set = set_health
 
 @export_group("Feed back")
 @export_subgroup("Damage label", "label")
 @export var label_settings: LabelSettings
 
 var label_tween: Tween
+
+signal health_changed(value: float)
+signal died()
 
 #### BUILT-IN ####
 func _ready() -> void:
@@ -32,18 +32,36 @@ func _ready() -> void:
 		var hurt_box: HurtBox= child
 		hurt_box.hitted.connect(_on_hurt_box_hitted)
 
+#### SETTER ####
+
+func set_health(value: float) -> void:
+	value = clamp(value, 0.0, stat.max_health)
+	
+	if value != health:
+		health = value
+		health_changed.emit(value)
+		
+		if health == 0.0:
+			die()
+
+func set_stat(value: CharcStatistics) -> void:
+	if stat: stat.stat_updated.disconnect(_on_stat_stat_update)
+	if value: value.stat_updated.connect(_on_stat_stat_update)
+	
+	stat = value
+
 #### LOGICS ####
 func _hurt(damage: float, hurt_box: HurtBox, hit_box: HitBox) -> void:
 	var dam: float= _compute_damage(damage)
-	health.current_health -= dam
+	health -= dam
 	
 	hit_box.hit.emit(damage, hurt_box)
 
 func die() -> void:
-	pass
+	died.emit()
 
 func _compute_damage(damage: float) -> float:
-	return damage - ( 2**(damage / defense.value) )
+	return damage - ( 2**(damage / stat.defense) )
 
 func _hurt_feed_back(damage: float, hurt_box: HurtBox, hit_box: HitBox) -> void:
 	_label_feed_back(damage, hurt_box, hit_box)
@@ -79,3 +97,6 @@ func _custom_label(label: Label, damage: float, hurt_box: HurtBox) -> void:
 func _on_hurt_box_hitted(damage: float, hurt_box: HurtBox, hit_box: HitBox) -> void:
 	_hurt(damage, hurt_box, hit_box)
 	_hurt_feed_back(damage, hurt_box, hit_box)
+
+func _on_stat_stat_update(_stat_name: String) -> void:
+	health = min(health, stat.max_health)

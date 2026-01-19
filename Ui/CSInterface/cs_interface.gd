@@ -24,11 +24,11 @@ signal cancel()
 
 #### BUILT_IN ####
 func _ready() -> void:
-	data_manager.player_statistics.reactive_changed.connect(_on_player_statistics_stat_changed)
+	data_manager.player_statistics.stat_updated.connect(_on_player_statistics_stat_updated)
 	_connect_cs_category_buttons_signals()
 	
 	for stat_name in data_manager.player_statistics.statistics.keys():
-		_set_stat_label_text(data_manager.player_statistics.get(stat_name))
+		_set_stat_label_text(stat_name)
 	
 	on_screen_changed.connect(func(_value):
 		if not on_screen: release_focus())
@@ -54,14 +54,10 @@ func display() -> void:
 func _emit_event_cs_selected_signal(cs_data) -> void:
 	Events.combat_skill_selected.emit(cs_data)
 
-func _set_stat_label_text(stat: Stat) -> void:
-	var stat_name: String= Utiles.get_property_name_from_value(
-		data_manager.player_statistics, stat
-	)
-	
-	var label: Label = get_node_or_null("%" + Utiles.uppercase_first_letter(stat_name) + "Label")
+func _set_stat_label_text(stat_name: String) -> void:
+	var label: Label = get_node_or_null("%" + Utiles.snake_case_to_camel_case(stat_name) + "ValueLabel")
 	if label:
-		label.text += " " + str(stat.value)
+		label.text += str(data_manager.player_statistics.get(stat_name))
 
 func _connect_cs_category_buttons_signals() -> void:
 	for child in %CSCategoryGridContainer.get_children():
@@ -78,5 +74,5 @@ func _on_cs_selected(cs_data: CombatSkillData) -> void:
 		Events.combat_skill_selected.emit(cs_data)
 	)
 
-func _on_player_statistics_stat_changed(stat: Stat) -> void:
-	_set_stat_label_text(stat)
+func _on_player_statistics_stat_updated(stat_name: String) -> void:
+	_set_stat_label_text(stat_name)
