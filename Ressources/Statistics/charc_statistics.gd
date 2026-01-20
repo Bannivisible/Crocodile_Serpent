@@ -1,5 +1,5 @@
 extends Statistics
-class_name CharcStatistics
+class_name CharacStatistics
 
 @export var base_max_health: float
 @export var base_strenght: float
@@ -17,3 +17,4 @@ func get_statistics() -> Dictionary[String, float]:
 		"strenght" = strenght,
 		"defense" = defense,
 		"speed" = speed }
+

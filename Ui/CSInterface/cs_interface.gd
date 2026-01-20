@@ -16,6 +16,8 @@ var on_screen: bool= false:
 
 var tween: Tween
 
+var health_component: HealthComponent
+
 const SHOW_ANIMATION_DURATION: float= 0.5
 
 signal on_screen_animation_finished()
@@ -26,6 +28,8 @@ signal cancel()
 func _ready() -> void:
 	data_manager.player_statistics.stat_updated.connect(_on_player_statistics_stat_updated)
 	_connect_cs_category_buttons_signals()
+	
+	_setup_health_component()
 	
 	for stat_name in data_manager.player_statistics.statistics.keys():
 		_set_stat_label_text(stat_name)
@@ -56,8 +60,25 @@ func _emit_event_cs_selected_signal(cs_data) -> void:
 
 func _set_stat_label_text(stat_name: String) -> void:
 	var label: Label = get_node_or_null("%" + Utiles.snake_case_to_camel_case(stat_name) + "ValueLabel")
-	if label:
-		label.text += str(data_manager.player_statistics.get(stat_name))
+	if label == %MaxHealthValueLabel:
+		_set_health_label_text()
+	
+	elif label:
+		label.text = str(data_manager.player_statistics.get(stat_name))
+
+func _set_health_label_text() -> void:
+	var label: Label= %MaxHealthValueLabel
+	
+	if health_component:
+		label.text = str(health_component.health) + " / "
+	label.text += str(data_manager.player_statistics.max_health)
+
+func _setup_health_component() -> void:
+	var player: Character= get_tree().get_first_node_in_group(Game.player_group_name)
+	health_component = player.get_node_or_null("HealthComponent")
+	
+	if health_component:
+		health_component.health_changed.connect(_on_health_component_health_changed)
 
 func _connect_cs_category_buttons_signals() -> void:
 	for child in %CSCategoryGridContainer.get_children():
@@ -76,3 +97,6 @@ func _on_cs_selected(cs_data: CombatSkillData) -> void:
 
 func _on_player_statistics_stat_updated(stat_name: String) -> void:
 	_set_stat_label_text(stat_name)
+
+func _on_health_component_health_changed(_health: float) -> void:
+	_set_health_label_text()

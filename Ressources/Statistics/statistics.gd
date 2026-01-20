@@ -14,6 +14,7 @@ signal stat_updated(stat_name: String)
 
 signal stat_upgraded_permanently(stat_name: String, amount: float)
 
+
 @abstract
 func get_statistics() -> Dictionary[String, float]
 
@@ -85,15 +86,32 @@ func append_buff(buff: Buff) -> void:
 	
 	if get_statistics().has(stat_name):
 		buffs.append(buff)
-		_update_stat(stat_name)
+		update_stat(stat_name)
 		buff_added.emit(buff)
 
 
 func remove_buff(buff: Buff) -> void:
 	if buff in buffs:
 		buffs.erase(buff)
-		_update_stat(buff.stat_name)
+		update_stat(buff.stat_name)
 		buff_removed.emit(buff)
+
+
+func remove_all_occurence_of_buff(buff: Buff) -> void:
+	while buff in buffs:
+		remove_buff(buff)
+
+
+func remove_all_buffs_of_stat(stat_name: String) -> void:
+	for buff in buffs:
+		if buff.stat_name == stat_name:
+			remove_buff(buff)
+
+
+func remove_all_buffs() -> void:
+	for buff in buffs:
+		remove_buff(buff)
+
 
 func upgrade_permanently(stat_name: String, amount: float) -> void:
 	var stat: float= get(stat_name)
@@ -102,14 +120,30 @@ func upgrade_permanently(stat_name: String, amount: float) -> void:
 	set("base_" + stat_name, stat + amount)
 	stat_upgraded_permanently.emit(stat_name, amount)
 	
-	_update_stat(stat_name)
+	update_stat(stat_name)
 
-func _update_stat(stat_name: String) -> void:
+
+func get_min_value(stat_name: String) -> float:
+	var min_value = get("min_" + stat_name)
+	if not min_value is float: min_value = 0.0
+	
+	return min_value
+
+
+func update_stat(stat_name: String) -> void:
 	var base_stat_name: String= "base_" + stat_name
 	var base_stat: float= get(base_stat_name)
 	if not base_stat: return
 	
-	var stat: float= (base_stat + get_add_buff_total(stat_name)) * get_mult_coef(stat_name)
+	var new_value: float= (base_stat + get_add_buff_total(stat_name)) * get_mult_coef(stat_name)
+	var min_value = get_min_value(stat_name)
 	
-	set(base_stat_name, stat)
+	var stat: float= max(min_value ,new_value)
+	
+	set(stat_name, stat)
 	stat_updated.emit(stat_name)
+
+
+func update_all_stat() -> void:
+	for stat_name in statistics.keys():
+		update_stat(stat_name)

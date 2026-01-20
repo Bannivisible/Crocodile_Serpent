@@ -1,4 +1,4 @@
-[gd_scene load_steps=108 format=3 uid="uid://bgxumcv6rrpm1"]
+[gd_scene load_steps=109 format=3 uid="uid://bgxumcv6rrpm1"]
 
 [ext_resource type="PackedScene" uid="uid://mmkgsg3lueu" path="res://Scene/Characters/character.tscn" id="1_pp85c"]
 [ext_resource type="Script" uid="uid://b4gx6mrenb5rh" path="res://Scene/Characters/Crocodile/crocodile.gd" id="2_fjl3l"]
@@ -1999,7 +1999,14 @@ height = 88.18735
 radius = 138.0
 height = 372.0
 
-[node name="Crocodile" instance=ExtResource("1_pp85c")]
+[sub_resource type="Resource" id="Resource_usnsk"]
+script = ExtResource("23_usnsk")
+stat_name = "defense"
+type = 1
+amount = -0.4
+metadata/_custom_type_script = "uid://byhe3mep5poar"
+
+[node name="Crocodile" groups=["Crocodile"] instance=ExtResource("1_pp85c")]
 script = ExtResource("2_fjl3l")
 
 [node name="CollisionShape2D" parent="." index="0"]
@@ -2565,7 +2572,6 @@ parameters/StateOneShot/request = 0
 parameters/StateBlend2/blend_amount = 0.0
 
 [node name="BMC" parent="." index="6" node_paths=PackedStringArray("facing_node") instance=ExtResource("2_pp85c")]
-charc_stat = ExtResource("34_usnsk")
 facing_node = NodePath("../Skeleton2D")
 
 [node name="StateMachineX" parent="BMC" index="0"]
@@ -2677,6 +2683,7 @@ shape = SubResource("CapsuleShape2D_pp85c")
 [node name="StatisticsManager" type="Node" parent="." index="9"]
 script = ExtResource("11_xdqw8")
 statistiques = ExtResource("34_usnsk")
+buff = SubResource("Resource_usnsk")
 metadata/_custom_type_script = "uid://dat1xibjdbka6"
 
 [connection signal="dir_changed" from="BMC" to="BMC/StateMachineY/Air/Free/FreeIdle" method="_on_bmc_dir_changed"]

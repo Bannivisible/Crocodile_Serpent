@@ -6,3 +6,4 @@ enum COLLISION_MASK{
 	HURT_BOX
 }
 
+var player_group_name: String= "Crocodile"

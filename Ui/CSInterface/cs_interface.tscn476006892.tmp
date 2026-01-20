@@ -93,12 +93,12 @@ layout_mode = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="MaxHealthLabel" type="Label" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="HealthLabel" type="Label" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "PV "
 
-[node name="MaxHealthValueLabel" type="Label" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="HealthValueLabel" type="Label" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3

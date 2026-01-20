@@ -1,7 +1,7 @@
 extends Node
 class_name CSInterfacceDataManager
 
-@export var player_statistics: CharcStatistics
+@export var player_statistics: CharacStatistics
 
 signal cs_category_sellected(cs_data: Array[CombatSkillData])
 

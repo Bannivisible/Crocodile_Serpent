@@ -9,7 +9,7 @@ enum FACTIONS{
 
 @export var faction : FACTIONS
 
-@export var stat: CharcStatistics:
+@export var stat: CharacStatistics:
 	set = set_stat
 
 var health: float:
@@ -44,11 +44,13 @@ func set_health(value: float) -> void:
 		if health == 0.0:
 			die()
 
-func set_stat(value: CharcStatistics) -> void:
+func set_stat(value: CharacStatistics) -> void:
 	if stat: stat.stat_updated.disconnect(_on_stat_stat_update)
 	if value: value.stat_updated.connect(_on_stat_stat_update)
 	
 	stat = value
+	
+	health = stat.max_health
 
 #### LOGICS ####
 func _hurt(damage: float, hurt_box: HurtBox, hit_box: HitBox) -> void:
