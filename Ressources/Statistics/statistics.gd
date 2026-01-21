@@ -161,6 +161,7 @@ func get_max_variable_stats() -> Dictionary[String, float]:
 	
 	return stat_name_dict
 
+
 func get_variable_stats() -> Dictionary[String ,float]:
 	var stat_dict: Dictionary[String ,float]
 	
@@ -173,6 +174,7 @@ func get_variable_stats() -> Dictionary[String ,float]:
 
 func get_current_value(max_stat_name: String) -> float:
 	return get(max_stat_name.substr(len(MAX_STAT_PREFIX)))
+
 
 func is_max_stat(stat_name: String) -> bool:
 	return stat_name.begins_with(MAX_STAT_PREFIX)

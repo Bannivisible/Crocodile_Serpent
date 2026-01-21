@@ -2250,7 +2250,7 @@ offset = Vector2(-12, 15)
 
 [node name="LegFront" type="Sprite2D" parent="SpriteContainer/LegFrontGroup" index="0"]
 position = Vector2(-63.087433, -95.860504)
-rotation = 0.069723494
+rotation = 0.06972348
 scale = Vector2(0.9995601, 0.9995601)
 texture = SubResource("AtlasTexture_qvnx8")
 offset = Vector2(2.667, 21.333)
@@ -2264,7 +2264,7 @@ offset = Vector2(-5.667, 21)
 
 [node name="FootFront" type="Sprite2D" parent="SpriteContainer/LegFrontGroup" index="2"]
 position = Vector2(-67.01467, -50.90897)
-rotation = -0.0004918084
+rotation = -0.0004918233
 scale = Vector2(0.99940306, 0.99940306)
 texture = SubResource("AtlasTexture_7cm0d")
 offset = Vector2(2.2518923, 17.591896)
