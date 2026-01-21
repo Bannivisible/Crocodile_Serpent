@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dgndeir7aqk0o"]
+[gd_scene load_steps=19 format=3 uid="uid://dgndeir7aqk0o"]
 
 [ext_resource type="Theme" uid="uid://dxxn1u7fah8ng" path="res://Ui/BookInterface/Theme/Book.tres" id="1_nh015"]
 [ext_resource type="Script" uid="uid://dijsmuk5xxrv7" path="res://Ui/CSInterface/cs_interface.gd" id="2_lhy7a"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://b2qh2de0kbwt" path="res://Ui/CSInterface/cs_category_button.gd" id="4_ddx0q"]
 [ext_resource type="Resource" uid="uid://iq6c7ofn104r" path="res://Scene/Characters/Crocodile/crocodile_stati.tres" id="4_ilqmr"]
 [ext_resource type="Script" uid="uid://ihcg87coc1pm" path="res://Ui/CSInterface/tab_container.gd" id="4_vyjhn"]
+[ext_resource type="Resource" uid="uid://cngbsch24bs31" path="res://Scene/Characters/Snake/snake_stat.tres" id="5_5kfsq"]
 [ext_resource type="Script" uid="uid://dkeybkucf0o12" path="res://Ui/CSInterface/grid_container.gd" id="6_ddx0q"]
 [ext_resource type="Script" uid="uid://db4jcia3pwpd3" path="res://Ressources/CombatSkillData/combat_skill_data.gd" id="8_5tmjq"]
 [ext_resource type="Resource" uid="uid://cnx36oinkwin0" path="res://Ressources/CombatSkillData/Weapon/jaw_trap_data.tres" id="9_ix3v8"]
@@ -40,6 +41,7 @@ metadata/_edit_lock_ = true
 unique_name_in_owner = true
 script = ExtResource("3_lhy7a")
 player_statistics = ExtResource("4_ilqmr")
+wizard_statistics = ExtResource("5_5kfsq")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -162,10 +164,11 @@ text = "700 %"
 
 [node name="StardustLabel" type="Label" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Stardust"
+text = "Poussières d'étoiles"
 horizontal_alignment = 1
 
-[node name="ProgressBar" type="ProgressBar" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer"]
+[node name="StardustProgressBar" type="ProgressBar" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 modulate = Color(0.06666667, 0.09803922, 0.72156864, 1)
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2

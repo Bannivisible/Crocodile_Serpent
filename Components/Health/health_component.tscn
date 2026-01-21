@@ -1,7 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://dbkcfhn0j6tet"]
 
-[ext_resource type="Script" uid="uid://by3okutnlgy02" path="res://Components/Statistics/Health/health_component.gd" id="1_uafr8"]
-[ext_resource type="Script" uid="uid://dbek7sg1u7b3b" path="res://Components/Statistics/Health/hurt_box.gd" id="2_s7ou4"]
+[ext_resource type="Script" uid="uid://by3okutnlgy02" path="res://Components/Health/health_component.gd" id="1_uafr8"]
+[ext_resource type="Script" uid="uid://dbek7sg1u7b3b" path="res://Components/Health/hurt_box.gd" id="2_s7ou4"]
+
 
 [sub_resource type="LabelSettings" id="LabelSettings_w2p6d"]
 

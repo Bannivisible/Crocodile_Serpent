@@ -29,6 +29,8 @@ func _ready() -> void:
 	data_manager.player_statistics.stat_updated.connect(_on_player_statistics_stat_updated)
 	_connect_cs_category_buttons_signals()
 	
+	_update_stardust_progress_bar()
+	
 	_setup_health_component()
 	
 	for stat_name in data_manager.player_statistics.statistics.keys():
@@ -84,6 +86,10 @@ func _connect_cs_category_buttons_signals() -> void:
 	for child in %CSCategoryGridContainer.get_children():
 		var cs_categ_button: CSCategoryButton= child
 		cs_categ_button.pressed.connect(_on_cs_category_button_pressed)
+
+func _update_stardust_progress_bar() -> void:
+	var max_stardust: float= data_manager.wizard_statistics.max_stardust
+	%StardustProgressBar.max_value = max_stardust
 
 #### SIGNAL RESPONSES ####
 func _on_cs_category_button_pressed() -> void:

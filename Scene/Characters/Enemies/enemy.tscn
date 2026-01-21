@@ -1,11 +1,12 @@
 [gd_scene load_steps=15 format=3 uid="uid://do3y7dxe754f4"]
 
 [ext_resource type="PackedScene" uid="uid://mmkgsg3lueu" path="res://Scene/Characters/character.tscn" id="1_ikawt"]
-[ext_resource type="PackedScene" uid="uid://dbkcfhn0j6tet" path="res://Components/Statistics/Health/health_component.tscn" id="2_tegfp"]
+[ext_resource type="PackedScene" uid="uid://dbkcfhn0j6tet" path="res://Components/Health/health_component.tscn" id="2_tegfp"]
 [ext_resource type="Script" uid="uid://duv2wxetutjux" path="res://Ressources/Statistics/Stats/health_stat.gd" id="3_cgw2a"]
 [ext_resource type="Script" uid="uid://bhm4lgjssqqrc" path="res://Ressources/Statistics/Stats/defense_stat.gd" id="4_vvq5x"]
 [ext_resource type="Script" uid="uid://danh8ni44s3tn" path="res://Ressources/Attack/AttackType/ResistanceType/resistance_type.gd" id="5_8seoa"]
 [ext_resource type="Script" uid="uid://danilkv671r1y" path="res://Ressources/Attack/AttackType/attack_type.gd" id="6_k4r48"]
+
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ikawt"]
 size = Vector2(64, 64)

@@ -13,7 +13,7 @@ enum FACTIONS{
 	set = set_stat
 
 var health: float:
-	set = set_health
+	set = set_health, get = get_health
 
 @export_group("Feed back")
 @export_subgroup("Damage label", "label")
@@ -32,7 +32,7 @@ func _ready() -> void:
 		var hurt_box: HurtBox= child
 		hurt_box.hitted.connect(_on_hurt_box_hitted)
 
-#### SETTER ####
+#### SETTER  GETTER####
 
 func set_health(value: float) -> void:
 	value = clamp(value, 0.0, stat.max_health)
@@ -43,6 +43,9 @@ func set_health(value: float) -> void:
 		
 		if health == 0.0:
 			die()
+
+func get_health() -> float:
+	return stat.health
 
 func set_stat(value: CharacStatistics) -> void:
 	if stat: stat.stat_updated.disconnect(_on_stat_stat_update)

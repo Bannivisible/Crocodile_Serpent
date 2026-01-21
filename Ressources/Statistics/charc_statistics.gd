@@ -18,3 +18,10 @@ func get_statistics() -> Dictionary[String, float]:
 		"defense" = defense,
 		"speed" = speed }
 
+var health: float
+
+func set_health(value: float) -> void:
+	value = clamp(value, 0.0, max_health)
+	
+	if value != health:
+		health = value

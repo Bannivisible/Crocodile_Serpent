@@ -2,6 +2,9 @@
 extends Resource
 class_name Statistics
 
+const BASE_STAT_PREFIX: String= "base_"
+const MAX_STAT_PREFIX: String= "max_"
+
 var statistics: Dictionary[String, float]:
 	get =  get_statistics
 
@@ -117,7 +120,7 @@ func upgrade_permanently(stat_name: String, amount: float) -> void:
 	var stat: float= get(stat_name)
 	if not stat: return
 	
-	set("base_" + stat_name, stat + amount)
+	set(BASE_STAT_PREFIX + stat_name, stat + amount)
 	stat_upgraded_permanently.emit(stat_name, amount)
 	
 	update_stat(stat_name)
@@ -131,7 +134,7 @@ func get_min_value(stat_name: String) -> float:
 
 
 func update_stat(stat_name: String) -> void:
-	var base_stat_name: String= "base_" + stat_name
+	var base_stat_name: String= BASE_STAT_PREFIX + stat_name
 	var base_stat: float= get(base_stat_name)
 	if not base_stat: return
 	
@@ -147,3 +150,29 @@ func update_stat(stat_name: String) -> void:
 func update_all_stat() -> void:
 	for stat_name in statistics.keys():
 		update_stat(stat_name)
+
+
+func get_max_variable_stats() -> Dictionary[String, float]:
+	var stat_name_dict: Dictionary[String, float]= {}
+	
+	for stat_name in statistics.keys():
+		if stat_name.begins_with(MAX_STAT_PREFIX):
+			stat_name_dict[stat_name] = statistics[stat_name]
+	
+	return stat_name_dict
+
+func get_variable_stats() -> Dictionary[String ,float]:
+	var stat_dict: Dictionary[String ,float]
+	
+	for max_stat_name in get_max_variable_stats():
+		var stat_name = max_stat_name.substr(len(MAX_STAT_PREFIX))
+		stat_dict[stat_name] = get(stat_name)
+	
+	return stat_dict
+
+
+func get_current_value(max_stat_name: String) -> float:
+	return get(max_stat_name.substr(len(MAX_STAT_PREFIX)))
+
+func is_max_stat(stat_name: String) -> bool:
+	return stat_name.begins_with(MAX_STAT_PREFIX)

@@ -2,6 +2,7 @@ extends Node
 class_name CSInterfacceDataManager
 
 @export var player_statistics: CharacStatistics
+@export var wizard_statistics: Wizard_statistics
 
 signal cs_category_sellected(cs_data: Array[CombatSkillData])
 
@@ -16,4 +17,3 @@ func _connect_cs_category_buttons_signals() -> void:
 
 func _on_cs_category_button_pressed(cs_data: Array[CombatSkillData]) -> void:
 	cs_category_sellected.emit(cs_data)
-

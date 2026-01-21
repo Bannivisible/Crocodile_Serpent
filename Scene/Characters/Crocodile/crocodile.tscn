@@ -17,7 +17,7 @@
 [ext_resource type="SkeletonModification2DCCDIK" uid="uid://cr4f6ya7mmow5" path="res://Scene/Characters/Crocodile/SkeletonModification/knee_back_skeleton_modification_2dccdik.tres" id="7_hsnmx"]
 [ext_resource type="SkeletonModification2DLookAt" uid="uid://b22cehgl1aw1a" path="res://Scene/Characters/Crocodile/SkeletonModification/head_skeleton_modification_2d_look_at.tres" id="8_umomj"]
 [ext_resource type="SkeletonModification2DLookAt" uid="uid://dakqfb5g8q8ai" path="res://Scene/Characters/Crocodile/SkeletonModification/foot_front_skeleton_modification_2d_look_at.tres" id="9_fs2r1"]
-[ext_resource type="PackedScene" uid="uid://dbkcfhn0j6tet" path="res://Components/Statistics/Health/health_component.tscn" id="10_51sid"]
+[ext_resource type="PackedScene" uid="uid://dbkcfhn0j6tet" path="res://Components/Health/health_component.tscn" id="10_51sid"]
 [ext_resource type="SkeletonModification2DLookAt" uid="uid://ipi3j2b3sdth" path="res://Scene/Characters/Crocodile/SkeletonModification/foot_back_skeleton_modification_2d_look_at.tres" id="10_ifobo"]
 [ext_resource type="Script" uid="uid://dat1xibjdbka6" path="res://Components/Statistics/statistics_manager.gd" id="11_xdqw8"]
 [ext_resource type="Script" uid="uid://t1y8h2xnlvsi" path="res://Components/BasiqueMovement/States/bent_down.gd" id="12_1etbk"]
@@ -34,6 +34,7 @@
 [ext_resource type="Script" uid="uid://kwdw0pmhwwqr" path="res://Scene/Characters/Crocodile/Scripts/free_idle.gd" id="29_wbk6g"]
 [ext_resource type="Script" uid="uid://m551wfdyvjyg" path="res://Components/BasiqueMovement/States/rotate_dir.gd" id="32_yvpvj"]
 [ext_resource type="Resource" uid="uid://iq6c7ofn104r" path="res://Scene/Characters/Crocodile/crocodile_stati.tres" id="34_usnsk"]
+[ext_resource type="Script" uid="uid://wqohf18ow8uk" path="res://Components/Stardust/stardust_component.gd" id="35_wbk6g"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pp85c"]
 radius = 35.0
@@ -1999,13 +2000,6 @@ height = 88.18735
 radius = 138.0
 height = 372.0
 
-[sub_resource type="Resource" id="Resource_usnsk"]
-script = ExtResource("23_usnsk")
-stat_name = "defense"
-type = 1
-amount = -0.4
-metadata/_custom_type_script = "uid://byhe3mep5poar"
-
 [node name="Crocodile" groups=["Crocodile"] instance=ExtResource("1_pp85c")]
 script = ExtResource("2_fjl3l")
 
@@ -2683,8 +2677,10 @@ shape = SubResource("CapsuleShape2D_pp85c")
 [node name="StatisticsManager" type="Node" parent="." index="9"]
 script = ExtResource("11_xdqw8")
 statistiques = ExtResource("34_usnsk")
-buff = SubResource("Resource_usnsk")
 metadata/_custom_type_script = "uid://dat1xibjdbka6"
+
+[node name="StardustComponent" type="Node" parent="." index="10"]
+script = ExtResource("35_wbk6g")
 
 [connection signal="dir_changed" from="BMC" to="BMC/StateMachineY/Air/Free/FreeIdle" method="_on_bmc_dir_changed"]
 
