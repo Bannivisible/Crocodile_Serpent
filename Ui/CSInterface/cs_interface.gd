@@ -16,7 +16,6 @@ var on_screen: bool= false:
 
 var tween: Tween
 
-var health_component: HealthComponent
 
 const SHOW_ANIMATION_DURATION: float= 0.5
 
@@ -27,11 +26,13 @@ signal cancel()
 #### BUILT_IN ####
 func _ready() -> void:
 	data_manager.player_statistics.stat_updated.connect(_on_player_statistics_stat_updated)
+	data_manager.player_statistics.variable_stat_changed.connect(_on_player_statistics_variable_stat_chanded)
+	data_manager.wizard_statistics.stat_updated.connect(_on_wizard_statistics_stat_updated)
+	data_manager.wizard_statistics.variable_stat_changed.connect(_on_wizard_statistics_variable_stat_chanded)
+	
 	_connect_cs_category_buttons_signals()
 	
-	_update_stardust_progress_bar()
-	
-	_setup_health_component()
+	#_update_stardust_progress_bar()
 	
 	for stat_name in data_manager.player_statistics.statistics.keys():
 		_set_stat_label_text(stat_name)
@@ -71,25 +72,27 @@ func _set_stat_label_text(stat_name: String) -> void:
 func _set_health_label_text() -> void:
 	var label: Label= %MaxHealthValueLabel
 	
-	if health_component:
-		label.text = str(health_component.health) + " / "
-	label.text += str(data_manager.player_statistics.max_health)
-
-func _setup_health_component() -> void:
-	var player: Character= get_tree().get_first_node_in_group(Game.player_group_name)
-	health_component = player.get_node_or_null("HealthComponent")
+	var health: float= data_manager.player_statistics.health
+	var max_health: float= data_manager.player_statistics.max_health
 	
-	if health_component:
-		health_component.health_changed.connect(_on_health_component_health_changed)
+	label.text = str(health) + " / " + str(max_health)
+
 
 func _connect_cs_category_buttons_signals() -> void:
 	for child in %CSCategoryGridContainer.get_children():
 		var cs_categ_button: CSCategoryButton= child
 		cs_categ_button.pressed.connect(_on_cs_category_button_pressed)
 
+
 func _update_stardust_progress_bar() -> void:
+	var stardust_progress_bar: ProgressBar = %StardustProgressBar
+	
 	var max_stardust: float= data_manager.wizard_statistics.max_stardust
-	%StardustProgressBar.max_value = max_stardust
+	stardust_progress_bar.max_value = max_stardust
+	
+	var stardust: float= data_manager.wizard_statistics.stardust
+	stardust_progress_bar.value = stardust
+
 
 #### SIGNAL RESPONSES ####
 func _on_cs_category_button_pressed() -> void:
@@ -104,5 +107,15 @@ func _on_cs_selected(cs_data: CombatSkillData) -> void:
 func _on_player_statistics_stat_updated(stat_name: String) -> void:
 	_set_stat_label_text(stat_name)
 
-func _on_health_component_health_changed(_health: float) -> void:
+func _on_player_statistics_variable_stat_chanded(stat_name: String, _value: float) -> void:
+	if not stat_name == HealthComponent.HEALTH_STAT_NAME: return
 	_set_health_label_text()
+
+func _on_wizard_statistics_stat_updated(stat_name: String) -> void:
+	var max_stardust_stat_name: String= Statistics.MAX_STAT_PREFIX + StardustComponent.STARDUST_STAT_NAME
+	if stat_name == max_stardust_stat_name:
+		_update_stardust_progress_bar()
+
+func _on_wizard_statistics_variable_stat_chanded(stat_name: String, _value: float) -> void:
+	if not stat_name == StardustComponent.STARDUST_STAT_NAME: return
+	_update_stardust_progress_bar()

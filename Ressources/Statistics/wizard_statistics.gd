@@ -1,7 +1,7 @@
 extends CharacStatistics
 class_name Wizard_statistics
 
-@export var base_stardus: float
+@export var base_max_stardust: float
 
 var max_stardust: float
 

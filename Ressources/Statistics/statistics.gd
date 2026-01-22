@@ -15,8 +15,9 @@ signal buff_removed(buff: Buff)
 
 signal stat_updated(stat_name: String)
 
-signal stat_upgraded_permanently(stat_name: String, amount: float)
+signal stat_upgraded_permanently(stat_name: String, value: float)
 
+signal variable_stat_changed(stat_name: String, value: float)
 
 @abstract
 func get_statistics() -> Dictionary[String, float]
@@ -134,8 +135,7 @@ func get_min_value(stat_name: String) -> float:
 
 
 func update_stat(stat_name: String) -> void:
-	var base_stat_name: String= BASE_STAT_PREFIX + stat_name
-	var base_stat: float= get(base_stat_name)
+	var base_stat: float= get(BASE_STAT_PREFIX + stat_name)
 	if not base_stat: return
 	
 	var new_value: float= (base_stat + get_add_buff_total(stat_name)) * get_mult_coef(stat_name)
@@ -178,3 +178,12 @@ func get_current_value(max_stat_name: String) -> float:
 
 func is_max_stat(stat_name: String) -> bool:
 	return stat_name.begins_with(MAX_STAT_PREFIX)
+
+
+func set_variable_stat(stat_name: String, value: float) -> void:
+	if value == get(stat_name): return
+	
+	var max_stat: float= get(MAX_STAT_PREFIX + stat_name)
+	set(stat_name, clamp(value, 0.0, max_stat))
+	
+	variable_stat_changed.emit(stat_name, value)

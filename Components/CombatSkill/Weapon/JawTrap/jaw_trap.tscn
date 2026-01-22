@@ -24,15 +24,14 @@
 [ext_resource type="Script" uid="uid://dn31df61ur2vl" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/on_ground.gd" id="15_7x2u0"]
 [ext_resource type="Script" uid="uid://bey7t8h4m0yyp" path="res://StateMachine/state.gd" id="16_2tnll"]
 [ext_resource type="Script" uid="uid://dcjv5pdoy3ubs" path="res://Ui/timer_range.gd" id="16_fho1j"]
-[ext_resource type="Script" uid="uid://6lekj6yg62r6" path="res://Components/Animation_manager/animation_manager_component.gd" id="16_in3ot"]
+[ext_resource type="Script" uid="uid://6lekj6yg62r6" path="res://Components/animation_manager/animation_manager_component.gd" id="16_in3ot"]
 [ext_resource type="Script" uid="uid://e0ej46y7q5uy" path="res://Other/ProceduralNode/procedural_link.gd" id="16_kcwly"]
 [ext_resource type="Script" uid="uid://bsmm7c0f2k3hr" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/bite_attack.gd" id="18_5rtpq"]
 [ext_resource type="Script" uid="uid://x1tg260g65b0" path="res://Other/timer_label.gd" id="18_eaiaj"]
 [ext_resource type="Resource" uid="uid://b85xloi286pt1" path="res://Ressources/AnimationConnection/crocodile_animation_connections.tres" id="19_bxcyf"]
 [ext_resource type="Script" uid="uid://c78u4kmgq07op" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/devastating_attack.gd" id="19_mkx5c"]
-[ext_resource type="Script" uid="uid://dgi2a2c0lt17u" path="res://Components/Animation_manager/state_animation_manager.gd" id="19_wdegu"]
+[ext_resource type="Script" uid="uid://dgi2a2c0lt17u" path="res://Components/animation_manager/state_animation_manager.gd" id="19_wdegu"]
 [ext_resource type="Shape2D" uid="uid://dehxsdpvhda4g" path="res://Components/CombatSkill/Weapon/JawTrap/Ressources/ToGroundShape.tres" id="25_7etub"]
-
 
 [sub_resource type="Resource" id="Resource_jlbrr"]
 script = ExtResource("3_v0eml")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=109 format=3 uid="uid://bgxumcv6rrpm1"]
+[gd_scene load_steps=110 format=3 uid="uid://bgxumcv6rrpm1"]
 
 [ext_resource type="PackedScene" uid="uid://mmkgsg3lueu" path="res://Scene/Characters/character.tscn" id="1_pp85c"]
 [ext_resource type="Script" uid="uid://b4gx6mrenb5rh" path="res://Scene/Characters/Crocodile/crocodile.gd" id="2_fjl3l"]
@@ -35,6 +35,7 @@
 [ext_resource type="Script" uid="uid://m551wfdyvjyg" path="res://Components/BasiqueMovement/States/rotate_dir.gd" id="32_yvpvj"]
 [ext_resource type="Resource" uid="uid://iq6c7ofn104r" path="res://Scene/Characters/Crocodile/crocodile_stati.tres" id="34_usnsk"]
 [ext_resource type="Script" uid="uid://wqohf18ow8uk" path="res://Components/Stardust/stardust_component.gd" id="35_wbk6g"]
+[ext_resource type="Resource" uid="uid://cngbsch24bs31" path="res://Scene/Characters/Snake/snake_stat.tres" id="36_m1odn"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pp85c"]
 radius = 35.0
@@ -2250,7 +2251,7 @@ offset = Vector2(-12, 15)
 
 [node name="LegFront" type="Sprite2D" parent="SpriteContainer/LegFrontGroup" index="0"]
 position = Vector2(-63.087433, -95.860504)
-rotation = 0.06972348
+rotation = 0.069723494
 scale = Vector2(0.9995601, 0.9995601)
 texture = SubResource("AtlasTexture_qvnx8")
 offset = Vector2(2.667, 21.333)
@@ -2264,7 +2265,7 @@ offset = Vector2(-5.667, 21)
 
 [node name="FootFront" type="Sprite2D" parent="SpriteContainer/LegFrontGroup" index="2"]
 position = Vector2(-67.01467, -50.90897)
-rotation = -0.0004918233
+rotation = -0.0004918084
 scale = Vector2(0.99940306, 0.99940306)
 texture = SubResource("AtlasTexture_7cm0d")
 offset = Vector2(2.2518923, 17.591896)
@@ -2681,6 +2682,7 @@ metadata/_custom_type_script = "uid://dat1xibjdbka6"
 
 [node name="StardustComponent" type="Node" parent="." index="10"]
 script = ExtResource("35_wbk6g")
+wizard_stat = ExtResource("36_m1odn")
 
 [connection signal="dir_changed" from="BMC" to="BMC/StateMachineY/Air/Free/FreeIdle" method="_on_bmc_dir_changed"]
 
