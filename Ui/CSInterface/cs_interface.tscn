@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dgndeir7aqk0o"]
+[gd_scene load_steps=23 format=3 uid="uid://dgndeir7aqk0o"]
 
 [ext_resource type="Theme" uid="uid://dxxn1u7fah8ng" path="res://Ui/BookInterface/Theme/Book.tres" id="1_nh015"]
 [ext_resource type="Script" uid="uid://dijsmuk5xxrv7" path="res://Ui/CSInterface/cs_interface.gd" id="2_lhy7a"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://ihcg87coc1pm" path="res://Ui/CSInterface/tab_container.gd" id="4_vyjhn"]
 [ext_resource type="Resource" uid="uid://cngbsch24bs31" path="res://Scene/Characters/Snake/snake_stat.tres" id="5_5kfsq"]
 [ext_resource type="Script" uid="uid://dkeybkucf0o12" path="res://Ui/CSInterface/grid_container.gd" id="6_ddx0q"]
+[ext_resource type="StyleBox" uid="uid://doguu1cldrpqx" path="res://Ui/CSInterface/StyleBox/weapon_style_box.tres" id="7_idbfo"]
 [ext_resource type="Script" uid="uid://db4jcia3pwpd3" path="res://Ressources/CombatSkillData/combat_skill_data.gd" id="8_5tmjq"]
 [ext_resource type="Resource" uid="uid://cnx36oinkwin0" path="res://Ressources/CombatSkillData/Weapon/jaw_trap_data.tres" id="9_ix3v8"]
 [ext_resource type="Resource" uid="uid://cx84vorgutpdq" path="res://Ressources/CombatSkillData/Spell/Water/spell_geyser.tres" id="10_ilqmr"]
@@ -19,6 +20,16 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i5yi8"]
 bg_color = Color(0.2969628, 0.10500003, 0.115467034, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_idbfo"]
+bg_color = Color(0.52156866, 0.11764706, 0.25490198, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k2css"]
+bg_color = Color(0.7607843, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tjcl5"]
+bg_color = Color(0.40148437, 0.018748576, 0.06989488, 1)
+border_color = Color(0.9137255, 0.8156863, 0.2, 1)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_ilqmr"]
 viewport_path = NodePath("SubViewport")
@@ -148,28 +159,54 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "30"
 
-[node name="HBoxContainer5" type="HBoxContainer" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer"]
+[node name="CriticalDataPanelContainer" type="PanelContainer" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("7_idbfo")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer/CriticalDataPanelContainer"]
 layout_mode = 2
 
-[node name="CritRateLabel" type="Label" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer/HBoxContainer5"]
+[node name="CriticalLabel" type="Label" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer/CriticalDataPanelContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 6
+theme_override_colors/font_color = Color(0.8938901, 0.89389014, 0, 1)
 text = "Critique"
 
-[node name="CriteRateValueLabel" type="Label" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer/HBoxContainer5"]
+[node name="PanelContainer" type="PanelContainer" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer/CriticalDataPanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_idbfo")
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer/CriticalDataPanelContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="CriteCoefValueLabel" type="Label" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer/CriticalDataPanelContainer/VBoxContainer/PanelContainer/HBoxContainer5"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 3
-text = "700 %"
+size_flags_horizontal = 6
+text = "X 2"
 
-[node name="StardustLabel" type="Label" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer"]
+[node name="CriteRateValueLabel" type="Label" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer/CriticalDataPanelContainer/VBoxContainer/PanelContainer/HBoxContainer5"]
+unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 6
+text = "20 %"
+
+[node name="PanelContainer" type="PanelContainer" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_k2css")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="StardustLabel" type="Label" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.31764707, 0.5294118, 1)
 text = "Poussières d'étoiles"
 horizontal_alignment = 1
 
-[node name="StardustProgressBar" type="ProgressBar" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer"]
+[node name="StardustProgressBar" type="ProgressBar" parent="Panel/TabContainer/CSCategorySelection/Panel/MarginContainer/VBoxContainer/PanelContainer/VBoxContainer"]
 unique_name_in_owner = true
-modulate = Color(0.06666667, 0.09803922, 0.72156864, 1)
+modulate = Color(0.2, 0.3529412, 0.62352943, 1)
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 step = 1.0
@@ -206,6 +243,10 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_tjcl5")
+theme_override_styles/pressed = ExtResource("7_idbfo")
+theme_override_styles/hover = ExtResource("7_idbfo")
+theme_override_styles/focus = ExtResource("7_idbfo")
 text = "Armes"
 script = ExtResource("4_ddx0q")
 cs_data_array = Array[ExtResource("8_5tmjq")]([ExtResource("9_ix3v8")])
@@ -266,6 +307,7 @@ metadata/_custom_type_script = "uid://b2qh2de0kbwt"
 
 [node name="Page" type="Sprite2D" parent="Panel/TabContainer/CSCategorySelection/Panel2"]
 unique_name_in_owner = true
+visible = false
 modulate = Color(1, 1, 1, 0.37254903)
 rotation = 1.5707964
 texture = SubResource("ViewportTexture_ilqmr")

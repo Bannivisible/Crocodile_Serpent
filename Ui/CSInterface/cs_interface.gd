@@ -93,6 +93,10 @@ func _update_stardust_progress_bar() -> void:
 	var stardust: float= data_manager.wizard_statistics.stardust
 	stardust_progress_bar.value = stardust
 
+func _update_critical_value(weapon_stat: WeaponStatistics) -> void:
+	%CriteCoefValueLabel.text = "X " + str(weapon_stat.crit_coef)
+	%CriteRateValueLabel.text = str(weapon_stat.crit_rate) + " %"
+
 
 #### SIGNAL RESPONSES ####
 func _on_cs_category_button_pressed() -> void:

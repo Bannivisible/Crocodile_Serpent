@@ -3,6 +3,7 @@ class_name CSInterfacceDataManager
 
 @export var player_statistics: CharacStatistics
 @export var wizard_statistics: Wizard_statistics
+@export var weapon_statistics: WeaponStatistics
 
 signal cs_category_sellected(cs_data: Array[CombatSkillData])
 

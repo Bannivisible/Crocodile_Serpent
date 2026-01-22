@@ -11,3 +11,6 @@ var stardust: float:
 func _ready() -> void:
 	wizard_stat.update_all_stat()
 	wizard_stat.set_variable_stat(STARDUST_STAT_NAME, wizard_stat.max_stardust)
+
+func cast_spell(spell: Spell) -> void:
+	wizard_stat.set_variable_stat("stardust", stardust - spell.stat.stardust_cost)
