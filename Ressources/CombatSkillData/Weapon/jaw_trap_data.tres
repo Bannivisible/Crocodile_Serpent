@@ -1,24 +1,19 @@
-[gd_resource type="Resource" script_class="CombatSkillData" load_steps=7 format=3 uid="uid://cnx36oinkwin0"]
+[gd_resource type="Resource" script_class="CombatSkillData" load_steps=5 format=3 uid="uid://cnx36oinkwin0"]
 
 [ext_resource type="Script" uid="uid://db4jcia3pwpd3" path="res://Ressources/CombatSkillData/combat_skill_data.gd" id="1_8rnwb"]
-[ext_resource type="Script" uid="uid://c20oatp4y0el5" path="res://Ressources/Statistics/Stats/critical_rate.gd" id="1_pooew"]
 [ext_resource type="PackedScene" uid="uid://ds4i8cup57akf" path="res://Components/CombatSkill/Weapon/JawTrap/jaw_trap.tscn" id="1_ukgpr"]
-[ext_resource type="Script" uid="uid://mcrao1da8rcg" path="res://Ressources/Statistics/Stats/strenght_stat.gd" id="3_ukgpr"]
+[ext_resource type="Script" uid="uid://bk1oc1ul33tnd" path="res://Ressources/Statistics/weapon_statistics.gd" id="3_pooew"]
 
-[sub_resource type="Resource" id="Resource_hp3vo"]
-script = ExtResource("1_pooew")
-value = 40.0
-metadata/_custom_type_script = "uid://c20oatp4y0el5"
-
-[sub_resource type="Resource" id="Resource_fx2q7"]
-script = ExtResource("3_ukgpr")
-value = 45.0
-metadata/_custom_type_script = "uid://mcrao1da8rcg"
+[sub_resource type="Resource" id="Resource_ukgpr"]
+script = ExtResource("3_pooew")
+base_attack = 40.0
+base_crit_rate = 20.0
+base_crit_coef = 2.0
+metadata/_custom_type_script = "uid://bk1oc1ul33tnd"
 
 [resource]
 script = ExtResource("1_8rnwb")
 name = "Piège A Machoire"
-strenght = SubResource("Resource_fx2q7")
-critical_rate = SubResource("Resource_hp3vo")
+stat = SubResource("Resource_ukgpr")
 combat_skill_scene = ExtResource("1_ukgpr")
 metadata/_custom_type_script = "uid://db4jcia3pwpd3"
