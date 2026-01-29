@@ -37,6 +37,9 @@ func _input(_event: InputEvent) -> void:
 	
 	if Input.is_action_just_pressed("cancel"):
 		cancel.emit()
+	
+	if Input.is_action_just_pressed("special"):
+		turn_page()
 
 
 #### LOGIC ####
@@ -50,13 +53,37 @@ func display() -> void:
 	tween.tween_callback(func():on_screen_animation_finished.emit())
 
 
+func turn_page() -> void:
+	if %DoublePageTabContainer.get_child_count() - 1 == %DoublePageTabContainer.current_tab: return
+	
+	$AnimationPlayer.play("TurnPage")
+
+
+func _anime_turn_page() -> void:
+	var double_page_tab_container: TabContainer = %DoublePageTabContainer
+	var tab1_node: Control= double_page_tab_container.get_child(double_page_tab_container.current_tab).duplicate()
+	var tab2_node: Control= double_page_tab_container.get_child(double_page_tab_container.current_tab + 1).duplicate()
+	
+	double_page_tab_container.current_tab += 1
+	
+	tab1_node.set_anchors_preset(Control.PRESET_FULL_RECT)
+	tab2_node.set_anchors_preset(Control.PRESET_FULL_RECT)
+	
+	Utiles.remove_all_child(%SubViewControl1)
+	Utiles.remove_all_child(%SubViewControl2)
+	
+	%SubViewControl1.add_child(tab1_node)
+	%SubViewControl2.add_child(tab2_node)
+
+
+
 func _emit_event_cs_selected_signal(cs_data) -> void:
 	Events.combat_skill_selected.emit(cs_data)
 
 
-
 func _last_button_focus_grab_focus() -> void:
 	last_button_focus.grab_focus()
+
 
 func _last_button_focus_release_focus() -> void:
 	last_button_focus.release_focus()

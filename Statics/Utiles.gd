@@ -1,16 +1,23 @@
 extends Object
 class_name Utiles
 
+static func remove_all_child(node: Node) -> void:
+	while node.get_child_count() > 0:
+		node.remove_child(node.get_child(0))
+
+
 static func reduce_string(origine: String, reducer: String, bonus_len := 0) -> String:
 	if reducer.is_subsequence_of(origine):
 		origine = origine.substr(len(reducer) + bonus_len)
 	return origine
+
 
 static func call_if_component(owner: Node, component_name: String, callable: Callable):
 	var component = owner.get_node_or_null(component_name)
 	
 	if component:
 		callable.call()
+
 
 static func has_property(node: Node, prop_name: String) -> bool:
 	var property_list: Array[Dictionary] = node.get_property_list()
@@ -21,10 +28,12 @@ static func has_property(node: Node, prop_name: String) -> bool:
 	
 	return false
 
+
 static func get_value_if_exist(dict: Dictionary, key: String) -> Variant:
 	if dict.has(key):
 		return dict[key]
 	return null
+
 
 static  func setup_grid_child_neighbour(grid: GridContainer) -> void:
 	var columns: int= grid.columns
@@ -45,9 +54,11 @@ static  func setup_grid_child_neighbour(grid: GridContainer) -> void:
 		elif (i + 1) % columns == 0: #A droite
 			button.focus_neighbor_right = grid.get_child(i - columns + 1).get_path()
 
+
 static func free_all_children(node: Node) -> void:
 	for child in node.get_children():
 		child.free()
+
 
 static func count_bits(n: int) -> int:
 	var count = 0
@@ -55,6 +66,7 @@ static func count_bits(n: int) -> int:
 		n &= n - 1
 		count += 1
 	return count
+
 
 #static func get_property_name_from_value(object: Object, value: Variant) -> String:
 	#for property in object.get_property_list():
