@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://f188bqv4kk26"]
+[gd_scene format=3 uid="uid://f188bqv4kk26"]
 
 [ext_resource type="PackedScene" uid="uid://dvhhcev5ikxgt" path="res://Scene/Arena/arena.tscn" id="1_0264e"]
 [ext_resource type="Script" uid="uid://rclgvctg748s" path="res://Scene/Arena/FightArena/fight_arena.gd" id="2_1ato1"]
@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://bey7t8h4m0yyp" path="res://StateMachine/state.gd" id="5_3wvjj"]
 [ext_resource type="Script" uid="uid://s1ya3aadtjn5" path="res://Scene/Arena/FightArena/choose.gd" id="5_7lhif"]
 [ext_resource type="PackedScene" uid="uid://bgxumcv6rrpm1" path="res://Scene/Characters/Crocodile/crocodile.tscn" id="7_3wvjj"]
-[ext_resource type="PackedScene" uid="uid://do3y7dxe754f4" path="res://Scene/Characters/Enemies/enemy.tscn" id="8_wp1n5"]
+[ext_resource type="PackedScene" uid="uid://c1ok3d3x3i6rh" path="res://Scene/Characters/Enemies/Boss/Chimera/chimera.tscn" id="8_wp1n5"]
 
 [sub_resource type="Gradient" id="Gradient_3wvjj"]
 colors = PackedColorArray(0, 1, 0, 1, 0, 1, 0, 1)
@@ -18,47 +18,45 @@ gradient = SubResource("Gradient_3wvjj")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wp1n5"]
 size = Vector2(64, 46.12616)
 
-[node name="FightArena" instance=ExtResource("1_0264e")]
+[node name="FightArena" unique_id=929122509 instance=ExtResource("1_0264e")]
 script = ExtResource("2_1ato1")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." index="0"]
+[node name="StaticBody2D" type="StaticBody2D" parent="." index="0" unique_id=1435186607]
 z_index = -10
 position = Vector2(961, 859)
 scale = Vector2(30, -2)
 collision_layer = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" index="0"]
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" index="0" unique_id=1402949603]
 texture = SubResource("GradientTexture2D_wp1n5")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" index="1"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" index="1" unique_id=1203639244]
 position = Vector2(0, -8.93692)
 shape = SubResource("RectangleShape2D_wp1n5")
 
-[node name="CSInterface" parent="UI" index="1" instance=ExtResource("2_j78hf")]
+[node name="CSInterface" parent="UI" index="1" unique_id=784519379 instance=ExtResource("2_j78hf")]
 
-[node name="StateMachine" type="Node" parent="." index="2"]
+[node name="StateMachine" type="Node" parent="." index="2" unique_id=437999778]
 script = ExtResource("4_7lhif")
 set_to_default_state_at_ready = true
 metadata/_custom_type_script = "uid://bcmokx1bwyftw"
 
-[node name="Choose" type="Node" parent="StateMachine" index="0"]
+[node name="Choose" type="Node" parent="StateMachine" index="0" unique_id=1512207871]
 script = ExtResource("5_7lhif")
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 
-[node name="Attaque" type="Node" parent="StateMachine" index="1"]
+[node name="Attaque" type="Node" parent="StateMachine" index="1" unique_id=113268313]
 script = ExtResource("5_3wvjj")
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 
-[node name="Defense" type="Node" parent="StateMachine" index="2"]
+[node name="Defense" type="Node" parent="StateMachine" index="2" unique_id=1803292706]
 script = ExtResource("5_3wvjj")
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 
-[node name="Enemy" parent="." index="3" instance=ExtResource("8_wp1n5")]
-position = Vector2(1559, 606)
-platform_floor_layers = 4294967295
-platform_wall_layers = 0
-
-[node name="Crocodile" parent="." index="4" instance=ExtResource("7_3wvjj")]
+[node name="Crocodile" parent="." index="3" unique_id=1168972678 instance=ExtResource("7_3wvjj")]
 position = Vector2(316, 446)
 platform_floor_layers = 4294967295
 platform_wall_layers = 0
+
+[node name="Chimera" parent="." index="4" unique_id=417415811 instance=ExtResource("8_wp1n5")]
+position = Vector2(1510, 594)

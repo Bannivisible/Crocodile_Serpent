@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ConditionForAction" load_steps=11 format=3 uid="uid://c6h00dt7fpxnb"]
+[gd_resource type="Resource" script_class="ConditionForAction" format=3 uid="uid://c6h00dt7fpxnb"]
 
 [ext_resource type="Script" uid="uid://d0v33ys2dynyh" path="res://Ressources/Actions/action.gd" id="1_vnsyt"]
 [ext_resource type="PackedScene" uid="uid://t1buea63lkc4" path="res://Scene/Projectile/FireBall/SuperFireBall/projectile_super_fire_ball.tscn" id="2_vt2re"]

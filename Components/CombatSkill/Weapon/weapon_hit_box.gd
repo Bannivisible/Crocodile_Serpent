@@ -7,10 +7,14 @@ class_name WeaponHitBox
 var current_is_crit: bool= false
 
 func _compute_raw_damage() -> float:
-	var damage: float= super._compute_raw_damage()
+	var damage: float= (weapon.statistics.attack + attack_data.add_damage) * attack_data.mult_damage
 	
 	current_is_crit = _is_critical()
-	if current_is_crit: damage *= 3
+	
+	if current_is_crit:
+		var crit_coef: float= weapon.statistics.crit_coef + weapon_attck_data.add_crit_coef
+		crit_coef *= weapon_attck_data.mult_crit_coef
+		damage *= crit_coef
 	
 	return damage
 

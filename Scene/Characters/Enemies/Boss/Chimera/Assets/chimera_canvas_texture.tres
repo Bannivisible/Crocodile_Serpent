@@ -1,0 +1,8 @@
+[gd_resource type="CanvasTexture" format=3 uid="uid://blx7irn07seo7"]
+
+[ext_resource type="Texture2D" uid="uid://52oefb0xbiev" path="res://Scene/Characters/Enemies/Boss/Chimera/Assets/chimera_sprite_sheet.png" id="1_py5xn"]
+[ext_resource type="Texture2D" uid="uid://cp80xrmhjkpgf" path="res://Scene/Characters/Enemies/Boss/Chimera/Assets/chimera_sprite_sheet_n.png" id="2_hin43"]
+
+[resource]
+diffuse_texture = ExtResource("1_py5xn")
+normal_texture = ExtResource("2_hin43")

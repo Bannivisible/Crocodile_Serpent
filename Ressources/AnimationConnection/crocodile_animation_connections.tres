@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="AnimationConnectionsList" load_steps=10 format=3 uid="uid://b85xloi286pt1"]
+[gd_resource type="Resource" script_class="AnimationConnectionsList" format=3 uid="uid://b85xloi286pt1"]
 
 [ext_resource type="Script" uid="uid://bmm1oqvjaxa4m" path="res://Ressources/AnimationConnection/animation_connection.gd" id="1_72sr6"]
 [ext_resource type="Script" uid="uid://dqkyu24522gux" path="res://Ressources/AnimationConnection/animation_connections_list.gd" id="2_wh5am"]

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CombatSkillData" load_steps=5 format=3 uid="uid://cnx36oinkwin0"]
+[gd_resource type="Resource" script_class="CombatSkillData" format=3 uid="uid://cnx36oinkwin0"]
 
 [ext_resource type="Script" uid="uid://db4jcia3pwpd3" path="res://Ressources/CombatSkillData/combat_skill_data.gd" id="1_8rnwb"]
 [ext_resource type="PackedScene" uid="uid://ds4i8cup57akf" path="res://Components/CombatSkill/Weapon/JawTrap/jaw_trap.tscn" id="1_ukgpr"]

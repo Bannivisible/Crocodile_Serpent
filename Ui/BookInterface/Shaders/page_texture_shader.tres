@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://cpfa1vsswfkvq"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://cpfa1vsswfkvq"]
 
 [ext_resource type="Shader" uid="uid://dmsadherpylqo" path="res://Ui/BookInterface/Shaders/page_texture_shader.gdshader" id="1_v03r5"]
 

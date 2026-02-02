@@ -21,7 +21,7 @@ func _obtain_bmc() -> BMC:
 func enter() -> void:
 	bmc.dir = dir
 	
-	bmc.charc_stat.append_buff(buff_speed)
+	bmc.charac_stat.append_buff(buff_speed)
 
 ####### FAIRE UN BUFF A LA PLACE
 
@@ -29,4 +29,4 @@ func update(_delta: float) -> void:
 	bmc.update_velocity_with_dir()
 
 func exit() -> void:
-	bmc.charc_stat.remove_buff(buff_speed)
+	bmc.charac_stat.remove_buff(buff_speed)

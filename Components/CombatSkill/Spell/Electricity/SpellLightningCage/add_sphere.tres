@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ConditionForAction" load_steps=16 format=3 uid="uid://djivrp1afebnt"]
+[gd_resource type="Resource" script_class="ConditionForAction" format=3 uid="uid://djivrp1afebnt"]
 
 [ext_resource type="Script" uid="uid://d0v33ys2dynyh" path="res://Ressources/Actions/action.gd" id="1_lvhsy"]
 [ext_resource type="PackedScene" uid="uid://7waxkd4kq5sy" path="res://Scene/Projectile/LightningSphere/lightning_sphere.tscn" id="2_p263x"]

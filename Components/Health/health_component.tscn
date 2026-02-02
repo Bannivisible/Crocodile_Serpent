@@ -1,19 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://dbkcfhn0j6tet"]
+[gd_scene format=3 uid="uid://dbkcfhn0j6tet"]
 
 [ext_resource type="Script" uid="uid://by3okutnlgy02" path="res://Components/Health/health_component.gd" id="1_uafr8"]
 [ext_resource type="Script" uid="uid://dbek7sg1u7b3b" path="res://Components/Health/hurt_box.gd" id="2_s7ou4"]
 
-
 [sub_resource type="LabelSettings" id="LabelSettings_w2p6d"]
 
-[node name="HealthComponent" type="Node2D"]
+[node name="HealthComponent" type="Node2D" unique_id=240872718]
 script = ExtResource("1_uafr8")
 label_settings = SubResource("LabelSettings_w2p6d")
 
-[node name="HurtBox" type="Area2D" parent="." groups=["HurtBox"]]
+[node name="HurtBox" type="Area2D" parent="." unique_id=1017093875 groups=["HurtBox"]]
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("2_s7ou4")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=414636330]
 debug_color = Color(0.9529412, 0.45882353, 0.6784314, 0.43137255)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://dgndeir7aqk0o"]
+[gd_scene load_steps=44 format=3 uid="uid://dgndeir7aqk0o"]
 
 [ext_resource type="Theme" uid="uid://dxxn1u7fah8ng" path="res://Ui/BookInterface/Theme/Book.tres" id="1_nh015"]
 [ext_resource type="Script" uid="uid://dijsmuk5xxrv7" path="res://Ui/CSInterface/cs_interface.gd" id="2_lhy7a"]
@@ -9,6 +9,7 @@
 [ext_resource type="StyleBox" uid="uid://btakedmfoujf4" path="res://Ui/CSInterface/StyleBox/page_style_box_flat.tres" id="7_5kfsq"]
 [ext_resource type="StyleBox" uid="uid://doguu1cldrpqx" path="res://Ui/CSInterface/StyleBox/weapon_style_box_focus.tres" id="7_idbfo"]
 [ext_resource type="Script" uid="uid://db4jcia3pwpd3" path="res://Ressources/CombatSkillData/combat_skill_data.gd" id="8_5tmjq"]
+[ext_resource type="StyleBox" uid="uid://ddlcfiauojenx" path="res://Components/CombatSkill/spell_button_style_box.tres" id="9_idbfo"]
 [ext_resource type="Resource" uid="uid://cnx36oinkwin0" path="res://Ressources/CombatSkillData/Weapon/jaw_trap_data.tres" id="9_ix3v8"]
 [ext_resource type="Resource" uid="uid://cx84vorgutpdq" path="res://Ressources/CombatSkillData/Spell/Water/spell_geyser.tres" id="10_ilqmr"]
 [ext_resource type="Resource" uid="uid://ila888nuoopt" path="res://Ressources/CombatSkillData/Spell/Fire/spell_fire_ball.tres" id="11_5kfsq"]
@@ -63,24 +64,14 @@ border_width_right = 6
 border_width_bottom = 6
 border_color = Color(0, 0.6392157, 0.5803922, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5kfsq"]
-bg_color = Color(0, 1, 1, 1)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tjcl5"]
 bg_color = Color(0.40148437, 0.018748576, 0.06989488, 1)
 border_color = Color(0.9137255, 0.8156863, 0.2, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wg374"]
-bg_color = Color(0.3713642, 1.280278e-05, 0.2870933, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0.15133491, 0.8135176, 0.9253967, 1)
+[sub_resource type="Gradient" id="Gradient_5kfsq"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_idbfo"]
+gradient = SubResource("Gradient_5kfsq")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_idbfo"]
 viewport_path = NodePath("SubViewport")
@@ -113,6 +104,14 @@ viewport_path = NodePath("SubViewport2")
 resource_local_to_scene = true
 atlas = SubResource("ViewportTexture_5kfsq")
 region = Rect2(0, 0, 454, 485)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wg374"]
+bg_color = Color(0.3713642, 1.280278e-05, 0.2870933, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.15133491, 0.8135176, 0.9253967, 1)
 
 [sub_resource type="Animation" id="Animation_5kfsq"]
 length = 0.001
@@ -187,6 +186,83 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_idbfo"]
+resource_name = "ReturnPage"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel/AnchorPageLeft:skew")
+tracks/0/interp = 4
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.569051]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel/AnchorPageLeft:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Panel/StatickPageRight:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Panel/AnchorPagRight:skew")
+tracks/3/interp = 4
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.5, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [4.714134, 0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Panel/AnchorPagRight:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.5, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_anime_return_page"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_ilqmr"]
@@ -266,69 +342,6 @@ tracks/5/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_idbfo"]
-resource_name = "ReturnPage"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Panel/AnchorPageLeft:skew")
-tracks/0/interp = 4
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 1.569051]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Panel/AnchorPageLeft:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Panel/StatickPageRight:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Panel/AnchorPagRight:skew")
-tracks/3/interp = 4
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0.5, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [4.714134, 0.0]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Panel/AnchorPagRight:visible")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0.5, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5kfsq"]
 _data = {
 &"RESET": SubResource("Animation_5kfsq"),
@@ -336,7 +349,7 @@ _data = {
 &"TurnPage": SubResource("Animation_ilqmr")
 }
 
-[node name="CSInterface" type="Control" node_paths=PackedStringArray("last_button_focus")]
+[node name="CSInterface" type="Control" node_paths=PackedStringArray("tab_first_buttons")]
 custom_minimum_size = Vector2(576, 324)
 layout_mode = 3
 anchor_left = 0.75
@@ -348,7 +361,7 @@ theme = ExtResource("1_nh015")
 script = ExtResource("2_lhy7a")
 show_animation_ease = 1
 show_animation_trans = 11
-last_button_focus = NodePath("Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/MarginContainer/StarButton")
+tab_first_buttons = [NodePath("Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/MarginContainer/StarButton"), NodePath("Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer/CSButton1")]
 metadata/_edit_lock_ = true
 
 [node name="CSInterfaceDataManager" type="Node" parent="."]
@@ -366,6 +379,135 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_i5yi8")
 metadata/_edit_lock_ = true
+
+[node name="StardustPanelContainer" type="PanelContainer" parent="Panel"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 45.0
+offset_right = 470.0
+offset_bottom = 138.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_k2css")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/StardustPanelContainer"]
+layout_mode = 2
+
+[node name="StardustLabel" type="Label" parent="Panel/StardustPanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Poussières d'étoiles"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/StardustPanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 6
+
+[node name="StardustTextureProgressBar" type="TextureProgressBar" parent="Panel/StardustPanelContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+value = 50.0
+nine_patch_stretch = true
+stretch_margin_bottom = 32
+texture_under = SubResource("GradientTexture2D_ilqmr")
+texture_progress = SubResource("GradientTexture2D_tjcl5")
+
+[node name="StatisticsMarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 188.0
+offset_right = 470.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_right = 12
+
+[node name="PanelContainer" type="PanelContainer" parent="Panel/StatisticsMarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_qiots")
+
+[node name="GridContainer" type="GridContainer" parent="Panel/StatisticsMarginContainer/PanelContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="MaxHealthLabel" type="Label" parent="Panel/StatisticsMarginContainer/PanelContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "PV "
+horizontal_alignment = 1
+
+[node name="MaxHealthValueLabel" type="Label" parent="Panel/StatisticsMarginContainer/PanelContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "60 / 60"
+horizontal_alignment = 1
+
+[node name="StrenghtLabel" type="Label" parent="Panel/StatisticsMarginContainer/PanelContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Force"
+horizontal_alignment = 1
+
+[node name="StrenghtValueLabel" type="Label" parent="Panel/StatisticsMarginContainer/PanelContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "80"
+horizontal_alignment = 1
+
+[node name="DefenseLabel" type="Label" parent="Panel/StatisticsMarginContainer/PanelContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Defense"
+horizontal_alignment = 1
+
+[node name="DefenseValueLabel" type="Label" parent="Panel/StatisticsMarginContainer/PanelContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "70"
+horizontal_alignment = 1
+
+[node name="SpeedLabel" type="Label" parent="Panel/StatisticsMarginContainer/PanelContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Vitesse"
+horizontal_alignment = 1
+
+[node name="SpeedValueLabel" type="Label" parent="Panel/StatisticsMarginContainer/PanelContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "30"
+horizontal_alignment = 1
+
+[node name="CriticalPanelContainer" type="PanelContainer" parent="Panel"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 406.0
+offset_right = 470.0
+offset_bottom = 496.0
+theme_override_styles/panel = ExtResource("7_idbfo")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/CriticalPanelContainer"]
+layout_mode = 2
+
+[node name="CriticalLabel" type="Label" parent="Panel/CriticalPanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_colors/font_color = Color(0.8938901, 0.89389014, 0, 1)
+text = "Critique"
+
+[node name="PanelContainer" type="PanelContainer" parent="Panel/CriticalPanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_idbfo")
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="Panel/CriticalPanelContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="CriteCoefValueLabel" type="Label" parent="Panel/CriticalPanelContainer/VBoxContainer/PanelContainer/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "X 2"
+
+[node name="CriteRateValueLabel" type="Label" parent="Panel/CriticalPanelContainer/VBoxContainer/PanelContainer/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "20 %"
 
 [node name="DoublePageTabContainer" type="TabContainer" parent="Panel"]
 unique_name_in_owner = true
@@ -581,7 +723,7 @@ custom_minimum_size = Vector2(96, 113)
 layout_mode = 2
 size_flags_horizontal = 3
 focus_neighbor_left = NodePath("../WindButton")
-theme_override_styles/normal = SubResource("StyleBoxFlat_5kfsq")
+theme_override_styles/normal = ExtResource("9_idbfo")
 text = "Eau"
 icon_alignment = 1
 script = ExtResource("4_ddx0q")
@@ -592,7 +734,7 @@ metadata/_custom_type_script = "uid://b2qh2de0kbwt"
 custom_minimum_size = Vector2(96, 113)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/normal = SubResource("StyleBoxFlat_5kfsq")
+theme_override_styles/normal = ExtResource("9_idbfo")
 text = "Feu"
 icon_alignment = 1
 script = ExtResource("4_ddx0q")
@@ -604,7 +746,7 @@ custom_minimum_size = Vector2(96, 113)
 layout_mode = 2
 size_flags_horizontal = 3
 focus_neighbor_right = NodePath("../WaterButton")
-theme_override_styles/normal = SubResource("StyleBoxFlat_5kfsq")
+theme_override_styles/normal = ExtResource("9_idbfo")
 text = "Vent"
 icon_alignment = 1
 script = ExtResource("4_ddx0q")
@@ -619,7 +761,7 @@ custom_minimum_size = Vector2(144, 113)
 layout_mode = 2
 focus_neighbor_left = NodePath("../IceButton")
 focus_neighbor_top = NodePath("../../HBoxContainer/FireButton")
-theme_override_styles/normal = SubResource("StyleBoxFlat_5kfsq")
+theme_override_styles/normal = ExtResource("9_idbfo")
 text = "Foudre"
 clip_text = true
 icon_alignment = 1
@@ -632,7 +774,7 @@ custom_minimum_size = Vector2(144, 113)
 layout_mode = 2
 focus_neighbor_top = NodePath("../../HBoxContainer/FireButton")
 focus_neighbor_right = NodePath("../LightningButton")
-theme_override_styles/normal = SubResource("StyleBoxFlat_5kfsq")
+theme_override_styles/normal = ExtResource("9_idbfo")
 text = "Glace"
 icon_alignment = 1
 script = ExtResource("4_ddx0q")
@@ -670,6 +812,44 @@ metadata/_tab_index = 1
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/DoublePageTabContainer/CSSelection/LeftPanel2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/DoublePageTabContainer/CSSelection/LeftPanel2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 75
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 75
+theme_override_constants/margin_bottom = 10
+
+[node name="TextureRect" type="TextureRect" parent="Panel/DoublePageTabContainer/CSSelection/LeftPanel2/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = SubResource("GradientTexture2D_idbfo")
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="Panel/DoublePageTabContainer/CSSelection/LeftPanel2/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="Panel/DoublePageTabContainer/CSSelection/LeftPanel2/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_right = -12
+
+[node name="DescriptionLabel" type="Label" parent="Panel/DoublePageTabContainer/CSSelection/LeftPanel2/VBoxContainer/MarginContainer2"]
+custom_minimum_size = Vector2(454, 241)
+layout_mode = 2
+size_flags_vertical = 3
+text = "La description de l'arme ou du sort selectionné."
+autowrap_mode = 2
+
 [node name="RightPanel2" type="Panel" parent="Panel/DoublePageTabContainer/CSSelection"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -682,9 +862,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 4
+theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 4
+theme_override_constants/margin_bottom = 8
 
 [node name="CSGridContainer" type="GridContainer" parent="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer"]
 layout_mode = 2
@@ -693,8 +873,9 @@ theme_override_constants/v_separation = 10
 columns = 2
 
 [node name="CSButton1" type="Button" parent="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer"]
-custom_minimum_size = Vector2(216, 113)
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_styles/normal = ExtResource("14_ilqmr")
 theme_override_styles/focus = ExtResource("7_idbfo")
 text = "Piège A Machoire"
@@ -702,48 +883,61 @@ autowrap_mode = 2
 icon_alignment = 1
 
 [node name="CSButton2" type="Button" parent="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer"]
-custom_minimum_size = Vector2(216, 113)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_wg374")
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = ExtResource("9_idbfo")
 text = "Boule De Feu"
 autowrap_mode = 2
 icon_alignment = 1
 
 [node name="CSButton3" type="Button" parent="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer"]
-custom_minimum_size = Vector2(216, 113)
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = ExtResource("9_idbfo")
 text = "Geyser"
 autowrap_mode = 2
 icon_alignment = 1
 
 [node name="CSButton4" type="Button" parent="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer"]
-custom_minimum_size = Vector2(216, 113)
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = ExtResource("9_idbfo")
 text = "Cage Electrique"
 autowrap_mode = 2
 icon_alignment = 1
 
 [node name="CSButton5" type="Button" parent="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer"]
-custom_minimum_size = Vector2(216, 113)
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = ExtResource("9_idbfo")
 autowrap_mode = 2
 icon_alignment = 1
 
 [node name="CSButton6" type="Button" parent="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer"]
-custom_minimum_size = Vector2(216, 113)
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = ExtResource("9_idbfo")
 autowrap_mode = 2
 icon_alignment = 1
 
 [node name="CSButton7" type="Button" parent="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer"]
-custom_minimum_size = Vector2(216, 113)
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = ExtResource("9_idbfo")
 autowrap_mode = 2
 icon_alignment = 1
 
 [node name="CSButton8" type="Button" parent="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer"]
-custom_minimum_size = Vector2(216, 113)
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = ExtResource("9_idbfo")
 autowrap_mode = 2
 icon_alignment = 1
 
@@ -1000,7 +1194,7 @@ custom_minimum_size = Vector2(96, 113)
 layout_mode = 2
 size_flags_horizontal = 3
 focus_neighbor_left = NodePath("../WindButton")
-theme_override_styles/normal = SubResource("StyleBoxFlat_5kfsq")
+theme_override_styles/normal = ExtResource("9_idbfo")
 text = "Eau"
 icon_alignment = 1
 script = ExtResource("4_ddx0q")
@@ -1011,7 +1205,7 @@ metadata/_custom_type_script = "uid://b2qh2de0kbwt"
 custom_minimum_size = Vector2(96, 113)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/normal = SubResource("StyleBoxFlat_5kfsq")
+theme_override_styles/normal = ExtResource("9_idbfo")
 text = "Feu"
 icon_alignment = 1
 script = ExtResource("4_ddx0q")
@@ -1023,7 +1217,7 @@ custom_minimum_size = Vector2(96, 113)
 layout_mode = 2
 size_flags_horizontal = 3
 focus_neighbor_right = NodePath("../WaterButton")
-theme_override_styles/normal = SubResource("StyleBoxFlat_5kfsq")
+theme_override_styles/normal = ExtResource("9_idbfo")
 text = "Vent"
 icon_alignment = 1
 script = ExtResource("4_ddx0q")
@@ -1038,7 +1232,7 @@ custom_minimum_size = Vector2(144, 113)
 layout_mode = 2
 focus_neighbor_left = NodePath("../IceButton")
 focus_neighbor_top = NodePath("../../HBoxContainer/FireButton")
-theme_override_styles/normal = SubResource("StyleBoxFlat_5kfsq")
+theme_override_styles/normal = ExtResource("9_idbfo")
 text = "Foudre"
 clip_text = true
 icon_alignment = 1
@@ -1051,7 +1245,7 @@ custom_minimum_size = Vector2(144, 113)
 layout_mode = 2
 focus_neighbor_top = NodePath("../../HBoxContainer/FireButton")
 focus_neighbor_right = NodePath("../LightningButton")
-theme_override_styles/normal = SubResource("StyleBoxFlat_5kfsq")
+theme_override_styles/normal = ExtResource("9_idbfo")
 text = "Glace"
 icon_alignment = 1
 script = ExtResource("4_ddx0q")
@@ -1190,4 +1384,6 @@ libraries = {
 [connection signal="on_screen_changed" from="." to="Panel/DoublePageTabContainer" method="_on_cs_interface_on_screen_changed"]
 [connection signal="on_screen_changed" from="." to="Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/MarginContainer2/WeaponButton" method="_on_cs_interface_on_screen_changed"]
 [connection signal="cs_category_sellected" from="CSInterfaceDataManager" to="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer" method="_on_cs_interface_data_manager_cs_category_sellected"]
+[connection signal="tab_changed" from="Panel/DoublePageTabContainer" to="." method="_on_double_page_tab_container_tab_changed"]
 [connection signal="tab_changed" from="Panel/DoublePageTabContainer" to="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer" method="_on_tab_container_tab_changed"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

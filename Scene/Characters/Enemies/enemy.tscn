@@ -1,50 +1,18 @@
-[gd_scene load_steps=15 format=3 uid="uid://do3y7dxe754f4"]
+[gd_scene format=3 uid="uid://do3y7dxe754f4"]
 
 [ext_resource type="PackedScene" uid="uid://mmkgsg3lueu" path="res://Scene/Characters/character.tscn" id="1_ikawt"]
 [ext_resource type="PackedScene" uid="uid://dbkcfhn0j6tet" path="res://Components/Health/health_component.tscn" id="2_tegfp"]
-[ext_resource type="Script" uid="uid://duv2wxetutjux" path="res://Ressources/Statistics/Stats/health_stat.gd" id="3_cgw2a"]
-[ext_resource type="Script" uid="uid://bhm4lgjssqqrc" path="res://Ressources/Statistics/Stats/defense_stat.gd" id="4_vvq5x"]
-[ext_resource type="Script" uid="uid://danh8ni44s3tn" path="res://Ressources/Attack/AttackType/ResistanceType/resistance_type.gd" id="5_8seoa"]
-[ext_resource type="Script" uid="uid://danilkv671r1y" path="res://Ressources/Attack/AttackType/attack_type.gd" id="6_k4r48"]
-
+[ext_resource type="Script" uid="uid://bcmokx1bwyftw" path="res://StateMachine/state_machine.gd" id="3_cgw2a"]
+[ext_resource type="Script" uid="uid://bey7t8h4m0yyp" path="res://StateMachine/state.gd" id="4_vvq5x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ikawt"]
 size = Vector2(64, 64)
 
-[sub_resource type="Gradient" id="Gradient_tegfp"]
-colors = PackedColorArray(1, 0, 0, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_d8h06"]
-gradient = SubResource("Gradient_tegfp")
-width = 128
-height = 256
-
-[sub_resource type="Resource" id="Resource_8seoa"]
-script = ExtResource("3_cgw2a")
-value = 10.0
-metadata/_custom_type_script = "uid://duv2wxetutjux"
-
-[sub_resource type="Resource" id="Resource_k4r48"]
-script = ExtResource("4_vvq5x")
-value = 5.0
-metadata/_custom_type_script = "uid://bhm4lgjssqqrc"
-
-[sub_resource type="Resource" id="Resource_udn5k"]
-script = ExtResource("6_k4r48")
-type = 1
-metadata/_custom_type_script = "uid://danilkv671r1y"
-
-[sub_resource type="Resource" id="Resource_i6ags"]
-script = ExtResource("5_8seoa")
-type = SubResource("Resource_udn5k")
-multiplier = 2.0
-metadata/_custom_type_script = "uid://danh8ni44s3tn"
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cgw2a"]
-radius = 64.0
-height = 256.0
+radius = 169.0
+height = 464.0
 
-[node name="Enemy" instance=ExtResource("1_ikawt")]
+[node name="Enemy" unique_id=737387642 groups=["Ennemy"] instance=ExtResource("1_ikawt")]
 
 [node name="CollisionShape2D" parent="." index="0"]
 position = Vector2(0, -31)
@@ -53,20 +21,23 @@ shape = SubResource("RectangleShape2D_ikawt")
 [node name="SpriteContainer" parent="." index="1"]
 position = Vector2(0, -31)
 
-[node name="Sprite2D" type="Sprite2D" parent="SpriteContainer" index="0"]
-position = Vector2(0, -96)
-texture = SubResource("GradientTexture2D_d8h06")
-
-[node name="HealthComponent" parent="." index="2" instance=ExtResource("2_tegfp")]
+[node name="HealthComponent" parent="." index="2" unique_id=807074996 instance=ExtResource("2_tegfp")]
 faction = 1
-health = SubResource("Resource_8seoa")
-defense = SubResource("Resource_k4r48")
 
-[node name="HurtBox" parent="HealthComponent" index="0"]
-resistances = Array[ExtResource("5_8seoa")]([SubResource("Resource_i6ags")])
-
-[node name="CollisionShape2D" parent="HealthComponent/HurtBox" index="0"]
+[node name="CollisionShape2D" parent="HealthComponent/HurtBox" parent_id_path=PackedInt32Array(807074996, 1017093875) index="0" unique_id=414636330]
 position = Vector2(0, -128)
 shape = SubResource("CapsuleShape2D_cgw2a")
+
+[node name="Mode" type="Node" parent="." index="3" unique_id=1106383817]
+script = ExtResource("3_cgw2a")
+metadata/_custom_type_script = "uid://bcmokx1bwyftw"
+
+[node name="Offensive" type="Node" parent="Mode" index="0" unique_id=1563418445]
+script = ExtResource("4_vvq5x")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="Defensive" type="Node" parent="Mode" index="1" unique_id=1392111219]
+script = ExtResource("4_vvq5x")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 
 [editable path="HealthComponent"]

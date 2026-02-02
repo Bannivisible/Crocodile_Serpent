@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=3 uid="uid://ds4i8cup57akf"]
+[gd_scene format=3 uid="uid://ds4i8cup57akf"]
 
 [ext_resource type="AnimationLibrary" uid="uid://ctdrtnjx7txak" path="res://Components/CombatSkill/Weapon/JawTrap/AnimationsData/JawTrapAnimationLibrary.res" id="2_dp6s7"]
 [ext_resource type="Script" uid="uid://bhcip3r7gigab" path="res://Components/CombatSkill/Weapon/JawTrap/jaw_trap.gd" id="2_g4jcv"]
@@ -25,13 +25,13 @@
 [ext_resource type="Script" uid="uid://dn31df61ur2vl" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/on_ground.gd" id="15_7x2u0"]
 [ext_resource type="Script" uid="uid://bey7t8h4m0yyp" path="res://StateMachine/state.gd" id="16_2tnll"]
 [ext_resource type="Script" uid="uid://dcjv5pdoy3ubs" path="res://Ui/timer_range.gd" id="16_fho1j"]
-[ext_resource type="Script" uid="uid://6lekj6yg62r6" path="res://Components/Animation_manager/animation_manager_component.gd" id="16_in3ot"]
+[ext_resource type="Script" uid="uid://6lekj6yg62r6" path="res://Components/animation_manager/animation_manager_component.gd" id="16_in3ot"]
 [ext_resource type="Script" uid="uid://e0ej46y7q5uy" path="res://Other/ProceduralNode/procedural_link.gd" id="16_kcwly"]
 [ext_resource type="Script" uid="uid://bsmm7c0f2k3hr" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/bite_attack.gd" id="18_5rtpq"]
 [ext_resource type="Script" uid="uid://x1tg260g65b0" path="res://Other/timer_label.gd" id="18_eaiaj"]
 [ext_resource type="Resource" uid="uid://b85xloi286pt1" path="res://Ressources/AnimationConnection/crocodile_animation_connections.tres" id="19_bxcyf"]
 [ext_resource type="Script" uid="uid://c78u4kmgq07op" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/devastating_attack.gd" id="19_mkx5c"]
-[ext_resource type="Script" uid="uid://dgi2a2c0lt17u" path="res://Components/Animation_manager/state_animation_manager.gd" id="19_wdegu"]
+[ext_resource type="Script" uid="uid://dgi2a2c0lt17u" path="res://Components/animation_manager/state_animation_manager.gd" id="19_wdegu"]
 [ext_resource type="Shape2D" uid="uid://dehxsdpvhda4g" path="res://Components/CombatSkill/Weapon/JawTrap/Ressources/ToGroundShape.tres" id="25_7etub"]
 
 [sub_resource type="Resource" id="Resource_d1rhm"]
@@ -507,28 +507,28 @@ _data = {
 &"RESET": SubResource("Animation_kcwly")
 }
 
-[node name="JawTrap" type="StaticBody2D"]
+[node name="JawTrap" type="StaticBody2D" unique_id=291549971]
 collision_mask = 2
 script = ExtResource("2_g4jcv")
 statistics = SubResource("Resource_d1rhm")
 strenght = SubResource("Resource_jlbrr")
 
-[node name="StateMachine" type="Node" parent="."]
+[node name="StateMachine" type="Node" parent="." unique_id=107697349]
 script = ExtResource("14_av258")
 set_to_default_state_at_ready = true
 metadata/_custom_type_script = "uid://bcmokx1bwyftw"
 
-[node name="OnHand" type="Node" parent="StateMachine"]
+[node name="OnHand" type="Node" parent="StateMachine" unique_id=2128408316]
 script = ExtResource("14_av258")
 set_to_default_state_at_ready = true
 metadata/_custom_type_script = "uid://bcmokx1bwyftw"
 
-[node name="Idle" type="Node" parent="StateMachine/OnHand" node_paths=PackedStringArray("next_state")]
+[node name="Idle" type="Node" parent="StateMachine/OnHand" unique_id=126777271 node_paths=PackedStringArray("next_state")]
 script = ExtResource("5_o8o0j")
 next_state = NodePath("../../OnJaw/IdleJ")
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 
-[node name="SlashAttack1" type="Node" parent="StateMachine/OnHand" node_paths=PackedStringArray("idle_state", "previous_state")]
+[node name="SlashAttack1" type="Node" parent="StateMachine/OnHand" unique_id=267871702 node_paths=PackedStringArray("idle_state", "previous_state")]
 script = ExtResource("10_bxcyf")
 weapon_attack_data = SubResource("Resource_kcwly")
 idle_state = NodePath("../Idle")
@@ -538,7 +538,7 @@ attack_data = SubResource("Resource_bxcyf")
 previous_state = NodePath("../Idle")
 metadata/_custom_type_script = "uid://c5stjpuprt08p"
 
-[node name="SlashAttack2" type="Node" parent="StateMachine/OnHand" node_paths=PackedStringArray("idle_state", "previous_state")]
+[node name="SlashAttack2" type="Node" parent="StateMachine/OnHand" unique_id=1079616752 node_paths=PackedStringArray("idle_state", "previous_state")]
 script = ExtResource("10_bxcyf")
 weapon_attack_data = SubResource("Resource_2xqvd")
 idle_state = NodePath("../Idle")
@@ -549,7 +549,7 @@ need_hit_box_hit = true
 previous_state = NodePath("../SlashAttack1")
 metadata/_custom_type_script = "uid://c5stjpuprt08p"
 
-[node name="ConstantRotatingAttack" type="Node" parent="StateMachine/OnHand" node_paths=PackedStringArray("idle_state", "previous_state")]
+[node name="ConstantRotatingAttack" type="Node" parent="StateMachine/OnHand" unique_id=873993661 node_paths=PackedStringArray("idle_state", "previous_state")]
 script = ExtResource("10_vpr7y")
 weapon_attack_data = SubResource("Resource_fho1j")
 idle_state = NodePath("../Idle")
@@ -561,7 +561,7 @@ blend_node_name = &"AttackBlend2"
 previous_state = NodePath("../Idle")
 metadata/_custom_type_script = "uid://c5stjpuprt08p"
 
-[node name="ThrowAttack" type="Node" parent="StateMachine/OnHand" node_paths=PackedStringArray("idle_state", "previous_state")]
+[node name="ThrowAttack" type="Node" parent="StateMachine/OnHand" unique_id=1461063782 node_paths=PackedStringArray("idle_state", "previous_state")]
 script = ExtResource("11_wdegu")
 distance = 630.299
 time = 0.5
@@ -573,18 +573,18 @@ combo_cooldown = 0.2
 previous_state = NodePath("../ConstantRotatingAttack")
 metadata/_custom_type_script = "uid://c5stjpuprt08p"
 
-[node name="ThrowIntermediate" type="Node" parent="StateMachine/OnHand" node_paths=PackedStringArray("next_state")]
+[node name="ThrowIntermediate" type="Node" parent="StateMachine/OnHand" unique_id=473574739 node_paths=PackedStringArray("next_state")]
 script = ExtResource("13_lj60c")
 next_state = NodePath("../ToGround")
 wait_time = 999.9
 metadata/_custom_type_script = "uid://7erslqswf2f2"
 
-[node name="ToGround" type="Node" parent="StateMachine/OnHand" node_paths=PackedStringArray("next_state")]
+[node name="ToGround" type="Node" parent="StateMachine/OnHand" unique_id=465125457 node_paths=PackedStringArray("next_state")]
 script = ExtResource("12_11eis")
 next_state = NodePath("../../OnGround/IdleG")
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 
-[node name="RecallAttack" type="Node" parent="StateMachine/OnHand" node_paths=PackedStringArray("idle_state", "previous_state")]
+[node name="RecallAttack" type="Node" parent="StateMachine/OnHand" unique_id=59877823 node_paths=PackedStringArray("idle_state", "previous_state")]
 script = ExtResource("12_3w3qp")
 weapon_attack_data = SubResource("Resource_jlvaw")
 idle_state = NodePath("../Idle")
@@ -593,7 +593,7 @@ combo_cooldown = 0.4
 previous_state = NodePath("../ThrowAttack")
 metadata/_custom_type_script = "uid://c5stjpuprt08p"
 
-[node name="OnJaw" type="Node" parent="StateMachine" node_paths=PackedStringArray("next_state")]
+[node name="OnJaw" type="Node" parent="StateMachine" unique_id=1238307790 node_paths=PackedStringArray("next_state")]
 script = ExtResource("14_kcwly")
 next_state = NodePath("../OnHand/Idle")
 remote_f_parent_path = NodePath("../../../../Skeleton2D/Center/Body/Torso/Head/HeadFacing/NeckFacing/Face")
@@ -602,16 +602,16 @@ remote_f_name = &"RemoteJTF"
 remote_b_name = &"RemoteJTB"
 metadata/_custom_type_script = "uid://bcmokx1bwyftw"
 
-[node name="IdleJ" type="Node" parent="StateMachine/OnJaw"]
+[node name="IdleJ" type="Node" parent="StateMachine/OnJaw" unique_id=1406936320]
 script = ExtResource("16_2tnll")
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 
-[node name="DynamicTimer" type="Timer" parent="StateMachine/OnJaw"]
+[node name="DynamicTimer" type="Timer" parent="StateMachine/OnJaw" unique_id=1514591656]
 wait_time = 10.0
 one_shot = true
 script = ExtResource("15_2xqvd")
 
-[node name="TimerLabel" type="Label" parent="StateMachine/OnJaw" node_paths=PackedStringArray("timer")]
+[node name="TimerLabel" type="Label" parent="StateMachine/OnJaw" unique_id=853479053 node_paths=PackedStringArray("timer")]
 offset_left = 1603.0
 offset_top = 96.0
 offset_right = 1887.0
@@ -619,7 +619,7 @@ offset_bottom = 373.0
 script = ExtResource("18_eaiaj")
 timer = NodePath("../DynamicTimer")
 
-[node name="BiteAttack" type="Node" parent="StateMachine/OnJaw" node_paths=PackedStringArray("idle_state", "previous_state")]
+[node name="BiteAttack" type="Node" parent="StateMachine/OnJaw" unique_id=454913511 node_paths=PackedStringArray("idle_state", "previous_state")]
 script = ExtResource("18_5rtpq")
 weapon_attack_data = SubResource("Resource_jn0tm")
 idle_state = NodePath("../IdleJ")
@@ -628,7 +628,7 @@ attack_data = SubResource("Resource_nlvaj")
 previous_state = NodePath("../IdleJ")
 metadata/_custom_type_script = "uid://c5stjpuprt08p"
 
-[node name="DevastatingAttack" type="Node" parent="StateMachine/OnJaw" node_paths=PackedStringArray("idle_state", "previous_state")]
+[node name="DevastatingAttack" type="Node" parent="StateMachine/OnJaw" unique_id=1350169837 node_paths=PackedStringArray("idle_state", "previous_state")]
 script = ExtResource("19_mkx5c")
 center_bone_path = NodePath("Skeleton2D/Center")
 weapon_attack_data = SubResource("Resource_hjahh")
@@ -641,33 +641,33 @@ blend_node_name = &"AttackBlend2"
 previous_state = NodePath("../IdleJ")
 metadata/_custom_type_script = "uid://c5stjpuprt08p"
 
-[node name="OnGround" type="Node" parent="StateMachine"]
+[node name="OnGround" type="Node" parent="StateMachine" unique_id=975553714]
 script = ExtResource("15_7x2u0")
 gravity = 200.0
 metadata/_custom_type_script = "uid://bcmokx1bwyftw"
 
-[node name="IdleG" type="Node" parent="StateMachine/OnGround"]
+[node name="IdleG" type="Node" parent="StateMachine/OnGround" unique_id=1122158009]
 script = ExtResource("16_2tnll")
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 
-[node name="CatchAttack" type="Node" parent="StateMachine/OnGround" node_paths=PackedStringArray("idle_state", "previous_state")]
+[node name="CatchAttack" type="Node" parent="StateMachine/OnGround" unique_id=1214073741 node_paths=PackedStringArray("idle_state", "previous_state")]
 script = ExtResource("10_bxcyf")
 idle_state = NodePath("../IdleG")
 previous_state = NodePath("../IdleG")
 metadata/_custom_type_script = "uid://c5stjpuprt08p"
 
-[node name="ProceduralLink" type="Node" parent="StateMachine/OnGround" node_paths=PackedStringArray("node_b")]
+[node name="ProceduralLink" type="Node" parent="StateMachine/OnGround" unique_id=1121641512 node_paths=PackedStringArray("node_b")]
 script = ExtResource("16_kcwly")
 node_b = NodePath("../../..")
 max_dist = 600.0
 
-[node name="StateLabel" type="Label" parent="StateMachine"]
+[node name="StateLabel" type="Label" parent="StateMachine" unique_id=1824887468]
 offset_right = 272.0
 offset_bottom = 142.0
 script = ExtResource("14_11eis")
 metadata/_custom_type_script = "uid://d38qkfrf1wj1a"
 
-[node name="TimerRange" type="TextureProgressBar" parent="." node_paths=PackedStringArray("timer")]
+[node name="TimerRange" type="TextureProgressBar" parent="." unique_id=1818492429 node_paths=PackedStringArray("timer")]
 z_index = 10
 offset_left = -265.0
 offset_top = -327.0
@@ -678,38 +678,38 @@ texture_progress = SubResource("GradientTexture2D_eaiaj")
 script = ExtResource("16_fho1j")
 timer = NodePath("../StateMachine/OnJaw/DynamicTimer")
 
-[node name="Front" type="StaticBody2D" parent="."]
+[node name="Front" type="StaticBody2D" parent="." unique_id=473639612]
 z_index = 5
 position = Vector2(-9, 0)
 collision_layer = 0
 collision_mask = 0
 
-[node name="Offest" type="Marker2D" parent="Front"]
+[node name="Offest" type="Marker2D" parent="Front" unique_id=2036590807]
 position = Vector2(0.1759777, -45.967045)
 
-[node name="Sleeve" type="Sprite2D" parent="Front/Offest"]
+[node name="Sleeve" type="Sprite2D" parent="Front/Offest" unique_id=1018925201]
 z_index = -1
 position = Vector2(-2.3841858e-07, 52)
 texture = SubResource("AtlasTexture_p0okl")
 
-[node name="Iron" type="Sprite2D" parent="Front/Offest"]
+[node name="Iron" type="Sprite2D" parent="Front/Offest" unique_id=1449499431]
 position = Vector2(-29.602692, 51.933586)
 texture = SubResource("AtlasTexture_rsvc4")
 
-[node name="Jaw" type="Sprite2D" parent="Front/Offest"]
+[node name="Jaw" type="Sprite2D" parent="Front/Offest" unique_id=1577332897]
 position = Vector2(-66.61364, 48.932693)
 texture = SubResource("AtlasTexture_hgdcd")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Front"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Front" unique_id=1514246662]
 position = Vector2(-3, 1)
 rotation = 1.5039136
 shape = SubResource("CapsuleShape2D_v0eml")
 
-[node name="PinJointFront" type="PinJoint2D" parent="Front"]
+[node name="PinJointFront" type="PinJoint2D" parent="Front" unique_id=649467174]
 position = Vector2(38, 0)
 node_a = NodePath("..")
 
-[node name="Links" type="Node2D" parent="." node_paths=PackedStringArray("front_part", "back_part")]
+[node name="Links" type="Node2D" parent="." unique_id=115907038 node_paths=PackedStringArray("front_part", "back_part")]
 script = ExtResource("5_jeet7")
 front_part = NodePath("../Front")
 back_part = NodePath("../Back")
@@ -719,68 +719,67 @@ region_link_right = Rect2(0, 132, 101, 65)
 shape = ExtResource("6_86vhf")
 physics_material = SubResource("PhysicsMaterial_86vhf")
 
-[node name="Back" type="StaticBody2D" parent="."]
+[node name="Back" type="StaticBody2D" parent="." unique_id=99701971]
 z_index = 4
 position = Vector2(9, 0)
 scale = Vector2(-1, 1)
 collision_layer = 0
 collision_mask = 0
 
-[node name="Offest" type="Marker2D" parent="Back"]
+[node name="Offest" type="Marker2D" parent="Back" unique_id=2122967268]
 position = Vector2(0.1759777, -45.967045)
 
-[node name="Sleeve" type="Sprite2D" parent="Back/Offest"]
+[node name="Sleeve" type="Sprite2D" parent="Back/Offest" unique_id=2127110596]
 position = Vector2(-2.3841858e-07, 52)
 texture = SubResource("AtlasTexture_n380g")
 
-[node name="Iron" type="Sprite2D" parent="Back/Offest"]
+[node name="Iron" type="Sprite2D" parent="Back/Offest" unique_id=1833082611]
 position = Vector2(-29.602692, 51.933586)
 texture = SubResource("AtlasTexture_3po1k")
 
-[node name="Jaw" type="Sprite2D" parent="Back/Offest"]
+[node name="Jaw" type="Sprite2D" parent="Back/Offest" unique_id=952381243]
 position = Vector2(-66.61364, 48.932693)
 texture = SubResource("AtlasTexture_pvels")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Back"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Back" unique_id=1534789154]
 position = Vector2(0, 1)
 rotation = -1.6192627
 shape = SubResource("CapsuleShape2D_jeet7")
 
-[node name="PinJointBack" type="PinJoint2D" parent="Back"]
+[node name="PinJointBack" type="PinJoint2D" parent="Back" unique_id=1668744931]
 position = Vector2(-31, -1)
 node_b = NodePath("..")
 bias = 0.9
 
-[node name="WeaponHitBox" type="Area2D" parent="."]
+[node name="WeaponHitBox" type="Area2D" parent="." unique_id=494151939 node_paths=PackedStringArray("weapon")]
 rotation = 1.5707964
 script = ExtResource("4_5pxtx")
+weapon = NodePath("..")
 weapon_attck_data = SubResource("Resource_71p2d")
 attack_data = SubResource("Resource_wfuh6")
 metadata/_custom_type_script = "uid://42c2b5rma8ot"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponHitBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponHitBox" unique_id=133617072]
 z_index = 3
 position = Vector2(-7, 3.8146973e-06)
 shape = SubResource("CapsuleShape2D_weadw")
 disabled = true
 debug_color = Color(1, 0, 0, 0.41960785)
 
-[node name="AnimationManagerComponent" type="Node" parent="."]
+[node name="AnimationManagerComponent" type="Node" parent="." unique_id=203429901]
 script = ExtResource("16_in3ot")
 anim_connect_list = ExtResource("19_bxcyf")
 library = ExtResource("2_dp6s7")
 metadata/_custom_type_script = "uid://6lekj6yg62r6"
 
-[node name="StateAnimationManager" type="Node" parent="AnimationManagerComponent" node_paths=PackedStringArray("state_machines")]
+[node name="StateAnimationManager" type="Node" parent="AnimationManagerComponent" unique_id=1041608812 node_paths=PackedStringArray("state_machines")]
 script = ExtResource("19_wdegu")
 state_machines = [NodePath("../../StateMachine")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=652731362]
 rotation = 1.5707964
 shape = ExtResource("25_7etub")
 disabled = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_kcwly")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=232560582]
+libraries/ = SubResource("AnimationLibrary_kcwly")

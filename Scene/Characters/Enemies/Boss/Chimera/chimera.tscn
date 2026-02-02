@@ -1,0 +1,545 @@
+[gd_scene format=3 uid="uid://c1ok3d3x3i6rh"]
+
+[ext_resource type="PackedScene" uid="uid://cex13xrhcrmxi" path="res://Scene/Characters/Enemies/Boss/boss.tscn" id="1_nbavr"]
+[ext_resource type="Script" uid="uid://bcmokx1bwyftw" path="res://StateMachine/state_machine.gd" id="2_4ak7f"]
+[ext_resource type="Texture2D" uid="uid://blx7irn07seo7" path="res://Scene/Characters/Enemies/Boss/Chimera/Assets/chimera_canvas_texture.tres" id="2_fddmp"]
+[ext_resource type="Script" uid="uid://bey7t8h4m0yyp" path="res://StateMachine/state.gd" id="3_1puav"]
+[ext_resource type="Texture2D" uid="uid://dhnum2i6dnjve" path="res://Scene/Characters/Enemies/Boss/Chimera/Assets/Serpent tête.PNG" id="3_fddmp"]
+[ext_resource type="Script" uid="uid://cfjum8yusjbmc" path="res://Ressources/Statistics/charc_statistics.gd" id="3_kocgg"]
+[ext_resource type="Script" uid="uid://danh8ni44s3tn" path="res://Ressources/Attack/AttackType/ResistanceType/resistance_type.gd" id="4_ptyu4"]
+[ext_resource type="Script" uid="uid://danilkv671r1y" path="res://Ressources/Attack/AttackType/attack_type.gd" id="5_q5ekc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1g0bx"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(0, 1675, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_blq1e"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(353, 2345, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bqe10"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(0, 1675, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_076g2"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(353, 2345, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v7bky"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(1765, 0, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8n8aj"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(1412, 670, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yc1ac"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(706, 2345, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xof0o"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(706, 670, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m4r6y"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(1059, 2010, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k0wp1"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(1059, 1340, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2fra0"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(1059, 2345, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x73dl"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(353, 670, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ianam"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(706, 0, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fddmp"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(0, 1340, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ptyu4"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(1765, 2010, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_paoh5"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(0, 2680, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1puav"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(1059, 670, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ovvh0"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(1412, 1005, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6y6jt"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(353, 335, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i1np0"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(1765, 1675, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x4xdt"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(353, 0, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q5ekc"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(1412, 0, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kocgg"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(353, 1340, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dw30u"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(353, 2680, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ak7f"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(0, 2345, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s5d0m"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(1765, 0, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_euguf"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(1412, 670, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u4tjq"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(706, 2345, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6wbw2"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(706, 670, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gs3o1"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(1059, 2010, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ew4av"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(1059, 1340, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8nx3b"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(1059, 2345, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1flte"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(353, 670, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wrrhd"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(1765, 670, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iy6kr"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(1412, 1675, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_viuum"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(1059, 0, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p74lx"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(0, 335, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fmn14"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(1059, 1675, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oet2l"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(1412, 2010, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_408fj"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(706, 2010, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bs78w"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(706, 1005, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jxpag"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(1765, 1340, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gacks"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(0, 1005, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jdel6"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(0, 0, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k505n"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(706, 335, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ma4r"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(1059, 1675, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vbayi"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(1412, 2345, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xfivs"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(1059, 1675, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jb1r4"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(1412, 2345, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bv7jd"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(0, 2010, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ehydm"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(1412, 335, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dyi22"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(0, 2010, 353, 335)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l2kd0"]
+atlas = ExtResource("2_fddmp")
+region = Rect2(353, 1005, 353, 335)
+
+[sub_resource type="Resource" id="Resource_ianam"]
+script = ExtResource("3_kocgg")
+base_max_health = 1000.0
+base_strenght = 60.0
+base_defense = 20.0
+base_speed = 30.0
+metadata/_custom_type_script = "uid://cfjum8yusjbmc"
+
+[sub_resource type="Resource" id="Resource_udn5k"]
+script = ExtResource("5_q5ekc")
+type = 1
+metadata/_custom_type_script = "uid://danilkv671r1y"
+
+[sub_resource type="Resource" id="Resource_i6ags"]
+script = ExtResource("4_ptyu4")
+type = SubResource("Resource_udn5k")
+multiplier = 2.0
+metadata/_custom_type_script = "uid://danh8ni44s3tn"
+
+[node name="Chimera" unique_id=417415811 instance=ExtResource("1_nbavr")]
+
+[node name="StateMachine" type="Node" parent="." index="0" unique_id=1700517181]
+script = ExtResource("2_4ak7f")
+metadata/_custom_type_script = "uid://bcmokx1bwyftw"
+
+[node name="Idle" type="Node" parent="StateMachine" index="0" unique_id=1546631636]
+script = ExtResource("3_1puav")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="WingFordwardGroup" type="Node2D" parent="SpriteContainer" index="0" unique_id=862973977]
+rotation = 3.1415927
+scale = Vector2(1, -1)
+
+[node name="WingBackFur" type="Sprite2D" parent="SpriteContainer/WingFordwardGroup" index="0" unique_id=381320166]
+position = Vector2(105.5, -262.5)
+texture = SubResource("AtlasTexture_1g0bx")
+
+[node name="WingBackFeathers" type="Sprite2D" parent="SpriteContainer/WingFordwardGroup" index="1" unique_id=172015840]
+position = Vector2(180.5, -180.5)
+texture = SubResource("AtlasTexture_blq1e")
+
+[node name="WingBackGroup" type="Node2D" parent="SpriteContainer" index="1" unique_id=1875460995]
+
+[node name="WingBackFur" type="Sprite2D" parent="SpriteContainer/WingBackGroup" index="0" unique_id=654150870]
+position = Vector2(160, -255)
+texture = SubResource("AtlasTexture_bqe10")
+
+[node name="WingBackFeathers" type="Sprite2D" parent="SpriteContainer/WingBackGroup" index="1" unique_id=829279269]
+position = Vector2(235, -173)
+texture = SubResource("AtlasTexture_076g2")
+
+[node name="ArmForwardGroup2" type="Node2D" parent="SpriteContainer" index="2" unique_id=2033538849]
+position = Vector2(32, 6)
+scale = Vector2(-1, 1)
+
+[node name="ForArmeForward" type="Sprite2D" parent="SpriteContainer/ArmForwardGroup2" index="0" unique_id=564235339]
+position = Vector2(133.5, -128.5)
+texture = SubResource("AtlasTexture_v7bky")
+
+[node name="ArmeForward" type="Sprite2D" parent="SpriteContainer/ArmForwardGroup2" index="1" unique_id=422409453]
+position = Vector2(92, -218)
+texture = SubResource("AtlasTexture_8n8aj")
+
+[node name="ArmBraceletForwardGroup" type="Node2D" parent="SpriteContainer/ArmForwardGroup2" index="2" unique_id=1946197806]
+position = Vector2(7, -3)
+
+[node name="ArmBraceletFeathersForward" type="Sprite2D" parent="SpriteContainer/ArmForwardGroup2/ArmBraceletForwardGroup" index="0" unique_id=612409930]
+position = Vector2(83, -251)
+texture = SubResource("AtlasTexture_yc1ac")
+
+[node name="ArmBraceletForward" type="Sprite2D" parent="SpriteContainer/ArmForwardGroup2/ArmBraceletForwardGroup" index="1" unique_id=2063852868]
+position = Vector2(100, -212)
+texture = SubResource("AtlasTexture_xof0o")
+
+[node name="HandForwardGroup" type="Node2D" parent="SpriteContainer/ArmForwardGroup2" index="3" unique_id=1662888347]
+position = Vector2(10.5, 1.5)
+
+[node name="PalmForward" type="Sprite2D" parent="SpriteContainer/ArmForwardGroup2/HandForwardGroup" index="0" unique_id=896963748]
+position = Vector2(140, -70.99994)
+texture = SubResource("AtlasTexture_m4r6y")
+
+[node name="FingersForward" type="Sprite2D" parent="SpriteContainer/ArmForwardGroup2/HandForwardGroup" index="1" unique_id=1434587416]
+position = Vector2(140, -47.999943)
+texture = SubResource("AtlasTexture_k0wp1")
+
+[node name="ThumbForward" type="Sprite2D" parent="SpriteContainer/ArmForwardGroup2/HandForwardGroup" index="2" unique_id=2017889979]
+position = Vector2(147, -65.99995)
+texture = SubResource("AtlasTexture_2fra0")
+
+[node name="ForArmBraceletForward" type="Sprite2D" parent="SpriteContainer/ArmForwardGroup2" index="4" unique_id=585459136]
+visible = false
+position = Vector2(142.5, -107.5)
+texture = SubResource("AtlasTexture_x73dl")
+
+[node name="LegForwardGroup" type="Node2D" parent="SpriteContainer" index="3" unique_id=1400798763]
+
+[node name="LegForward" type="Sprite2D" parent="SpriteContainer/LegForwardGroup" index="0" unique_id=906196249]
+position = Vector2(-71, -19)
+texture = SubResource("AtlasTexture_ianam")
+
+[node name="ThighForward" type="Sprite2D" parent="SpriteContainer/LegForwardGroup" index="1" unique_id=50499119]
+position = Vector2(-63, -66)
+texture = SubResource("AtlasTexture_fddmp")
+
+[node name="FootForward" type="Sprite2D" parent="SpriteContainer/LegForwardGroup" index="2" unique_id=400185256]
+position = Vector2(-92, 27)
+texture = SubResource("AtlasTexture_ptyu4")
+
+[node name="FurLegForward" type="Sprite2D" parent="SpriteContainer/LegForwardGroup" index="3" unique_id=529602445]
+position = Vector2(-70, -29)
+texture = SubResource("AtlasTexture_paoh5")
+
+[node name="BodyGroup" type="Node2D" parent="SpriteContainer" index="4" unique_id=588863980]
+
+[node name="Cape" type="Sprite2D" parent="SpriteContainer/BodyGroup" index="0" unique_id=855759804]
+z_index = -1
+position = Vector2(70, -110)
+texture = SubResource("AtlasTexture_1puav")
+
+[node name="Body" type="Sprite2D" parent="SpriteContainer/BodyGroup" index="1" unique_id=1905952903]
+position = Vector2(14, -184)
+texture = SubResource("AtlasTexture_ovvh0")
+
+[node name="Pelvis" type="Sprite2D" parent="SpriteContainer/BodyGroup" index="2" unique_id=853172551]
+position = Vector2(12, -75)
+texture = SubResource("AtlasTexture_6y6jt")
+
+[node name="CapeFur" type="Sprite2D" parent="SpriteContainer/BodyGroup" index="3" unique_id=1523593844]
+position = Vector2(-47, -264)
+texture = SubResource("AtlasTexture_i1np0")
+
+[node name="GoatHead" type="Sprite2D" parent="SpriteContainer/BodyGroup" index="4" unique_id=325338295]
+z_index = 1
+position = Vector2(104, -264)
+texture = SubResource("AtlasTexture_x4xdt")
+
+[node name="LegBackGroup" type="Node2D" parent="SpriteContainer" index="5" unique_id=99390534]
+
+[node name="LegBack" type="Sprite2D" parent="SpriteContainer/LegBackGroup" index="0" unique_id=2078634249]
+position = Vector2(99, -13)
+texture = SubResource("AtlasTexture_q5ekc")
+
+[node name="TightBack" type="Sprite2D" parent="SpriteContainer/LegBackGroup" index="1" unique_id=547918186]
+position = Vector2(91, -72)
+texture = SubResource("AtlasTexture_kocgg")
+
+[node name="FurLegBack" type="Sprite2D" parent="SpriteContainer/LegBackGroup" index="2" unique_id=231256394]
+position = Vector2(102, -33)
+texture = SubResource("AtlasTexture_dw30u")
+
+[node name="FootBack" type="Sprite2D" parent="SpriteContainer/LegBackGroup" index="3" unique_id=900698434]
+position = Vector2(128, 36)
+texture = SubResource("AtlasTexture_4ak7f")
+
+[node name="ArmBackGroup" type="Node2D" parent="SpriteContainer" index="6" unique_id=2065962930]
+position = Vector2(0, 2)
+
+[node name="ForArmeBack" type="Sprite2D" parent="SpriteContainer/ArmBackGroup" index="0" unique_id=806479097]
+position = Vector2(133.5, -128.5)
+texture = SubResource("AtlasTexture_s5d0m")
+
+[node name="ArmeBack" type="Sprite2D" parent="SpriteContainer/ArmBackGroup" index="1" unique_id=875198844]
+position = Vector2(92, -218)
+texture = SubResource("AtlasTexture_euguf")
+
+[node name="ArmBraceletBackGroup" type="Node2D" parent="SpriteContainer/ArmBackGroup" index="2" unique_id=1063247473]
+visible = false
+position = Vector2(7, -3)
+
+[node name="ArmBraceletFeathersBack" type="Sprite2D" parent="SpriteContainer/ArmBackGroup/ArmBraceletBackGroup" index="0" unique_id=1208522072]
+position = Vector2(83, -251)
+texture = SubResource("AtlasTexture_u4tjq")
+
+[node name="ArmBraceletBack" type="Sprite2D" parent="SpriteContainer/ArmBackGroup/ArmBraceletBackGroup" index="1" unique_id=863474212]
+position = Vector2(100, -212)
+texture = SubResource("AtlasTexture_6wbw2")
+
+[node name="HandBackGroup" type="Node2D" parent="SpriteContainer/ArmBackGroup" index="3" unique_id=24675553]
+position = Vector2(10.5, 1.5)
+
+[node name="PalmBack" type="Sprite2D" parent="SpriteContainer/ArmBackGroup/HandBackGroup" index="0" unique_id=523337199]
+position = Vector2(140, -70.99994)
+texture = SubResource("AtlasTexture_gs3o1")
+
+[node name="FingersBack" type="Sprite2D" parent="SpriteContainer/ArmBackGroup/HandBackGroup" index="1" unique_id=1176126031]
+position = Vector2(140, -47.999943)
+texture = SubResource("AtlasTexture_ew4av")
+
+[node name="ThumbBack" type="Sprite2D" parent="SpriteContainer/ArmBackGroup/HandBackGroup" index="2" unique_id=753464815]
+position = Vector2(147, -65.99995)
+texture = SubResource("AtlasTexture_8nx3b")
+
+[node name="ForArmBraceletBack" type="Sprite2D" parent="SpriteContainer/ArmBackGroup" index="4" unique_id=373939581]
+position = Vector2(142.5, -107.5)
+texture = SubResource("AtlasTexture_1flte")
+
+[node name="LionHead" type="Node2D" parent="SpriteContainer" index="7" unique_id=1214556533]
+
+[node name="HearBack" type="Sprite2D" parent="SpriteContainer/LionHead" index="0" unique_id=715335584]
+position = Vector2(16, -304)
+texture = SubResource("AtlasTexture_wrrhd")
+
+[node name="Jaw" type="Sprite2D" parent="SpriteContainer/LionHead" index="1" unique_id=1830471615]
+position = Vector2(5, -308)
+texture = SubResource("AtlasTexture_iy6kr")
+
+[node name="Face" type="Sprite2D" parent="SpriteContainer/LionHead" index="2" unique_id=1866697987]
+position = Vector2(13, -318)
+texture = SubResource("AtlasTexture_viuum")
+
+[node name="Beard" type="Sprite2D" parent="SpriteContainer/LionHead" index="3" unique_id=454731537]
+position = Vector2(6, -269)
+texture = SubResource("AtlasTexture_p74lx")
+
+[node name="EyeBackGroup" type="Node2D" parent="SpriteContainer/LionHead" index="4" unique_id=476084916]
+
+[node name="EyeBack" type="Sprite2D" parent="SpriteContainer/LionHead/EyeBackGroup" index="0" unique_id=696048215]
+position = Vector2(19, -319)
+texture = SubResource("AtlasTexture_fmn14")
+
+[node name="EyebrowsBack" type="Sprite2D" parent="SpriteContainer/LionHead/EyeBackGroup" index="1" unique_id=923250523]
+z_index = 1
+position = Vector2(23, -333)
+texture = SubResource("AtlasTexture_oet2l")
+
+[node name="EyeForwardGroup" type="Node2D" parent="SpriteContainer/LionHead" index="5" unique_id=145635041]
+position = Vector2(-45, -5)
+
+[node name="EyeForward" type="Sprite2D" parent="SpriteContainer/LionHead/EyeForwardGroup" index="0" unique_id=874725994]
+position = Vector2(21, -317)
+texture = SubResource("AtlasTexture_fmn14")
+
+[node name="EyebrowsForward" type="Sprite2D" parent="SpriteContainer/LionHead/EyeForwardGroup" index="1" unique_id=1195100983]
+z_index = 1
+position = Vector2(12, -332)
+scale = Vector2(-1, 1)
+texture = SubResource("AtlasTexture_oet2l")
+
+[node name="Nose" type="Sprite2D" parent="SpriteContainer/LionHead" index="6" unique_id=1731255070]
+position = Vector2(5, -293)
+texture = SubResource("AtlasTexture_408fj")
+
+[node name="HearForward" type="Sprite2D" parent="SpriteContainer/LionHead" index="7" unique_id=587305384]
+position = Vector2(12, -346)
+texture = SubResource("AtlasTexture_bs78w")
+
+[node name="HearNet" type="Sprite2D" parent="SpriteContainer/LionHead" index="8" unique_id=981472463]
+position = Vector2(35, -336)
+texture = SubResource("AtlasTexture_jxpag")
+
+[node name="EagleHead" type="Node2D" parent="SpriteContainer" index="8" unique_id=849172572]
+visible = false
+position = Vector2(0, 31)
+
+[node name="HearForward" type="Sprite2D" parent="SpriteContainer/EagleHead" index="0" unique_id=894437909]
+position = Vector2(-7, -355)
+texture = SubResource("AtlasTexture_gacks")
+
+[node name="Face" type="Sprite2D" parent="SpriteContainer/EagleHead" index="1" unique_id=24041430]
+position = Vector2(8, -327)
+texture = SubResource("AtlasTexture_jdel6")
+
+[node name="UnderBeak" type="Sprite2D" parent="SpriteContainer/EagleHead" index="2" unique_id=1801525262]
+position = Vector2(7, -327)
+texture = SubResource("AtlasTexture_k505n")
+
+[node name="EyeBackGroup" type="Node2D" parent="SpriteContainer/EagleHead" index="3" unique_id=1391346309]
+position = Vector2(3, 1)
+
+[node name="EyeBack" type="Sprite2D" parent="SpriteContainer/EagleHead/EyeBackGroup" index="0" unique_id=705836244]
+position = Vector2(21, -346)
+texture = SubResource("AtlasTexture_3ma4r")
+
+[node name="EyebrownBack" type="Sprite2D" parent="SpriteContainer/EagleHead/EyeBackGroup" index="1" unique_id=1586052912]
+position = Vector2(48, -369)
+texture = SubResource("AtlasTexture_vbayi")
+
+[node name="EyeForwardGroup" type="Node2D" parent="SpriteContainer/EagleHead" index="4" unique_id=714157735]
+position = Vector2(-37, 0)
+
+[node name="EyeForward" type="Sprite2D" parent="SpriteContainer/EagleHead/EyeForwardGroup" index="0" unique_id=1843469671]
+position = Vector2(20, -348)
+texture = SubResource("AtlasTexture_xfivs")
+
+[node name="EyebrownForward" type="Sprite2D" parent="SpriteContainer/EagleHead/EyeForwardGroup" index="1" unique_id=1550150665]
+position = Vector2(-9, -371)
+scale = Vector2(-1, 1)
+texture = SubResource("AtlasTexture_jb1r4")
+
+[node name="MustacheBack2" type="Sprite2D" parent="SpriteContainer/EagleHead" index="5" unique_id=1457543553]
+position = Vector2(-55.000004, -311.00003)
+rotation = 0.10646509
+scale = Vector2(-0.75, 0.75)
+texture = SubResource("AtlasTexture_bv7jd")
+
+[node name="UpperBeak" type="Sprite2D" parent="SpriteContainer/EagleHead" index="6" unique_id=1314085293]
+position = Vector2(0, -326)
+texture = SubResource("AtlasTexture_ehydm")
+
+[node name="MustacheBack" type="Sprite2D" parent="SpriteContainer/EagleHead" index="7" unique_id=1531799006]
+position = Vector2(-2, -302)
+texture = SubResource("AtlasTexture_dyi22")
+
+[node name="HearBack" type="Sprite2D" parent="SpriteContainer/EagleHead" index="8" unique_id=891982187]
+position = Vector2(43, -337)
+texture = SubResource("AtlasTexture_l2kd0")
+
+[node name="HealthComponent" parent="." index="3" unique_id=807074996]
+visible = false
+stat = SubResource("Resource_ianam")
+
+[node name="HurtBox" parent="HealthComponent" index="0" unique_id=1017093875]
+resistances = Array[ExtResource("4_ptyu4")]([SubResource("Resource_i6ags")])
+
+[node name="CollisionShape2D" parent="HealthComponent/HurtBox" index="0" unique_id=414636330]
+position = Vector2(10, -192)
+
+[node name="SerpentTête" type="Sprite2D" parent="." index="4" unique_id=193081546]
+position = Vector2(382, -270)
+texture = ExtResource("3_fddmp")
+
+[editable path="HealthComponent"]
