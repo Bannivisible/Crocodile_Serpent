@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://mmkgsg3lueu" path="res://Scene/Characters/character.tscn" id="1_ikawt"]
 [ext_resource type="PackedScene" uid="uid://dbkcfhn0j6tet" path="res://Components/Health/health_component.tscn" id="2_tegfp"]
+[ext_resource type="Script" uid="uid://clxc1eaoq168p" path="res://Scene/Characters/Enemies/enemy.gd" id="2_vvq5x"]
 [ext_resource type="Script" uid="uid://bcmokx1bwyftw" path="res://StateMachine/state_machine.gd" id="3_cgw2a"]
 [ext_resource type="Script" uid="uid://bey7t8h4m0yyp" path="res://StateMachine/state.gd" id="4_vvq5x"]
 
@@ -13,6 +14,7 @@ radius = 169.0
 height = 464.0
 
 [node name="Enemy" unique_id=737387642 groups=["Ennemy"] instance=ExtResource("1_ikawt")]
+script = ExtResource("2_vvq5x")
 
 [node name="CollisionShape2D" parent="." index="0"]
 position = Vector2(0, -31)

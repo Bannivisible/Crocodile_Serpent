@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://f188bqv4kk26"]
+[gd_scene format=4 uid="uid://f188bqv4kk26"]
 
 [ext_resource type="PackedScene" uid="uid://dvhhcev5ikxgt" path="res://Scene/Arena/arena.tscn" id="1_0264e"]
 [ext_resource type="Script" uid="uid://rclgvctg748s" path="res://Scene/Arena/FightArena/fight_arena.gd" id="2_1ato1"]
@@ -8,6 +8,8 @@
 [ext_resource type="Script" uid="uid://s1ya3aadtjn5" path="res://Scene/Arena/FightArena/choose.gd" id="5_7lhif"]
 [ext_resource type="PackedScene" uid="uid://bgxumcv6rrpm1" path="res://Scene/Characters/Crocodile/crocodile.tscn" id="7_3wvjj"]
 [ext_resource type="PackedScene" uid="uid://c1ok3d3x3i6rh" path="res://Scene/Characters/Enemies/Boss/Chimera/chimera.tscn" id="8_wp1n5"]
+[ext_resource type="Texture2D" uid="uid://bboidoiy1l6o0" path="res://Scene/Arena/FightArena/ChimeraArena/TileMap/chimera_arena_tile_map.png" id="9_o1adf"]
+[ext_resource type="Script" uid="uid://b08ket8viby3v" path="res://Scene/Characters/character.gd" id="10_e5sod"]
 
 [sub_resource type="Gradient" id="Gradient_3wvjj"]
 colors = PackedColorArray(0, 1, 0, 1, 0, 1, 0, 1)
@@ -17,6 +19,64 @@ gradient = SubResource("Gradient_3wvjj")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wp1n5"]
 size = Vector2(64, 46.12616)
+
+[sub_resource type="Gradient" id="Gradient_e5sod"]
+colors = PackedColorArray(0, 0.43137255, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rtusd"]
+gradient = SubResource("Gradient_e5sod")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e5sod"]
+resource_name = "Soil"
+texture = ExtResource("9_o1adf")
+texture_region_size = Vector2i(128, 128)
+1:8/0 = 0
+1:6/0 = 0
+1:7/0 = 0
+2:6/0 = 0
+2:7/0 = 0
+2:8/0 = 0
+3:6/0 = 0
+3:7/0 = 0
+3:8/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_rtusd"]
+tile_size = Vector2i(128, 128)
+sources/0 = SubResource("TileSetAtlasSource_e5sod")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rtusd"]
+resource_name = "Grass"
+texture = ExtResource("9_o1adf")
+texture_region_size = Vector2i(128, 128)
+4:3/0 = 0
+5:3/0 = 0
+6:3/0 = 0
+7:3/0 = 0
+8:3/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+6:4/0 = 0
+7:4/0 = 0
+8:4/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+6:5/0 = 0
+7:5/0 = 0
+8:5/0 = 0
+4:6/0 = 0
+5:6/0 = 0
+6:6/0 = 0
+7:6/0 = 0
+8:6/0 = 0
+4:7/0 = 0
+5:7/0 = 0
+6:7/0 = 0
+7:7/0 = 0
+8:7/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_i0p2h"]
+tile_size = Vector2i(128, 128)
+sources/0 = SubResource("TileSetAtlasSource_rtusd")
 
 [node name="FightArena" unique_id=929122509 instance=ExtResource("1_0264e")]
 script = ExtResource("2_1ato1")
@@ -53,10 +113,26 @@ metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 script = ExtResource("5_3wvjj")
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 
-[node name="Crocodile" parent="." index="3" unique_id=1168972678 instance=ExtResource("7_3wvjj")]
+[node name="Sprite2D" type="Sprite2D" parent="." index="3" unique_id=437724842]
+position = Vector2(987.00006, 576)
+rotation = -1.5707964
+scale = Vector2(22.951012, 50.14331)
+texture = SubResource("GradientTexture2D_rtusd")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." index="4" unique_id=69658213]
+tile_map_data = PackedByteArray("AAABAAYAAAACAAcAAAACAAYAAAACAAcAAAADAAYAAAACAAcAAAAEAAYAAAACAAcAAAAFAAYAAAACAAcAAAAGAAYAAAACAAcAAAAHAAYAAAACAAcAAAAIAAYAAAACAAcAAAAJAAYAAAACAAcAAAAKAAYAAAACAAcAAAALAAYAAAACAAcAAAAMAAYAAAACAAcAAAANAAYAAAACAAcAAAAAAAYAAAABAAcAAAAOAAYAAAADAAcAAAABAAcAAAACAAgAAAACAAcAAAACAAgAAAADAAcAAAACAAgAAAAEAAcAAAACAAgAAAAFAAcAAAACAAgAAAAGAAcAAAACAAgAAAAHAAcAAAACAAgAAAAIAAcAAAACAAgAAAAJAAcAAAACAAgAAAAKAAcAAAACAAgAAAALAAcAAAACAAgAAAAMAAcAAAACAAgAAAANAAcAAAACAAgAAAABAAUAAAACAAYAAAACAAUAAAACAAYAAAADAAUAAAACAAYAAAAEAAUAAAACAAYAAAAFAAUAAAACAAYAAAAGAAUAAAACAAYAAAAHAAUAAAACAAYAAAAIAAUAAAACAAYAAAAJAAUAAAACAAYAAAAKAAUAAAACAAYAAAALAAUAAAACAAYAAAAMAAUAAAACAAYAAAANAAUAAAACAAYAAAAAAAUAAAABAAYAAAAOAAUAAAADAAYAAAAOAAcAAAADAAgAAAAAAAcAAAABAAgAAAA=")
+tile_set = SubResource("TileSet_rtusd")
+
+[node name="TileMapLayer2" type="TileMapLayer" parent="." index="5" unique_id=1317279527]
+position = Vector2(0, 64)
+tile_map_data = PackedByteArray("AAABAAQAAAAGAAQAAAACAAQAAAAGAAQAAAADAAQAAAAGAAQAAAAEAAQAAAAGAAQAAAAFAAQAAAAGAAQAAAAGAAQAAAAGAAQAAAAHAAQAAAAGAAQAAAAIAAQAAAAGAAQAAAAJAAQAAAAGAAQAAAAKAAQAAAAGAAQAAAALAAQAAAAGAAQAAAAMAAQAAAAGAAQAAAANAAQAAAAGAAQAAAAAAAQAAAAFAAQAAAAAAAUAAAAFAAUAAAAAAAYAAAAFAAUAAAAAAAcAAAAFAAYAAAD//wcAAAAEAAYAAAD//wYAAAAEAAUAAAD//wUAAAAEAAUAAAD//wQAAAAEAAQAAAAAAAMAAAAFAAMAAAAOAAQAAAAHAAQAAAAOAAMAAAAHAAMAAAAPAAQAAAAIAAQAAAAPAAMAAAAIAAMAAAD//wMAAAAEAAMAAAABAAcAAAAGAAYAAAACAAcAAAAGAAYAAAADAAcAAAAGAAYAAAAEAAcAAAAGAAYAAAAFAAcAAAAGAAYAAAAGAAcAAAAGAAYAAAAHAAcAAAAGAAYAAAAIAAcAAAAGAAYAAAAJAAcAAAAGAAYAAAAKAAcAAAAGAAYAAAALAAcAAAAGAAYAAAAMAAcAAAAGAAYAAAANAAcAAAAGAAYAAAAOAAcAAAAHAAYAAAAOAAgAAAAHAAcAAAAPAAgAAAAIAAcAAAAPAAcAAAAIAAYAAAAOAAYAAAAHAAUAAAAPAAUAAAAIAAUAAAAOAAUAAAAHAAUAAAAPAAYAAAAIAAUAAAABAAgAAAAGAAcAAAACAAgAAAAGAAcAAAADAAgAAAAGAAcAAAAEAAgAAAAGAAcAAAAFAAgAAAAGAAcAAAAGAAgAAAAGAAcAAAAHAAgAAAAGAAcAAAAIAAgAAAAGAAcAAAAJAAgAAAAGAAcAAAAKAAgAAAAGAAcAAAALAAgAAAAGAAcAAAAMAAgAAAAGAAcAAAANAAgAAAAGAAcAAAABAAMAAAAGAAMAAAACAAMAAAAGAAMAAAADAAMAAAAGAAMAAAAEAAMAAAAGAAMAAAAFAAMAAAAGAAMAAAAGAAMAAAAGAAMAAAAHAAMAAAAGAAMAAAAIAAMAAAAGAAMAAAAJAAMAAAAGAAMAAAAKAAMAAAAGAAMAAAALAAMAAAAGAAMAAAAMAAMAAAAGAAMAAAANAAMAAAAGAAMAAAAAAAgAAAAFAAcAAAA=")
+tile_set = SubResource("TileSet_i0p2h")
+
+[node name="Crocodile" parent="." index="6" unique_id=1168972678 instance=ExtResource("7_3wvjj")]
 position = Vector2(316, 446)
 platform_floor_layers = 4294967295
 platform_wall_layers = 0
 
-[node name="Chimera" parent="." index="4" unique_id=417415811 instance=ExtResource("8_wp1n5")]
+[node name="Chimera" parent="." index="7" unique_id=417415811 instance=ExtResource("8_wp1n5")]
 position = Vector2(1510, 594)
+script = ExtResource("10_e5sod")
