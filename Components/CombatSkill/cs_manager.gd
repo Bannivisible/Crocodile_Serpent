@@ -14,8 +14,8 @@ func _ready() -> void:
 	
 	Events.cs_interface_on_screen_changed.connect(_on_Events_cs_interface_on_screen_changed)
 	
-	var bmc: BMC= owner.get_node_or_null("BMC")
-	if bmc: bmc.facing_direction_changed.connect(_on_bmc_facing_direction_change)
+	var velocity_component: VelocityComponent= owner.get_node_or_null("VelocityComponent")
+	if velocity_component: velocity_component.facing_direction_changed.connect(_on_VelocityComponent_facing_direction_change)
 
 func _physics_process(delta: float) -> void:
 	if current_cs:
@@ -35,7 +35,7 @@ func _set_cs() -> void:
 
 #### SIGNALS RESPONSES ####
 
-func _on_bmc_facing_direction_change(face_dir: Vector2) -> void:
+func _on_VelocityComponent_facing_direction_change(face_dir: Vector2) -> void:
 	if current_cs:
 		current_cs.position.x = current_cs.gap.x * face_dir.x
 

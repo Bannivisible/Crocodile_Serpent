@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://b8wa1bb4e5mxe"]
+[gd_scene format=3 uid="uid://b8wa1bb4e5mxe"]
 
-[ext_resource type="PackedScene" uid="uid://b74kbwhwtmiu5" path="res://Components/BasiqueMovement/bassqiue_movement_component.tscn" id="1_qhpp6"]
+[ext_resource type="PackedScene" uid="uid://b74kbwhwtmiu5" path="res://Components/VelocityComponent/velocity_component.tscn" id="1_qhpp6"]
 
 [sub_resource type="GDScript" id="GDScript_5hxnu"]
 script/source = "extends BMC

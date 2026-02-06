@@ -1,7 +1,7 @@
 extends StateMachine
-class_name BMC_FreeState
+class_name VelocityComponent_FreeState
 
-@export var air_state: BMC_AirState= get_parent()
+@export var air_state: VelocityComponent_AirState= get_parent()
 @export var gravity_mult: float= 0.0
 
 var prev_gravity: float

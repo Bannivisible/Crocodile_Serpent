@@ -1,5 +1,5 @@
 extends State
-class_name BMC_FallState
+class_name VelocityComponent_FallState
 
 @export var gravity_increase: float = 300.0
 

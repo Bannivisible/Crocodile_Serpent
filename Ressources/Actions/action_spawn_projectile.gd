@@ -52,15 +52,15 @@ func _get_projectile_faction(owner: Node2D) -> HealthComponent.FACTIONS:
 func _get_projectile_rotation(owner: Node2D, component: Node2D) -> float:
 	var rotation = component.rotation
 	
-	var bmc : BMC= owner.get_node_or_null("BMC")
-	if bmc:
-		var face_dir: float= bmc.facing_direction.x
+	var velocity_component : VelocityComponent= owner.get_node_or_null("VelocityComponent")
+	if VelocityComponent:
+		var face_dir: float= velocity_component.facing_direction.x
 		if face_dir == -1.0: rotation += PI
 	
 	return rotation
 
 func _get_projectile_side(owner: Node) -> float:
-	var bmc : BMC= owner.get_node_or_null("BMC")
-	if bmc:
-		return bmc.facing_direction.x
+	var velocity_component : VelocityComponent= owner.get_node_or_null("VelocityComponent")
+	if VelocityComponent:
+		return velocity_component.facing_direction.x
 	return 1.0

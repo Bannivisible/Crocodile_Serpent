@@ -2250,7 +2250,7 @@ offset = Vector2(-12, 15)
 
 [node name="LegFront" type="Sprite2D" parent="SpriteContainer/LegFrontGroup" index="0" unique_id=1504693139]
 position = Vector2(-63.08738, -95.86055)
-rotation = 0.06972347
+rotation = 0.06972349
 scale = Vector2(0.99955934, 0.99955934)
 texture = SubResource("AtlasTexture_qvnx8")
 offset = Vector2(2.667, 21.333)
@@ -2264,8 +2264,8 @@ offset = Vector2(-5.667, 21)
 
 [node name="FootFront" type="Sprite2D" parent="SpriteContainer/LegFrontGroup" index="2" unique_id=1521634280]
 position = Vector2(-67.01461, -50.90905)
-rotation = -0.0004918237
-scale = Vector2(0.9994022, 0.9994022)
+rotation = -0.0004918088
+scale = Vector2(0.9994023, 0.9994023)
 texture = SubResource("AtlasTexture_7cm0d")
 offset = Vector2(2.2518923, 17.591896)
 
@@ -2564,8 +2564,6 @@ parameters/StateBlend2/blend_amount = 0.0
 
 [node name="VelocityComponent" parent="." index="6" unique_id=661764387 node_paths=PackedStringArray("facing_node") instance=ExtResource("2_pp85c")]
 facing_node = NodePath("../Skeleton2D")
-auto_trigger = null
-conditions_for_actions_array = null
 
 [node name="StateMachineX" parent="VelocityComponent" index="0" unique_id=1605277860]
 set_to_default_state_at_ready = true

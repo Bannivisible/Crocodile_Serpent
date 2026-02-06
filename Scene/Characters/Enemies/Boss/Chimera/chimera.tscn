@@ -3,11 +3,14 @@
 [ext_resource type="PackedScene" uid="uid://cex13xrhcrmxi" path="res://Scene/Characters/Enemies/Boss/boss.tscn" id="1_nbavr"]
 [ext_resource type="Script" uid="uid://bcmokx1bwyftw" path="res://StateMachine/state_machine.gd" id="2_4ak7f"]
 [ext_resource type="Texture2D" uid="uid://blx7irn07seo7" path="res://Scene/Characters/Enemies/Boss/Chimera/Assets/chimera_canvas_texture.tres" id="2_fddmp"]
+[ext_resource type="Script" uid="uid://c8i7j3pllodu6" path="res://Scene/Characters/Enemies/Boss/Chimera/chimera.gd" id="2_i1np0"]
 [ext_resource type="Script" uid="uid://bey7t8h4m0yyp" path="res://StateMachine/state.gd" id="3_1puav"]
 [ext_resource type="Texture2D" uid="uid://dhnum2i6dnjve" path="res://Scene/Characters/Enemies/Boss/Chimera/Assets/Serpent tête.PNG" id="3_fddmp"]
 [ext_resource type="Script" uid="uid://cfjum8yusjbmc" path="res://Ressources/Statistics/charc_statistics.gd" id="3_kocgg"]
 [ext_resource type="Script" uid="uid://danh8ni44s3tn" path="res://Ressources/Attack/AttackType/ResistanceType/resistance_type.gd" id="4_ptyu4"]
 [ext_resource type="Script" uid="uid://danilkv671r1y" path="res://Ressources/Attack/AttackType/attack_type.gd" id="5_q5ekc"]
+[ext_resource type="PackedScene" uid="uid://b74kbwhwtmiu5" path="res://Components/VelocityComponent/velocity_component.tscn" id="9_1puav"]
+[ext_resource type="Script" uid="uid://dat1xibjdbka6" path="res://Components/Statistics/statistics_manager.gd" id="11_6y6jt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1g0bx"]
 atlas = ExtResource("2_fddmp")
@@ -240,7 +243,13 @@ type = SubResource("Resource_udn5k")
 multiplier = 2.0
 metadata/_custom_type_script = "uid://danh8ni44s3tn"
 
+[sub_resource type="Resource" id="Resource_i1np0"]
+script = ExtResource("3_kocgg")
+base_speed = 20.0
+metadata/_custom_type_script = "uid://cfjum8yusjbmc"
+
 [node name="Chimera" unique_id=417415811 instance=ExtResource("1_nbavr")]
+script = ExtResource("2_i1np0")
 
 [node name="StateMachine" type="Node" parent="." index="0" unique_id=1700517181]
 script = ExtResource("2_4ak7f")
@@ -249,6 +258,9 @@ metadata/_custom_type_script = "uid://bcmokx1bwyftw"
 [node name="Idle" type="Node" parent="StateMachine" index="0" unique_id=1546631636]
 script = ExtResource("3_1puav")
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="SpriteContainer" parent="." index="2" unique_id=791091049]
+position = Vector2(-6, 93)
 
 [node name="WingFordwardGroup" type="Node2D" parent="SpriteContainer" index="0" unique_id=862973977]
 rotation = 3.1415927
@@ -538,8 +550,32 @@ resistances = Array[ExtResource("4_ptyu4")]([SubResource("Resource_i6ags")])
 [node name="CollisionShape2D" parent="HealthComponent/HurtBox" index="0" unique_id=414636330]
 position = Vector2(10, -192)
 
-[node name="SerpentTête" type="Sprite2D" parent="." index="4" unique_id=193081546]
+[node name="VelocityComponent" parent="." index="4" unique_id=174796900 instance=ExtResource("9_1puav")]
+
+[node name="MoveSet" type="Node" parent="." index="5" unique_id=1502018066]
+script = ExtResource("2_4ak7f")
+metadata/_custom_type_script = "uid://bcmokx1bwyftw"
+
+[node name="Charge" type="Node" parent="MoveSet" index="0" unique_id=1295932096]
+script = ExtResource("3_1puav")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="SerpentTête" type="Sprite2D" parent="." index="6" unique_id=193081546]
 position = Vector2(382, -270)
 texture = ExtResource("3_fddmp")
 
+[node name="StatisticsManager" type="Node" parent="." index="7" unique_id=1895657502]
+script = ExtResource("11_6y6jt")
+statistiques = SubResource("Resource_i1np0")
+metadata/_custom_type_script = "uid://dat1xibjdbka6"
+
+[node name="Offensive2" type="Node" parent="Mode" parent_id_path=PackedInt32Array(187800442) index="0" unique_id=1563418445]
+script = ExtResource("3_1puav")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="Defensive2" type="Node" parent="Mode" parent_id_path=PackedInt32Array(187800442) index="1" unique_id=1392111219]
+script = ExtResource("3_1puav")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
 [editable path="HealthComponent"]
+[editable path="VelocityComponent"]

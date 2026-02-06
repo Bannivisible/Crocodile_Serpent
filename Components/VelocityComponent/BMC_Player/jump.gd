@@ -1,4 +1,4 @@
-extends BMC_JumpState
+extends VelocityComponent_JumpState
 
 @onready var idle_grounded: State = $"../../Grounded/Idle"
 @onready var base_state: StateMachine = $"../../../StateMachineX/BaseState"

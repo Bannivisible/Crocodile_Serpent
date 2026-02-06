@@ -8,12 +8,12 @@ var state_machine_y: StateMachine
 func enter() -> void:
 	super.enter()
 	
-	var bmc: BMC= object.get_node("BMC")
-	state_machine_x = bmc.state_machine_x
-	state_machine_y = bmc.state_machine_y
+	var velocity_component: VelocityComponent= object.get_node("VelocityComponent")
+	state_machine_x = velocity_component.state_machine_x
+	state_machine_y = velocity_component.state_machine_y
 	
-	var constant_dash: BMC_ConstantDashState= bmc.get_node("StateMachineX/ConstantDash")
-	constant_dash.dir = bmc.facing_direction
+	var constant_dash: VelocityComponent_ConstantDashState= velocity_component.get_node("StateMachineX/ConstantDash")
+	constant_dash.dir = velocity_component.facing_direction
 	
 	state_machine_x.set_state(constant_dash)
 	state_machine_y.set_state_with_string("RotateDir")

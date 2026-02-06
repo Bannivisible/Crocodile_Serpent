@@ -10,5 +10,5 @@ func _ready() -> void:
 	if hp:
 		hp.stat = statistiques
 	
-	var bmc: BMC= object.get_node_or_null("BMC")
-	if bmc: bmc.charac_stat = statistiques
+	var vel_comp: VelocityComponent= object.get_node_or_null("VelocityComponent")
+	if vel_comp: vel_comp.charac_stat = statistiques

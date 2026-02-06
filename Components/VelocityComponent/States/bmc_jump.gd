@@ -1,5 +1,5 @@
 extends State
-class_name BMC_JumpState
+class_name VelocityComponent_JumpState
 
 @export var force: float = 400
 

@@ -1,12 +1,12 @@
 extends State
-class_name BMC_FreeMoveState
+class_name VelocityComponent_FreeMoveState
 
 @export var acceleration: float = 0.3
 
-@export var bmc: BMC= owner
+@export var velocity_component: VelocityComponent= owner
 
 func update(_delta: float) -> void:
-	var velocity_y: float= lerp(object.velocity.y, bmc.speed.value * bmc.dir.y * BMC_MoveState.MULT_SPEED, acceleration)
+	var velocity_y: float= lerp(object.velocity.y, velocity_component.speed.value * velocity_component.dir.y * VelocityComponent.MULT_SPEED, acceleration)
 	object.velocity.y = velocity_y
 
 func enter() -> void:
@@ -17,7 +17,7 @@ func enter() -> void:
 func exit() -> void:
 	super.exit()
 	
-	while object.velocity.y > BMC_MoveState.MIN_SPEED:
+	while object.velocity.y > VelocityComponent.MIN_SPEED:
 		object.velocity.y = lerp(object.velocity.y, 0.0, acceleration)
 	
 	object.velocity.y = 0.0

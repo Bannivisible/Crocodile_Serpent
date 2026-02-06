@@ -1,6 +1,6 @@
 extends State
 
-@onready var free_move: BMC_FreeMoveState = $"../FreeMove"
+@onready var free_move: VelocityComponent_FreeMoveState = $"../FreeMove"
 
 
 func _on_bmc_dir_changed(dir: Vector2) -> void:

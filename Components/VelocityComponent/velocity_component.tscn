@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://b74kbwhwtmiu5"]
+
+[ext_resource type="Script" uid="uid://cfbujs1d0b1s6" path="res://Components/VelocityComponent/velocity_component.gd" id="1_64anw"]
+[ext_resource type="Script" uid="uid://bcmokx1bwyftw" path="res://StateMachine/state_machine.gd" id="2_58pje"]
+[ext_resource type="Script" uid="uid://dsv464pbap684" path="res://Components/VelocityComponent/States/bmc_idle.gd" id="3_gnu0n"]
+[ext_resource type="Script" uid="uid://1ow5qrqjgci3" path="res://Components/VelocityComponent/States/bmc_move.gd" id="4_7osg8"]
+[ext_resource type="Script" uid="uid://b0nvwgre5ouv4" path="res://Components/VelocityComponent/States/charge.gd" id="5_rjaug"]
+[ext_resource type="Script" uid="uid://d38qkfrf1wj1a" path="res://StateMachine/state_label.gd" id="6_g2ay0"]
+[ext_resource type="Script" uid="uid://bey7t8h4m0yyp" path="res://StateMachine/state.gd" id="7_ctn11"]
+[ext_resource type="Script" uid="uid://rbct5cq3581w" path="res://Components/VelocityComponent/States/bmc_air.gd" id="8_vo6h0"]
+[ext_resource type="Script" uid="uid://bffvks1uysb0j" path="res://Components/VelocityComponent/States/bmc_fall.gd" id="9_g2xlh"]
+[ext_resource type="Script" uid="uid://5ic5uuxnursm" path="res://Components/VelocityComponent/States/bmc_jump.gd" id="10_8en8b"]
+
+[node name="VelocityComponent" type="Node2D" unique_id=1212142288]
+script = ExtResource("1_64anw")
+
+[node name="StateMachineX" type="Node2D" parent="." unique_id=1605277860]
+script = ExtResource("2_58pje")
+
+[node name="BaseState" type="Node" parent="StateMachineX" unique_id=493854868]
+script = ExtResource("2_58pje")
+metadata/_custom_type_script = "uid://bcmokx1bwyftw"
+
+[node name="Idle" type="Node" parent="StateMachineX/BaseState" unique_id=987973511]
+script = ExtResource("3_gnu0n")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="Move" type="Node" parent="StateMachineX/BaseState" unique_id=2001400550]
+script = ExtResource("4_7osg8")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="Charge" type="Node" parent="StateMachineX/BaseState" unique_id=2094884912]
+script = ExtResource("5_rjaug")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="StateLabel" type="Label" parent="StateMachineX" unique_id=171025809]
+offset_left = 31.0
+offset_top = -80.0
+offset_right = 71.0
+offset_bottom = -57.0
+script = ExtResource("6_g2ay0")
+metadata/_custom_type_script = "uid://d38qkfrf1wj1a"
+
+[node name="StateMachineY" type="Node2D" parent="." unique_id=2034475183]
+script = ExtResource("2_58pje")
+
+[node name="Grounded" type="Node" parent="StateMachineY" unique_id=1439988526]
+script = ExtResource("2_58pje")
+metadata/_custom_type_script = "uid://bcmokx1bwyftw"
+
+[node name="Idle" type="Node" parent="StateMachineY/Grounded" unique_id=316861868]
+script = ExtResource("7_ctn11")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="Air" type="Node" parent="StateMachineY" unique_id=2001776605]
+script = ExtResource("8_vo6h0")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="Fall" type="Node" parent="StateMachineY/Air" unique_id=143431119]
+script = ExtResource("9_g2xlh")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="Jump" type="Node" parent="StateMachineY/Air" unique_id=1510190684]
+script = ExtResource("10_8en8b")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="StateLabel" type="Label" parent="StateMachineY" unique_id=85232895]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("6_g2ay0")
+metadata/_custom_type_script = "uid://d38qkfrf1wj1a"
+
+[connection signal="dir_changed" from="." to="." method="_on_dir_changed"]

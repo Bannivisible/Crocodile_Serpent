@@ -1,38 +1,9 @@
 [gd_resource type="Resource" script_class="ConditionForAction" format=3 uid="uid://djivrp1afebnt"]
 
 [ext_resource type="Script" uid="uid://d0v33ys2dynyh" path="res://Ressources/Actions/action.gd" id="1_lvhsy"]
-[ext_resource type="PackedScene" uid="uid://7waxkd4kq5sy" path="res://Scene/Projectile/LightningSphere/lightning_sphere.tscn" id="2_p263x"]
-[ext_resource type="Script" uid="uid://ce7ave72wm32j" path="res://Ressources/Attack/attack_data.gd" id="3_5s22c"]
-[ext_resource type="Script" uid="uid://dg6bs3dyq4hca" path="res://Ressources/Actions/action_spawn_projectile.gd" id="3_awup0"]
-[ext_resource type="Script" uid="uid://danilkv671r1y" path="res://Ressources/Attack/AttackType/attack_type.gd" id="4_5rp87"]
-[ext_resource type="Script" uid="uid://bramtakjhrjig" path="res://Ressources/Actions/action_call_method.gd" id="4_5s22c"]
 [ext_resource type="Script" uid="uid://ufcpgmdje658" path="res://Ressources/Conditions/condition.gd" id="5_5rp87"]
 [ext_resource type="Script" uid="uid://b730gnwe3got2" path="res://Ressources/Conditions/Inputs/condition_input.gd" id="6_yo5pc"]
 [ext_resource type="Script" uid="uid://dyglpbhv533ei" path="res://Ressources/ConditionForAction/condition_for_action.gd" id="7_iytxo"]
-
-[sub_resource type="Resource" id="Resource_e63wp"]
-script = ExtResource("4_5s22c")
-who = "COMPONENT"
-method_name = "append_point"
-metadata/_custom_type_script = "uid://bramtakjhrjig"
-
-[sub_resource type="Resource" id="Resource_yo5pc"]
-script = ExtResource("4_5rp87")
-type = 16
-metadata/_custom_type_script = "uid://danilkv671r1y"
-
-[sub_resource type="Resource" id="Resource_iytxo"]
-script = ExtResource("3_5s22c")
-type = SubResource("Resource_yo5pc")
-metadata/_custom_type_script = "uid://ce7ave72wm32j"
-
-[sub_resource type="Resource" id="Resource_n8we8"]
-script = ExtResource("3_awup0")
-attack_data = SubResource("Resource_iytxo")
-projectile_scene = ExtResource("2_p263x")
-pool_size = 5
-gap = Vector2(0, -100)
-metadata/_custom_type_script = "uid://dg6bs3dyq4hca"
 
 [sub_resource type="InputEventAction" id="InputEventAction_n3kh8"]
 action = &"attack"
@@ -45,5 +16,4 @@ metadata/_custom_type_script = "uid://b730gnwe3got2"
 [resource]
 script = ExtResource("7_iytxo")
 conditions = Array[ExtResource("5_5rp87")]([SubResource("Resource_2pvpr")])
-actions = Array[ExtResource("1_lvhsy")]([SubResource("Resource_e63wp"), SubResource("Resource_n8we8")])
 metadata/_custom_type_script = "uid://dyglpbhv533ei"

@@ -1,13 +1,27 @@
-[gd_scene load_steps=2 format=3 uid="uid://mmkgsg3lueu"]
+[gd_scene format=3 uid="uid://mmkgsg3lueu"]
 
 [ext_resource type="Script" uid="uid://b08ket8viby3v" path="res://Scene/Characters/character.gd" id="1_272p2"]
+[ext_resource type="Script" uid="uid://bcmokx1bwyftw" path="res://StateMachine/state_machine.gd" id="2_vyphu"]
+[ext_resource type="Script" uid="uid://bey7t8h4m0yyp" path="res://StateMachine/state.gd" id="3_s0pos"]
 
-[node name="Character" type="CharacterBody2D" groups=["Character"]]
+[node name="Character" type="CharacterBody2D" unique_id=644033490 groups=["Character"]]
 collision_mask = 2
 platform_floor_layers = 4294967290
 platform_wall_layers = 2
 script = ExtResource("1_272p2")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=604189463]
 
-[node name="SpriteContainer" type="Node2D" parent="."]
+[node name="SpriteContainer" type="Node2D" parent="." unique_id=791091049]
+
+[node name="Mode" type="Node" parent="." unique_id=187800442]
+script = ExtResource("2_vyphu")
+metadata/_custom_type_script = "uid://bcmokx1bwyftw"
+
+[node name="Offensive" type="Node" parent="Mode" unique_id=838116481]
+script = ExtResource("3_s0pos")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="Defensive" type="Node" parent="Mode" unique_id=1387168061]
+script = ExtResource("3_s0pos")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
