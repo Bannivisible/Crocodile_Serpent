@@ -6,7 +6,7 @@ class_name VelocityComponent_FreeMoveState
 @export var velocity_component: VelocityComponent= owner
 
 func update(_delta: float) -> void:
-	var velocity_y: float= lerp(object.velocity.y, velocity_component.speed.value * velocity_component.dir.y * VelocityComponent.MULT_SPEED, acceleration)
+	var velocity_y: float= lerp(object.velocity.y, velocity_component.speed * velocity_component.dir.y * VelocityComponent.MULT_SPEED, acceleration)
 	object.velocity.y = velocity_y
 
 func enter() -> void:

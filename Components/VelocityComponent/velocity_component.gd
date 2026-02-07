@@ -6,6 +6,8 @@ const MIN_SPEED: float= 0.05
 
 @export var charac_stat: CharacStatistics
 
+@export var gravity: float = 200.0
+
 @export var facing_node: Node2D
 
 
@@ -62,14 +64,16 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
 	
+	_move_along_path(delta)
 	character.move_and_slide()
 	
-	if character.is_on_floor() and $StateMachineY/Air/Fall.is_current_state():
-		state_machine_y.set_state($StateMachineY/Grounded/Idle)
-	
-	elif character.velocity.y > 0:
-		if $StateMachineY/Grounded.is_current_state() or $StateMachineY/Air/Jump.is_current_state():
-			state_machine_y.set_state_with_string("Fall")
+	#if character.is_on_floor() and $StateMachineY/Air/Fall.is_current_state():
+		#state_machine_y.set_state($StateMachineY/Grounded/Idle)
+	#
+	#elif character.velocity.y > 0:
+		#if $StateMachineY/Grounded.is_current_state() or $StateMachineY/Air/Jump.is_current_state():
+			#state_machine_y.set_state_with_string("Fall")
+
 
 #func _update_animation() -> void:
 	#var x_state_name: String= state_machine_x.get_deepest_state().name
@@ -103,7 +107,7 @@ func get_current_target() -> Vector2:
 
 
 #### LOGIC ####
-func _check_target(delta: float) -> void:
+func _move_along_path(delta: float) -> void:
 	if path.is_empty(): return
 	
 	var target: Vector2= path[0]
@@ -132,6 +136,25 @@ func walk_to(pos: Vector2) -> void:
 	else : direction = Vector2.LEFT
 	
 	dir = direction
+
+
+func add_target_at_begining(target: Vector2) -> void:
+	path.push_front(target)
+	target_changed.emit(target)
+
+
+func add_target_at_end(target: Vector2) -> void:
+	path.append(target)
+	
+	if len(path) == 1: target_changed.emit(target)
+
+
+func apply_gravity(delta: float) -> void:
+	character.velocity.y -= gravity * delta
+
+
+func jump(force: float) -> void:
+	character.velocity.y -= force
 
 
 func immobilize() -> void:

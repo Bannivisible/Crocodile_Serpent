@@ -15,8 +15,6 @@ func enter() -> void:
 	var charc_pos: Vector2= vel_component.character.global_position
 	var dir: Vector2= charc_pos.direction_to(target_pos)
 	vel_component.dir = dir
-	
-	vel_component.update_velocity_with_dir()
 
 
 func update(_delta: float) -> void:
@@ -26,4 +24,3 @@ func update(_delta: float) -> void:
 		destination_reached.emit(target_pos)
 		
 		vel_component.dir = Vector2.ZERO
-		vel_component.update_velocity_with_dir()

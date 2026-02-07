@@ -36,6 +36,9 @@
 [ext_resource type="Resource" uid="uid://iq6c7ofn104r" path="res://Scene/Characters/Crocodile/crocodile_stati.tres" id="34_usnsk"]
 [ext_resource type="Script" uid="uid://wqohf18ow8uk" path="res://Components/Stardust/stardust_component.gd" id="35_wbk6g"]
 [ext_resource type="Resource" uid="uid://cngbsch24bs31" path="res://Scene/Characters/Snake/snake_stat.tres" id="36_m1odn"]
+[ext_resource type="Script" uid="uid://dhau74o4l0rjm" path="res://Components/Controler/controler.gd" id="37_yvpvj"]
+[ext_resource type="Script" uid="uid://bcmokx1bwyftw" path="res://StateMachine/state_machine.gd" id="38_jlbrr"]
+[ext_resource type="Script" uid="uid://bey7t8h4m0yyp" path="res://StateMachine/state.gd" id="39_e5ikc"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pp85c"]
 radius = 35.0
@@ -1985,13 +1988,6 @@ nodes/StateBlend2/node = SubResource("AnimationNodeBlend2_dr3s2")
 nodes/StateBlend2/position = Vector2(-760, 140)
 node_connections = [&"output", 0, &"AttackOneShot", &"AttackOneShot", 0, &"StateOneShot", &"AttackOneShot", 1, &"AttackAnimation", &"StateOneShot", 0, &"StateBlend2", &"StateOneShot", 1, &"StateOneShotAnimation", &"StateBlend2", 0, &"StateMachine", &"StateBlend2", 1, &"StateBlendAnimation"]
 
-[sub_resource type="Resource" id="Resource_wbk6g"]
-script = ExtResource("23_usnsk")
-stat_name = "speed"
-type = 1
-amount = 0.2
-metadata/_custom_type_script = "uid://byhe3mep5poar"
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jeet7"]
 radius = 10.036705
 height = 88.18735
@@ -1999,6 +1995,13 @@ height = 88.18735
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fjl3l"]
 radius = 54.999992
 height = 176.0
+
+[sub_resource type="Resource" id="Resource_wbk6g"]
+script = ExtResource("23_usnsk")
+stat_name = "speed"
+type = 1
+amount = 0.2
+metadata/_custom_type_script = "uid://byhe3mep5poar"
 
 [node name="Crocodile" unique_id=2023739003 groups=["Crocodile"] instance=ExtResource("1_pp85c")]
 script = ExtResource("2_fjl3l")
@@ -2250,7 +2253,7 @@ offset = Vector2(-12, 15)
 
 [node name="LegFront" type="Sprite2D" parent="SpriteContainer/LegFrontGroup" index="0" unique_id=1504693139]
 position = Vector2(-63.08738, -95.86055)
-rotation = 0.06972347
+rotation = 0.06972349
 scale = Vector2(0.99955934, 0.99955934)
 texture = SubResource("AtlasTexture_qvnx8")
 offset = Vector2(2.667, 21.333)
@@ -2264,12 +2267,12 @@ offset = Vector2(-5.667, 21)
 
 [node name="FootFront" type="Sprite2D" parent="SpriteContainer/LegFrontGroup" index="2" unique_id=1521634280]
 position = Vector2(-67.01461, -50.90905)
-rotation = -0.0004918237
-scale = Vector2(0.9994022, 0.9994022)
+rotation = -0.0004918088
+scale = Vector2(0.9994023, 0.9994023)
 texture = SubResource("AtlasTexture_7cm0d")
 offset = Vector2(2.2518923, 17.591896)
 
-[node name="Skeleton2D" type="Skeleton2D" parent="." index="2" unique_id=1316418976]
+[node name="Skeleton2D" type="Skeleton2D" parent="." index="3" unique_id=1316418976]
 modulate = Color(1, 1, 1, 0.16470589)
 position = Vector2(0, -121)
 modification_stack = SubResource("SkeletonModificationStack2D_1etbk")
@@ -2499,7 +2502,7 @@ bone_angle = 24.999996
 [node name="FootBack" type="RemoteTransform2D" parent="Skeleton2D/Center/ThighBack/LegBack/FootBack" index="0" unique_id=396401734]
 remote_path = NodePath("../../../../../../SpriteContainer/LegBackGroup/FootBack")
 
-[node name="SkeletonTargets" type="Node2D" parent="." index="3" unique_id=1688883857]
+[node name="SkeletonTargets" type="Node2D" parent="." index="4" unique_id=1688883857]
 visible = false
 position = Vector2(0, 20)
 
@@ -2543,12 +2546,12 @@ position = Vector2(58, -29)
 [node name="HeadLookAt" type="Marker2D" parent="SkeletonTargets" index="8" unique_id=1493146228]
 position = Vector2(126, -276)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4" unique_id=252078669]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5" unique_id=252078669]
 libraries/ = SubResource("AnimationLibrary_0ft5j")
 libraries/JawTrapAnimationLibrary = ExtResource("18_8e5hb")
 playback_default_blend_time = 2.0
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="5" unique_id=309911794]
+[node name="AnimationTree" type="AnimationTree" parent="." index="6" unique_id=309911794]
 deterministic = false
 tree_root = SubResource("AnimationNodeBlendTree_7cm0d")
 anim_player = NodePath("../AnimationPlayer")
@@ -2562,10 +2565,8 @@ parameters/StateOneShot/internal_active = false
 parameters/StateOneShot/request = 0
 parameters/StateBlend2/blend_amount = 0.0
 
-[node name="VelocityComponent" parent="." index="6" unique_id=661764387 node_paths=PackedStringArray("facing_node") instance=ExtResource("2_pp85c")]
+[node name="VelocityComponent" parent="." index="7" unique_id=661764387 node_paths=PackedStringArray("facing_node") instance=ExtResource("2_pp85c")]
 facing_node = NodePath("../Skeleton2D")
-auto_trigger = null
-conditions_for_actions_array = null
 
 [node name="StateMachineX" parent="VelocityComponent" index="0" unique_id=1605277860]
 set_to_default_state_at_ready = true
@@ -2574,12 +2575,7 @@ set_to_default_state_at_ready = true
 script = ExtResource("22_usnsk")
 set_to_default_state_at_ready = true
 
-[node name="ConstantDash" type="Node" parent="VelocityComponent/StateMachineX" index="1" unique_id=1347404302]
-script = ExtResource("27_yvpvj")
-buff_speed = SubResource("Resource_wbk6g")
-metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
-
-[node name="StateLabel" parent="VelocityComponent/StateMachineX" index="2" unique_id=171025809]
+[node name="StateLabel" parent="VelocityComponent/StateMachineX" index="1" unique_id=171025809]
 offset_left = 291.0
 offset_top = -325.0
 offset_right = 331.0
@@ -2596,24 +2592,6 @@ metadata/_custom_type_script = "uid://t1y8h2xnlvsi"
 [node name="Jump" parent="VelocityComponent/StateMachineY/Air" parent_id_path=PackedInt32Array(661764387, 2001776605) index="1" unique_id=1510190684]
 script = ExtResource("25_usnsk")
 
-[node name="Free" type="Node" parent="VelocityComponent/StateMachineY/Air" parent_id_path=PackedInt32Array(661764387, 2001776605) index="2" unique_id=364922845 node_paths=PackedStringArray("air_state")]
-script = ExtResource("28_usnsk")
-air_state = NodePath("..")
-metadata/_custom_type_script = "uid://dnvqquim7c7xk"
-
-[node name="FreeIdle" type="Node" parent="VelocityComponent/StateMachineY/Air/Free" index="0" unique_id=1340363213]
-script = ExtResource("29_wbk6g")
-metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
-
-[node name="FreeMove" type="Node" parent="VelocityComponent/StateMachineY/Air/Free" index="1" unique_id=1383492213]
-script = ExtResource("27_dr3s2")
-metadata/_custom_type_script = "uid://b2ht1wi0b2hvw"
-
-[node name="RotateDir" type="Node" parent="VelocityComponent/StateMachineY/Air/Free" index="2" unique_id=622454534]
-script = ExtResource("32_yvpvj")
-angle_range = Vector2(-1.571, 1.571)
-metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
-
 [node name="StateLabel" parent="VelocityComponent/StateMachineY" index="2" unique_id=85232895]
 offset_left = 173.0
 offset_top = 15.0
@@ -2621,7 +2599,7 @@ offset_right = 213.0
 offset_bottom = 38.0
 metadata/_edit_use_anchors_ = true
 
-[node name="CSManager" type="Node2D" parent="." index="7" unique_id=274501858]
+[node name="CSManager" type="Node2D" parent="." index="8" unique_id=274501858]
 script = ExtResource("6_wwopw")
 
 [node name="JawTrap" parent="CSManager" index="0" unique_id=1426184236 instance=ExtResource("27_0jkvw")]
@@ -2665,23 +2643,77 @@ shape = SubResource("CapsuleShape2D_fjl3l")
 [node name="CollisionShape2D" parent="CSManager/JawTrap" index="7" unique_id=652731362]
 position = Vector2(0, 1)
 
-[node name="HealthComponent" parent="." index="8" unique_id=218773380 instance=ExtResource("10_51sid")]
+[node name="HealthComponent" parent="." index="9" unique_id=218773380 instance=ExtResource("10_51sid")]
 visible = false
 
 [node name="CollisionShape2D" parent="HealthComponent/HurtBox" parent_id_path=PackedInt32Array(218773380, 1017093875) index="0" unique_id=414636330]
 position = Vector2(0, -150)
 shape = SubResource("CapsuleShape2D_pp85c")
 
-[node name="StatisticsManager" type="Node" parent="." index="9" unique_id=2083153856]
+[node name="StatisticsManager" type="Node" parent="." index="10" unique_id=2083153856]
 script = ExtResource("11_xdqw8")
 statistiques = ExtResource("34_usnsk")
 metadata/_custom_type_script = "uid://dat1xibjdbka6"
 
-[node name="StardustComponent" type="Node" parent="." index="10" unique_id=475841678]
+[node name="StardustComponent" type="Node" parent="." index="11" unique_id=475841678]
 script = ExtResource("35_wbk6g")
 wizard_stat = ExtResource("36_m1odn")
 
-[connection signal="dir_changed" from="VelocityComponent" to="VelocityComponent/StateMachineY/Air/Free/FreeIdle" method="_on_bmc_dir_changed"]
+[node name="Controler" type="Node" parent="." index="12" unique_id=882876440]
+script = ExtResource("37_yvpvj")
+
+[node name="ConstantDash" type="Node" parent="." index="13" unique_id=1347404302]
+script = ExtResource("27_yvpvj")
+buff_speed = SubResource("Resource_wbk6g")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="Free" type="Node" parent="." index="14" unique_id=364922845 node_paths=PackedStringArray("air_state")]
+script = ExtResource("28_usnsk")
+air_state = NodePath("../VelocityComponent/StateMachineY/Air")
+metadata/_custom_type_script = "uid://dnvqquim7c7xk"
+
+[node name="FreeIdle" type="Node" parent="Free" index="0" unique_id=1340363213]
+script = ExtResource("29_wbk6g")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="FreeMove" type="Node" parent="Free" index="1" unique_id=1383492213]
+script = ExtResource("27_dr3s2")
+metadata/_custom_type_script = "uid://b2ht1wi0b2hvw"
+
+[node name="RotateDir" type="Node" parent="Free" index="2" unique_id=622454534]
+script = ExtResource("32_yvpvj")
+angle_range = Vector2(-1.571, 1.571)
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="StateMachine" type="Node" parent="." index="15" unique_id=1853879653]
+script = ExtResource("38_jlbrr")
+metadata/_custom_type_script = "uid://bcmokx1bwyftw"
+
+[node name="Idle" type="Node" parent="StateMachine" index="0" unique_id=414784781]
+script = ExtResource("39_e5ikc")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="Move" type="Node" parent="StateMachine" index="1" unique_id=1575010189]
+script = ExtResource("39_e5ikc")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="Jumpe" type="Node" parent="StateMachine" index="2" unique_id=2090905538]
+script = ExtResource("39_e5ikc")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="Fall" type="Node" parent="StateMachine" index="3" unique_id=2113944416]
+script = ExtResource("39_e5ikc")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="BentDown" type="Node" parent="StateMachine" index="4" unique_id=1520256951]
+script = ExtResource("39_e5ikc")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="OnWall" type="Node" parent="StateMachine" index="5" unique_id=1730622973]
+script = ExtResource("39_e5ikc")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[connection signal="dir_changed" from="VelocityComponent" to="Free/FreeIdle" method="_on_bmc_dir_changed"]
 
 [editable path="VelocityComponent"]
 [editable path="CSManager/JawTrap"]

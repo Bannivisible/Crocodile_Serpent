@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://dgndeir7aqk0o"]
+[gd_scene format=3 uid="uid://dgndeir7aqk0o"]
 
 [ext_resource type="Theme" uid="uid://dxxn1u7fah8ng" path="res://Ui/BookInterface/Theme/Book.tres" id="1_nh015"]
 [ext_resource type="Script" uid="uid://dijsmuk5xxrv7" path="res://Ui/CSInterface/cs_interface.gd" id="2_lhy7a"]
@@ -349,7 +349,7 @@ _data = {
 &"TurnPage": SubResource("Animation_ilqmr")
 }
 
-[node name="CSInterface" type="Control" node_paths=PackedStringArray("tab_first_buttons")]
+[node name="CSInterface" type="Control" unique_id=546743809 node_paths=PackedStringArray("tab_first_buttons")]
 custom_minimum_size = Vector2(576, 324)
 layout_mode = 3
 anchor_left = 0.75
@@ -364,13 +364,13 @@ show_animation_trans = 11
 tab_first_buttons = [NodePath("Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/MarginContainer/StarButton"), NodePath("Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer/CSButton1")]
 metadata/_edit_lock_ = true
 
-[node name="CSInterfaceDataManager" type="Node" parent="."]
+[node name="CSInterfaceDataManager" type="Node" parent="." unique_id=1531371341]
 unique_name_in_owner = true
 script = ExtResource("3_lhy7a")
 player_statistics = ExtResource("4_ilqmr")
 wizard_statistics = ExtResource("5_5kfsq")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=279884189]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -380,7 +380,7 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_i5yi8")
 metadata/_edit_lock_ = true
 
-[node name="StardustPanelContainer" type="PanelContainer" parent="Panel"]
+[node name="StardustPanelContainer" type="PanelContainer" parent="Panel" unique_id=182214876]
 layout_mode = 0
 offset_left = 32.0
 offset_top = 45.0
@@ -388,21 +388,21 @@ offset_right = 470.0
 offset_bottom = 138.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_k2css")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/StardustPanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/StardustPanelContainer" unique_id=624165634]
 layout_mode = 2
 
-[node name="StardustLabel" type="Label" parent="Panel/StardustPanelContainer/VBoxContainer"]
+[node name="StardustLabel" type="Label" parent="Panel/StardustPanelContainer/VBoxContainer" unique_id=839719081]
 layout_mode = 2
 text = "Poussières d'étoiles"
 horizontal_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/StardustPanelContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel/StardustPanelContainer/VBoxContainer" unique_id=1747287362]
 layout_mode = 2
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 6
 
-[node name="StardustTextureProgressBar" type="TextureProgressBar" parent="Panel/StardustPanelContainer/VBoxContainer/MarginContainer"]
+[node name="StardustTextureProgressBar" type="TextureProgressBar" parent="Panel/StardustPanelContainer/VBoxContainer/MarginContainer" unique_id=631471144]
 layout_mode = 2
 value = 50.0
 nine_patch_stretch = true
@@ -410,7 +410,7 @@ stretch_margin_bottom = 32
 texture_under = SubResource("GradientTexture2D_ilqmr")
 texture_progress = SubResource("GradientTexture2D_tjcl5")
 
-[node name="StatisticsMarginContainer" type="MarginContainer" parent="Panel"]
+[node name="StatisticsMarginContainer" type="MarginContainer" parent="Panel" unique_id=434123495]
 layout_mode = 0
 offset_left = 32.0
 offset_top = 188.0
@@ -419,63 +419,63 @@ offset_bottom = 356.0
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_right = 12
 
-[node name="PanelContainer" type="PanelContainer" parent="Panel/StatisticsMarginContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="Panel/StatisticsMarginContainer" unique_id=1955101764]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_qiots")
 
-[node name="GridContainer" type="GridContainer" parent="Panel/StatisticsMarginContainer/PanelContainer"]
+[node name="GridContainer" type="GridContainer" parent="Panel/StatisticsMarginContainer/PanelContainer" unique_id=1502308589]
 layout_mode = 2
 columns = 2
 
-[node name="MaxHealthLabel" type="Label" parent="Panel/StatisticsMarginContainer/PanelContainer/GridContainer"]
+[node name="MaxHealthLabel" type="Label" parent="Panel/StatisticsMarginContainer/PanelContainer/GridContainer" unique_id=477516631]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "PV "
 horizontal_alignment = 1
 
-[node name="MaxHealthValueLabel" type="Label" parent="Panel/StatisticsMarginContainer/PanelContainer/GridContainer"]
+[node name="MaxHealthValueLabel" type="Label" parent="Panel/StatisticsMarginContainer/PanelContainer/GridContainer" unique_id=105944287]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "60 / 60"
 horizontal_alignment = 1
 
-[node name="StrenghtLabel" type="Label" parent="Panel/StatisticsMarginContainer/PanelContainer/GridContainer"]
+[node name="StrenghtLabel" type="Label" parent="Panel/StatisticsMarginContainer/PanelContainer/GridContainer" unique_id=1087279790]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Force"
 horizontal_alignment = 1
 
-[node name="StrenghtValueLabel" type="Label" parent="Panel/StatisticsMarginContainer/PanelContainer/GridContainer"]
+[node name="StrenghtValueLabel" type="Label" parent="Panel/StatisticsMarginContainer/PanelContainer/GridContainer" unique_id=417359206]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "80"
 horizontal_alignment = 1
 
-[node name="DefenseLabel" type="Label" parent="Panel/StatisticsMarginContainer/PanelContainer/GridContainer"]
+[node name="DefenseLabel" type="Label" parent="Panel/StatisticsMarginContainer/PanelContainer/GridContainer" unique_id=1599829160]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Defense"
 horizontal_alignment = 1
 
-[node name="DefenseValueLabel" type="Label" parent="Panel/StatisticsMarginContainer/PanelContainer/GridContainer"]
+[node name="DefenseValueLabel" type="Label" parent="Panel/StatisticsMarginContainer/PanelContainer/GridContainer" unique_id=137513205]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "70"
 horizontal_alignment = 1
 
-[node name="SpeedLabel" type="Label" parent="Panel/StatisticsMarginContainer/PanelContainer/GridContainer"]
+[node name="SpeedLabel" type="Label" parent="Panel/StatisticsMarginContainer/PanelContainer/GridContainer" unique_id=1764744413]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Vitesse"
 horizontal_alignment = 1
 
-[node name="SpeedValueLabel" type="Label" parent="Panel/StatisticsMarginContainer/PanelContainer/GridContainer"]
+[node name="SpeedValueLabel" type="Label" parent="Panel/StatisticsMarginContainer/PanelContainer/GridContainer" unique_id=1541872555]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "30"
 horizontal_alignment = 1
 
-[node name="CriticalPanelContainer" type="PanelContainer" parent="Panel"]
+[node name="CriticalPanelContainer" type="PanelContainer" parent="Panel" unique_id=549824847]
 layout_mode = 0
 offset_left = 32.0
 offset_top = 406.0
@@ -483,33 +483,33 @@ offset_right = 470.0
 offset_bottom = 496.0
 theme_override_styles/panel = ExtResource("7_idbfo")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/CriticalPanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/CriticalPanelContainer" unique_id=640494376]
 layout_mode = 2
 
-[node name="CriticalLabel" type="Label" parent="Panel/CriticalPanelContainer/VBoxContainer"]
+[node name="CriticalLabel" type="Label" parent="Panel/CriticalPanelContainer/VBoxContainer" unique_id=1700430935]
 layout_mode = 2
 size_flags_horizontal = 6
 theme_override_colors/font_color = Color(0.8938901, 0.89389014, 0, 1)
 text = "Critique"
 
-[node name="PanelContainer" type="PanelContainer" parent="Panel/CriticalPanelContainer/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="Panel/CriticalPanelContainer/VBoxContainer" unique_id=200010986]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_idbfo")
 
-[node name="HBoxContainer5" type="HBoxContainer" parent="Panel/CriticalPanelContainer/VBoxContainer/PanelContainer"]
+[node name="HBoxContainer5" type="HBoxContainer" parent="Panel/CriticalPanelContainer/VBoxContainer/PanelContainer" unique_id=1914528235]
 layout_mode = 2
 
-[node name="CriteCoefValueLabel" type="Label" parent="Panel/CriticalPanelContainer/VBoxContainer/PanelContainer/HBoxContainer5"]
+[node name="CriteCoefValueLabel" type="Label" parent="Panel/CriticalPanelContainer/VBoxContainer/PanelContainer/HBoxContainer5" unique_id=1139395391]
 layout_mode = 2
 size_flags_horizontal = 6
 text = "X 2"
 
-[node name="CriteRateValueLabel" type="Label" parent="Panel/CriticalPanelContainer/VBoxContainer/PanelContainer/HBoxContainer5"]
+[node name="CriteRateValueLabel" type="Label" parent="Panel/CriticalPanelContainer/VBoxContainer/PanelContainer/HBoxContainer5" unique_id=669574131]
 layout_mode = 2
 size_flags_horizontal = 6
 text = "20 %"
 
-[node name="DoublePageTabContainer" type="TabContainer" parent="Panel"]
+[node name="DoublePageTabContainer" type="TabContainer" parent="Panel" unique_id=1107728129]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
@@ -524,15 +524,15 @@ tab_focus_mode = 0
 deselect_enabled = true
 metadata/_edit_lock_ = true
 
-[node name="CSCategorySelection" type="HBoxContainer" parent="Panel/DoublePageTabContainer"]
+[node name="CSCategorySelection" type="HBoxContainer" parent="Panel/DoublePageTabContainer" unique_id=144963213]
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="LeftPanel1" type="Panel" parent="Panel/DoublePageTabContainer/CSCategorySelection"]
+[node name="LeftPanel1" type="Panel" parent="Panel/DoublePageTabContainer/CSCategorySelection" unique_id=2054038730]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1" unique_id=1774589841]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -544,30 +544,30 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer" unique_id=1762819848]
 layout_mode = 2
 theme_override_constants/separation = 50
 alignment = 1
 
-[node name="StardustPanelContainer" type="PanelContainer" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer"]
+[node name="StardustPanelContainer" type="PanelContainer" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer" unique_id=73858577]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_k2css")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StardustPanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StardustPanelContainer" unique_id=1473856335]
 layout_mode = 2
 
-[node name="StardustLabel" type="Label" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StardustPanelContainer/VBoxContainer"]
+[node name="StardustLabel" type="Label" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StardustPanelContainer/VBoxContainer" unique_id=1737295138]
 layout_mode = 2
 text = "Poussières d'étoiles"
 horizontal_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StardustPanelContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StardustPanelContainer/VBoxContainer" unique_id=1992540622]
 layout_mode = 2
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 6
 
-[node name="StardustTextureProgressBar" type="TextureProgressBar" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StardustPanelContainer/VBoxContainer/MarginContainer"]
+[node name="StardustTextureProgressBar" type="TextureProgressBar" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StardustPanelContainer/VBoxContainer/MarginContainer" unique_id=2029477967]
 unique_name_in_owner = true
 layout_mode = 2
 value = 50.0
@@ -576,109 +576,109 @@ stretch_margin_bottom = 32
 texture_under = SubResource("GradientTexture2D_ilqmr")
 texture_progress = SubResource("GradientTexture2D_tjcl5")
 
-[node name="StatisticsMarginContainer" type="MarginContainer" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer"]
+[node name="StatisticsMarginContainer" type="MarginContainer" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer" unique_id=2090798931]
 layout_mode = 2
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_right = 12
 
-[node name="PanelContainer" type="PanelContainer" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StatisticsMarginContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StatisticsMarginContainer" unique_id=861075122]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_qiots")
 
-[node name="GridContainer" type="GridContainer" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StatisticsMarginContainer/PanelContainer"]
+[node name="GridContainer" type="GridContainer" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StatisticsMarginContainer/PanelContainer" unique_id=2085327992]
 layout_mode = 2
 columns = 2
 
-[node name="MaxHealthLabel" type="Label" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StatisticsMarginContainer/PanelContainer/GridContainer"]
+[node name="MaxHealthLabel" type="Label" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StatisticsMarginContainer/PanelContainer/GridContainer" unique_id=1743341911]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "PV "
 horizontal_alignment = 1
 
-[node name="MaxHealthValueLabel" type="Label" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StatisticsMarginContainer/PanelContainer/GridContainer"]
+[node name="MaxHealthValueLabel" type="Label" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StatisticsMarginContainer/PanelContainer/GridContainer" unique_id=648291781]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "60 / 60"
 horizontal_alignment = 1
 
-[node name="StrenghtLabel" type="Label" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StatisticsMarginContainer/PanelContainer/GridContainer"]
+[node name="StrenghtLabel" type="Label" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StatisticsMarginContainer/PanelContainer/GridContainer" unique_id=911301334]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Force"
 horizontal_alignment = 1
 
-[node name="StrenghtValueLabel" type="Label" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StatisticsMarginContainer/PanelContainer/GridContainer"]
+[node name="StrenghtValueLabel" type="Label" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StatisticsMarginContainer/PanelContainer/GridContainer" unique_id=928437155]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "80"
 horizontal_alignment = 1
 
-[node name="DefenseLabel" type="Label" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StatisticsMarginContainer/PanelContainer/GridContainer"]
+[node name="DefenseLabel" type="Label" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StatisticsMarginContainer/PanelContainer/GridContainer" unique_id=219763068]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Defense"
 horizontal_alignment = 1
 
-[node name="DefenseValueLabel" type="Label" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StatisticsMarginContainer/PanelContainer/GridContainer"]
+[node name="DefenseValueLabel" type="Label" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StatisticsMarginContainer/PanelContainer/GridContainer" unique_id=1299646149]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "70"
 horizontal_alignment = 1
 
-[node name="SpeedLabel" type="Label" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StatisticsMarginContainer/PanelContainer/GridContainer"]
+[node name="SpeedLabel" type="Label" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StatisticsMarginContainer/PanelContainer/GridContainer" unique_id=22051001]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Vitesse"
 horizontal_alignment = 1
 
-[node name="SpeedValueLabel" type="Label" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StatisticsMarginContainer/PanelContainer/GridContainer"]
+[node name="SpeedValueLabel" type="Label" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StatisticsMarginContainer/PanelContainer/GridContainer" unique_id=521008206]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "30"
 horizontal_alignment = 1
 
-[node name="CriticalPanelContainer" type="PanelContainer" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer"]
+[node name="CriticalPanelContainer" type="PanelContainer" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer" unique_id=373909381]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("7_idbfo")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/CriticalPanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/CriticalPanelContainer" unique_id=495235267]
 layout_mode = 2
 
-[node name="CriticalLabel" type="Label" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/CriticalPanelContainer/VBoxContainer"]
+[node name="CriticalLabel" type="Label" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/CriticalPanelContainer/VBoxContainer" unique_id=1099973119]
 layout_mode = 2
 size_flags_horizontal = 6
 theme_override_colors/font_color = Color(0.8938901, 0.89389014, 0, 1)
 text = "Critique"
 
-[node name="PanelContainer" type="PanelContainer" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/CriticalPanelContainer/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/CriticalPanelContainer/VBoxContainer" unique_id=1864151037]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_idbfo")
 
-[node name="HBoxContainer5" type="HBoxContainer" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/CriticalPanelContainer/VBoxContainer/PanelContainer"]
+[node name="HBoxContainer5" type="HBoxContainer" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/CriticalPanelContainer/VBoxContainer/PanelContainer" unique_id=1291523562]
 layout_mode = 2
 
-[node name="CriteCoefValueLabel" type="Label" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/CriticalPanelContainer/VBoxContainer/PanelContainer/HBoxContainer5"]
+[node name="CriteCoefValueLabel" type="Label" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/CriticalPanelContainer/VBoxContainer/PanelContainer/HBoxContainer5" unique_id=635231837]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 6
 text = "X 2"
 
-[node name="CriteRateValueLabel" type="Label" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/CriticalPanelContainer/VBoxContainer/PanelContainer/HBoxContainer5"]
+[node name="CriteRateValueLabel" type="Label" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/CriticalPanelContainer/VBoxContainer/PanelContainer/HBoxContainer5" unique_id=494233679]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 6
 text = "20 %"
 
-[node name="RightPanel1" type="Panel" parent="Panel/DoublePageTabContainer/CSCategorySelection"]
+[node name="RightPanel1" type="Panel" parent="Panel/DoublePageTabContainer/CSCategorySelection" unique_id=262542463]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = ExtResource("7_5kfsq")
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1" unique_id=169470089]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -690,17 +690,17 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1/MarginContainer" unique_id=351946637]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer" unique_id=1023148950]
 layout_mode = 2
 theme_override_constants/margin_left = 6
 theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 6
 
-[node name="StarButton" type="Button" parent="Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/MarginContainer"]
+[node name="StarButton" type="Button" parent="Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/MarginContainer" unique_id=542769949]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(96, 113)
 layout_mode = 2
@@ -714,11 +714,11 @@ icon_alignment = 1
 script = ExtResource("4_ddx0q")
 metadata/_custom_type_script = "uid://b2qh2de0kbwt"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer" unique_id=149688043]
 layout_mode = 2
 alignment = 1
 
-[node name="WaterButton" type="Button" parent="Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="WaterButton" type="Button" parent="Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/HBoxContainer" unique_id=673774983]
 custom_minimum_size = Vector2(96, 113)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -730,7 +730,7 @@ script = ExtResource("4_ddx0q")
 cs_data_array = Array[ExtResource("8_5tmjq")]([ExtResource("10_ilqmr")])
 metadata/_custom_type_script = "uid://b2qh2de0kbwt"
 
-[node name="FireButton" type="Button" parent="Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="FireButton" type="Button" parent="Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/HBoxContainer" unique_id=2067543818]
 custom_minimum_size = Vector2(96, 113)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -741,7 +741,7 @@ script = ExtResource("4_ddx0q")
 cs_data_array = Array[ExtResource("8_5tmjq")]([ExtResource("11_5kfsq"), ExtResource("12_idbfo")])
 metadata/_custom_type_script = "uid://b2qh2de0kbwt"
 
-[node name="WindButton" type="Button" parent="Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="WindButton" type="Button" parent="Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1293475680]
 custom_minimum_size = Vector2(96, 113)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -752,11 +752,11 @@ icon_alignment = 1
 script = ExtResource("4_ddx0q")
 metadata/_custom_type_script = "uid://b2qh2de0kbwt"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer" unique_id=1986389909]
 layout_mode = 2
 alignment = 1
 
-[node name="LightningButton" type="Button" parent="Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="LightningButton" type="Button" parent="Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=202539268]
 custom_minimum_size = Vector2(144, 113)
 layout_mode = 2
 focus_neighbor_left = NodePath("../IceButton")
@@ -769,7 +769,7 @@ script = ExtResource("4_ddx0q")
 cs_data_array = Array[ExtResource("8_5tmjq")]([ExtResource("13_k2css")])
 metadata/_custom_type_script = "uid://b2qh2de0kbwt"
 
-[node name="IceButton" type="Button" parent="Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="IceButton" type="Button" parent="Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1698210904]
 custom_minimum_size = Vector2(144, 113)
 layout_mode = 2
 focus_neighbor_top = NodePath("../../HBoxContainer/FireButton")
@@ -780,14 +780,14 @@ icon_alignment = 1
 script = ExtResource("4_ddx0q")
 metadata/_custom_type_script = "uid://b2qh2de0kbwt"
 
-[node name="MarginContainer2" type="MarginContainer" parent="Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer" unique_id=950429627]
 layout_mode = 2
 theme_override_constants/margin_left = 6
 theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 6
 
-[node name="WeaponButton" type="Button" parent="Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/MarginContainer2"]
+[node name="WeaponButton" type="Button" parent="Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/MarginContainer2" unique_id=2121639779]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(96, 113)
 layout_mode = 2
@@ -803,16 +803,16 @@ script = ExtResource("4_ddx0q")
 cs_data_array = Array[ExtResource("8_5tmjq")]([ExtResource("9_ix3v8")])
 metadata/_custom_type_script = "uid://b2qh2de0kbwt"
 
-[node name="CSSelection" type="HBoxContainer" parent="Panel/DoublePageTabContainer"]
+[node name="CSSelection" type="HBoxContainer" parent="Panel/DoublePageTabContainer" unique_id=1812041866]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="LeftPanel2" type="Panel" parent="Panel/DoublePageTabContainer/CSSelection"]
+[node name="LeftPanel2" type="Panel" parent="Panel/DoublePageTabContainer/CSSelection" unique_id=983366805]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/DoublePageTabContainer/CSSelection/LeftPanel2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/DoublePageTabContainer/CSSelection/LeftPanel2" unique_id=734607481]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -820,7 +820,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/DoublePageTabContainer/CSSelection/LeftPanel2/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel/DoublePageTabContainer/CSSelection/LeftPanel2/VBoxContainer" unique_id=1016089830]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 75
@@ -828,33 +828,33 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 75
 theme_override_constants/margin_bottom = 10
 
-[node name="TextureRect" type="TextureRect" parent="Panel/DoublePageTabContainer/CSSelection/LeftPanel2/VBoxContainer/MarginContainer"]
+[node name="TextureRect" type="TextureRect" parent="Panel/DoublePageTabContainer/CSSelection/LeftPanel2/VBoxContainer/MarginContainer" unique_id=1712407937]
 layout_mode = 2
 size_flags_vertical = 3
 texture = SubResource("GradientTexture2D_idbfo")
 
-[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="Panel/DoublePageTabContainer/CSSelection/LeftPanel2/VBoxContainer"]
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="Panel/DoublePageTabContainer/CSSelection/LeftPanel2/VBoxContainer" unique_id=2120609437]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="MarginContainer2" type="MarginContainer" parent="Panel/DoublePageTabContainer/CSSelection/LeftPanel2/VBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="Panel/DoublePageTabContainer/CSSelection/LeftPanel2/VBoxContainer" unique_id=556811492]
 layout_mode = 2
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_right = -12
 
-[node name="DescriptionLabel" type="Label" parent="Panel/DoublePageTabContainer/CSSelection/LeftPanel2/VBoxContainer/MarginContainer2"]
+[node name="DescriptionLabel" type="Label" parent="Panel/DoublePageTabContainer/CSSelection/LeftPanel2/VBoxContainer/MarginContainer2" unique_id=561978245]
 custom_minimum_size = Vector2(454, 241)
 layout_mode = 2
 size_flags_vertical = 3
 text = "La description de l'arme ou du sort selectionné."
 autowrap_mode = 2
 
-[node name="RightPanel2" type="Panel" parent="Panel/DoublePageTabContainer/CSSelection"]
+[node name="RightPanel2" type="Panel" parent="Panel/DoublePageTabContainer/CSSelection" unique_id=515803444]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/DoublePageTabContainer/CSSelection/RightPanel2"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel/DoublePageTabContainer/CSSelection/RightPanel2" unique_id=1579193896]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -866,13 +866,13 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="CSGridContainer" type="GridContainer" parent="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer"]
+[node name="CSGridContainer" type="GridContainer" parent="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer" unique_id=292173295]
 layout_mode = 2
 theme_override_constants/h_separation = 6
 theme_override_constants/v_separation = 10
 columns = 2
 
-[node name="CSButton1" type="Button" parent="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer"]
+[node name="CSButton1" type="Button" parent="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer" unique_id=323651009]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -882,7 +882,7 @@ text = "Piège A Machoire"
 autowrap_mode = 2
 icon_alignment = 1
 
-[node name="CSButton2" type="Button" parent="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer"]
+[node name="CSButton2" type="Button" parent="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer" unique_id=325572450]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -891,7 +891,7 @@ text = "Boule De Feu"
 autowrap_mode = 2
 icon_alignment = 1
 
-[node name="CSButton3" type="Button" parent="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer"]
+[node name="CSButton3" type="Button" parent="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer" unique_id=975881186]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -900,7 +900,7 @@ text = "Geyser"
 autowrap_mode = 2
 icon_alignment = 1
 
-[node name="CSButton4" type="Button" parent="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer"]
+[node name="CSButton4" type="Button" parent="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer" unique_id=708016987]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -909,7 +909,7 @@ text = "Cage Electrique"
 autowrap_mode = 2
 icon_alignment = 1
 
-[node name="CSButton5" type="Button" parent="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer"]
+[node name="CSButton5" type="Button" parent="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer" unique_id=316186031]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -917,7 +917,7 @@ theme_override_styles/normal = ExtResource("9_idbfo")
 autowrap_mode = 2
 icon_alignment = 1
 
-[node name="CSButton6" type="Button" parent="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer"]
+[node name="CSButton6" type="Button" parent="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer" unique_id=72411021]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -925,7 +925,7 @@ theme_override_styles/normal = ExtResource("9_idbfo")
 autowrap_mode = 2
 icon_alignment = 1
 
-[node name="CSButton7" type="Button" parent="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer"]
+[node name="CSButton7" type="Button" parent="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer" unique_id=372632584]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -933,7 +933,7 @@ theme_override_styles/normal = ExtResource("9_idbfo")
 autowrap_mode = 2
 icon_alignment = 1
 
-[node name="CSButton8" type="Button" parent="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer"]
+[node name="CSButton8" type="Button" parent="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer" unique_id=615621004]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -941,7 +941,7 @@ theme_override_styles/normal = ExtResource("9_idbfo")
 autowrap_mode = 2
 icon_alignment = 1
 
-[node name="StatickPageLeft" type="Sprite2D" parent="Panel"]
+[node name="StatickPageLeft" type="Sprite2D" parent="Panel" unique_id=802666212]
 unique_name_in_owner = true
 visible = false
 position = Vector2(251, 270.5)
@@ -949,7 +949,7 @@ scale = Vector2(1, 0.99999994)
 texture = SubResource("AtlasTexture_k2css")
 metadata/_edit_lock_ = true
 
-[node name="StatickPageRight" type="Sprite2D" parent="Panel"]
+[node name="StatickPageRight" type="Sprite2D" parent="Panel" unique_id=10745336]
 unique_name_in_owner = true
 visible = false
 position = Vector2(709, 270.5)
@@ -957,40 +957,40 @@ scale = Vector2(1, 0.99999994)
 texture = SubResource("AtlasTexture_wg374")
 metadata/_edit_lock_ = true
 
-[node name="AnchorPagRight" type="Node2D" parent="Panel"]
+[node name="AnchorPagRight" type="Node2D" parent="Panel" unique_id=204425053]
 unique_name_in_owner = true
 visible = false
 position = Vector2(482, 28)
 rotation = 1.5707964
 metadata/_edit_lock_ = true
 
-[node name="PageRight" type="Sprite2D" parent="Panel/AnchorPagRight"]
+[node name="PageRight" type="Sprite2D" parent="Panel/AnchorPagRight" unique_id=2069344032]
 unique_name_in_owner = true
 position = Vector2(242.5, -227)
 rotation = -1.5707964
 texture = SubResource("AtlasTexture_tjcl5")
 
-[node name="AnchorPageLeft" type="Node2D" parent="Panel"]
+[node name="AnchorPageLeft" type="Node2D" parent="Panel" unique_id=230718107]
 unique_name_in_owner = true
 visible = false
 position = Vector2(478, 28)
 rotation = 1.5707964
 metadata/_edit_lock_ = true
 
-[node name="PageLeft" type="Sprite2D" parent="Panel/AnchorPageLeft"]
+[node name="PageLeft" type="Sprite2D" parent="Panel/AnchorPageLeft" unique_id=1801774722]
 unique_name_in_owner = true
 position = Vector2(242.5, 227)
 rotation = -1.5707964
 texture = SubResource("AtlasTexture_idbfo")
 
-[node name="Hider" type="VisibleOnScreenNotifier2D" parent="."]
+[node name="Hider" type="VisibleOnScreenNotifier2D" parent="." unique_id=1127989824]
 rect = Rect2(0, 0, 960, 540)
 script = ExtResource("15_ilqmr")
 
-[node name="SubViewport" type="SubViewport" parent="."]
+[node name="SubViewport" type="SubViewport" parent="." unique_id=1602144924]
 size = Vector2i(912, 485)
 
-[node name="SubViewControl1" type="Control" parent="SubViewport"]
+[node name="SubViewControl1" type="Control" parent="SubViewport" unique_id=1311717135]
 unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 0
@@ -998,7 +998,7 @@ offset_right = 912.0
 offset_bottom = 485.0
 theme = ExtResource("1_nh015")
 
-[node name="CSCategorySelection" type="HBoxContainer" parent="SubViewport/SubViewControl1"]
+[node name="CSCategorySelection" type="HBoxContainer" parent="SubViewport/SubViewControl1" unique_id=598998696]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1007,11 +1007,11 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_tab_index = 0
 
-[node name="LeftPanel1" type="Panel" parent="SubViewport/SubViewControl1/CSCategorySelection"]
+[node name="LeftPanel1" type="Panel" parent="SubViewport/SubViewControl1/CSCategorySelection" unique_id=1945627770]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1"]
+[node name="MarginContainer" type="MarginContainer" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1" unique_id=409246857]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1023,30 +1023,30 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1/MarginContainer" unique_id=1104363637]
 layout_mode = 2
 theme_override_constants/separation = 50
 alignment = 1
 
-[node name="StardustPanelContainer" type="PanelContainer" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer"]
+[node name="StardustPanelContainer" type="PanelContainer" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer" unique_id=1850851054]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_k2css")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StardustPanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StardustPanelContainer" unique_id=240531801]
 layout_mode = 2
 
-[node name="StardustLabel" type="Label" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StardustPanelContainer/VBoxContainer"]
+[node name="StardustLabel" type="Label" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StardustPanelContainer/VBoxContainer" unique_id=386888361]
 layout_mode = 2
 text = "Poussières d'étoiles"
 horizontal_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StardustPanelContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StardustPanelContainer/VBoxContainer" unique_id=2041347099]
 layout_mode = 2
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 6
 
-[node name="StardustTextureProgressBar" type="TextureProgressBar" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StardustPanelContainer/VBoxContainer/MarginContainer"]
+[node name="StardustTextureProgressBar" type="TextureProgressBar" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StardustPanelContainer/VBoxContainer/MarginContainer" unique_id=1626448789]
 layout_mode = 2
 value = 50.0
 nine_patch_stretch = true
@@ -1054,103 +1054,103 @@ stretch_margin_bottom = 32
 texture_under = SubResource("GradientTexture2D_ilqmr")
 texture_progress = SubResource("GradientTexture2D_tjcl5")
 
-[node name="StatisticsMarginContainer" type="MarginContainer" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer"]
+[node name="StatisticsMarginContainer" type="MarginContainer" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer" unique_id=740720035]
 layout_mode = 2
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_right = 12
 
-[node name="PanelContainer" type="PanelContainer" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StatisticsMarginContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StatisticsMarginContainer" unique_id=1302077205]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_qiots")
 
-[node name="GridContainer" type="GridContainer" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StatisticsMarginContainer/PanelContainer"]
+[node name="GridContainer" type="GridContainer" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StatisticsMarginContainer/PanelContainer" unique_id=2041230522]
 layout_mode = 2
 columns = 2
 
-[node name="MaxHealthLabel" type="Label" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StatisticsMarginContainer/PanelContainer/GridContainer"]
+[node name="MaxHealthLabel" type="Label" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StatisticsMarginContainer/PanelContainer/GridContainer" unique_id=1203944324]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "PV "
 horizontal_alignment = 1
 
-[node name="MaxHealthValueLabel" type="Label" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StatisticsMarginContainer/PanelContainer/GridContainer"]
+[node name="MaxHealthValueLabel" type="Label" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StatisticsMarginContainer/PanelContainer/GridContainer" unique_id=2147451307]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "60 / 60"
 horizontal_alignment = 1
 
-[node name="StrenghtLabel" type="Label" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StatisticsMarginContainer/PanelContainer/GridContainer"]
+[node name="StrenghtLabel" type="Label" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StatisticsMarginContainer/PanelContainer/GridContainer" unique_id=288153638]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Force"
 horizontal_alignment = 1
 
-[node name="StrenghtValueLabel" type="Label" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StatisticsMarginContainer/PanelContainer/GridContainer"]
+[node name="StrenghtValueLabel" type="Label" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StatisticsMarginContainer/PanelContainer/GridContainer" unique_id=823205944]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "80"
 horizontal_alignment = 1
 
-[node name="DefenseLabel" type="Label" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StatisticsMarginContainer/PanelContainer/GridContainer"]
+[node name="DefenseLabel" type="Label" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StatisticsMarginContainer/PanelContainer/GridContainer" unique_id=410721598]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Defense"
 horizontal_alignment = 1
 
-[node name="DefenseValueLabel" type="Label" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StatisticsMarginContainer/PanelContainer/GridContainer"]
+[node name="DefenseValueLabel" type="Label" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StatisticsMarginContainer/PanelContainer/GridContainer" unique_id=2080588848]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "70"
 horizontal_alignment = 1
 
-[node name="SpeedLabel" type="Label" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StatisticsMarginContainer/PanelContainer/GridContainer"]
+[node name="SpeedLabel" type="Label" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StatisticsMarginContainer/PanelContainer/GridContainer" unique_id=927139649]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Vitesse"
 horizontal_alignment = 1
 
-[node name="SpeedValueLabel" type="Label" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StatisticsMarginContainer/PanelContainer/GridContainer"]
+[node name="SpeedValueLabel" type="Label" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/StatisticsMarginContainer/PanelContainer/GridContainer" unique_id=1128734868]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "30"
 horizontal_alignment = 1
 
-[node name="CriticalPanelContainer" type="PanelContainer" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer"]
+[node name="CriticalPanelContainer" type="PanelContainer" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer" unique_id=1498770884]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("7_idbfo")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/CriticalPanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/CriticalPanelContainer" unique_id=1153716742]
 layout_mode = 2
 
-[node name="CriticalLabel" type="Label" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/CriticalPanelContainer/VBoxContainer"]
+[node name="CriticalLabel" type="Label" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/CriticalPanelContainer/VBoxContainer" unique_id=1913288722]
 layout_mode = 2
 size_flags_horizontal = 6
 theme_override_colors/font_color = Color(0.8938901, 0.89389014, 0, 1)
 text = "Critique"
 
-[node name="PanelContainer" type="PanelContainer" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/CriticalPanelContainer/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/CriticalPanelContainer/VBoxContainer" unique_id=327821506]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_idbfo")
 
-[node name="HBoxContainer5" type="HBoxContainer" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/CriticalPanelContainer/VBoxContainer/PanelContainer"]
+[node name="HBoxContainer5" type="HBoxContainer" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/CriticalPanelContainer/VBoxContainer/PanelContainer" unique_id=452609821]
 layout_mode = 2
 
-[node name="CriteCoefValueLabel" type="Label" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/CriticalPanelContainer/VBoxContainer/PanelContainer/HBoxContainer5"]
+[node name="CriteCoefValueLabel" type="Label" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/CriticalPanelContainer/VBoxContainer/PanelContainer/HBoxContainer5" unique_id=737714857]
 layout_mode = 2
 size_flags_horizontal = 6
 text = "X 2"
 
-[node name="CriteRateValueLabel" type="Label" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/CriticalPanelContainer/VBoxContainer/PanelContainer/HBoxContainer5"]
+[node name="CriteRateValueLabel" type="Label" parent="SubViewport/SubViewControl1/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer/CriticalPanelContainer/VBoxContainer/PanelContainer/HBoxContainer5" unique_id=545382183]
 layout_mode = 2
 size_flags_horizontal = 6
 text = "20 %"
 
-[node name="RightPanel1" type="Panel" parent="SubViewport/SubViewControl1/CSCategorySelection"]
+[node name="RightPanel1" type="Panel" parent="SubViewport/SubViewControl1/CSCategorySelection" unique_id=1154035318]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = ExtResource("7_5kfsq")
 
-[node name="MarginContainer" type="MarginContainer" parent="SubViewport/SubViewControl1/CSCategorySelection/RightPanel1"]
+[node name="MarginContainer" type="MarginContainer" parent="SubViewport/SubViewControl1/CSCategorySelection/RightPanel1" unique_id=969476932]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1162,17 +1162,17 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/SubViewControl1/CSCategorySelection/RightPanel1/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/SubViewControl1/CSCategorySelection/RightPanel1/MarginContainer" unique_id=1344288350]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="SubViewport/SubViewControl1/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="SubViewport/SubViewControl1/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer" unique_id=1348309944]
 layout_mode = 2
 theme_override_constants/margin_left = 6
 theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 6
 
-[node name="StarButton" type="Button" parent="SubViewport/SubViewControl1/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/MarginContainer"]
+[node name="StarButton" type="Button" parent="SubViewport/SubViewControl1/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/MarginContainer" unique_id=1858343509]
 custom_minimum_size = Vector2(96, 113)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1185,11 +1185,11 @@ icon_alignment = 1
 script = ExtResource("4_ddx0q")
 metadata/_custom_type_script = "uid://b2qh2de0kbwt"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport/SubViewControl1/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport/SubViewControl1/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer" unique_id=1563757647]
 layout_mode = 2
 alignment = 1
 
-[node name="WaterButton" type="Button" parent="SubViewport/SubViewControl1/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="WaterButton" type="Button" parent="SubViewport/SubViewControl1/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/HBoxContainer" unique_id=831937352]
 custom_minimum_size = Vector2(96, 113)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1201,7 +1201,7 @@ script = ExtResource("4_ddx0q")
 cs_data_array = Array[ExtResource("8_5tmjq")]([ExtResource("10_ilqmr")])
 metadata/_custom_type_script = "uid://b2qh2de0kbwt"
 
-[node name="FireButton" type="Button" parent="SubViewport/SubViewControl1/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="FireButton" type="Button" parent="SubViewport/SubViewControl1/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/HBoxContainer" unique_id=22799717]
 custom_minimum_size = Vector2(96, 113)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1212,7 +1212,7 @@ script = ExtResource("4_ddx0q")
 cs_data_array = Array[ExtResource("8_5tmjq")]([ExtResource("11_5kfsq"), ExtResource("12_idbfo")])
 metadata/_custom_type_script = "uid://b2qh2de0kbwt"
 
-[node name="WindButton" type="Button" parent="SubViewport/SubViewControl1/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="WindButton" type="Button" parent="SubViewport/SubViewControl1/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1521801355]
 custom_minimum_size = Vector2(96, 113)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1223,11 +1223,11 @@ icon_alignment = 1
 script = ExtResource("4_ddx0q")
 metadata/_custom_type_script = "uid://b2qh2de0kbwt"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="SubViewport/SubViewControl1/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="SubViewport/SubViewControl1/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer" unique_id=307323754]
 layout_mode = 2
 alignment = 1
 
-[node name="LightningButton" type="Button" parent="SubViewport/SubViewControl1/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="LightningButton" type="Button" parent="SubViewport/SubViewControl1/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1704462013]
 custom_minimum_size = Vector2(144, 113)
 layout_mode = 2
 focus_neighbor_left = NodePath("../IceButton")
@@ -1240,7 +1240,7 @@ script = ExtResource("4_ddx0q")
 cs_data_array = Array[ExtResource("8_5tmjq")]([ExtResource("13_k2css")])
 metadata/_custom_type_script = "uid://b2qh2de0kbwt"
 
-[node name="IceButton" type="Button" parent="SubViewport/SubViewControl1/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="IceButton" type="Button" parent="SubViewport/SubViewControl1/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1883571251]
 custom_minimum_size = Vector2(144, 113)
 layout_mode = 2
 focus_neighbor_top = NodePath("../../HBoxContainer/FireButton")
@@ -1251,14 +1251,14 @@ icon_alignment = 1
 script = ExtResource("4_ddx0q")
 metadata/_custom_type_script = "uid://b2qh2de0kbwt"
 
-[node name="MarginContainer2" type="MarginContainer" parent="SubViewport/SubViewControl1/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="SubViewport/SubViewControl1/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer" unique_id=850637358]
 layout_mode = 2
 theme_override_constants/margin_left = 6
 theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 6
 
-[node name="WeaponButton" type="Button" parent="SubViewport/SubViewControl1/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/MarginContainer2"]
+[node name="WeaponButton" type="Button" parent="SubViewport/SubViewControl1/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/MarginContainer2" unique_id=73690342]
 custom_minimum_size = Vector2(96, 113)
 layout_mode = 2
 focus_neighbor_bottom = NodePath("../../MarginContainer/StarButton")
@@ -1273,10 +1273,10 @@ script = ExtResource("4_ddx0q")
 cs_data_array = Array[ExtResource("8_5tmjq")]([ExtResource("9_ix3v8")])
 metadata/_custom_type_script = "uid://b2qh2de0kbwt"
 
-[node name="SubViewport2" type="SubViewport" parent="."]
+[node name="SubViewport2" type="SubViewport" parent="." unique_id=366099233]
 size = Vector2i(912, 485)
 
-[node name="SubViewControl2" type="Control" parent="SubViewport2"]
+[node name="SubViewControl2" type="Control" parent="SubViewport2" unique_id=98687958]
 unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 0
@@ -1284,7 +1284,7 @@ offset_right = 912.0
 offset_bottom = 485.0
 theme = ExtResource("1_nh015")
 
-[node name="CSSelection" type="HBoxContainer" parent="SubViewport2/SubViewControl2"]
+[node name="CSSelection" type="HBoxContainer" parent="SubViewport2/SubViewControl2" unique_id=39111464]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1293,15 +1293,15 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_tab_index = 1
 
-[node name="LeftPanel2" type="Panel" parent="SubViewport2/SubViewControl2/CSSelection"]
+[node name="LeftPanel2" type="Panel" parent="SubViewport2/SubViewControl2/CSSelection" unique_id=1491251859]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="RightPanel2" type="Panel" parent="SubViewport2/SubViewControl2/CSSelection"]
+[node name="RightPanel2" type="Panel" parent="SubViewport2/SubViewControl2/CSSelection" unique_id=1783989367]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="SubViewport2/SubViewControl2/CSSelection/RightPanel2"]
+[node name="MarginContainer" type="MarginContainer" parent="SubViewport2/SubViewControl2/CSSelection/RightPanel2" unique_id=1550930052]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1313,13 +1313,13 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 4
 
-[node name="CSGridContainer" type="GridContainer" parent="SubViewport2/SubViewControl2/CSSelection/RightPanel2/MarginContainer"]
+[node name="CSGridContainer" type="GridContainer" parent="SubViewport2/SubViewControl2/CSSelection/RightPanel2/MarginContainer" unique_id=208219542]
 layout_mode = 2
 theme_override_constants/h_separation = 6
 theme_override_constants/v_separation = 10
 columns = 2
 
-[node name="CSButton1" type="Button" parent="SubViewport2/SubViewControl2/CSSelection/RightPanel2/MarginContainer/CSGridContainer"]
+[node name="CSButton1" type="Button" parent="SubViewport2/SubViewControl2/CSSelection/RightPanel2/MarginContainer/CSGridContainer" unique_id=1822536096]
 custom_minimum_size = Vector2(216, 113)
 layout_mode = 2
 theme_override_styles/normal = ExtResource("14_ilqmr")
@@ -1328,7 +1328,7 @@ text = "Piège A Machoire"
 autowrap_mode = 2
 icon_alignment = 1
 
-[node name="CSButton2" type="Button" parent="SubViewport2/SubViewControl2/CSSelection/RightPanel2/MarginContainer/CSGridContainer"]
+[node name="CSButton2" type="Button" parent="SubViewport2/SubViewControl2/CSSelection/RightPanel2/MarginContainer/CSGridContainer" unique_id=1879198461]
 custom_minimum_size = Vector2(216, 113)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_wg374")
@@ -1336,48 +1336,46 @@ text = "Boule De Feu"
 autowrap_mode = 2
 icon_alignment = 1
 
-[node name="CSButton3" type="Button" parent="SubViewport2/SubViewControl2/CSSelection/RightPanel2/MarginContainer/CSGridContainer"]
+[node name="CSButton3" type="Button" parent="SubViewport2/SubViewControl2/CSSelection/RightPanel2/MarginContainer/CSGridContainer" unique_id=2130319831]
 custom_minimum_size = Vector2(216, 113)
 layout_mode = 2
 text = "Geyser"
 autowrap_mode = 2
 icon_alignment = 1
 
-[node name="CSButton4" type="Button" parent="SubViewport2/SubViewControl2/CSSelection/RightPanel2/MarginContainer/CSGridContainer"]
+[node name="CSButton4" type="Button" parent="SubViewport2/SubViewControl2/CSSelection/RightPanel2/MarginContainer/CSGridContainer" unique_id=1815774709]
 custom_minimum_size = Vector2(216, 113)
 layout_mode = 2
 text = "Cage Electrique"
 autowrap_mode = 2
 icon_alignment = 1
 
-[node name="CSButton5" type="Button" parent="SubViewport2/SubViewControl2/CSSelection/RightPanel2/MarginContainer/CSGridContainer"]
+[node name="CSButton5" type="Button" parent="SubViewport2/SubViewControl2/CSSelection/RightPanel2/MarginContainer/CSGridContainer" unique_id=631159034]
 custom_minimum_size = Vector2(216, 113)
 layout_mode = 2
 autowrap_mode = 2
 icon_alignment = 1
 
-[node name="CSButton6" type="Button" parent="SubViewport2/SubViewControl2/CSSelection/RightPanel2/MarginContainer/CSGridContainer"]
+[node name="CSButton6" type="Button" parent="SubViewport2/SubViewControl2/CSSelection/RightPanel2/MarginContainer/CSGridContainer" unique_id=1711115041]
 custom_minimum_size = Vector2(216, 113)
 layout_mode = 2
 autowrap_mode = 2
 icon_alignment = 1
 
-[node name="CSButton7" type="Button" parent="SubViewport2/SubViewControl2/CSSelection/RightPanel2/MarginContainer/CSGridContainer"]
+[node name="CSButton7" type="Button" parent="SubViewport2/SubViewControl2/CSSelection/RightPanel2/MarginContainer/CSGridContainer" unique_id=440294777]
 custom_minimum_size = Vector2(216, 113)
 layout_mode = 2
 autowrap_mode = 2
 icon_alignment = 1
 
-[node name="CSButton8" type="Button" parent="SubViewport2/SubViewControl2/CSSelection/RightPanel2/MarginContainer/CSGridContainer"]
+[node name="CSButton8" type="Button" parent="SubViewport2/SubViewControl2/CSSelection/RightPanel2/MarginContainer/CSGridContainer" unique_id=1600211656]
 custom_minimum_size = Vector2(216, 113)
 layout_mode = 2
 autowrap_mode = 2
 icon_alignment = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_5kfsq")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=521327795]
+libraries/ = SubResource("AnimationLibrary_5kfsq")
 
 [connection signal="cancel" from="." to="Panel/DoublePageTabContainer" method="_on_cs_interface_cancel"]
 [connection signal="cs_category_selected" from="." to="Panel/DoublePageTabContainer" method="_on_cs_interface_cs_category_selected"]
