@@ -32,6 +32,7 @@
 [ext_resource type="Resource" uid="uid://b85xloi286pt1" path="res://Ressources/AnimationConnection/crocodile_animation_connections.tres" id="19_bxcyf"]
 [ext_resource type="Script" uid="uid://c78u4kmgq07op" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/devastating_attack.gd" id="19_mkx5c"]
 [ext_resource type="Script" uid="uid://dgi2a2c0lt17u" path="res://Components/animation_manager/state_animation_manager.gd" id="19_wdegu"]
+[ext_resource type="Texture2D" uid="uid://b5iu6elvpti77" path="res://Ui/Assets/UI1.png" id="21_tlny7"]
 [ext_resource type="Shape2D" uid="uid://dehxsdpvhda4g" path="res://Components/CombatSkill/Weapon/JawTrap/Ressources/ToGroundShape.tres" id="25_7etub"]
 
 [sub_resource type="Resource" id="Resource_d1rhm"]
@@ -140,15 +141,6 @@ metadata/_custom_type_script = "uid://bpo8hybdit330"
 [sub_resource type="Resource" id="Resource_n0i6p"]
 script = ExtResource("5_v0eml")
 metadata/_custom_type_script = "uid://ce7ave72wm32j"
-
-[sub_resource type="Gradient" id="Gradient_o8o0j"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(1, 0.74509805, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_eaiaj"]
-gradient = SubResource("Gradient_o8o0j")
-width = 128
-height = 128
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p0okl"]
 atlas = ExtResource("4_jeet7")
@@ -507,6 +499,23 @@ _data = {
 &"RESET": SubResource("Animation_kcwly")
 }
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_jlvaw"]
+atlas = ExtResource("21_tlny7")
+region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="Gradient" id="Gradient_o8o0j"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 0.74509805, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_eaiaj"]
+gradient = SubResource("Gradient_o8o0j")
+width = 160
+height = 160
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tlny7"]
+atlas = ExtResource("21_tlny7")
+region = Rect2(0, 384, 192, 192)
+
 [node name="JawTrap" type="StaticBody2D" unique_id=291549971]
 collision_mask = 2
 script = ExtResource("2_g4jcv")
@@ -593,13 +602,14 @@ combo_cooldown = 0.4
 previous_state = NodePath("../ThrowAttack")
 metadata/_custom_type_script = "uid://c5stjpuprt08p"
 
-[node name="OnJaw" type="Node" parent="StateMachine" unique_id=1238307790 node_paths=PackedStringArray("next_state")]
+[node name="OnJaw" type="Node" parent="StateMachine" unique_id=1238307790 node_paths=PackedStringArray("next_state", "gauge")]
 script = ExtResource("14_kcwly")
 next_state = NodePath("../OnHand/Idle")
 remote_f_parent_path = NodePath("../../../../Skeleton2D/Center/Body/Torso/Head/HeadFacing/NeckFacing/Face")
 remote_b_parent_path = NodePath("../../../../Skeleton2D/Center/Body/Torso/Head/HeadFacing/NeckFacing/Jaw")
 remote_f_name = &"RemoteJTF"
 remote_b_name = &"RemoteJTB"
+gauge = NodePath("../../GaugeOnJaw")
 metadata/_custom_type_script = "uid://bcmokx1bwyftw"
 
 [node name="IdleJ" type="Node" parent="StateMachine/OnJaw" unique_id=1406936320]
@@ -666,17 +676,6 @@ offset_right = 272.0
 offset_bottom = 142.0
 script = ExtResource("14_11eis")
 metadata/_custom_type_script = "uid://d38qkfrf1wj1a"
-
-[node name="TimerRange" type="TextureProgressBar" parent="." unique_id=1818492429 node_paths=PackedStringArray("timer")]
-z_index = 10
-offset_left = -265.0
-offset_top = -327.0
-offset_right = -137.0
-offset_bottom = -199.0
-fill_mode = 5
-texture_progress = SubResource("GradientTexture2D_eaiaj")
-script = ExtResource("16_fho1j")
-timer = NodePath("../StateMachine/OnJaw/DynamicTimer")
 
 [node name="Front" type="StaticBody2D" parent="." unique_id=473639612]
 z_index = 5
@@ -783,3 +782,33 @@ disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=232560582]
 libraries/ = SubResource("AnimationLibrary_kcwly")
+
+[node name="GaugeOnJaw" type="Control" parent="." unique_id=1685924446]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="GaugeOutLine2" type="Sprite2D" parent="GaugeOnJaw" unique_id=730416665]
+position = Vector2(-203, -256)
+texture = SubResource("AtlasTexture_jlvaw")
+
+[node name="TimerRange" type="TextureProgressBar" parent="GaugeOnJaw" unique_id=1818492429 node_paths=PackedStringArray("timer")]
+clip_children = 1
+z_index = 10
+layout_mode = 0
+offset_left = -281.0
+offset_top = -336.0
+offset_right = -121.0
+offset_bottom = -176.0
+value = 75.0
+fill_mode = 5
+texture_progress = SubResource("GradientTexture2D_eaiaj")
+script = ExtResource("16_fho1j")
+timer = NodePath("../../StateMachine/OnJaw/DynamicTimer")
+
+[node name="GaugeMask" type="Sprite2D" parent="GaugeOnJaw/TimerRange" unique_id=1663551494]
+self_modulate = Color(1.5720325, 1.1789198, 0.053863578, 1)
+position = Vector2(78, 80)
+texture = SubResource("AtlasTexture_tlny7")

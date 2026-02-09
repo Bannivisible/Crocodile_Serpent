@@ -11,6 +11,9 @@ extends StateMachine
 @export var remote_f_name: StringName
 @export var remote_b_name: StringName
 
+@export var gauge: Control
+
+
 @onready var dynamic_timer: DynamicTimer = $DynamicTimer
 
 @onready var front: StaticBody2D = $"../../Front"
@@ -49,22 +52,28 @@ func enter() -> void:
 	super.enter()
 	
 	dynamic_timer.start()
+	
+	gauge.visible = true
 
 
 func exit() -> void:
 	super.exit()
+	
 	remote_trans_f.remote_path = ""
 	remote_trans_b.remote_path = ""
+	
+	gauge.visible = false
+
+
+
 
 #### LOGIC ####
-
-
-
 func _innit_remote_trans(parent_path: NodePath) -> RemoteTransform2D:
 	var remote_trans = RemoteTransform2D.new()
 	get_node(parent_path).add_child(remote_trans)
 	
 	return remote_trans
+
 
 #### SIGNALS RESPONSES ####
 

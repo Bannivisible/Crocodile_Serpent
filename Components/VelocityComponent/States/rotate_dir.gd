@@ -6,8 +6,8 @@ class_name VelocityComponent_RotateDirState
 
 @onready var velocity_component := _obtain_velocity_component()
 
-var neg_action: String= "look up"
-var pos_action: String= "look down"
+var neg_action: String= "up"
+var pos_action: String= "down"
 
 var face_dir := Vector2.RIGHT
 
@@ -60,9 +60,9 @@ func restrict_angle() -> void:
 func _input(_event: InputEvent) -> void:
 	if (Input.is_action_just_pressed(neg_action) or Input.is_action_just_pressed(pos_action)) and is_current_state():
 		if velocity_component.facing_direction.x == 1.0:
-			neg_action = "look up"
-			pos_action = "look down"
+			neg_action = "up"
+			pos_action = "down"
 		else :
-			neg_action = "look down"
-			pos_action = "look up"
+			neg_action = "down"
+			pos_action = "up"
 

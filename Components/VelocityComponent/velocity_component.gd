@@ -6,16 +6,10 @@ const MIN_SPEED: float= 0.05
 
 @export var charac_stat: CharacStatistics
 
+@export var suffer_gravity: bool= true
 @export var gravity: float = 200.0
 
 @export var facing_node: Node2D
-
-
-#@onready var anim_player: AnimationPlayer= owner.get_node("AnimationPlayer")
-#@onready var anim_tree: AnimationTree= owner.get_node("AnimationTree")
-
-@onready var state_machine_x: StateMachine = $StateMachineX
-@onready var state_machine_y: StateMachine = $StateMachineY
 
 @onready var character: Character= object
 
@@ -66,6 +60,9 @@ func _physics_process(delta: float) -> void:
 	
 	_move_along_path(delta)
 	character.move_and_slide()
+	
+	if not character.is_on_floor() and suffer_gravity:
+		apply_gravity(delta)
 	
 	#if character.is_on_floor() and $StateMachineY/Air/Fall.is_current_state():
 		#state_machine_y.set_state($StateMachineY/Grounded/Idle)
@@ -118,12 +115,16 @@ func _move_along_path(delta: float) -> void:
 		target_reached.emit(target)
 
 
-func _update_velocity() -> void:
+func _direct_to(target: Vector2) -> void:
+	dir = character.global_position.direction_to(target)
+
+
+func update_velocity() -> void:
 	character.velocity = dir * speed * MULT_SPEED
 
 
-func _direct_to(target: Vector2) -> void:
-	dir = character.global_position.direction_to(target)
+func update_velocity_x() -> void:
+	character.velocity.x = dir.x * speed * MULT_SPEED
 
 
 func roatate_dir_to(pos: Vector2) -> void:
@@ -150,28 +151,28 @@ func add_target_at_end(target: Vector2) -> void:
 
 
 func apply_gravity(delta: float) -> void:
-	character.velocity.y -= gravity * delta
+	character.velocity.y += gravity * delta
 
 
 func jump(force: float) -> void:
 	character.velocity.y -= force
 
 
+func reset_air_velocity() -> void:
+	character.velocity.y = 0.0
+
+
 func immobilize() -> void:
-	state_machine_x.lock_state($StateMachineX/BaseState/Idle)
-	state_machine_y.lock_state($StateMachineY/Grounded/Idle)
+	pass
 
 
 func free_immobilize() -> void:
-	state_machine_x.unlock_state()
-	state_machine_y.unlock_state()
+	pass
 
 
 #### SIGNAL RESPONSES ####
 func _on_dir_changed(_dir: Vector2) -> void:
 	# X axis
-	_update_velocity()
-	
 	if dir.x != 0.0:
 		facing_direction.x = sign(dir.x)
 
@@ -185,7 +186,7 @@ func _on_face_dir_changed(_dir: Vector2) -> void:
 
 
 func _on_charac_stat_stat_updated() -> void:
-	_update_velocity()
+	update_velocity_x()
 
 
 func _on_target_reached(_pos: Vector2) -> void:

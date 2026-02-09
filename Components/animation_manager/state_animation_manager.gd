@@ -1,6 +1,8 @@
 extends Component
 class_name StateAnimationManager
 
+@export var active: bool= true
+
 @export_enum("Play", "Blend") var play_mode: String= "Blend"
 
 @export var state_machines: Array[StateMachine]
@@ -14,7 +16,6 @@ class_name StateAnimationManager
 
 func _ready() -> void:
 	for state_machine in state_machines:
-		state_machine.state_changed.connect(_on_state_machine_state_changed)
 		state_machine.state_changed_recur.connect(_on_state_machine_state_changed_recur)
 	
 	if not object.is_node_ready(): await object.ready
@@ -29,23 +30,28 @@ func _obtain_anim_manager() -> Node:
 		return parent
 	else : return null
 
+
 func _get_anim_name(state: State) -> String:
-	var anim_name: String= ""
+	var anim_name: String= _get_existing_anim_name(state.name)
+	if anim_name != "":
+		return anim_name
+	
 	var top_state_machine := state.get_top_state_machine()
 	
 	for i in range(state_machines.size()):
 		if state_machines[i] == top_state_machine:
-			anim_name = state.get_chained_string()
+			anim_name += state.get_chained_string()
 			anim_name = anim_name.substr(len(top_state_machine.name) + 1)
 			
 		else :
-			anim_name = state_machines[i].get_chained_state_string()
+			anim_name += state_machines[i].get_chained_state_string()
 		
 		if i < state_machines.size() - 1: anim_name += "|"
 	
 	anim_name = _get_existing_anim_name(anim_name)
 	
 	return anim_name
+
 
 func _get_existing_anim_name(anim_name: String) -> String:
 	if anim_manager is AnimationManagerComponent:
@@ -65,6 +71,7 @@ func _get_existing_anim_name(anim_name: String) -> String:
 	
 	return ""
 
+
 func _blend_logic(anim_name: StringName) -> void:
 	var connection: AnimationConnection= anim_manager.get_connection_with_from(state_blend_anim_name)
 	var blend_node_name: StringName= connection.to
@@ -77,7 +84,8 @@ func _blend_logic(anim_name: StringName) -> void:
 	
 	anim_manager.tween_blend_amount(blend_node_name, 0.2, 1.0)
 
-func _one_shot_logic(anim_name:StringName) -> void:
+
+func _one_shot_logic(anim_name: StringName) -> void:
 	var connection: AnimationConnection= anim_manager.get_connection_with_from(state_os_anim_name)
 	var os_node_name: StringName= connection.to
 	
@@ -87,6 +95,9 @@ func _one_shot_logic(anim_name:StringName) -> void:
 	
 	anim_manager.request_one_shot(os_node_name)
 
+
+
+
 func _play_state_anime(state: State) -> void:
 	if state == null: return
 	var anim_name: StringName= _get_anim_name(state)
@@ -95,7 +106,9 @@ func _play_state_anime(state: State) -> void:
 	
 	match play_mode:
 		"Play":
-			anim_manager.play(anim_name)
+			if anim_manager.current_animation != anim_name:
+				anim_manager.stop()
+				anim_manager.play(anim_name)
 		"Blend":
 			if anim_manager.get_animation(anim_name).loop_mode == Animation.LOOP_NONE:
 				_one_shot_logic(anim_name)
@@ -103,10 +116,5 @@ func _play_state_anime(state: State) -> void:
 				_blend_logic(anim_name)
 
 #### SIGNAL RESPONSES ####
-
-func _on_state_machine_state_changed(state: State) -> void:
-	_play_state_anime(state)
-
 func _on_state_machine_state_changed_recur(_state: State, deep_state: State) -> void:
-	_play_state_anime(deep_state)
-	
+	if active: _play_state_anime(deep_state)

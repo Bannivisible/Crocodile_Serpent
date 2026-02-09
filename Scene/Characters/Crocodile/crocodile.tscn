@@ -24,20 +24,23 @@
 [ext_resource type="SkeletonModification2DLookAt" uid="uid://c8bnrs2ge68xr" path="res://Scene/Characters/Crocodile/SkeletonModification/hand_front_skeleton_modification_2d_look_at.tres" id="14_umomj"]
 [ext_resource type="Animation" uid="uid://ccbyb3j0w0168" path="res://Scene/Characters/Crocodile/AnimationTree/Idle.res" id="16_jlbrr"]
 [ext_resource type="AnimationLibrary" uid="uid://ctdrtnjx7txak" path="res://Components/CombatSkill/Weapon/JawTrap/AnimationsData/JawTrapAnimationLibrary.res" id="18_8e5hb"]
-[ext_resource type="Script" uid="uid://ce5dn7234e16y" path="res://Components/VelocityComponent/BMC_Player/base_state.gd" id="22_usnsk"]
+[ext_resource type="Script" uid="uid://dgi2a2c0lt17u" path="res://Components/animation_manager/state_animation_manager.gd" id="22_jbjqy"]
 [ext_resource type="Script" uid="uid://byhe3mep5poar" path="res://Ressources/Statistics/buff.gd" id="23_usnsk"]
-[ext_resource type="Script" uid="uid://cj4k60put1qnc" path="res://Components/VelocityComponent/BMC_Player/jump.gd" id="25_usnsk"]
 [ext_resource type="PackedScene" uid="uid://ds4i8cup57akf" path="res://Components/CombatSkill/Weapon/JawTrap/jaw_trap.tscn" id="27_0jkvw"]
 [ext_resource type="Script" uid="uid://b2ht1wi0b2hvw" path="res://Components/VelocityComponent/States/bmc_free.gd" id="27_dr3s2"]
 [ext_resource type="Script" uid="uid://khisnu7j8mou" path="res://Components/VelocityComponent/States/constant_dash.gd" id="27_yvpvj"]
 [ext_resource type="Script" uid="uid://dnvqquim7c7xk" path="res://Components/VelocityComponent/States/free_idle.gd" id="28_usnsk"]
+[ext_resource type="Script" uid="uid://dpn7spt1k8imj" path="res://Scene/Characters/Crocodile/Scripts/state_machine.gd" id="28_yvpvj"]
 [ext_resource type="Script" uid="uid://kwdw0pmhwwqr" path="res://Scene/Characters/Crocodile/Scripts/free_idle.gd" id="29_wbk6g"]
+[ext_resource type="Script" uid="uid://vki8pd4tv00v" path="res://Scene/Characters/Crocodile/Scripts/jump.gd" id="30_e5ikc"]
+[ext_resource type="Script" uid="uid://d38qkfrf1wj1a" path="res://StateMachine/state_label.gd" id="30_jlbrr"]
+[ext_resource type="Script" uid="uid://b2brduwjmier0" path="res://Scene/Characters/Crocodile/Scripts/player_controler.gd" id="30_yvpvj"]
+[ext_resource type="Script" uid="uid://v3l0uww2xr70" path="res://Scene/Characters/Crocodile/Scripts/fall.gd" id="31_nn2k0"]
 [ext_resource type="Script" uid="uid://m551wfdyvjyg" path="res://Components/VelocityComponent/States/rotate_dir.gd" id="32_yvpvj"]
+[ext_resource type="Script" uid="uid://bcmokx1bwyftw" path="res://StateMachine/state_machine.gd" id="33_qvnx8"]
 [ext_resource type="Resource" uid="uid://iq6c7ofn104r" path="res://Scene/Characters/Crocodile/crocodile_stati.tres" id="34_usnsk"]
 [ext_resource type="Script" uid="uid://wqohf18ow8uk" path="res://Components/Stardust/stardust_component.gd" id="35_wbk6g"]
 [ext_resource type="Resource" uid="uid://cngbsch24bs31" path="res://Scene/Characters/Snake/snake_stat.tres" id="36_m1odn"]
-[ext_resource type="Script" uid="uid://dhau74o4l0rjm" path="res://Components/Controler/controler.gd" id="37_yvpvj"]
-[ext_resource type="Script" uid="uid://bcmokx1bwyftw" path="res://StateMachine/state_machine.gd" id="38_jlbrr"]
 [ext_resource type="Script" uid="uid://bey7t8h4m0yyp" path="res://StateMachine/state.gd" id="39_e5ikc"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pp85c"]
@@ -210,6 +213,9 @@ modifications/12 = ExtResource("10_ifobo")
 
 [sub_resource type="Animation" id="Animation_fjl3l"]
 resource_name = "1"
+
+[sub_resource type="Animation" id="Animation_jbjqy"]
+resource_name = "BentDown"
 
 [sub_resource type="Animation" id="Animation_rsvc4"]
 resource_name = "Fall"
@@ -1354,6 +1360,30 @@ tracks/75/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/76/type = "value"
+tracks/76/imported = false
+tracks/76/enabled = true
+tracks/76/path = NodePath("HealthComponent/HurtBox/CollisionShape2D:rotation")
+tracks/76/interp = 1
+tracks/76/loop_wrap = true
+tracks/76/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/77/type = "value"
+tracks/77/imported = false
+tracks/77/enabled = true
+tracks/77/path = NodePath("HealthComponent/HurtBox/CollisionShape2D:position")
+tracks/77/interp = 1
+tracks/77/loop_wrap = true
+tracks/77/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -150)]
+}
 
 [sub_resource type="Animation" id="Animation_jlbrr"]
 resource_name = "Run"
@@ -1393,6 +1423,108 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [-0.10142873, -0.3089782]
+}
+
+[sub_resource type="Animation" id="Animation_hgdcd"]
+resource_name = "ToBentDown"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Skeleton2D/Center:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -21), Vector2(-4.0000005, 78.000015)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Skeleton2D/Center:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.5707963267948966]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HealthComponent/HurtBox/CollisionShape2D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.5707963267948966]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HealthComponent/HurtBox/CollisionShape2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -150), Vector2(-5, -44)]
+}
+
+[sub_resource type="Animation" id="Animation_n380g"]
+resource_name = "ToGetUp"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Skeleton2D/Center:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-4.0000005, 78.000015), Vector2(0, -21)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Skeleton2D/Center:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.5707963267948966, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HealthComponent/HurtBox/CollisionShape2D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.5707963267948966, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HealthComponent/HurtBox/CollisionShape2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-5, -44), Vector2(0, -150)]
 }
 
 [sub_resource type="Animation" id="Animation_qvnx8"]
@@ -1881,12 +2013,15 @@ tracks/39/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0ft5j"]
 _data = {
 &"1": SubResource("Animation_fjl3l"),
+&"BentDownIdle": SubResource("Animation_jbjqy"),
 &"Fall": SubResource("Animation_rsvc4"),
 &"Idle": ExtResource("16_jlbrr"),
 &"Jump": SubResource("Animation_e5ikc"),
 &"Move": SubResource("Animation_p0okl"),
 &"RESET": SubResource("Animation_7cm0d"),
 &"Run": SubResource("Animation_jlbrr"),
+&"ToBentDown": SubResource("Animation_hgdcd"),
+&"ToGetUp": SubResource("Animation_n380g"),
 &"ToSideRight": SubResource("Animation_qvnx8")
 }
 
@@ -1906,44 +2041,26 @@ filters = ["CSManager/JawTrap/Front:position", "CSManager/JawTrap/Front:rotation
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fjl3l"]
 animation = &"RESET"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jbjqy"]
+animation = &"BentDownIdle"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_utiys"]
 animation = &"Fall"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7cm0d"]
+animation = &"Idle"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qvnx8"]
 animation = &"Jump"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jlbrr"]
-animation = &"Idle"
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_p0okl"]
+animation = &"Move"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_e5ikc"]
-animation = &"Walk"
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rsvc4"]
+animation = &"ToBentDown"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nn2k0"]
-animation = &"Walk"
-
-[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_utiys"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_jlbrr")
-blend_point_0/pos = 0.0
-blend_point_1/node = SubResource("AnimationNodeAnimation_e5ikc")
-blend_point_1/pos = -1.0
-blend_point_2/node = SubResource("AnimationNodeAnimation_nn2k0")
-blend_point_2/pos = 1.0
-value_label = "speed"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jbjqy"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7cm0d"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_p0okl"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rsvc4"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hgdcd"]
-advance_mode = 2
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hgdcd"]
+animation = &"ToGetUp"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_n380g"]
 advance_mode = 2
@@ -1954,14 +2071,51 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pvels"]
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_71p2d"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wfuh6"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_weadw"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kwm2e"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_l1deg"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_owqoc"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_j0hnv"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wk535"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ooqhq"]
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_qvnx8"]
+states/BentDownIdle/node = SubResource("AnimationNodeAnimation_jbjqy")
+states/BentDownIdle/position = Vector2(579.33606, 168.74292)
 states/Fall/node = SubResource("AnimationNodeAnimation_utiys")
-states/Fall/position = Vector2(513, 23)
+states/Fall/position = Vector2(589.6667, -1)
+states/Idle/node = SubResource("AnimationNodeAnimation_7cm0d")
+states/Idle/position = Vector2(578.0768, 92.84641)
 states/Jump/node = SubResource("AnimationNodeAnimation_qvnx8")
-states/Jump/position = Vector2(513, 170)
-states/MoveSpace/node = SubResource("AnimationNodeBlendSpace1D_utiys")
-states/MoveSpace/position = Vector2(408, 100)
-transitions = ["Start", "MoveSpace", SubResource("AnimationNodeStateMachineTransition_jbjqy"), "MoveSpace", "Jump", SubResource("AnimationNodeStateMachineTransition_7cm0d"), "Jump", "Fall", SubResource("AnimationNodeStateMachineTransition_p0okl"), "Fall", "MoveSpace", SubResource("AnimationNodeStateMachineTransition_rsvc4"), "Fall", "End", SubResource("AnimationNodeStateMachineTransition_hgdcd"), "Jump", "End", SubResource("AnimationNodeStateMachineTransition_n380g"), "MoveSpace", "End", SubResource("AnimationNodeStateMachineTransition_3po1k"), "MoveSpace", "Fall", SubResource("AnimationNodeStateMachineTransition_pvels")]
+states/Jump/position = Vector2(435.66666, -1.5555573)
+states/Move/node = SubResource("AnimationNodeAnimation_p0okl")
+states/Move/position = Vector2(714.0768, 24.000004)
+states/Start/position = Vector2(228.66667, 92.96297)
+states/ToBentDown/node = SubResource("AnimationNodeAnimation_rsvc4")
+states/ToBentDown/position = Vector2(334.0768, 169.77777)
+states/ToGetUp/node = SubResource("AnimationNodeAnimation_hgdcd")
+states/ToGetUp/position = Vector2(784.07684, 170.5207)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_n380g"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_3po1k"), "Jump", "Fall", SubResource("AnimationNodeStateMachineTransition_pvels"), "Fall", "Idle", SubResource("AnimationNodeStateMachineTransition_71p2d"), "Idle", "Move", SubResource("AnimationNodeStateMachineTransition_wfuh6"), "Move", "Idle", SubResource("AnimationNodeStateMachineTransition_weadw"), "Idle", "Fall", SubResource("AnimationNodeStateMachineTransition_kwm2e"), "Idle", "ToBentDown", SubResource("AnimationNodeStateMachineTransition_l1deg"), "ToBentDown", "BentDownIdle", SubResource("AnimationNodeStateMachineTransition_owqoc"), "BentDownIdle", "ToGetUp", SubResource("AnimationNodeStateMachineTransition_j0hnv"), "ToGetUp", "Idle", SubResource("AnimationNodeStateMachineTransition_wk535"), "Idle", "End", SubResource("AnimationNodeStateMachineTransition_ooqhq")]
+graph_offset = Vector2(194.74347, 28.212597)
 
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_8e5hb"]
 
@@ -1969,6 +2123,7 @@ transitions = ["Start", "MoveSpace", SubResource("AnimationNodeStateMachineTrans
 animation = &"RESET"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_7cm0d"]
+graph_offset = Vector2(-754.1098, -45.913437)
 nodes/output/position = Vector2(700, 200)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_qvnx8")
 nodes/StateMachine/position = Vector2(-1180, 100)
@@ -2011,6 +2166,10 @@ visible = false
 position = Vector2(0, -150)
 shape = SubResource("CapsuleShape2D_pp85c")
 
+[node name="VelocityComponent" parent="." index="1" unique_id=661764387 node_paths=PackedStringArray("facing_node") instance=ExtResource("2_pp85c")]
+gravity = 3000.0
+facing_node = NodePath("../Skeleton2D")
+
 [node name="ArmBackGroup" type="Node2D" parent="SpriteContainer" parent_id_path=PackedInt32Array(791091049) index="0" unique_id=2065276084]
 z_index = -1
 
@@ -2025,15 +2184,15 @@ offset = Vector2(-10, 17.333)
 
 [node name="ForearmBack" type="Sprite2D" parent="SpriteContainer/ArmBackGroup" index="1" unique_id=1962910639]
 position = Vector2(82.07867, -187.31177)
-rotation = 3.026777
-scale = Vector2(0.9995529, -0.9995529)
+rotation = 3.0267773
+scale = Vector2(0.99955297, -0.99955297)
 texture = SubResource("AtlasTexture_pigwd")
 offset = Vector2(-7.7521763, 23.060297)
 
 [node name="HandBack" type="Sprite2D" parent="SpriteContainer/ArmBackGroup" index="2" unique_id=1161825618]
-position = Vector2(119.967255, -140.01782)
-rotation = 3.026777
-scale = Vector2(0.9995535, -0.9995535)
+position = Vector2(82.07867, -187.31177)
+rotation = 3.0267773
+scale = Vector2(0.99955356, -0.99955356)
 texture = SubResource("AtlasTexture_ifobo")
 offset = Vector2(-9.287, 11.465)
 
@@ -2041,24 +2200,24 @@ offset = Vector2(-9.287, 11.465)
 
 [node name="LegBack" type="Sprite2D" parent="SpriteContainer/LegBackGroup" index="0" unique_id=444752468]
 z_index = -1
-position = Vector2(79.113525, -97.98731)
-rotation = 0.11591938
-scale = Vector2(0.9995422, 0.9995422)
+position = Vector2(79.113556, -97.987274)
+rotation = 0.11591935
+scale = Vector2(0.99954236, 0.99954236)
 texture = SubResource("AtlasTexture_3ua5h")
 offset = Vector2(0, 17)
 
 [node name="ThighBack" type="Sprite2D" parent="SpriteContainer/LegBackGroup" index="1" unique_id=97382226]
 modulate = Color(0.735357, 0.735357, 0.735357, 1)
 position = Vector2(30.662449, -139.0664)
-rotation = -0.30312806
-scale = Vector2(0.9996867, 0.9996867)
+rotation = -0.3031281
+scale = Vector2(0.9996875, 0.9996875)
 texture = SubResource("AtlasTexture_utiys")
 offset = Vector2(18, 26.333)
 
 [node name="FootBack" type="Sprite2D" parent="SpriteContainer/LegBackGroup" index="2" unique_id=1107727012]
-position = Vector2(70.51605, -58.72562)
-rotation = -0.11685947
-scale = Vector2(0.9993887, 0.9993887)
+position = Vector2(70.51608, -58.725574)
+rotation = -0.11685951
+scale = Vector2(0.9993889, 0.9993889)
 texture = SubResource("AtlasTexture_6et86")
 offset = Vector2(9.333, 10.667)
 
@@ -2143,17 +2302,17 @@ texture = SubResource("AtlasTexture_6d12l")
 z_index = 3
 position = Vector2(0.0004786701, -267.96362)
 rotation = 0.0021072626
-scale = Vector2(0.99982154, 0.99982154)
+scale = Vector2(0.9998209, 0.9998209)
 
 [node name="Jaw" type="Sprite2D" parent="SpriteContainer/HeadGroup" index="0" unique_id=1671218072]
-position = Vector2(-32.01185, -0.21963501)
-scale = Vector2(1.0023625, 0.9932366)
+position = Vector2(-32.011868, -0.21963501)
+scale = Vector2(1.0023011, 0.99324286)
 texture = SubResource("AtlasTexture_wfuh6")
 offset = Vector2(36.92784, -2.5172439)
 
 [node name="FaceGroup" type="Node2D" parent="SpriteContainer/HeadGroup" index="1" unique_id=793666102]
-position = Vector2(-32.01185, -0.21963501)
-scale = Vector2(0.9975373, 0.9932366)
+position = Vector2(-32.011868, -0.21963501)
+scale = Vector2(0.9975345, 0.993243)
 
 [node name="HairBack" type="Sprite2D" parent="SpriteContainer/HeadGroup/FaceGroup" index="0" unique_id=256432908]
 z_index = -1
@@ -2210,16 +2369,16 @@ position = Vector2(3.0087547, 3.258667)
 texture = SubResource("AtlasTexture_hb14a")
 
 [node name="StrandBack" type="Sprite2D" parent="SpriteContainer/HeadGroup" index="2" unique_id=194762747]
-position = Vector2(-43.34182, 16.775848)
+position = Vector2(-43.34185, 16.775848)
 rotation = -0.3490656
-scale = Vector2(1.0034375, 0.99908024)
+scale = Vector2(1.0034378, 0.99907607)
 texture = SubResource("AtlasTexture_weadw")
 offset = Vector2(20.086979, -10.858177)
 
 [node name="StrandFront" type="Sprite2D" parent="SpriteContainer/HeadGroup" index="3" unique_id=1968218646]
 z_index = 3
-position = Vector2(13.382612, -58.460358)
-scale = Vector2(1.0020975, 0.99391454)
+position = Vector2(13.38262, -58.46039)
+scale = Vector2(1.0021018, 0.9939177)
 texture = SubResource("AtlasTexture_24sqv")
 offset = Vector2(3.8255405, 18.435066)
 
@@ -2236,15 +2395,15 @@ offset = Vector2(-10, 17.333)
 [node name="ForearmFront" type="Sprite2D" parent="SpriteContainer/ArmFrontGroup" index="1" unique_id=189613157]
 z_index = 3
 position = Vector2(-77.27039, -187.86244)
-rotation = -0.072139084
-scale = Vector2(0.9995479, 0.9995479)
+rotation = -0.07213891
+scale = Vector2(0.99954796, 0.99954796)
 texture = SubResource("AtlasTexture_l1deg")
 offset = Vector2(-14, 25.667)
 
 [node name="HandFront" type="Sprite2D" parent="SpriteContainer/ArmFrontGroup" index="2" unique_id=950457284]
 z_index = 3
-position = Vector2(-100.398056, -138.08728)
-rotation = -0.25910056
+position = Vector2(-77.27039, -187.86244)
+rotation = -0.072138906
 scale = Vector2(0.99955213, 0.99955213)
 texture = SubResource("AtlasTexture_fs2r1")
 offset = Vector2(-12, 15)
@@ -2252,27 +2411,27 @@ offset = Vector2(-12, 15)
 [node name="LegFrontGroup" type="Node2D" parent="SpriteContainer" parent_id_path=PackedInt32Array(791091049) index="6" unique_id=1785593900]
 
 [node name="LegFront" type="Sprite2D" parent="SpriteContainer/LegFrontGroup" index="0" unique_id=1504693139]
-position = Vector2(-63.08738, -95.86055)
-rotation = 0.06972349
-scale = Vector2(0.99955934, 0.99955934)
+position = Vector2(-63.08737, -95.860565)
+rotation = 0.0697235
+scale = Vector2(0.99955875, 0.99955875)
 texture = SubResource("AtlasTexture_qvnx8")
 offset = Vector2(2.667, 21.333)
 
 [node name="ThighFront" type="Sprite2D" parent="SpriteContainer/LegFrontGroup" index="1" unique_id=1920124788]
 position = Vector2(-35.661667, -138.33339)
 rotation = 0.266719
-scale = Vector2(0.9997024, 0.9997024)
+scale = Vector2(0.99970204, 0.99970204)
 texture = SubResource("AtlasTexture_jbjqy")
 offset = Vector2(-5.667, 21)
 
 [node name="FootFront" type="Sprite2D" parent="SpriteContainer/LegFrontGroup" index="2" unique_id=1521634280]
-position = Vector2(-67.01461, -50.90905)
-rotation = -0.0004918088
-scale = Vector2(0.9994023, 0.9994023)
+position = Vector2(-67.0146, -50.909092)
+rotation = -0.00049201783
+scale = Vector2(0.9994016, 0.9994016)
 texture = SubResource("AtlasTexture_7cm0d")
 offset = Vector2(2.2518923, 17.591896)
 
-[node name="Skeleton2D" type="Skeleton2D" parent="." index="3" unique_id=1316418976]
+[node name="Skeleton2D" type="Skeleton2D" parent="." index="4" unique_id=1316418976]
 modulate = Color(1, 1, 1, 0.16470589)
 position = Vector2(0, -121)
 modification_stack = SubResource("SkeletonModificationStack2D_1etbk")
@@ -2385,8 +2544,6 @@ rest = Transform2D(0.99858445, -0.050140046, 0.050140046, 0.99858445, -21.667164
 remote_path = NodePath("../../../../../../../SpriteContainer/ArmFrontGroup/ForearmFront")
 
 [node name="HandFront" type="Bone2D" parent="Skeleton2D/Center/Body/Torso/ArmFront/ForeArmFront" index="1" unique_id=672722390]
-position = Vector2(-26.667183, 48.000443)
-rotation = -0.18696147
 scale = Vector2(1.0000042, 1.0000042)
 rest = Transform2D(0.9825777, -0.18587495, 0.18587495, 0.9825777, -26.667183, 48.000443)
 auto_calculate_length_and_angle = false
@@ -2424,7 +2581,6 @@ scale = Vector2(-1, 1)
 remote_path = NodePath("../../../../../../../SpriteContainer/ArmBackGroup/ForearmBack")
 
 [node name="HandBack" type="Bone2D" parent="Skeleton2D/Center/Body/Torso/ArmBack/ForeArmBack" index="1" unique_id=1941151401]
-position = Vector2(32.23538, 51.346157)
 scale = Vector2(1.0000006, 1.0000006)
 rest = Transform2D(0.95383966, 0.3003184, -0.3003184, 0.95383966, 32.23538, 51.346157)
 auto_calculate_length_and_angle = false
@@ -2445,7 +2601,7 @@ update_rotation = false
 [node name="ThighFront" type="Bone2D" parent="Skeleton2D/Center" index="1" unique_id=110966940]
 position = Vector2(-35.66718, 3.667183)
 rotation = 0.266719
-scale = Vector2(0.9998568, 0.9998568)
+scale = Vector2(0.99985653, 0.99985653)
 rest = Transform2D(0.96450275, 0.26353016, -0.26353016, 0.96450275, -35.66718, 3.667183)
 
 [node name="ThighFront" type="RemoteTransform2D" parent="Skeleton2D/Center/ThighFront" index="0" unique_id=498928478]
@@ -2454,7 +2610,7 @@ remote_path = NodePath("../../../../SpriteContainer/LegFrontGroup/ThighFront")
 [node name="LegFront" type="Bone2D" parent="Skeleton2D/Center/ThighFront" index="1" unique_id=628957492]
 position = Vector2(-15.266029, 48.21392)
 rotation = -0.19699557
-scale = Vector2(0.99985695, 0.99985695)
+scale = Vector2(0.9998567, 0.9998567)
 rest = Transform2D(0.98051864, -0.19569586, 0.19569586, 0.98051864, -15.266029, 48.21392)
 
 [node name="LegFront" type="RemoteTransform2D" parent="Skeleton2D/Center/ThighFront/LegFront" index="0" unique_id=1521590327]
@@ -2463,7 +2619,7 @@ remote_path = NodePath("../../../../../SpriteContainer/LegFrontGroup/LegFront")
 [node name="FootFront" type="Bone2D" parent="Skeleton2D/Center/ThighFront/LegFront" index="1" unique_id=1025153005]
 position = Vector2(-0.78639984, 45.13577)
 rotation = -0.0702153
-scale = Vector2(0.9998428, 0.9998428)
+scale = Vector2(0.99984276, 0.99984276)
 rest = Transform2D(0.9973769, -0.07014619, 0.07014619, 0.9973769, -0.78639984, 45.13577)
 auto_calculate_length_and_angle = false
 length = 26.667
@@ -2475,7 +2631,7 @@ remote_path = NodePath("../../../../../../SpriteContainer/LegFrontGroup/FootFron
 [node name="ThighBack" type="Bone2D" parent="Skeleton2D/Center" index="2" unique_id=213418361]
 position = Vector2(30.667187, 2.9340515)
 rotation = -0.30312806
-scale = Vector2(0.99984115, 0.99984115)
+scale = Vector2(0.9998419, 0.9998419)
 rest = Transform2D(0.9542559, -0.29845974, 0.29845974, 0.9542559, 30.667187, 2.9340515)
 
 [node name="ThighBack" type="RemoteTransform2D" parent="Skeleton2D/Center/ThighBack" index="0" unique_id=1490173146]
@@ -2484,7 +2640,7 @@ remote_path = NodePath("../../../../SpriteContainer/LegBackGroup/ThighBack")
 [node name="LegBack" type="Bone2D" parent="Skeleton2D/Center/ThighBack" index="1" unique_id=1871453857]
 position = Vector2(33.99031, 53.686005)
 rotation = 0.41904745
-scale = Vector2(0.99985534, 0.99985534)
+scale = Vector2(0.99985486, 0.99985486)
 rest = Transform2D(0.91334486, 0.40683168, -0.40683168, 0.91334486, 33.99031, 53.686005)
 
 [node name="LegBack" type="RemoteTransform2D" parent="Skeleton2D/Center/ThighBack/LegBack" index="0" unique_id=593641726]
@@ -2493,7 +2649,7 @@ remote_path = NodePath("../../../../../SpriteContainer/LegBackGroup/LegBack")
 [node name="FootBack" type="Bone2D" parent="Skeleton2D/Center/ThighBack/LegBack" index="1" unique_id=1992951678]
 position = Vector2(-4.0006027, 40.010902)
 rotation = -0.23277885
-scale = Vector2(0.99984646, 0.99984646)
+scale = Vector2(0.9998465, 0.9998465)
 rest = Transform2D(0.97287995, -0.23064695, 0.23064695, 0.97287995, -4.0006027, 40.010902)
 auto_calculate_length_and_angle = false
 length = 43.383
@@ -2502,7 +2658,7 @@ bone_angle = 24.999996
 [node name="FootBack" type="RemoteTransform2D" parent="Skeleton2D/Center/ThighBack/LegBack/FootBack" index="0" unique_id=396401734]
 remote_path = NodePath("../../../../../../SpriteContainer/LegBackGroup/FootBack")
 
-[node name="SkeletonTargets" type="Node2D" parent="." index="4" unique_id=1688883857]
+[node name="SkeletonTargets" type="Node2D" parent="." index="5" unique_id=1688883857]
 visible = false
 position = Vector2(0, 20)
 
@@ -2546,16 +2702,22 @@ position = Vector2(58, -29)
 [node name="HeadLookAt" type="Marker2D" parent="SkeletonTargets" index="8" unique_id=1493146228]
 position = Vector2(126, -276)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5" unique_id=252078669]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6" unique_id=252078669]
 libraries/ = SubResource("AnimationLibrary_0ft5j")
 libraries/JawTrapAnimationLibrary = ExtResource("18_8e5hb")
 playback_default_blend_time = 2.0
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="6" unique_id=309911794]
+[node name="StateAnimationManager" type="Node" parent="AnimationPlayer" index="0" unique_id=11466307 node_paths=PackedStringArray("state_machines")]
+script = ExtResource("22_jbjqy")
+play_mode = "Play"
+state_machines = [NodePath("../../StateMachine")]
+metadata/_custom_type_script = "uid://dgi2a2c0lt17u"
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="7" unique_id=309911794]
+active = false
 deterministic = false
 tree_root = SubResource("AnimationNodeBlendTree_7cm0d")
 anim_player = NodePath("../AnimationPlayer")
-parameters/StateMachine/MoveSpace/blend_position = 0.0134932995
 parameters/AttackOneShot/active = false
 parameters/AttackOneShot/internal_active = false
 parameters/AttackOneShot/request = 0
@@ -2565,46 +2727,12 @@ parameters/StateOneShot/internal_active = false
 parameters/StateOneShot/request = 0
 parameters/StateBlend2/blend_amount = 0.0
 
-[node name="VelocityComponent" parent="." index="7" unique_id=661764387 node_paths=PackedStringArray("facing_node") instance=ExtResource("2_pp85c")]
-facing_node = NodePath("../Skeleton2D")
-
-[node name="StateMachineX" parent="VelocityComponent" index="0" unique_id=1605277860]
-set_to_default_state_at_ready = true
-
-[node name="BaseState" parent="VelocityComponent/StateMachineX" index="0" unique_id=493854868]
-script = ExtResource("22_usnsk")
-set_to_default_state_at_ready = true
-
-[node name="StateLabel" parent="VelocityComponent/StateMachineX" index="1" unique_id=171025809]
-offset_left = 291.0
-offset_top = -325.0
-offset_right = 331.0
-offset_bottom = -302.0
-metadata/_edit_use_anchors_ = true
-
-[node name="StateMachineY" parent="VelocityComponent" index="1" unique_id=2034475183]
-set_to_default_state_at_ready = true
-
-[node name="BentDown" type="Node" parent="VelocityComponent/StateMachineY/Grounded" parent_id_path=PackedInt32Array(661764387, 1439988526) index="1" unique_id=811348580]
-script = ExtResource("12_1etbk")
-metadata/_custom_type_script = "uid://t1y8h2xnlvsi"
-
-[node name="Jump" parent="VelocityComponent/StateMachineY/Air" parent_id_path=PackedInt32Array(661764387, 2001776605) index="1" unique_id=1510190684]
-script = ExtResource("25_usnsk")
-
-[node name="StateLabel" parent="VelocityComponent/StateMachineY" index="2" unique_id=85232895]
-offset_left = 173.0
-offset_top = 15.0
-offset_right = 213.0
-offset_bottom = 38.0
-metadata/_edit_use_anchors_ = true
-
 [node name="CSManager" type="Node2D" parent="." index="8" unique_id=274501858]
 script = ExtResource("6_wwopw")
 
 [node name="JawTrap" parent="CSManager" index="0" unique_id=1426184236 instance=ExtResource("27_0jkvw")]
 
-[node name="Front" parent="CSManager/JawTrap" index="2" unique_id=473639612]
+[node name="Front" parent="CSManager/JawTrap" index="1" unique_id=473639612]
 z_index = 4
 position = Vector2(-104.56619, -119.967804)
 scale = Vector2(0.99955285, 0.99955285)
@@ -2619,7 +2747,7 @@ position = Vector2(-1, -35)
 [node name="CollisionShape2D" parent="CSManager/JawTrap/Front" index="1" unique_id=1514246662]
 visible = false
 
-[node name="Back" parent="CSManager/JawTrap" index="4" unique_id=99701971]
+[node name="Back" parent="CSManager/JawTrap" index="3" unique_id=99701971]
 position = Vector2(125.294266, -128.43332)
 scale = Vector2(0.9995548, 0.9995548)
 
@@ -2640,11 +2768,10 @@ shape = SubResource("CapsuleShape2D_jeet7")
 position = Vector2(-176, -113.99999)
 shape = SubResource("CapsuleShape2D_fjl3l")
 
-[node name="CollisionShape2D" parent="CSManager/JawTrap" index="7" unique_id=652731362]
+[node name="CollisionShape2D" parent="CSManager/JawTrap" index="6" unique_id=652731362]
 position = Vector2(0, 1)
 
 [node name="HealthComponent" parent="." index="9" unique_id=218773380 instance=ExtResource("10_51sid")]
-visible = false
 
 [node name="CollisionShape2D" parent="HealthComponent/HurtBox" parent_id_path=PackedInt32Array(218773380, 1017093875) index="0" unique_id=414636330]
 position = Vector2(0, -150)
@@ -2659,17 +2786,67 @@ metadata/_custom_type_script = "uid://dat1xibjdbka6"
 script = ExtResource("35_wbk6g")
 wizard_stat = ExtResource("36_m1odn")
 
-[node name="Controler" type="Node" parent="." index="12" unique_id=882876440]
-script = ExtResource("37_yvpvj")
+[node name="StateMachine" type="Node2D" parent="." index="12" unique_id=1630455474 node_paths=PackedStringArray("current_state")]
+script = ExtResource("28_yvpvj")
+current_state = NodePath("Idle")
 
-[node name="ConstantDash" type="Node" parent="." index="13" unique_id=1347404302]
+[node name="Idle" type="Node" parent="StateMachine" index="0" unique_id=414784781]
+script = ExtResource("39_e5ikc")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="Move" type="Node" parent="StateMachine" index="1" unique_id=1575010189]
+script = ExtResource("39_e5ikc")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="Jump" type="Node" parent="StateMachine" index="2" unique_id=2090905538]
+script = ExtResource("30_e5ikc")
+force = 1500.0
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="Fall" type="Node" parent="StateMachine" index="3" unique_id=2113944416]
+script = ExtResource("31_nn2k0")
+increase_gravity = 1000.0
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="BentDown" type="Node" parent="StateMachine" index="4" unique_id=1434913754]
+script = ExtResource("33_qvnx8")
+metadata/_custom_type_script = "uid://bcmokx1bwyftw"
+
+[node name="BentDownIdle" type="Node" parent="StateMachine/BentDown" index="0" unique_id=1163203416]
+script = ExtResource("39_e5ikc")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="BentDownMove" type="Node" parent="StateMachine/BentDown" index="1" unique_id=1705806667]
+script = ExtResource("39_e5ikc")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="OnWall" type="Node" parent="StateMachine" index="5" unique_id=1730622973]
+script = ExtResource("39_e5ikc")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="StateLabel" type="Label" parent="StateMachine" index="6" unique_id=1698894319]
+offset_left = 1.0
+offset_top = 87.0
+offset_right = 41.0
+offset_bottom = 110.0
+theme_override_font_sizes/font_size = 32
+script = ExtResource("30_jlbrr")
+metadata/_custom_type_script = "uid://d38qkfrf1wj1a"
+
+[node name="Controler" type="Node" parent="." index="13" unique_id=882876440]
+script = ExtResource("30_yvpvj")
+
+[node name="ConstantDash" type="Node" parent="." index="14" unique_id=1347404302]
 script = ExtResource("27_yvpvj")
 buff_speed = SubResource("Resource_wbk6g")
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 
-[node name="Free" type="Node" parent="." index="14" unique_id=364922845 node_paths=PackedStringArray("air_state")]
+[node name="VelocityComponent_StateMachineY_Grounded#BentDown" type="Node" parent="." index="15" unique_id=811348580]
+script = ExtResource("12_1etbk")
+metadata/_custom_type_script = "uid://t1y8h2xnlvsi"
+
+[node name="Free" type="Node" parent="." index="16" unique_id=364922845]
 script = ExtResource("28_usnsk")
-air_state = NodePath("../VelocityComponent/StateMachineY/Air")
 metadata/_custom_type_script = "uid://dnvqquim7c7xk"
 
 [node name="FreeIdle" type="Node" parent="Free" index="0" unique_id=1340363213]
@@ -2685,34 +2862,7 @@ script = ExtResource("32_yvpvj")
 angle_range = Vector2(-1.571, 1.571)
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 
-[node name="StateMachine" type="Node" parent="." index="15" unique_id=1853879653]
-script = ExtResource("38_jlbrr")
-metadata/_custom_type_script = "uid://bcmokx1bwyftw"
-
-[node name="Idle" type="Node" parent="StateMachine" index="0" unique_id=414784781]
-script = ExtResource("39_e5ikc")
-metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
-
-[node name="Move" type="Node" parent="StateMachine" index="1" unique_id=1575010189]
-script = ExtResource("39_e5ikc")
-metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
-
-[node name="Jumpe" type="Node" parent="StateMachine" index="2" unique_id=2090905538]
-script = ExtResource("39_e5ikc")
-metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
-
-[node name="Fall" type="Node" parent="StateMachine" index="3" unique_id=2113944416]
-script = ExtResource("39_e5ikc")
-metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
-
-[node name="BentDown" type="Node" parent="StateMachine" index="4" unique_id=1520256951]
-script = ExtResource("39_e5ikc")
-metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
-
-[node name="OnWall" type="Node" parent="StateMachine" index="5" unique_id=1730622973]
-script = ExtResource("39_e5ikc")
-metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
-
+[connection signal="dir_changed" from="VelocityComponent" to="StateMachine" method="_on_velocity_component_dir_changed"]
 [connection signal="dir_changed" from="VelocityComponent" to="Free/FreeIdle" method="_on_bmc_dir_changed"]
 
 [editable path="VelocityComponent"]

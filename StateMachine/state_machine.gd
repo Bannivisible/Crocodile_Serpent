@@ -1,9 +1,7 @@
 extends State
 class_name StateMachine
 
-@export var set_to_default_state_at_ready: bool= false
-
-var current_state: State = null:
+@export var current_state: State = null:
 	set = _set_current_state
 
 func _set_current_state(state: State) -> void:
@@ -28,11 +26,6 @@ signal state_changed_recur(state: State, deep_state: State)
 #### BUILT-IN ####
 
 func _ready() -> void:
-	#Set to default_state
-	if set_to_default_state_at_ready: 
-		if not owner.is_node_ready(): await owner.ready
-		set_to_default_state()
-	
 	#Connect signals
 	state_changed.connect(_on_state_changed)
 	
