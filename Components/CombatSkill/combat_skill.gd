@@ -3,8 +3,6 @@ class_name CombatSkill
 
 @export var auto_process: bool= false
 
-@export var strenght: StrenghtStat
-
 @export var passives: Array[Action]
 
 @export var gap := Vector2.ZERO

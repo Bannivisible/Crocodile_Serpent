@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="SpellStatistics" format=3 uid="uid://dii3cc3v5xsna"]
+
+[ext_resource type="Script" uid="uid://cn2f6xm4yt7hj" path="res://Ressources/Statistics/spell_statistics.gd" id="1_w4cnr"]
+
+[resource]
+script = ExtResource("1_w4cnr")
+base_power = 50.0
+base_stardust_cost = 25.0
+metadata/_custom_type_script = "uid://cn2f6xm4yt7hj"

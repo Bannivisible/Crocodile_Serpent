@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SpellData" format=3 uid="uid://c04uu7w2nnej1"]
+
+[ext_resource type="PackedScene" uid="uid://ixbubbq3qifp" path="res://Components/CombatSkill/Spell/Electricity/SpellLightningCage/spell_lightning_cage.tscn" id="1_al4s4"]
+[ext_resource type="Script" uid="uid://gc7yieoshcty" path="res://Ressources/CombatSkillData/Spell/spell_data.gd" id="2_k516f"]
+[ext_resource type="Resource" uid="uid://dii3cc3v5xsna" path="res://Ressources/CombatSkillData/Spell/Lightning/LightningCage/lightning_cage_statistics.tres" id="3_f3pbs"]
+
+[resource]
+script = ExtResource("2_k516f")
+name = "Cage Electrique"
+description = "Une cage éléctrique."
+stat = ExtResource("3_f3pbs")
+combat_skill_scene = ExtResource("1_al4s4")
+metadata/_custom_type_script = "uid://gc7yieoshcty"

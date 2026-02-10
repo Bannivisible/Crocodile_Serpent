@@ -2,10 +2,10 @@ extends Statistics
 class_name SpellStatistics
 
 @export var base_power: float
-@export var base_stardust_cost: int
+@export var base_stardust_cost: float
 
 var power: float
-var stardust_cost: int
+var stardust_cost: float
 
 func get_statistics() -> Dictionary[String, float]:
 	return {

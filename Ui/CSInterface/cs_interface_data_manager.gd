@@ -4,26 +4,28 @@ class_name CSInterfacceDataManager
 @export var player_statistics: CharacStatistics
 @export var wizard_statistics: Wizard_statistics
 
-signal cs_category_sellected(cs_data_array: Array[CombatSkillData])
-signal cs_focus_changed(cs_data: CombatSkillData)
+@export var water_spells_data: Array[CombatSkillData]
+@export var fire_spells_data: Array[CombatSkillData]
+@export var wind_spells_data: Array[CombatSkillData]
+@export var lightning_spells_data: Array[CombatSkillData]
+@export var ice_spells_data: Array[CombatSkillData]
+@export var weapons_data: Array[CombatSkillData]
 
 
-#func _ready() -> void:
-	#_connect_cs_category_buttons_signals()
+#signal cs_category_sellected(cs_data_array: Array[CombatSkillData])
+#signal cs_focus_changed(cs_data: CombatSkillData)
 
-#func _connect_cs_category_buttons_signals() -> void:
-	#for child in %CSCategoryGridContainer.get_children():
-		#var cs_categ_button: CSCategoryButton= child
-		#cs_categ_button.pressed.connect(
-			#_on_cs_category_button_pressed.bind(cs_categ_button.cs_data_array))
+#### BUILT-IN ####
+func _ready() -> void:
+	%WaterButton.pressed.connect(_on_cs_category_button_pressed.bind(water_spells_data))
+	%FireButton.pressed.connect(_on_cs_category_button_pressed.bind(fire_spells_data))
+	%WindButton.pressed.connect(_on_cs_category_button_pressed.bind(wind_spells_data))
+	%LightningButton.pressed.connect(_on_cs_category_button_pressed.bind(lightning_spells_data))
+	%IceButton.pressed.connect(_on_cs_category_button_pressed.bind(ice_spells_data))
+	%WeaponButton.pressed.connect(_on_cs_category_button_pressed.bind(weapons_data))
 
-func _on_cs_category_button_pressed(cs_data: Array[CombatSkillData]) -> void:
-	cs_category_sellected.emit(cs_data)
 
-func _on_cs_button_focus_entered(cs_data: CombatSkillData) -> void:
-	print(cs_data)
-	cs_focus_changed.emit(cs_data)
-
+#### LOGIC ####
 func _set_stat_label_text(stat_name: String) -> void:
 	var label: Label = get_node_or_null("%" + Utiles.snake_case_to_camel_case(stat_name) + "ValueLabel")
 	if label == %MaxHealthValueLabel:
@@ -57,7 +59,31 @@ func _update_critical_value(weapon_stat: WeaponStatistics) -> void:
 	%CriteRateValueLabel.text = str(weapon_stat.crit_rate) + " %"
 
 
+func _get_cs_button_count() -> int:
+	var n := 0
+	
+	while get_node_or_null("%CSButton" + str(n + 1)) != null:
+		n += 1
+	
+	return n
+
 #### SIGNAL RESPONSES ###
+func _on_cs_category_button_pressed(cs_data: Array[CombatSkillData]) -> void:
+	for i in range(1, _get_cs_button_count() + 1):
+		var button: Button= get_node("%CSButton" + str(i))
+		
+		button.visible = i <= cs_data.size()
+		
+		if i < cs_data.size():
+			button.text = cs_data[i].name
+	
+	
+	$"..".turn_page()
+
+
+func _on_cs_button_focus_entered(_cs_data: CombatSkillData) -> void:
+	pass
+
 
 func _on_player_statistics_stat_updated(stat_name: String) -> void:
 	_set_stat_label_text(stat_name)

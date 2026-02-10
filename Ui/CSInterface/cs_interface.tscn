@@ -11,10 +11,10 @@
 [ext_resource type="Script" uid="uid://db4jcia3pwpd3" path="res://Ressources/CombatSkillData/combat_skill_data.gd" id="8_5tmjq"]
 [ext_resource type="StyleBox" uid="uid://ddlcfiauojenx" path="res://Components/CombatSkill/spell_button_style_box.tres" id="9_idbfo"]
 [ext_resource type="Resource" uid="uid://cnx36oinkwin0" path="res://Ressources/CombatSkillData/Weapon/jaw_trap_data.tres" id="9_ix3v8"]
-[ext_resource type="Resource" uid="uid://cx84vorgutpdq" path="res://Ressources/CombatSkillData/Spell/Water/spell_geyser.tres" id="10_ilqmr"]
-[ext_resource type="Resource" uid="uid://ila888nuoopt" path="res://Ressources/CombatSkillData/Spell/Fire/spell_fire_ball.tres" id="11_5kfsq"]
-[ext_resource type="Resource" uid="uid://d2urmmxyqwlit" path="res://Ressources/CombatSkillData/Spell/Fire/spell_super_fire_ball.tres" id="12_idbfo"]
-[ext_resource type="Resource" uid="uid://c04uu7w2nnej1" path="res://Ressources/CombatSkillData/Spell/Electricity/lightning_caga.tres" id="13_k2css"]
+[ext_resource type="Resource" uid="uid://cx84vorgutpdq" path="res://Ressources/CombatSkillData/Spell/Water/Geyser/geyser_data.tres" id="10_ilqmr"]
+[ext_resource type="Resource" uid="uid://ila888nuoopt" path="res://Ressources/CombatSkillData/Spell/Fire/FireBall/fire_ball_data.tres" id="11_5kfsq"]
+[ext_resource type="Resource" uid="uid://d2urmmxyqwlit" path="res://Ressources/CombatSkillData/Spell/Fire/ExplosiveFireBall/explosive_fire_ball_data.tres" id="12_idbfo"]
+[ext_resource type="Resource" uid="uid://c04uu7w2nnej1" path="res://Ressources/CombatSkillData/Spell/Lightning/LightningCage/lightning_cage_data.tres" id="13_k2css"]
 [ext_resource type="StyleBox" uid="uid://dib7pbhbh3nq8" path="res://Ui/CSInterface/StyleBox/weapon_style_box.tres" id="14_ilqmr"]
 [ext_resource type="Script" uid="uid://yi1uvna27jmy" path="res://Other/hider.gd" id="15_ilqmr"]
 
@@ -369,6 +369,10 @@ unique_name_in_owner = true
 script = ExtResource("3_lhy7a")
 player_statistics = ExtResource("4_ilqmr")
 wizard_statistics = ExtResource("5_5kfsq")
+water_spells_data = Array[ExtResource("8_5tmjq")]([ExtResource("10_ilqmr")])
+fire_spells_data = Array[ExtResource("8_5tmjq")]([ExtResource("12_idbfo"), ExtResource("11_5kfsq")])
+lightning_spells_data = Array[ExtResource("8_5tmjq")]([ExtResource("13_k2css")])
+weapons_data = Array[ExtResource("8_5tmjq")]([ExtResource("9_ix3v8")])
 
 [node name="Panel" type="Panel" parent="." unique_id=279884189]
 layout_mode = 1
@@ -718,7 +722,8 @@ metadata/_custom_type_script = "uid://b2qh2de0kbwt"
 layout_mode = 2
 alignment = 1
 
-[node name="WaterButton" type="Button" parent="Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/HBoxContainer" unique_id=673774983]
+[node name="WaterButton" type="Button" parent="Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/HBoxContainer" unique_id=697044413]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(96, 113)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -726,22 +731,18 @@ focus_neighbor_left = NodePath("../WindButton")
 theme_override_styles/normal = ExtResource("9_idbfo")
 text = "Eau"
 icon_alignment = 1
-script = ExtResource("4_ddx0q")
-cs_data_array = Array[ExtResource("8_5tmjq")]([ExtResource("10_ilqmr")])
-metadata/_custom_type_script = "uid://b2qh2de0kbwt"
 
-[node name="FireButton" type="Button" parent="Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/HBoxContainer" unique_id=2067543818]
+[node name="FireButton" type="Button" parent="Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1927419194]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(96, 113)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/normal = ExtResource("9_idbfo")
 text = "Feu"
 icon_alignment = 1
-script = ExtResource("4_ddx0q")
-cs_data_array = Array[ExtResource("8_5tmjq")]([ExtResource("11_5kfsq"), ExtResource("12_idbfo")])
-metadata/_custom_type_script = "uid://b2qh2de0kbwt"
 
-[node name="WindButton" type="Button" parent="Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1293475680]
+[node name="WindButton" type="Button" parent="Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1302301119]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(96, 113)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -749,14 +750,13 @@ focus_neighbor_right = NodePath("../WaterButton")
 theme_override_styles/normal = ExtResource("9_idbfo")
 text = "Vent"
 icon_alignment = 1
-script = ExtResource("4_ddx0q")
-metadata/_custom_type_script = "uid://b2qh2de0kbwt"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer" unique_id=1986389909]
 layout_mode = 2
 alignment = 1
 
-[node name="LightningButton" type="Button" parent="Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=202539268]
+[node name="LightningButton" type="Button" parent="Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=332053610]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(144, 113)
 layout_mode = 2
 focus_neighbor_left = NodePath("../IceButton")
@@ -765,11 +765,9 @@ theme_override_styles/normal = ExtResource("9_idbfo")
 text = "Foudre"
 clip_text = true
 icon_alignment = 1
-script = ExtResource("4_ddx0q")
-cs_data_array = Array[ExtResource("8_5tmjq")]([ExtResource("13_k2css")])
-metadata/_custom_type_script = "uid://b2qh2de0kbwt"
 
-[node name="IceButton" type="Button" parent="Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1698210904]
+[node name="IceButton" type="Button" parent="Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=651978065]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(144, 113)
 layout_mode = 2
 focus_neighbor_top = NodePath("../../HBoxContainer/FireButton")
@@ -777,8 +775,6 @@ focus_neighbor_right = NodePath("../LightningButton")
 theme_override_styles/normal = ExtResource("9_idbfo")
 text = "Glace"
 icon_alignment = 1
-script = ExtResource("4_ddx0q")
-metadata/_custom_type_script = "uid://b2qh2de0kbwt"
 
 [node name="MarginContainer2" type="MarginContainer" parent="Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer" unique_id=950429627]
 layout_mode = 2
@@ -787,7 +783,7 @@ theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 6
 
-[node name="WeaponButton" type="Button" parent="Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/MarginContainer2" unique_id=2121639779]
+[node name="WeaponButton" type="Button" parent="Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/MarginContainer2" unique_id=761316519]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(96, 113)
 layout_mode = 2
@@ -799,9 +795,6 @@ theme_override_styles/hover = ExtResource("7_idbfo")
 theme_override_styles/focus = ExtResource("7_idbfo")
 text = "Armes"
 icon_alignment = 1
-script = ExtResource("4_ddx0q")
-cs_data_array = Array[ExtResource("8_5tmjq")]([ExtResource("9_ix3v8")])
-metadata/_custom_type_script = "uid://b2qh2de0kbwt"
 
 [node name="CSSelection" type="HBoxContainer" parent="Panel/DoublePageTabContainer" unique_id=1812041866]
 visible = false
@@ -873,6 +866,7 @@ theme_override_constants/v_separation = 10
 columns = 2
 
 [node name="CSButton1" type="Button" parent="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer" unique_id=323651009]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -883,6 +877,7 @@ autowrap_mode = 2
 icon_alignment = 1
 
 [node name="CSButton2" type="Button" parent="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer" unique_id=325572450]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -892,6 +887,7 @@ autowrap_mode = 2
 icon_alignment = 1
 
 [node name="CSButton3" type="Button" parent="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer" unique_id=975881186]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -901,6 +897,7 @@ autowrap_mode = 2
 icon_alignment = 1
 
 [node name="CSButton4" type="Button" parent="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer" unique_id=708016987]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -910,6 +907,7 @@ autowrap_mode = 2
 icon_alignment = 1
 
 [node name="CSButton5" type="Button" parent="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer" unique_id=316186031]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -918,6 +916,7 @@ autowrap_mode = 2
 icon_alignment = 1
 
 [node name="CSButton6" type="Button" parent="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer" unique_id=72411021]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -926,6 +925,7 @@ autowrap_mode = 2
 icon_alignment = 1
 
 [node name="CSButton7" type="Button" parent="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer" unique_id=372632584]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -934,6 +934,7 @@ autowrap_mode = 2
 icon_alignment = 1
 
 [node name="CSButton8" type="Button" parent="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer" unique_id=615621004]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1381,7 +1382,6 @@ libraries/ = SubResource("AnimationLibrary_5kfsq")
 [connection signal="cs_category_selected" from="." to="Panel/DoublePageTabContainer" method="_on_cs_interface_cs_category_selected"]
 [connection signal="on_screen_changed" from="." to="Panel/DoublePageTabContainer" method="_on_cs_interface_on_screen_changed"]
 [connection signal="on_screen_changed" from="." to="Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/MarginContainer2/WeaponButton" method="_on_cs_interface_on_screen_changed"]
-[connection signal="cs_category_sellected" from="CSInterfaceDataManager" to="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer" method="_on_cs_interface_data_manager_cs_category_sellected"]
 [connection signal="tab_changed" from="Panel/DoublePageTabContainer" to="." method="_on_double_page_tab_container_tab_changed"]
 [connection signal="tab_changed" from="Panel/DoublePageTabContainer" to="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer" method="_on_tab_container_tab_changed"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

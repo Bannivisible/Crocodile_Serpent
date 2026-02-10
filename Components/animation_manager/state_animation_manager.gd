@@ -3,6 +3,8 @@ class_name StateAnimationManager
 
 @export var active: bool= true
 
+@export var play_reset: bool= true
+
 @export_enum("Play", "Blend") var play_mode: String= "Blend"
 
 @export var state_machines: Array[StateMachine]
@@ -108,6 +110,11 @@ func _play_state_anime(state: State) -> void:
 		"Play":
 			if anim_manager.current_animation != anim_name:
 				anim_manager.stop()
+				
+				if play_reset: 
+					anim_manager.play("RESET")
+					anim_manager.stop()
+				
 				anim_manager.play(anim_name)
 		"Blend":
 			if anim_manager.get_animation(anim_name).loop_mode == Animation.LOOP_NONE:

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="SpellData" format=3 uid="uid://d2urmmxyqwlit"]
+
+[ext_resource type="PackedScene" uid="uid://dav6bo74k22oc" path="res://Components/CombatSkill/Spell/Fire/SpellSuperFireBall/spell_super_fire_ball.tscn" id="1_k8d5y"]
+[ext_resource type="Script" uid="uid://gc7yieoshcty" path="res://Ressources/CombatSkillData/Spell/spell_data.gd" id="2_bwmdh"]
+[ext_resource type="Resource" uid="uid://ciapacbsxj07o" path="res://Ressources/CombatSkillData/Spell/Fire/ExplosiveFireBall/explosive_fire_ball_statistics.tres" id="3_gl4uw"]
+
+[resource]
+script = ExtResource("2_bwmdh")
+name = "Super Fire Ball"
+stat = ExtResource("3_gl4uw")
+combat_skill_scene = ExtResource("1_k8d5y")
+metadata/_custom_type_script = "uid://db4jcia3pwpd3"

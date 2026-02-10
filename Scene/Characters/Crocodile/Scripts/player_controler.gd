@@ -8,6 +8,10 @@ extends Controler
 @onready var bent_down_state: StateMachine = $"../StateMachine/BentDown"
 
 
+func _ready() -> void:
+	Events.cs_interface_on_screen_changed.connect(_on_Events_cs_interface_on_screen_changed)
+
+
 func _input(_event: InputEvent) -> void:
 	velocity_component.dir.x = Input.get_axis("left", "right")
 	
@@ -24,3 +28,9 @@ func _input(_event: InputEvent) -> void:
 	
 	if Input.is_action_just_released("bent_down") and bent_down_state.is_current_state():
 		state_machine.set_state_with_string("Idle")
+
+
+
+func _on_Events_cs_interface_on_screen_changed(on_screen: bool) -> void:
+	velocity_component.dir = Vector2.ZERO
+	active = !on_screen

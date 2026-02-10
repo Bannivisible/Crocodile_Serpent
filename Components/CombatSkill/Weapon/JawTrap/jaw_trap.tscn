@@ -3,7 +3,6 @@
 [ext_resource type="AnimationLibrary" uid="uid://ctdrtnjx7txak" path="res://Components/CombatSkill/Weapon/JawTrap/AnimationsData/JawTrapAnimationLibrary.res" id="2_dp6s7"]
 [ext_resource type="Script" uid="uid://bhcip3r7gigab" path="res://Components/CombatSkill/Weapon/JawTrap/jaw_trap.gd" id="2_g4jcv"]
 [ext_resource type="Script" uid="uid://bk1oc1ul33tnd" path="res://Ressources/Statistics/weapon_statistics.gd" id="2_vpr7y"]
-[ext_resource type="Script" uid="uid://mcrao1da8rcg" path="res://Ressources/Statistics/Stats/strenght_stat.gd" id="3_v0eml"]
 [ext_resource type="Script" uid="uid://42c2b5rma8ot" path="res://Components/CombatSkill/Weapon/weapon_hit_box.gd" id="4_5pxtx"]
 [ext_resource type="Texture2D" uid="uid://qkqqtx1bnvjk" path="res://Components/CombatSkill/Weapon/JawTrap/Assets/jaw_trap_texture.tres" id="4_jeet7"]
 [ext_resource type="Script" uid="uid://bpo8hybdit330" path="res://Ressources/Attack/WeaponAttack/weapon_attack_data.gd" id="5_4d2f6"]
@@ -41,11 +40,6 @@ base_attack = 50.0
 base_crit_rate = 20.0
 base_crit_coef = 2.0
 metadata/_custom_type_script = "uid://bk1oc1ul33tnd"
-
-[sub_resource type="Resource" id="Resource_jlbrr"]
-script = ExtResource("3_v0eml")
-value = 10.0
-metadata/_custom_type_script = "uid://mcrao1da8rcg"
 
 [sub_resource type="Resource" id="Resource_kcwly"]
 script = ExtResource("5_4d2f6")
@@ -144,15 +138,15 @@ metadata/_custom_type_script = "uid://ce7ave72wm32j"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p0okl"]
 atlas = ExtResource("4_jeet7")
-region = Rect2(305, 130, 102, 65)
+region = Rect2(202, 130, 101, 65)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rsvc4"]
 atlas = ExtResource("4_jeet7")
-region = Rect2(204, 0, 101, 64)
+region = Rect2(0, 0, 101, 65)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hgdcd"]
 atlas = ExtResource("4_jeet7")
-region = Rect2(303, 65, 101, 65)
+region = Rect2(0, 65, 101, 65)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v0eml"]
 height = 86.60971
@@ -163,15 +157,15 @@ bounce = 1.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n380g"]
 atlas = ExtResource("4_jeet7")
-region = Rect2(303, 130, 101, 65)
+region = Rect2(202, 130, 101, 65)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3po1k"]
 atlas = ExtResource("4_jeet7")
-region = Rect2(202, 0, 101, 65)
+region = Rect2(0, 0, 101, 65)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pvels"]
 atlas = ExtResource("4_jeet7")
-region = Rect2(303, 65, 101, 65)
+region = Rect2(0, 65, 101, 65)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jeet7"]
 radius = 10.036705
@@ -520,16 +514,13 @@ region = Rect2(0, 384, 192, 192)
 collision_mask = 2
 script = ExtResource("2_g4jcv")
 statistics = SubResource("Resource_d1rhm")
-strenght = SubResource("Resource_jlbrr")
 
 [node name="StateMachine" type="Node" parent="." unique_id=107697349]
 script = ExtResource("14_av258")
-set_to_default_state_at_ready = true
 metadata/_custom_type_script = "uid://bcmokx1bwyftw"
 
 [node name="OnHand" type="Node" parent="StateMachine" unique_id=2128408316]
 script = ExtResource("14_av258")
-set_to_default_state_at_ready = true
 metadata/_custom_type_script = "uid://bcmokx1bwyftw"
 
 [node name="Idle" type="Node" parent="StateMachine/OnHand" unique_id=126777271 node_paths=PackedStringArray("next_state")]
