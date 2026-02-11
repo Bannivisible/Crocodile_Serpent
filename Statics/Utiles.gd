@@ -225,3 +225,18 @@ static func get_joy_dir(neutral_dir := Vector2.ZERO, left_stick := true ,device 
 		dir = dir.normalized()
 	
 	return dir
+
+
+static func rest_tween(node: Node, tween: Tween, tw_ease := Tween.EASE_IN, tw_trans := Tween.TRANS_LINEAR) -> Tween:
+	if tween: tween.kill()
+	tween = node.create_tween()
+	
+	tween.set_ease(tw_ease).set_trans(tw_trans)
+	
+	return tween
+
+
+
+
+
+

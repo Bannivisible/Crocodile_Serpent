@@ -7,15 +7,16 @@
 [ext_resource type="Resource" uid="uid://iq6c7ofn104r" path="res://Scene/Characters/Crocodile/crocodile_stati.tres" id="4_ilqmr"]
 [ext_resource type="Resource" uid="uid://cngbsch24bs31" path="res://Scene/Characters/Snake/snake_stat.tres" id="5_5kfsq"]
 [ext_resource type="StyleBox" uid="uid://btakedmfoujf4" path="res://Ui/CSInterface/StyleBox/page_style_box_flat.tres" id="7_5kfsq"]
-[ext_resource type="StyleBox" uid="uid://doguu1cldrpqx" path="res://Ui/CSInterface/StyleBox/weapon_style_box_focus.tres" id="7_idbfo"]
+[ext_resource type="StyleBox" uid="uid://doguu1cldrpqx" path="res://Ui/CSInterface/StyleBox/WeaponButtonStyleBoxes/weapon_style_box_focus.tres" id="7_idbfo"]
 [ext_resource type="Script" uid="uid://db4jcia3pwpd3" path="res://Ressources/CombatSkillData/combat_skill_data.gd" id="8_5tmjq"]
-[ext_resource type="StyleBox" uid="uid://ddlcfiauojenx" path="res://Components/CombatSkill/spell_button_style_box.tres" id="9_idbfo"]
+[ext_resource type="StyleBox" uid="uid://ddlcfiauojenx" path="res://Ui/CSInterface/StyleBox/SpellButtonStyleBoxes/spell_button_style_box_normal.tres" id="9_idbfo"]
 [ext_resource type="Resource" uid="uid://cnx36oinkwin0" path="res://Ressources/CombatSkillData/Weapon/jaw_trap_data.tres" id="9_ix3v8"]
 [ext_resource type="Resource" uid="uid://cx84vorgutpdq" path="res://Ressources/CombatSkillData/Spell/Water/Geyser/geyser_data.tres" id="10_ilqmr"]
 [ext_resource type="Resource" uid="uid://ila888nuoopt" path="res://Ressources/CombatSkillData/Spell/Fire/FireBall/fire_ball_data.tres" id="11_5kfsq"]
 [ext_resource type="Resource" uid="uid://d2urmmxyqwlit" path="res://Ressources/CombatSkillData/Spell/Fire/ExplosiveFireBall/explosive_fire_ball_data.tres" id="12_idbfo"]
 [ext_resource type="Resource" uid="uid://c04uu7w2nnej1" path="res://Ressources/CombatSkillData/Spell/Lightning/LightningCage/lightning_cage_data.tres" id="13_k2css"]
-[ext_resource type="StyleBox" uid="uid://dib7pbhbh3nq8" path="res://Ui/CSInterface/StyleBox/weapon_style_box.tres" id="14_ilqmr"]
+[ext_resource type="StyleBox" uid="uid://db2dcc2ltlsis" path="res://Ui/CSInterface/StyleBox/SpellButtonStyleBoxes/spell_button_style_box_focus.tres" id="13_tjcl5"]
+[ext_resource type="StyleBox" uid="uid://dib7pbhbh3nq8" path="res://Ui/CSInterface/StyleBox/WeaponButtonStyleBoxes/weapon_style_box_normal.tres" id="14_ilqmr"]
 [ext_resource type="Script" uid="uid://yi1uvna27jmy" path="res://Other/hider.gd" id="15_ilqmr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i5yi8"]
@@ -370,9 +371,17 @@ script = ExtResource("3_lhy7a")
 player_statistics = ExtResource("4_ilqmr")
 wizard_statistics = ExtResource("5_5kfsq")
 water_spells_data = Array[ExtResource("8_5tmjq")]([ExtResource("10_ilqmr")])
-fire_spells_data = Array[ExtResource("8_5tmjq")]([ExtResource("12_idbfo"), ExtResource("11_5kfsq")])
+fire_spells_data = Array[ExtResource("8_5tmjq")]([ExtResource("11_5kfsq"), ExtResource("12_idbfo")])
 lightning_spells_data = Array[ExtResource("8_5tmjq")]([ExtResource("13_k2css")])
 weapons_data = Array[ExtResource("8_5tmjq")]([ExtResource("9_ix3v8")])
+spell_style_boxes = Dictionary[String, StyleBox]({
+"focus": ExtResource("13_tjcl5"),
+"normal": ExtResource("9_idbfo")
+})
+weapon_style_boxes = Dictionary[String, StyleBox]({
+"focus": ExtResource("7_idbfo"),
+"normal": ExtResource("14_ilqmr")
+})
 
 [node name="Panel" type="Panel" parent="." unique_id=279884189]
 layout_mode = 1
@@ -383,135 +392,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_i5yi8")
 metadata/_edit_lock_ = true
-
-[node name="StardustPanelContainer" type="PanelContainer" parent="Panel" unique_id=182214876]
-layout_mode = 0
-offset_left = 32.0
-offset_top = 45.0
-offset_right = 470.0
-offset_bottom = 138.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_k2css")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/StardustPanelContainer" unique_id=624165634]
-layout_mode = 2
-
-[node name="StardustLabel" type="Label" parent="Panel/StardustPanelContainer/VBoxContainer" unique_id=839719081]
-layout_mode = 2
-text = "Poussières d'étoiles"
-horizontal_alignment = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="Panel/StardustPanelContainer/VBoxContainer" unique_id=1747287362]
-layout_mode = 2
-theme_override_constants/margin_left = 12
-theme_override_constants/margin_right = 12
-theme_override_constants/margin_bottom = 6
-
-[node name="StardustTextureProgressBar" type="TextureProgressBar" parent="Panel/StardustPanelContainer/VBoxContainer/MarginContainer" unique_id=631471144]
-layout_mode = 2
-value = 50.0
-nine_patch_stretch = true
-stretch_margin_bottom = 32
-texture_under = SubResource("GradientTexture2D_ilqmr")
-texture_progress = SubResource("GradientTexture2D_tjcl5")
-
-[node name="StatisticsMarginContainer" type="MarginContainer" parent="Panel" unique_id=434123495]
-layout_mode = 0
-offset_left = 32.0
-offset_top = 188.0
-offset_right = 470.0
-offset_bottom = 356.0
-theme_override_constants/margin_left = 12
-theme_override_constants/margin_right = 12
-
-[node name="PanelContainer" type="PanelContainer" parent="Panel/StatisticsMarginContainer" unique_id=1955101764]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_qiots")
-
-[node name="GridContainer" type="GridContainer" parent="Panel/StatisticsMarginContainer/PanelContainer" unique_id=1502308589]
-layout_mode = 2
-columns = 2
-
-[node name="MaxHealthLabel" type="Label" parent="Panel/StatisticsMarginContainer/PanelContainer/GridContainer" unique_id=477516631]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "PV "
-horizontal_alignment = 1
-
-[node name="MaxHealthValueLabel" type="Label" parent="Panel/StatisticsMarginContainer/PanelContainer/GridContainer" unique_id=105944287]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "60 / 60"
-horizontal_alignment = 1
-
-[node name="StrenghtLabel" type="Label" parent="Panel/StatisticsMarginContainer/PanelContainer/GridContainer" unique_id=1087279790]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Force"
-horizontal_alignment = 1
-
-[node name="StrenghtValueLabel" type="Label" parent="Panel/StatisticsMarginContainer/PanelContainer/GridContainer" unique_id=417359206]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "80"
-horizontal_alignment = 1
-
-[node name="DefenseLabel" type="Label" parent="Panel/StatisticsMarginContainer/PanelContainer/GridContainer" unique_id=1599829160]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Defense"
-horizontal_alignment = 1
-
-[node name="DefenseValueLabel" type="Label" parent="Panel/StatisticsMarginContainer/PanelContainer/GridContainer" unique_id=137513205]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "70"
-horizontal_alignment = 1
-
-[node name="SpeedLabel" type="Label" parent="Panel/StatisticsMarginContainer/PanelContainer/GridContainer" unique_id=1764744413]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Vitesse"
-horizontal_alignment = 1
-
-[node name="SpeedValueLabel" type="Label" parent="Panel/StatisticsMarginContainer/PanelContainer/GridContainer" unique_id=1541872555]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "30"
-horizontal_alignment = 1
-
-[node name="CriticalPanelContainer" type="PanelContainer" parent="Panel" unique_id=549824847]
-layout_mode = 0
-offset_left = 32.0
-offset_top = 406.0
-offset_right = 470.0
-offset_bottom = 496.0
-theme_override_styles/panel = ExtResource("7_idbfo")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/CriticalPanelContainer" unique_id=640494376]
-layout_mode = 2
-
-[node name="CriticalLabel" type="Label" parent="Panel/CriticalPanelContainer/VBoxContainer" unique_id=1700430935]
-layout_mode = 2
-size_flags_horizontal = 6
-theme_override_colors/font_color = Color(0.8938901, 0.89389014, 0, 1)
-text = "Critique"
-
-[node name="PanelContainer" type="PanelContainer" parent="Panel/CriticalPanelContainer/VBoxContainer" unique_id=200010986]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_idbfo")
-
-[node name="HBoxContainer5" type="HBoxContainer" parent="Panel/CriticalPanelContainer/VBoxContainer/PanelContainer" unique_id=1914528235]
-layout_mode = 2
-
-[node name="CriteCoefValueLabel" type="Label" parent="Panel/CriticalPanelContainer/VBoxContainer/PanelContainer/HBoxContainer5" unique_id=1139395391]
-layout_mode = 2
-size_flags_horizontal = 6
-text = "X 2"
-
-[node name="CriteRateValueLabel" type="Label" parent="Panel/CriticalPanelContainer/VBoxContainer/PanelContainer/HBoxContainer5" unique_id=669574131]
-layout_mode = 2
-size_flags_horizontal = 6
-text = "20 %"
 
 [node name="DoublePageTabContainer" type="TabContainer" parent="Panel" unique_id=1107728129]
 unique_name_in_owner = true
@@ -554,6 +434,8 @@ theme_override_constants/separation = 50
 alignment = 1
 
 [node name="StardustPanelContainer" type="PanelContainer" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer" unique_id=73858577]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(438, 93)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_k2css")
 
@@ -581,6 +463,7 @@ texture_under = SubResource("GradientTexture2D_ilqmr")
 texture_progress = SubResource("GradientTexture2D_tjcl5")
 
 [node name="StatisticsMarginContainer" type="MarginContainer" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer" unique_id=2090798931]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_right = 12
@@ -646,6 +529,7 @@ text = "30"
 horizontal_alignment = 1
 
 [node name="CriticalPanelContainer" type="PanelContainer" parent="Panel/DoublePageTabContainer/CSCategorySelection/LeftPanel1/MarginContainer/VBoxContainer" unique_id=373909381]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_styles/panel = ExtResource("7_idbfo")
 
@@ -729,6 +613,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 focus_neighbor_left = NodePath("../WindButton")
 theme_override_styles/normal = ExtResource("9_idbfo")
+theme_override_styles/hover = ExtResource("13_tjcl5")
+theme_override_styles/focus = ExtResource("13_tjcl5")
 text = "Eau"
 icon_alignment = 1
 
@@ -738,6 +624,8 @@ custom_minimum_size = Vector2(96, 113)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/normal = ExtResource("9_idbfo")
+theme_override_styles/hover = ExtResource("13_tjcl5")
+theme_override_styles/focus = ExtResource("13_tjcl5")
 text = "Feu"
 icon_alignment = 1
 
@@ -748,6 +636,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 focus_neighbor_right = NodePath("../WaterButton")
 theme_override_styles/normal = ExtResource("9_idbfo")
+theme_override_styles/hover = ExtResource("13_tjcl5")
+theme_override_styles/focus = ExtResource("13_tjcl5")
 text = "Vent"
 icon_alignment = 1
 
@@ -762,6 +652,8 @@ layout_mode = 2
 focus_neighbor_left = NodePath("../IceButton")
 focus_neighbor_top = NodePath("../../HBoxContainer/FireButton")
 theme_override_styles/normal = ExtResource("9_idbfo")
+theme_override_styles/hover = ExtResource("13_tjcl5")
+theme_override_styles/focus = ExtResource("13_tjcl5")
 text = "Foudre"
 clip_text = true
 icon_alignment = 1
@@ -773,6 +665,8 @@ layout_mode = 2
 focus_neighbor_top = NodePath("../../HBoxContainer/FireButton")
 focus_neighbor_right = NodePath("../LightningButton")
 theme_override_styles/normal = ExtResource("9_idbfo")
+theme_override_styles/hover = ExtResource("13_tjcl5")
+theme_override_styles/focus = ExtResource("13_tjcl5")
 text = "Glace"
 icon_alignment = 1
 
@@ -867,80 +761,226 @@ columns = 2
 
 [node name="CSButton1" type="Button" parent="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer" unique_id=323651009]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(216, 110)
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 theme_override_styles/normal = ExtResource("14_ilqmr")
-theme_override_styles/focus = ExtResource("7_idbfo")
 text = "Piège A Machoire"
 autowrap_mode = 2
 icon_alignment = 1
 
 [node name="CSButton2" type="Button" parent="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer" unique_id=325572450]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(216, 110)
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 theme_override_styles/normal = ExtResource("9_idbfo")
+theme_override_styles/hover = ExtResource("7_idbfo")
 text = "Boule De Feu"
 autowrap_mode = 2
 icon_alignment = 1
 
 [node name="CSButton3" type="Button" parent="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer" unique_id=975881186]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(216, 110)
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 theme_override_styles/normal = ExtResource("9_idbfo")
+theme_override_styles/hover = ExtResource("7_idbfo")
 text = "Geyser"
 autowrap_mode = 2
 icon_alignment = 1
 
 [node name="CSButton4" type="Button" parent="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer" unique_id=708016987]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(216, 110)
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 theme_override_styles/normal = ExtResource("9_idbfo")
+theme_override_styles/hover = ExtResource("7_idbfo")
 text = "Cage Electrique"
 autowrap_mode = 2
 icon_alignment = 1
 
 [node name="CSButton5" type="Button" parent="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer" unique_id=316186031]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(216, 110)
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 theme_override_styles/normal = ExtResource("9_idbfo")
+theme_override_styles/hover = ExtResource("7_idbfo")
 autowrap_mode = 2
 icon_alignment = 1
 
 [node name="CSButton6" type="Button" parent="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer" unique_id=72411021]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(216, 110)
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 theme_override_styles/normal = ExtResource("9_idbfo")
+theme_override_styles/hover = ExtResource("7_idbfo")
 autowrap_mode = 2
 icon_alignment = 1
 
 [node name="CSButton7" type="Button" parent="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer" unique_id=372632584]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(216, 110)
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 theme_override_styles/normal = ExtResource("9_idbfo")
+theme_override_styles/hover = ExtResource("7_idbfo")
 autowrap_mode = 2
 icon_alignment = 1
 
 [node name="CSButton8" type="Button" parent="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer" unique_id=615621004]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(216, 110)
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 theme_override_styles/normal = ExtResource("9_idbfo")
+theme_override_styles/hover = ExtResource("7_idbfo")
 autowrap_mode = 2
 icon_alignment = 1
+
+[node name="TWStardustPanelContainer" type="PanelContainer" parent="Panel" unique_id=1351130684]
+unique_name_in_owner = true
+visible = false
+modulate = Color(0.12156863, 1, 0.70980394, 1)
+custom_minimum_size = Vector2(438, 93)
+layout_mode = 0
+offset_left = 32.0
+offset_top = 45.0
+offset_right = 470.0
+offset_bottom = 138.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_k2css")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/TWStardustPanelContainer" unique_id=462784941]
+layout_mode = 2
+
+[node name="TWStardustLabel" type="Label" parent="Panel/TWStardustPanelContainer/VBoxContainer" unique_id=646932266]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Poussières d'étoiles"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/TWStardustPanelContainer/VBoxContainer" unique_id=1178702027]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 6
+
+[node name="TWStardustTextureProgressBar" type="TextureProgressBar" parent="Panel/TWStardustPanelContainer/VBoxContainer/MarginContainer" unique_id=741226867]
+unique_name_in_owner = true
+layout_mode = 2
+value = 50.0
+nine_patch_stretch = true
+stretch_margin_bottom = 32
+texture_under = SubResource("GradientTexture2D_ilqmr")
+texture_progress = SubResource("GradientTexture2D_tjcl5")
+
+[node name="TWStatisticsMarginContainer" type="MarginContainer" parent="Panel" unique_id=915928350]
+unique_name_in_owner = true
+visible = false
+modulate = Color(0.03529412, 1, 0.73333335, 1)
+layout_mode = 0
+offset_left = 32.0
+offset_top = 188.0
+offset_right = 470.0
+offset_bottom = 356.0
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_right = 12
+
+[node name="PanelContainer" type="PanelContainer" parent="Panel/TWStatisticsMarginContainer" unique_id=534003356]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_qiots")
+
+[node name="GridContainer" type="GridContainer" parent="Panel/TWStatisticsMarginContainer/PanelContainer" unique_id=1006752191]
+layout_mode = 2
+columns = 2
+
+[node name="TWMaxHealthLabel" type="Label" parent="Panel/TWStatisticsMarginContainer/PanelContainer/GridContainer" unique_id=888541209]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "PV "
+horizontal_alignment = 1
+
+[node name="TWMaxHealthValueLabel" type="Label" parent="Panel/TWStatisticsMarginContainer/PanelContainer/GridContainer" unique_id=826310487]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "60 / 60"
+horizontal_alignment = 1
+
+[node name="TWStrenghtLabel" type="Label" parent="Panel/TWStatisticsMarginContainer/PanelContainer/GridContainer" unique_id=788481231]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Force"
+horizontal_alignment = 1
+
+[node name="TWStrenghtValueLabel" type="Label" parent="Panel/TWStatisticsMarginContainer/PanelContainer/GridContainer" unique_id=1962275983]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "80"
+horizontal_alignment = 1
+
+[node name="TWDefenseLabel" type="Label" parent="Panel/TWStatisticsMarginContainer/PanelContainer/GridContainer" unique_id=1108048899]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Defense"
+horizontal_alignment = 1
+
+[node name="TWDefenseValueLabel" type="Label" parent="Panel/TWStatisticsMarginContainer/PanelContainer/GridContainer" unique_id=1990188553]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "70"
+horizontal_alignment = 1
+
+[node name="TWSpeedLabel" type="Label" parent="Panel/TWStatisticsMarginContainer/PanelContainer/GridContainer" unique_id=1122764439]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Vitesse"
+horizontal_alignment = 1
+
+[node name="TWSpeedValueLabel" type="Label" parent="Panel/TWStatisticsMarginContainer/PanelContainer/GridContainer" unique_id=827018818]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "30"
+horizontal_alignment = 1
+
+[node name="TWCriticalPanelContainer" type="PanelContainer" parent="Panel" unique_id=1317486228]
+unique_name_in_owner = true
+visible = false
+modulate = Color(0.03529412, 1, 0.73333335, 1)
+layout_mode = 0
+offset_left = 32.0
+offset_top = 406.0
+offset_right = 470.0
+offset_bottom = 496.0
+theme_override_styles/panel = ExtResource("7_idbfo")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/TWCriticalPanelContainer" unique_id=1745487881]
+layout_mode = 2
+
+[node name="TWCriticalLabel" type="Label" parent="Panel/TWCriticalPanelContainer/VBoxContainer" unique_id=1943838746]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_colors/font_color = Color(0.8938901, 0.89389014, 0, 1)
+text = "Critique"
+
+[node name="PanelContainer" type="PanelContainer" parent="Panel/TWCriticalPanelContainer/VBoxContainer" unique_id=89132309]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_idbfo")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/TWCriticalPanelContainer/VBoxContainer/PanelContainer" unique_id=360625668]
+layout_mode = 2
+
+[node name="TWCriteCoefValueLabel" type="Label" parent="Panel/TWCriticalPanelContainer/VBoxContainer/PanelContainer/HBoxContainer" unique_id=1469971987]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+text = "X 2"
+
+[node name="TWCriteRateValueLabel" type="Label" parent="Panel/TWCriticalPanelContainer/VBoxContainer/PanelContainer/HBoxContainer" unique_id=191854809]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+text = "20 %"
 
 [node name="StatickPageLeft" type="Sprite2D" parent="Panel" unique_id=802666212]
 unique_name_in_owner = true
@@ -1379,7 +1419,6 @@ icon_alignment = 1
 libraries/ = SubResource("AnimationLibrary_5kfsq")
 
 [connection signal="cancel" from="." to="Panel/DoublePageTabContainer" method="_on_cs_interface_cancel"]
-[connection signal="cs_category_selected" from="." to="Panel/DoublePageTabContainer" method="_on_cs_interface_cs_category_selected"]
 [connection signal="on_screen_changed" from="." to="Panel/DoublePageTabContainer" method="_on_cs_interface_on_screen_changed"]
 [connection signal="on_screen_changed" from="." to="Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/MarginContainer2/WeaponButton" method="_on_cs_interface_on_screen_changed"]
 [connection signal="tab_changed" from="Panel/DoublePageTabContainer" to="." method="_on_double_page_tab_container_tab_changed"]

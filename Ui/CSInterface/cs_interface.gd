@@ -6,6 +6,9 @@ class_name CSInterface
 @export var show_animation_ease: Tween.EaseType
 @export var show_animation_trans: Tween.TransitionType
 
+@export var stats_show_animation_ease: Tween.EaseType 
+@export var stats_show_animation_trans: Tween.TransitionType
+
 @export var tab_first_buttons: Array[Button]
 var last_buttons_focus: Array[Button]
 
@@ -23,13 +26,18 @@ const SHOW_ANIMATION_DURATION: float= 0.5
 
 signal on_screen_changed(on_screen: bool)
 signal on_screen_animation_finished()
-signal cs_category_selected()
 signal cancel()
 
 #### BUILT_IN ####
 func _ready() -> void:
 	on_screen_changed.connect(_on_on_scren_changed)
-
+	
+	%WaterButton.pressed.connect(_on_cs_category_button_pressed)
+	%FireButton.pressed.connect(_on_cs_category_button_pressed)
+	%WindButton.pressed.connect(_on_cs_category_button_pressed)
+	%LightningButton.pressed.connect(_on_cs_category_button_pressed)
+	%IceButton.pressed.connect(_on_cs_category_button_pressed)
+	%WeaponButton.pressed.connect(_on_cs_category_button_pressed)
 
 #### INPUTS ####
 func _input(_event: InputEvent) -> void:
@@ -39,9 +47,10 @@ func _input(_event: InputEvent) -> void:
 	elif Input.is_action_just_pressed("cancel"):
 		cancel.emit()
 		return_page()
+		_unshow_stats(%TWStardustPanelContainer)
 	
 	elif Input.is_action_just_pressed("special"):
-		turn_page()
+		_show_stats(%TWStardustPanelContainer)
 
 
 #### LOGIC ####
@@ -126,9 +135,29 @@ func _last_button_focus_release_focus() -> void:
 	else :
 		tab_first_buttons[tab].release_focus()
 
+
+func _show_stats(stats_container: Control) -> void:
+	stats_container.visible = true
+	
+	tween = Utiles.rest_tween(self, tween, stats_show_animation_ease, stats_show_animation_trans)
+	
+	var to: Vector2= stats_container.global_position
+	to.x -= stats_container.size.x
+	tween.tween_property(stats_container, "global_position", to, SHOW_ANIMATION_DURATION)
+
+
+func _unshow_stats(stats_container: Control) -> void:
+	tween = Utiles.rest_tween(self, tween, stats_show_animation_ease, stats_show_animation_trans)
+	
+	var to: Vector2= stats_container.global_position
+	to.x += stats_container.size.x
+	tween.tween_property(stats_container, "global_position", to, SHOW_ANIMATION_DURATION)
+	
+	tween.tween_callback(func(): stats_container.visible = false)
+
 #### SIGNAL RESPONSES ####
 func _on_cs_category_button_pressed() -> void:
-	cs_category_selected.emit()
+	turn_page()
 
 
 func _on_cs_selected(cs_data: CombatSkillData) -> void:

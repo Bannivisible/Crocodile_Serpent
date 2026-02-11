@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("2_jfwyn")
-name = "Fire Ball"
+name = "Boule De Feu"
 description = "Des boules de feu."
 stat = ExtResource("3_w53f8")
 combat_skill_scene = ExtResource("1_g3rq0")

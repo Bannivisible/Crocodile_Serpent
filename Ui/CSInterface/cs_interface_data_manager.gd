@@ -1,8 +1,12 @@
 extends Node
 class_name CSInterfacceDataManager
 
+@export_group("Statistics")
+
 @export var player_statistics: CharacStatistics
 @export var wizard_statistics: Wizard_statistics
+
+@export_group("Combat Skill Data")
 
 @export var water_spells_data: Array[CombatSkillData]
 @export var fire_spells_data: Array[CombatSkillData]
@@ -11,9 +15,11 @@ class_name CSInterfacceDataManager
 @export var ice_spells_data: Array[CombatSkillData]
 @export var weapons_data: Array[CombatSkillData]
 
+@export_group("Style Boxes")
 
-#signal cs_category_sellected(cs_data_array: Array[CombatSkillData])
-#signal cs_focus_changed(cs_data: CombatSkillData)
+@export var spell_style_boxes: Dictionary[String ,StyleBox]
+@export var weapon_style_boxes: Dictionary[String ,StyleBox]
+
 
 #### BUILT-IN ####
 func _ready() -> void:
@@ -28,20 +34,18 @@ func _ready() -> void:
 #### LOGIC ####
 func _set_stat_label_text(stat_name: String) -> void:
 	var label: Label = get_node_or_null("%" + Utiles.snake_case_to_camel_case(stat_name) + "ValueLabel")
-	if label == %MaxHealthValueLabel:
-		_set_health_label_text()
 	
-	elif label:
+	if label:
 		label.text = str(player_statistics.get(stat_name))
 
 
 func _set_health_label_text() -> void:
-	var label: Label= %MaxHealthValueLabel
-	
 	var health: float= player_statistics.health
 	var max_health: float= player_statistics.max_health
 	
-	label.text = str(health) + " / " + str(max_health)
+	var text: String= str(health) + " / " + str(max_health)
+	%MaxHealthValueLabel.text = text
+	%TWMaxHealthValueLabel.text = text
 
 
 func _update_stardust_progress_bar() -> void:
@@ -49,9 +53,11 @@ func _update_stardust_progress_bar() -> void:
 	
 	var max_stardust: float= wizard_statistics.max_stardust
 	stardust_progress_bar.max_value = max_stardust
+	%TWStardustTextureProgressBar.max_value = max_stardust
 	
 	var stardust: float= wizard_statistics.stardust
 	stardust_progress_bar.value = stardust
+	%StardustTextureProgressBar.value = stardust
 
 
 func _update_critical_value(weapon_stat: WeaponStatistics) -> void:
@@ -74,11 +80,13 @@ func _on_cs_category_button_pressed(cs_data: Array[CombatSkillData]) -> void:
 		
 		button.visible = i <= cs_data.size()
 		
-		if i < cs_data.size():
-			button.text = cs_data[i].name
-	
-	
-	$"..".turn_page()
+		if i <= cs_data.size():
+			button.text = cs_data[i - 1].name
+		
+			var style_boxes: Dictionary[String, StyleBox]= weapon_style_boxes if cs_data == weapons_data else spell_style_boxes
+			
+			for key in style_boxes:
+				button.add_theme_stylebox_override(key, style_boxes[key])
 
 
 func _on_cs_button_focus_entered(_cs_data: CombatSkillData) -> void:
@@ -86,7 +94,10 @@ func _on_cs_button_focus_entered(_cs_data: CombatSkillData) -> void:
 
 
 func _on_player_statistics_stat_updated(stat_name: String) -> void:
-	_set_stat_label_text(stat_name)
+	if stat_name == "max_health": _set_health_label_text()
+	else :
+		_set_stat_label_text(stat_name)
+		_set_stat_label_text("TW" +  stat_name)
 
 
 func _on_player_statistics_variable_stat_chanded(stat_name: String, _value: float) -> void:

@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("2_bwmdh")
-name = "Super Fire Ball"
+name = "Déflagration"
 stat = ExtResource("3_gl4uw")
 combat_skill_scene = ExtResource("1_k8d5y")
 metadata/_custom_type_script = "uid://db4jcia3pwpd3"
