@@ -3,6 +3,9 @@ class_name CSInterface
 
 @onready var data_manager: CSInterfacceDataManager = $CSInterfaceDataManager
 
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+
+
 @export var show_animation_ease: Tween.EaseType
 @export var show_animation_trans: Tween.TransitionType
 
@@ -21,6 +24,8 @@ var on_screen: bool= false:
 			Events.cs_interface_on_screen_changed.emit(on_screen)
 
 var tween: Tween
+var tween2: Tween
+
 
 const SHOW_ANIMATION_DURATION: float= 0.5
 
@@ -32,12 +37,13 @@ signal cancel()
 func _ready() -> void:
 	on_screen_changed.connect(_on_on_scren_changed)
 	
-	%WaterButton.pressed.connect(_on_cs_category_button_pressed)
-	%FireButton.pressed.connect(_on_cs_category_button_pressed)
-	%WindButton.pressed.connect(_on_cs_category_button_pressed)
-	%LightningButton.pressed.connect(_on_cs_category_button_pressed)
-	%IceButton.pressed.connect(_on_cs_category_button_pressed)
-	%WeaponButton.pressed.connect(_on_cs_category_button_pressed)
+	%WaterButton.pressed.connect(_on_spell_category_button_pressed)
+	%FireButton.pressed.connect(_on_spell_category_button_pressed)
+	%WindButton.pressed.connect(_on_spell_category_button_pressed)
+	%LightningButton.pressed.connect(_on_spell_category_button_pressed)
+	%IceButton.pressed.connect(_on_spell_category_button_pressed)
+	
+	%WeaponButton.pressed.connect(_on_weapon_category_button_pressed)
 
 #### INPUTS ####
 func _input(_event: InputEvent) -> void:
@@ -46,11 +52,12 @@ func _input(_event: InputEvent) -> void:
 	
 	elif Input.is_action_just_pressed("cancel"):
 		cancel.emit()
-		return_page()
-		_unshow_stats(%TWStardustPanelContainer)
+		_return_page()
+		
+		_check_stat_to_unshow()
 	
 	elif Input.is_action_just_pressed("special"):
-		_show_stats(%TWStardustPanelContainer)
+		pass
 
 
 #### LOGIC ####
@@ -64,14 +71,14 @@ func display() -> void:
 	tween.tween_callback(func():on_screen_animation_finished.emit())
 
 
-func turn_page() -> void:
+func _turn_page() -> void:
 	if %DoublePageTabContainer.get_child_count() - 1 == %DoublePageTabContainer.current_tab: return
 	if not on_screen: return
 	
 	$AnimationPlayer.play("TurnPage")
 
 
-func return_page() -> void:
+func _return_page() -> void:
 	if %DoublePageTabContainer.current_tab == 0: return
 	if not on_screen: return
 	
@@ -136,28 +143,60 @@ func _last_button_focus_release_focus() -> void:
 		tab_first_buttons[tab].release_focus()
 
 
-func _show_stats(stats_container: Control) -> void:
+func _show_stats(stats_container: Control, tween_stat: Tween) -> void:
+	stats_container.z_index -= 1
 	stats_container.visible = true
 	
-	tween = Utiles.rest_tween(self, tween, stats_show_animation_ease, stats_show_animation_trans)
+	tween_stat = Utiles.reset_tween(self, tween_stat, stats_show_animation_ease, stats_show_animation_trans)
 	
 	var to: Vector2= stats_container.global_position
 	to.x -= stats_container.size.x
-	tween.tween_property(stats_container, "global_position", to, SHOW_ANIMATION_DURATION)
+	tween_stat.tween_property(stats_container, "global_position", to, SHOW_ANIMATION_DURATION)
+	
+	tween_stat.tween_callback(func(): stats_container.z_index += 1)
 
 
 func _unshow_stats(stats_container: Control) -> void:
-	tween = Utiles.rest_tween(self, tween, stats_show_animation_ease, stats_show_animation_trans)
+	var tween_stat = Utiles.reset_tween(self, create_tween(), stats_show_animation_ease, stats_show_animation_trans)
 	
 	var to: Vector2= stats_container.global_position
 	to.x += stats_container.size.x
-	tween.tween_property(stats_container, "global_position", to, SHOW_ANIMATION_DURATION)
+	tween_stat.tween_property(stats_container, "global_position", to, SHOW_ANIMATION_DURATION)
 	
-	tween.tween_callback(func(): stats_container.visible = false)
+	tween_stat.tween_callback(func():
+		stats_container.visible = false)
+
+
+func _check_stat_to_unshow() -> void:
+	if %DoublePageTabContainer.current_tab == 0: return
+	
+	var tw_stats_cont: MarginContainer = %TWStatisticsMarginContainer
+	
+	if tw_stats_cont.position.x == %TWStardustPanelContainer.position.x:
+		_unshow_stats(%TWStardustPanelContainer)
+	else : _unshow_stats(%TWCriticalPanelContainer)
+	
+	_unshow_stats(tw_stats_cont)
+
+
 
 #### SIGNAL RESPONSES ####
-func _on_cs_category_button_pressed() -> void:
-	turn_page()
+func _on_spell_category_button_pressed() -> void:
+	_turn_page()
+	
+	await  animation_player.animation_finished
+	
+	_show_stats(%TWStardustPanelContainer, tween)
+	_show_stats(%TWStatisticsMarginContainer, tween2)
+
+
+func _on_weapon_category_button_pressed() -> void:
+	_turn_page()
+	
+	await  animation_player.animation_finished
+	
+	_show_stats(%TWStatisticsMarginContainer, tween)
+	_show_stats(%TWCriticalPanelContainer, tween2)
 
 
 func _on_cs_selected(cs_data: CombatSkillData) -> void:
