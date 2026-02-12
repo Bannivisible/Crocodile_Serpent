@@ -4,9 +4,19 @@
 [ext_resource type="Script" uid="uid://gc7yieoshcty" path="res://Ressources/CombatSkillData/Spell/spell_data.gd" id="2_bwmdh"]
 [ext_resource type="Resource" uid="uid://ciapacbsxj07o" path="res://Ressources/CombatSkillData/Spell/Fire/ExplosiveFireBall/explosive_fire_ball_statistics.tres" id="3_gl4uw"]
 
+[sub_resource type="Gradient" id="Gradient_k8d5y"]
+colors = PackedColorArray(1, 0.6666667, 0, 1, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bwmdh"]
+gradient = SubResource("Gradient_k8d5y")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
 [resource]
 script = ExtResource("2_bwmdh")
 name = "Déflagration"
+icone = SubResource("GradientTexture2D_bwmdh")
+description = "Une boule de feu qui déclenche une déflagration"
 stat = ExtResource("3_gl4uw")
 combat_skill_scene = ExtResource("1_k8d5y")
 metadata/_custom_type_script = "uid://db4jcia3pwpd3"

@@ -21,6 +21,8 @@ class_name CSInterfacceDataManager
 @export var weapon_style_boxes: Dictionary[String ,StyleBox]
 
 
+var current_cs_datas: Array[CombatSkillData]
+
 #### BUILT-IN ####
 func _ready() -> void:
 	%WaterButton.pressed.connect(_on_cs_category_button_pressed.bind(water_spells_data))
@@ -29,6 +31,17 @@ func _ready() -> void:
 	%LightningButton.pressed.connect(_on_cs_category_button_pressed.bind(lightning_spells_data))
 	%IceButton.pressed.connect(_on_cs_category_button_pressed.bind(ice_spells_data))
 	%WeaponButton.pressed.connect(_on_cs_category_button_pressed.bind(weapons_data))
+	
+	var cs_button: Button= get_node_or_null("%CSButton1")
+	var n: int= 1
+	
+	while cs_button != null:
+		cs_button.focus_entered.connect(_on_cs_button_focus_entered.bind(n-1))
+		
+		n += 1
+		cs_button = get_node_or_null("%CSButton" + str(n))
+	
+	%DoublePageTabContainer
 
 
 #### LOGIC ####
@@ -74,23 +87,28 @@ func _get_cs_button_count() -> int:
 	return n
 
 #### SIGNAL RESPONSES ###
-func _on_cs_category_button_pressed(cs_data: Array[CombatSkillData]) -> void:
+func _on_cs_category_button_pressed(cs_datas: Array[CombatSkillData]) -> void:
+	current_cs_datas = cs_datas
+	
 	for i in range(1, _get_cs_button_count() + 1):
 		var button: Button= get_node("%CSButton" + str(i))
 		
-		button.visible = i <= cs_data.size()
+		button.visible = i <= cs_datas.size()
 		
-		if i <= cs_data.size():
-			button.text = cs_data[i - 1].name
+		if i <= cs_datas.size():
+			button.text = cs_datas[i - 1].name
 		
-			var style_boxes: Dictionary[String, StyleBox]= weapon_style_boxes if cs_data == weapons_data else spell_style_boxes
+			var style_boxes: Dictionary[String, StyleBox]= weapon_style_boxes if cs_datas == weapons_data else spell_style_boxes
 			
 			for key in style_boxes:
 				button.add_theme_stylebox_override(key, style_boxes[key])
 
 
-func _on_cs_button_focus_entered(_cs_data: CombatSkillData) -> void:
-	pass
+func _on_cs_button_focus_entered(id: int) -> void:
+	if current_cs_datas.is_empty(): return
+	
+	%DescriptionLabel.text = current_cs_datas[id].description
+	%TextureRect.texture = current_cs_datas[id].icone
 
 
 func _on_player_statistics_stat_updated(stat_name: String) -> void:
@@ -114,3 +132,9 @@ func _on_wizard_statistics_stat_updated(stat_name: String) -> void:
 func _on_wizard_statistics_variable_stat_chanded(stat_name: String, _value: float) -> void:
 	if not stat_name == StardustComponent.STARDUST_STAT_NAME: return
 	_update_stardust_progress_bar()
+
+
+func _on_double_page_tab_container_tab_changed(tab: int) -> void:
+	if tab == 0:
+		%TextureRect.texture = null
+		%DescriptionLabel.text = ""

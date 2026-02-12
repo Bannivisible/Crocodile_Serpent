@@ -234,9 +234,3 @@ static func reset_tween(node: Node, tween: Tween, tw_ease := Tween.EASE_IN, tw_t
 	tween.set_ease(tw_ease).set_trans(tw_trans)
 	
 	return tween
-
-
-
-
-
-

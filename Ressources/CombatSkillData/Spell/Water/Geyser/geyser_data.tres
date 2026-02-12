@@ -4,10 +4,19 @@
 [ext_resource type="Script" uid="uid://gc7yieoshcty" path="res://Ressources/CombatSkillData/Spell/spell_data.gd" id="2_6abib"]
 [ext_resource type="Resource" uid="uid://cktgvgilj7mww" path="res://Ressources/CombatSkillData/Spell/Water/Geyser/geyser_statistics.tres" id="3_sce6o"]
 
+[sub_resource type="Gradient" id="Gradient_biaj7"]
+colors = PackedColorArray(0, 0.8156863, 0.9254902, 1, 0, 0.25490198, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6abib"]
+gradient = SubResource("Gradient_biaj7")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
 [resource]
 script = ExtResource("2_6abib")
 stardust_cost = 30.0
 name = "Geyser"
+icone = SubResource("GradientTexture2D_6abib")
 description = "Un geyser d'eau."
 stat = ExtResource("3_sce6o")
 combat_skill_scene = ExtResource("1_biaj7")

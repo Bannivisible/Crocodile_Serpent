@@ -13,11 +13,32 @@
 [ext_resource type="Resource" uid="uid://cnx36oinkwin0" path="res://Ressources/CombatSkillData/Weapon/jaw_trap_data.tres" id="9_ix3v8"]
 [ext_resource type="Resource" uid="uid://cx84vorgutpdq" path="res://Ressources/CombatSkillData/Spell/Water/Geyser/geyser_data.tres" id="10_ilqmr"]
 [ext_resource type="Resource" uid="uid://ila888nuoopt" path="res://Ressources/CombatSkillData/Spell/Fire/FireBall/fire_ball_data.tres" id="11_5kfsq"]
+[ext_resource type="PackedScene" uid="uid://ds4i8cup57akf" path="res://Components/CombatSkill/Weapon/JawTrap/jaw_trap.tscn" id="11_k8l66"]
 [ext_resource type="Resource" uid="uid://d2urmmxyqwlit" path="res://Ressources/CombatSkillData/Spell/Fire/ExplosiveFireBall/explosive_fire_ball_data.tres" id="12_idbfo"]
+[ext_resource type="Texture2D" uid="uid://bppfppgp3n74q" path="res://Components/CombatSkill/Weapon/JawTrap/Assets/piege_a_machoire_back_up/En main.PNG" id="12_vh1v8"]
 [ext_resource type="Resource" uid="uid://c04uu7w2nnej1" path="res://Ressources/CombatSkillData/Spell/Lightning/LightningCage/lightning_cage_data.tres" id="13_k2css"]
+[ext_resource type="Script" uid="uid://bk1oc1ul33tnd" path="res://Ressources/Statistics/weapon_statistics.gd" id="13_nptg7"]
 [ext_resource type="StyleBox" uid="uid://db2dcc2ltlsis" path="res://Ui/CSInterface/StyleBox/SpellButtonStyleBoxes/spell_button_style_box_focus.tres" id="13_tjcl5"]
 [ext_resource type="StyleBox" uid="uid://dib7pbhbh3nq8" path="res://Ui/CSInterface/StyleBox/WeaponButtonStyleBoxes/weapon_style_box_normal.tres" id="14_ilqmr"]
 [ext_resource type="Script" uid="uid://yi1uvna27jmy" path="res://Other/hider.gd" id="15_ilqmr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_djj2n"]
+atlas = ExtResource("12_vh1v8")
+
+[sub_resource type="Resource" id="Resource_ukgpr"]
+script = ExtResource("13_nptg7")
+base_attack = 40.0
+base_crit_rate = 20.0
+base_crit_coef = 2.0
+metadata/_custom_type_script = "uid://bk1oc1ul33tnd"
+
+[sub_resource type="Resource" id="Resource_yj6c8"]
+script = ExtResource("8_5tmjq")
+name = "Piège A Machoire"
+icone = SubResource("AtlasTexture_djj2n")
+stat = SubResource("Resource_ukgpr")
+combat_skill_scene = ExtResource("11_k8l66")
+metadata/_custom_type_script = "uid://db4jcia3pwpd3"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i5yi8"]
 bg_color = Color(0.2969628, 0.10500003, 0.115467034, 1)
@@ -69,10 +90,17 @@ border_color = Color(0, 0.6392157, 0.5803922, 1)
 bg_color = Color(0.40148437, 0.018748576, 0.06989488, 1)
 border_color = Color(0.9137255, 0.8156863, 0.2, 1)
 
-[sub_resource type="Gradient" id="Gradient_5kfsq"]
+[sub_resource type="Gradient" id="Gradient_k8l66"]
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_idbfo"]
-gradient = SubResource("Gradient_5kfsq")
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vh1v8"]
+gradient = SubResource("Gradient_k8l66")
+
+[sub_resource type="Gradient" id="Gradient_vh1v8"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 0.16862746, 0.16078432, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nptg7"]
+gradient = SubResource("Gradient_vh1v8")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_idbfo"]
 viewport_path = NodePath("SubViewport")
@@ -373,7 +401,7 @@ wizard_statistics = ExtResource("5_5kfsq")
 water_spells_data = Array[ExtResource("8_5tmjq")]([ExtResource("10_ilqmr")])
 fire_spells_data = Array[ExtResource("8_5tmjq")]([ExtResource("11_5kfsq"), ExtResource("12_idbfo")])
 lightning_spells_data = Array[ExtResource("8_5tmjq")]([ExtResource("13_k2css")])
-weapons_data = Array[ExtResource("8_5tmjq")]([ExtResource("9_ix3v8")])
+weapons_data = Array[ExtResource("8_5tmjq")]([SubResource("Resource_yj6c8")])
 spell_style_boxes = Dictionary[String, StyleBox]({
 "focus": ExtResource("13_tjcl5"),
 "normal": ExtResource("9_idbfo")
@@ -716,9 +744,10 @@ theme_override_constants/margin_right = 75
 theme_override_constants/margin_bottom = 10
 
 [node name="TextureRect" type="TextureRect" parent="Panel/DoublePageTabContainer/CSSelection/LeftPanel2/VBoxContainer/MarginContainer" unique_id=1712407937]
+unique_name_in_owner = true
 layout_mode = 2
-size_flags_vertical = 3
-texture = SubResource("GradientTexture2D_idbfo")
+texture = SubResource("GradientTexture2D_vh1v8")
+stretch_mode = 5
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="Panel/DoublePageTabContainer/CSSelection/LeftPanel2/VBoxContainer" unique_id=2120609437]
 visible = false
@@ -731,6 +760,7 @@ theme_override_constants/margin_left = 12
 theme_override_constants/margin_right = -12
 
 [node name="DescriptionLabel" type="Label" parent="Panel/DoublePageTabContainer/CSSelection/LeftPanel2/VBoxContainer/MarginContainer2" unique_id=561978245]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(454, 241)
 layout_mode = 2
 size_flags_vertical = 3
@@ -836,8 +866,6 @@ icon_alignment = 1
 
 [node name="TWStardustPanelContainer" type="PanelContainer" parent="Panel" unique_id=1351130684]
 unique_name_in_owner = true
-visible = false
-modulate = Color(0.12156863, 1, 0.70980394, 1)
 custom_minimum_size = Vector2(438, 93)
 layout_mode = 0
 offset_left = 32.0
@@ -861,19 +889,26 @@ theme_override_constants/margin_left = 12
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 6
 
-[node name="TWStardustTextureProgressBar" type="TextureProgressBar" parent="Panel/TWStardustPanelContainer/VBoxContainer/MarginContainer" unique_id=741226867]
+[node name="LossTWStardustTextureProgressBar" type="TextureProgressBar" parent="Panel/TWStardustPanelContainer/VBoxContainer/MarginContainer" unique_id=1670435291]
 unique_name_in_owner = true
 layout_mode = 2
-value = 50.0
+value = 60.0
 nine_patch_stretch = true
 stretch_margin_bottom = 32
 texture_under = SubResource("GradientTexture2D_ilqmr")
+texture_progress = SubResource("GradientTexture2D_nptg7")
+
+[node name="TWStardustTextureProgressBar" type="TextureProgressBar" parent="Panel/TWStardustPanelContainer/VBoxContainer/MarginContainer" unique_id=741226867]
+unique_name_in_owner = true
+layout_mode = 2
+value = 40.0
+nine_patch_stretch = true
+stretch_margin_bottom = 32
 texture_progress = SubResource("GradientTexture2D_tjcl5")
 
 [node name="TWStatisticsMarginContainer" type="MarginContainer" parent="Panel" unique_id=915928350]
 unique_name_in_owner = true
 visible = false
-modulate = Color(0.03529412, 1, 0.73333335, 1)
 layout_mode = 0
 offset_left = 32.0
 offset_top = 188.0
@@ -945,7 +980,6 @@ horizontal_alignment = 1
 [node name="TWCriticalPanelContainer" type="PanelContainer" parent="Panel" unique_id=1317486228]
 unique_name_in_owner = true
 visible = false
-modulate = Color(0.03529412, 1, 0.73333335, 1)
 layout_mode = 0
 offset_left = 32.0
 offset_top = 406.0
@@ -1421,6 +1455,5 @@ libraries/ = SubResource("AnimationLibrary_5kfsq")
 [connection signal="cancel" from="." to="Panel/DoublePageTabContainer" method="_on_cs_interface_cancel"]
 [connection signal="on_screen_changed" from="." to="Panel/DoublePageTabContainer" method="_on_cs_interface_on_screen_changed"]
 [connection signal="on_screen_changed" from="." to="Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/MarginContainer2/WeaponButton" method="_on_cs_interface_on_screen_changed"]
-[connection signal="tab_changed" from="Panel/DoublePageTabContainer" to="." method="_on_double_page_tab_container_tab_changed"]
 [connection signal="tab_changed" from="Panel/DoublePageTabContainer" to="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer" method="_on_tab_container_tab_changed"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

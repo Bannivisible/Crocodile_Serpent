@@ -42,8 +42,9 @@ func _ready() -> void:
 	%WindButton.pressed.connect(_on_spell_category_button_pressed)
 	%LightningButton.pressed.connect(_on_spell_category_button_pressed)
 	%IceButton.pressed.connect(_on_spell_category_button_pressed)
-	
 	%WeaponButton.pressed.connect(_on_weapon_category_button_pressed)
+	
+	%DoublePageTabContainer.current_tab = 0
 
 #### INPUTS ####
 func _input(_event: InputEvent) -> void:
@@ -211,11 +212,6 @@ func _on_on_scren_changed(_value: bool) -> void:
 		_last_button_focus_grab_focus()
 	else :
 		_last_button_focus_release_focus()
-
-
-func _on_double_page_tab_container_tab_changed(_tab: int) -> void:
-	#_last_button_focus_grab_focus()
-	pass
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:

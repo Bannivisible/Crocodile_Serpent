@@ -4,9 +4,17 @@
 [ext_resource type="Script" uid="uid://gc7yieoshcty" path="res://Ressources/CombatSkillData/Spell/spell_data.gd" id="2_jfwyn"]
 [ext_resource type="Resource" uid="uid://cr2436recv4cg" path="res://Ressources/CombatSkillData/Spell/Fire/FireBall/fire_ball_statistics.tres" id="3_w53f8"]
 
+[sub_resource type="Gradient" id="Gradient_g3rq0"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 0.24313726, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jfwyn"]
+gradient = SubResource("Gradient_g3rq0")
+
 [resource]
 script = ExtResource("2_jfwyn")
 name = "Boule De Feu"
+icone = SubResource("GradientTexture2D_jfwyn")
 description = "Des boules de feu."
 stat = ExtResource("3_w53f8")
 combat_skill_scene = ExtResource("1_g3rq0")

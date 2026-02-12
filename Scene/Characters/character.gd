@@ -8,4 +8,3 @@ const MODE_DEFENSIVE_NAME: String= "Defensive"
 
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var sprite_container: Node2D = $SpriteContainer
-

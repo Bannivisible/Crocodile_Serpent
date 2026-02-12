@@ -4,9 +4,19 @@
 [ext_resource type="Script" uid="uid://gc7yieoshcty" path="res://Ressources/CombatSkillData/Spell/spell_data.gd" id="2_k516f"]
 [ext_resource type="Resource" uid="uid://dii3cc3v5xsna" path="res://Ressources/CombatSkillData/Spell/Lightning/LightningCage/lightning_cage_statistics.tres" id="3_f3pbs"]
 
+[sub_resource type="Gradient" id="Gradient_anivo"]
+colors = PackedColorArray(0.89411765, 1, 0, 1, 0.2627451, 1, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_q58fq"]
+gradient = SubResource("Gradient_anivo")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(2, 2)
+
 [resource]
 script = ExtResource("2_k516f")
 name = "Cage Electrique"
+icone = SubResource("GradientTexture2D_q58fq")
 description = "Une cage éléctrique."
 stat = ExtResource("3_f3pbs")
 combat_skill_scene = ExtResource("1_al4s4")
