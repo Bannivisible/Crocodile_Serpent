@@ -13,6 +13,7 @@ gradient = SubResource("Gradient_g3rq0")
 
 [resource]
 script = ExtResource("2_jfwyn")
+stardust_cost = 15.0
 name = "Boule De Feu"
 icone = SubResource("GradientTexture2D_jfwyn")
 description = "Des boules de feu."

@@ -22,6 +22,7 @@ signal variable_stat_changed(stat_name: String, value: float)
 @abstract
 func get_statistics() -> Dictionary[String, float]
 
+
 func get_stat_buffs(stat_name: String, buff_array: Array[Buff]= buffs) -> Array[Buff]:
 	var stat_buffs: Array[Buff]
 	
@@ -162,6 +163,10 @@ func get_max_variable_stats() -> Dictionary[String, float]:
 	return stat_name_dict
 
 
+func to_max_stat(stat_name: String) -> String:
+	return MAX_STAT_PREFIX + stat_name
+
+
 func get_variable_stats() -> Dictionary[String ,float]:
 	var stat_dict: Dictionary[String ,float]
 	
@@ -170,6 +175,10 @@ func get_variable_stats() -> Dictionary[String ,float]:
 		stat_dict[stat_name] = get(stat_name)
 	
 	return stat_dict
+
+
+func to_variable_stat(stat_name: String) -> String:
+	return stat_name.substr(len(MAX_STAT_PREFIX))
 
 
 func get_current_value(max_stat_name: String) -> float:
@@ -187,3 +196,9 @@ func set_variable_stat(stat_name: String, value: float) -> void:
 	set(stat_name, clamp(value, 0.0, max_stat))
 	
 	variable_stat_changed.emit(stat_name, value)
+
+
+func innit_variable_stats() -> void:
+	for stat in get_variable_stats():
+		var max_stat: float= get(to_max_stat(stat))
+		set_variable_stat(stat, max_stat)

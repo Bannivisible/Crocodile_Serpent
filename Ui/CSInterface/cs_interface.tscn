@@ -28,8 +28,8 @@ atlas = ExtResource("12_vh1v8")
 [sub_resource type="Resource" id="Resource_ukgpr"]
 script = ExtResource("13_nptg7")
 base_attack = 40.0
-base_crit_rate = 20.0
-base_crit_coef = 2.0
+base_crit_rate = 24.0
+base_crit_coef = 2.2
 metadata/_custom_type_script = "uid://bk1oc1ul33tnd"
 
 [sub_resource type="Resource" id="Resource_yj6c8"]
@@ -38,6 +38,26 @@ name = "Piège A Machoire"
 icone = SubResource("AtlasTexture_djj2n")
 stat = SubResource("Resource_ukgpr")
 combat_skill_scene = ExtResource("11_k8l66")
+metadata/_custom_type_script = "uid://db4jcia3pwpd3"
+
+[sub_resource type="Gradient" id="Gradient_nptg7"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_djj2n"]
+gradient = SubResource("Gradient_nptg7")
+
+[sub_resource type="Resource" id="Resource_uxvu1"]
+script = ExtResource("13_nptg7")
+base_attack = 15.0
+base_crit_rate = 10.0
+base_crit_coef = 1.5
+metadata/_custom_type_script = "uid://bk1oc1ul33tnd"
+
+[sub_resource type="Resource" id="Resource_iupbt"]
+script = ExtResource("8_5tmjq")
+name = "Test"
+icone = SubResource("GradientTexture2D_djj2n")
+description = "Arme innutilisable sui sert seulement à voir si les données se mette à jour dans l'interface"
+stat = SubResource("Resource_uxvu1")
 metadata/_custom_type_script = "uid://db4jcia3pwpd3"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i5yi8"]
@@ -401,7 +421,7 @@ wizard_statistics = ExtResource("5_5kfsq")
 water_spells_data = Array[ExtResource("8_5tmjq")]([ExtResource("10_ilqmr")])
 fire_spells_data = Array[ExtResource("8_5tmjq")]([ExtResource("11_5kfsq"), ExtResource("12_idbfo")])
 lightning_spells_data = Array[ExtResource("8_5tmjq")]([ExtResource("13_k2css")])
-weapons_data = Array[ExtResource("8_5tmjq")]([SubResource("Resource_yj6c8")])
+weapons_data = Array[ExtResource("8_5tmjq")]([SubResource("Resource_yj6c8"), SubResource("Resource_iupbt")])
 spell_style_boxes = Dictionary[String, StyleBox]({
 "focus": ExtResource("13_tjcl5"),
 "normal": ExtResource("9_idbfo")
@@ -866,6 +886,7 @@ icon_alignment = 1
 
 [node name="TWStardustPanelContainer" type="PanelContainer" parent="Panel" unique_id=1351130684]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(438, 93)
 layout_mode = 0
 offset_left = 32.0
@@ -1455,5 +1476,4 @@ libraries/ = SubResource("AnimationLibrary_5kfsq")
 [connection signal="cancel" from="." to="Panel/DoublePageTabContainer" method="_on_cs_interface_cancel"]
 [connection signal="on_screen_changed" from="." to="Panel/DoublePageTabContainer" method="_on_cs_interface_on_screen_changed"]
 [connection signal="on_screen_changed" from="." to="Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/MarginContainer2/WeaponButton" method="_on_cs_interface_on_screen_changed"]
-[connection signal="tab_changed" from="Panel/DoublePageTabContainer" to="Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer" method="_on_tab_container_tab_changed"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

@@ -1,6 +1,10 @@
 extends Control
 class_name CSInterface
 
+
+const STATS_SHOW_ANIMATION_MIN_GAP: float= 20.0
+
+
 @onready var data_manager: CSInterfacceDataManager = $CSInterfaceDataManager
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -44,7 +48,7 @@ func _ready() -> void:
 	%IceButton.pressed.connect(_on_spell_category_button_pressed)
 	%WeaponButton.pressed.connect(_on_weapon_category_button_pressed)
 	
-	%DoublePageTabContainer.current_tab = 0
+	_innit_values()
 
 #### INPUTS ####
 func _input(_event: InputEvent) -> void:
@@ -62,6 +66,14 @@ func _input(_event: InputEvent) -> void:
 
 
 #### LOGIC ####
+func _innit_values() -> void:
+	%DoublePageTabContainer.current_tab = 0
+	
+	%TWStardustPanelContainer.visible = false
+	%TWStatisticsMarginContainer.visible = false
+	%TWCriticalPanelContainer.visible = false
+
+
 func display() -> void:
 	if tween: tween.kill()
 	var to = -size.y if on_screen else 0.0
@@ -151,7 +163,7 @@ func _show_stats(stats_container: Control, tween_stat: Tween) -> void:
 	tween_stat = Utiles.reset_tween(self, tween_stat, stats_show_animation_ease, stats_show_animation_trans)
 	
 	var to: Vector2= stats_container.global_position
-	to.x -= stats_container.size.x
+	to.x -= stats_container.size.x + STATS_SHOW_ANIMATION_MIN_GAP
 	tween_stat.tween_property(stats_container, "global_position", to, SHOW_ANIMATION_DURATION)
 	
 	tween_stat.tween_callback(func(): stats_container.z_index += 1)
@@ -161,7 +173,7 @@ func _unshow_stats(stats_container: Control) -> void:
 	var tween_stat = Utiles.reset_tween(self, create_tween(), stats_show_animation_ease, stats_show_animation_trans)
 	
 	var to: Vector2= stats_container.global_position
-	to.x += stats_container.size.x
+	to.x += stats_container.size.x + STATS_SHOW_ANIMATION_MIN_GAP
 	tween_stat.tween_property(stats_container, "global_position", to, SHOW_ANIMATION_DURATION)
 	
 	tween_stat.tween_callback(func():

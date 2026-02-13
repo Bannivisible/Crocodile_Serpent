@@ -32,19 +32,42 @@ func _ready() -> void:
 	%IceButton.pressed.connect(_on_cs_category_button_pressed.bind(ice_spells_data))
 	%WeaponButton.pressed.connect(_on_cs_category_button_pressed.bind(weapons_data))
 	
+	_connect_cs_button()
+	
+	%DoublePageTabContainer.tab_changed.connect(_on_double_page_tab_container_tab_changed)
+	
+	_innit_cs_data_statistics()
+	wizard_statistics.update_all_stat()
+	wizard_statistics.innit_variable_stats()
+	_update_stardust_progress_bar()
+	
+	_update_critical_value(weapons_data[0].stat)
+
+
+#### LOGIC ####
+func _connect_cs_button() -> void:
 	var cs_button: Button= get_node_or_null("%CSButton1")
 	var n: int= 1
 	
 	while cs_button != null:
 		cs_button.focus_entered.connect(_on_cs_button_focus_entered.bind(n-1))
+		cs_button.pressed.connect(_on_cs_button_pressed.bind(n-1))
 		
 		n += 1
 		cs_button = get_node_or_null("%CSButton" + str(n))
+
+
+func _innit_cs_data_statistics() -> void:
+	for element in Spell.elements:
+		var spell_data_list: Array[CombatSkillData]= get(element + "_spells_data")
+		
+		for spell_data in spell_data_list:
+			spell_data.stat.update_all_stat()
 	
-	%DoublePageTabContainer
+	for weapon_data in weapons_data:
+		weapon_data.stat.update_all_stat()
 
 
-#### LOGIC ####
 func _set_stat_label_text(stat_name: String) -> void:
 	var label: Label = get_node_or_null("%" + Utiles.snake_case_to_camel_case(stat_name) + "ValueLabel")
 	
@@ -62,20 +85,31 @@ func _set_health_label_text() -> void:
 
 
 func _update_stardust_progress_bar() -> void:
-	var stardust_progress_bar: ProgressBar = %StardustTextureProgressBar
+	var stardust_progress_bar: TextureProgressBar = %StardustTextureProgressBar
 	
 	var max_stardust: float= wizard_statistics.max_stardust
 	stardust_progress_bar.max_value = max_stardust
 	%TWStardustTextureProgressBar.max_value = max_stardust
+	%LossTWStardustTextureProgressBar.max_value = max_stardust
 	
 	var stardust: float= wizard_statistics.stardust
 	stardust_progress_bar.value = stardust
-	%StardustTextureProgressBar.value = stardust
+	%TWStardustTextureProgressBar.value = stardust
+	%LossTWStardustTextureProgressBar.value = stardust
+
+
+func _update_loss_stardust_progress_bar(stardust_cost: float) -> void:
+	%TWStardustTextureProgressBar.value = %LossTWStardustTextureProgressBar.value - stardust_cost
 
 
 func _update_critical_value(weapon_stat: WeaponStatistics) -> void:
 	%CriteCoefValueLabel.text = "X " + str(weapon_stat.crit_coef)
 	%CriteRateValueLabel.text = str(weapon_stat.crit_rate) + " %"
+
+
+func _update_tw_critical_value(weapon_stat: WeaponStatistics) -> void:
+	%TWCriteCoefValueLabel.text = "X " + str(weapon_stat.crit_coef)
+	%TWCriteRateValueLabel.text = str(weapon_stat.crit_rate) + " %"
 
 
 func _get_cs_button_count() -> int:
@@ -107,8 +141,24 @@ func _on_cs_category_button_pressed(cs_datas: Array[CombatSkillData]) -> void:
 func _on_cs_button_focus_entered(id: int) -> void:
 	if current_cs_datas.is_empty(): return
 	
-	%DescriptionLabel.text = current_cs_datas[id].description
-	%TextureRect.texture = current_cs_datas[id].icone
+	var cs_data: CombatSkillData= current_cs_datas[id]
+	
+	%DescriptionLabel.text = cs_data.description
+	%TextureRect.texture = cs_data.icone
+	
+	var stat: Statistics= cs_data.stat
+	
+	if stat is SpellStatistics:
+		_update_loss_stardust_progress_bar(stat.stardust_cost)
+	elif stat is WeaponStatistics:
+		_update_tw_critical_value(stat)
+
+
+func _on_cs_button_pressed(id: int) -> void:
+	var cs_data: CombatSkillData= current_cs_datas[id]
+	
+	if cs_data.stat is WeaponStatistics:
+		_update_critical_value(cs_data.stat)
 
 
 func _on_player_statistics_stat_updated(stat_name: String) -> void:
@@ -138,3 +188,5 @@ func _on_double_page_tab_container_tab_changed(tab: int) -> void:
 	if tab == 0:
 		%TextureRect.texture = null
 		%DescriptionLabel.text = ""
+		
+		_update_loss_stardust_progress_bar(0.0)
