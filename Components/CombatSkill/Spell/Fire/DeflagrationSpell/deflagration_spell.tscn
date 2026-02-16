@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://dav6bo74k22oc"]
+
+[ext_resource type="Script" uid="uid://kukwpon7j2d4" path="res://Components/CombatSkill/Spell/Fire/DeflagrationSpell/deflagration_spell.gd" id="1_55xye"]
+[ext_resource type="Script" uid="uid://bcmokx1bwyftw" path="res://StateMachine/state_machine.gd" id="2_oo454"]
+[ext_resource type="Script" uid="uid://bey7t8h4m0yyp" path="res://StateMachine/state.gd" id="3_uxa32"]
+[ext_resource type="Script" uid="uid://cwmi3g3xc85au" path="res://StateMachine/States/spawn_projectile_state.gd" id="4_v2ypn"]
+[ext_resource type="PackedScene" uid="uid://t1buea63lkc4" path="res://Scene/Projectile/FireBall/SuperFireBall/projectile_deflagration.tscn" id="5_lg64t"]
+[ext_resource type="Script" uid="uid://dn4fvadrkpq74" path="res://Components/CombatSkill/Spell/Fire/DeflagrationSpell/controler.gd" id="6_h8w17"]
+
+[node name="Deflagration" type="Node2D" unique_id=2041461300]
+script = ExtResource("1_55xye")
+metadata/_custom_type_script = "uid://1ntq0e44578q"
+
+[node name="StateMachine" type="Node" parent="." unique_id=539624420]
+script = ExtResource("2_oo454")
+metadata/_custom_type_script = "uid://bcmokx1bwyftw"
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=686914881]
+script = ExtResource("3_uxa32")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="SpawnProjectileState" type="Node" parent="StateMachine" unique_id=895858270]
+script = ExtResource("4_v2ypn")
+projectile_scene = ExtResource("5_lg64t")
+metadata/_custom_type_script = "uid://cwmi3g3xc85au"
+
+[node name="Controler" type="Node" parent="." unique_id=735814923]
+script = ExtResource("6_h8w17")
+metadata/_custom_type_script = "uid://dhau74o4l0rjm"
+
+[node name="Cooldown" type="Timer" parent="." unique_id=616744061]
+wait_time = 6.0
+one_shot = true
+
+[connection signal="projectile_spawn" from="StateMachine/SpawnProjectileState" to="." method="_on_spawn_projectile_state_projectile_spawn"]

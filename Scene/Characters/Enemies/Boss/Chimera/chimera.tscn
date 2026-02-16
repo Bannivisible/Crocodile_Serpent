@@ -541,7 +541,6 @@ position = Vector2(43, -337)
 texture = SubResource("AtlasTexture_l2kd0")
 
 [node name="HealthComponent" parent="." index="3" unique_id=807074996]
-visible = false
 stat = SubResource("Resource_ianam")
 
 [node name="HurtBox" parent="HealthComponent" index="0" unique_id=1017093875]

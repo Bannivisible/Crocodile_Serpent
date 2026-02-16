@@ -1,5 +1,5 @@
 extends Spell
-class_name SpellGeyser
+class_name GeyserSpell
 
 @onready var line_2d: Line2D = $Line2D
 @onready var ray_cast_2d: RayCast2D = $RayCast2D
@@ -29,3 +29,4 @@ func _set_line_lenght(lenght: float) -> void:
 
 func _set_ray_cast_lenght(lenght: float) -> void:
 	ray_cast_2d.target_position.x = lenght
+

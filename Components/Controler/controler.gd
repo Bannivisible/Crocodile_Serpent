@@ -1,4 +1,3 @@
-@abstract
 extends Component
 class_name Controler
 
@@ -9,5 +8,5 @@ class_name Controler
 		set_process_input(active)
 
 
-@abstract
-func _input(event: InputEvent) -> void
+
+

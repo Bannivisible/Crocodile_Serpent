@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ConditionForAction" format=3 uid="uid://c6h00dt7fpxnb"]
+
+[ext_resource type="Script" uid="uid://d0v33ys2dynyh" path="res://Ressources/Actions/action.gd" id="1_c00ql"]
+[ext_resource type="Script" uid="uid://ufcpgmdje658" path="res://Ressources/Conditions/condition.gd" id="2_3nrkx"]
+[ext_resource type="Script" uid="uid://b730gnwe3got2" path="res://Ressources/Conditions/Inputs/condition_input.gd" id="3_jmuam"]
+[ext_resource type="Script" uid="uid://dyglpbhv533ei" path="res://Ressources/ConditionForAction/condition_for_action.gd" id="4_gtsja"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_4qa3w"]
+action = &"attack"
+
+[sub_resource type="Resource" id="Resource_kuxmm"]
+script = ExtResource("3_jmuam")
+input_action = SubResource("InputEventAction_4qa3w")
+metadata/_custom_type_script = "uid://b730gnwe3got2"
+
+[resource]
+script = ExtResource("4_gtsja")
+conditions = Array[ExtResource("2_3nrkx")]([SubResource("Resource_kuxmm")])
+metadata/_custom_type_script = "uid://dyglpbhv533ei"

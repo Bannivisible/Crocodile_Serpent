@@ -24,6 +24,8 @@
 [ext_resource type="SkeletonModification2DLookAt" uid="uid://c8bnrs2ge68xr" path="res://Scene/Characters/Crocodile/SkeletonModification/hand_front_skeleton_modification_2d_look_at.tres" id="14_umomj"]
 [ext_resource type="Animation" uid="uid://ccbyb3j0w0168" path="res://Scene/Characters/Crocodile/AnimationTree/Idle.res" id="16_jlbrr"]
 [ext_resource type="Script" uid="uid://dgi2a2c0lt17u" path="res://Components/animation_manager/state_animation_manager.gd" id="22_jbjqy"]
+[ext_resource type="Script" uid="uid://crj66obtl3821" path="res://Components/CombatSkill/Weapon/weapon_manager.gd" id="22_qvnx8"]
+[ext_resource type="Script" uid="uid://v7k2pc1yokl3" path="res://Components/CombatSkill/Spell/spell_manager.gd" id="23_jbjqy"]
 [ext_resource type="Script" uid="uid://byhe3mep5poar" path="res://Ressources/Statistics/buff.gd" id="23_usnsk"]
 [ext_resource type="Script" uid="uid://b2ht1wi0b2hvw" path="res://Components/VelocityComponent/States/bmc_free.gd" id="27_dr3s2"]
 [ext_resource type="Script" uid="uid://khisnu7j8mou" path="res://Components/VelocityComponent/States/constant_dash.gd" id="27_yvpvj"]
@@ -2376,8 +2378,8 @@ texture = SubResource("AtlasTexture_hb14a")
 
 [node name="StrandBack" type="Sprite2D" parent="SpriteContainer/HeadGroup" index="2" unique_id=194762747]
 position = Vector2(-43.347675, 16.778244)
-rotation = -0.34906557
-scale = Vector2(1.0034373, 0.9990675)
+rotation = -0.3490656
+scale = Vector2(1.0034372, 0.9990675)
 texture = SubResource("AtlasTexture_weadw")
 offset = Vector2(20.086979, -10.858177)
 
@@ -2418,7 +2420,7 @@ offset = Vector2(-12, 15)
 
 [node name="LegFront" type="Sprite2D" parent="SpriteContainer/LegFrontGroup" index="0" unique_id=1504693139]
 position = Vector2(-63.09566, -95.85449)
-rotation = 0.069723494
+rotation = 0.06972345
 scale = Vector2(0.9996902, 0.9996902)
 texture = SubResource("AtlasTexture_qvnx8")
 offset = Vector2(2.667, 21.333)
@@ -2432,8 +2434,8 @@ offset = Vector2(-5.667, 21)
 
 [node name="FootFront" type="Sprite2D" parent="SpriteContainer/LegFrontGroup" index="2" unique_id=1521634280]
 position = Vector2(-67.02341, -50.897106)
-rotation = -0.0004917904
-scale = Vector2(0.99953055, 0.99953055)
+rotation = -0.00049183465
+scale = Vector2(0.99953145, 0.99953145)
 texture = SubResource("AtlasTexture_7cm0d")
 offset = Vector2(2.2518923, 17.591896)
 
@@ -2629,7 +2631,7 @@ remote_path = NodePath("../../../../../SpriteContainer/LegFrontGroup/LegFront")
 [node name="FootFront" type="Bone2D" parent="Skeleton2D/Center/ThighFront/LegFront" index="1" unique_id=1025153005]
 position = Vector2(-0.78639984, 45.13577)
 rotation = -0.0702153
-scale = Vector2(0.9998403, 0.9998403)
+scale = Vector2(0.9998412, 0.9998412)
 rest = Transform2D(0.9973769, -0.07014619, 0.07014619, 0.9973769, -0.78639984, 45.13577)
 auto_calculate_length_and_angle = false
 length = 26.667
@@ -2740,8 +2742,12 @@ parameters/StateBlend2/blend_amount = 0.0
 script = ExtResource("6_wwopw")
 
 [node name="WeaponManager" type="Node2D" parent="." index="9" unique_id=1145767657]
+script = ExtResource("22_qvnx8")
 
 [node name="SpellManager" type="Node2D" parent="." index="10" unique_id=1817703146]
+z_index = 10
+position = Vector2(148, -184)
+script = ExtResource("23_jbjqy")
 
 [node name="HealthComponent" parent="." index="11" unique_id=218773380 instance=ExtResource("10_51sid")]
 

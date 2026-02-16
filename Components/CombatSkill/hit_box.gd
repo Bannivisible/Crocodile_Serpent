@@ -25,7 +25,8 @@ func _ready() -> void:
 	monitorable = false
 	
 	set_collision_layer_value(1, false)
-	set_collision_mask_value(3, true)
+	set_collision_mask_value(1, false)
+	set_collision_mask_value(Game.COLLISION_MASK.HURT_BOX, true)
 
 #### INIT ####
 
@@ -66,12 +67,14 @@ func _on_area_2d_entered(area: Area2D) -> void:
 		
 		overlapping_hurt_box.append(hurt_box)
 
+
 func _on_area_2d_exited(area: Area2D) -> void:
 	if area in overlapping_hurt_box:
 		overlapping_hurt_box.erase(area)
 		
 		if overlapping_hurt_box == [] and damage_inteval_timer:
 			damage_inteval_timer.stop()
+
 
 func _on_damage_interval_timer_timeout() -> void:
 	for hurt_box in overlapping_hurt_box:

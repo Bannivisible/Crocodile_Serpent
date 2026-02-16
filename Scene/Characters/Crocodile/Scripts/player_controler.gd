@@ -30,7 +30,6 @@ func _input(_event: InputEvent) -> void:
 		state_machine.set_state_with_string("Idle")
 
 
-
 func _on_Events_cs_interface_on_screen_changed(on_screen: bool) -> void:
 	velocity_component.dir = Vector2.ZERO
 	active = !on_screen

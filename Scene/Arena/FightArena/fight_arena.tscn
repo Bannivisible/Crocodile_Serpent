@@ -131,19 +131,19 @@ sources/0 = SubResource("TileSetAtlasSource_rtusd")
 [node name="FightArena" unique_id=929122509 instance=ExtResource("1_0264e")]
 script = ExtResource("2_1ato1")
 
-[node name="BackGround" type="Sprite2D" parent="." index="0" unique_id=437724842]
+[node name="BackGround" type="Sprite2D" parent="." index="1" unique_id=437724842]
 z_index = -100
 position = Vector2(987.00006, 576)
 rotation = -1.5707964
 scale = Vector2(22.951012, 50.14331)
 texture = SubResource("GradientTexture2D_rtusd")
 
-[node name="BackGroundTileMapLayer3" type="TileMapLayer" parent="." index="1" unique_id=1782493465]
+[node name="BackGroundTileMapLayer3" type="TileMapLayer" parent="." index="2" unique_id=1782493465]
 z_index = -100
 tile_map_data = PackedByteArray("AAAGAAEAAQABAAEAAAAHAAEAAQABAAEAAAAIAAEAAQABAAEAAAAJAAEAAQABAAEAAAAIAAAAAQABAAAAAAAJAAAAAQABAAAAAAAKAAEAAQACAAEAAAAHAAAAAQABAAAAAAAGAAAAAQABAAAAAAAHAAIAAQABAAEAAAAGAAIAAQABAAEAAAAFAAEAAQAAAAEAAAAFAAIAAQAAAAEAAAAGAAMAAQABAAIAAAAHAAMAAQABAAIAAAAIAAIAAQACAAEAAAAJAAIAAQABAAIAAAA=")
 tile_set = SubResource("TileSet_5lqx4")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." index="2" unique_id=1435186607]
+[node name="StaticBody2D" type="StaticBody2D" parent="." index="3" unique_id=1435186607]
 visible = false
 z_index = -10
 position = Vector2(961, 859)
@@ -157,11 +157,8 @@ texture = SubResource("GradientTexture2D_wp1n5")
 position = Vector2(0, -8.93692)
 shape = SubResource("RectangleShape2D_wp1n5")
 
-[node name="CSInterface" parent="UI" index="1" unique_id=784519379 instance=ExtResource("2_j78hf")]
-
 [node name="StateMachine" type="Node" parent="." index="4" unique_id=437999778]
 script = ExtResource("4_7lhif")
-set_to_default_state_at_ready = true
 metadata/_custom_type_script = "uid://bcmokx1bwyftw"
 
 [node name="Choose" type="Node" parent="StateMachine" index="0" unique_id=1512207871]
@@ -194,3 +191,5 @@ platform_wall_layers = 0
 
 [node name="Chimera" parent="." index="8" unique_id=417415811 instance=ExtResource("9_e5sod")]
 position = Vector2(1472, 628)
+
+[node name="CSInterface" parent="UI" parent_id_path=PackedInt32Array(1969216931) index="1" unique_id=784519379 instance=ExtResource("2_j78hf")]

@@ -159,6 +159,8 @@ func _on_cs_button_pressed(id: int) -> void:
 	
 	if cs_data.stat is WeaponStatistics:
 		_update_critical_value(cs_data.stat)
+	
+	Events.combat_skill_selected.emit(cs_data)
 
 
 func _on_player_statistics_stat_updated(stat_name: String) -> void:

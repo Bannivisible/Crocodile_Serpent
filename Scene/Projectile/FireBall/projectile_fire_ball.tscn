@@ -1,12 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://b56xaxpssthc3"]
+[gd_scene format=3 uid="uid://b56xaxpssthc3"]
 
 [ext_resource type="Script" uid="uid://cqje0vshhoojn" path="res://Scene/Projectile/FireBall/projectile_fire_ball.gd" id="1_6imha"]
 [ext_resource type="Script" uid="uid://ce7ave72wm32j" path="res://Ressources/Attack/attack_data.gd" id="2_gvjyp"]
 [ext_resource type="Script" uid="uid://bcmokx1bwyftw" path="res://StateMachine/state_machine.gd" id="2_ibf51"]
-[ext_resource type="Script" uid="uid://bey7t8h4m0yyp" path="res://StateMachine/state.gd" id="3_f8qhn"]
 [ext_resource type="Script" uid="uid://danilkv671r1y" path="res://Ressources/Attack/AttackType/attack_type.gd" id="3_oykcr"]
 [ext_resource type="Script" uid="uid://xxcmvr6maq23" path="res://Scene/Projectile/FireBall/appear.gd" id="3_qcdgd"]
-[ext_resource type="Script" uid="uid://de8bq1hhypgmu" path="res://StateMachine/States/linear_movement.gd" id="4_f8qhn"]
+[ext_resource type="Script" uid="uid://de8bq1hhypgmu" path="res://StateMachine/States/linear_movement_state.gd" id="4_f8qhn"]
 [ext_resource type="Script" uid="uid://drol6kwdx6avs" path="res://Scene/Projectile/FireBall/disapear.gd" id="5_b82d3"]
 
 [sub_resource type="Resource" id="Resource_d84a6"]
@@ -16,6 +15,7 @@ metadata/_custom_type_script = "uid://danilkv671r1y"
 
 [sub_resource type="Resource" id="Resource_lkaip"]
 script = ExtResource("2_gvjyp")
+add_damage = 25.0
 type = SubResource("Resource_d84a6")
 metadata/_custom_type_script = "uid://ce7ave72wm32j"
 
@@ -27,42 +27,36 @@ colors = PackedColorArray(1, 0, 0, 1, 1, 1, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_h6gav"]
 gradient = SubResource("Gradient_6imha")
-width = 32
-height = 32
 
-[node name="FireBall" type="Area2D"]
+[node name="FireBall" type="Area2D" unique_id=1799863302]
 script = ExtResource("1_6imha")
 attack_data = SubResource("Resource_lkaip")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1453953886]
 shape = SubResource("CircleShape2D_f8qhn")
 debug_color = Color(0.907015, 0.281748, 0.293615, 0.419608)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1876869771]
 texture = SubResource("GradientTexture2D_h6gav")
 
-[node name="StateMachine" type="Node" parent="."]
+[node name="StateMachine" type="Node" parent="." unique_id=1148728702]
 script = ExtResource("2_ibf51")
 metadata/_custom_type_script = "uid://bcmokx1bwyftw"
 
-[node name="Appear" type="Node" parent="StateMachine"]
+[node name="Appear" type="Node" parent="StateMachine" unique_id=1208750451]
 script = ExtResource("3_qcdgd")
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 
-[node name="LinearMovement" type="Node" parent="StateMachine"]
+[node name="LinearMovement" type="Node" parent="StateMachine" unique_id=1981393615]
 script = ExtResource("4_f8qhn")
-distance = 200.0
+distance = 700.0
 speed = 1.5
 ease_type = 2
 transition_type = 2
 metadata/_custom_type_script = "uid://de8bq1hhypgmu"
 
-[node name="Disapear" type="Node" parent="StateMachine"]
+[node name="Disapear" type="Node" parent="StateMachine" unique_id=209455624]
 script = ExtResource("5_b82d3")
-metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
-
-[node name="Desactivate" type="Node" parent="StateMachine"]
-script = ExtResource("3_f8qhn")
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

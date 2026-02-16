@@ -20,14 +20,17 @@ func _ready() -> void:
 func activate() -> void:
 	state_machine.set_state_with_string("Appear")
 
-func desactivate() -> void:
-	state_machine.set_state_with_string("Desactivate")
+
+func _disapear() -> void:
+	state_machine.set_state_with_string("Disapear")
 
 #### SIGNAL RESPONSES ####
 func _on_area_2d_entered(area: Area2D) -> void:
 	super._on_area_2d_entered(area)
+	
 	if area.owner.faction != faction:
-		state_machine.set_state_with_string("Disapear")
+		_disapear()
+
 
 func _on_LinearMovement_destination_reached() -> void:
 	state_machine.set_state_with_string("Disapear")

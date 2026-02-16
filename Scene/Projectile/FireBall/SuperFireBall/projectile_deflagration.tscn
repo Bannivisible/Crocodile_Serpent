@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://t1buea63lkc4"]
+
+[ext_resource type="PackedScene" uid="uid://b56xaxpssthc3" path="res://Scene/Projectile/FireBall/projectile_fire_ball.tscn" id="1_n0nvc"]
+[ext_resource type="Script" uid="uid://dhjrj2u16kcy3" path="res://Scene/Projectile/FireBall/SuperFireBall/projectile_super_fire_ball.gd" id="2_0k2qt"]
+[ext_resource type="Script" uid="uid://br2ifpft2i0xw" path="res://Scene/Projectile/FireBall/SuperFireBall/appear.gd" id="3_tejqg"]
+[ext_resource type="Script" uid="uid://dcwwwlr5gupk6" path="res://Scene/Projectile/FireBall/SuperFireBall/explode.gd" id="4_x73w7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v2h8a"]
+radius = 25.298222
+
+[node name="ProjectileDeflagration" unique_id=1801537751 instance=ExtResource("1_n0nvc")]
+script = ExtResource("2_0k2qt")
+p_ratio = 1.0
+
+[node name="CollisionShape2D" parent="." index="0" unique_id=1453953886]
+shape = SubResource("CircleShape2D_v2h8a")
+
+[node name="Appear" parent="StateMachine" parent_id_path=PackedInt32Array(1148728702) index="0" unique_id=1208750451]
+script = ExtResource("3_tejqg")
+
+[node name="LinearMovement" parent="StateMachine" parent_id_path=PackedInt32Array(1148728702) index="1" unique_id=1981393615]
+distance = 300.0
+speed = 0.75
+ease_type = 0
+transition_type = 0
+
+[node name="Explode" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1148728702) index="2" unique_id=78518647]
+script = ExtResource("4_x73w7")
+explosion_mult_range = 6.0
+damage_interval = 0.4
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="Timer" type="Timer" parent="StateMachine/Explode" index="0" unique_id=1493238872]
+wait_time = 2.5
+
+[connection signal="timeout" from="StateMachine/Explode/Timer" to="StateMachine/Explode" method="_on_timer_timeout"]

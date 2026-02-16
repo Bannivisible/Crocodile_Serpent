@@ -1,0 +1,125 @@
+[gd_scene format=3 uid="uid://dwli3wvromd61"]
+
+[ext_resource type="Script" uid="uid://dhb1e5iyhlyl5" path="res://Components/CombatSkill/Spell/Water/Geyser/Script/spell_geyser.gd" id="1_mjluh"]
+[ext_resource type="Resource" uid="uid://cktgvgilj7mww" path="res://Ressources/CombatSkillData/Spell/Water/Geyser/geyser_statistics.tres" id="2_q8h74"]
+[ext_resource type="Script" uid="uid://danilkv671r1y" path="res://Ressources/Attack/AttackType/attack_type.gd" id="2_wtlxq"]
+[ext_resource type="Script" uid="uid://c3c6ycd8hiv2p" path="res://Components/CombatSkill/Spell/hit_box.gd" id="4_q8h74"]
+[ext_resource type="Script" uid="uid://cd5i6fer42vww" path="res://Components/CombatSkill/Spell/Water/Geyser/controler.gd" id="9_msyc4"]
+[ext_resource type="Script" uid="uid://d38qkfrf1wj1a" path="res://StateMachine/state_label.gd" id="9_qduu2"]
+[ext_resource type="Script" uid="uid://ce7ave72wm32j" path="res://Ressources/Attack/attack_data.gd" id="9_vcv6m"]
+[ext_resource type="Script" uid="uid://bcmokx1bwyftw" path="res://StateMachine/state_machine.gd" id="10_5ekjd"]
+[ext_resource type="Script" uid="uid://dh526fg0u7duu" path="res://Components/CombatSkill/Spell/Water/Geyser/Script/desactivate.gd" id="11_bf0ja"]
+[ext_resource type="Script" uid="uid://cvkoqrytxj66u" path="res://Components/CombatSkill/Spell/Water/Geyser/Script/charge.gd" id="12_q75wl"]
+[ext_resource type="Script" uid="uid://dtfutyetajtjj" path="res://Components/CombatSkill/Spell/Water/Geyser/Script/cast.gd" id="13_wwxgk"]
+
+[sub_resource type="Resource" id="Resource_uwwfb"]
+script = ExtResource("2_wtlxq")
+type = 4
+metadata/_custom_type_script = "uid://danilkv671r1y"
+
+[sub_resource type="Curve" id="Curve_7oeuo"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.25742576, 0.23595512), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_aqxpk"]
+colors = PackedColorArray(0, 0, 0.839216, 1, 0.0941176, 1, 1, 0.772549)
+
+[sub_resource type="Resource" id="Resource_gx4b4"]
+script = ExtResource("2_wtlxq")
+type = 4
+metadata/_custom_type_script = "uid://danilkv671r1y"
+
+[sub_resource type="Resource" id="Resource_4aa4s"]
+script = ExtResource("9_vcv6m")
+mult_damage = 0.25
+type = SubResource("Resource_gx4b4")
+metadata/_custom_type_script = "uid://ce7ave72wm32j"
+
+[sub_resource type="Gradient" id="Gradient_0blkd"]
+colors = PackedColorArray(0, 1, 1, 1, 0, 0, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_aqxpk"]
+gradient = SubResource("Gradient_0blkd")
+width = 16
+height = 16
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k3fl0"]
+particle_flag_disable_z = true
+angle_min = -563.3
+angle_max = 536.0
+inherit_velocity_ratio = 0.292
+velocity_pivot = Vector3(-100, 0, 0)
+initial_velocity_max = 334.38
+gravity = Vector3(0, 98, 0)
+
+[node name="GeyserSpell" type="Node2D" unique_id=393425924]
+script = ExtResource("1_mjluh")
+duration = 7.0
+stat = ExtResource("2_q8h74")
+type = SubResource("Resource_uwwfb")
+metadata/_edit_lock_ = true
+
+[node name="Line2D" type="Line2D" parent="." unique_id=436396684]
+points = PackedVector2Array(0, 0, 0, 0, 0, 0)
+width = 15.0
+width_curve = SubResource("Curve_7oeuo")
+gradient = SubResource("Gradient_aqxpk")
+begin_cap_mode = 2
+
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=131382593]
+enabled = false
+target_position = Vector2(0, 0)
+collision_mask = 6
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="HitBox" type="Area2D" parent="." unique_id=1439694550 node_paths=PackedStringArray("spell")]
+script = ExtResource("4_q8h74")
+spell = NodePath("..")
+attack_data = SubResource("Resource_4aa4s")
+metadata/_custom_type_script = "uid://da3cqoomwyp1o"
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1070517859]
+emitting = false
+amount_ratio = 0.3977
+texture = SubResource("GradientTexture2D_aqxpk")
+process_material = SubResource("ParticleProcessMaterial_k3fl0")
+
+[node name="StateMachine" type="Node2D" parent="." unique_id=1287588101 node_paths=PackedStringArray("current_state")]
+script = ExtResource("10_5ekjd")
+current_state = NodePath("Desactivate")
+
+[node name="Desactivate" type="Node" parent="StateMachine" unique_id=1620008149]
+script = ExtResource("11_bf0ja")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="Charge" type="Node" parent="StateMachine" unique_id=1332523288]
+script = ExtResource("12_q75wl")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="Cast" type="Node" parent="StateMachine" unique_id=2076129432]
+script = ExtResource("13_wwxgk")
+metadata/_custom_type_script = "uid://bcmokx1bwyftw"
+
+[node name="Timer" type="Timer" parent="StateMachine/Cast" unique_id=1230834238]
+one_shot = true
+
+[node name="DamageInterval" type="Timer" parent="StateMachine/Cast" unique_id=1772897159]
+wait_time = 0.25
+
+[node name="StateLabel" type="Label" parent="StateMachine" unique_id=1363662275]
+offset_left = 41.0
+offset_top = 22.0
+offset_right = 334.0
+offset_bottom = 180.0
+theme_override_font_sizes/font_size = 32
+text = "ezfef"
+script = ExtResource("9_qduu2")
+metadata/_custom_type_script = "uid://d38qkfrf1wj1a"
+
+[node name="Controler" type="Node" parent="." unique_id=223276975]
+script = ExtResource("9_msyc4")
+metadata/_custom_type_script = "uid://dhau74o4l0rjm"
+
+[connection signal="timeout" from="StateMachine/Cast/Timer" to="StateMachine/Cast" method="_on_timer_timeout"]
+[connection signal="timeout" from="StateMachine/Cast/DamageInterval" to="StateMachine/Cast" method="_on_damage_interval_timeout"]
