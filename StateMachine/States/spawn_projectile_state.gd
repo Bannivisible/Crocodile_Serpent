@@ -3,7 +3,7 @@ class_name SpawnProjectileState
 
 @export var projectile_scene: PackedScene
 
-@export var pos: Vector2= Vector2(100.0, -150.0)
+@export var pos: Vector2= Vector2.ZERO
 @export_enum("Global", "Owner") var pos_mode: String= "Owner"
 
 @export var rot: float

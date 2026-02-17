@@ -1,16 +1,15 @@
 [gd_scene format=3 uid="uid://dwli3wvromd61"]
 
-[ext_resource type="Script" uid="uid://dhb1e5iyhlyl5" path="res://Components/CombatSkill/Spell/Water/Geyser/Script/spell_geyser.gd" id="1_mjluh"]
+[ext_resource type="Script" uid="uid://dhb1e5iyhlyl5" path="res://Components/CombatSkill/Spell/Water/GeyserSpell/Script/spell_geyser.gd" id="1_mjluh"]
 [ext_resource type="Resource" uid="uid://cktgvgilj7mww" path="res://Ressources/CombatSkillData/Spell/Water/Geyser/geyser_statistics.tres" id="2_q8h74"]
 [ext_resource type="Script" uid="uid://danilkv671r1y" path="res://Ressources/Attack/AttackType/attack_type.gd" id="2_wtlxq"]
 [ext_resource type="Script" uid="uid://c3c6ycd8hiv2p" path="res://Components/CombatSkill/Spell/hit_box.gd" id="4_q8h74"]
-[ext_resource type="Script" uid="uid://cd5i6fer42vww" path="res://Components/CombatSkill/Spell/Water/Geyser/controler.gd" id="9_msyc4"]
-[ext_resource type="Script" uid="uid://d38qkfrf1wj1a" path="res://StateMachine/state_label.gd" id="9_qduu2"]
+[ext_resource type="Script" uid="uid://cd5i6fer42vww" path="res://Components/CombatSkill/Spell/Water/GeyserSpell/controler.gd" id="9_msyc4"]
 [ext_resource type="Script" uid="uid://ce7ave72wm32j" path="res://Ressources/Attack/attack_data.gd" id="9_vcv6m"]
 [ext_resource type="Script" uid="uid://bcmokx1bwyftw" path="res://StateMachine/state_machine.gd" id="10_5ekjd"]
-[ext_resource type="Script" uid="uid://dh526fg0u7duu" path="res://Components/CombatSkill/Spell/Water/Geyser/Script/desactivate.gd" id="11_bf0ja"]
-[ext_resource type="Script" uid="uid://cvkoqrytxj66u" path="res://Components/CombatSkill/Spell/Water/Geyser/Script/charge.gd" id="12_q75wl"]
-[ext_resource type="Script" uid="uid://dtfutyetajtjj" path="res://Components/CombatSkill/Spell/Water/Geyser/Script/cast.gd" id="13_wwxgk"]
+[ext_resource type="Script" uid="uid://dh526fg0u7duu" path="res://Components/CombatSkill/Spell/Water/GeyserSpell/Script/desactivate.gd" id="11_bf0ja"]
+[ext_resource type="Script" uid="uid://cvkoqrytxj66u" path="res://Components/CombatSkill/Spell/Water/GeyserSpell/Script/charge.gd" id="12_q75wl"]
+[ext_resource type="Script" uid="uid://dtfutyetajtjj" path="res://Components/CombatSkill/Spell/Water/GeyserSpell/Script/cast.gd" id="13_wwxgk"]
 
 [sub_resource type="Resource" id="Resource_uwwfb"]
 script = ExtResource("2_wtlxq")
@@ -85,7 +84,7 @@ amount_ratio = 0.3977
 texture = SubResource("GradientTexture2D_aqxpk")
 process_material = SubResource("ParticleProcessMaterial_k3fl0")
 
-[node name="StateMachine" type="Node2D" parent="." unique_id=1287588101 node_paths=PackedStringArray("current_state")]
+[node name="StateMachine" type="Node" parent="." unique_id=1883089290 node_paths=PackedStringArray("current_state")]
 script = ExtResource("10_5ekjd")
 current_state = NodePath("Desactivate")
 
@@ -106,16 +105,6 @@ one_shot = true
 
 [node name="DamageInterval" type="Timer" parent="StateMachine/Cast" unique_id=1772897159]
 wait_time = 0.25
-
-[node name="StateLabel" type="Label" parent="StateMachine" unique_id=1363662275]
-offset_left = 41.0
-offset_top = 22.0
-offset_right = 334.0
-offset_bottom = 180.0
-theme_override_font_sizes/font_size = 32
-text = "ezfef"
-script = ExtResource("9_qduu2")
-metadata/_custom_type_script = "uid://d38qkfrf1wj1a"
 
 [node name="Controler" type="Node" parent="." unique_id=223276975]
 script = ExtResource("9_msyc4")

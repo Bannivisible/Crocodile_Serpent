@@ -2,13 +2,16 @@
 
 [ext_resource type="Script" uid="uid://08bxve7rviu1" path="res://Components/CombatSkill/Spell/Electricity/LightningCageSpell/lightning_cage_spell.gd" id="1_ufs5w"]
 [ext_resource type="Resource" uid="uid://dii3cc3v5xsna" path="res://Ressources/CombatSkillData/Spell/Lightning/LightningCage/lightning_cage_statistics.tres" id="2_0kds0"]
-[ext_resource type="Script" uid="uid://dyglpbhv533ei" path="res://Ressources/ConditionForAction/condition_for_action.gd" id="2_1nhht"]
 [ext_resource type="Shader" uid="uid://batc7gqofvjwu" path="res://Components/CombatSkill/Spell/Electricity/LightningCageSpell/blinking.gdshader" id="3_cr2f6"]
-[ext_resource type="Resource" uid="uid://djivrp1afebnt" path="res://Components/CombatSkill/Spell/Electricity/LightningCageSpell/add_sphere.tres" id="3_xwg1o"]
 [ext_resource type="Shader" uid="uid://fqayuhjem0hg" path="res://Components/CombatSkill/Spell/Electricity/LightningCageSpell/lightning_cage_spell_line_2d.gdshader" id="4_4n4qg"]
 [ext_resource type="Script" uid="uid://ce7ave72wm32j" path="res://Ressources/Attack/attack_data.gd" id="7_1nhht"]
 [ext_resource type="Script" uid="uid://danilkv671r1y" path="res://Ressources/Attack/AttackType/attack_type.gd" id="8_0kds0"]
+[ext_resource type="Script" uid="uid://bcmokx1bwyftw" path="res://StateMachine/state_machine.gd" id="8_ae8xk"]
+[ext_resource type="Script" uid="uid://cwmi3g3xc85au" path="res://StateMachine/States/spawn_projectile_state.gd" id="9_aeu6h"]
+[ext_resource type="Script" uid="uid://bey7t8h4m0yyp" path="res://StateMachine/state.gd" id="10_3xivn"]
 [ext_resource type="Script" uid="uid://da3cqoomwyp1o" path="res://Components/CombatSkill/hit_box.gd" id="10_hyi0x"]
+[ext_resource type="PackedScene" uid="uid://7waxkd4kq5sy" path="res://Scene/Projectile/LightningSphere/lightning_sphere.tscn" id="11_aeu6h"]
+[ext_resource type="Script" uid="uid://d34pga1ehnp01" path="res://Components/CombatSkill/Spell/Electricity/LightningCageSpell/controler.gd" id="12_3xivn"]
 
 [sub_resource type="Resource" id="Resource_l5xkk"]
 script = ExtResource("8_0kds0")
@@ -45,12 +48,11 @@ script = ExtResource("7_1nhht")
 type = SubResource("Resource_hyi0x")
 metadata/_custom_type_script = "uid://ce7ave72wm32j"
 
-[node name="SpellLightningCage" type="Node2D" unique_id=177501967]
+[node name="LightningCageSpell" type="Node2D" unique_id=177501967]
 script = ExtResource("1_ufs5w")
 stat = ExtResource("2_0kds0")
 type = SubResource("Resource_l5xkk")
 gap = Vector2(0, -100)
-conditions_for_actions_array = Array[ExtResource("2_1nhht")]([ExtResource("3_xwg1o")])
 
 [node name="Cage" type="Node2D" parent="." unique_id=1531420479]
 
@@ -70,4 +72,26 @@ sharp_limit = 200.0
 [node name="HitBox" type="Area2D" parent="Cage" unique_id=1227643224]
 script = ExtResource("10_hyi0x")
 attack_data = SubResource("Resource_yfi6u")
+damage_inteval = 0.6
 metadata/_custom_type_script = "uid://da3cqoomwyp1o"
+
+[node name="StateMachine" type="Node" parent="." unique_id=1211320450]
+script = ExtResource("8_ae8xk")
+metadata/_custom_type_script = "uid://bcmokx1bwyftw"
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=437274446]
+script = ExtResource("10_3xivn")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="SpawnProjectileState" type="Node" parent="StateMachine" unique_id=2019228098]
+script = ExtResource("9_aeu6h")
+projectile_scene = ExtResource("11_aeu6h")
+metadata/_custom_type_script = "uid://cwmi3g3xc85au"
+
+[node name="Controler" type="Node" parent="." unique_id=578449294]
+script = ExtResource("12_3xivn")
+metadata/_custom_type_script = "uid://dhau74o4l0rjm"
+
+[node name="DamageIntervalTimer" type="Timer" parent="." unique_id=57727354]
+
+[connection signal="projectile_spawn" from="StateMachine/SpawnProjectileState" to="." method="_on_spawn_projectile_state_projectile_spawn"]

@@ -43,18 +43,6 @@ signal target_reached(pos: Vector2)
 signal target_changed(pos: Vector2)
 
 #### BUILT-IN ####
-func _ready() -> void:
-	#Events.cs_interface_on_screen_changed.connect(func(on_screen):
-		#if on_screen: 
-			#immobilize()
-		#else :
-			#free_immobilize()
-			#)
-	
-	facing_direction_changed.connect(_on_face_dir_changed)
-	#state_machine_x.state_changed_recur.connect(_on_state_machine_state_change_recur)
-	#state_machine_y.state_changed_recur.connect(_on_state_machine_state_change_recur)
-
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
 	
@@ -63,26 +51,6 @@ func _physics_process(delta: float) -> void:
 	
 	if not character.is_on_floor() and suffer_gravity:
 		apply_gravity(delta)
-	
-	#if character.is_on_floor() and $StateMachineY/Air/Fall.is_current_state():
-		#state_machine_y.set_state($StateMachineY/Grounded/Idle)
-	#
-	#elif character.velocity.y > 0:
-		#if $StateMachineY/Grounded.is_current_state() or $StateMachineY/Air/Jump.is_current_state():
-			#state_machine_y.set_state_with_string("Fall")
-
-
-#func _update_animation() -> void:
-	#var x_state_name: String= state_machine_x.get_deepest_state().name
-	#var y_state_name: String= state_machine_y.get_deepest_state().name
-	#var anim_name: String= x_state_name + "-" + y_state_name
-	#
-	#if anim_player.has_animation(anim_name):
-		#anim_player.play(anim_name)
-	#elif anim_player.has_animation(y_state_name):
-		#anim_player.play(y_state_name)
-	#elif anim_player.has_animation(x_state_name):
-		#anim_player.play(x_state_name)
 
 
 ### SETTER ###
@@ -175,14 +143,6 @@ func _on_dir_changed(_dir: Vector2) -> void:
 	# X axis
 	if dir.x != 0.0:
 		facing_direction.x = sign(dir.x)
-
-
-func _on_face_dir_changed(_dir: Vector2) -> void:
-	if facing_node:
-		facing_node.scale.x = facing_direction.x
-
-#func _on_state_machine_state_change_recur(_state: State, _deep_state: State) -> void:
-	#_update_animation()
 
 
 func _on_charac_stat_stat_updated() -> void:

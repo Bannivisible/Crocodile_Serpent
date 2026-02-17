@@ -1,8 +1,16 @@
 [gd_scene format=3 uid="uid://b74kbwhwtmiu5"]
 
 [ext_resource type="Script" uid="uid://cfbujs1d0b1s6" path="res://Components/VelocityComponent/velocity_component.gd" id="1_64anw"]
+[ext_resource type="Script" uid="uid://c81bvv7rpwtss" path="res://Components/VelocityComponent/scale_x_face_inverser.gd" id="2_q24de"]
+[ext_resource type="Script" uid="uid://sanv8io0pqwr" path="res://Components/VelocityComponent/pos_x_face_inverser.gd" id="3_2un0o"]
 
 [node name="VelocityComponent" type="Node2D" unique_id=1212142288]
 script = ExtResource("1_64anw")
+
+[node name="ScaleXFaceInverser" type="Node" parent="." unique_id=1314762492]
+script = ExtResource("2_q24de")
+
+[node name="PosXFaceInverser" type="Node" parent="." unique_id=1679766930]
+script = ExtResource("3_2un0o")
 
 [connection signal="dir_changed" from="." to="." method="_on_dir_changed"]

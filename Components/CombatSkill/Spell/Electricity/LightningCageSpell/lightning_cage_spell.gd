@@ -1,5 +1,8 @@
 extends Spell
-class_name SpellLightnngCage
+class_name LightnngCageSpell
+
+
+@export var max_lightning_sphere: int= 7
 
 @onready var cage: Node2D = $Cage
 
@@ -11,21 +14,23 @@ class_name SpellLightnngCage
 @onready var line_2d: Line2D = $Cage/Line2D
 
 var points: Array[Vector2]
+var lightning_sphere_array: Array[LightningSphere]= []
 
-var lightning_sphere_signals_connected := false
+var cage_coll_shape: Node2D
 
+#### BUILT-IN ####
 func _ready() -> void:
+	Events.object_dispawn.connect(_on_Event_object_dispawn)
+	
 	remove_child(cage)
 	get_tree().root.get_child(0).add_child(cage)
 
+
+#### LOGIC ####
 func append_point() -> void:
-	if not lightning_sphere_signals_connected: _connect_sphere_disapear()
-	
-	if context.has("factory"):
-		var factory: ProjectileFactory= context["factory"]
-		if points.size() >= factory.pool_size:
-			_remove_first_point()
-			_remove_first_lightning_sphere()
+	if points.size() >= max_lightning_sphere:
+		_remove_first_point()
+		_remove_first_lightning_sphere()
 	
 	var pos: Vector2= self.global_position
 	points.append(pos)
@@ -33,32 +38,35 @@ func append_point() -> void:
 	
 	_update_all()
 
+
 func _remove_first_lightning_sphere() -> void:
-	var factory: ProjectileFactory= context["factory"]
-	var first_sphere: LightningSphere= factory.active_instance[0]
-	factory.desactivate_instance(first_sphere)
+	lightning_sphere_array[0].queue_free()
+	lightning_sphere_array.remove_at(0)
+
 
 func _update_all() -> void:
 	_update_point_colision_cage()
 	_update_point_line_2d()
 	_update_point_polygone_cage()
 
+
 func _update_point_colision_cage() -> void:
 	if points.size() < 2: return
 	if points.size() == 2:
-		if hit_box.get_child_count() == 1: hit_box.get_child(0).queue_free()
 		
-		var collision = _create_segment_collision()
-		hit_box.add_child(collision)
+		cage_coll_shape = _create_segment_collision()
+		hit_box.add_child(cage_coll_shape)
 	
 	elif points.size() == 3:
-		if hit_box.get_child_count() == 1: hit_box.get_child(0).queue_free()
+		if cage_coll_shape is CollisionShape2D:
+			cage_coll_shape.queue_free()
 		
-		var collision = _create_polygone_collision()
-		hit_box.add_child(collision)
+		cage_coll_shape = _create_polygone_collision()
+		hit_box.add_child(cage_coll_shape)
 	
 	else :
 		collision_polygon_2d.polygon = points
+
 
 func _create_segment_collision() -> CollisionShape2D:
 		var collision := CollisionShape2D.new()
@@ -68,17 +76,21 @@ func _create_segment_collision() -> CollisionShape2D:
 		collision.shape = shape
 		return collision
 
+
 func _create_polygone_collision() -> CollisionPolygon2D:
 	collision_polygon_2d = CollisionPolygon2D.new()
 	collision_polygon_2d.polygon = points
 	
 	return collision_polygon_2d
 
+
 func _update_point_polygone_cage() -> void:
 	polygon_2d.polygon = points
 
+
 func _update_point_line_2d() -> void:
 	line_2d.points = points
+
 
 func _sort_points() -> void:
 	var center = Vector2.ZERO
@@ -92,30 +104,29 @@ func _sort_points() -> void:
 		return angle_a < angle_b
 	)
 
+
 func _remove_first_point() -> void:
-	if not context.has("factory"): return
-	var factory: ProjectileFactory= context["factory"]
-	var pos: Vector2= factory.get_first_instance().global_position
+	var pos: Vector2= lightning_sphere_array[0].global_position
 	
 	points.erase(pos)
 
-func _connect_sphere_disapear() -> void:
-	if not context.has("factory"): return
-	var factory: ProjectileFactory= context["factory"]
-	
-	for instance in factory.pool:
-		var lightning_sphere: LightningSphere= instance
-		lightning_sphere.disapear.connect(_on_lightning_sphere_disapear)
-	
-	lightning_sphere_signals_connected = true
 
-func _on_lightning_sphere_disapear(sphere: LightningSphere) -> void:
+func _input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("bent_down"):
+		print(hit_box.overlapping_hurt_box)
+		print(hit_box.damage_inteval_timer)
+
+
+#### SIGNALS RESPONSES ####
+
+func _on_Event_object_dispawn(sphere: Node2D) -> void:
+	if not sphere in lightning_sphere_array: return
+	
 	points.erase(sphere.global_position)
 	_sort_points()
 	_update_all()
 
-#func _get_pos_id(pos: Vector2) -> int:
-	#for i in points.size():
-		#if pos == points[i]:
-			#return i
-	#return 0
+
+func _on_spawn_projectile_state_projectile_spawn(projectile: Projectile) -> void:
+	append_point()
+	lightning_sphere_array.append(projectile)

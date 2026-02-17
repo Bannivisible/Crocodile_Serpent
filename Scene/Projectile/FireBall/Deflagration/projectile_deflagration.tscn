@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://t1buea63lkc4"]
 
 [ext_resource type="PackedScene" uid="uid://b56xaxpssthc3" path="res://Scene/Projectile/FireBall/projectile_fire_ball.tscn" id="1_n0nvc"]
-[ext_resource type="Script" uid="uid://dhjrj2u16kcy3" path="res://Scene/Projectile/FireBall/SuperFireBall/projectile_super_fire_ball.gd" id="2_0k2qt"]
-[ext_resource type="Script" uid="uid://br2ifpft2i0xw" path="res://Scene/Projectile/FireBall/SuperFireBall/appear.gd" id="3_tejqg"]
-[ext_resource type="Script" uid="uid://dcwwwlr5gupk6" path="res://Scene/Projectile/FireBall/SuperFireBall/explode.gd" id="4_x73w7"]
+[ext_resource type="Script" uid="uid://dhjrj2u16kcy3" path="res://Scene/Projectile/FireBall/Deflagration/projectile_super_fire_ball.gd" id="2_0k2qt"]
+[ext_resource type="Script" uid="uid://br2ifpft2i0xw" path="res://Scene/Projectile/FireBall/Deflagration/appear.gd" id="3_tejqg"]
+[ext_resource type="Script" uid="uid://dcwwwlr5gupk6" path="res://Scene/Projectile/FireBall/Deflagration/explode.gd" id="4_x73w7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v2h8a"]
 radius = 25.298222

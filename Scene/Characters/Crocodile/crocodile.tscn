@@ -2178,6 +2178,12 @@ shape = SubResource("CapsuleShape2D_pp85c")
 gravity = 3000.0
 facing_node = NodePath("../Skeleton2D")
 
+[node name="ScaleXFaceInverser" parent="VelocityComponent" index="0" unique_id=1314762492 node_paths=PackedStringArray("facing_nodes")]
+facing_nodes = [NodePath("../../Skeleton2D"), NodePath("../../SpellManager"), NodePath("../../WeaponManager")]
+
+[node name="PosXFaceInverser" parent="VelocityComponent" index="1" unique_id=1679766930 node_paths=PackedStringArray("facing_nodes")]
+facing_nodes = [NodePath("../../SpellManager"), NodePath("../../WeaponManager")]
+
 [node name="ArmBackGroup" type="Node2D" parent="SpriteContainer" parent_id_path=PackedInt32Array(791091049) index="0" unique_id=2065276084]
 z_index = -1
 
@@ -2378,8 +2384,8 @@ texture = SubResource("AtlasTexture_hb14a")
 
 [node name="StrandBack" type="Sprite2D" parent="SpriteContainer/HeadGroup" index="2" unique_id=194762747]
 position = Vector2(-43.347675, 16.778244)
-rotation = -0.3490656
-scale = Vector2(1.0034372, 0.9990675)
+rotation = -0.34906557
+scale = Vector2(1.0034369, 0.99906594)
 texture = SubResource("AtlasTexture_weadw")
 offset = Vector2(20.086979, -10.858177)
 
@@ -2434,8 +2440,8 @@ offset = Vector2(-5.667, 21)
 
 [node name="FootFront" type="Sprite2D" parent="SpriteContainer/LegFrontGroup" index="2" unique_id=1521634280]
 position = Vector2(-67.02341, -50.897106)
-rotation = -0.00049183465
-scale = Vector2(0.99953145, 0.99953145)
+rotation = -0.0004918343
+scale = Vector2(0.99953216, 0.99953216)
 texture = SubResource("AtlasTexture_7cm0d")
 offset = Vector2(2.2518923, 17.591896)
 
@@ -2631,7 +2637,7 @@ remote_path = NodePath("../../../../../SpriteContainer/LegFrontGroup/LegFront")
 [node name="FootFront" type="Bone2D" parent="Skeleton2D/Center/ThighFront/LegFront" index="1" unique_id=1025153005]
 position = Vector2(-0.78639984, 45.13577)
 rotation = -0.0702153
-scale = Vector2(0.9998412, 0.9998412)
+scale = Vector2(0.999842, 0.999842)
 rest = Transform2D(0.9973769, -0.07014619, 0.07014619, 0.9973769, -0.78639984, 45.13577)
 auto_calculate_length_and_angle = false
 length = 26.667
