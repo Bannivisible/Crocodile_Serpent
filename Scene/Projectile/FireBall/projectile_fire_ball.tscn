@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b56xaxpssthc3"]
 
 [ext_resource type="Script" uid="uid://cqje0vshhoojn" path="res://Scene/Projectile/FireBall/projectile_fire_ball.gd" id="1_6imha"]
-[ext_resource type="Script" uid="uid://ce7ave72wm32j" path="res://Ressources/Attack/attack_data.gd" id="2_gvjyp"]
+[ext_resource type="Script" uid="uid://ce7ave72wm32j" path="res://Ressources/Attack/AttackData/attack_data.gd" id="2_gvjyp"]
 [ext_resource type="Script" uid="uid://bcmokx1bwyftw" path="res://StateMachine/state_machine.gd" id="2_ibf51"]
 [ext_resource type="Script" uid="uid://danilkv671r1y" path="res://Ressources/Attack/AttackType/attack_type.gd" id="3_oykcr"]
 [ext_resource type="Script" uid="uid://xxcmvr6maq23" path="res://Scene/Projectile/FireBall/appear.gd" id="3_qcdgd"]

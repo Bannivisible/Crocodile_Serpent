@@ -1,6 +1,8 @@
 extends Area2D
 class_name HitBox
 
+@export var cs_stat: Statistics
+
 @export var faction: HealthComponent.FACTIONS
 
 @export var attack_data: AttackData
@@ -45,8 +47,6 @@ func _init_damage_inteval_timer() -> void:
 
 #### LOGICS ####
 
-func _compute_raw_damage() -> float:
-	return attack_data.add_damage * attack_data.mult_damage
 
 func modify_label_damage(_label: Label) -> void:
 	return
@@ -58,8 +58,7 @@ func _on_area_2d_entered(area: Area2D) -> void:
 		var hurt_box: HurtBox= area
 		if hurt_box.owner.faction == faction: return
 		
-		
-		var damage: float= _compute_raw_damage()
+		var damage: float= attack_data.compute_damage(cs_stat)
 		hurt_box.hurt(damage, self)
 		
 		if damage_inteval_timer and overlapping_hurt_box == []:
@@ -78,5 +77,5 @@ func _on_area_2d_exited(area: Area2D) -> void:
 
 func _on_damage_interval_timer_timeout() -> void:
 	for hurt_box in overlapping_hurt_box:
-		var damage: float= _compute_raw_damage()
+		var damage: float= attack_data.compute_damage(cs_stat)
 		hurt_box.hurt(damage, self)

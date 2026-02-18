@@ -3,6 +3,9 @@ class_name SpawnProjectileState
 
 @export var projectile_scene: PackedScene
 
+@export var cs_stat: Statistics
+@export var attack_data: AttackData
+
 @export var pos: Vector2= Vector2.ZERO
 @export_enum("Global", "Owner") var pos_mode: String= "Owner"
 
@@ -33,11 +36,19 @@ func _get_projectile_pos() -> Vector2:
 	return proj_pos
 
 
+func _setup_projectile(projectile: Projectile) -> void:
+	projectile.cs_stat = cs_stat
+	
+	if attack_data: projectile.attack_data = attack_data
+
+
 #### INHERITANCE ####
 func enter() -> void:
 	var projectile: Projectile= projectile_scene.instantiate()
 	projectile.global_position = _get_projectile_pos()
 	projectile.rotation = rot
+	
+	_setup_projectile(projectile)
 	
 	Events.request_spawn_object.emit(projectile)
 	projectile_spawn.emit(projectile)

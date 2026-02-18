@@ -111,12 +111,6 @@ func _remove_first_point() -> void:
 	points.erase(pos)
 
 
-func _input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("bent_down"):
-		print(hit_box.overlapping_hurt_box)
-		print(hit_box.damage_inteval_timer)
-
-
 #### SIGNALS RESPONSES ####
 
 func _on_Event_object_dispawn(sphere: Node2D) -> void:
