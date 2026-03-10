@@ -7,11 +7,16 @@ class_name AttackData
 
 @export var type: AttackType
 
-@warning_ignore("unused_parameter")
-func compute_damage(cs_stat: Statistics) -> float:
-	return add_damage * mult_damage
+
+func _get_raw_damage(charac_stat: CharacStatistics ,_cs_stat: Statistics) -> float:
+	if charac_stat: return charac_stat.strenght + add_damage
+	else : return add_damage
 
 
-@warning_ignore("unused_parameter")
-func modify_label_damage(label: Label) -> void:
+func compute_damage(charac_stat: CharacStatistics ,_cs_stat: Statistics) -> float:
+	var damage: float= _get_raw_damage(charac_stat, _cs_stat) * mult_damage
+	return damage
+
+
+func modify_label_damage(_label: Label) -> void:
 	return

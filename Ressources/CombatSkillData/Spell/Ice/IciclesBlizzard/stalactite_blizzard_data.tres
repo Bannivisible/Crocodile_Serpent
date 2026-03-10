@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="CombatSkillData" format=3 uid="uid://dgngahmttbfgp"]
+
+[ext_resource type="Script" uid="uid://db4jcia3pwpd3" path="res://Ressources/CombatSkillData/combat_skill_data.gd" id="1_gsgvq"]
+[ext_resource type="PackedScene" uid="uid://m00q23ijbb7v" path="res://Components/CombatSkill/Spell/Ice/StalactiteBlizzard/stalactite_blizzard_spell.tscn" id="1_ratc7"]
+[ext_resource type="Resource" uid="uid://c2u3oesmixhw7" path="res://Ressources/CombatSkillData/Spell/Ice/IciclesBlizzard/stalactite_blizzard_statistics.tres" id="3_umofa"]
+
+[sub_resource type="Gradient" id="Gradient_gsgvq"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(4.1392445e-06, 0.5943242, 0.7970143, 1, 0.00035598705, 0.03731445, 0.2682576, 1, 0, 0.59607846, 0.79607844, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jkvbd"]
+gradient = SubResource("Gradient_gsgvq")
+
+[resource]
+script = ExtResource("1_gsgvq")
+name = "Blizzard de stalactites"
+icone = SubResource("GradientTexture2D_jkvbd")
+description = "Un blizzard de statlactites"
+stat = ExtResource("3_umofa")
+combat_skill_scene = ExtResource("1_ratc7")
+metadata/_custom_type_script = "uid://db4jcia3pwpd3"

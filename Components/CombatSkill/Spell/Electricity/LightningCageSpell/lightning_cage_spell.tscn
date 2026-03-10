@@ -4,6 +4,7 @@
 [ext_resource type="Resource" uid="uid://dii3cc3v5xsna" path="res://Ressources/CombatSkillData/Spell/Lightning/LightningCage/lightning_cage_statistics.tres" id="2_0kds0"]
 [ext_resource type="Shader" uid="uid://batc7gqofvjwu" path="res://Components/CombatSkill/Spell/Electricity/LightningCageSpell/blinking.gdshader" id="3_cr2f6"]
 [ext_resource type="Shader" uid="uid://fqayuhjem0hg" path="res://Components/CombatSkill/Spell/Electricity/LightningCageSpell/lightning_cage_spell_line_2d.gdshader" id="4_4n4qg"]
+[ext_resource type="Resource" uid="uid://cnl4cmnu6nf6p" path="res://Scene/Characters/PlayableCharacter/Crocodile/Ressources/crocodile_stat.tres" id="7_skbvi"]
 [ext_resource type="Script" uid="uid://danilkv671r1y" path="res://Ressources/Attack/AttackType/attack_type.gd" id="8_0kds0"]
 [ext_resource type="Script" uid="uid://bcmokx1bwyftw" path="res://StateMachine/state_machine.gd" id="8_ae8xk"]
 [ext_resource type="Script" uid="uid://cwmi3g3xc85au" path="res://StateMachine/States/spawn_projectile_state.gd" id="9_aeu6h"]
@@ -63,7 +64,6 @@ metadata/_custom_type_script = "uid://doagmyu4ylk33"
 script = ExtResource("1_ufs5w")
 stat = ExtResource("2_0kds0")
 type = SubResource("Resource_l5xkk")
-gap = Vector2(0, -100)
 
 [node name="Cage" type="Node2D" parent="." unique_id=1531420479]
 
@@ -80,8 +80,10 @@ joint_mode = 2
 end_cap_mode = 2
 sharp_limit = 200.0
 
-[node name="HitBox" type="Area2D" parent="Cage" unique_id=1227643224]
+[node name="HitBox" type="Area2D" parent="Cage" unique_id=1227643224 node_paths=PackedStringArray("combat_skill")]
 script = ExtResource("10_hyi0x")
+combat_skill = NodePath("../..")
+charac_stat = ExtResource("7_skbvi")
 cs_stat = ExtResource("2_0kds0")
 attack_data = SubResource("Resource_3xivn")
 damage_inteval = 0.6
@@ -95,8 +97,9 @@ metadata/_custom_type_script = "uid://bcmokx1bwyftw"
 script = ExtResource("10_3xivn")
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 
-[node name="SpawnProjectileState" type="Node" parent="StateMachine" unique_id=2019228098]
+[node name="SpawnProjectileState" type="Node" parent="StateMachine" unique_id=2019228098 node_paths=PackedStringArray("combat_skill")]
 script = ExtResource("9_aeu6h")
+combat_skill = NodePath("../..")
 projectile_scene = ExtResource("11_aeu6h")
 cs_stat = ExtResource("2_0kds0")
 attack_data = SubResource("Resource_nvify")

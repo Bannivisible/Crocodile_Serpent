@@ -11,20 +11,9 @@ func enter() -> void:
 	spell.ray_cast_2d.enabled = false
 	spell.rotation = 0.0
 	
-	_free_player()
+	spell.free_player()
 
 
 func exit() -> void:
-	_immobilize_player()
-
-
-func _immobilize_player() -> void:
-	if object is Crocodile:
-		object.immobilize()
-
-
-func _free_player() -> void:
-	if object is Crocodile:
-		object.free_immobolize()
-
+	spell.immobilize_player()
 

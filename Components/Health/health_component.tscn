@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://dbek7sg1u7b3b" path="res://Components/Health/hurt_box.gd" id="2_s7ou4"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_w2p6d"]
+font_size = 32
 
 [node name="HealthComponent" type="Node2D" unique_id=240872718]
 script = ExtResource("1_uafr8")

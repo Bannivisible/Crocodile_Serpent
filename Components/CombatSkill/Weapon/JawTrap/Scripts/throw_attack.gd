@@ -1,4 +1,4 @@
-extends WeaponAttackState
+extends AttackState
 
 @export_range(0.0, 999.9) var distance: float= 50.0
 @export_range(0.0, 10.0, 0.1) var time: float
@@ -10,9 +10,17 @@ extends WeaponAttackState
 var tween: Tween
 var hit_box_tween: Tween
 
+
+#### INHERITENCE ####
 func enter() -> void:
 	super.enter()
+	
+	var pos: Vector2= owner.global_position
+	owner.set_as_top_level(true)
+	owner.global_position = pos
 
+
+#### LOGIC ####
 func throw() -> void:
 	if not is_current_state(): return
 	
@@ -33,14 +41,17 @@ func throw() -> void:
 	hit_box_tween.set_ease(tw_ease).set_trans(tw_trans)
 	hit_box_tween.tween_property(collision_shape, "global_position", dest, time)
 
+
 func _get_direction() -> Vector2:
 	return Utiles.get_joy_dir(Vector2.RIGHT)
+
 
 func _get_destination(dir: Vector2) -> Vector2:
 	var dest := front.global_position
 	dest += dir * distance
 	
 	return dest
+
 
 func _update_rotation(dir: Vector2) -> void:
 	var rot = dir.angle()

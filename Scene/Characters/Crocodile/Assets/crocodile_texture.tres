@@ -1,6 +1,0 @@
-[gd_resource type="CanvasTexture" load_steps=2 format=3 uid="uid://cwkl4nep4hgvb"]
-
-[ext_resource type="Texture2D" uid="uid://dmjffaotnjjek" path="res://Scene/Characters/Crocodile/Assets/crocodile_sprite_sheet.PNG" id="1_niwcv"]
-
-[resource]
-diffuse_texture = ExtResource("1_niwcv")

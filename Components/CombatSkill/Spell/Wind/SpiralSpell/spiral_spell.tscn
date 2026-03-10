@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://curcaa0cweqyv"]
+
+[ext_resource type="Script" uid="uid://i1wm4nt6l6em" path="res://Components/CombatSkill/Spell/Wind/SpiralSpell/spiral_spell.gd" id="1_h5wib"]
+[ext_resource type="Resource" uid="uid://kb2fvg7k7afc" path="res://Ressources/CombatSkillData/Spell/Wind/Spiral/spiral_statistics.tres" id="2_41ik5"]
+[ext_resource type="Script" uid="uid://danilkv671r1y" path="res://Ressources/Attack/AttackType/attack_type.gd" id="3_yssel"]
+[ext_resource type="Script" uid="uid://bcmokx1bwyftw" path="res://StateMachine/state_machine.gd" id="4_cuks1"]
+[ext_resource type="Script" uid="uid://bey7t8h4m0yyp" path="res://StateMachine/state.gd" id="5_wb0o2"]
+[ext_resource type="Script" uid="uid://cwmi3g3xc85au" path="res://StateMachine/States/spawn_projectile_state.gd" id="6_00sfu"]
+[ext_resource type="PackedScene" uid="uid://d3ndrx3vqaap5" path="res://Scene/Projectile/WindSphere/wind_sphere.tscn" id="7_00sfu"]
+[ext_resource type="Script" uid="uid://doagmyu4ylk33" path="res://Ressources/Attack/AttackData/spell_attack_data.gd" id="8_3du21"]
+[ext_resource type="Script" uid="uid://c2tjl6yuq0a6" path="res://Components/CombatSkill/Spell/Wind/SpiralSpell/controler.gd" id="9_3du21"]
+
+[sub_resource type="Resource" id="Resource_yssel"]
+script = ExtResource("3_yssel")
+type = 32
+metadata/_custom_type_script = "uid://danilkv671r1y"
+
+[sub_resource type="Resource" id="Resource_sw4f1"]
+script = ExtResource("3_yssel")
+type = 32
+metadata/_custom_type_script = "uid://danilkv671r1y"
+
+[sub_resource type="Resource" id="Resource_fxa4u"]
+script = ExtResource("8_3du21")
+type = SubResource("Resource_sw4f1")
+metadata/_custom_type_script = "uid://doagmyu4ylk33"
+
+[node name="SpiralSpell" type="Node2D" unique_id=145500609]
+script = ExtResource("1_h5wib")
+stat = ExtResource("2_41ik5")
+type = SubResource("Resource_yssel")
+
+[node name="SpriralCenter" type="Node2D" parent="." unique_id=1889240083]
+position = Vector2(-148, 0)
+
+[node name="StateMachine" type="Node" parent="." unique_id=886607391]
+script = ExtResource("4_cuks1")
+metadata/_custom_type_script = "uid://bcmokx1bwyftw"
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=75203136]
+script = ExtResource("5_wb0o2")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="SpawnProjectileState" type="Node" parent="StateMachine" unique_id=161664337 node_paths=PackedStringArray("combat_skill", "spawn_projectile_parent")]
+script = ExtResource("6_00sfu")
+combat_skill = NodePath("../..")
+projectile_scene = ExtResource("7_00sfu")
+cs_stat = ExtResource("2_41ik5")
+attack_data = SubResource("Resource_fxa4u")
+spawn_projectile_parent = NodePath("../../SpriralCenter")
+metadata/_custom_type_script = "uid://cwmi3g3xc85au"
+
+[node name="Controler" type="Node" parent="." unique_id=76337531]
+script = ExtResource("9_3du21")
+metadata/_custom_type_script = "uid://dhau74o4l0rjm"
+
+[node name="Timer" type="Timer" parent="." unique_id=704459524]
+wait_time = 3.0
+autostart = true
+
+[connection signal="projectile_spawn" from="StateMachine/SpawnProjectileState" to="." method="_on_spawn_projectile_state_projectile_spawn"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

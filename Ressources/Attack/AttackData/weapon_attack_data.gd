@@ -10,11 +10,17 @@ class_name WeaponAttackData
 
 var current_is_crit: bool
 
-func compute_damage(cs_stat: Statistics) -> float:
-	if cs_stat == null: return super.compute_damage(cs_stat)
+func _get_raw_damage(charac_stat: CharacStatistics ,cs_stat: Statistics) -> float:
+	var weapon_stat: WeaponStatistics= cs_stat
+	
+	return weapon_stat.attack + super._get_raw_damage(charac_stat, cs_stat)
+
+
+func compute_damage(charac_stat: CharacStatistics ,cs_stat: Statistics) -> float:
+	if cs_stat == null: return super.compute_damage(charac_stat ,cs_stat)
 	
 	var weapon_stat: WeaponStatistics= cs_stat
-	var damage: float= (weapon_stat.attack + add_damage) * mult_damage
+	var damage: float= _get_raw_damage(charac_stat, cs_stat) * mult_damage
 	
 	current_is_crit = _is_critical(cs_stat)
 	

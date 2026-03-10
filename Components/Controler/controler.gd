@@ -6,6 +6,7 @@ class_name Controler
 	set(value):
 		active = value
 		set_process_input(active)
+		set_physics_process(active)
 
 
 

@@ -8,7 +8,7 @@ class_name LinearMovement
 
 var tween: Tween
 
-signal destination_reached
+signal destination_reached(pos: Vector2)
 
 func enter() -> void:
 	
@@ -18,7 +18,7 @@ func enter() -> void:
 	var direction: Vector2= Vector2.RIGHT.rotated(owner.rotation)
 	
 	tween.tween_property(owner, "global_position", owner.global_position + distance * direction, 1/speed)
-	tween.tween_callback(func(): destination_reached.emit())
+	tween.tween_callback(func(): destination_reached.emit(owner.global_position))
 
 func exit() -> void:
 	tween.kill()

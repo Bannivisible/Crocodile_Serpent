@@ -1,0 +1,6 @@
+[gd_resource type="CanvasTexture" format=3 uid="uid://dv4grtrx6drl7"]
+
+[ext_resource type="Texture2D" uid="uid://cfa0ahmaddoda" path="res://Scene/Characters/PlayableCharacter/Snake/Assets/snake_spritesheet.png" id="1_us8ge"]
+
+[resource]
+diffuse_texture = ExtResource("1_us8ge")

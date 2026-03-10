@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="CombatSkillData" format=3 uid="uid://dybi26ggyfpw1"]
+
+[ext_resource type="PackedScene" uid="uid://curcaa0cweqyv" path="res://Components/CombatSkill/Spell/Wind/SpiralSpell/spiral_spell.tscn" id="1_w8gyb"]
+[ext_resource type="Script" uid="uid://db4jcia3pwpd3" path="res://Ressources/CombatSkillData/combat_skill_data.gd" id="2_8qjdt"]
+[ext_resource type="Resource" uid="uid://kb2fvg7k7afc" path="res://Ressources/CombatSkillData/Spell/Wind/Spiral/spiral_statistics.tres" id="3_e5ory"]
+
+[sub_resource type="Gradient" id="Gradient_rnsqr"]
+colors = PackedColorArray(0, 0.9019608, 0.1764706, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4m23b"]
+gradient = SubResource("Gradient_rnsqr")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[resource]
+script = ExtResource("2_8qjdt")
+name = "Spirale"
+icone = SubResource("GradientTexture2D_4m23b")
+description = "Une spirale de vent"
+stat = ExtResource("3_e5ory")
+combat_skill_scene = ExtResource("1_w8gyb")
+metadata/_custom_type_script = "uid://db4jcia3pwpd3"

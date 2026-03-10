@@ -12,7 +12,8 @@ extends StateMachine
 @export var remote_b_name: StringName
 
 @export var gauge: Control
-
+@export_range(0.0, 999.9) var bonus_time_amount: float= 1.0
+@export var hit_box: HitBox
 
 @onready var dynamic_timer: DynamicTimer = $DynamicTimer
 
@@ -29,6 +30,7 @@ func _ready() -> void:
 	super._ready()
 	
 	dynamic_timer.timeout.connect(_on_dynamic_timer_timeout)
+	hit_box.hit.connect(_on_hit_box_hit)
 	
 	await object.ready
 	
@@ -65,8 +67,6 @@ func exit() -> void:
 	gauge.visible = false
 
 
-
-
 #### LOGIC ####
 func _innit_remote_trans(parent_path: NodePath) -> RemoteTransform2D:
 	var remote_trans = RemoteTransform2D.new()
@@ -84,3 +84,12 @@ func _on_dynamic_timer_timeout() -> void:
 #func _input(_event: InputEvent) -> void:
 	#if Input.is_action_just_pressed("BentDown"):
 		#dynamic_timer.add_time(3.0)
+
+
+func _on_hit_box_hit(_damage: float, _hurt_box: HurtBox) -> void:
+	if is_current_state():
+		dynamic_timer.add_time(bonus_time_amount)
+
+
+
+

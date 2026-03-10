@@ -2,19 +2,13 @@
 extends Line2D
 class_name ProceduralLine
 
+@export var active: bool= true
+
 @export var reinitialize: bool= false:
 	set = reinitialized
-func reinitialized(value: bool) -> void:
-	if value == true:
-		_init_points()
-		queue_redraw()
 
-@export var anchor_path: NodePath= "..":
-	set = set_anchor
-@onready var anchor: Node2D= get_node(anchor_path)
-func set_anchor(value: NodePath) -> void:
-	anchor_path = value
-	anchor =get_node(value)
+
+@export var anchor: Node2D
 
 @export_group("Parameters")
 
@@ -39,14 +33,32 @@ func set_anchor(value: NodePath) -> void:
 @export var outline_color: Color
 @export var outline_width: float
 
+
+#### SETTERS ####
+func _set_active(value: bool) -> void:
+	active = value
+	
+	if not Engine.is_editor_hint():
+		set_as_top_level(active)
+
+
+func reinitialized(value: bool) -> void:
+	if value == true:
+		_init_points()
+		queue_redraw()
+
+
 ##### BUILT-IN ####
 func _ready() -> void:
 	_init_points()
 	
-	if not Engine.is_editor_hint(): Utiles.add_child_to_root(self)
+	if not Engine.is_editor_hint():
+		set_as_top_level(active)
+
 
 func _physics_process(delta: float) -> void:
-	if Engine.is_editor_hint(): return
+	if Engine.is_editor_hint() or not active: return
+	
 	if get_gravity: _process_gravity(delta)
 	if collide: _process_collisions()
 	_process_points()
@@ -61,6 +73,7 @@ func _init_points() -> void:
 		var pos: Vector2= anchor_pos + init_dir * distance * i
 		points[i] = pos
 
+
 func _process_points() -> void:
 	if points.size() == 0 or anchor == null: return
 	
@@ -73,6 +86,7 @@ func _process_points() -> void:
 		
 		points[i] = points[i-1] + dist
 
+
 func _process_gravity(delta: float) -> void:
 	for i in range(1, points.size()):
 		var gravity = Vector2.DOWN * (gravity_amount + gravity_increase_amount * i) * delta
@@ -80,6 +94,7 @@ func _process_gravity(delta: float) -> void:
 		gravity.limit_length(distance)
 		
 		points[i] += gravity
+
 
 func _process_collisions() -> void:
 	var space_state: PhysicsDirectSpaceState2D= get_world_2d().direct_space_state

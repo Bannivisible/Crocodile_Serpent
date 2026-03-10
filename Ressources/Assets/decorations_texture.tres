@@ -1,0 +1,6 @@
+[gd_resource type="CanvasTexture" format=3 uid="uid://csuqnx0vwd4v"]
+
+[ext_resource type="Texture2D" uid="uid://o2inx01m20ey" path="res://Ressources/Assets/decorations.png" id="1_jvwly"]
+
+[resource]
+diffuse_texture = ExtResource("1_jvwly")

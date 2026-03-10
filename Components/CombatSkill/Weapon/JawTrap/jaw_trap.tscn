@@ -1,18 +1,15 @@
 [gd_scene format=3 uid="uid://ds4i8cup57akf"]
 
+[ext_resource type="Resource" uid="uid://b827r0xrw47yh" path="res://Ressources/CombatSkillData/Weapon/JawTrap/jaw_trap_statistics.tres" id="2_5rtpq"]
 [ext_resource type="AnimationLibrary" uid="uid://ctdrtnjx7txak" path="res://Components/CombatSkill/Weapon/JawTrap/AnimationsData/JawTrapAnimationLibrary.res" id="2_dp6s7"]
 [ext_resource type="Script" uid="uid://bhcip3r7gigab" path="res://Components/CombatSkill/Weapon/JawTrap/jaw_trap.gd" id="2_g4jcv"]
-[ext_resource type="Script" uid="uid://bk1oc1ul33tnd" path="res://Ressources/Statistics/weapon_statistics.gd" id="2_vpr7y"]
-[ext_resource type="Script" uid="uid://42c2b5rma8ot" path="res://Components/CombatSkill/Weapon/weapon_hit_box.gd" id="4_5pxtx"]
 [ext_resource type="Texture2D" uid="uid://qkqqtx1bnvjk" path="res://Components/CombatSkill/Weapon/JawTrap/Assets/jaw_trap_texture.tres" id="4_jeet7"]
 [ext_resource type="Script" uid="uid://bpo8hybdit330" path="res://Ressources/Attack/AttackData/weapon_attack_data.gd" id="5_4d2f6"]
 [ext_resource type="Script" uid="uid://c8pciq7v5fjbx" path="res://Components/CombatSkill/Weapon/JawTrap/links.gd" id="5_jeet7"]
 [ext_resource type="Script" uid="uid://c8v3lc10f3wrg" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/on_hand_idle.gd" id="5_o8o0j"]
-[ext_resource type="Script" uid="uid://ce7ave72wm32j" path="res://Ressources/Attack/AttackData/attack_data.gd" id="5_v0eml"]
+[ext_resource type="Script" uid="uid://dljxw7lqw0vie" path="res://StateMachine/States/AttackState/attack_state.gd" id="5_vpr7y"]
 [ext_resource type="Shape2D" uid="uid://bw7u1sj0wx0wf" path="res://Components/CombatSkill/Weapon/JawTrap/Ressources/links_shape.tres" id="6_86vhf"]
 [ext_resource type="Script" uid="uid://danilkv671r1y" path="res://Ressources/Attack/AttackType/attack_type.gd" id="6_jeet7"]
-[ext_resource type="Script" uid="uid://c5stjpuprt08p" path="res://StateMachine/States/AttackState/weapon_attack_state.gd" id="10_bxcyf"]
-[ext_resource type="Script" uid="uid://db3rpivekg2pa" path="res://Components/CombatSkill/Weapon/JawTrap/constant_rotating_attack.gd" id="10_vpr7y"]
 [ext_resource type="Script" uid="uid://crp34hnmuet64" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/throw_attack.gd" id="11_wdegu"]
 [ext_resource type="Script" uid="uid://cll5pib1n7cl3" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/recall_attack.gd" id="12_3w3qp"]
 [ext_resource type="Script" uid="uid://djbip8wqhfqhp" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/to_ground.gd" id="12_11eis"]
@@ -28,125 +25,111 @@
 [ext_resource type="Script" uid="uid://e0ej46y7q5uy" path="res://Other/ProceduralNode/procedural_link.gd" id="16_kcwly"]
 [ext_resource type="Script" uid="uid://bsmm7c0f2k3hr" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/bite_attack.gd" id="18_5rtpq"]
 [ext_resource type="Script" uid="uid://x1tg260g65b0" path="res://Other/timer_label.gd" id="18_eaiaj"]
-[ext_resource type="Resource" uid="uid://b85xloi286pt1" path="res://Ressources/AnimationConnection/crocodile_animation_connections.tres" id="19_bxcyf"]
 [ext_resource type="Script" uid="uid://c78u4kmgq07op" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/devastating_attack.gd" id="19_mkx5c"]
+[ext_resource type="Script" uid="uid://byhe3mep5poar" path="res://Ressources/Statistics/Scripts/buff.gd" id="19_vpr7y"]
 [ext_resource type="Script" uid="uid://dgi2a2c0lt17u" path="res://Components/animation_manager/state_animation_manager.gd" id="19_wdegu"]
 [ext_resource type="Texture2D" uid="uid://b5iu6elvpti77" path="res://Ui/Assets/UI1.png" id="21_tlny7"]
+[ext_resource type="Script" uid="uid://da3cqoomwyp1o" path="res://Components/CombatSkill/hit_box.gd" id="24_5rtpq"]
 [ext_resource type="Shape2D" uid="uid://dehxsdpvhda4g" path="res://Components/CombatSkill/Weapon/JawTrap/Ressources/ToGroundShape.tres" id="25_7etub"]
-
-[sub_resource type="Resource" id="Resource_d1rhm"]
-script = ExtResource("2_vpr7y")
-base_attack = 50.0
-base_crit_rate = 20.0
-base_crit_coef = 2.0
-metadata/_custom_type_script = "uid://bk1oc1ul33tnd"
-
-[sub_resource type="Resource" id="Resource_kcwly"]
-script = ExtResource("5_4d2f6")
-metadata/_custom_type_script = "uid://bpo8hybdit330"
-
-[sub_resource type="Resource" id="Resource_cyaoe"]
-script = ExtResource("6_jeet7")
-type = 1
-metadata/_custom_type_script = "uid://danilkv671r1y"
-
-[sub_resource type="Resource" id="Resource_bxcyf"]
-script = ExtResource("5_v0eml")
-type = SubResource("Resource_cyaoe")
-metadata/_custom_type_script = "uid://ce7ave72wm32j"
-
-[sub_resource type="Resource" id="Resource_2xqvd"]
-script = ExtResource("5_4d2f6")
-mult_crit_rate = 1.5
-metadata/_custom_type_script = "uid://bpo8hybdit330"
-
-[sub_resource type="Resource" id="Resource_3w3qp"]
-script = ExtResource("6_jeet7")
-type = 2
-metadata/_custom_type_script = "uid://danilkv671r1y"
-
-[sub_resource type="Resource" id="Resource_lj60c"]
-script = ExtResource("5_v0eml")
-type = SubResource("Resource_3w3qp")
-metadata/_custom_type_script = "uid://ce7ave72wm32j"
-
-[sub_resource type="Resource" id="Resource_fho1j"]
-script = ExtResource("5_4d2f6")
-mult_crit_rate = 1.2
-metadata/_custom_type_script = "uid://bpo8hybdit330"
-
-[sub_resource type="Resource" id="Resource_11eis"]
-script = ExtResource("6_jeet7")
-type = 1
-metadata/_custom_type_script = "uid://danilkv671r1y"
-
-[sub_resource type="Resource" id="Resource_7x2u0"]
-script = ExtResource("5_v0eml")
-type = SubResource("Resource_11eis")
-metadata/_custom_type_script = "uid://ce7ave72wm32j"
-
-[sub_resource type="Resource" id="Resource_vpr7y"]
-script = ExtResource("5_4d2f6")
-metadata/_custom_type_script = "uid://bpo8hybdit330"
-
-[sub_resource type="Resource" id="Resource_tlny7"]
-script = ExtResource("6_jeet7")
-type = 1
-metadata/_custom_type_script = "uid://danilkv671r1y"
+[ext_resource type="Script" uid="uid://bmm1oqvjaxa4m" path="res://Ressources/AnimationConnection/animation_connection.gd" id="26_mkx5c"]
+[ext_resource type="Script" uid="uid://dqkyu24522gux" path="res://Ressources/AnimationConnection/animation_connections_list.gd" id="27_vpr7y"]
 
 [sub_resource type="Resource" id="Resource_5rtpq"]
-script = ExtResource("5_v0eml")
-type = SubResource("Resource_tlny7")
-metadata/_custom_type_script = "uid://ce7ave72wm32j"
-
-[sub_resource type="Resource" id="Resource_jlvaw"]
-script = ExtResource("5_4d2f6")
-mult_crit_rate = 2.0
-metadata/_custom_type_script = "uid://bpo8hybdit330"
-
-[sub_resource type="Resource" id="Resource_yvmfl"]
 script = ExtResource("6_jeet7")
-type = 2
+type = 1
 metadata/_custom_type_script = "uid://danilkv671r1y"
 
+[sub_resource type="Resource" id="Resource_mkx5c"]
+script = ExtResource("5_4d2f6")
+type = SubResource("Resource_5rtpq")
+metadata/_custom_type_script = "uid://bpo8hybdit330"
+
+[sub_resource type="Resource" id="Resource_vpr7y"]
+script = ExtResource("6_jeet7")
+type = 3
+metadata/_custom_type_script = "uid://danilkv671r1y"
+
+[sub_resource type="Resource" id="Resource_tlny7"]
+script = ExtResource("5_4d2f6")
+type = SubResource("Resource_vpr7y")
+metadata/_custom_type_script = "uid://bpo8hybdit330"
+
+[sub_resource type="Resource" id="Resource_jlvaw"]
+script = ExtResource("6_jeet7")
+type = 1
+metadata/_custom_type_script = "uid://danilkv671r1y"
+
+[sub_resource type="Resource" id="Resource_yvmfl"]
+script = ExtResource("5_4d2f6")
+type = SubResource("Resource_jlvaw")
+metadata/_custom_type_script = "uid://bpo8hybdit330"
+
 [sub_resource type="Resource" id="Resource_1shtc"]
-script = ExtResource("5_v0eml")
-type = SubResource("Resource_yvmfl")
-metadata/_custom_type_script = "uid://ce7ave72wm32j"
+script = ExtResource("6_jeet7")
+type = 3
+metadata/_custom_type_script = "uid://danilkv671r1y"
+
+[sub_resource type="Resource" id="Resource_rddj4"]
+script = ExtResource("5_4d2f6")
+type = SubResource("Resource_1shtc")
+metadata/_custom_type_script = "uid://bpo8hybdit330"
+
+[sub_resource type="Resource" id="Resource_nlvaj"]
+script = ExtResource("6_jeet7")
+type = 1
+metadata/_custom_type_script = "uid://danilkv671r1y"
 
 [sub_resource type="Resource" id="Resource_jn0tm"]
 script = ExtResource("5_4d2f6")
+type = SubResource("Resource_nlvaj")
 metadata/_custom_type_script = "uid://bpo8hybdit330"
 
-[sub_resource type="Resource" id="Resource_rddj4"]
+[sub_resource type="Resource" id="Resource_hjahh"]
 script = ExtResource("6_jeet7")
 type = 1
 metadata/_custom_type_script = "uid://danilkv671r1y"
 
-[sub_resource type="Resource" id="Resource_nlvaj"]
-script = ExtResource("5_v0eml")
-type = SubResource("Resource_rddj4")
-metadata/_custom_type_script = "uid://ce7ave72wm32j"
-
-[sub_resource type="Resource" id="Resource_hjahh"]
+[sub_resource type="Resource" id="Resource_n0i6p"]
 script = ExtResource("5_4d2f6")
+type = SubResource("Resource_hjahh")
 metadata/_custom_type_script = "uid://bpo8hybdit330"
 
-[sub_resource type="Resource" id="Resource_n0i6p"]
-script = ExtResource("5_v0eml")
-metadata/_custom_type_script = "uid://ce7ave72wm32j"
+[sub_resource type="Resource" id="Resource_a2aeo"]
+script = ExtResource("19_vpr7y")
+stat_name = "speed"
+metadata/_custom_type_script = "uid://byhe3mep5poar"
+
+[sub_resource type="Resource" id="Resource_d1rhm"]
+script = ExtResource("6_jeet7")
+type = 1
+metadata/_custom_type_script = "uid://danilkv671r1y"
+
+[sub_resource type="Resource" id="Resource_fc7m6"]
+script = ExtResource("5_4d2f6")
+type = SubResource("Resource_d1rhm")
+metadata/_custom_type_script = "uid://bpo8hybdit330"
+
+[sub_resource type="Resource" id="Resource_6eu5w"]
+script = ExtResource("6_jeet7")
+type = 1
+metadata/_custom_type_script = "uid://danilkv671r1y"
+
+[sub_resource type="Resource" id="Resource_2leea"]
+script = ExtResource("5_4d2f6")
+type = SubResource("Resource_6eu5w")
+metadata/_custom_type_script = "uid://bpo8hybdit330"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p0okl"]
 atlas = ExtResource("4_jeet7")
-region = Rect2(202, 130, 101, 65)
+region = Rect2(305, 130, 102, 65)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rsvc4"]
 atlas = ExtResource("4_jeet7")
-region = Rect2(0, 0, 101, 65)
+region = Rect2(204, 0, 101, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hgdcd"]
 atlas = ExtResource("4_jeet7")
-region = Rect2(0, 65, 101, 65)
+region = Rect2(303, 65, 101, 65)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v0eml"]
 height = 86.60971
@@ -157,37 +140,60 @@ bounce = 1.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n380g"]
 atlas = ExtResource("4_jeet7")
-region = Rect2(202, 130, 101, 65)
+region = Rect2(303, 130, 101, 65)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3po1k"]
 atlas = ExtResource("4_jeet7")
-region = Rect2(0, 0, 101, 65)
+region = Rect2(202, 0, 101, 65)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pvels"]
 atlas = ExtResource("4_jeet7")
-region = Rect2(0, 65, 101, 65)
+region = Rect2(303, 65, 101, 65)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jeet7"]
 radius = 10.036705
 height = 88.18735
 
-[sub_resource type="Resource" id="Resource_71p2d"]
-script = ExtResource("5_4d2f6")
-metadata/_custom_type_script = "uid://bpo8hybdit330"
-
-[sub_resource type="Resource" id="Resource_dp6s7"]
-script = ExtResource("6_jeet7")
-type = 1
-metadata/_custom_type_script = "uid://danilkv671r1y"
-
-[sub_resource type="Resource" id="Resource_wfuh6"]
-script = ExtResource("5_v0eml")
-type = SubResource("Resource_dp6s7")
-metadata/_custom_type_script = "uid://ce7ave72wm32j"
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_weadw"]
-radius = 110.0
-height = 252.0
+radius = 154.05058
+height = 446.32965
+
+[sub_resource type="Resource" id="Resource_72sr6"]
+script = ExtResource("26_mkx5c")
+from = &"StateMachine"
+to = &"StateBlend2"
+metadata/_custom_type_script = "uid://bmm1oqvjaxa4m"
+
+[sub_resource type="Resource" id="Resource_qlhte"]
+script = ExtResource("26_mkx5c")
+from = &"StateBlendAnimation"
+to = &"StateBlend2"
+to_port = 1
+metadata/_custom_type_script = "uid://bmm1oqvjaxa4m"
+
+[sub_resource type="Resource" id="Resource_qxw88"]
+script = ExtResource("26_mkx5c")
+from = &"StateBlend2"
+to = &"StateOneShot"
+metadata/_custom_type_script = "uid://bmm1oqvjaxa4m"
+
+[sub_resource type="Resource" id="Resource_mc2yf"]
+script = ExtResource("26_mkx5c")
+from = &"StateOneShotAnimation"
+to = &"StateOneShot"
+to_port = 1
+metadata/_custom_type_script = "uid://bmm1oqvjaxa4m"
+
+[sub_resource type="Resource" id="Resource_rj4ec"]
+script = ExtResource("26_mkx5c")
+from = &"StateOneShot"
+to = &"output"
+metadata/_custom_type_script = "uid://bmm1oqvjaxa4m"
+
+[sub_resource type="Resource" id="Resource_vo7fj"]
+script = ExtResource("27_vpr7y")
+connections = Array[ExtResource("26_mkx5c")]([SubResource("Resource_72sr6"), SubResource("Resource_qlhte"), SubResource("Resource_qxw88"), SubResource("Resource_mc2yf"), SubResource("Resource_rj4ec")])
+metadata/_custom_type_script = "uid://dqkyu24522gux"
 
 [sub_resource type="Animation" id="Animation_2xqvd"]
 resource_name = "OnGround(EditorHelp)"
@@ -278,7 +284,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("WeaponHitBox/CollisionShape2D:shape:height")
+tracks/7/path = NodePath("HitBox/CollisionShape2D:shape:height")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -341,7 +347,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("WeaponHitBox/CollisionShape2D:shape:radius")
+tracks/4/path = NodePath("HitBox/CollisionShape2D:shape:radius")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -353,7 +359,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("WeaponHitBox/CollisionShape2D:shape:height")
+tracks/5/path = NodePath("HitBox/CollisionShape2D:shape:height")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -365,7 +371,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("WeaponHitBox/CollisionShape2D:disabled")
+tracks/6/path = NodePath("HitBox/CollisionShape2D:disabled")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -377,7 +383,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("WeaponHitBox/CollisionShape2D:position")
+tracks/7/path = NodePath("HitBox/CollisionShape2D:position")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -389,7 +395,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("WeaponHitBox/CollisionShape2D:rotation")
+tracks/8/path = NodePath("HitBox/CollisionShape2D:rotation")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -464,7 +470,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("WeaponHitBox/CollisionShape2D:disabled")
+tracks/4/path = NodePath("HitBox/CollisionShape2D:disabled")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -513,14 +519,25 @@ region = Rect2(0, 384, 192, 192)
 [node name="JawTrap" type="StaticBody2D" unique_id=291549971]
 collision_mask = 2
 script = ExtResource("2_g4jcv")
-statistics = SubResource("Resource_d1rhm")
+statistics = ExtResource("2_5rtpq")
 
-[node name="StateMachine" type="Node" parent="." unique_id=107697349]
+[node name="StateLabel" type="Label" parent="." unique_id=1824887468 node_paths=PackedStringArray("state_machine")]
+offset_left = -132.0
+offset_top = 131.0
+offset_right = 140.0
+offset_bottom = 273.0
+script = ExtResource("14_11eis")
+state_machine = NodePath("../StateMachine")
+metadata/_custom_type_script = "uid://d38qkfrf1wj1a"
+
+[node name="StateMachine" type="Node" parent="." unique_id=107697349 node_paths=PackedStringArray("current_state")]
 script = ExtResource("14_av258")
+current_state = NodePath("OnHand")
 metadata/_custom_type_script = "uid://bcmokx1bwyftw"
 
-[node name="OnHand" type="Node" parent="StateMachine" unique_id=2128408316]
+[node name="OnHand" type="Node" parent="StateMachine" unique_id=2128408316 node_paths=PackedStringArray("current_state")]
 script = ExtResource("14_av258")
+current_state = NodePath("Idle")
 metadata/_custom_type_script = "uid://bcmokx1bwyftw"
 
 [node name="Idle" type="Node" parent="StateMachine/OnHand" unique_id=126777271 node_paths=PackedStringArray("next_state")]
@@ -528,50 +545,53 @@ script = ExtResource("5_o8o0j")
 next_state = NodePath("../../OnJaw/IdleJ")
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 
-[node name="SlashAttack1" type="Node" parent="StateMachine/OnHand" unique_id=267871702 node_paths=PackedStringArray("idle_state", "previous_state")]
-script = ExtResource("10_bxcyf")
-weapon_attack_data = SubResource("Resource_kcwly")
+[node name="SlashAttack1" type="Node" parent="StateMachine/OnHand" unique_id=1304794329 node_paths=PackedStringArray("idle_state", "hit_box", "animation_manager", "previous_state")]
+script = ExtResource("5_vpr7y")
 idle_state = NodePath("../Idle")
 input_time_interval = Vector2(-1, 0.5)
-hit_box_path = NodePath("WeaponHitBox")
-attack_data = SubResource("Resource_bxcyf")
+input_mode = 2
+hit_box = NodePath("../../../HitBox")
+attack_data = SubResource("Resource_mkx5c")
+animation_manager = NodePath("../../../AnimationManagerComponent")
 previous_state = NodePath("../Idle")
-metadata/_custom_type_script = "uid://c5stjpuprt08p"
+metadata/_custom_type_script = "uid://dljxw7lqw0vie"
 
-[node name="SlashAttack2" type="Node" parent="StateMachine/OnHand" unique_id=1079616752 node_paths=PackedStringArray("idle_state", "previous_state")]
-script = ExtResource("10_bxcyf")
-weapon_attack_data = SubResource("Resource_2xqvd")
+[node name="SlashAttack2" type="Node" parent="StateMachine/OnHand" unique_id=578237295 node_paths=PackedStringArray("idle_state", "hit_box", "animation_manager", "previous_state")]
+script = ExtResource("5_vpr7y")
 idle_state = NodePath("../Idle")
-input_time_interval = Vector2(-1, 0.5)
-attack_data = SubResource("Resource_lj60c")
+input_time_interval = Vector2(0.1, 0.5)
+input_mode = 3
+hit_box = NodePath("../../../HitBox")
+attack_data = SubResource("Resource_tlny7")
+animation_manager = NodePath("../../../AnimationManagerComponent")
 combo_cooldown = 1.0
 need_hit_box_hit = true
 previous_state = NodePath("../SlashAttack1")
-metadata/_custom_type_script = "uid://c5stjpuprt08p"
+metadata/_custom_type_script = "uid://dljxw7lqw0vie"
 
-[node name="ConstantRotatingAttack" type="Node" parent="StateMachine/OnHand" unique_id=873993661 node_paths=PackedStringArray("idle_state", "previous_state")]
-script = ExtResource("10_vpr7y")
-weapon_attack_data = SubResource("Resource_fho1j")
+[node name="ConstantRotatingAttack" type="Node" parent="StateMachine/OnHand" unique_id=881297522 node_paths=PackedStringArray("idle_state", "hit_box", "animation_manager", "previous_state")]
+script = ExtResource("5_vpr7y")
 idle_state = NodePath("../Idle")
 input_time_interval = Vector2(1, -1)
-input_mode = "Continue"
-attack_data = SubResource("Resource_7x2u0")
-damage_interval = 0.4
-blend_node_name = &"AttackBlend2"
+input_mode = 1
+hit_box = NodePath("../../../HitBox")
+attack_data = SubResource("Resource_yvmfl")
+damage_interval = 0.5
+animation_manager = NodePath("../../../AnimationManagerComponent")
 previous_state = NodePath("../Idle")
-metadata/_custom_type_script = "uid://c5stjpuprt08p"
+metadata/_custom_type_script = "uid://dljxw7lqw0vie"
 
-[node name="ThrowAttack" type="Node" parent="StateMachine/OnHand" unique_id=1461063782 node_paths=PackedStringArray("idle_state", "previous_state")]
+[node name="ThrowAttack" type="Node" parent="StateMachine/OnHand" unique_id=1461063782 node_paths=PackedStringArray("idle_state", "hit_box", "animation_manager", "previous_state")]
 script = ExtResource("11_wdegu")
 distance = 630.299
 time = 0.5
-weapon_attack_data = SubResource("Resource_vpr7y")
 idle_state = NodePath("../ThrowIntermediate")
-input_time_interval = Vector2(1, -1)
-attack_data = SubResource("Resource_5rtpq")
+input_mode = 2
+hit_box = NodePath("../../../HitBox")
+attack_data = SubResource("Resource_rddj4")
+animation_manager = NodePath("../../../AnimationManagerComponent")
 combo_cooldown = 0.2
 previous_state = NodePath("../ConstantRotatingAttack")
-metadata/_custom_type_script = "uid://c5stjpuprt08p"
 
 [node name="ThrowIntermediate" type="Node" parent="StateMachine/OnHand" unique_id=473574739 node_paths=PackedStringArray("next_state")]
 script = ExtResource("13_lj60c")
@@ -584,16 +604,17 @@ script = ExtResource("12_11eis")
 next_state = NodePath("../../OnGround/IdleG")
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 
-[node name="RecallAttack" type="Node" parent="StateMachine/OnHand" unique_id=59877823 node_paths=PackedStringArray("idle_state", "previous_state")]
+[node name="RecallAttack" type="Node" parent="StateMachine/OnHand" unique_id=59877823 node_paths=PackedStringArray("idle_state", "hit_box", "animation_manager", "previous_state")]
 script = ExtResource("12_3w3qp")
-weapon_attack_data = SubResource("Resource_jlvaw")
 idle_state = NodePath("../Idle")
-attack_data = SubResource("Resource_1shtc")
+input_mode = 3
+hit_box = NodePath("../../../HitBox")
+attack_data = SubResource("Resource_jn0tm")
+animation_manager = NodePath("../../../AnimationManagerComponent")
 combo_cooldown = 0.4
 previous_state = NodePath("../ThrowAttack")
-metadata/_custom_type_script = "uid://c5stjpuprt08p"
 
-[node name="OnJaw" type="Node" parent="StateMachine" unique_id=1238307790 node_paths=PackedStringArray("next_state", "gauge")]
+[node name="OnJaw" type="Node" parent="StateMachine" unique_id=1238307790 node_paths=PackedStringArray("next_state", "gauge", "hit_box")]
 script = ExtResource("14_kcwly")
 next_state = NodePath("../OnHand/Idle")
 remote_f_parent_path = NodePath("../../../../Skeleton2D/Center/Body/Torso/Head/HeadFacing/NeckFacing/Face")
@@ -601,6 +622,7 @@ remote_b_parent_path = NodePath("../../../../Skeleton2D/Center/Body/Torso/Head/H
 remote_f_name = &"RemoteJTF"
 remote_b_name = &"RemoteJTB"
 gauge = NodePath("../../GaugeOnJaw")
+hit_box = NodePath("../../HitBox")
 metadata/_custom_type_script = "uid://bcmokx1bwyftw"
 
 [node name="IdleJ" type="Node" parent="StateMachine/OnJaw" unique_id=1406936320]
@@ -620,53 +642,49 @@ offset_bottom = 373.0
 script = ExtResource("18_eaiaj")
 timer = NodePath("../DynamicTimer")
 
-[node name="BiteAttack" type="Node" parent="StateMachine/OnJaw" unique_id=454913511 node_paths=PackedStringArray("idle_state", "previous_state")]
+[node name="BiteAttack" type="Node" parent="StateMachine/OnJaw" unique_id=454913511 node_paths=PackedStringArray("idle_state", "hit_box", "animation_manager", "previous_state")]
 script = ExtResource("18_5rtpq")
-weapon_attack_data = SubResource("Resource_jn0tm")
 idle_state = NodePath("../IdleJ")
 input_time_interval = Vector2(-1, 0.8)
-attack_data = SubResource("Resource_nlvaj")
+input_mode = 2
+hit_box = NodePath("../../../HitBox")
+attack_data = SubResource("Resource_n0i6p")
+animation_manager = NodePath("../../../AnimationManagerComponent")
 previous_state = NodePath("../IdleJ")
-metadata/_custom_type_script = "uid://c5stjpuprt08p"
 
-[node name="DevastatingAttack" type="Node" parent="StateMachine/OnJaw" unique_id=1350169837 node_paths=PackedStringArray("idle_state", "previous_state")]
+[node name="DevastatingAttack" type="Node" parent="StateMachine/OnJaw" unique_id=1350169837 node_paths=PackedStringArray("idle_state", "hit_box", "animation_manager", "previous_state")]
 script = ExtResource("19_mkx5c")
-center_bone_path = NodePath("Skeleton2D/Center")
-weapon_attack_data = SubResource("Resource_hjahh")
+buff_speed = SubResource("Resource_a2aeo")
 idle_state = NodePath("../IdleJ")
 input_time_interval = Vector2(1, -1)
-input_mode = "Continue"
-attack_data = SubResource("Resource_n0i6p")
+input_mode = 1
+hit_box = NodePath("../../../HitBox")
+attack_data = SubResource("Resource_fc7m6")
 damage_interval = 0.4
-blend_node_name = &"AttackBlend2"
+animation_manager = NodePath("../../../AnimationManagerComponent")
 previous_state = NodePath("../IdleJ")
-metadata/_custom_type_script = "uid://c5stjpuprt08p"
 
 [node name="OnGround" type="Node" parent="StateMachine" unique_id=975553714]
 script = ExtResource("15_7x2u0")
-gravity = 200.0
 metadata/_custom_type_script = "uid://bcmokx1bwyftw"
 
 [node name="IdleG" type="Node" parent="StateMachine/OnGround" unique_id=1122158009]
 script = ExtResource("16_2tnll")
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 
-[node name="CatchAttack" type="Node" parent="StateMachine/OnGround" unique_id=1214073741 node_paths=PackedStringArray("idle_state", "previous_state")]
-script = ExtResource("10_bxcyf")
+[node name="CatchAttack" type="Node" parent="StateMachine/OnGround" unique_id=757966198 node_paths=PackedStringArray("idle_state", "hit_box", "animation_manager", "previous_state")]
+script = ExtResource("5_vpr7y")
 idle_state = NodePath("../IdleG")
+hit_box = NodePath("../../../HitBox")
+attack_data = SubResource("Resource_2leea")
+animation_manager = NodePath("../../../AnimationManagerComponent")
 previous_state = NodePath("../IdleG")
-metadata/_custom_type_script = "uid://c5stjpuprt08p"
+metadata/_custom_type_script = "uid://dljxw7lqw0vie"
 
 [node name="ProceduralLink" type="Node" parent="StateMachine/OnGround" unique_id=1121641512 node_paths=PackedStringArray("node_b")]
 script = ExtResource("16_kcwly")
 node_b = NodePath("../../..")
 max_dist = 600.0
-
-[node name="StateLabel" type="Label" parent="StateMachine" unique_id=1824887468]
-offset_right = 272.0
-offset_bottom = 142.0
-script = ExtResource("14_11eis")
-metadata/_custom_type_script = "uid://d38qkfrf1wj1a"
 
 [node name="Front" type="StaticBody2D" parent="." unique_id=473639612]
 z_index = 5
@@ -713,8 +731,7 @@ physics_material = SubResource("PhysicsMaterial_86vhf")
 z_index = 4
 position = Vector2(9, 0)
 scale = Vector2(-1, 1)
-collision_layer = 0
-collision_mask = 0
+collision_mask = 2
 
 [node name="Offest" type="Marker2D" parent="Back" unique_id=2122967268]
 position = Vector2(0.1759777, -45.967045)
@@ -741,30 +758,29 @@ position = Vector2(-31, -1)
 node_b = NodePath("..")
 bias = 0.9
 
-[node name="WeaponHitBox" type="Area2D" parent="." unique_id=494151939 node_paths=PackedStringArray("weapon")]
+[node name="HitBox" type="Area2D" parent="." unique_id=642244919]
 rotation = 1.5707964
-script = ExtResource("4_5pxtx")
-weapon = NodePath("..")
-weapon_attck_data = SubResource("Resource_71p2d")
-attack_data = SubResource("Resource_wfuh6")
-metadata/_custom_type_script = "uid://42c2b5rma8ot"
+script = ExtResource("24_5rtpq")
+cs_stat = ExtResource("2_5rtpq")
+metadata/_custom_type_script = "uid://da3cqoomwyp1o"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponHitBox" unique_id=133617072]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=133617072]
 z_index = 3
-position = Vector2(-7, 3.8146973e-06)
+position = Vector2(-3.5087176e-06, -7)
+rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_weadw")
 disabled = true
 debug_color = Color(1, 0, 0, 0.41960785)
 
 [node name="AnimationManagerComponent" type="Node" parent="." unique_id=203429901]
 script = ExtResource("16_in3ot")
-anim_connect_list = ExtResource("19_bxcyf")
+anim_connect_list = SubResource("Resource_vo7fj")
 library = ExtResource("2_dp6s7")
 metadata/_custom_type_script = "uid://6lekj6yg62r6"
 
-[node name="StateAnimationManager" type="Node" parent="AnimationManagerComponent" unique_id=1041608812 node_paths=PackedStringArray("state_machines")]
+[node name="StateAnimationManager" type="Node" parent="AnimationManagerComponent" unique_id=1041608812 node_paths=PackedStringArray("state_machine")]
 script = ExtResource("19_wdegu")
-state_machines = [NodePath("../../StateMachine")]
+state_machine = NodePath("../../StateMachine")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=652731362]
 rotation = 1.5707964

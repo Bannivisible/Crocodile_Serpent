@@ -1,7 +1,7 @@
 extends Timer
 class_name DynamicTimer
 
-@export var time_max: float= -1.0
+@export var time_max: float= 10.0
 
 @export var warnings_steps: Array[float]:
 	set(value):

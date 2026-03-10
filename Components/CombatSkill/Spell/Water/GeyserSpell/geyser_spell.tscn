@@ -3,11 +3,12 @@
 [ext_resource type="Script" uid="uid://dhb1e5iyhlyl5" path="res://Components/CombatSkill/Spell/Water/GeyserSpell/Script/spell_geyser.gd" id="1_mjluh"]
 [ext_resource type="Resource" uid="uid://cktgvgilj7mww" path="res://Ressources/CombatSkillData/Spell/Water/Geyser/geyser_statistics.tres" id="2_q8h74"]
 [ext_resource type="Script" uid="uid://danilkv671r1y" path="res://Ressources/Attack/AttackType/attack_type.gd" id="2_wtlxq"]
-[ext_resource type="Script" uid="uid://c3c6ycd8hiv2p" path="res://Components/CombatSkill/Spell/hit_box.gd" id="4_q8h74"]
-[ext_resource type="Script" uid="uid://doagmyu4ylk33" path="res://Ressources/Attack/AttackData/spell_attack_data.gd" id="5_kiuwm"]
+[ext_resource type="Script" uid="uid://da3cqoomwyp1o" path="res://Components/CombatSkill/hit_box.gd" id="4_pb20s"]
 [ext_resource type="Script" uid="uid://cd5i6fer42vww" path="res://Components/CombatSkill/Spell/Water/GeyserSpell/controler.gd" id="9_msyc4"]
 [ext_resource type="Script" uid="uid://bcmokx1bwyftw" path="res://StateMachine/state_machine.gd" id="10_5ekjd"]
+[ext_resource type="Script" uid="uid://6lekj6yg62r6" path="res://Components/animation_manager/animation_manager_component.gd" id="10_5nrq7"]
 [ext_resource type="Script" uid="uid://dh526fg0u7duu" path="res://Components/CombatSkill/Spell/Water/GeyserSpell/Script/desactivate.gd" id="11_bf0ja"]
+[ext_resource type="Script" uid="uid://dgi2a2c0lt17u" path="res://Components/animation_manager/state_animation_manager.gd" id="11_cdv0n"]
 [ext_resource type="Script" uid="uid://cvkoqrytxj66u" path="res://Components/CombatSkill/Spell/Water/GeyserSpell/Script/charge.gd" id="12_q75wl"]
 [ext_resource type="Script" uid="uid://dtfutyetajtjj" path="res://Components/CombatSkill/Spell/Water/GeyserSpell/Script/cast.gd" id="13_wwxgk"]
 
@@ -22,10 +23,6 @@ point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_aqxpk"]
 colors = PackedColorArray(0, 0, 0.839216, 1, 0.0941176, 1, 1, 0.772549)
-
-[sub_resource type="Resource" id="Resource_5nrq7"]
-script = ExtResource("5_kiuwm")
-metadata/_custom_type_script = "uid://doagmyu4ylk33"
 
 [sub_resource type="Gradient" id="Gradient_0blkd"]
 colors = PackedColorArray(0, 1, 1, 1, 0, 0, 1, 1)
@@ -65,11 +62,9 @@ collision_mask = 6
 hit_from_inside = true
 collide_with_areas = true
 
-[node name="HitBox" type="Area2D" parent="." unique_id=1439694550 node_paths=PackedStringArray("spell")]
-script = ExtResource("4_q8h74")
-spell = NodePath("..")
-cs_stat = ExtResource("2_q8h74")
-attack_data = SubResource("Resource_5nrq7")
+[node name="HitBox" type="Area2D" parent="." unique_id=1439694550 node_paths=PackedStringArray("combat_skill")]
+script = ExtResource("4_pb20s")
+combat_skill = NodePath("..")
 metadata/_custom_type_script = "uid://da3cqoomwyp1o"
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1070517859]
@@ -103,6 +98,17 @@ wait_time = 0.25
 [node name="Controler" type="Node" parent="." unique_id=223276975]
 script = ExtResource("9_msyc4")
 metadata/_custom_type_script = "uid://dhau74o4l0rjm"
+
+[node name="AnimationManagerComponent" type="Node" parent="." unique_id=188727327]
+script = ExtResource("10_5nrq7")
+metadata/_custom_type_script = "uid://6lekj6yg62r6"
+
+[node name="StateAnimationManager" type="Node" parent="AnimationManagerComponent" unique_id=954534735 node_paths=PackedStringArray("state_machine")]
+script = ExtResource("11_cdv0n")
+play_reset = false
+play_mode = "Play"
+state_machine = NodePath("../../StateMachine")
+metadata/_custom_type_script = "uid://dgi2a2c0lt17u"
 
 [connection signal="timeout" from="StateMachine/Cast/Timer" to="StateMachine/Cast" method="_on_timer_timeout"]
 [connection signal="timeout" from="StateMachine/Cast/DamageInterval" to="StateMachine/Cast" method="_on_damage_interval_timeout"]

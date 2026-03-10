@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Wizard_statistics" format=3 uid="uid://cngbsch24bs31"]
+
+[ext_resource type="Script" uid="uid://cl87ihxgbwyfh" path="res://Ressources/Statistics/Scripts/wizard_statistics.gd" id="1_2u1uw"]
+
+[resource]
+script = ExtResource("1_2u1uw")
+base_max_stardust = 100.0
+base_max_health = 50.0
+base_speed = 50.0
+metadata/_custom_type_script = "uid://cl87ihxgbwyfh"

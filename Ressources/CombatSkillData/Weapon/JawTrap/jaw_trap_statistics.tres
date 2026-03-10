@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="WeaponStatistics" format=3 uid="uid://b827r0xrw47yh"]
+
+[ext_resource type="Script" uid="uid://bk1oc1ul33tnd" path="res://Ressources/Statistics/Scripts/weapon_statistics.gd" id="1_fchxr"]
+
+[resource]
+script = ExtResource("1_fchxr")
+base_attack = 50.0
+base_crit_rate = 20.0
+base_crit_coef = 2.0
+metadata/_custom_type_script = "uid://bk1oc1ul33tnd"

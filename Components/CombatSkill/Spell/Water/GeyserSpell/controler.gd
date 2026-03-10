@@ -22,6 +22,7 @@ func _physics_process(delta: float) -> void:
 	
 	_roated_geyser(delta)
 
+
 func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("attack") and _can_charge():
 		state_machine.set_state_with_string("Charge")
@@ -31,7 +32,6 @@ func _input(_event: InputEvent) -> void:
 		charge_rate = 0.0
 		
 		state_machine.set_state_with_string("Cast")
-
 
 #### LOGIC ####
 func _roated_geyser(delta: float) -> void:

@@ -8,3 +8,4 @@ class_name JawTrap
 
 #func _input(_event: InputEvent) -> void:
 	#if Input.is_action_just_pressed("BentDown"):
+		#set_at_top_level()

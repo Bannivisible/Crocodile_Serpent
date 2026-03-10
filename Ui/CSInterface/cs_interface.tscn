@@ -4,20 +4,22 @@
 [ext_resource type="Script" uid="uid://dijsmuk5xxrv7" path="res://Ui/CSInterface/cs_interface.gd" id="2_lhy7a"]
 [ext_resource type="Script" uid="uid://b1e0vwa7x3w0j" path="res://Ui/CSInterface/cs_interface_data_manager.gd" id="3_lhy7a"]
 [ext_resource type="Script" uid="uid://b2qh2de0kbwt" path="res://Ui/CSInterface/cs_category_button.gd" id="4_ddx0q"]
-[ext_resource type="Resource" uid="uid://iq6c7ofn104r" path="res://Scene/Characters/Crocodile/crocodile_stati.tres" id="4_ilqmr"]
-[ext_resource type="Resource" uid="uid://cngbsch24bs31" path="res://Scene/Characters/Snake/snake_stat.tres" id="5_5kfsq"]
+[ext_resource type="Resource" uid="uid://cnl4cmnu6nf6p" path="res://Scene/Characters/PlayableCharacter/Crocodile/Ressources/crocodile_stat.tres" id="4_nptg7"]
+[ext_resource type="Resource" uid="uid://cngbsch24bs31" path="res://Scene/Characters/PlayableCharacter/Snake/snake_stat.tres" id="5_5kfsq"]
 [ext_resource type="StyleBox" uid="uid://btakedmfoujf4" path="res://Ui/CSInterface/StyleBox/page_style_box_flat.tres" id="7_5kfsq"]
 [ext_resource type="StyleBox" uid="uid://doguu1cldrpqx" path="res://Ui/CSInterface/StyleBox/WeaponButtonStyleBoxes/weapon_style_box_focus.tres" id="7_idbfo"]
 [ext_resource type="Script" uid="uid://db4jcia3pwpd3" path="res://Ressources/CombatSkillData/combat_skill_data.gd" id="8_5tmjq"]
 [ext_resource type="StyleBox" uid="uid://ddlcfiauojenx" path="res://Ui/CSInterface/StyleBox/SpellButtonStyleBoxes/spell_button_style_box_normal.tres" id="9_idbfo"]
-[ext_resource type="Resource" uid="uid://cnx36oinkwin0" path="res://Ressources/CombatSkillData/Weapon/jaw_trap_data.tres" id="9_ix3v8"]
+[ext_resource type="Resource" uid="uid://cnx36oinkwin0" path="res://Ressources/CombatSkillData/Weapon/JawTrap/jaw_trap_data.tres" id="9_ix3v8"]
 [ext_resource type="Resource" uid="uid://cx84vorgutpdq" path="res://Ressources/CombatSkillData/Spell/Water/Geyser/geyser_data.tres" id="10_ilqmr"]
+[ext_resource type="Resource" uid="uid://dybi26ggyfpw1" path="res://Ressources/CombatSkillData/Spell/Wind/Spiral/spiral_data.tres" id="10_vh1v8"]
 [ext_resource type="Resource" uid="uid://ila888nuoopt" path="res://Ressources/CombatSkillData/Spell/Fire/FireBall/fire_ball_data.tres" id="11_5kfsq"]
 [ext_resource type="PackedScene" uid="uid://ds4i8cup57akf" path="res://Components/CombatSkill/Weapon/JawTrap/jaw_trap.tscn" id="11_k8l66"]
 [ext_resource type="Resource" uid="uid://d2urmmxyqwlit" path="res://Ressources/CombatSkillData/Spell/Fire/ExplosiveFireBall/explosive_fire_ball_data.tres" id="12_idbfo"]
+[ext_resource type="Resource" uid="uid://dgngahmttbfgp" path="res://Ressources/CombatSkillData/Spell/Ice/IciclesBlizzard/stalactite_blizzard_data.tres" id="12_nptg7"]
 [ext_resource type="Texture2D" uid="uid://bppfppgp3n74q" path="res://Components/CombatSkill/Weapon/JawTrap/Assets/piege_a_machoire_back_up/En main.PNG" id="12_vh1v8"]
 [ext_resource type="Resource" uid="uid://c04uu7w2nnej1" path="res://Ressources/CombatSkillData/Spell/Lightning/LightningCage/lightning_cage_data.tres" id="13_k2css"]
-[ext_resource type="Script" uid="uid://bk1oc1ul33tnd" path="res://Ressources/Statistics/weapon_statistics.gd" id="13_nptg7"]
+[ext_resource type="Script" uid="uid://bk1oc1ul33tnd" path="res://Ressources/Statistics/Scripts/weapon_statistics.gd" id="13_nptg7"]
 [ext_resource type="StyleBox" uid="uid://db2dcc2ltlsis" path="res://Ui/CSInterface/StyleBox/SpellButtonStyleBoxes/spell_button_style_box_focus.tres" id="13_tjcl5"]
 [ext_resource type="StyleBox" uid="uid://dib7pbhbh3nq8" path="res://Ui/CSInterface/StyleBox/WeaponButtonStyleBoxes/weapon_style_box_normal.tres" id="14_ilqmr"]
 [ext_resource type="Script" uid="uid://yi1uvna27jmy" path="res://Other/hider.gd" id="15_ilqmr"]
@@ -416,11 +418,13 @@ metadata/_edit_lock_ = true
 [node name="CSInterfaceDataManager" type="Node" parent="." unique_id=1531371341]
 unique_name_in_owner = true
 script = ExtResource("3_lhy7a")
-player_statistics = ExtResource("4_ilqmr")
+player_statistics = ExtResource("4_nptg7")
 wizard_statistics = ExtResource("5_5kfsq")
 water_spells_data = Array[ExtResource("8_5tmjq")]([ExtResource("10_ilqmr")])
 fire_spells_data = Array[ExtResource("8_5tmjq")]([ExtResource("11_5kfsq"), ExtResource("12_idbfo")])
+wind_spells_data = Array[ExtResource("8_5tmjq")]([ExtResource("10_vh1v8")])
 lightning_spells_data = Array[ExtResource("8_5tmjq")]([ExtResource("13_k2css")])
+ice_spells_data = Array[ExtResource("8_5tmjq")]([ExtResource("12_nptg7")])
 weapons_data = Array[ExtResource("8_5tmjq")]([SubResource("Resource_yj6c8"), SubResource("Resource_iupbt")])
 spell_style_boxes = Dictionary[String, StyleBox]({
 "focus": ExtResource("13_tjcl5"),

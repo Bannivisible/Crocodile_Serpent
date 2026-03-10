@@ -1,27 +1,22 @@
-extends WeaponAttackState
+extends AttackState
 
-@export var center_bone_path: NodePath
 
-var state_machine_x: StateMachine
-var state_machine_y: StateMachine
+@export var state_machine_path: NodePath= "StateMachine"
+@export var state_name: String= "Torpedo"
+
+@export var buff_speed: Buff
+
+
+@onready var croc_state_machine: StateMachine= get_object_node(state_machine_path)
+
 
 func enter() -> void:
 	super.enter()
-	
-	var velocity_component: VelocityComponent= object.get_node("VelocityComponent")
-	state_machine_x = velocity_component.state_machine_x
-	state_machine_y = velocity_component.state_machine_y
-	
-	var constant_dash: VelocityComponent_ConstantDashState= velocity_component.get_node("StateMachineX/ConstantDash")
-	constant_dash.dir = velocity_component.facing_direction
-	
-	state_machine_x.set_state(constant_dash)
-	state_machine_y.set_state_with_string("RotateDir")
+	croc_state_machine.set_state_with_string(state_name)
+
 
 func exit() -> void:
 	super.exit()
-	
-	state_machine_x.set_state_with_string("Idle")
-	state_machine_y.set_state_with_string("Fall")
-	
-	object.get_node(center_bone_path).rotation = 0.0
+	croc_state_machine.set_state_with_string("Idle")
+
+

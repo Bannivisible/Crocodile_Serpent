@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://8cbrtfbvotvd"]
+
+[ext_resource type="Script" uid="uid://b0ah0ceedepk3" path="res://Scene/Projectile/Stalactite/stalactite.gd" id="1_5ny1o"]
+[ext_resource type="Script" uid="uid://ce7ave72wm32j" path="res://Ressources/Attack/AttackData/attack_data.gd" id="2_obmrj"]
+[ext_resource type="Script" uid="uid://bcmokx1bwyftw" path="res://StateMachine/state_machine.gd" id="3_5ny1o"]
+[ext_resource type="Script" uid="uid://bey7t8h4m0yyp" path="res://StateMachine/state.gd" id="4_0wgqh"]
+[ext_resource type="Script" uid="uid://de8bq1hhypgmu" path="res://StateMachine/States/linear_movement_state.gd" id="5_wtq6n"]
+
+[sub_resource type="Resource" id="Resource_4kbsa"]
+script = ExtResource("2_obmrj")
+add_damage = 25.0
+metadata/_custom_type_script = "uid://ce7ave72wm32j"
+
+[sub_resource type="Curve" id="Curve_x8yfx"]
+_data = [Vector2(0, 0.9928097), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_x8yfx"]
+colors = PackedColorArray(5.1740557e-07, 0, 0.33234644, 1, 0, 0.8627451, 1, 0.7764706)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x8yfx"]
+radius = 30.0
+height = 320.0
+
+[node name="Stalactite" type="Area2D" unique_id=598492003]
+rotation = 1.5707964
+script = ExtResource("1_5ny1o")
+attack_data = SubResource("Resource_4kbsa")
+metadata/_custom_type_script = "uid://da3cqoomwyp1o"
+
+[node name="Line2D" type="Line2D" parent="." unique_id=121504086]
+points = PackedVector2Array(-150, 0, 150, 0)
+width = 60.0
+width_curve = SubResource("Curve_x8yfx")
+gradient = SubResource("Gradient_x8yfx")
+begin_cap_mode = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1087212532]
+position = Vector2(-20, 0)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_x8yfx")
+debug_color = Color(1, 0.19215687, 0.2784314, 0.41960785)
+
+[node name="StateMachine" type="Node" parent="." unique_id=868253349 node_paths=PackedStringArray("current_state")]
+script = ExtResource("3_5ny1o")
+current_state = NodePath("Idle")
+metadata/_custom_type_script = "uid://bcmokx1bwyftw"
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=174551585]
+script = ExtResource("4_0wgqh")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="LinearMovement" type="Node" parent="StateMachine" unique_id=33742221]
+script = ExtResource("5_wtq6n")
+distance = 2000.0
+metadata/_custom_type_script = "uid://de8bq1hhypgmu"

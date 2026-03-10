@@ -1,29 +1,54 @@
 extends Component
 class_name StateAnimationManager
 
+enum PLAY_MODE {
+	PLAY,
+	Blend,
+	TRAVEL
+}
+
+
 @export var active: bool= true
 
 @export var play_reset: bool= true
 
-@export_enum("Play", "Blend") var play_mode: String= "Blend"
+@export var play_mode := PLAY_MODE.PLAY
 
-@export var state_machines: Array[StateMachine]
+@export var state_machine: StateMachine:
+	set = _set_state_machine
 
+@export_group("Blend")
 @export var state_blend_anim_name: StringName= "StateBlendAnimation"
 @export var state_os_anim_name: StringName= "StateOneShotAnimation"
 
+@export_group("Travel")
+@export var anim_state_machine_name: StringName= "StateMachine"
+
 @onready var anim_manager: Node= _obtain_anim_manager()
+
+
+var anim_state_machine: AnimationNodeStateMachine
+
+
+#### SETTERS ####
+func _set_state_machine(value: StateMachine) -> void:
+	if state_machine: state_machine.state_changed_recur.disconnect(_on_state_machine_state_changed_recur)
+	
+	state_machine = value
+	
+	if state_machine: state_machine.state_changed_recur.connect(_on_state_machine_state_changed_recur)
 
 #### BUILT IN ####
 
 func _ready() -> void:
-	for state_machine in state_machines:
-		state_machine.state_changed_recur.connect(_on_state_machine_state_changed_recur)
-	
 	if not object.is_node_ready(): await object.ready
+	if not owner.is_node_ready(): await  owner.ready
 	
-	if state_machines[0]:
-		_play_state_anime(state_machines[0].get_deepest_state())
+	var state: State= state_machine.current_state
+	_play_state_anime(state)
+	while state is StateMachine:
+		state = state.current_state
+		_play_state_anime(state)
 
 #### LOGIC ####
 func _obtain_anim_manager() -> Node:
@@ -31,47 +56,6 @@ func _obtain_anim_manager() -> Node:
 	if parent is AnimationManagerComponent or parent is AnimationPlayer:
 		return parent
 	else : return null
-
-
-func _get_anim_name(state: State) -> String:
-	var anim_name: String= _get_existing_anim_name(state.name)
-	if anim_name != "":
-		return anim_name
-	
-	var top_state_machine := state.get_top_state_machine()
-	
-	for i in range(state_machines.size()):
-		if state_machines[i] == top_state_machine:
-			anim_name += state.get_chained_string()
-			anim_name = anim_name.substr(len(top_state_machine.name) + 1)
-			
-		else :
-			anim_name += state_machines[i].get_chained_state_string()
-		
-		if i < state_machines.size() - 1: anim_name += "|"
-	
-	anim_name = _get_existing_anim_name(anim_name)
-	
-	return anim_name
-
-
-func _get_existing_anim_name(anim_name: String) -> String:
-	if anim_manager is AnimationManagerComponent:
-		anim_name = anim_manager.get_anime_complete_name(anim_name)
-	
-	if anim_manager.has_animation(anim_name):
-		return anim_name
-	
-	for i in range(state_machines.size() - 1):
-		anim_name = Utiles.end_substr_until_meet(anim_name, "|")
-		
-		if anim_manager is AnimationManagerComponent:
-			anim_name = anim_manager.get_anime_complete_name(anim_name)
-		
-		if anim_manager.has_animation(anim_name):
-			return anim_name
-	
-	return ""
 
 
 func _blend_logic(anim_name: StringName) -> void:
@@ -98,29 +82,49 @@ func _one_shot_logic(anim_name: StringName) -> void:
 	anim_manager.request_one_shot(os_node_name)
 
 
-
-
 func _play_state_anime(state: State) -> void:
 	if state == null: return
 	var anim_name: StringName= _get_anim_name(state)
-	
 	if not anim_manager.has_animation(anim_name): return
 	
 	match play_mode:
-		"Play":
-			if anim_manager.current_animation != anim_name:
-				anim_manager.stop()
-				
-				if play_reset: 
-					anim_manager.play("RESET")
-					anim_manager.stop()
-				
-				anim_manager.play(anim_name)
-		"Blend":
-			if anim_manager.get_animation(anim_name).loop_mode == Animation.LOOP_NONE:
-				_one_shot_logic(anim_name)
-			else :
-				_blend_logic(anim_name)
+		PLAY_MODE.PLAY: _match_play(anim_name)
+		PLAY_MODE.Blend: _match_blend(anim_name)
+
+
+func _match_play(anim_name: StringName) -> void:
+	if not anim_manager.current_animation != anim_name: return
+	
+	if anim_manager is AnimationPlayer:
+		anim_manager.stop()
+		
+		if play_reset: 
+			anim_manager.play("RESET")
+			anim_manager.stop()
+		
+		anim_manager.play(anim_name)
+
+
+func _match_blend(anim_name: StringName) -> void:
+	if anim_manager.get_animation(anim_name).loop_mode == Animation.LOOP_NONE:
+		_one_shot_logic(anim_name)
+	else :
+		_blend_logic(anim_name)
+
+
+func _match_travel(anim_name: StringName) -> void:
+	if anim_manager is AnimationTree:
+		anim_state_machine
+
+
+func _get_anim_name(state: State) -> String:
+	var anim_name: String= state.get_chained_string()
+	anim_name = anim_name.substr(len(state_machine.name) + 1)
+	
+	if anim_manager is AnimationManagerComponent:
+		anim_name = anim_manager.get_anime_complete_name(anim_name)
+	
+	return anim_name
 
 #### SIGNAL RESPONSES ####
 func _on_state_machine_state_changed_recur(_state: State, deep_state: State) -> void:

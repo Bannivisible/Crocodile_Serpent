@@ -3,7 +3,8 @@ extends Node
 enum COLLISION_MASK{
 	CHARACTER = 1,
 	GROUND,
-	HURT_BOX
+	HURT_BOX,
+	OTHER
 }
 
 

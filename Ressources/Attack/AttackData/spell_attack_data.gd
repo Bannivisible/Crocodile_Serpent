@@ -2,7 +2,6 @@ extends AttackData
 class_name SpellAttackData
 
 
-func compute_damage(cs_stat: Statistics) -> float:
+func _get_raw_damage(charac_stat: CharacStatistics ,cs_stat: Statistics) -> float:
 	var spell_stat: SpellStatistics= cs_stat
-	
-	return (spell_stat.power + add_damage) * mult_damage 
+	return spell_stat.power + super._get_raw_damage(charac_stat, cs_stat)

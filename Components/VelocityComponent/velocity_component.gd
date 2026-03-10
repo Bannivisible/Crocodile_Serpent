@@ -7,18 +7,20 @@ const MIN_SPEED: float= 0.05
 @export var charac_stat: CharacStatistics
 
 @export var suffer_gravity: bool= true
-@export var gravity: float = 200.0
-
-@export var facing_node: Node2D
+@export var gravity: float = 3000.0
 
 @onready var character: Character= object
 
+@onready var scale_x_face_inverser: ScaleXFaceInverser = $ScaleXFaceInverser
+@onready var pos_x_face_inverser: PosXFaceInverser = $PosXFaceInverser
+@onready var rotation_leader: RotationLeader = $RotationLeader
 
-var facing_direction := Vector2.RIGHT:
+
+var face_dir := Vector2.RIGHT:
 	set(value):
-		if value != facing_direction:
-			facing_direction = value
-			facing_direction_changed.emit(facing_direction)
+		if value != face_dir:
+			face_dir = value
+			face_dir_changed.emit(face_dir)
 
 var dir: Vector2:
 	set(value):
@@ -37,7 +39,7 @@ var follow_path: bool= false
 
 
 signal dir_changed(dir: Vector2)
-signal facing_direction_changed(face_dir: Vector2)
+signal face_dir_changed(face_dir: Vector2)
 
 signal target_reached(pos: Vector2)
 signal target_changed(pos: Vector2)
@@ -140,9 +142,8 @@ func free_immobilize() -> void:
 
 #### SIGNAL RESPONSES ####
 func _on_dir_changed(_dir: Vector2) -> void:
-	# X axis
 	if dir.x != 0.0:
-		facing_direction.x = sign(dir.x)
+		face_dir.x = sign(dir.x)
 
 
 func _on_charac_stat_stat_updated() -> void:

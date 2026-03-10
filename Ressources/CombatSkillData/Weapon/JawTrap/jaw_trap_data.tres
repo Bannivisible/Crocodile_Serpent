@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="CombatSkillData" format=3 uid="uid://cnx36oinkwin0"]
+
+[ext_resource type="Script" uid="uid://db4jcia3pwpd3" path="res://Ressources/CombatSkillData/combat_skill_data.gd" id="1_8rnwb"]
+[ext_resource type="PackedScene" uid="uid://ds4i8cup57akf" path="res://Components/CombatSkill/Weapon/JawTrap/jaw_trap.tscn" id="1_ukgpr"]
+[ext_resource type="Texture2D" uid="uid://bppfppgp3n74q" path="res://Components/CombatSkill/Weapon/JawTrap/Assets/piege_a_machoire_back_up/En main.PNG" id="2_ukgpr"]
+[ext_resource type="Script" uid="uid://bk1oc1ul33tnd" path="res://Ressources/Statistics/Scripts/weapon_statistics.gd" id="3_pooew"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_djj2n"]
+atlas = ExtResource("2_ukgpr")
+
+[sub_resource type="Resource" id="Resource_ukgpr"]
+script = ExtResource("3_pooew")
+base_attack = 40.0
+base_crit_rate = 20.0
+base_crit_coef = 2.0
+metadata/_custom_type_script = "uid://bk1oc1ul33tnd"
+
+[resource]
+script = ExtResource("1_8rnwb")
+name = "Piège A Machoire"
+icone = SubResource("AtlasTexture_djj2n")
+stat = SubResource("Resource_ukgpr")
+combat_skill_scene = ExtResource("1_ukgpr")
+metadata/_custom_type_script = "uid://db4jcia3pwpd3"

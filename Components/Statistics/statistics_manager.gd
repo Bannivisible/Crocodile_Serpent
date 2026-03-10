@@ -11,4 +11,5 @@ func _ready() -> void:
 		hp.stat = statistiques
 	
 	var vel_comp: VelocityComponent= object.get_node_or_null("VelocityComponent")
-	if vel_comp: vel_comp.charac_stat = statistiques
+	if vel_comp:
+		vel_comp.charac_stat = statistiques

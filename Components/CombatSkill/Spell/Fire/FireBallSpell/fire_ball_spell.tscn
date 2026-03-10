@@ -37,8 +37,9 @@ metadata/_custom_type_script = "uid://bcmokx1bwyftw"
 script = ExtResource("7_01ugg")
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 
-[node name="SpawnProjectile" type="Node" parent="StateMachine" unique_id=1384810449]
+[node name="SpawnProjectile" type="Node" parent="StateMachine" unique_id=1384810449 node_paths=PackedStringArray("combat_skill")]
 script = ExtResource("8_u73ff")
+combat_skill = NodePath("../..")
 projectile_scene = ExtResource("9_dor2y")
 cs_stat = ExtResource("2_6co0t")
 attack_data = SubResource("Resource_ffqhb")
