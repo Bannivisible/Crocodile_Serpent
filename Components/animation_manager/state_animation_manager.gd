@@ -10,6 +10,8 @@ enum PLAY_MODE {
 
 @export var active: bool= true
 
+@export var anim_manager_path: NodePath= ".."
+
 @export var play_reset: bool= true
 
 @export var play_mode := PLAY_MODE.PLAY
@@ -22,12 +24,13 @@ enum PLAY_MODE {
 @export var state_os_anim_name: StringName= "StateOneShotAnimation"
 
 @export_group("Travel")
-@export var anim_state_machine_name: StringName= "StateMachine"
+@export var anim_state_machine_path: String= "StateMachine":
+	set = _set_anim_state_machine_path
 
-@onready var anim_manager: Node= _obtain_anim_manager()
+@onready var anim_manager: Node= get_node_or_null(anim_manager_path)
 
 
-var anim_state_machine: AnimationNodeStateMachine
+@onready var state_machine_playback: AnimationNodeStateMachinePlayback= _get_state_machine_playback()
 
 
 #### SETTERS ####
@@ -37,6 +40,11 @@ func _set_state_machine(value: StateMachine) -> void:
 	state_machine = value
 	
 	if state_machine: state_machine.state_changed_recur.connect(_on_state_machine_state_changed_recur)
+
+
+func _set_anim_state_machine_path(value: String) -> void:
+	anim_state_machine_path = value
+	state_machine_playback = _get_state_machine_playback()
 
 #### BUILT IN ####
 
@@ -51,11 +59,28 @@ func _ready() -> void:
 		_play_state_anime(state)
 
 #### LOGIC ####
-func _obtain_anim_manager() -> Node:
-	var parent: Node= get_parent()
-	if parent is AnimationManagerComponent or parent is AnimationPlayer:
-		return parent
-	else : return null
+func _get_anim_name(state: State) -> String:
+	var anim_name: String= state.get_chained_string()
+	anim_name = anim_name.substr(len(state_machine.name) + 1)
+	
+	if anim_manager is AnimationManagerComponent:
+		anim_name = anim_manager.get_anime_complete_name(anim_name)
+	
+	return anim_name
+
+
+func _get_state_machine_playback() -> AnimationNodeStateMachinePlayback:
+	if play_mode != PLAY_MODE.TRAVEL: return
+	
+	var path: String= "parameters/"
+	path += anim_state_machine_path + "/playback"
+	
+	if anim_manager is AnimationTree:
+		return anim_manager.get(path)
+	if anim_manager is AnimationManagerComponent:
+		return anim_manager.animation_tree.get(path)
+	
+	return null
 
 
 func _blend_logic(anim_name: StringName) -> void:
@@ -90,6 +115,7 @@ func _play_state_anime(state: State) -> void:
 	match play_mode:
 		PLAY_MODE.PLAY: _match_play(anim_name)
 		PLAY_MODE.Blend: _match_blend(anim_name)
+		PLAY_MODE.TRAVEL: _match_travel(anim_name)
 
 
 func _match_play(anim_name: StringName) -> void:
@@ -113,18 +139,9 @@ func _match_blend(anim_name: StringName) -> void:
 
 
 func _match_travel(anim_name: StringName) -> void:
-	if anim_manager is AnimationTree:
-		anim_state_machine
-
-
-func _get_anim_name(state: State) -> String:
-	var anim_name: String= state.get_chained_string()
-	anim_name = anim_name.substr(len(state_machine.name) + 1)
-	
-	if anim_manager is AnimationManagerComponent:
-		anim_name = anim_manager.get_anime_complete_name(anim_name)
-	
-	return anim_name
+	if anim_manager is AnimationTree and state_machine_playback:
+		
+		state_machine_playback.travel(anim_name)
 
 #### SIGNAL RESPONSES ####
 func _on_state_machine_state_changed_recur(_state: State, deep_state: State) -> void:

@@ -49,7 +49,7 @@ func _set_combat_skill(value: CombatSkill) -> void:
 func _ready() -> void:
 	var vel_comp: VelocityComponent= get_object_node(vel_comp_path)
 	if vel_comp:
-		vel_comp.facing_direction_changed.connect(_on_vel_comp_facing_direction_changed)
+		vel_comp.face_dir_changed.connect(_on_vel_comp_face_dir_changed)
 	
 	if spawn_rot_mode == "Degree": spawn_rot = deg_to_rad(spawn_rot)
 
@@ -92,7 +92,7 @@ func enter() -> void:
 	projectile_spawn.emit(projectile)
 
 #### SIGNAL RESPONSES ####
-func _on_vel_comp_facing_direction_changed(dir: Vector2) -> void:
+func _on_vel_comp_face_dir_changed(dir: Vector2) -> void:
 	spawn_pos.x = abs(spawn_pos.x) *  dir.x
 	spawn_rot += face_dir_rotation * dir.x
 

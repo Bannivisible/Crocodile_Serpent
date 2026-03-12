@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://1ntq0e44578q" path="res://Components/CombatSkill/Spell/spell.gd" id="1_qtvmm"]
 [ext_resource type="Resource" uid="uid://cr2436recv4cg" path="res://Ressources/CombatSkillData/Spell/Fire/FireBall/fire_ball_statistics.tres" id="2_6co0t"]
 [ext_resource type="Script" uid="uid://danilkv671r1y" path="res://Ressources/Attack/AttackType/attack_type.gd" id="3_pf3qg"]
+[ext_resource type="Resource" uid="uid://cngbsch24bs31" path="res://Scene/Characters/PlayableCharacter/Snake/snake_stat.tres" id="4_6co0t"]
 [ext_resource type="Script" uid="uid://dyglpbhv533ei" path="res://Ressources/ConditionForAction/condition_for_action.gd" id="4_xdj86"]
 [ext_resource type="Resource" uid="uid://bhmjl8h8ocfri" path="res://Components/CombatSkill/Spell/Fire/FireBallSpell/cast_fire_ball.tres" id="5_c7yar"]
 [ext_resource type="Script" uid="uid://bcmokx1bwyftw" path="res://StateMachine/state_machine.gd" id="6_72s2d"]
@@ -25,6 +26,7 @@ metadata/_custom_type_script = "uid://doagmyu4ylk33"
 script = ExtResource("1_qtvmm")
 stat = ExtResource("2_6co0t")
 type = SubResource("Resource_cokb3")
+charac_stat = ExtResource("4_6co0t")
 conditions_for_actions_array = Array[ExtResource("4_xdj86")]([ExtResource("5_c7yar")])
 metadata/_custom_type_script = "uid://1ntq0e44578q"
 

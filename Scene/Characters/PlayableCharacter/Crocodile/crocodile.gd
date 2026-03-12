@@ -14,8 +14,14 @@ func _ready() -> void:
 	Events.cs_interface_on_screen_changed.connect(_on_Events_cs_interface_on_screen_changed)
 
 
-func _input(_event: InputEvent) -> void:
-	pass
+#func _input(_event: InputEvent) -> void:
+	#if Input.is_action_just_pressed("bent_down"):
+		#print($AnimationTree.get("parameters/StateMachine/playback"))
+
+#func _input(_event: InputEvent) -> void:
+	#if Input.is_action_just_pressed("bent_down"):
+		#print($AnimationPlayer.get_animation_library_list())
+
 
 
 #### LOGIC ####
@@ -35,6 +41,7 @@ func _on_Event_combat_skill_selected(cs_data: CombatSkillData) -> void:
 		weapon_manager.current_weapon = cs
 		weapon_manager.active = true
 		controler.active = true
+	
 	elif cs is Spell:
 		weapon_manager.active = false
 		controler.active = false
