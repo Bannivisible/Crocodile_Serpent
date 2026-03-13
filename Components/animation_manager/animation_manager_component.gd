@@ -373,3 +373,26 @@ func get_string_all_current_anim_name_in_tree() -> Array[String]:
 	return anim_list
 
 
+func print_blendtree() -> void:
+	for anim_node_name in tree_root.get_node_list():
+		var anim_node = get_animation_node(anim_node_name)
+		
+		if anim_node is AnimationNodeAnimation:
+			print_animation_node(anim_node_name)
+		elif anim_node is AnimationNodeBlend2 or anim_node is AnimationNodeBlend3:
+			print_blend_node(anim_node_name)
+		elif anim_node is AnimationNodeOneShot:
+			print_one_shot_node(anim_node_name)
+		else : print(anim_node_name)
+
+
+func print_animation_node(animation_node_name: StringName) -> void:
+	print(animation_node_name + " : " + str(get_animation_name(animation_node_name)))
+
+
+func print_blend_node(blend_node_name: StringName) -> void:
+	print(blend_node_name + " : " + str(get_blend_amount(blend_node_name)))
+
+
+func print_one_shot_node(one_shot_node_name: StringName) -> void:
+	print(one_shot_node_name + " : " + str(get_request_one_shot(one_shot_node_name)))

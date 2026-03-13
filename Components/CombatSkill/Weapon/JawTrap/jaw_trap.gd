@@ -4,8 +4,8 @@ class_name JawTrap
 @onready var state_machine: StateMachine = $StateMachine
 @onready var on_hand_machine: Node = $StateMachine/OnHand
 
-@onready var animation_manager_component: AnimationManagerComponent = $AnimationManagerComponent
+@onready var anim_manager: AnimationManagerComponent = $AnimationManagerComponent
 
 #func _input(_event: InputEvent) -> void:
-	#if Input.is_action_just_pressed("BentDown"):
-		#set_at_top_level()
+	#if Input.is_action_just_pressed("bent_down"):
+		#anim_manager.print_blendtree()

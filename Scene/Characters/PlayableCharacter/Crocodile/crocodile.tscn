@@ -21,10 +21,8 @@
 [ext_resource type="Script" uid="uid://dat1xibjdbka6" path="res://Components/Statistics/statistics_manager.gd" id="11_xdqw8"]
 [ext_resource type="SkeletonModification2DLookAt" uid="uid://c8bnrs2ge68xr" path="res://Scene/Characters/PlayableCharacter/Crocodile/SkeletonModification/hand_front_skeleton_modification_2d_look_at.tres" id="14_umomj"]
 [ext_resource type="Animation" uid="uid://ccbyb3j0w0168" path="res://Scene/Characters/PlayableCharacter/Crocodile/AnimationTree/Idle.res" id="16_jlbrr"]
-[ext_resource type="AnimationLibrary" uid="uid://ctdrtnjx7txak" path="res://Components/CombatSkill/Weapon/JawTrap/AnimationsData/JawTrapAnimationLibrary.res" id="20_jbjqy"]
 [ext_resource type="Script" uid="uid://dgi2a2c0lt17u" path="res://Components/animation_manager/state_animation_manager.gd" id="22_jbjqy"]
 [ext_resource type="Script" uid="uid://crj66obtl3821" path="res://Components/CombatSkill/Weapon/weapon_manager.gd" id="22_qvnx8"]
-[ext_resource type="PackedScene" uid="uid://ds4i8cup57akf" path="res://Components/CombatSkill/Weapon/JawTrap/jaw_trap.tscn" id="23_7cm0d"]
 [ext_resource type="Resource" uid="uid://cnl4cmnu6nf6p" path="res://Scene/Characters/PlayableCharacter/Crocodile/Ressources/crocodile_stat.tres" id="27_e5ikc"]
 [ext_resource type="Script" uid="uid://dpn7spt1k8imj" path="res://Scene/Characters/Scripts/BasicStates/state_machine.gd" id="28_yvpvj"]
 [ext_resource type="Script" uid="uid://vki8pd4tv00v" path="res://Scene/Characters/Scripts/BasicStates/jump.gd" id="30_e5ikc"]
@@ -202,10 +200,6 @@ modifications/9 = ExtResource("14_umomj")
 modifications/10 = ExtResource("5_fs2r1")
 modifications/11 = ExtResource("9_fs2r1")
 modifications/12 = ExtResource("10_ifobo")
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jeet7"]
-radius = 10.036705
-height = 88.18735
 
 [sub_resource type="Animation" id="Animation_fjl3l"]
 resource_name = "1"
@@ -1452,70 +1446,34 @@ tracks/73/keys = {
 tracks/74/type = "value"
 tracks/74/imported = false
 tracks/74/enabled = true
-tracks/74/path = NodePath("WeaponManager/JawTrap/Back:rotation")
-tracks/74/interp = 1
+tracks/74/path = NodePath("Skeleton2D/Center/ThighBack/LegBack:position")
+tracks/74/interp = 2
 tracks/74/loop_wrap = true
 tracks/74/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.44440964]
+"values": [Vector2(33.99031, 53.686005)]
 }
 tracks/75/type = "value"
 tracks/75/imported = false
 tracks/75/enabled = true
-tracks/75/path = NodePath("WeaponManager/JawTrap/Back:z_index")
-tracks/75/interp = 1
+tracks/75/path = NodePath("Skeleton2D/Center/ThighBack/LegBack/FootBack:position")
+tracks/75/interp = 2
 tracks/75/loop_wrap = true
 tracks/75/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [5]
-}
-tracks/76/type = "value"
-tracks/76/imported = false
-tracks/76/enabled = true
-tracks/76/path = NodePath("WeaponManager/JawTrap/Front:z_index")
-tracks/76/interp = 1
-tracks/76/loop_wrap = true
-tracks/76/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [6]
-}
-tracks/77/type = "value"
-tracks/77/imported = false
-tracks/77/enabled = true
-tracks/77/path = NodePath("Skeleton2D/Center/ThighBack/LegBack:position")
-tracks/77/interp = 2
-tracks/77/loop_wrap = true
-tracks/77/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(33.99031, 53.686005)]
-}
-tracks/78/type = "value"
-tracks/78/imported = false
-tracks/78/enabled = true
-tracks/78/path = NodePath("Skeleton2D/Center/ThighBack/LegBack/FootBack:position")
-tracks/78/interp = 2
-tracks/78/loop_wrap = true
-tracks/78/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(-4.0006027, 40.010902)]
 }
-tracks/79/type = "value"
-tracks/79/imported = false
-tracks/79/enabled = true
-tracks/79/path = NodePath("Skeleton2D/Center/Body:rotation")
-tracks/79/interp = 1
-tracks/79/loop_wrap = true
-tracks/79/keys = {
+tracks/76/type = "value"
+tracks/76/imported = false
+tracks/76/enabled = true
+tracks/76/path = NodePath("Skeleton2D/Center/Body:rotation")
+tracks/76/interp = 1
+tracks/76/loop_wrap = true
+tracks/76/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -2265,15 +2223,6 @@ _data = {
 &"Torpedo": SubResource("Animation_nn2k0")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8e5hb"]
-animation = &"RESET"
-
-[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_fjl3l"]
-filter_enabled = true
-filters = ["CSManager/JawTrap/Front:position", "CSManager/JawTrap/Front:rotation", "Skeleton2D/Center:position", "Skeleton2D/Center:rotation"]
-
-[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_0jkvw"]
-
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_dr3s2"]
 filter_enabled = true
 filters = ["CSManager/JawTrap/Front:position", "CSManager/JawTrap/Front:rotation"]
@@ -2377,25 +2326,19 @@ graph_offset = Vector2(169.52386, -124.86037)
 animation = &"RESET"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_7cm0d"]
-graph_offset = Vector2(-809.3359, -47.832165)
+graph_offset = Vector2(-528.59467, -1.3199056)
 nodes/output/position = Vector2(700, 200)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_qvnx8")
 nodes/StateMachine/position = Vector2(-1180, 100)
-nodes/AttackOneShot/node = SubResource("AnimationNodeOneShot_0jkvw")
-nodes/AttackOneShot/position = Vector2(220, 320)
-nodes/AttackBlend2/node = SubResource("AnimationNodeBlend2_fjl3l")
-nodes/AttackBlend2/position = Vector2(220, -60)
+nodes/StateOneShot/node = SubResource("AnimationNodeOneShot_8e5hb")
+nodes/StateOneShot/position = Vector2(120, 133.33333)
+nodes/StateBlend2/node = SubResource("AnimationNodeBlend2_dr3s2")
+nodes/StateBlend2/position = Vector2(-560, 133.33333)
 nodes/StateOneShotAnimation/node = SubResource("AnimationNodeAnimation_dr3s2")
-nodes/StateOneShotAnimation/position = Vector2(-760, 460)
+nodes/StateOneShotAnimation/position = Vector2(-293.33334, 453.33334)
 nodes/StateBlendAnimation/node = SubResource("AnimationNodeAnimation_fjl3l")
 nodes/StateBlendAnimation/position = Vector2(-1160, 360)
-nodes/AttackAnimation/node = SubResource("AnimationNodeAnimation_8e5hb")
-nodes/AttackAnimation/position = Vector2(-220, 460)
-nodes/StateOneShot/node = SubResource("AnimationNodeOneShot_8e5hb")
-nodes/StateOneShot/position = Vector2(-380, 120)
-nodes/StateBlend2/node = SubResource("AnimationNodeBlend2_dr3s2")
-nodes/StateBlend2/position = Vector2(-760, 140)
-node_connections = [&"output", 0, &"StateOneShot", &"AttackOneShot", 1, &"AttackAnimation", &"StateOneShot", 0, &"StateBlend2", &"StateOneShot", 1, &"StateOneShotAnimation", &"StateBlend2", 0, &"StateMachine", &"StateBlend2", 1, &"StateBlendAnimation"]
+node_connections = [&"output", 0, &"StateOneShot", &"StateOneShot", 0, &"StateBlend2", &"StateOneShot", 1, &"StateOneShotAnimation", &"StateBlend2", 0, &"StateMachine", &"StateBlend2", 1, &"StateBlendAnimation"]
 
 [node name="Crocodile" unique_id=2023739003 groups=["Crocodile"] instance=ExtResource("1_pp85c")]
 script = ExtResource("2_fjl3l")
@@ -2623,7 +2566,7 @@ z_index = 3
 
 [node name="ArmFront" type="Sprite2D" parent="SpriteContainer/ArmFrontGroup" index="0" unique_id=1751966982]
 position = Vector2(-56.329865, -220.66083)
-rotation = -0.021970082
+rotation = -0.021970093
 scale = Vector2(0.9997865, 0.9997865)
 texture = SubResource("AtlasTexture_kwm2e")
 offset = Vector2(-10, 17.333)
@@ -2631,7 +2574,7 @@ offset = Vector2(-10, 17.333)
 [node name="ForearmFront" type="Sprite2D" parent="SpriteContainer/ArmFrontGroup" index="1" unique_id=189613157]
 z_index = 3
 position = Vector2(-77.27702, -187.86658)
-rotation = -0.07213887
+rotation = -0.0721389
 scale = Vector2(0.99963075, 0.99963075)
 texture = SubResource("AtlasTexture_l1deg")
 offset = Vector2(-14, 25.667)
@@ -2639,8 +2582,8 @@ offset = Vector2(-14, 25.667)
 [node name="HandFront" type="Sprite2D" parent="SpriteContainer/ArmFrontGroup" index="2" unique_id=950457284]
 z_index = 3
 position = Vector2(-100.40661, -138.0873)
-rotation = -0.25910032
-scale = Vector2(0.999635, 0.999635)
+rotation = -0.25910038
+scale = Vector2(0.9996349, 0.9996349)
 texture = SubResource("AtlasTexture_fs2r1")
 offset = Vector2(-12, 15)
 
@@ -2942,45 +2885,7 @@ position = Vector2(126, -276)
 [node name="WeaponManager" type="Node2D" parent="." index="4" unique_id=1145767657 node_paths=PackedStringArray("current_weapon")]
 script = ExtResource("22_qvnx8")
 charac_stat = ExtResource("27_e5ikc")
-current_weapon = NodePath("JawTrap")
-
-[node name="JawTrap" parent="WeaponManager" index="0" unique_id=291549971 instance=ExtResource("23_7cm0d")]
-
-[node name="Front" parent="WeaponManager/JawTrap" index="2" unique_id=473639612]
-z_index = 6
-position = Vector2(-104.57708, -119.96578)
-scale = Vector2(0.9996564, 0.9996564)
-
-[node name="Iron" parent="WeaponManager/JawTrap/Front/Offest" parent_id_path=PackedInt32Array(291549971, 2036590807) index="1" unique_id=1449499431]
-position = Vector2(1.4065231, 19.924086)
-scale = Vector2(1, -1)
-
-[node name="Jaw" parent="WeaponManager/JawTrap/Front/Offest" parent_id_path=PackedInt32Array(291549971, 2036590807) index="2" unique_id=1577332897]
-position = Vector2(-1, -35)
-
-[node name="Back" parent="WeaponManager/JawTrap" index="4" unique_id=99701971]
-z_index = 5
-position = Vector2(114.05631, -151.03525)
-rotation = 0.44440964
-scale = Vector2(0.9996652, 0.9996652)
-
-[node name="Sleeve" parent="WeaponManager/JawTrap/Back/Offest" parent_id_path=PackedInt32Array(291549971, 2122967268) index="0" unique_id=2127110596]
-z_index = -3
-
-[node name="Iron" parent="WeaponManager/JawTrap/Back/Offest" parent_id_path=PackedInt32Array(291549971, 2122967268) index="1" unique_id=1833082611]
-z_index = -2
-position = Vector2(1, 19.999998)
-
-[node name="Jaw" parent="WeaponManager/JawTrap/Back/Offest" parent_id_path=PackedInt32Array(291549971, 2122967268) index="2" unique_id=952381243]
-z_index = -2
-position = Vector2(1.0000001, -35)
-
-[node name="CollisionShape2D" parent="WeaponManager/JawTrap/Back" index="1" unique_id=1534789154]
-shape = SubResource("CapsuleShape2D_jeet7")
-
-[node name="CollisionShape2D" parent="WeaponManager/JawTrap/HitBox" parent_id_path=PackedInt32Array(291549971, 642244919) index="0" unique_id=133617072]
-position = Vector2(-164, -56.999992)
-rotation = 0.0
+current_weapon = NodePath("")
 
 [node name="HealthComponent" parent="." index="5" unique_id=218773380 instance=ExtResource("10_51sid")]
 visible = false
@@ -2991,17 +2896,12 @@ shape = SubResource("CapsuleShape2D_pp85c")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6" unique_id=252078669]
 libraries/ = SubResource("AnimationLibrary_0ft5j")
-libraries/JawTrapAnimationLibrary = ExtResource("20_jbjqy")
 playback_default_blend_time = 2.0
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="7" unique_id=309911794]
 deterministic = false
 tree_root = SubResource("AnimationNodeBlendTree_7cm0d")
 anim_player = NodePath("../AnimationPlayer")
-parameters/AttackOneShot/active = false
-parameters/AttackOneShot/internal_active = false
-parameters/AttackOneShot/request = 0
-parameters/AttackBlend2/blend_amount = 0.0
 parameters/StateOneShot/active = false
 parameters/StateOneShot/internal_active = false
 parameters/StateOneShot/request = 0
@@ -3089,6 +2989,5 @@ jump_state = NodePath("../StateMachine/Jump")
 fall_state = NodePath("../StateMachine/Fall")
 metadata/_custom_type_script = "uid://b2brduwjmier0"
 
-[editable path="WeaponManager/JawTrap"]
 [editable path="HealthComponent"]
 [editable path="VelocityComponent"]

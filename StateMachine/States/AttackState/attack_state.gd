@@ -39,6 +39,7 @@ enum INPUT_MODE{
 var is_hit_box_hit: bool= false
 
 var input_time: float= 0.0
+var input_active: bool= false
 
 var anim_name: StringName
 
@@ -56,7 +57,7 @@ func _ready() -> void:
 	animation_manager.animation_finished.connect(_on_animation_manager_animation_finished)
 	hit_box.hit.connect(_on_hit_box_hit)
 	if combo_timer: combo_timer.timeout.connect(_on_combo_timer_timeout)
-	
+	Events.cs_interface_on_screen_changed.connect(_on_Events_cs_interface_on_screen_changed)
 	
 	_obtain_anim_name()
 	
@@ -138,6 +139,8 @@ func _combo_condition_valid() -> bool:
 
 ### INPUT ###
 func _input_logic(delta) -> void:
+	if not input_active: return
+	
 	if Input.is_action_just_pressed(input_name):
 		_input_just_pressed()
 	
@@ -295,9 +298,6 @@ func _on_animation_manager_animation_finished(anime: StringName) -> void:
 	if combo_timer:
 		combo_timer.timeout.emit()
 		combo_timer.stop()
-	
-	#if blend_node is AnimationNodeOneShot:
-		#print(blend_node)
 
 
 func _on_previous_state_exit() -> void:
@@ -311,3 +311,7 @@ func _on_hit_box_hit(_damage: float, _hurt_box: HurtBox) -> void:
 
 func _on_combo_timer_timeout() -> void:
 	pass
+
+
+func _on_Events_cs_interface_on_screen_changed(on_screen: bool) -> void:
+	input_active = !on_screen
