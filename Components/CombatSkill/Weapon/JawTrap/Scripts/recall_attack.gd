@@ -10,7 +10,6 @@ func _ready() -> void:
 	await super._ready()
 	
 	var throw_anime_name: String= throw_attack.get_chained_string().substr(len(get_top_state_machine().name)+1)
-	throw_anime_name = animation_manager.add_library_to_name(throw_anime_name)
 	var throw_anime: Animation= animation_manager.get_animation(throw_anime_name)
 	combo_cooldown += throw_anime.length + throw_attack.time 
 	$"../ThrowIntermediate".wait_time = throw_attack.time + combo_cooldown

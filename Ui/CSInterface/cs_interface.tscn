@@ -58,7 +58,7 @@ metadata/_custom_type_script = "uid://bk1oc1ul33tnd"
 script = ExtResource("8_5tmjq")
 name = "Test"
 icone = SubResource("GradientTexture2D_djj2n")
-description = "Arme innutilisable sui sert seulement à voir si les données se mette à jour dans l'interface"
+description = "Arme innutilisable sui sert seulement à voir si les données se mettent à jour dans l'interface"
 stat = SubResource("Resource_uxvu1")
 metadata/_custom_type_script = "uid://db4jcia3pwpd3"
 

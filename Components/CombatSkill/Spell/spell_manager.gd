@@ -17,21 +17,27 @@ func _set_active(value: bool) -> void:
 	
 	active = value
 	
-	if active and current_spell:
-		add_child(current_spell)
-	elif current_spell != null:
-		remove_child(current_spell)
+	if current_spell:
+		if active and not current_spell in get_children():
+			add_child(current_spell)
+	
+		elif not active and current_spell in get_children():
+			remove_child(current_spell)
 
 
 func _set_current_spell(value) -> void:
-	if current_spell: remove_child(current_spell)
+	if value == current_spell: return
+	if current_spell in get_children():
+		remove_child(current_spell)
 	
 	current_spell = value
 	
 	if current_spell:
 		current_spell.object = owner
 		current_spell.charac_stat = charac_stat
-		add_child(current_spell)
+		
+		if active and not current_spell in get_children():
+			add_child(current_spell)
 
 
 func _set_charac_stat(value: CharacStatistics):

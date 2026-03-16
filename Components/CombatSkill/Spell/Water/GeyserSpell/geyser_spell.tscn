@@ -105,8 +105,6 @@ metadata/_custom_type_script = "uid://6lekj6yg62r6"
 
 [node name="StateAnimationManager" type="Node" parent="AnimationManagerComponent" unique_id=954534735 node_paths=PackedStringArray("state_machine")]
 script = ExtResource("11_cdv0n")
-play_reset = false
-play_mode = "Play"
 state_machine = NodePath("../../StateMachine")
 metadata/_custom_type_script = "uid://dgi2a2c0lt17u"
 

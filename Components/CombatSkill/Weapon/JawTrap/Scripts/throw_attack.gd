@@ -56,3 +56,4 @@ func _get_destination(dir: Vector2) -> Vector2:
 func _update_rotation(dir: Vector2) -> void:
 	var rot = dir.angle()
 	front.rotation = rot
+

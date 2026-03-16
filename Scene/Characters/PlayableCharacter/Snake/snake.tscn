@@ -230,8 +230,8 @@ animations = [{
 }]
 
 [sub_resource type="Curve" id="Curve_rro0k"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.4, 0.5), 0.0, 0.0, 0, 0, Vector2(0.6, 0.5), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 4
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.6, 0.5), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_28kfq"]
 atlas = ExtResource("2_28kfq")
@@ -1003,6 +1003,15 @@ _data = {
 &"RESET": SubResource("Animation_ox5u4")
 }
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qrhud"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_upub7"]
+graph_offset = Vector2(-426.0415, 67.30173)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_qrhud")
+nodes/Animation/position = Vector2(0, 146.66667)
+node_connections = [&"output", 0, &"Animation"]
+
 [node name="Snake" unique_id=644033490 instance=ExtResource("1_aytpt")]
 script = ExtResource("2_gv3gm")
 
@@ -1270,7 +1279,7 @@ position = Vector2(-47, -54)
 rest = Transform2D(1, 0, 0, 1, -47, -54)
 auto_calculate_length_and_angle = false
 length = 88.0
-bone_angle = -209.99983
+bone_angle = -209.99982
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Skeleton2D/Body/SleeveBack" index="0" unique_id=29591003]
 remote_path = NodePath("../../../../SpriteContainer/BodyGroup/SleeveBack")
@@ -1365,7 +1374,11 @@ charac_stat = ExtResource("8_fymkc")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4" unique_id=1387048882]
 libraries/ = SubResource("AnimationLibrary_rro0k")
 
-[node name="VelocityComponent" parent="." index="5" unique_id=1212142288 instance=ExtResource("2_u3ofr")]
+[node name="AnimationTree" type="AnimationTree" parent="." index="5" unique_id=1636600723]
+tree_root = SubResource("AnimationNodeBlendTree_upub7")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="VelocityComponent" parent="." index="6" unique_id=1212142288 instance=ExtResource("2_u3ofr")]
 
 [node name="ScaleXFaceInverser" parent="VelocityComponent" index="0" unique_id=1314762492 node_paths=PackedStringArray("facing_nodes")]
 facing_nodes = [NodePath("../../SpellManager"), NodePath("../../Skeleton2D")]
@@ -1373,16 +1386,16 @@ facing_nodes = [NodePath("../../SpellManager"), NodePath("../../Skeleton2D")]
 [node name="PosXFaceInverser" parent="VelocityComponent" index="1" unique_id=1679766930 node_paths=PackedStringArray("facing_nodes")]
 facing_nodes = [NodePath("../../SpellManager")]
 
-[node name="StatisticsManager" type="Node" parent="." index="6" unique_id=2118422330]
+[node name="StatisticsManager" type="Node" parent="." index="7" unique_id=2118422330]
 script = ExtResource("15_hd1gs")
 statistiques = ExtResource("3_gv3gm")
 metadata/_custom_type_script = "uid://dat1xibjdbka6"
 
-[node name="StardustComponent" type="Node" parent="." index="7" unique_id=1095236350]
+[node name="StardustComponent" type="Node" parent="." index="8" unique_id=1095236350]
 script = ExtResource("10_qrhud")
 wizard_stat = ExtResource("3_gv3gm")
 
-[node name="StateMachine" type="Node" parent="." index="9" unique_id=1836951717 node_paths=PackedStringArray("velocity_component", "current_state")]
+[node name="StateMachine" type="Node" parent="." index="10" unique_id=1836951717 node_paths=PackedStringArray("velocity_component", "current_state")]
 script = ExtResource("9_x7o3y")
 velocity_component = NodePath("../VelocityComponent")
 current_state = NodePath("Idle")
@@ -1418,7 +1431,7 @@ metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 script = ExtResource("6_1e483")
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 
-[node name="StateLabel" type="Label" parent="." index="10" unique_id=1744803114 node_paths=PackedStringArray("state_machine")]
+[node name="StateLabel" type="Label" parent="." index="11" unique_id=1744803114 node_paths=PackedStringArray("state_machine")]
 offset_left = -19.0
 offset_top = 44.0
 offset_right = 21.0
@@ -1427,7 +1440,7 @@ script = ExtResource("13_x7o3y")
 state_machine = NodePath("../StateMachine")
 metadata/_custom_type_script = "uid://d38qkfrf1wj1a"
 
-[node name="PlayerControler" type="Node" parent="." index="11" unique_id=1792488713 node_paths=PackedStringArray("velocity_component", "state_machine", "jump_state", "fall_state")]
+[node name="PlayerControler" type="Node" parent="." index="12" unique_id=1792488713 node_paths=PackedStringArray("velocity_component", "state_machine", "jump_state", "fall_state")]
 script = ExtResource("11_c8tis")
 velocity_component = NodePath("../VelocityComponent")
 state_machine = NodePath("../StateMachine")

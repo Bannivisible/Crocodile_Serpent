@@ -25,8 +25,6 @@ enum INPUT_MODE{
 
 @export_group("Animation")
 @export var animation_manager: AnimationManagerComponent
-#@export var anim_node: StringName= "AttackAnimation"
-#@export var blend_node_name: StringName= "AttackOneShot"
 
 @export_group("Combo")
 @export_range(0.0, 60.0) var combo_cooldown: float
@@ -149,8 +147,8 @@ func _input_logic(delta) -> void:
 		_input_pressed()
 	
 	elif Input.is_action_just_released(input_name):
-		input_time = 0.0
 		_input_release()
+		input_time = 0.0
 
 
 func _input_just_pressed() -> void:
@@ -284,9 +282,6 @@ func _create_combo_timer() -> Timer:
 
 func _obtain_anim_name() -> void:
 	anim_name = get_chained_string().substr(len(get_top_state_machine().name)+1)
-	if animation_manager:
-		anim_name = animation_manager.get_anime_complete_name(anim_name)
-
 
 
 #### SIGNALS RESPONSES ####

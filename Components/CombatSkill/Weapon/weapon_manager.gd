@@ -6,8 +6,10 @@ extends Node2D
 @export var charac_stat: CharacStatistics:
 	set = _set_charac_stat
 
+@export var current_weapon_data: CombatSkillData:
+	set = _set_weapon_data
 
-@export var current_weapon: Weapon:
+var current_weapon: Weapon:
 	set = _set_current_weapon
 
 
@@ -17,16 +19,30 @@ func _set_active(value: bool) -> void:
 	
 	active = value
 	
-	if active and current_weapon:
-		add_child(current_weapon)
+	if current_weapon:
+		if active and not current_weapon in get_children():
+			add_child(current_weapon)
 	
-	elif current_weapon != null:
-		remove_child(current_weapon)
+		elif not active and current_weapon in get_children():
+			remove_child(current_weapon)
+
+
+func _set_weapon_data(value: CombatSkillData) -> void:
+	if not value != current_weapon_data: return
+	
+	current_weapon_data = value
+	
+	if current_weapon_data == null:
+		current_weapon = null
+	else :
+		current_weapon = current_weapon_data.combat_skill_scene.instantiate()
+
 
 func _set_current_weapon(value: Weapon) -> void:
 	if value == current_weapon: return
 	if current_weapon in get_children():
 		remove_child(current_weapon)
+		current_weapon.queue_free()
 	
 	current_weapon = value
 	

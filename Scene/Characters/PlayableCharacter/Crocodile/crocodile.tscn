@@ -21,6 +21,8 @@
 [ext_resource type="Script" uid="uid://dat1xibjdbka6" path="res://Components/Statistics/statistics_manager.gd" id="11_xdqw8"]
 [ext_resource type="SkeletonModification2DLookAt" uid="uid://c8bnrs2ge68xr" path="res://Scene/Characters/PlayableCharacter/Crocodile/SkeletonModification/hand_front_skeleton_modification_2d_look_at.tres" id="14_umomj"]
 [ext_resource type="Animation" uid="uid://ccbyb3j0w0168" path="res://Scene/Characters/PlayableCharacter/Crocodile/AnimationTree/Idle.res" id="16_jlbrr"]
+[ext_resource type="Script" uid="uid://6lekj6yg62r6" path="res://Components/animation_manager/animation_manager_component.gd" id="21_w2kjd"]
+[ext_resource type="Resource" uid="uid://b85xloi286pt1" path="res://Ressources/AnimationConnection/crocodile_animation_connections.tres" id="22_4djef"]
 [ext_resource type="Script" uid="uid://dgi2a2c0lt17u" path="res://Components/animation_manager/state_animation_manager.gd" id="22_jbjqy"]
 [ext_resource type="Script" uid="uid://crj66obtl3821" path="res://Components/CombatSkill/Weapon/weapon_manager.gd" id="22_qvnx8"]
 [ext_resource type="Resource" uid="uid://cnl4cmnu6nf6p" path="res://Scene/Characters/PlayableCharacter/Crocodile/Ressources/crocodile_stat.tres" id="27_e5ikc"]
@@ -2223,6 +2225,8 @@ _data = {
 &"Torpedo": SubResource("Animation_nn2k0")
 }
 
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_k74ft"]
+
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_dr3s2"]
 filter_enabled = true
 filters = ["CSManager/JawTrap/Front:position", "CSManager/JawTrap/Front:rotation"]
@@ -2259,13 +2263,18 @@ advance_on_start = true
 animation = &"ToGetUp"
 advance_on_start = true
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_k74ft"]
+animation = &"Torpedo"
+
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_n380g"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pvels"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wfuh6"]
+xfade_time = 0.2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_weadw"]
+xfade_time = 0.2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_l1deg"]
 
@@ -2297,6 +2306,10 @@ switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_w2kjd"]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ynjtu"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_iw2au"]
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_qvnx8"]
 states/BentDown-IdleB/node = SubResource("AnimationNodeAnimation_w2kjd")
 states/BentDown-IdleB/position = Vector2(435.59378, 307.80246)
@@ -2314,11 +2327,13 @@ states/Move/node = SubResource("AnimationNodeAnimation_p0okl")
 states/Move/position = Vector2(782.59534, 25.333338)
 states/Start/position = Vector2(228.66667, 92.96297)
 states/ToBentDown/node = SubResource("AnimationNodeAnimation_rsvc4")
-states/ToBentDown/position = Vector2(334.0768, 169.77777)
+states/ToBentDown/position = Vector2(344.74347, 170.8932)
 states/ToGetUp/node = SubResource("AnimationNodeAnimation_hgdcd")
-states/ToGetUp/position = Vector2(784.07684, 170.5207)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_n380g"), "Jump", "Fall", SubResource("AnimationNodeStateMachineTransition_pvels"), "Idle", "Move", SubResource("AnimationNodeStateMachineTransition_wfuh6"), "Move", "Idle", SubResource("AnimationNodeStateMachineTransition_weadw"), "Idle", "ToBentDown", SubResource("AnimationNodeStateMachineTransition_l1deg"), "Idle", "End", SubResource("AnimationNodeStateMachineTransition_ooqhq"), "ToGetUp", "Idle", SubResource("AnimationNodeStateMachineTransition_4djef"), "BentDown-MoveB", "BentDown-IdleB", SubResource("AnimationNodeStateMachineTransition_kj3xj"), "BentDown-IdleB", "BentDown-MoveB", SubResource("AnimationNodeStateMachineTransition_nprca"), "BentDown-IdleB", "ToGetUp", SubResource("AnimationNodeStateMachineTransition_7ktkk"), "BentDown-MoveB", "ToGetUp", SubResource("AnimationNodeStateMachineTransition_36jn7"), "Idle", "Fall", SubResource("AnimationNodeStateMachineTransition_e5u65"), "ToBentDown", "BentDown-MoveB", SubResource("AnimationNodeStateMachineTransition_u4jyn"), "ToBentDown", "BentDown-IdleB", SubResource("AnimationNodeStateMachineTransition_0rnww"), "Fall", "FallLanding", SubResource("AnimationNodeStateMachineTransition_vsulq"), "FallLanding", "Idle", SubResource("AnimationNodeStateMachineTransition_sw307"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_w2kjd")]
-graph_offset = Vector2(169.52386, -124.86037)
+states/ToGetUp/position = Vector2(783.3114, 171.88016)
+states/Torpedo/node = SubResource("AnimationNodeAnimation_k74ft")
+states/Torpedo/position = Vector2(578.1147, 169.04134)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_n380g"), "Jump", "Fall", SubResource("AnimationNodeStateMachineTransition_pvels"), "Idle", "Move", SubResource("AnimationNodeStateMachineTransition_wfuh6"), "Move", "Idle", SubResource("AnimationNodeStateMachineTransition_weadw"), "Idle", "ToBentDown", SubResource("AnimationNodeStateMachineTransition_l1deg"), "Idle", "End", SubResource("AnimationNodeStateMachineTransition_ooqhq"), "ToGetUp", "Idle", SubResource("AnimationNodeStateMachineTransition_4djef"), "BentDown-MoveB", "BentDown-IdleB", SubResource("AnimationNodeStateMachineTransition_kj3xj"), "BentDown-IdleB", "BentDown-MoveB", SubResource("AnimationNodeStateMachineTransition_nprca"), "BentDown-IdleB", "ToGetUp", SubResource("AnimationNodeStateMachineTransition_7ktkk"), "BentDown-MoveB", "ToGetUp", SubResource("AnimationNodeStateMachineTransition_36jn7"), "Idle", "Fall", SubResource("AnimationNodeStateMachineTransition_e5u65"), "ToBentDown", "BentDown-MoveB", SubResource("AnimationNodeStateMachineTransition_u4jyn"), "ToBentDown", "BentDown-IdleB", SubResource("AnimationNodeStateMachineTransition_0rnww"), "Fall", "FallLanding", SubResource("AnimationNodeStateMachineTransition_vsulq"), "FallLanding", "Idle", SubResource("AnimationNodeStateMachineTransition_sw307"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_w2kjd"), "Idle", "Torpedo", SubResource("AnimationNodeStateMachineTransition_ynjtu"), "Torpedo", "Idle", SubResource("AnimationNodeStateMachineTransition_iw2au")]
+graph_offset = Vector2(173.52386, 6.71783)
 
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_8e5hb"]
 
@@ -2326,7 +2341,6 @@ graph_offset = Vector2(169.52386, -124.86037)
 animation = &"RESET"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_7cm0d"]
-graph_offset = Vector2(-528.59467, -1.3199056)
 nodes/output/position = Vector2(700, 200)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_qvnx8")
 nodes/StateMachine/position = Vector2(-1180, 100)
@@ -2353,23 +2367,23 @@ z_index = -1
 [node name="ArmBack" type="Sprite2D" parent="SpriteContainer/ArmBackGroup" index="0" unique_id=199930191]
 modulate = Color(0.735357, 0.735357, 0.735357, 1)
 z_index = -1
-position = Vector2(52.993195, -221.12987)
+position = Vector2(52.99315, -221.12979)
 rotation = 3.0692008
-scale = Vector2(0.99978375, -0.99978375)
+scale = Vector2(0.99978286, -0.99978286)
 texture = SubResource("AtlasTexture_71p2d")
 offset = Vector2(-10, 17.333)
 
 [node name="ForearmBack" type="Sprite2D" parent="SpriteContainer/ArmBackGroup" index="1" unique_id=1962910639]
-position = Vector2(82.08568, -187.31587)
+position = Vector2(82.08561, -187.31583)
 rotation = 3.0267773
-scale = Vector2(0.99963146, -0.99963146)
+scale = Vector2(0.9996306, -0.9996306)
 texture = SubResource("AtlasTexture_pigwd")
 offset = Vector2(-7.7521763, 23.060297)
 
 [node name="HandBack" type="Sprite2D" parent="SpriteContainer/ArmBackGroup" index="2" unique_id=1161825618]
-position = Vector2(119.977234, -140.0182)
+position = Vector2(119.97713, -140.0182)
 rotation = -2.9513817
-scale = Vector2(0.99963206, -0.99963206)
+scale = Vector2(0.99963117, -0.99963117)
 texture = SubResource("AtlasTexture_ifobo")
 offset = Vector2(-9.287, 11.465)
 
@@ -2377,30 +2391,30 @@ offset = Vector2(-9.287, 11.465)
 
 [node name="LegBack" type="Sprite2D" parent="SpriteContainer/LegBackGroup" index="0" unique_id=444752468]
 z_index = -1
-position = Vector2(79.122, -97.982544)
-rotation = 0.1159194
-scale = Vector2(0.99964815, 0.99964815)
+position = Vector2(79.12201, -97.982544)
+rotation = 0.115919374
+scale = Vector2(0.99964833, 0.99964833)
 texture = SubResource("AtlasTexture_3ua5h")
 offset = Vector2(0, 17)
 
 [node name="ThighBack" type="Sprite2D" parent="SpriteContainer/LegBackGroup" index="1" unique_id=97382226]
 modulate = Color(0.735357, 0.735357, 0.735357, 1)
 position = Vector2(30.665672, -139.0661)
-rotation = -0.30312806
-scale = Vector2(0.99979514, 0.99979514)
+rotation = -0.3031281
+scale = Vector2(0.9997953, 0.9997953)
 texture = SubResource("AtlasTexture_utiys")
 offset = Vector2(18, 26.333)
 
 [node name="FootBack" type="Sprite2D" parent="SpriteContainer/LegBackGroup" index="2" unique_id=1107727012]
-position = Vector2(70.52361, -58.71669)
-rotation = -0.116859466
-scale = Vector2(0.99949247, 0.99949247)
+position = Vector2(70.52362, -58.716682)
+rotation = -0.11685949
+scale = Vector2(0.9994927, 0.9994927)
 texture = SubResource("AtlasTexture_6et86")
 offset = Vector2(9.333, 10.667)
 
 [node name="TorsoGroup" type="Node2D" parent="SpriteContainer" parent_id_path=PackedInt32Array(791091049) index="2" unique_id=1459112674]
 position = Vector2(0, -142)
-scale = Vector2(0.99993163, 0.99993163)
+scale = Vector2(0.99993074, 0.99993074)
 
 [node name="Torso" type="Sprite2D" parent="SpriteContainer/TorsoGroup" index="0" unique_id=114306766]
 scale = Vector2(0.9999982, 0.9999982)
@@ -2434,8 +2448,8 @@ scale = Vector2(0.9999491, 0.9999491)
 
 [node name="ProceduralLine" type="Line2D" parent="SpriteContainer/AnchorTail" index="0" unique_id=724561488 node_paths=PackedStringArray("anchor")]
 z_index = -2
-points = PackedVector2Array(0, 0, -40, 0, -80, 0, -120, 0, -160, 0, -200, 0)
-width = 70.0
+points = PackedVector2Array(0, 0, -50, 0, -100, 0, -150, 0, -200, 0, -250, 0)
+width = 80.0
 width_curve = SubResource("Curve_e5ikc")
 texture = SubResource("GradientTexture2D_dr3s2")
 joint_mode = 2
@@ -2443,7 +2457,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 script = ExtResource("3_e5ikc")
 anchor = NodePath("..")
-distance = 40.0
+distance = 50.0
 init_dir = Vector2(-1, 0)
 gravity_amount = 125.0
 gravity_increase_amount = 10.0
@@ -2453,7 +2467,7 @@ metadata/_custom_type_script = "uid://lnbdh25h7yvf"
 
 [node name="PelvisGroup" type="Node2D" parent="SpriteContainer" parent_id_path=PackedInt32Array(791091049) index="4" unique_id=856574124]
 position = Vector2(0, -142)
-scale = Vector2(0.99993163, 0.99993163)
+scale = Vector2(0.99993074, 0.99993074)
 
 [node name="Pelvis" type="Sprite2D" parent="SpriteContainer/PelvisGroup" index="0" unique_id=1300555623]
 scale = Vector2(0.9999982, 0.9999982)
@@ -2479,19 +2493,19 @@ texture = SubResource("AtlasTexture_6d12l")
 
 [node name="HeadGroup" type="Node2D" parent="SpriteContainer" parent_id_path=PackedInt32Array(791091049) index="5" unique_id=243440234]
 z_index = 3
-position = Vector2(0.00047871177, -267.97458)
+position = Vector2(0.00047871136, -267.9745)
 rotation = 0.0021072626
-scale = Vector2(0.9997599, 0.9997599)
+scale = Vector2(0.999759, 0.999759)
 
 [node name="Jaw" type="Sprite2D" parent="SpriteContainer/HeadGroup" index="0" unique_id=1671218072]
-position = Vector2(-32.01649, -0.21966553)
-scale = Vector2(0.99988425, 0.97738045)
+position = Vector2(-32.01649, -0.21963501)
+scale = Vector2(0.9998842, 0.9773804)
 texture = SubResource("AtlasTexture_wfuh6")
 offset = Vector2(36.92784, -2.5172439)
 
 [node name="FaceGroup" type="Node2D" parent="SpriteContainer/HeadGroup" index="1" unique_id=793666102]
-position = Vector2(-32.01649, -0.21966553)
-scale = Vector2(0.9998756, 0.977372)
+position = Vector2(-32.01649, -0.21963501)
+scale = Vector2(0.99987555, 0.97737193)
 
 [node name="HairBack" type="Sprite2D" parent="SpriteContainer/HeadGroup/FaceGroup" index="0" unique_id=256432908]
 z_index = -1
@@ -2548,16 +2562,16 @@ position = Vector2(3.0087547, 3.258667)
 texture = SubResource("AtlasTexture_hb14a")
 
 [node name="StrandBack" type="Sprite2D" parent="SpriteContainer/HeadGroup" index="2" unique_id=194762747]
-position = Vector2(-43.34818, 16.778366)
+position = Vector2(-43.34818, 16.778397)
 rotation = -0.34906563
-scale = Vector2(0.9998837, 0.9998835)
+scale = Vector2(0.99988365, 0.99988335)
 texture = SubResource("AtlasTexture_weadw")
 offset = Vector2(20.086979, -10.858177)
 
 [node name="StrandFront" type="Sprite2D" parent="SpriteContainer/HeadGroup" index="3" unique_id=1968218646]
 z_index = 3
-position = Vector2(13.38467, -58.468994)
-scale = Vector2(0.9998756, 0.99956936)
+position = Vector2(13.384669, -58.468964)
+scale = Vector2(0.99987555, 0.9995693)
 texture = SubResource("AtlasTexture_24sqv")
 offset = Vector2(3.8255405, 18.435066)
 
@@ -2565,48 +2579,48 @@ offset = Vector2(3.8255405, 18.435066)
 z_index = 3
 
 [node name="ArmFront" type="Sprite2D" parent="SpriteContainer/ArmFrontGroup" index="0" unique_id=1751966982]
-position = Vector2(-56.329865, -220.66083)
-rotation = -0.021970093
-scale = Vector2(0.9997865, 0.9997865)
+position = Vector2(-56.329815, -220.66077)
+rotation = -0.02197009
+scale = Vector2(0.9997856, 0.9997856)
 texture = SubResource("AtlasTexture_kwm2e")
 offset = Vector2(-10, 17.333)
 
 [node name="ForearmFront" type="Sprite2D" parent="SpriteContainer/ArmFrontGroup" index="1" unique_id=189613157]
 z_index = 3
-position = Vector2(-77.27702, -187.86658)
-rotation = -0.0721389
-scale = Vector2(0.99963075, 0.99963075)
+position = Vector2(-77.276955, -187.86655)
+rotation = -0.07213889
+scale = Vector2(0.99962986, 0.99962986)
 texture = SubResource("AtlasTexture_l1deg")
 offset = Vector2(-14, 25.667)
 
 [node name="HandFront" type="Sprite2D" parent="SpriteContainer/ArmFrontGroup" index="2" unique_id=950457284]
 z_index = 3
-position = Vector2(-100.40661, -138.0873)
-rotation = -0.25910038
-scale = Vector2(0.9996349, 0.9996349)
+position = Vector2(-100.40652, -138.08731)
+rotation = -0.25910035
+scale = Vector2(0.9996341, 0.9996341)
 texture = SubResource("AtlasTexture_fs2r1")
 offset = Vector2(-12, 15)
 
 [node name="LegFrontGroup" type="Node2D" parent="SpriteContainer" parent_id_path=PackedInt32Array(791091049) index="7" unique_id=1785593900]
 
 [node name="LegFront" type="Sprite2D" parent="SpriteContainer/LegFrontGroup" index="0" unique_id=1504693139]
-position = Vector2(-63.09398, -95.855736)
-rotation = 0.06972345
-scale = Vector2(0.99966353, 0.99966353)
+position = Vector2(-63.093987, -95.85573)
+rotation = 0.06972351
+scale = Vector2(0.99966365, 0.99966365)
 texture = SubResource("AtlasTexture_qvnx8")
 offset = Vector2(2.667, 21.333)
 
 [node name="ThighFront" type="Sprite2D" parent="SpriteContainer/LegFrontGroup" index="1" unique_id=1920124788]
 position = Vector2(-35.665417, -138.333)
-rotation = 0.266719
-scale = Vector2(0.99980634, 0.99980634)
+rotation = 0.26671907
+scale = Vector2(0.9998065, 0.9998065)
 texture = SubResource("AtlasTexture_jbjqy")
 offset = Vector2(-5.667, 21)
 
 [node name="FootFront" type="Sprite2D" parent="SpriteContainer/LegFrontGroup" index="2" unique_id=1521634280]
-position = Vector2(-67.02162, -50.89955)
-rotation = -0.00049207924
-scale = Vector2(0.9995041, 0.9995041)
+position = Vector2(-67.02163, -50.899536)
+rotation = -0.00049201207
+scale = Vector2(0.9995042, 0.9995042)
 texture = SubResource("AtlasTexture_7cm0d")
 offset = Vector2(2.2518923, 17.591896)
 
@@ -2621,7 +2635,7 @@ scale = Vector2(0.9999506, 0.9999506)
 rest = Transform2D(0.99997675, 0, 0, 0.99997675, 0, -21)
 
 [node name="Body" type="Bone2D" parent="Skeleton2D/Center" index="0" unique_id=1398461688]
-scale = Vector2(0.99998105, 0.99998105)
+scale = Vector2(0.99998015, 0.99998015)
 rest = Transform2D(1, 0, 0, 1, 0, 0)
 
 [node name="Pelvis" type="RemoteTransform2D" parent="Skeleton2D/Center/Body" index="0" unique_id=1309882699]
@@ -2781,7 +2795,7 @@ update_scale = false
 [node name="ThighFront" type="Bone2D" parent="Skeleton2D/Center" index="1" unique_id=110966940]
 position = Vector2(-35.66718, 3.667183)
 rotation = 0.266719
-scale = Vector2(0.99985576, 0.99985576)
+scale = Vector2(0.99985594, 0.99985594)
 rest = Transform2D(0.96450275, 0.26353016, -0.26353016, 0.96450275, -35.66718, 3.667183)
 
 [node name="ThighFront" type="RemoteTransform2D" parent="Skeleton2D/Center/ThighFront" index="0" unique_id=498928478]
@@ -2811,7 +2825,7 @@ remote_path = NodePath("../../../../../../SpriteContainer/LegFrontGroup/FootFron
 [node name="ThighBack" type="Bone2D" parent="Skeleton2D/Center" index="2" unique_id=213418361]
 position = Vector2(30.667187, 2.9340515)
 rotation = 5.9800572
-scale = Vector2(0.99984455, 0.99984455)
+scale = Vector2(0.99984473, 0.99984473)
 rest = Transform2D(0.9542559, -0.29845974, 0.29845974, 0.9542559, 30.667187, 2.9340515)
 
 [node name="ThighBack" type="RemoteTransform2D" parent="Skeleton2D/Center/ThighBack" index="0" unique_id=1490173146]
@@ -2882,10 +2896,9 @@ position = Vector2(58, -29)
 [node name="HeadLookAt" type="Marker2D" parent="SkeletonTargets" index="8" unique_id=1493146228]
 position = Vector2(126, -276)
 
-[node name="WeaponManager" type="Node2D" parent="." index="4" unique_id=1145767657 node_paths=PackedStringArray("current_weapon")]
+[node name="WeaponManager" type="Node2D" parent="." index="4" unique_id=1145767657]
 script = ExtResource("22_qvnx8")
 charac_stat = ExtResource("27_e5ikc")
-current_weapon = NodePath("")
 
 [node name="HealthComponent" parent="." index="5" unique_id=218773380 instance=ExtResource("10_51sid")]
 visible = false
@@ -2894,11 +2907,18 @@ visible = false
 position = Vector2(0, -150)
 shape = SubResource("CapsuleShape2D_pp85c")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6" unique_id=252078669]
+[node name="AnimationManagerComponent" type="Node" parent="." index="6" unique_id=599713350]
+script = ExtResource("21_w2kjd")
+anim_connect_list = ExtResource("22_4djef")
+remove_library_on_exit_tree = false
+metadata/_custom_type_script = "uid://6lekj6yg62r6"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="7" unique_id=252078669]
 libraries/ = SubResource("AnimationLibrary_0ft5j")
+libraries/WeaponLibrary = SubResource("AnimationLibrary_k74ft")
 playback_default_blend_time = 2.0
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="7" unique_id=309911794]
+[node name="AnimationTree" type="AnimationTree" parent="." index="8" unique_id=309911794]
 deterministic = false
 tree_root = SubResource("AnimationNodeBlendTree_7cm0d")
 anim_player = NodePath("../AnimationPlayer")
@@ -2909,12 +2929,11 @@ parameters/StateBlend2/blend_amount = 0.0
 
 [node name="StateAnimationManager" type="Node" parent="AnimationTree" index="0" unique_id=11466307 node_paths=PackedStringArray("state_machine")]
 script = ExtResource("22_jbjqy")
-play_reset = false
 play_mode = 2
 state_machine = NodePath("../../StateMachine")
 metadata/_custom_type_script = "uid://dgi2a2c0lt17u"
 
-[node name="VelocityComponent" parent="." index="8" unique_id=661764387 instance=ExtResource("2_pp85c")]
+[node name="VelocityComponent" parent="." index="9" unique_id=661764387 instance=ExtResource("2_pp85c")]
 
 [node name="ScaleXFaceInverser" parent="VelocityComponent" index="0" unique_id=1314762492 node_paths=PackedStringArray("facing_nodes")]
 facing_nodes = [NodePath("../../Skeleton2D"), NodePath("../../WeaponManager")]
@@ -2922,12 +2941,12 @@ facing_nodes = [NodePath("../../Skeleton2D"), NodePath("../../WeaponManager")]
 [node name="PosXFaceInverser" parent="VelocityComponent" index="1" unique_id=1679766930 node_paths=PackedStringArray("facing_nodes")]
 facing_nodes = [NodePath("../../WeaponManager")]
 
-[node name="StatisticsManager" type="Node" parent="." index="9" unique_id=2083153856]
+[node name="StatisticsManager" type="Node" parent="." index="10" unique_id=2083153856]
 script = ExtResource("11_xdqw8")
 statistiques = ExtResource("27_e5ikc")
 metadata/_custom_type_script = "uid://dat1xibjdbka6"
 
-[node name="StateMachine" type="Node2D" parent="." index="11" unique_id=1630455474 node_paths=PackedStringArray("velocity_component", "current_state")]
+[node name="StateMachine" type="Node2D" parent="." index="12" unique_id=1630455474 node_paths=PackedStringArray("velocity_component", "current_state")]
 script = ExtResource("28_yvpvj")
 velocity_component = NodePath("../VelocityComponent")
 current_state = NodePath("Idle")
@@ -2981,7 +3000,7 @@ script = ExtResource("30_jlbrr")
 state_machine = NodePath("..")
 metadata/_custom_type_script = "uid://d38qkfrf1wj1a"
 
-[node name="PlayerControler" type="Node" parent="." index="12" unique_id=876854452 node_paths=PackedStringArray("velocity_component", "state_machine", "jump_state", "fall_state")]
+[node name="PlayerControler" type="Node" parent="." index="13" unique_id=876854452 node_paths=PackedStringArray("velocity_component", "state_machine", "jump_state", "fall_state")]
 script = ExtResource("30_yvpvj")
 velocity_component = NodePath("../VelocityComponent")
 state_machine = NodePath("../StateMachine")

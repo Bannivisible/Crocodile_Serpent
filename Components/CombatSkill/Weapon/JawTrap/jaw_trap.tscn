@@ -586,12 +586,13 @@ script = ExtResource("11_wdegu")
 distance = 630.299
 time = 0.5
 idle_state = NodePath("../ThrowIntermediate")
+input_time_interval = Vector2(1, -1)
 input_mode = 2
 hit_box = NodePath("../../../HitBox")
 attack_data = SubResource("Resource_rddj4")
 animation_manager = NodePath("../../../AnimationManagerComponent")
-combo_cooldown = 0.2
 previous_state = NodePath("../ConstantRotatingAttack")
+await_previous_attack_finished = false
 
 [node name="ThrowIntermediate" type="Node" parent="StateMachine/OnHand" unique_id=473574739 node_paths=PackedStringArray("next_state")]
 script = ExtResource("13_lj60c")
@@ -607,11 +608,10 @@ metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 [node name="RecallAttack" type="Node" parent="StateMachine/OnHand" unique_id=59877823 node_paths=PackedStringArray("idle_state", "hit_box", "animation_manager", "previous_state")]
 script = ExtResource("12_3w3qp")
 idle_state = NodePath("../Idle")
-input_mode = 3
 hit_box = NodePath("../../../HitBox")
 attack_data = SubResource("Resource_jn0tm")
 animation_manager = NodePath("../../../AnimationManagerComponent")
-combo_cooldown = 0.4
+combo_cooldown = 1.0
 previous_state = NodePath("../ThrowAttack")
 
 [node name="OnJaw" type="Node" parent="StateMachine" unique_id=1238307790 node_paths=PackedStringArray("next_state", "gauge", "hit_box")]

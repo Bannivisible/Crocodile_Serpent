@@ -15,9 +15,13 @@ class_name AnimationManagerComponent
 @export var library: AnimationLibrary:
 	set = _set_library
 
-var tracks_filter: Dictionary[StringName, StringName]= {}
+@export var remove_library_on_exit_tree: bool= true
+
+var tracks_filter: Dictionary[StringName, Animation]= {}
 
 signal animation_finished(anim_name: StringName)
+
+var blend_tween: Tween
 
 #### SETTER ####
 func _set_library(value) -> void:
@@ -26,7 +30,9 @@ func _set_library(value) -> void:
 	if not is_node_ready():
 		await ready 
 	
-	if library != null: _add_library(library)
+	if library != null:
+		#add_library(library)
+		add_all_anim_library(library, animation_player.get_animation_library(""))
 
 
 #### BUILT-IN ####
@@ -36,12 +42,44 @@ func _ready() -> void:
 	animation_player.animation_finished.connect(on_animation_finished)
 	animation_tree.animation_finished.connect(on_animation_finished)
 
+
+func _enter_tree() -> void:
+	if not is_node_ready(): await ready 
+	
+	if remove_library_on_exit_tree and library != null:
+		#add_library(library)
+		add_all_anim_library(library, animation_player.get_animation_library(""))
+
+
+func _exit_tree() -> void:
+	if remove_library_on_exit_tree and library != null:
+		reset_tree_with_lib()
+		#remove_library(Utiles.get_resource_name(library))
+		remove_all_anim_library(library, animation_player.get_animation_library(""))
+
 #### LOGIC ####
-func _add_library(anim_lib: AnimationLibrary, lib_name :=StringName(Utiles.get_resource_name(anim_lib))) -> void:
-	if not animation_player.has_animation_library(lib_name):
-		animation_player.add_animation_library(lib_name, anim_lib)
+#func add_library(anim_lib: AnimationLibrary, lib_name :=StringName(Utiles.get_resource_name(anim_lib))) -> void:
+	#if not animation_player.has_animation_library(lib_name):
+		#animation_player.add_animation_library(lib_name, anim_lib)
+#
+#
+#func remove_library(lib_name: StringName) -> void:
+	#if animation_player.has_animation_library(lib_name):
+		#animation_player.remove_animation_library(lib_name)
 
 ## PUBLIC ##
+func add_all_anim_library(lib_from: AnimationLibrary, lib_to: AnimationLibrary) -> void:
+	for anim_name in lib_from.get_animation_list():
+		var anim: Animation= library.get_animation(anim_name)
+		lib_to.add_animation(anim_name, anim)
+
+
+func remove_all_anim_library(lib_from: AnimationLibrary, lib_to: AnimationLibrary) -> void:
+	for anim_name in lib_from.get_animation_list():
+		if lib_to.has_animation(anim_name):
+			lib_to.remove_animation(anim_name)
+
+
 func play(anim_name: StringName) -> void:
 	animation_player.play(anim_name)
 
@@ -59,11 +97,27 @@ func has_animation(anim_name: StringName) -> bool:
 	return animation_player.has_animation(anim_name)
 
 ### TREE ROOT ###
-func request_reset_one_shot(anim_node_name: StringName, one_shot_name) -> void:
-	change_animation(anim_node_name, reset_animation)
-	set_filter_with_all_track(one_shot_name, anim_node_name)
-	connect_animation_node(anim_node_name, 1, one_shot_name)
+func setup_one_shot(one_shot_name: StringName, anim_name: StringName) -> void:
+	var anim_node_name: StringName= get_connection_with_to_and_port(one_shot_name, 1).from
+	
+	reset_filter(one_shot_name)
+	change_animation(anim_node_name, anim_name)
+	set_filter_with_all_track(one_shot_name, get_animation(anim_name))
 	request_one_shot(one_shot_name, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+
+
+func setup_blend_node(blend_node_name: StringName, anim_name: StringName, tw_ease := Tween.EASE_IN, tw_trans := Tween.TRANS_LINEAR, duration := 0.4) -> void:
+	var anim_node_name: StringName= get_connection_with_to_and_port(blend_node_name, 1).from
+	
+	tween_blend_amount(blend_node_name, duration, 0.0, tw_ease, tw_trans)
+	
+	blend_tween.tween_callback(func():
+		reset_filter(blend_node_name)
+		change_animation(anim_node_name, anim_name)
+		set_filter_with_all_track(blend_node_name, get_animation(anim_name))
+		
+		tween_blend_amount(blend_node_name, duration, 1.0, tw_ease, tw_trans)
+		)
 
 
 func add_in_tree_animation_with_name(anim_name: StringName, anim_node_name: StringName) -> void:
@@ -111,16 +165,13 @@ func disconnect_out_connection(anim_node_name: StringName) -> void:
 	disconnect_in_connection(from_connection.to, from_connection.to_port)
 
 
-func set_filter_with_all_track(blend_nd_name: StringName, anim_node: StringName, activate: bool= true) -> void:
+func set_filter_with_all_track(blend_nd_name: StringName, anime: Animation, activate: bool= true) -> void:
 	var blend_node: AnimationNode= tree_root.get_node(blend_nd_name)
 	
-	var anim_name: StringName= tree_root.get_node(anim_node).animation
-	var anime: Animation= animation_player.get_animation(anim_name)
-	
 	if activate:
-		tracks_filter[blend_nd_name] = anim_name
+		tracks_filter[blend_nd_name] = anime
 	else :
-		tracks_filter[blend_nd_name] = ""
+		tracks_filter[blend_nd_name] = null
 	
 	for prop_path in get_animation_traks(anime):
 		blend_node.set_filter_path(prop_path, activate)
@@ -140,19 +191,19 @@ func verif_filter(blend_nd_name: StringName, anime: Animation) -> Dictionary[Nod
 
 
 func reset_filter(blend_nd_name: StringName) -> void:
-	if not tracks_filter.has(blend_nd_name) or tracks_filter[blend_nd_name] == "": return
-	set_filter_with_all_track(blend_nd_name, tracks_filter[blend_nd_name], false)
+	if not tracks_filter.has(blend_nd_name) or tracks_filter[blend_nd_name] == null: return
+	var anime: Animation= tracks_filter[blend_nd_name]
+	set_filter_with_all_track(blend_nd_name, anime, false)
 
 
-func is_filtred_by(blend: String, anim_name: String) -> bool:
-	return tracks_filter[blend] == anim_name
+func is_filtred_by(blend: String, anime: Animation) -> bool:
+	return tracks_filter[blend] == anime
 
 
-func change_animation(anim_node: StringName, anim_name: StringName) -> void:
-	var anime: AnimationNodeAnimation= tree_root.get_node(anim_node)
-	var anime_name= anim_name
+func change_animation(anim_node_name: StringName, anim_name: StringName) -> void:
+	var anim_node: AnimationNodeAnimation= get_animation_node(anim_node_name)
 	
-	anime.animation = anime_name
+	anim_node.animation = anim_name
 
 
 func convert_all_connections(anim_nd_name1: StringName, anim_nd_name2: StringName) -> void:
@@ -181,10 +232,10 @@ func has_out_connection(anim_node_name: StringName) -> bool:
 	return get_connection_with_from(anim_node_name) != null
 
 
-func add_library_to_name(anim_name: StringName, lib: AnimationLibrary= library) -> StringName:
-	var lib_name: StringName = Utiles.get_resource_name(lib)
-	
-	return lib_name + "/" + anim_name
+#func add_library_to_name(anim_name: StringName, lib: AnimationLibrary= library) -> StringName:
+	#var lib_name: StringName = Utiles.get_resource_name(lib)
+	#
+	#return lib_name + "/" + anim_name
 
 
 func print_all_connections() -> void:
@@ -216,11 +267,10 @@ func set_blend_amount(blend_node_name: StringName, amount: float) -> void:
 
 
 func tween_blend_amount(blend_node_name: StringName, duration: float, amount: float= 1.0, tw_ease := Tween.EASE_IN, tw_trans := Tween.TRANS_LINEAR) -> void:
-	var tween_add: Tween= create_tween()
-	tween_add.set_ease(tw_ease).set_trans(tw_trans)
+	blend_tween = Utiles.reset_tween(self, blend_tween, tw_ease, tw_trans)
 	var parameter_path: NodePath= NodePath("parameters/%s/blend_amount" %blend_node_name)
 	
-	tween_add.tween_property(animation_tree, parameter_path, amount, duration)
+	blend_tween.tween_property(animation_tree, parameter_path, amount, duration)
 
 
 func get_blend_amount(blend_node_name: StringName) -> float:
@@ -296,9 +346,15 @@ func get_all_anim_node_animation_name() -> Array[StringName]:
 	return anim_node_animation_array
 
 
-func get_animation_name(anim_node: StringName) -> StringName:
-	var anime: AnimationNodeAnimation= tree_root.get_node(anim_node)
-	return anime.animation
+func get_animation_name(anim_node_name: StringName) -> StringName:
+	var anim_node: AnimationNodeAnimation= tree_root.get_node(anim_node_name)
+	return anim_node.animation
+
+
+func get_state_machine_playback(anim_state_machine_path: String) -> AnimationNodeStateMachinePlayback:
+	var path: String= "parameters/"
+	path += anim_state_machine_path + "/playback"
+	return animation_tree.get(path)
 
 
 func get_connection_with_from(from: StringName) -> AnimationConnection:
@@ -341,10 +397,14 @@ func get_anim_node_connect_to(anim_node_name: StringName) -> StringName:
 	return connection.to
 
 
-func get_anime_complete_name(anim_name: StringName) -> StringName:
-	if library.has_animation(anim_name):
-		return add_library_to_name(anim_name)
-	return anim_name
+func get_anim_node_connect_in(anim_node_name: StringName) -> StringName:
+	return get_connection_with_to_and_port(anim_node_name, 0).from
+
+
+#func get_anime_complete_name(anim_name: StringName) -> StringName:
+	#if library.has_animation(anim_name):
+		#return add_library_to_name(anim_name)
+	#return anim_name
 
 
 func get_all_current_anim_name_in_tree() -> Array[StringName]:
@@ -373,7 +433,38 @@ func get_string_all_current_anim_name_in_tree() -> Array[String]:
 	return anim_list
 
 
+func change_animations_in_library(new_anim_name := reset_animation, lib := library) -> void:
+	for anim_node_name in get_all_anim_node_animation_name():
+		if lib.has_animation(get_animation_name(anim_node_name)):
+			change_animation(anim_node_name, new_anim_name)
+
+
+func reset_tree_with_lib(lib := library) -> void:
+	for anim_node_name in get_all_anim_node_animation_name():
+		if not lib.has_animation(get_animation_name(anim_node_name)): continue
+		
+		reset_anim_node(anim_node_name)
+		var blend_node_name: StringName= get_anim_node_connect_to(anim_node_name)
+		reset_anim_node(blend_node_name)
+
+
+func reset_anim_node(anim_node_name: StringName) -> void:
+	var anim_node := get_animation_node(anim_node_name)
+	
+	if anim_node is AnimationNodeAnimation:
+		change_animation(anim_node_name, reset_animation)
+	elif anim_node is AnimationNodeBlend2 or anim_node is AnimationNodeBlend3:
+		set_blend_amount(anim_node_name, 0.0)
+		reset_filter(anim_node_name)
+	
+	elif anim_node is AnimationNodeOneShot:
+		request_one_shot(anim_node_name ,AnimationNodeOneShot.ONE_SHOT_REQUEST_NONE)
+		reset_filter(anim_node_name)
+
+
 func print_blendtree() -> void:
+	print("BlendTree:")
+	
 	for anim_node_name in tree_root.get_node_list():
 		var anim_node = get_animation_node(anim_node_name)
 		
@@ -383,7 +474,11 @@ func print_blendtree() -> void:
 			print_blend_node(anim_node_name)
 		elif anim_node is AnimationNodeOneShot:
 			print_one_shot_node(anim_node_name)
+		elif anim_node is AnimationNodeStateMachine:
+			print_anim_state_machine(anim_node_name)
 		else : print(anim_node_name)
+	
+	print("------------")
 
 
 func print_animation_node(animation_node_name: StringName) -> void:
@@ -396,3 +491,8 @@ func print_blend_node(blend_node_name: StringName) -> void:
 
 func print_one_shot_node(one_shot_node_name: StringName) -> void:
 	print(one_shot_node_name + " : " + str(get_request_one_shot(one_shot_node_name)))
+
+
+func print_anim_state_machine(anim_state_machine_name: StringName) -> void:
+	var anim_sm_playback := get_state_machine_playback(anim_state_machine_name)
+	print(anim_state_machine_name + " : " +anim_sm_playback.get_current_node())

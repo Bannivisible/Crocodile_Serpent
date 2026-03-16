@@ -12,12 +12,14 @@ enum PLAY_MODE {
 
 @export var anim_manager_path: NodePath= ".."
 
-@export var play_reset: bool= true
 
 @export var play_mode := PLAY_MODE.PLAY
 
 @export var state_machine: StateMachine:
 	set = _set_state_machine
+
+@export_group("Play")
+@export var play_reset: bool
 
 @export_group("Blend")
 @export var state_blend_anim_name: StringName= "StateBlendAnimation"
@@ -63,9 +65,6 @@ func _get_anim_name(state: State) -> String:
 	var anim_name: String= state.get_chained_string()
 	anim_name = anim_name.substr(len(state_machine.name) + 1)
 	
-	if anim_manager is AnimationManagerComponent:
-		anim_name = anim_manager.get_anime_complete_name(anim_name)
-	
 	return anim_name
 
 
@@ -84,27 +83,19 @@ func _get_state_machine_playback() -> AnimationNodeStateMachinePlayback:
 
 
 func _blend_logic(anim_name: StringName) -> void:
-	var connection: AnimationConnection= anim_manager.get_connection_with_from(state_blend_anim_name)
-	var blend_node_name: StringName= connection.to
-	
-	anim_manager.tween_blend_amount(blend_node_name, 0.2, 0.0)
-	
-	anim_manager.reset_filter(state_blend_anim_name)
-	anim_manager.change_animation(state_blend_anim_name, anim_name)
-	anim_manager.set_filter_with_all_track(blend_node_name, state_blend_anim_name)
-	
-	anim_manager.tween_blend_amount(blend_node_name, 0.2, 1.0)
+	if anim_manager is AnimationManagerComponent:
+		var connection: AnimationConnection= anim_manager.get_connection_with_from(state_blend_anim_name)
+		var blend_node_name: StringName= connection.to
+		
+		anim_manager.setup_blend_node(blend_node_name, anim_name)
 
 
 func _one_shot_logic(anim_name: StringName) -> void:
-	var connection: AnimationConnection= anim_manager.get_connection_with_from(state_os_anim_name)
-	var os_node_name: StringName= connection.to
-	
-	anim_manager.reset_filter(state_os_anim_name)
-	anim_manager.change_animation(state_os_anim_name, anim_name)
-	anim_manager.set_filter_with_all_track(os_node_name, state_os_anim_name)
-	
-	anim_manager.request_one_shot(os_node_name)
+	if anim_manager is AnimationManagerComponent:
+		var connection: AnimationConnection= anim_manager.get_connection_with_from(state_os_anim_name)
+		var os_node_name: StringName= connection.to
+		
+		anim_manager.setup_one_shot(os_node_name, anim_name)
 
 
 func _play_state_anime(state: State) -> void:
