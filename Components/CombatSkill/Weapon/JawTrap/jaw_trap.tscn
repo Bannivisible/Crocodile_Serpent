@@ -155,8 +155,8 @@ radius = 10.036705
 height = 88.18735
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_weadw"]
-radius = 126.0
-height = 252.0
+radius = 154.05058
+height = 446.32965
 
 [sub_resource type="Resource" id="Resource_72sr6"]
 script = ExtResource("26_mkx5c")

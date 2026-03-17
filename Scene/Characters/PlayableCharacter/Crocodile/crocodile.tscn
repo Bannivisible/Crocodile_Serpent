@@ -205,6 +205,30 @@ modifications/12 = ExtResource("10_ifobo")
 
 [sub_resource type="Animation" id="Animation_fjl3l"]
 resource_name = "1"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Skeleton2D/Center/Body/Torso/ArmFront/ForeArmFront/HandFront/HandFrontTarget/HandFrontTarget:remote_path")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [NodePath("")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Skeleton2D/Center/Body/Torso/ArmBack/ForeArmBack/HandBack/HandBackTarget/HandBackTarget:remote_path")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [NodePath("")]
+}
 
 [sub_resource type="Animation" id="Animation_jbjqy"]
 resource_name = "BentDown-Idle"
@@ -705,7 +729,7 @@ tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
 tracks/12/path = NodePath("SpriteContainer/TorsoGroup/Torso:texture:region")
-tracks/12/interp = 2
+tracks/12/interp = 0
 tracks/12/loop_wrap = true
 tracks/12/keys = {
 "times": PackedFloat32Array(0),
@@ -717,7 +741,7 @@ tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true
 tracks/13/path = NodePath("SpriteContainer/TorsoGroup/Jacket:texture:region")
-tracks/13/interp = 1
+tracks/13/interp = 0
 tracks/13/loop_wrap = true
 tracks/13/keys = {
 "times": PackedFloat32Array(0),
@@ -849,7 +873,7 @@ tracks/24/type = "value"
 tracks/24/imported = false
 tracks/24/enabled = true
 tracks/24/path = NodePath("Skeleton2D/Center/Body/Torso/ArmBack/ForeArmBack/HandBack:position")
-tracks/24/interp = 1
+tracks/24/interp = 2
 tracks/24/loop_wrap = true
 tracks/24/keys = {
 "times": PackedFloat32Array(0),
@@ -861,7 +885,7 @@ tracks/25/type = "value"
 tracks/25/imported = false
 tracks/25/enabled = true
 tracks/25/path = NodePath("Skeleton2D/Center/Body/Torso/ArmBack/ForeArmBack/HandBack:rotation")
-tracks/25/interp = 1
+tracks/25/interp = 4
 tracks/25/loop_wrap = true
 tracks/25/keys = {
 "times": PackedFloat32Array(0),
@@ -1161,7 +1185,7 @@ tracks/50/type = "value"
 tracks/50/imported = false
 tracks/50/enabled = true
 tracks/50/path = NodePath("Skeleton2D/Center/Body/Torso/ArmBack/ArmBack:scale")
-tracks/50/interp = 1
+tracks/50/interp = 2
 tracks/50/loop_wrap = true
 tracks/50/keys = {
 "times": PackedFloat32Array(0),
@@ -1197,7 +1221,7 @@ tracks/53/type = "value"
 tracks/53/imported = false
 tracks/53/enabled = true
 tracks/53/path = NodePath("Skeleton2D/Center/Body/Torso/Head:rotation")
-tracks/53/interp = 1
+tracks/53/interp = 4
 tracks/53/loop_wrap = true
 tracks/53/keys = {
 "times": PackedFloat32Array(0),
@@ -1377,7 +1401,7 @@ tracks/68/type = "value"
 tracks/68/imported = false
 tracks/68/enabled = true
 tracks/68/path = NodePath("Skeleton2D/Center/Body/Torso/Head:position")
-tracks/68/interp = 1
+tracks/68/interp = 2
 tracks/68/loop_wrap = true
 tracks/68/keys = {
 "times": PackedFloat32Array(0),
@@ -1425,7 +1449,7 @@ tracks/72/type = "value"
 tracks/72/imported = false
 tracks/72/enabled = true
 tracks/72/path = NodePath("Skeleton2D/Center/Body/Torso/ArmFront/ForeArmFront/HandFront:position")
-tracks/72/interp = 1
+tracks/72/interp = 2
 tracks/72/loop_wrap = true
 tracks/72/keys = {
 "times": PackedFloat32Array(0),
@@ -1436,50 +1460,50 @@ tracks/72/keys = {
 tracks/73/type = "value"
 tracks/73/imported = false
 tracks/73/enabled = true
-tracks/73/path = NodePath("Skeleton2D/Center/Body/Torso/ArmFront/ForeArmFront/HandFront:rotation")
-tracks/73/interp = 1
+tracks/73/path = NodePath("Skeleton2D/Center/ThighBack/LegBack:position")
+tracks/73/interp = 2
 tracks/73/loop_wrap = true
 tracks/73/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [-0.18696147]
+"values": [Vector2(33.99031, 53.686005)]
 }
 tracks/74/type = "value"
 tracks/74/imported = false
 tracks/74/enabled = true
-tracks/74/path = NodePath("Skeleton2D/Center/ThighBack/LegBack:position")
+tracks/74/path = NodePath("Skeleton2D/Center/ThighBack/LegBack/FootBack:position")
 tracks/74/interp = 2
 tracks/74/loop_wrap = true
 tracks/74/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(33.99031, 53.686005)]
+"values": [Vector2(-4.0006027, 40.010902)]
 }
 tracks/75/type = "value"
 tracks/75/imported = false
 tracks/75/enabled = true
-tracks/75/path = NodePath("Skeleton2D/Center/ThighBack/LegBack/FootBack:position")
-tracks/75/interp = 2
+tracks/75/path = NodePath("Skeleton2D/Center/Body:rotation")
+tracks/75/interp = 4
 tracks/75/loop_wrap = true
 tracks/75/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-4.0006027, 40.010902)]
+"values": [0.0]
 }
 tracks/76/type = "value"
 tracks/76/imported = false
 tracks/76/enabled = true
-tracks/76/path = NodePath("Skeleton2D/Center/Body:rotation")
-tracks/76/interp = 1
+tracks/76/path = NodePath("Skeleton2D/Center/Body/Torso/ArmFront/ForeArmFront/HandFront:rotation")
+tracks/76/interp = 4
 tracks/76/loop_wrap = true
 tracks/76/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.0]
+"values": [-0.18696147]
 }
 
 [sub_resource type="Animation" id="Animation_jlbrr"]
@@ -2225,8 +2249,6 @@ _data = {
 &"Torpedo": SubResource("Animation_nn2k0")
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_k74ft"]
-
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_dr3s2"]
 filter_enabled = true
 filters = ["CSManager/JawTrap/Front:position", "CSManager/JawTrap/Front:rotation"]
@@ -2376,14 +2398,14 @@ offset = Vector2(-10, 17.333)
 [node name="ForearmBack" type="Sprite2D" parent="SpriteContainer/ArmBackGroup" index="1" unique_id=1962910639]
 position = Vector2(82.08561, -187.31583)
 rotation = 3.0267773
-scale = Vector2(0.9996306, -0.9996306)
+scale = Vector2(0.99963045, -0.99963045)
 texture = SubResource("AtlasTexture_pigwd")
 offset = Vector2(-7.7521763, 23.060297)
 
 [node name="HandBack" type="Sprite2D" parent="SpriteContainer/ArmBackGroup" index="2" unique_id=1161825618]
 position = Vector2(119.97713, -140.0182)
 rotation = -2.9513817
-scale = Vector2(0.99963117, -0.99963117)
+scale = Vector2(0.99963105, -0.99963105)
 texture = SubResource("AtlasTexture_ifobo")
 offset = Vector2(-9.287, 11.465)
 
@@ -2392,23 +2414,23 @@ offset = Vector2(-9.287, 11.465)
 [node name="LegBack" type="Sprite2D" parent="SpriteContainer/LegBackGroup" index="0" unique_id=444752468]
 z_index = -1
 position = Vector2(79.12201, -97.982544)
-rotation = 0.115919374
-scale = Vector2(0.99964833, 0.99964833)
+rotation = 0.11591938
+scale = Vector2(0.9996485, 0.9996485)
 texture = SubResource("AtlasTexture_3ua5h")
 offset = Vector2(0, 17)
 
 [node name="ThighBack" type="Sprite2D" parent="SpriteContainer/LegBackGroup" index="1" unique_id=97382226]
 modulate = Color(0.735357, 0.735357, 0.735357, 1)
 position = Vector2(30.665672, -139.0661)
-rotation = -0.3031281
-scale = Vector2(0.9997953, 0.9997953)
+rotation = -0.30312806
+scale = Vector2(0.99979526, 0.99979526)
 texture = SubResource("AtlasTexture_utiys")
 offset = Vector2(18, 26.333)
 
 [node name="FootBack" type="Sprite2D" parent="SpriteContainer/LegBackGroup" index="2" unique_id=1107727012]
-position = Vector2(70.52362, -58.716682)
-rotation = -0.11685949
-scale = Vector2(0.9994927, 0.9994927)
+position = Vector2(70.52362, -58.716675)
+rotation = -0.116859466
+scale = Vector2(0.9994929, 0.9994929)
 texture = SubResource("AtlasTexture_6et86")
 offset = Vector2(9.333, 10.667)
 
@@ -2580,47 +2602,47 @@ z_index = 3
 
 [node name="ArmFront" type="Sprite2D" parent="SpriteContainer/ArmFrontGroup" index="0" unique_id=1751966982]
 position = Vector2(-56.329815, -220.66077)
-rotation = -0.02197009
-scale = Vector2(0.9997856, 0.9997856)
+rotation = -0.021970097
+scale = Vector2(0.99978554, 0.99978554)
 texture = SubResource("AtlasTexture_kwm2e")
 offset = Vector2(-10, 17.333)
 
 [node name="ForearmFront" type="Sprite2D" parent="SpriteContainer/ArmFrontGroup" index="1" unique_id=189613157]
 z_index = 3
 position = Vector2(-77.276955, -187.86655)
-rotation = -0.07213889
-scale = Vector2(0.99962986, 0.99962986)
+rotation = -0.07213891
+scale = Vector2(0.99962944, 0.99962944)
 texture = SubResource("AtlasTexture_l1deg")
 offset = Vector2(-14, 25.667)
 
 [node name="HandFront" type="Sprite2D" parent="SpriteContainer/ArmFrontGroup" index="2" unique_id=950457284]
 z_index = 3
-position = Vector2(-100.40652, -138.08731)
-rotation = -0.25910035
-scale = Vector2(0.9996341, 0.9996341)
+position = Vector2(-100.40651, -138.08733)
+rotation = -0.25910038
+scale = Vector2(0.99963367, 0.99963367)
 texture = SubResource("AtlasTexture_fs2r1")
 offset = Vector2(-12, 15)
 
 [node name="LegFrontGroup" type="Node2D" parent="SpriteContainer" parent_id_path=PackedInt32Array(791091049) index="7" unique_id=1785593900]
 
 [node name="LegFront" type="Sprite2D" parent="SpriteContainer/LegFrontGroup" index="0" unique_id=1504693139]
-position = Vector2(-63.093987, -95.85573)
-rotation = 0.06972351
-scale = Vector2(0.99966365, 0.99966365)
+position = Vector2(-63.09398, -95.85574)
+rotation = 0.06972345
+scale = Vector2(0.99966323, 0.99966323)
 texture = SubResource("AtlasTexture_qvnx8")
 offset = Vector2(2.667, 21.333)
 
 [node name="ThighFront" type="Sprite2D" parent="SpriteContainer/LegFrontGroup" index="1" unique_id=1920124788]
 position = Vector2(-35.665417, -138.333)
-rotation = 0.26671907
-scale = Vector2(0.9998065, 0.9998065)
+rotation = 0.266719
+scale = Vector2(0.9998063, 0.9998063)
 texture = SubResource("AtlasTexture_jbjqy")
 offset = Vector2(-5.667, 21)
 
 [node name="FootFront" type="Sprite2D" parent="SpriteContainer/LegFrontGroup" index="2" unique_id=1521634280]
-position = Vector2(-67.02163, -50.899536)
-rotation = -0.00049201207
-scale = Vector2(0.9995042, 0.9995042)
+position = Vector2(-67.021614, -50.89957)
+rotation = -0.0004920866
+scale = Vector2(0.99950427, 0.99950427)
 texture = SubResource("AtlasTexture_7cm0d")
 offset = Vector2(2.2518923, 17.591896)
 
@@ -2716,7 +2738,7 @@ rotation = 0.08726646
 [node name="ArmFront" type="Bone2D" parent="Skeleton2D/Center/Body/Torso" index="2" unique_id=902578333]
 position = Vector2(-56.333717, -78.666214)
 rotation = 6.261215
-scale = Vector2(0.99985486, 0.99985486)
+scale = Vector2(0.9998548, 0.9998548)
 rest = Transform2D(0.99961656, -0.021965206, 0.021965206, 0.99961656, -56.333717, -78.666214)
 
 [node name="ArmFront" type="RemoteTransform2D" parent="Skeleton2D/Center/Body/Torso/ArmFront" index="0" unique_id=2007492695]
@@ -2725,7 +2747,7 @@ remote_path = NodePath("../../../../../../SpriteContainer/ArmFrontGroup/ArmFront
 [node name="ForeArmFront" type="Bone2D" parent="Skeleton2D/Center/Body/Torso/ArmFront" index="1" unique_id=602703116]
 position = Vector2(-21.667164, 32.33307)
 rotation = 6.2330165
-scale = Vector2(0.99984425, 0.99984425)
+scale = Vector2(0.9998439, 0.9998439)
 rest = Transform2D(0.99858445, -0.050140046, 0.050140046, 0.99858445, -21.667164, 32.33307)
 
 [node name="ForeArmFront" type="RemoteTransform2D" parent="Skeleton2D/Center/Body/Torso/ArmFront/ForeArmFront" index="0" unique_id=625985049]
@@ -2733,7 +2755,7 @@ remote_path = NodePath("../../../../../../../SpriteContainer/ArmFrontGroup/Forea
 
 [node name="HandFront" type="Bone2D" parent="Skeleton2D/Center/Body/Torso/ArmFront/ForeArmFront" index="1" unique_id=672722390]
 position = Vector2(-26.667183, 48.000443)
-rotation = -0.18696147
+rotation = 6.096224
 scale = Vector2(1.0000042, 1.0000042)
 rest = Transform2D(0.9825777, -0.18587495, 0.18587495, 0.9825777, -26.667183, 48.000443)
 auto_calculate_length_and_angle = false
@@ -2764,7 +2786,7 @@ remote_path = NodePath("../../../../../../SpriteContainer/ArmBackGroup/ArmBack")
 [node name="ForeArmBack" type="Bone2D" parent="Skeleton2D/Center/Body/Torso/ArmBack" index="1" unique_id=2132431154]
 position = Vector2(26.576317, 35.837402)
 rotation = 6.2407618
-scale = Vector2(0.9998477, 0.9998477)
+scale = Vector2(0.9998476, 0.9998476)
 rest = Transform2D(0.9989501, -0.042404626, 0.042404626, 0.9989501, 26.576317, 35.837402)
 
 [node name="ForeArmBack" type="RemoteTransform2D" parent="Skeleton2D/Center/Body/Torso/ArmBack/ForeArmBack" index="0" unique_id=271832021]
@@ -2795,7 +2817,7 @@ update_scale = false
 [node name="ThighFront" type="Bone2D" parent="Skeleton2D/Center" index="1" unique_id=110966940]
 position = Vector2(-35.66718, 3.667183)
 rotation = 0.266719
-scale = Vector2(0.99985594, 0.99985594)
+scale = Vector2(0.9998557, 0.9998557)
 rest = Transform2D(0.96450275, 0.26353016, -0.26353016, 0.96450275, -35.66718, 3.667183)
 
 [node name="ThighFront" type="RemoteTransform2D" parent="Skeleton2D/Center/ThighFront" index="0" unique_id=498928478]
@@ -2804,7 +2826,7 @@ remote_path = NodePath("../../../../SpriteContainer/LegFrontGroup/ThighFront")
 [node name="LegFront" type="Bone2D" parent="Skeleton2D/Center/ThighFront" index="1" unique_id=628957492]
 position = Vector2(-15.266029, 48.21392)
 rotation = 6.0861897
-scale = Vector2(0.9998571, 0.9998571)
+scale = Vector2(0.9998569, 0.9998569)
 rest = Transform2D(0.98051864, -0.19569586, 0.19569586, 0.98051864, -15.266029, 48.21392)
 
 [node name="LegFront" type="RemoteTransform2D" parent="Skeleton2D/Center/ThighFront/LegFront" index="0" unique_id=1521590327]
@@ -2813,7 +2835,7 @@ remote_path = NodePath("../../../../../SpriteContainer/LegFrontGroup/LegFront")
 [node name="FootFront" type="Bone2D" parent="Skeleton2D/Center/ThighFront/LegFront" index="1" unique_id=1025153005]
 position = Vector2(-0.78639984, 45.13577)
 rotation = 6.21297
-scale = Vector2(0.9998405, 0.9998405)
+scale = Vector2(0.999841, 0.999841)
 rest = Transform2D(0.9973769, -0.07014619, 0.07014619, 0.9973769, -0.78639984, 45.13577)
 auto_calculate_length_and_angle = false
 length = 26.667
@@ -2825,7 +2847,7 @@ remote_path = NodePath("../../../../../../SpriteContainer/LegFrontGroup/FootFron
 [node name="ThighBack" type="Bone2D" parent="Skeleton2D/Center" index="2" unique_id=213418361]
 position = Vector2(30.667187, 2.9340515)
 rotation = 5.9800572
-scale = Vector2(0.99984473, 0.99984473)
+scale = Vector2(0.9998447, 0.9998447)
 rest = Transform2D(0.9542559, -0.29845974, 0.29845974, 0.9542559, 30.667187, 2.9340515)
 
 [node name="ThighBack" type="RemoteTransform2D" parent="Skeleton2D/Center/ThighBack" index="0" unique_id=1490173146]
@@ -2834,7 +2856,7 @@ remote_path = NodePath("../../../../SpriteContainer/LegBackGroup/ThighBack")
 [node name="LegBack" type="Bone2D" parent="Skeleton2D/Center/ThighBack" index="1" unique_id=1871453857]
 position = Vector2(33.99031, 53.686005)
 rotation = 0.41904745
-scale = Vector2(0.999853, 0.999853)
+scale = Vector2(0.9998532, 0.9998532)
 rest = Transform2D(0.91334486, 0.40683168, -0.40683168, 0.91334486, 33.99031, 53.686005)
 
 [node name="LegBack" type="RemoteTransform2D" parent="Skeleton2D/Center/ThighBack/LegBack" index="0" unique_id=593641726]
@@ -2915,7 +2937,6 @@ metadata/_custom_type_script = "uid://6lekj6yg62r6"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="7" unique_id=252078669]
 libraries/ = SubResource("AnimationLibrary_0ft5j")
-libraries/WeaponLibrary = SubResource("AnimationLibrary_k74ft")
 playback_default_blend_time = 2.0
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="8" unique_id=309911794]

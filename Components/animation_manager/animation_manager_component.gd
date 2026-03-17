@@ -1,6 +1,8 @@
 extends Component
 class_name AnimationManagerComponent
 
+const EXIT_ANIM_NAME: StringName= "EXIT"
+
 @export var anim_player_path: NodePath= "AnimationPlayer"
 @export var anim_tree_path: NodePath= "AnimationTree"
 
@@ -8,7 +10,7 @@ class_name AnimationManagerComponent
 @onready var animation_tree: AnimationTree= get_object_node(anim_tree_path)
 @onready var tree_root: AnimationNodeBlendTree= animation_tree.tree_root if animation_tree else null
 
-@export var reset_animation: StringName= "RESET"
+@export var reset_anim_name: StringName= "RESET"
 
 @export var anim_connect_list: AnimationConnectionsList
 
@@ -47,14 +49,18 @@ func _enter_tree() -> void:
 	if not is_node_ready(): await ready 
 	
 	if remove_library_on_exit_tree and library != null:
-		#add_library(library)
 		add_all_anim_library(library, animation_player.get_animation_library(""))
 
 
 func _exit_tree() -> void:
 	if remove_library_on_exit_tree and library != null:
+		
+		print(get_current_anim_names_in_blendtree())
+		#print_blendtree()
+		
+		await animation_finished
+		
 		reset_tree_with_lib()
-		#remove_library(Utiles.get_resource_name(library))
 		remove_all_anim_library(library, animation_player.get_animation_library(""))
 
 #### LOGIC ####
@@ -68,6 +74,15 @@ func _exit_tree() -> void:
 		#animation_player.remove_animation_library(lib_name)
 
 ## PUBLIC ##
+func is_animation_playing(anim_name: StringName) -> bool:
+	if animation_player.current_animation == anim_name:
+		return true
+	
+	
+	
+	return false
+
+
 func add_all_anim_library(lib_from: AnimationLibrary, lib_to: AnimationLibrary) -> void:
 	for anim_name in lib_from.get_animation_list():
 		var anim: Animation= library.get_animation(anim_name)
@@ -88,15 +103,15 @@ func get_current_animation_name() -> String:
 	return animation_player.current_animation
 
 
-func play_reset_animation() -> void:
-	if animation_player.has_animation(reset_animation):
-		play(reset_animation)
+func play_reset_anim_name() -> void:
+	if animation_player.has_animation(reset_anim_name):
+		play(reset_anim_name)
 
 
 func has_animation(anim_name: StringName) -> bool:
 	return animation_player.has_animation(anim_name)
 
-### TREE ROOT ###
+### BlendTree ###
 func setup_one_shot(one_shot_name: StringName, anim_name: StringName) -> void:
 	var anim_node_name: StringName= get_connection_with_to_and_port(one_shot_name, 1).from
 	
@@ -245,8 +260,8 @@ func print_all_connections() -> void:
 	print("-----")
 
 
-func is_anim_in_tree(anim_name: String) -> bool:
-	return anim_name in get_all_current_anim_name_in_tree()
+#func is_anim_in_tree(anim_name: String) -> bool:
+	#return anim_name in get_all_current_anim_name_in_tree()
 
 ## ONE SHOT ##
 func request_one_shot(one_shot_name: String, request:= AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE) -> void:
@@ -407,14 +422,17 @@ func get_anim_node_connect_in(anim_node_name: StringName) -> StringName:
 	#return anim_name
 
 
-func get_all_current_anim_name_in_tree() -> Array[StringName]:
+func get_current_anim_names_in_blendtree(blend_tree: AnimationNodeBlendTree= tree_root) -> Array[StringName]:
 	var anim_list: Array[StringName]= []
 	
-	for anim_node_name in tree_root.get_node_list():
-		var anim_node := tree_root.get_node(anim_node_name)
+	for anim_node_name in blend_tree.get_node_list():
+		var anim_node := blend_tree.get_node(anim_node_name)
 		
 		if anim_node is AnimationNodeAnimation:
 			anim_list.append(anim_node.animation)
+		elif anim_node is AnimationNodeBlendTree:
+			anim_list += get_current_anim_names_in_blendtree(anim_node)
+	
 	
 	return anim_list
 
@@ -433,26 +451,15 @@ func get_string_all_current_anim_name_in_tree() -> Array[String]:
 	return anim_list
 
 
-func change_animations_in_library(new_anim_name := reset_animation, lib := library) -> void:
-	for anim_node_name in get_all_anim_node_animation_name():
-		if lib.has_animation(get_animation_name(anim_node_name)):
-			change_animation(anim_node_name, new_anim_name)
+### STATE MACHINE PLAYBACK ###
 
-
-func reset_tree_with_lib(lib := library) -> void:
-	for anim_node_name in get_all_anim_node_animation_name():
-		if not lib.has_animation(get_animation_name(anim_node_name)): continue
-		
-		reset_anim_node(anim_node_name)
-		var blend_node_name: StringName= get_anim_node_connect_to(anim_node_name)
-		reset_anim_node(blend_node_name)
 
 
 func reset_anim_node(anim_node_name: StringName) -> void:
 	var anim_node := get_animation_node(anim_node_name)
 	
 	if anim_node is AnimationNodeAnimation:
-		change_animation(anim_node_name, reset_animation)
+		change_animation(anim_node_name, reset_anim_name)
 	elif anim_node is AnimationNodeBlend2 or anim_node is AnimationNodeBlend3:
 		set_blend_amount(anim_node_name, 0.0)
 		reset_filter(anim_node_name)
@@ -496,3 +503,18 @@ func print_one_shot_node(one_shot_node_name: StringName) -> void:
 func print_anim_state_machine(anim_state_machine_name: StringName) -> void:
 	var anim_sm_playback := get_state_machine_playback(anim_state_machine_name)
 	print(anim_state_machine_name + " : " +anim_sm_playback.get_current_node())
+
+
+func change_animations_in_library(new_anim_name := reset_anim_name, lib := library) -> void:
+	for anim_node_name in get_all_anim_node_animation_name():
+		if lib.has_animation(get_animation_name(anim_node_name)):
+			change_animation(anim_node_name, new_anim_name)
+
+
+func reset_tree_with_lib(lib := library) -> void:
+	for anim_node_name in get_all_anim_node_animation_name():
+		if not lib.has_animation(get_animation_name(anim_node_name)): continue
+		
+		reset_anim_node(anim_node_name)
+		var blend_node_name: StringName= get_anim_node_connect_to(anim_node_name)
+		reset_anim_node(blend_node_name)

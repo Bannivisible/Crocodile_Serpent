@@ -9,7 +9,7 @@ class_name Crocodile
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var animation_manager: AnimationManagerComponent = $AnimationManagerComponent
-
+@onready var remote_hand_target: RemoteTransform2D = $Skeleton2D/Center/Body/Torso/ArmFront/ForeArmFront/HandFront/HandFrontTarget/HandFrontTarget
 
 ##### BUILT-IN ####
 func _ready() -> void:
@@ -18,22 +18,9 @@ func _ready() -> void:
 
 
 #func _input(_event: InputEvent) -> void:
-	#if Input.is_action_just_pressed("bent_down"):
-		#print($AnimationTree.get("parameters/StateMachine/playback"))
-
-#func _input(_event: InputEvent) -> void:
-	#if Input.is_action_just_pressed("bent_down"):
-		#print($AnimationPlayer.get_animation_library_list())
-
-
-#func _input(_event: InputEvent) -> void:
-	#if Input.is_action_pressed("up"):
-		#animation_player.play("Idle")
-
-
-#func _input(_event: InputEvent) -> void:
 	#if Input.is_action_just_pressed("up"):
-		#animation_manager.print_blendtree()
+		#print(animation_player.current_animation)
+
 
 #### LOGIC ####
 func immobilize() -> void:

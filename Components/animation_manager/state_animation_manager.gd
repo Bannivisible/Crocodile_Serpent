@@ -12,7 +12,6 @@ enum PLAY_MODE {
 
 @export var anim_manager_path: NodePath= ".."
 
-
 @export var play_mode := PLAY_MODE.PLAY
 
 @export var state_machine: StateMachine:
@@ -49,16 +48,15 @@ func _set_anim_state_machine_path(value: String) -> void:
 	state_machine_playback = _get_state_machine_playback()
 
 #### BUILT IN ####
-
-func _ready() -> void:
-	if not object.is_node_ready(): await object.ready
-	if not owner.is_node_ready(): await  owner.ready
+func _enter_tree() -> void:
+	await get_tree().process_frame
 	
-	var state: State= state_machine.current_state
-	_play_state_anime(state)
-	while state is StateMachine:
-		state = state.current_state
+	for state in state_machine.get_chained_state_list():
 		_play_state_anime(state)
+
+
+func _exit_tree() -> void:
+	_play_anim(AnimationManagerComponent.EXIT_ANIM_NAME)
 
 #### LOGIC ####
 func _get_anim_name(state: State) -> String:
@@ -101,6 +99,11 @@ func _one_shot_logic(anim_name: StringName) -> void:
 func _play_state_anime(state: State) -> void:
 	if state == null: return
 	var anim_name: StringName= _get_anim_name(state)
+	
+	_play_anim(anim_name)
+
+
+func _play_anim(anim_name: StringName) -> void:
 	if not anim_manager.has_animation(anim_name): return
 	
 	match play_mode:
