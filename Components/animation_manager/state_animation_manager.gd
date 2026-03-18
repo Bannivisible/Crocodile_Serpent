@@ -17,6 +17,8 @@ enum PLAY_MODE {
 @export var state_machine: StateMachine:
 	set = _set_state_machine
 
+@export var exceptions: Dictionary[String, StringName]
+
 @export_group("Play")
 @export var play_reset: bool
 
@@ -63,6 +65,9 @@ func _get_anim_name(state: State) -> String:
 	var anim_name: String= state.get_chained_string()
 	anim_name = anim_name.substr(len(state_machine.name) + 1)
 	
+	if exceptions.has(anim_name):
+		anim_name = exceptions[anim_name]
+	
 	return anim_name
 
 
@@ -98,6 +103,7 @@ func _one_shot_logic(anim_name: StringName) -> void:
 
 func _play_state_anime(state: State) -> void:
 	if state == null: return
+	
 	var anim_name: StringName= _get_anim_name(state)
 	
 	_play_anim(anim_name)

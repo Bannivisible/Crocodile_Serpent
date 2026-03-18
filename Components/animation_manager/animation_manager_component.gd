@@ -53,13 +53,7 @@ func _enter_tree() -> void:
 
 
 func _exit_tree() -> void:
-	if remove_library_on_exit_tree and library != null:
-		
-		print(get_current_anim_names_in_blendtree())
-		#print_blendtree()
-		
-		await animation_finished
-		
+	if remove_library_on_exit_tree and library != null and not has_animation(EXIT_ANIM_NAME):
 		reset_tree_with_lib()
 		remove_all_anim_library(library, animation_player.get_animation_library(""))
 
@@ -110,6 +104,8 @@ func play_reset_anim_name() -> void:
 
 func has_animation(anim_name: StringName) -> bool:
 	return animation_player.has_animation(anim_name)
+
+### ANIM NODE ####
 
 ### BlendTree ###
 func setup_one_shot(one_shot_name: StringName, anim_name: StringName) -> void:
@@ -216,9 +212,12 @@ func is_filtred_by(blend: String, anime: Animation) -> bool:
 
 
 func change_animation(anim_node_name: StringName, anim_name: StringName) -> void:
-	var anim_node: AnimationNodeAnimation= get_animation_node(anim_node_name)
+	var anim_node := get_animation_node(anim_node_name)
 	
-	anim_node.animation = anim_name
+	if anim_node is AnimationNodeAnimation:
+		anim_node.animation = anim_name
+	elif anim_node is AnimationNodeStateMachine:
+		travel_animation(anim_node_name, anim_name)
 
 
 func convert_all_connections(anim_nd_name1: StringName, anim_nd_name2: StringName) -> void:
@@ -366,12 +365,6 @@ func get_animation_name(anim_node_name: StringName) -> StringName:
 	return anim_node.animation
 
 
-func get_state_machine_playback(anim_state_machine_path: String) -> AnimationNodeStateMachinePlayback:
-	var path: String= "parameters/"
-	path += anim_state_machine_path + "/playback"
-	return animation_tree.get(path)
-
-
 func get_connection_with_from(from: StringName) -> AnimationConnection:
 	for connection in anim_connect_list.connections:
 		if connection.from == from:
@@ -422,19 +415,19 @@ func get_anim_node_connect_in(anim_node_name: StringName) -> StringName:
 	#return anim_name
 
 
-func get_current_anim_names_in_blendtree(blend_tree: AnimationNodeBlendTree= tree_root) -> Array[StringName]:
-	var anim_list: Array[StringName]= []
+func get_current_anim_names() -> Array[StringName]:
+	var anim_names: Array[StringName]
 	
-	for anim_node_name in blend_tree.get_node_list():
-		var anim_node := blend_tree.get_node(anim_node_name)
+	for anim_node_name in tree_root.get_node_list():
+		var anim_node := get_animation_node(anim_node_name)
 		
 		if anim_node is AnimationNodeAnimation:
-			anim_list.append(anim_node.animation)
-		elif anim_node is AnimationNodeBlendTree:
-			anim_list += get_current_anim_names_in_blendtree(anim_node)
+			anim_names.append(anim_node.animation)
+		elif anim_node is AnimationNodeStateMachine:
+			var anim_name := get_anim_state_machine_current_anim_name(anim_node_name)
+			anim_names.append(anim_name)
 	
-	
-	return anim_list
+	return anim_names
 
 
 func get_string_all_current_anim_name_in_tree() -> Array[String]:
@@ -452,7 +445,20 @@ func get_string_all_current_anim_name_in_tree() -> Array[String]:
 
 
 ### STATE MACHINE PLAYBACK ###
+func get_state_machine_playback(anim_state_machine_path: StringName) -> AnimationNodeStateMachinePlayback:
+	var path: StringName= "parameters/%s/playback" % anim_state_machine_path
+	return animation_tree.get(path)
 
+
+func get_anim_state_machine_current_anim_name(anim_sm_name: StringName) -> StringName:
+	var playback := get_state_machine_playback(anim_sm_name)
+	
+	return playback.get_current_node()
+
+
+func travel_animation(anim_sm_name: StringName, anim_name: StringName) -> void:
+	var sm_playback := get_state_machine_playback(anim_sm_name)
+	sm_playback.travel(anim_name)
 
 
 func reset_anim_node(anim_node_name: StringName) -> void:
@@ -518,3 +524,11 @@ func reset_tree_with_lib(lib := library) -> void:
 		reset_anim_node(anim_node_name)
 		var blend_node_name: StringName= get_anim_node_connect_to(anim_node_name)
 		reset_anim_node(blend_node_name)
+
+#### SIGNALS RESPONSES ####
+func _on_animation_finished(anim_name: StringName) -> void:
+	if anim_name == EXIT_ANIM_NAME and remove_library_on_exit_tree:
+		reset_tree_with_lib()
+		remove_all_anim_library(library, animation_player.get_animation_library(""))
+
+
