@@ -2414,7 +2414,7 @@ offset = Vector2(-9.287, 11.465)
 [node name="LegBack" type="Sprite2D" parent="SpriteContainer/LegBackGroup" index="0" unique_id=444752468]
 z_index = -1
 position = Vector2(79.12201, -97.982544)
-rotation = 0.11591938
+rotation = 0.11591941
 scale = Vector2(0.9996485, 0.9996485)
 texture = SubResource("AtlasTexture_3ua5h")
 offset = Vector2(0, 17)
@@ -2429,7 +2429,7 @@ offset = Vector2(18, 26.333)
 
 [node name="FootBack" type="Sprite2D" parent="SpriteContainer/LegBackGroup" index="2" unique_id=1107727012]
 position = Vector2(70.52362, -58.716675)
-rotation = -0.116859466
+rotation = -0.11685945
 scale = Vector2(0.9994929, 0.9994929)
 texture = SubResource("AtlasTexture_6et86")
 offset = Vector2(9.333, 10.667)
@@ -2627,7 +2627,7 @@ offset = Vector2(-12, 15)
 
 [node name="LegFront" type="Sprite2D" parent="SpriteContainer/LegFrontGroup" index="0" unique_id=1504693139]
 position = Vector2(-63.09398, -95.85574)
-rotation = 0.06972345
+rotation = 0.069723465
 scale = Vector2(0.99966323, 0.99966323)
 texture = SubResource("AtlasTexture_qvnx8")
 offset = Vector2(2.667, 21.333)
@@ -2640,8 +2640,8 @@ texture = SubResource("AtlasTexture_jbjqy")
 offset = Vector2(-5.667, 21)
 
 [node name="FootFront" type="Sprite2D" parent="SpriteContainer/LegFrontGroup" index="2" unique_id=1521634280]
-position = Vector2(-67.021614, -50.89957)
-rotation = -0.0004920866
+position = Vector2(-67.02162, -50.89957)
+rotation = -0.0004920717
 scale = Vector2(0.99950427, 0.99950427)
 texture = SubResource("AtlasTexture_7cm0d")
 offset = Vector2(2.2518923, 17.591896)

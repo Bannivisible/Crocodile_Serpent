@@ -614,13 +614,13 @@ animation_manager = NodePath("../../../AnimationManagerComponent")
 combo_cooldown = 1.0
 previous_state = NodePath("../ThrowAttack")
 
-[node name="OnJaw" type="Node" parent="StateMachine" unique_id=1238307790 node_paths=PackedStringArray("next_state", "gauge", "hit_box")]
+[node name="OnJaw" type="Node" parent="StateMachine" unique_id=1238307790 node_paths=PackedStringArray("next_state", "remote_f", "remote_b", "gauge", "hit_box")]
 script = ExtResource("14_kcwly")
 next_state = NodePath("../OnHand/Idle")
 remote_f_parent_path = NodePath("../../../../Skeleton2D/Center/Body/Torso/Head/HeadFacing/NeckFacing/Face")
 remote_b_parent_path = NodePath("../../../../Skeleton2D/Center/Body/Torso/Head/HeadFacing/NeckFacing/Jaw")
-remote_f_name = &"RemoteJTF"
-remote_b_name = &"RemoteJTB"
+remote_f = NodePath("RemoteJTB")
+remote_b = NodePath("RemoteJTF")
 gauge = NodePath("../../GaugeOnJaw")
 hit_box = NodePath("../../HitBox")
 metadata/_custom_type_script = "uid://bcmokx1bwyftw"
@@ -663,6 +663,14 @@ attack_data = SubResource("Resource_fc7m6")
 damage_interval = 0.4
 animation_manager = NodePath("../../../AnimationManagerComponent")
 previous_state = NodePath("../IdleJ")
+
+[node name="RemoteJTB" type="RemoteTransform2D" parent="StateMachine/OnJaw" unique_id=960188853]
+position = Vector2(-49.428123, 10.152819)
+rotation = -0.08726646
+
+[node name="RemoteJTF" type="RemoteTransform2D" parent="StateMachine/OnJaw" unique_id=996720727]
+position = Vector2(-32.87325, -4.23806)
+rotation = 0.08726646
 
 [node name="OnGround" type="Node" parent="StateMachine" unique_id=975553714]
 script = ExtResource("15_7x2u0")
