@@ -1,0 +1,47 @@
+[gd_resource type="AnimationNodeStateMachine" format=3 uid="uid://b7174sswn82rk"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_swrla"]
+animation = &"Charge"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lac0c"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_axrhb"]
+animation = &"ToCharge"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0epr8"]
+animation = &"ToCharge"
+play_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wn1gg"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0j7tc"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_txsxm"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_okefp"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_s3h8e"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nsn7e"]
+switch_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mw5ck"]
+switch_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5wqwe"]
+
+[resource]
+resource_local_to_scene = true
+states/Charge/node = SubResource("AnimationNodeAnimation_swrla")
+states/Charge/position = Vector2(519.3113, 286.0741)
+states/Idle/node = SubResource("AnimationNodeAnimation_lac0c")
+states/Idle/position = Vector2(519.2527, 99.85265)
+states/ToCharge/node = SubResource("AnimationNodeAnimation_axrhb")
+states/ToCharge/position = Vector2(350, 214.45268)
+states/ToChargeBackward/node = SubResource("AnimationNodeAnimation_0epr8")
+states/ToChargeBackward/position = Vector2(718.42615, 213.23457)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_wn1gg"), "Idle", "End", SubResource("AnimationNodeStateMachineTransition_0j7tc"), "Idle", "ToCharge", SubResource("AnimationNodeStateMachineTransition_txsxm"), "ToCharge", "Charge", SubResource("AnimationNodeStateMachineTransition_okefp"), "ToChargeBackward", "Idle", SubResource("AnimationNodeStateMachineTransition_s3h8e"), "ToChargeBackward", "ToCharge", SubResource("AnimationNodeStateMachineTransition_nsn7e"), "ToCharge", "ToChargeBackward", SubResource("AnimationNodeStateMachineTransition_mw5ck"), "Charge", "ToChargeBackward", SubResource("AnimationNodeStateMachineTransition_5wqwe")]
+graph_offset = Vector2(149.91937, 92.33711)

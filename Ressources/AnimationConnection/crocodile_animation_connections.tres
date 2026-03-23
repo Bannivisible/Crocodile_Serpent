@@ -6,49 +6,36 @@
 [sub_resource type="Resource" id="Resource_72sr6"]
 script = ExtResource("1_72sr6")
 from = &"StateMachine"
-to = &"StateBlend2"
+to = &"Blend2"
 metadata/_custom_type_script = "uid://bmm1oqvjaxa4m"
 
 [sub_resource type="Resource" id="Resource_qlhte"]
 script = ExtResource("1_72sr6")
-from = &"StateBlendAnimation"
-to = &"StateBlend2"
+from = &"BlendAnimation"
+to = &"Blend2"
 to_port = 1
 metadata/_custom_type_script = "uid://bmm1oqvjaxa4m"
 
 [sub_resource type="Resource" id="Resource_qxw88"]
 script = ExtResource("1_72sr6")
-from = &"StateBlend2"
-to = &"StateOneShot"
+from = &"Blend2"
+to = &"OneShot"
 metadata/_custom_type_script = "uid://bmm1oqvjaxa4m"
 
 [sub_resource type="Resource" id="Resource_mc2yf"]
 script = ExtResource("1_72sr6")
-from = &"StateOneShotAnimation"
-to = &"StateOneShot"
+from = &"OneShotAnimation"
+to = &"OneShot"
 to_port = 1
 metadata/_custom_type_script = "uid://bmm1oqvjaxa4m"
 
 [sub_resource type="Resource" id="Resource_rj4ec"]
 script = ExtResource("1_72sr6")
-from = &"StateOneShot"
-to = &"output"
-metadata/_custom_type_script = "uid://bmm1oqvjaxa4m"
-
-[sub_resource type="Resource" id="Resource_wh5am"]
-script = ExtResource("1_72sr6")
-from = &"AttackAnimation"
-to = &"AttackOneShot"
-to_port = 1
-metadata/_custom_type_script = "uid://bmm1oqvjaxa4m"
-
-[sub_resource type="Resource" id="Resource_xxsdx"]
-script = ExtResource("1_72sr6")
-from = &"AttackOneShot"
+from = &"OneShot"
 to = &"output"
 metadata/_custom_type_script = "uid://bmm1oqvjaxa4m"
 
 [resource]
 script = ExtResource("2_wh5am")
-connections = Array[ExtResource("1_72sr6")]([SubResource("Resource_72sr6"), SubResource("Resource_qlhte"), SubResource("Resource_qxw88"), SubResource("Resource_mc2yf"), SubResource("Resource_rj4ec"), SubResource("Resource_wh5am"), SubResource("Resource_xxsdx")])
+connections = Array[ExtResource("1_72sr6")]([SubResource("Resource_72sr6"), SubResource("Resource_qlhte"), SubResource("Resource_qxw88"), SubResource("Resource_mc2yf"), SubResource("Resource_rj4ec")])
 metadata/_custom_type_script = "uid://dqkyu24522gux"

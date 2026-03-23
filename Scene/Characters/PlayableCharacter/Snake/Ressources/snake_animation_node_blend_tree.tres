@@ -1,0 +1,33 @@
+[gd_resource type="AnimationNodeBlendTree" format=3 uid="uid://dm506xnwext2r"]
+
+[ext_resource type="AnimationNodeStateMachine" uid="uid://b7174sswn82rk" path="res://Scene/Characters/PlayableCharacter/Snake/Ressources/snake_animation_node_state_machine.tres" id="1_pdl15"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qrhud"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_upub7"]
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_qrhud"]
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_upub7"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_axrhb"]
+graph_offset = Vector2(104.27794, 0)
+
+[resource]
+graph_offset = Vector2(-552.40326, -73.10249)
+nodes/StateMachine/node = ExtResource("1_pdl15")
+nodes/StateMachine/position = Vector2(-893.3333, 26.666666)
+nodes/StateMachineOneShot/node = SubResource("AnimationNodeStateMachine_axrhb")
+nodes/StateMachineOneShot/position = Vector2(-333.33334, 386.66666)
+nodes/AnimationOneShot/node = SubResource("AnimationNodeAnimation_upub7")
+nodes/AnimationOneShot/position = Vector2(-31.320925, 510.11438)
+nodes/Blend2/node = SubResource("AnimationNodeBlend2_qrhud")
+nodes/Blend2/position = Vector2(-506.66666, 66.666664)
+nodes/OneShot/node = SubResource("AnimationNodeOneShot_upub7")
+nodes/OneShot/position = Vector2(-26.666666, 66.666664)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_qrhud")
+nodes/Animation/position = Vector2(10.67673, -181.34569)
+nodes/AnimationNodeStateMachine/node = ExtResource("1_pdl15")
+nodes/AnimationNodeStateMachine/position = Vector2(-866.6667, 346.66666)
+node_connections = [&"output", 0, &"OneShot", &"Blend2", 0, &"StateMachine", &"Blend2", 1, &"AnimationNodeStateMachine", &"OneShot", 0, &"Blend2", &"OneShot", 1, &"StateMachineOneShot"]

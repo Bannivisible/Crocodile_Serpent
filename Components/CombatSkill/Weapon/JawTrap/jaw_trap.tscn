@@ -31,8 +31,7 @@
 [ext_resource type="Texture2D" uid="uid://b5iu6elvpti77" path="res://Ui/Assets/UI1.png" id="21_tlny7"]
 [ext_resource type="Script" uid="uid://da3cqoomwyp1o" path="res://Components/CombatSkill/hit_box.gd" id="24_5rtpq"]
 [ext_resource type="Shape2D" uid="uid://dehxsdpvhda4g" path="res://Components/CombatSkill/Weapon/JawTrap/Ressources/ToGroundShape.tres" id="25_7etub"]
-[ext_resource type="Script" uid="uid://bmm1oqvjaxa4m" path="res://Ressources/AnimationConnection/animation_connection.gd" id="26_mkx5c"]
-[ext_resource type="Script" uid="uid://dqkyu24522gux" path="res://Ressources/AnimationConnection/animation_connections_list.gd" id="27_vpr7y"]
+[ext_resource type="Resource" uid="uid://b85xloi286pt1" path="res://Ressources/AnimationConnection/crocodile_animation_connections.tres" id="27_mkx5c"]
 
 [sub_resource type="Resource" id="Resource_5rtpq"]
 script = ExtResource("6_jeet7")
@@ -157,43 +156,6 @@ height = 88.18735
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_weadw"]
 radius = 154.05058
 height = 446.32965
-
-[sub_resource type="Resource" id="Resource_72sr6"]
-script = ExtResource("26_mkx5c")
-from = &"StateMachine"
-to = &"StateBlend2"
-metadata/_custom_type_script = "uid://bmm1oqvjaxa4m"
-
-[sub_resource type="Resource" id="Resource_qlhte"]
-script = ExtResource("26_mkx5c")
-from = &"StateBlendAnimation"
-to = &"StateBlend2"
-to_port = 1
-metadata/_custom_type_script = "uid://bmm1oqvjaxa4m"
-
-[sub_resource type="Resource" id="Resource_qxw88"]
-script = ExtResource("26_mkx5c")
-from = &"StateBlend2"
-to = &"StateOneShot"
-metadata/_custom_type_script = "uid://bmm1oqvjaxa4m"
-
-[sub_resource type="Resource" id="Resource_mc2yf"]
-script = ExtResource("26_mkx5c")
-from = &"StateOneShotAnimation"
-to = &"StateOneShot"
-to_port = 1
-metadata/_custom_type_script = "uid://bmm1oqvjaxa4m"
-
-[sub_resource type="Resource" id="Resource_rj4ec"]
-script = ExtResource("26_mkx5c")
-from = &"StateOneShot"
-to = &"output"
-metadata/_custom_type_script = "uid://bmm1oqvjaxa4m"
-
-[sub_resource type="Resource" id="Resource_vo7fj"]
-script = ExtResource("27_vpr7y")
-connections = Array[ExtResource("26_mkx5c")]([SubResource("Resource_72sr6"), SubResource("Resource_qlhte"), SubResource("Resource_qxw88"), SubResource("Resource_mc2yf"), SubResource("Resource_rj4ec")])
-metadata/_custom_type_script = "uid://dqkyu24522gux"
 
 [sub_resource type="Animation" id="Animation_2xqvd"]
 resource_name = "OnGround(EditorHelp)"
@@ -782,7 +744,7 @@ debug_color = Color(1, 0, 0, 0.41960785)
 
 [node name="AnimationManagerComponent" type="Node" parent="." unique_id=203429901]
 script = ExtResource("16_in3ot")
-anim_connect_list = SubResource("Resource_vo7fj")
+anim_connect_list = ExtResource("27_mkx5c")
 library = ExtResource("2_dp6s7")
 metadata/_custom_type_script = "uid://6lekj6yg62r6"
 

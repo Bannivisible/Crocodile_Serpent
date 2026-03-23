@@ -2256,6 +2256,11 @@ filters = ["CSManager/JawTrap/Front:position", "CSManager/JawTrap/Front:rotation
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fjl3l"]
 animation = &"RESET"
 
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_8e5hb"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dr3s2"]
+animation = &"RESET"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_w2kjd"]
 animation = &"BentDown-IdleB"
 
@@ -2357,24 +2362,20 @@ states/Torpedo/position = Vector2(578.1147, 169.04134)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_n380g"), "Jump", "Fall", SubResource("AnimationNodeStateMachineTransition_pvels"), "Idle", "Move", SubResource("AnimationNodeStateMachineTransition_wfuh6"), "Move", "Idle", SubResource("AnimationNodeStateMachineTransition_weadw"), "Idle", "ToBentDown", SubResource("AnimationNodeStateMachineTransition_l1deg"), "Idle", "End", SubResource("AnimationNodeStateMachineTransition_ooqhq"), "ToGetUp", "Idle", SubResource("AnimationNodeStateMachineTransition_4djef"), "BentDown-MoveB", "BentDown-IdleB", SubResource("AnimationNodeStateMachineTransition_kj3xj"), "BentDown-IdleB", "BentDown-MoveB", SubResource("AnimationNodeStateMachineTransition_nprca"), "BentDown-IdleB", "ToGetUp", SubResource("AnimationNodeStateMachineTransition_7ktkk"), "BentDown-MoveB", "ToGetUp", SubResource("AnimationNodeStateMachineTransition_36jn7"), "Idle", "Fall", SubResource("AnimationNodeStateMachineTransition_e5u65"), "ToBentDown", "BentDown-MoveB", SubResource("AnimationNodeStateMachineTransition_u4jyn"), "ToBentDown", "BentDown-IdleB", SubResource("AnimationNodeStateMachineTransition_0rnww"), "Fall", "FallLanding", SubResource("AnimationNodeStateMachineTransition_vsulq"), "FallLanding", "Idle", SubResource("AnimationNodeStateMachineTransition_sw307"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_w2kjd"), "Idle", "Torpedo", SubResource("AnimationNodeStateMachineTransition_ynjtu"), "Torpedo", "Idle", SubResource("AnimationNodeStateMachineTransition_iw2au")]
 graph_offset = Vector2(173.52386, 6.71783)
 
-[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_8e5hb"]
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dr3s2"]
-animation = &"RESET"
-
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_7cm0d"]
+graph_offset = Vector2(-1034.8077, 53.93091)
 nodes/output/position = Vector2(700, 200)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_qvnx8")
 nodes/StateMachine/position = Vector2(-1180, 100)
-nodes/StateOneShot/node = SubResource("AnimationNodeOneShot_8e5hb")
-nodes/StateOneShot/position = Vector2(120, 133.33333)
-nodes/StateBlend2/node = SubResource("AnimationNodeBlend2_dr3s2")
-nodes/StateBlend2/position = Vector2(-560, 133.33333)
-nodes/StateOneShotAnimation/node = SubResource("AnimationNodeAnimation_dr3s2")
-nodes/StateOneShotAnimation/position = Vector2(-293.33334, 453.33334)
-nodes/StateBlendAnimation/node = SubResource("AnimationNodeAnimation_fjl3l")
-nodes/StateBlendAnimation/position = Vector2(-1160, 360)
-node_connections = [&"output", 0, &"StateOneShot", &"StateOneShot", 0, &"StateBlend2", &"StateOneShot", 1, &"StateOneShotAnimation", &"StateBlend2", 0, &"StateMachine", &"StateBlend2", 1, &"StateBlendAnimation"]
+nodes/OneShot/node = SubResource("AnimationNodeOneShot_8e5hb")
+nodes/OneShot/position = Vector2(120, 133.33333)
+nodes/Blend2/node = SubResource("AnimationNodeBlend2_dr3s2")
+nodes/Blend2/position = Vector2(-560, 133.33333)
+nodes/OneShotAnimation/node = SubResource("AnimationNodeAnimation_dr3s2")
+nodes/OneShotAnimation/position = Vector2(-293.33334, 453.33334)
+nodes/BlendAnimation/node = SubResource("AnimationNodeAnimation_fjl3l")
+nodes/BlendAnimation/position = Vector2(-1160, 360)
+node_connections = [&"output", 0, &"OneShot", &"OneShot", 0, &"Blend2", &"OneShot", 1, &"OneShotAnimation", &"Blend2", 0, &"StateMachine", &"Blend2", 1, &"BlendAnimation"]
 
 [node name="Crocodile" unique_id=2023739003 groups=["Crocodile"] instance=ExtResource("1_pp85c")]
 script = ExtResource("2_fjl3l")
@@ -2943,15 +2944,16 @@ playback_default_blend_time = 2.0
 deterministic = false
 tree_root = SubResource("AnimationNodeBlendTree_7cm0d")
 anim_player = NodePath("../AnimationPlayer")
-parameters/StateOneShot/active = false
-parameters/StateOneShot/internal_active = false
-parameters/StateOneShot/request = 0
-parameters/StateBlend2/blend_amount = 0.0
+parameters/OneShot/active = false
+parameters/OneShot/internal_active = false
+parameters/OneShot/request = 0
+parameters/Blend2/blend_amount = 0.0
 
 [node name="StateAnimationManager" type="Node" parent="AnimationTree" index="0" unique_id=11466307 node_paths=PackedStringArray("state_machine")]
 script = ExtResource("22_jbjqy")
 play_mode = 2
 state_machine = NodePath("../../StateMachine")
+anim_state_machine_path = "StateMachine"
 metadata/_custom_type_script = "uid://dgi2a2c0lt17u"
 
 [node name="VelocityComponent" parent="." index="9" unique_id=661764387 instance=ExtResource("2_pp85c")]

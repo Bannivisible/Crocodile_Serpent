@@ -23,11 +23,11 @@ enum PLAY_MODE {
 @export var play_reset: bool
 
 @export_group("Blend")
-@export var state_blend_anim_name: StringName= "StateBlendAnimation"
-@export var state_os_anim_name: StringName= "StateOneShotAnimation"
+@export var blend_node_name: StringName= "Blend2"
+@export var os_node_name: StringName= "OneShot"
 
 @export_group("Travel")
-@export var anim_state_machine_path: String= "StateMachine":
+@export var anim_state_machine_path: String= "AnimationNodeStateMachine":
 	set = _set_anim_state_machine_path
 
 @onready var anim_manager: Node= get_node_or_null(anim_manager_path)
@@ -87,17 +87,11 @@ func _get_state_machine_playback() -> AnimationNodeStateMachinePlayback:
 
 func _blend_logic(anim_name: StringName) -> void:
 	if anim_manager is AnimationManagerComponent:
-		var connection: AnimationConnection= anim_manager.get_connection_with_from(state_blend_anim_name)
-		var blend_node_name: StringName= connection.to
-		
 		anim_manager.setup_blend_node(blend_node_name, anim_name)
 
 
 func _one_shot_logic(anim_name: StringName) -> void:
 	if anim_manager is AnimationManagerComponent:
-		var connection: AnimationConnection= anim_manager.get_connection_with_from(state_os_anim_name)
-		var os_node_name: StringName= connection.to
-		
 		anim_manager.setup_one_shot(os_node_name, anim_name)
 
 
@@ -119,16 +113,19 @@ func _play_anim(anim_name: StringName) -> void:
 
 
 func _match_play(anim_name: StringName) -> void:
-	if not anim_manager.current_animation != anim_name: return
+	var anim_player: AnimationPlayer
 	
-	if anim_manager is AnimationPlayer:
-		anim_manager.stop()
-		
-		if play_reset: 
-			anim_manager.play("RESET")
-			anim_manager.stop()
-		
-		anim_manager.play(anim_name)
+	if anim_manager is AnimationPlayer: anim_player = anim_manager
+	elif anim_manager is AnimationManagerComponent: anim_player = anim_manager.animation_player
+	
+	if anim_player.current_animation == anim_name: return
+	anim_player.stop()
+	
+	if play_reset: 
+		anim_player.play("RESET")
+		anim_player.stop()
+	
+	anim_player.play(anim_name)
 
 
 func _match_blend(anim_name: StringName) -> void:

@@ -4,11 +4,15 @@
 [ext_resource type="Resource" uid="uid://cktgvgilj7mww" path="res://Ressources/CombatSkillData/Spell/Water/Geyser/geyser_statistics.tres" id="2_q8h74"]
 [ext_resource type="Script" uid="uid://danilkv671r1y" path="res://Ressources/Attack/AttackType/attack_type.gd" id="2_wtlxq"]
 [ext_resource type="Script" uid="uid://da3cqoomwyp1o" path="res://Components/CombatSkill/hit_box.gd" id="4_pb20s"]
+[ext_resource type="Resource" uid="uid://cngbsch24bs31" path="res://Scene/Characters/PlayableCharacter/Snake/snake_stat.tres" id="5_tvycw"]
+[ext_resource type="Script" uid="uid://doagmyu4ylk33" path="res://Ressources/Attack/AttackData/spell_attack_data.gd" id="6_2ib6l"]
 [ext_resource type="Script" uid="uid://cd5i6fer42vww" path="res://Components/CombatSkill/Spell/Water/GeyserSpell/controler.gd" id="9_msyc4"]
 [ext_resource type="Script" uid="uid://bcmokx1bwyftw" path="res://StateMachine/state_machine.gd" id="10_5ekjd"]
 [ext_resource type="Script" uid="uid://6lekj6yg62r6" path="res://Components/animation_manager/animation_manager_component.gd" id="10_5nrq7"]
+[ext_resource type="Script" uid="uid://bey7t8h4m0yyp" path="res://StateMachine/state.gd" id="11_2ib6l"]
 [ext_resource type="Script" uid="uid://dh526fg0u7duu" path="res://Components/CombatSkill/Spell/Water/GeyserSpell/Script/desactivate.gd" id="11_bf0ja"]
 [ext_resource type="Script" uid="uid://dgi2a2c0lt17u" path="res://Components/animation_manager/state_animation_manager.gd" id="11_cdv0n"]
+[ext_resource type="Resource" uid="uid://c4jeioubu2xem" path="res://Ressources/AnimationConnection/snake_connections.tres" id="11_smjqp"]
 [ext_resource type="Script" uid="uid://cvkoqrytxj66u" path="res://Components/CombatSkill/Spell/Water/GeyserSpell/Script/charge.gd" id="12_q75wl"]
 [ext_resource type="Script" uid="uid://dtfutyetajtjj" path="res://Components/CombatSkill/Spell/Water/GeyserSpell/Script/cast.gd" id="13_wwxgk"]
 
@@ -23,6 +27,16 @@ point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_aqxpk"]
 colors = PackedColorArray(0, 0, 0.839216, 1, 0.0941176, 1, 1, 0.772549)
+
+[sub_resource type="Resource" id="Resource_6phow"]
+script = ExtResource("2_wtlxq")
+type = 4
+metadata/_custom_type_script = "uid://danilkv671r1y"
+
+[sub_resource type="Resource" id="Resource_lqyww"]
+script = ExtResource("6_2ib6l")
+type = SubResource("Resource_6phow")
+metadata/_custom_type_script = "uid://doagmyu4ylk33"
 
 [sub_resource type="Gradient" id="Gradient_0blkd"]
 colors = PackedColorArray(0, 1, 1, 1, 0, 0, 1, 1)
@@ -65,6 +79,8 @@ collide_with_areas = true
 [node name="HitBox" type="Area2D" parent="." unique_id=1439694550 node_paths=PackedStringArray("combat_skill")]
 script = ExtResource("4_pb20s")
 combat_skill = NodePath("..")
+charac_stat = ExtResource("5_tvycw")
+attack_data = SubResource("Resource_lqyww")
 metadata/_custom_type_script = "uid://da3cqoomwyp1o"
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1070517859]
@@ -95,17 +111,31 @@ one_shot = true
 [node name="DamageInterval" type="Timer" parent="StateMachine/Cast" unique_id=1772897159]
 wait_time = 0.25
 
+[node name="AnimationStateMachine" type="Node" parent="." unique_id=1783945020]
+script = ExtResource("10_5ekjd")
+metadata/_custom_type_script = "uid://bcmokx1bwyftw"
+
+[node name="Charge" type="Node" parent="AnimationStateMachine" unique_id=1728012596]
+script = ExtResource("11_2ib6l")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="ToChargeBackward" type="Node" parent="AnimationStateMachine" unique_id=776007908]
+script = ExtResource("11_2ib6l")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
 [node name="Controler" type="Node" parent="." unique_id=223276975]
 script = ExtResource("9_msyc4")
 metadata/_custom_type_script = "uid://dhau74o4l0rjm"
 
 [node name="AnimationManagerComponent" type="Node" parent="." unique_id=188727327]
 script = ExtResource("10_5nrq7")
+anim_connect_list = ExtResource("11_smjqp")
 metadata/_custom_type_script = "uid://6lekj6yg62r6"
 
 [node name="StateAnimationManager" type="Node" parent="AnimationManagerComponent" unique_id=954534735 node_paths=PackedStringArray("state_machine")]
 script = ExtResource("11_cdv0n")
-state_machine = NodePath("../../StateMachine")
+play_mode = 1
+state_machine = NodePath("../../AnimationStateMachine")
 metadata/_custom_type_script = "uid://dgi2a2c0lt17u"
 
 [connection signal="timeout" from="StateMachine/Cast/Timer" to="StateMachine/Cast" method="_on_timer_timeout"]
