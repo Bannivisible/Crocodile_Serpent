@@ -2045,19 +2045,22 @@ _data = {
 animation = &"RESET"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_upub7"]
+animation = &"ToCharge"
 
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_qrhud"]
 
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_upub7"]
+filter_enabled = true
+filters = ["Skeleton2D/ArmBack:position", "Skeleton2D/ArmBack:rotation", "Skeleton2D/ArmFront/ArmFront:scale", "Skeleton2D/ArmFront/ForearmFront/ForearmFront:scale", "Skeleton2D/ArmFront/ForearmFront/HandFront:position", "Skeleton2D/ArmFront/ForearmFront/HandFront:rotation", "Skeleton2D/ArmFront/ForearmFront/HandFront:scale", "Skeleton2D/ArmFront/ForearmFront:position", "Skeleton2D/ArmFront/ForearmFront:rotation", "Skeleton2D/ArmFront:position", "Skeleton2D/ArmFront:rotation", "Skeleton2D/ArmFront:scale"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_4k7xw"]
-graph_offset = Vector2(-704.9122, 38.178574)
+graph_offset = Vector2(-639.3175, -5.6427054)
 nodes/OneShot/node = SubResource("AnimationNodeOneShot_upub7")
-nodes/OneShot/position = Vector2(-26.666666, 66.666664)
+nodes/OneShot/position = Vector2(-26.666666, 226.66667)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_qrhud")
 nodes/Animation/position = Vector2(10.67673, -181.34569)
 nodes/AnimationOneShot/node = SubResource("AnimationNodeAnimation_upub7")
-nodes/AnimationOneShot/position = Vector2(-31.320925, 510.11438)
+nodes/AnimationOneShot/position = Vector2(-453.33334, 440)
 nodes/Blend2/node = SubResource("AnimationNodeBlend2_qrhud")
 nodes/Blend2/position = Vector2(-506.66666, 66.666664)
 nodes/AnimationNodeStateMachine/node = ExtResource("8_wv1tt")
@@ -2065,8 +2068,8 @@ nodes/AnimationNodeStateMachine/position = Vector2(-1160, 100)
 "nodes/AnimationNodeStateMachine 2/node" = ExtResource("8_wv1tt")
 "nodes/AnimationNodeStateMachine 2/position" = Vector2(-1186.6666, 320)
 "nodes/AnimationNodeStateMachine 3/node" = ExtResource("8_wv1tt")
-"nodes/AnimationNodeStateMachine 3/position" = Vector2(-500, 440)
-node_connections = [&"output", 0, &"OneShot", &"OneShot", 0, &"Blend2", &"OneShot", 1, &"AnimationNodeStateMachine 3", &"Blend2", 0, &"AnimationNodeStateMachine", &"Blend2", 1, &"AnimationNodeStateMachine 2"]
+"nodes/AnimationNodeStateMachine 3/position" = Vector2(-920, 466.66666)
+node_connections = [&"output", 0, &"OneShot", &"OneShot", 0, &"Blend2", &"OneShot", 1, &"AnimationOneShot", &"Blend2", 0, &"AnimationNodeStateMachine", &"Blend2", 1, &"AnimationNodeStateMachine 2"]
 
 [sub_resource type="Animation" id="Animation_wv1tt"]
 resource_name = "ActiveArmBack"
@@ -2556,28 +2559,25 @@ position = Vector2(-1, -53)
 shape = SubResource("CapsuleShape2D_c8tis")
 
 [node name="ArmBack" type="Node2D" parent="SpriteContainer" parent_id_path=PackedInt32Array(791091049) index="0" unique_id=1358361652]
-modulate = Color(1, 1, 1, 0)
+visible = false
 position = Vector2(112, -106)
 
 [node name="TrailBack" type="AnimatedSprite2D" parent="SpriteContainer/ArmBack" index="0" unique_id=79303945]
-position = Vector2(-160, -63)
-rotation = -0.33281064
+position = Vector2(-135, 14)
 sprite_frames = SubResource("SpriteFrames_u3ofr")
 animation = &"active"
 offset = Vector2(37, -10)
 flip_v = true
 
 [node name="ShootingStarTailBack" type="AnimatedSprite2D" parent="SpriteContainer/ArmBack" index="1" unique_id=561651213]
-position = Vector2(-84.52966, -101.78439)
-rotation = 0.53461975
+position = Vector2(-51, 2)
 sprite_frames = SubResource("SpriteFrames_gv3gm")
 animation = &"active"
 offset = Vector2(15, 3)
 flip_v = true
 
 [node name="HandBack" type="AnimatedSprite2D" parent="SpriteContainer/ArmBack" index="2" unique_id=416047715]
-position = Vector2(-42.627014, -92.08034)
-rotation = 0.53461975
+position = Vector2(-10, -11)
 sprite_frames = SubResource("SpriteFrames_ox5u4")
 animation = &"active"
 offset = Vector2(7, 7)
@@ -2736,28 +2736,25 @@ texture = SubResource("AtlasTexture_umx4l")
 flip_h = true
 
 [node name="ArmFront" type="Node2D" parent="SpriteContainer" parent_id_path=PackedInt32Array(791091049) index="3" unique_id=159119175]
-modulate = Color(1, 1, 1, 0)
+visible = false
 z_index = 1
 position = Vector2(95, 16)
 
 [node name="TrailFront" type="AnimatedSprite2D" parent="SpriteContainer/ArmFront" index="0" unique_id=1197603258]
-position = Vector2(-278, -87)
-rotation = 0.43595326
+position = Vector2(-136, -3)
 sprite_frames = SubResource("SpriteFrames_u6xdx")
 animation = &"active"
 offset = Vector2(38, 7)
 
 [node name="ShootingStarTailFront" type="AnimatedSprite2D" parent="SpriteContainer/ArmFront" index="1" unique_id=1907325850]
-position = Vector2(-205.59521, -41.135498)
-rotation = 0.8061472
+position = Vector2(-51, 8)
 scale = Vector2(0.9999995, 0.9999995)
 sprite_frames = SubResource("SpriteFrames_nyjmh")
 animation = &"active"
 offset = Vector2(15, -3)
 
 [node name="HandFront" type="AnimatedSprite2D" parent="SpriteContainer/ArmFront" index="2" unique_id=857022757]
-position = Vector2(-173.60345, -15.010284)
-rotation = 0.8061472
+position = Vector2(-10, 3)
 scale = Vector2(0.9999995, 0.9999995)
 sprite_frames = SubResource("SpriteFrames_2rtc6")
 animation = &"active"
@@ -2880,13 +2877,11 @@ remote_path = NodePath("../../../../SpriteContainer/BodyGroup/ScarfFront")
 remote_path = NodePath("../../../SpriteContainer/BodyGroup/Body")
 
 [node name="ArmFront" type="Bone2D" parent="Skeleton2D" index="1" unique_id=1450489943]
-position = Vector2(-182.99998, -71)
-rotation = 0.43595326
+position = Vector2(-41, 13)
 rest = Transform2D(1, 0, 0, 1, -41, 13)
 
 [node name="ForearmFront" type="Bone2D" parent="Skeleton2D/ArmFront" index="0" unique_id=223136464]
 position = Vector2(85, 11)
-rotation = 0.37019396
 scale = Vector2(0.9999995, 0.9999995)
 rest = Transform2D(1, 0, 0, 1, 85, 11)
 
@@ -2907,13 +2902,11 @@ remote_path = NodePath("../../../../SpriteContainer/ArmFront/ShootingStarTailFro
 remote_path = NodePath("../../../SpriteContainer/ArmFront/TrailFront")
 
 [node name="ArmBack" type="Bone2D" parent="Skeleton2D" index="2" unique_id=1498223521]
-position = Vector2(-48, -169)
-rotation = -0.33281064
+position = Vector2(-23, -92)
 rest = Transform2D(1, 0, 0, 1, -23, -92)
 
 [node name="ForearmBack" type="Bone2D" parent="Skeleton2D/ArmBack" index="0" unique_id=327910248]
 position = Vector2(84, -12)
-rotation = 0.8674303
 rest = Transform2D(1, 0, 0, 1, 84, -12)
 
 [node name="HandBack" type="Bone2D" parent="Skeleton2D/ArmBack/ForearmBack" index="0" unique_id=1072201050]

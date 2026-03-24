@@ -752,6 +752,7 @@ metadata/_custom_type_script = "uid://6lekj6yg62r6"
 script = ExtResource("19_wdegu")
 play_mode = 1
 state_machine = NodePath("../../StateMachine")
+states_for_one_shot = Array[StringName]([&"OnHand", &"OnJaw", &"OnGround"])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=652731362]
 rotation = 1.5707964

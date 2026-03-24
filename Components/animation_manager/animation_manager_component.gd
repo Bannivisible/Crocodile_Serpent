@@ -111,24 +111,17 @@ func has_animation(anim_name: StringName) -> bool:
 func setup_one_shot(one_shot_name: StringName, anim_name: StringName) -> void:
 	var anim_node_name: StringName= get_connection_with_to_and_port(one_shot_name, 1).from
 	
-	reset_filter(one_shot_name)
+	change_filter(one_shot_name, get_animation(anim_name))
 	change_animation(anim_node_name, anim_name)
-	set_filter_with_all_track(one_shot_name, get_animation(anim_name))
 	request_one_shot(one_shot_name, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 
-func setup_blend_node(blend_node_name: StringName, anim_name: StringName, tw_ease := Tween.EASE_IN, tw_trans := Tween.TRANS_LINEAR, duration := 0.4) -> void:
-	var anim_node_name: StringName= get_connection_with_to_and_port(blend_node_name, 1).from
+func setup_blend_node(blend_nd_name: StringName, anim_name: StringName) -> void:
+	var anim_node_name: StringName= get_connection_with_to_and_port(blend_nd_name, 1).from
 	
-	tween_blend_amount(blend_node_name, duration, 0.0, tw_ease, tw_trans)
-	
-	blend_tween.tween_callback(func():
-		reset_filter(blend_node_name)
-		change_animation(anim_node_name, anim_name)
-		set_filter_with_all_track(blend_node_name, get_animation(anim_name))
-		
-		tween_blend_amount(blend_node_name, duration, 1.0, tw_ease, tw_trans)
-		)
+	#change_filter(blend_nd_name, get_animation(anim_name))
+	change_animation(anim_node_name, anim_name)
+	set_blend_amount(blend_nd_name, 1.0)
 
 
 func add_in_tree_animation_with_name(anim_name: StringName, anim_node_name: StringName) -> void:
@@ -205,6 +198,12 @@ func reset_filter(blend_nd_name: StringName) -> void:
 	if not tracks_filter.has(blend_nd_name) or tracks_filter[blend_nd_name] == null: return
 	var anime: Animation= tracks_filter[blend_nd_name]
 	set_filter_with_all_track(blend_nd_name, anime, false)
+
+
+func change_filter(blend_nd_name: StringName, anime: Animation) -> void:
+	if tracks_filter.has(blend_nd_name) and tracks_filter[blend_nd_name] == anime: return
+	reset_filter(blend_nd_name)
+	set_filter_with_all_track(blend_nd_name, anime)
 
 
 func is_filtred_by(blend: String, anime: Animation) -> bool:
@@ -361,8 +360,14 @@ func get_all_anim_node_animation_name() -> Array[StringName]:
 
 
 func get_animation_name(anim_node_name: StringName) -> StringName:
-	var anim_node: AnimationNodeAnimation= tree_root.get_node(anim_node_name)
-	return anim_node.animation
+	var anim_node := tree_root.get_node(anim_node_name)
+	if anim_node is AnimationNodeAnimation:
+		return anim_node.animation
+	
+	elif anim_node is AnimationNodeStateMachine:
+		return get_anim_state_machine_current_anim_name(anim_node_name)
+	
+	return ""
 
 
 func get_connection_with_from(from: StringName) -> AnimationConnection:

@@ -3,7 +3,7 @@ class_name StateAnimationManager
 
 enum PLAY_MODE {
 	PLAY,
-	Blend,
+	BLEND,
 	TRAVEL
 }
 
@@ -22,15 +22,17 @@ enum PLAY_MODE {
 @export_group("Play")
 @export var play_reset: bool
 
-@export_group("Blend")
+@export_group("BLEND")
 @export var blend_node_name: StringName= "Blend2"
 @export var os_node_name: StringName= "OneShot"
+@export var states_for_one_shot: Array[StringName]
 
 @export_group("Travel")
 @export var anim_state_machine_path: String= "AnimationNodeStateMachine":
 	set = _set_anim_state_machine_path
 
-@onready var anim_manager: Node= get_node_or_null(anim_manager_path)
+@onready var anim_manager: Node= get_node_or_null(anim_manager_path):
+	set = _set_anim_manager
 
 
 @onready var state_machine_playback: AnimationNodeStateMachinePlayback= _get_state_machine_playback()
@@ -48,6 +50,16 @@ func _set_state_machine(value: StateMachine) -> void:
 func _set_anim_state_machine_path(value: String) -> void:
 	anim_state_machine_path = value
 	state_machine_playback = _get_state_machine_playback()
+
+
+func _set_anim_manager(value: Node) -> void:
+	if anim_manager: 
+		anim_manager.animation_finished.disconnect(_on_animation_manager_animation_finished)
+	
+	anim_manager = value
+	
+	if anim_manager: 
+		anim_manager.animation_finished.connect(_on_animation_manager_animation_finished)
 
 #### BUILT IN ####
 func _enter_tree() -> void:
@@ -108,7 +120,7 @@ func _play_anim(anim_name: StringName) -> void:
 	
 	match play_mode:
 		PLAY_MODE.PLAY: _match_play(anim_name)
-		PLAY_MODE.Blend: _match_blend(anim_name)
+		PLAY_MODE.BLEND: _match_blend(anim_name)
 		PLAY_MODE.TRAVEL: _match_travel(anim_name)
 
 
@@ -129,10 +141,15 @@ func _match_play(anim_name: StringName) -> void:
 
 
 func _match_blend(anim_name: StringName) -> void:
-	if anim_manager.get_animation(anim_name).loop_mode == Animation.LOOP_NONE:
+	if anim_name in states_for_one_shot:
 		_one_shot_logic(anim_name)
 	else :
 		_blend_logic(anim_name)
+	
+	#if anim_manager.get_animation(anim_name).loop_mode == Animation.LOOP_NONE:
+		#_one_shot_logic(anim_name)
+	#else :
+		#_blend_logic(anim_name)
 
 
 func _match_travel(anim_name: StringName) -> void:
@@ -143,3 +160,10 @@ func _match_travel(anim_name: StringName) -> void:
 #### SIGNAL RESPONSES ####
 func _on_state_machine_state_changed_recur(_state: State, deep_state: State) -> void:
 	if active: _play_state_anime(deep_state)
+
+
+func _on_animation_manager_animation_finished(anim_name: StringName) -> void:
+	if anim_manager is AnimationManagerComponent and play_mode == PLAY_MODE.BLEND:
+		var anim_node : StringName= anim_manager.get_connection_with_to_and_port(blend_node_name, 1).from
+		if anim_manager.get_animation_name(anim_node) == anim_name:
+			anim_manager.set_blend_amount(blend_node_name, 0.0)
