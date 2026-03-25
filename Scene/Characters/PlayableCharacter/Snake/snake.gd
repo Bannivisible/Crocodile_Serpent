@@ -14,3 +14,7 @@ func _input(_event: InputEvent) -> void:
 		#
 	if Input.is_action_just_pressed("down"):
 		playback.travel("ToChargeBackward")
+
+
+#func _process(delta: float) -> void:
+	#print(animation_manager_component.get_animation_name("Animation"))

@@ -29,8 +29,7 @@ var blend_tween: Tween
 func _set_library(value) -> void:
 	library = value
 	
-	if not is_node_ready():
-		await ready 
+	if not is_node_ready(): await ready 
 	
 	if library != null:
 		#add_library(library)
@@ -119,7 +118,9 @@ func setup_one_shot(one_shot_name: StringName, anim_name: StringName) -> void:
 func setup_blend_node(blend_nd_name: StringName, anim_name: StringName) -> void:
 	var anim_node_name: StringName= get_connection_with_to_and_port(blend_nd_name, 1).from
 	
-	#change_filter(blend_nd_name, get_animation(anim_name))
+	change_filter(blend_nd_name, get_animation(anim_name))
+	##AVEC LE SERPENT BUG SANS, C'EST LE CROCODILE QUI BUG
+	
 	change_animation(anim_node_name, anim_name)
 	set_blend_amount(blend_nd_name, 1.0)
 

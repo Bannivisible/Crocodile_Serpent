@@ -2054,11 +2054,11 @@ filter_enabled = true
 filters = ["Skeleton2D/ArmBack:position", "Skeleton2D/ArmBack:rotation", "Skeleton2D/ArmFront/ArmFront:scale", "Skeleton2D/ArmFront/ForearmFront/ForearmFront:scale", "Skeleton2D/ArmFront/ForearmFront/HandFront:position", "Skeleton2D/ArmFront/ForearmFront/HandFront:rotation", "Skeleton2D/ArmFront/ForearmFront/HandFront:scale", "Skeleton2D/ArmFront/ForearmFront:position", "Skeleton2D/ArmFront/ForearmFront:rotation", "Skeleton2D/ArmFront:position", "Skeleton2D/ArmFront:rotation", "Skeleton2D/ArmFront:scale"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_4k7xw"]
-graph_offset = Vector2(-639.3175, -5.6427054)
+graph_offset = Vector2(-666.3737, 71.90155)
 nodes/OneShot/node = SubResource("AnimationNodeOneShot_upub7")
 nodes/OneShot/position = Vector2(-26.666666, 226.66667)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_qrhud")
-nodes/Animation/position = Vector2(10.67673, -181.34569)
+nodes/Animation/position = Vector2(-693.3333, -120)
 nodes/AnimationOneShot/node = SubResource("AnimationNodeAnimation_upub7")
 nodes/AnimationOneShot/position = Vector2(-453.33334, 440)
 nodes/Blend2/node = SubResource("AnimationNodeBlend2_qrhud")
@@ -2069,7 +2069,7 @@ nodes/AnimationNodeStateMachine/position = Vector2(-1160, 100)
 "nodes/AnimationNodeStateMachine 2/position" = Vector2(-1186.6666, 320)
 "nodes/AnimationNodeStateMachine 3/node" = ExtResource("8_wv1tt")
 "nodes/AnimationNodeStateMachine 3/position" = Vector2(-920, 466.66666)
-node_connections = [&"output", 0, &"OneShot", &"OneShot", 0, &"Blend2", &"OneShot", 1, &"AnimationOneShot", &"Blend2", 0, &"AnimationNodeStateMachine", &"Blend2", 1, &"AnimationNodeStateMachine 2"]
+node_connections = [&"output", 0, &"OneShot", &"OneShot", 0, &"Blend2", &"OneShot", 1, &"AnimationOneShot", &"Blend2", 0, &"AnimationNodeStateMachine", &"Blend2", 1, &"Animation"]
 
 [sub_resource type="Animation" id="Animation_wv1tt"]
 resource_name = "ActiveArmBack"
@@ -2559,7 +2559,6 @@ position = Vector2(-1, -53)
 shape = SubResource("CapsuleShape2D_c8tis")
 
 [node name="ArmBack" type="Node2D" parent="SpriteContainer" parent_id_path=PackedInt32Array(791091049) index="0" unique_id=1358361652]
-visible = false
 position = Vector2(112, -106)
 
 [node name="TrailBack" type="AnimatedSprite2D" parent="SpriteContainer/ArmBack" index="0" unique_id=79303945]
@@ -2736,25 +2735,27 @@ texture = SubResource("AtlasTexture_umx4l")
 flip_h = true
 
 [node name="ArmFront" type="Node2D" parent="SpriteContainer" parent_id_path=PackedInt32Array(791091049) index="3" unique_id=159119175]
-visible = false
 z_index = 1
 position = Vector2(95, 16)
 
 [node name="TrailFront" type="AnimatedSprite2D" parent="SpriteContainer/ArmFront" index="0" unique_id=1197603258]
-position = Vector2(-136, -3)
+position = Vector2(-278, -87)
+rotation = 0.43595326
 sprite_frames = SubResource("SpriteFrames_u6xdx")
 animation = &"active"
 offset = Vector2(38, 7)
 
 [node name="ShootingStarTailFront" type="AnimatedSprite2D" parent="SpriteContainer/ArmFront" index="1" unique_id=1907325850]
-position = Vector2(-51, 8)
+position = Vector2(-205.59521, -41.135498)
+rotation = 0.8061472
 scale = Vector2(0.9999995, 0.9999995)
 sprite_frames = SubResource("SpriteFrames_nyjmh")
 animation = &"active"
 offset = Vector2(15, -3)
 
 [node name="HandFront" type="AnimatedSprite2D" parent="SpriteContainer/ArmFront" index="2" unique_id=857022757]
-position = Vector2(-10, 3)
+position = Vector2(-173.60345, -15.010284)
+rotation = 0.8061472
 scale = Vector2(0.9999995, 0.9999995)
 sprite_frames = SubResource("SpriteFrames_2rtc6")
 animation = &"active"
@@ -2945,7 +2946,6 @@ libraries/ = SubResource("AnimationLibrary_rro0k")
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="6" unique_id=1636600723]
 deterministic = false
-reset_on_save = false
 tree_root = SubResource("AnimationNodeBlendTree_4k7xw")
 anim_player = NodePath("../AnimationPlayer")
 parameters/OneShot/active = false

@@ -141,15 +141,14 @@ func _match_play(anim_name: StringName) -> void:
 
 
 func _match_blend(anim_name: StringName) -> void:
-	if anim_name in states_for_one_shot:
-		_one_shot_logic(anim_name)
-	else :
-		_blend_logic(anim_name)
-	
-	#if anim_manager.get_animation(anim_name).loop_mode == Animation.LOOP_NONE:
+	#if anim_name in states_for_one_shot:
 		#_one_shot_logic(anim_name)
 	#else :
 		#_blend_logic(anim_name)
+	if anim_manager.get_animation(anim_name).loop_mode == Animation.LOOP_NONE:
+		_one_shot_logic(anim_name)
+	else :
+		_blend_logic(anim_name)
 
 
 func _match_travel(anim_name: StringName) -> void:
@@ -163,6 +162,7 @@ func _on_state_machine_state_changed_recur(_state: State, deep_state: State) -> 
 
 
 func _on_animation_manager_animation_finished(anim_name: StringName) -> void:
+	pass
 	if anim_manager is AnimationManagerComponent and play_mode == PLAY_MODE.BLEND:
 		var anim_node : StringName= anim_manager.get_connection_with_to_and_port(blend_node_name, 1).from
 		if anim_manager.get_animation_name(anim_node) == anim_name:
