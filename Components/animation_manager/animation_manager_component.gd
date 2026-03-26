@@ -371,6 +371,8 @@ func get_animation_name(anim_node_name: StringName) -> StringName:
 	return ""
 
 
+
+
 func get_connection_with_from(from: StringName) -> AnimationConnection:
 	for connection in anim_connect_list.connections:
 		if connection.from == from:

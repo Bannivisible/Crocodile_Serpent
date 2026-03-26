@@ -5,13 +5,13 @@
 
 [sub_resource type="Resource" id="Resource_xydh1"]
 script = ExtResource("1_xydh1")
-from = &"AnimationNodeStateMachine "
+from = &"AnimationNodeStateMachine"
 to = &"Blend2"
 metadata/_custom_type_script = "uid://bmm1oqvjaxa4m"
 
 [sub_resource type="Resource" id="Resource_abxpd"]
 script = ExtResource("1_xydh1")
-from = &"Animation"
+from = &"AnimationNodeStateMachine 2"
 to = &"Blend2"
 to_port = 1
 metadata/_custom_type_script = "uid://bmm1oqvjaxa4m"

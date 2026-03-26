@@ -9,6 +9,9 @@ func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("up"):
 		#playback.travel("Charge")
 		animation_manager_component.setup_blend_node("Blend2", "Charge")
+		#animation_manager_component.change_animation("Animation", "Charge")
+		#animation_manager_component.set_blend_amount("Blend2", 1.0)
+		
 		#print(animation_tree.get("parameters/Blend2/blend_amount"))
 		#print(playback.get_current_node())
 		#

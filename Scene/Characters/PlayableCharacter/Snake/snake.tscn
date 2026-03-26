@@ -1040,6 +1040,30 @@ tracks/14/keys = {
 "clips": PackedStringArray("ActiveArmBack"),
 "times": PackedFloat32Array(0)
 }
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("SpriteContainer/ArmBack:modulate")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("SpriteContainer/ArmBack:visible")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_lac0c"]
 resource_name = "Choc"
@@ -1226,6 +1250,7 @@ tracks/14/keys = {
 
 [sub_resource type="Animation" id="Animation_axrhb"]
 resource_name = "Idle"
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1269,6 +1294,78 @@ tracks/3/loop_wrap = true
 tracks/3/keys = {
 "clips": PackedStringArray("Floating"),
 "times": PackedFloat32Array(0)
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Skeleton2D/Body/ScarfBack:position")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-5, -51)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Skeleton2D/Body/ScarfBack:rotation")
+tracks/5/interp = 4
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.61082256]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Skeleton2D/Body/ScarfBack:scale")
+tracks/6/interp = 2
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Skeleton2D/Body/ScarfFront:position")
+tracks/7/interp = 2
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-5, -51)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Skeleton2D/Body/ScarfFront:rotation")
+tracks/8/interp = 4
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -0.35079393]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Skeleton2D/Body/ScarfFront:scale")
+tracks/9/interp = 2
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_ox5u4"]
@@ -1765,6 +1862,78 @@ tracks/40/keys = {
 "update": 0,
 "values": [Vector2(1, 1)]
 }
+tracks/41/type = "value"
+tracks/41/imported = false
+tracks/41/enabled = true
+tracks/41/path = NodePath("Skeleton2D/Body/ScarfBack:position")
+tracks/41/interp = 2
+tracks/41/loop_wrap = true
+tracks/41/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-5, -51)]
+}
+tracks/42/type = "value"
+tracks/42/imported = false
+tracks/42/enabled = true
+tracks/42/path = NodePath("Skeleton2D/Body/ScarfBack:rotation")
+tracks/42/interp = 4
+tracks/42/loop_wrap = true
+tracks/42/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/43/type = "value"
+tracks/43/imported = false
+tracks/43/enabled = true
+tracks/43/path = NodePath("Skeleton2D/Body/ScarfBack:scale")
+tracks/43/interp = 2
+tracks/43/loop_wrap = true
+tracks/43/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/44/type = "value"
+tracks/44/imported = false
+tracks/44/enabled = true
+tracks/44/path = NodePath("Skeleton2D/Body/ScarfFront:position")
+tracks/44/interp = 2
+tracks/44/loop_wrap = true
+tracks/44/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-5, -51)]
+}
+tracks/45/type = "value"
+tracks/45/imported = false
+tracks/45/enabled = true
+tracks/45/path = NodePath("Skeleton2D/Body/ScarfFront:rotation")
+tracks/45/interp = 4
+tracks/45/loop_wrap = true
+tracks/45/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/46/type = "value"
+tracks/46/imported = false
+tracks/46/enabled = true
+tracks/46/path = NodePath("Skeleton2D/Body/ScarfFront:scale")
+tracks/46/interp = 2
+tracks/46/loop_wrap = true
+tracks/46/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_0epr8"]
 resource_name = "ToCharge"
@@ -2041,12 +2210,6 @@ _data = {
 &"ToCharge": SubResource("Animation_0epr8")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qrhud"]
-animation = &"RESET"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_upub7"]
-animation = &"ToCharge"
-
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_qrhud"]
 
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_upub7"]
@@ -2054,22 +2217,18 @@ filter_enabled = true
 filters = ["Skeleton2D/ArmBack:position", "Skeleton2D/ArmBack:rotation", "Skeleton2D/ArmFront/ArmFront:scale", "Skeleton2D/ArmFront/ForearmFront/ForearmFront:scale", "Skeleton2D/ArmFront/ForearmFront/HandFront:position", "Skeleton2D/ArmFront/ForearmFront/HandFront:rotation", "Skeleton2D/ArmFront/ForearmFront/HandFront:scale", "Skeleton2D/ArmFront/ForearmFront:position", "Skeleton2D/ArmFront/ForearmFront:rotation", "Skeleton2D/ArmFront:position", "Skeleton2D/ArmFront:rotation", "Skeleton2D/ArmFront:scale"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_4k7xw"]
-graph_offset = Vector2(-666.3737, 71.90155)
+graph_offset = Vector2(-749.84937, -12.417003)
 nodes/OneShot/node = SubResource("AnimationNodeOneShot_upub7")
 nodes/OneShot/position = Vector2(-26.666666, 226.66667)
-nodes/Animation/node = SubResource("AnimationNodeAnimation_qrhud")
-nodes/Animation/position = Vector2(-693.3333, -120)
-nodes/AnimationOneShot/node = SubResource("AnimationNodeAnimation_upub7")
-nodes/AnimationOneShot/position = Vector2(-453.33334, 440)
+"nodes/AnimationNodeStateMachine 2/node" = ExtResource("8_wv1tt")
+"nodes/AnimationNodeStateMachine 2/position" = Vector2(-1186.6666, 320)
+"nodes/AnimationNodeStateMachine 3/node" = ExtResource("8_wv1tt")
+"nodes/AnimationNodeStateMachine 3/position" = Vector2(-573.3333, 386.66666)
 nodes/Blend2/node = SubResource("AnimationNodeBlend2_qrhud")
 nodes/Blend2/position = Vector2(-506.66666, 66.666664)
 nodes/AnimationNodeStateMachine/node = ExtResource("8_wv1tt")
 nodes/AnimationNodeStateMachine/position = Vector2(-1160, 100)
-"nodes/AnimationNodeStateMachine 2/node" = ExtResource("8_wv1tt")
-"nodes/AnimationNodeStateMachine 2/position" = Vector2(-1186.6666, 320)
-"nodes/AnimationNodeStateMachine 3/node" = ExtResource("8_wv1tt")
-"nodes/AnimationNodeStateMachine 3/position" = Vector2(-920, 466.66666)
-node_connections = [&"output", 0, &"OneShot", &"OneShot", 0, &"Blend2", &"OneShot", 1, &"AnimationOneShot", &"Blend2", 0, &"AnimationNodeStateMachine", &"Blend2", 1, &"Animation"]
+node_connections = [&"output", 0, &"OneShot", &"OneShot", 0, &"Blend2", &"OneShot", 1, &"AnimationNodeStateMachine 3", &"Blend2", 0, &"AnimationNodeStateMachine", &"Blend2", 1, &"AnimationNodeStateMachine 2"]
 
 [sub_resource type="Animation" id="Animation_wv1tt"]
 resource_name = "ActiveArmBack"
@@ -2939,6 +3098,7 @@ metadata/_custom_type_script = "uid://6lekj6yg62r6"
 
 [node name="AnimStateMachineManager" type="Node" parent="AnimationManagerComponent" index="0" unique_id=64257585]
 script = ExtResource("12_4k7xw")
+anim_sm_names = Array[StringName]([&"AnimationNodeStateMachine", &"AnimationNodeStateMachine 2", &"AnimationNodeStateMachine 3"])
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5" unique_id=1387048882]
 reset_on_save = false
