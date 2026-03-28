@@ -19,7 +19,7 @@ const EXIT_ANIM_NAME: StringName= "EXIT"
 
 @export var remove_library_on_exit_tree: bool= true
 
-var tracks_filter: Dictionary[StringName, Animation]= {}
+var tracks_filter: Dictionary[StringName, Array]= {}
 
 signal animation_finished(anim_name: StringName)
 
@@ -107,21 +107,19 @@ func has_animation(anim_name: StringName) -> bool:
 ### ANIM NODE ####
 
 ### BlendTree ###
-func setup_one_shot(one_shot_name: StringName, anim_name: StringName) -> void:
+func setup_one_shot(one_shot_name: StringName, new_anim_name: StringName, filter_anim_name := new_anim_name) -> void:
 	var anim_node_name: StringName= get_connection_with_to_and_port(one_shot_name, 1).from
 	
-	change_filter(one_shot_name, get_animation(anim_name))
-	change_animation(anim_node_name, anim_name)
+	change_filter(one_shot_name, get_animation(filter_anim_name))
+	change_animation(anim_node_name, new_anim_name)
 	request_one_shot(one_shot_name, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 
-func setup_blend_node(blend_nd_name: StringName, anim_name: StringName) -> void:
+func setup_blend_node(blend_nd_name: StringName, new_anim_name: StringName, filter_anim_name := new_anim_name) -> void:
 	var anim_node_name: StringName= get_connection_with_to_and_port(blend_nd_name, 1).from
 	
-	change_filter(blend_nd_name, get_animation(anim_name))
-	##AVEC LE SERPENT BUG SANS, C'EST LE CROCODILE QUI BUG
-	
-	change_animation(anim_node_name, anim_name)
+	change_filter(blend_nd_name, get_animation(filter_anim_name))
+	change_animation(anim_node_name, new_anim_name)
 	set_blend_amount(blend_nd_name, 1.0)
 
 
@@ -170,18 +168,31 @@ func disconnect_out_connection(anim_node_name: StringName) -> void:
 	disconnect_in_connection(from_connection.to, from_connection.to_port)
 
 
-func set_filter_with_all_track(blend_nd_name: StringName, anime: Animation, activate: bool= true) -> void:
+func set_filter_with_all_track(blend_nd_name: StringName, anim: Animation, activate: bool= true, anim_player := animation_player) -> void:
 	var blend_node: AnimationNode= tree_root.get_node(blend_nd_name)
 	
 	if activate:
-		tracks_filter[blend_nd_name] = anime
+		if tracks_filter.has(blend_nd_name):
+			tracks_filter[blend_nd_name].append(anim)
+		else :
+			tracks_filter[blend_nd_name] = [anim]
 	else :
-		tracks_filter[blend_nd_name] = null
+		tracks_filter[blend_nd_name] = []
 	
-	for prop_path in get_animation_traks(anime):
-		blend_node.set_filter_path(prop_path, activate)
+	for i in anim.get_track_count():
+		var track_path: NodePath= anim.track_get_path(i)
+		blend_node.set_filter_path(track_path, activate)
+		
+		if anim.track_get_type(i) == Animation.TrackType.TYPE_ANIMATION:
+			for key_idx in anim.track_get_key_count(i):
+				var sub_anim_name = anim.track_get_key_value(i, key_idx)
+				var sub_anim_player: AnimationPlayer= anim_player.get_node(animation_player.root_node).get_node(track_path)
+				var sub_anim: Animation= sub_anim_player.get_animation(sub_anim_name)
+				
+				set_filter_with_all_track(blend_nd_name, sub_anim, activate, sub_anim_player)
 	
 	blend_node.filter_enabled = activate
+
 
 
 func verif_filter(blend_nd_name: StringName, anime: Animation) -> Dictionary[NodePath, bool]:
@@ -197,18 +208,20 @@ func verif_filter(blend_nd_name: StringName, anime: Animation) -> Dictionary[Nod
 
 func reset_filter(blend_nd_name: StringName) -> void:
 	if not tracks_filter.has(blend_nd_name) or tracks_filter[blend_nd_name] == null: return
-	var anime: Animation= tracks_filter[blend_nd_name]
-	set_filter_with_all_track(blend_nd_name, anime, false)
+	for anim in tracks_filter[blend_nd_name]:
+		set_filter_with_all_track(blend_nd_name, anim, false)
 
 
-func change_filter(blend_nd_name: StringName, anime: Animation) -> void:
-	if tracks_filter.has(blend_nd_name) and tracks_filter[blend_nd_name] == anime: return
+func change_filter(blend_nd_name: StringName, anim: Animation) -> void:
+	if tracks_filter.has(blend_nd_name) and is_filtred_by(blend_nd_name, anim): return
 	reset_filter(blend_nd_name)
-	set_filter_with_all_track(blend_nd_name, anime)
+	
+	if anim.get_track_count() != 0:
+		set_filter_with_all_track(blend_nd_name, anim)
 
 
-func is_filtred_by(blend: String, anime: Animation) -> bool:
-	return tracks_filter[blend] == anime
+func is_filtred_by(blend: String, anim: Animation) -> bool:
+	return anim in tracks_filter[blend]
 
 
 func change_animation(anim_node_name: StringName, anim_name: StringName) -> void:
@@ -308,8 +321,18 @@ func get_add_amount(add_node_name: StringName) -> float:
 	return animation_tree.get("parameters/%s/add_amount" %add_node_name)
 
 ## GETTER ##
+func get_anim_nd_name(anim_node: AnimationNode) -> StringName:
+	for anim_nd_name in tree_root.get_node_list():
+		if get_animation_node(anim_nd_name) == anim_node:
+			return anim_nd_name
+	
+	return ""
+
+
 func get_animation(anim_name: StringName) -> Animation:
-	return animation_player.get_animation(anim_name)
+	if animation_player.has_animation(anim_name):
+		return animation_player.get_animation(anim_name)
+	return null
 
 
 func get_animation_traks(anime: Animation) -> Array[NodePath]:
@@ -360,8 +383,18 @@ func get_all_anim_node_animation_name() -> Array[StringName]:
 	return anim_node_animation_array
 
 
-func get_animation_name(anim_node_name: StringName) -> StringName:
-	var anim_node := tree_root.get_node(anim_node_name)
+func get_animation_name_of_node(anim_node: AnimationNode) -> StringName:
+	if anim_node is AnimationNodeAnimation:
+		return anim_node.animation
+	
+	elif anim_node is AnimationNodeStateMachine:
+		return get_anim_state_machine_current_anim_name(get_anim_nd_name(anim_node))
+	
+	return ""
+
+
+func get_animation_name_of(anim_node_name: StringName, anim_nd_parent: AnimationNode= tree_root) -> StringName:
+	var anim_node : AnimationNode= anim_nd_parent.get_node(anim_node_name)
 	if anim_node is AnimationNodeAnimation:
 		return anim_node.animation
 	
@@ -369,8 +402,6 @@ func get_animation_name(anim_node_name: StringName) -> StringName:
 		return get_anim_state_machine_current_anim_name(anim_node_name)
 	
 	return ""
-
-
 
 
 func get_connection_with_from(from: StringName) -> AnimationConnection:
@@ -445,7 +476,7 @@ func get_string_all_current_anim_name_in_tree() -> Array[String]:
 		var anim_node := tree_root.get_node(anim_node_name)
 		
 		if anim_node is AnimationNodeAnimation:
-			var string: String= anim_node_name + " : " + get_animation_name(anim_node_name)
+			var string: String= anim_node_name + " : " + get_animation_name_of(anim_node_name)
 			
 			anim_list.append(string)
 	
@@ -458,10 +489,16 @@ func get_state_machine_playback(anim_state_machine_path: StringName) -> Animatio
 	return animation_tree.get(path)
 
 
-func get_anim_state_machine_current_anim_name(anim_sm_name: StringName) -> StringName:
+func get_anim_state_machine_current_anim_node_name(anim_sm_name: StringName) -> StringName:
 	var playback := get_state_machine_playback(anim_sm_name)
 	
 	return playback.get_current_node()
+
+
+func get_anim_state_machine_current_anim_name(anim_sm_name: StringName) -> StringName:
+	var playback := get_state_machine_playback(anim_sm_name)
+	
+	return get_animation_name_of(playback.get_current_node(), get_animation_node(anim_sm_name))
 
 
 func travel_animation(anim_sm_name: StringName, anim_name: StringName) -> void:
@@ -503,7 +540,7 @@ func print_blendtree() -> void:
 
 
 func print_animation_node(animation_node_name: StringName) -> void:
-	print(animation_node_name + " : " + str(get_animation_name(animation_node_name)))
+	print(animation_node_name + " : " + str(get_animation_name_of(animation_node_name)))
 
 
 func print_blend_node(blend_node_name: StringName) -> void:
@@ -521,13 +558,13 @@ func print_anim_state_machine(anim_state_machine_name: StringName) -> void:
 
 func change_animations_in_library(new_anim_name := reset_anim_name, lib := library) -> void:
 	for anim_node_name in get_all_anim_node_animation_name():
-		if lib.has_animation(get_animation_name(anim_node_name)):
+		if lib.has_animation(get_animation_name_of(anim_node_name)):
 			change_animation(anim_node_name, new_anim_name)
 
 
 func reset_tree_with_lib(lib := library) -> void:
 	for anim_node_name in get_all_anim_node_animation_name():
-		if not lib.has_animation(get_animation_name(anim_node_name)): continue
+		if not lib.has_animation(get_animation_name_of(anim_node_name)): continue
 		
 		reset_anim_node(anim_node_name)
 		var blend_node_name: StringName= get_anim_node_connect_to(anim_node_name)

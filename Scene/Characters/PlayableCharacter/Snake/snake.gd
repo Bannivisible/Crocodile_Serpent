@@ -1,23 +1,15 @@
-extends Character
+extends PlayableCharacter
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var animation_manager_component: AnimationManagerComponent = $AnimationManagerComponent
 
-func _input(_event: InputEvent) -> void:
-	var playback: AnimationNodeStateMachinePlayback= animation_tree.get("parameters/AnimationNodeStateMachine 2/playback")
-	if Input.is_action_just_pressed("up"):
-		#playback.travel("Charge")
-		animation_manager_component.setup_blend_node("Blend2", "Charge")
-		#animation_manager_component.change_animation("Animation", "Charge")
-		#animation_manager_component.set_blend_amount("Blend2", 1.0)
-		
-		#print(animation_tree.get("parameters/Blend2/blend_amount"))
-		#print(playback.get_current_node())
+#func _input(_event: InputEvent) -> void:
+	#var playback: AnimationNodeStateMachinePlayback= animation_tree.get("parameters/AnimationNodeStateMachine 2/playback")
+	#if Input.is_action_just_pressed("up"):
 		#
-	if Input.is_action_just_pressed("down"):
-		playback.travel("ToChargeBackward")
-
+		#print(animation_manager_component.get_blend_amount("Blend2"))
+		#print(animation_manager_component.tracks_filter["Blend2"])
 
 #func _process(delta: float) -> void:
 	#print(animation_manager_component.get_animation_name("Animation"))

@@ -6,12 +6,18 @@ animation = &"Charge"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lac0c"]
 animation = &"Idle"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5lpgn"]
+animation = &"Move"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_axrhb"]
 animation = &"ToCharge"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0epr8"]
 animation = &"ToCharge"
 play_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_colld"]
+animation = &"Void"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wn1gg"]
 
@@ -25,13 +31,21 @@ switch_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_s3h8e"]
 switch_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nsn7e"]
-switch_mode = 1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mw5ck"]
-switch_mode = 1
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5wqwe"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5lpgn"]
+switch_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_colld"]
+switch_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0hv7p"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_n4s8y"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0esyn"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5xgkm"]
 
 [resource]
 resource_local_to_scene = true
@@ -39,9 +53,13 @@ states/Charge/node = SubResource("AnimationNodeAnimation_swrla")
 states/Charge/position = Vector2(519.3113, 286.0741)
 states/Idle/node = SubResource("AnimationNodeAnimation_lac0c")
 states/Idle/position = Vector2(519.2527, 99.85265)
+states/Move/node = SubResource("AnimationNodeAnimation_5lpgn")
+states/Move/position = Vector2(520.2108, -21.433794)
 states/ToCharge/node = SubResource("AnimationNodeAnimation_axrhb")
 states/ToCharge/position = Vector2(350, 214.45268)
 states/ToChargeBackward/node = SubResource("AnimationNodeAnimation_0epr8")
-states/ToChargeBackward/position = Vector2(718.42615, 213.23457)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_wn1gg"), "Idle", "End", SubResource("AnimationNodeStateMachineTransition_0j7tc"), "Idle", "ToCharge", SubResource("AnimationNodeStateMachineTransition_txsxm"), "ToCharge", "Charge", SubResource("AnimationNodeStateMachineTransition_okefp"), "ToChargeBackward", "Idle", SubResource("AnimationNodeStateMachineTransition_s3h8e"), "ToChargeBackward", "ToCharge", SubResource("AnimationNodeStateMachineTransition_nsn7e"), "ToCharge", "ToChargeBackward", SubResource("AnimationNodeStateMachineTransition_mw5ck"), "Charge", "ToChargeBackward", SubResource("AnimationNodeStateMachineTransition_5wqwe")]
-graph_offset = Vector2(255.6055, 136.82037)
+states/ToChargeBackward/position = Vector2(717.42615, 214.45268)
+states/Void/node = SubResource("AnimationNodeAnimation_colld")
+states/Void/position = Vector2(335.34323, 21.785934)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_wn1gg"), "Idle", "End", SubResource("AnimationNodeStateMachineTransition_0j7tc"), "Idle", "ToCharge", SubResource("AnimationNodeStateMachineTransition_txsxm"), "ToCharge", "Charge", SubResource("AnimationNodeStateMachineTransition_okefp"), "ToChargeBackward", "Idle", SubResource("AnimationNodeStateMachineTransition_s3h8e"), "Charge", "ToChargeBackward", SubResource("AnimationNodeStateMachineTransition_5wqwe"), "ToCharge", "ToChargeBackward", SubResource("AnimationNodeStateMachineTransition_5lpgn"), "ToChargeBackward", "ToCharge", SubResource("AnimationNodeStateMachineTransition_colld"), "Idle", "Move", SubResource("AnimationNodeStateMachineTransition_0hv7p"), "Move", "Idle", SubResource("AnimationNodeStateMachineTransition_n4s8y"), "Void", "Idle", SubResource("AnimationNodeStateMachineTransition_0esyn"), "Idle", "Void", SubResource("AnimationNodeStateMachineTransition_5xgkm")]
+graph_offset = Vector2(-138.65677, -32.214066)

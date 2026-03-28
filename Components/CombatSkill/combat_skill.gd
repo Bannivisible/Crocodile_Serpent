@@ -11,10 +11,10 @@ class_name CombatSkill
 signal charac_stat_changed(charac_stat: CharacStatistics)
 
 func immobilize_player() -> void:
-	if object is Crocodile:
+	if object is PlayableCharacter:
 		object.immobilize()
 
 
 func free_player() -> void:
-	if object is Crocodile:
+	if object is PlayableCharacter:
 		object.free_immobolize()

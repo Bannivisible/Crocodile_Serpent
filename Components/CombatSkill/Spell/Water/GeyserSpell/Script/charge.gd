@@ -14,5 +14,3 @@ func exit() -> void:
 	spell.ray_cast_2d.enabled = true
 	
 	spell.gpu_particles_2d.emitting = false
-	
-	animation_state_machine.set_state_with_string("ToChargeBackward")

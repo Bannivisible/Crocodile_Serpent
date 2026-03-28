@@ -119,7 +119,7 @@ metadata/_custom_type_script = "uid://bcmokx1bwyftw"
 script = ExtResource("11_2ib6l")
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 
-[node name="ToChargeBackward" type="Node" parent="AnimationStateMachine" unique_id=776007908]
+[node name="Void" type="Node" parent="AnimationStateMachine" unique_id=776007908]
 script = ExtResource("11_2ib6l")
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 

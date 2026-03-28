@@ -22,20 +22,15 @@ enum PLAY_MODE {
 @export_group("Play")
 @export var play_reset: bool
 
-@export_group("BLEND")
+@export_group("Blend")
 @export var blend_node_name: StringName= "Blend2"
 @export var os_node_name: StringName= "OneShot"
-@export var states_for_one_shot: Array[StringName]
 
 @export_group("Travel")
-@export var anim_state_machine_path: String= "AnimationNodeStateMachine":
-	set = _set_anim_state_machine_path
+@export var anim_sm_name: String= "AnimationNodeStateMachine":
+	set = _set_anim_sm_name
 
-@onready var anim_manager: Node= get_node_or_null(anim_manager_path):
-	set = _set_anim_manager
-
-
-@onready var state_machine_playback: AnimationNodeStateMachinePlayback= _get_state_machine_playback()
+@onready var anim_manager: Node= get_node_or_null(anim_manager_path)
 
 
 #### SETTERS ####
@@ -47,19 +42,8 @@ func _set_state_machine(value: StateMachine) -> void:
 	if state_machine: state_machine.state_changed_recur.connect(_on_state_machine_state_changed_recur)
 
 
-func _set_anim_state_machine_path(value: String) -> void:
-	anim_state_machine_path = value
-	state_machine_playback = _get_state_machine_playback()
-
-
-func _set_anim_manager(value: Node) -> void:
-	if anim_manager: 
-		anim_manager.animation_finished.disconnect(_on_animation_manager_animation_finished)
-	
-	anim_manager = value
-	
-	if anim_manager: 
-		anim_manager.animation_finished.connect(_on_animation_manager_animation_finished)
+func _set_anim_sm_name(value: String) -> void:
+	anim_sm_name = value
 
 #### BUILT IN ####
 func _enter_tree() -> void:
@@ -84,15 +68,23 @@ func _get_anim_name(state: State) -> String:
 
 
 func _get_state_machine_playback() -> AnimationNodeStateMachinePlayback:
-	if play_mode != PLAY_MODE.TRAVEL: return
-	
 	var path: String= "parameters/"
-	path += anim_state_machine_path + "/playback"
+	path += anim_sm_name + "/playback"
 	
 	if anim_manager is AnimationTree:
 		return anim_manager.get(path)
 	if anim_manager is AnimationManagerComponent:
 		return anim_manager.animation_tree.get(path)
+	
+	return null
+
+
+func _get_anim_state_machine() -> AnimationNodeStateMachine:
+	if anim_manager is AnimationTree:
+		if anim_manager.tree_root.has_node(anim_sm_name):
+			return anim_manager.tree_root.get_node(anim_sm_name)
+	if anim_manager is AnimationManagerComponent:
+		return anim_manager.get_animation_node(anim_sm_name)
 	
 	return null
 
@@ -116,8 +108,6 @@ func _play_state_anime(state: State) -> void:
 
 
 func _play_anim(anim_name: StringName) -> void:
-	if not anim_manager.has_animation(anim_name): return
-	
 	match play_mode:
 		PLAY_MODE.PLAY: _match_play(anim_name)
 		PLAY_MODE.BLEND: _match_blend(anim_name)
@@ -125,6 +115,7 @@ func _play_anim(anim_name: StringName) -> void:
 
 
 func _match_play(anim_name: StringName) -> void:
+	if not anim_manager.has_animation(anim_name): return
 	var anim_player: AnimationPlayer
 	
 	if anim_manager is AnimationPlayer: anim_player = anim_manager
@@ -141,29 +132,38 @@ func _match_play(anim_name: StringName) -> void:
 
 
 func _match_blend(anim_name: StringName) -> void:
-	#if anim_name in states_for_one_shot:
-		#_one_shot_logic(anim_name)
-	#else :
-		#_blend_logic(anim_name)
-	if anim_manager.get_animation(anim_name).loop_mode == Animation.LOOP_NONE:
-		_one_shot_logic(anim_name)
-	else :
-		_blend_logic(anim_name)
+	var anim: Animation= anim_manager.get_animation(anim_name)
+	if anim != null:
+		if anim.loop_mode == Animation.LOOP_NONE:
+			anim_manager.setup_one_shot(os_node_name, anim_name)
+		else :
+			anim_manager.setup_blend_node(blend_node_name, anim_name)
+	
+	elif anim_manager is AnimationManagerComponent:
+		var sm_name: StringName=anim_manager.get_connection_with_to_and_port(blend_node_name, 1).from
+		var anim_sm = anim_manager.get_animation_node(sm_name)
+		
+		if anim_sm is AnimationNodeStateMachine and anim_name in anim_sm.get_node_list():
+			var true_anim_name: StringName= anim_manager.get_animation_name_of_node(anim_sm.get_node(anim_name))
+		
+			anim_manager.setup_blend_node(blend_node_name, anim_name, true_anim_name)
+		else :
+			sm_name =anim_manager.get_connection_with_to_and_port(os_node_name, 1).from
+			anim_sm = anim_manager.get_animation_node(sm_name)
+			
+			if anim_sm is AnimationNodeStateMachine and anim_name in anim_sm.get_node_list():
+				var true_anim_name: StringName= anim_manager.get_animation_name_of_node(anim_sm.get_node(anim_name))
+			
+				anim_manager.setup_one_shot(os_node_name, anim_name, true_anim_name)
 
 
 func _match_travel(anim_name: StringName) -> void:
-	if anim_manager is AnimationTree and state_machine_playback:
-		
+	var state_machine_playback := _get_state_machine_playback()
+	var anim_sm := _get_anim_state_machine()
+	
+	if state_machine_playback and anim_sm.has_node(anim_name):
 		state_machine_playback.travel(anim_name)
 
 #### SIGNAL RESPONSES ####
 func _on_state_machine_state_changed_recur(_state: State, deep_state: State) -> void:
 	if active: _play_state_anime(deep_state)
-
-
-func _on_animation_manager_animation_finished(anim_name: StringName) -> void:
-	pass
-	if anim_manager is AnimationManagerComponent and play_mode == PLAY_MODE.BLEND:
-		var anim_node : StringName= anim_manager.get_connection_with_to_and_port(blend_node_name, 1).from
-		if anim_manager.get_animation_name(anim_node) == anim_name:
-			anim_manager.set_blend_amount(blend_node_name, 0.0)

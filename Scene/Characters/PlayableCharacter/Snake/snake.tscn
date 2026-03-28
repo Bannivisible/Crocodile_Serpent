@@ -20,6 +20,7 @@
 [ext_resource type="Script" uid="uid://vki8pd4tv00v" path="res://Scene/Characters/Scripts/BasicStates/jump.gd" id="11_v34ff"]
 [ext_resource type="Script" uid="uid://pwcimxmgku2j" path="res://Components/animation_manager/anim_state_machine_manager.gd" id="12_4k7xw"]
 [ext_resource type="Script" uid="uid://v3l0uww2xr70" path="res://Scene/Characters/Scripts/BasicStates/fall.gd" id="12_x7o3y"]
+[ext_resource type="Script" uid="uid://ce11vnhaprxn2" path="res://Components/animation_manager/anim_state_machine_label.gd" id="13_3ma4d"]
 [ext_resource type="Script" uid="uid://d38qkfrf1wj1a" path="res://StateMachine/state_label.gd" id="13_x7o3y"]
 [ext_resource type="Script" uid="uid://dat1xibjdbka6" path="res://Components/Statistics/statistics_manager.gd" id="15_hd1gs"]
 
@@ -357,14 +358,6 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1e483"]
-atlas = ExtResource("2_28kfq")
-region = Rect2(0, 1134, 194, 189)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_iabhh"]
-atlas = ExtResource("2_28kfq")
-region = Rect2(1164, 945, 194, 189)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_u3ofr"]
 atlas = ExtResource("2_28kfq")
 region = Rect2(194, 1134, 194, 189)
@@ -411,6 +404,14 @@ animations = [{
 "name": &"floating",
 "speed": 10.0
 }]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1e483"]
+atlas = ExtResource("2_28kfq")
+region = Rect2(0, 1134, 194, 189)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iabhh"]
+atlas = ExtResource("2_28kfq")
+region = Rect2(1164, 945, 194, 189)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gl8j3"]
 atlas = ExtResource("2_28kfq")
@@ -1040,30 +1041,6 @@ tracks/14/keys = {
 "clips": PackedStringArray("ActiveArmBack"),
 "times": PackedFloat32Array(0)
 }
-tracks/15/type = "value"
-tracks/15/imported = false
-tracks/15/enabled = true
-tracks/15/path = NodePath("SpriteContainer/ArmBack:modulate")
-tracks/15/interp = 1
-tracks/15/loop_wrap = true
-tracks/15/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-tracks/16/type = "value"
-tracks/16/imported = false
-tracks/16/enabled = true
-tracks/16/path = NodePath("SpriteContainer/ArmBack:visible")
-tracks/16/interp = 1
-tracks/16/loop_wrap = true
-tracks/16/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
 
 [sub_resource type="Animation" id="Animation_lac0c"]
 resource_name = "Choc"
@@ -1362,6 +1339,298 @@ tracks/9/path = NodePath("Skeleton2D/Body/ScarfFront:scale")
 tracks/9/interp = 2
 tracks/9/loop_wrap = true
 tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Skeleton2D/Body:position")
+tracks/10/interp = 2
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Skeleton2D/Body:rotation")
+tracks/11/interp = 4
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Skeleton2D/Body:scale")
+tracks/12/interp = 2
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Skeleton2D/Body/Head:position")
+tracks/13/interp = 2
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-8, -86)]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Skeleton2D/Body/Head:rotation")
+tracks/14/interp = 4
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("Skeleton2D/Body/Head:scale")
+tracks/15/interp = 2
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("Skeleton2D/Body/Head/Face/PonyTail:position")
+tracks/16/interp = 2
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(21, -64)]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("Skeleton2D/Body/Head/Face/PonyTail:rotation")
+tracks/17/interp = 4
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("Skeleton2D/Body/Head/Face/PonyTail:scale")
+tracks/18/interp = 2
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_saffc"]
+resource_name = "Move"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Skeleton2D/Body:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Skeleton2D/Body:rotation")
+tracks/1/interp = 4
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.5015563, 0.9582392]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Skeleton2D/Body:scale")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Skeleton2D/Body/ScarfBack:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-5, -51)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Skeleton2D/Body/ScarfBack:rotation")
+tracks/4/interp = 4
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.4252118, 1.1390063]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Skeleton2D/Body/ScarfBack:scale")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Skeleton2D/Body/ScarfFront:position")
+tracks/6/interp = 2
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-5, -51)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Skeleton2D/Body/ScarfFront:rotation")
+tracks/7/interp = 4
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.4252118, 0.80638516]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Skeleton2D/Body/ScarfFront:scale")
+tracks/8/interp = 2
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Skeleton2D/Body/Head:position")
+tracks/9/interp = 2
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-8, -86)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Skeleton2D/Body/Head:rotation")
+tracks/10/interp = 4
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.43031558, 5.467469]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Skeleton2D/Body/Head:scale")
+tracks/11/interp = 2
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Skeleton2D/Body/Head/Face/PonyTail:position")
+tracks/12/interp = 2
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(21, -64)]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Skeleton2D/Body/Head/Face/PonyTail:rotation")
+tracks/13/interp = 4
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 2),
+"update": 0,
+"values": [0.0, 1.0990539]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Skeleton2D/Body/Head/Face/PonyTail:scale")
+tracks/14/interp = 2
+tracks/14/loop_wrap = true
+tracks/14/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -1934,6 +2203,42 @@ tracks/46/keys = {
 "update": 0,
 "values": [Vector2(1, 1)]
 }
+tracks/47/type = "value"
+tracks/47/imported = false
+tracks/47/enabled = true
+tracks/47/path = NodePath("Skeleton2D/Body:position")
+tracks/47/interp = 2
+tracks/47/loop_wrap = true
+tracks/47/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/48/type = "value"
+tracks/48/imported = false
+tracks/48/enabled = true
+tracks/48/path = NodePath("Skeleton2D/Body:rotation")
+tracks/48/interp = 4
+tracks/48/loop_wrap = true
+tracks/48/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/49/type = "value"
+tracks/49/imported = false
+tracks/49/enabled = true
+tracks/49/path = NodePath("Skeleton2D/Body:scale")
+tracks/49/interp = 2
+tracks/49/loop_wrap = true
+tracks/49/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_0epr8"]
 resource_name = "ToCharge"
@@ -2199,6 +2504,10 @@ tracks/21/keys = {
 "values": [Vector2(1.1, 0.99999994)]
 }
 
+[sub_resource type="Animation" id="Animation_62jov"]
+resource_name = "Void"
+loop_mode = 1
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rro0k"]
 _data = {
 &"Cast": SubResource("Animation_4k7xw"),
@@ -2206,8 +2515,10 @@ _data = {
 &"Charge": SubResource("Animation_gv3gm"),
 &"Choc": SubResource("Animation_lac0c"),
 &"Idle": SubResource("Animation_axrhb"),
+&"Move": SubResource("Animation_saffc"),
 &"RESET": SubResource("Animation_ox5u4"),
-&"ToCharge": SubResource("Animation_0epr8")
+&"ToCharge": SubResource("Animation_0epr8"),
+&"Void": SubResource("Animation_62jov")
 }
 
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_qrhud"]
@@ -2217,7 +2528,7 @@ filter_enabled = true
 filters = ["Skeleton2D/ArmBack:position", "Skeleton2D/ArmBack:rotation", "Skeleton2D/ArmFront/ArmFront:scale", "Skeleton2D/ArmFront/ForearmFront/ForearmFront:scale", "Skeleton2D/ArmFront/ForearmFront/HandFront:position", "Skeleton2D/ArmFront/ForearmFront/HandFront:rotation", "Skeleton2D/ArmFront/ForearmFront/HandFront:scale", "Skeleton2D/ArmFront/ForearmFront:position", "Skeleton2D/ArmFront/ForearmFront:rotation", "Skeleton2D/ArmFront:position", "Skeleton2D/ArmFront:rotation", "Skeleton2D/ArmFront:scale"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_4k7xw"]
-graph_offset = Vector2(-749.84937, -12.417003)
+graph_offset = Vector2(-1019.26624, -94.618195)
 nodes/OneShot/node = SubResource("AnimationNodeOneShot_upub7")
 nodes/OneShot/position = Vector2(-26.666666, 226.66667)
 "nodes/AnimationNodeStateMachine 2/node" = ExtResource("8_wv1tt")
@@ -2436,7 +2747,7 @@ tracks/5/keys = {
 tracks/6/type = "method"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("SpriteContainer/BodyGroup/Pass")
+tracks/6/path = NodePath("SpriteContainer/BodyGroup/Body/Pass")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -2505,7 +2816,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("SpriteContainer/BodyGroup/Pass:speed_scale")
+tracks/2/path = NodePath("SpriteContainer/BodyGroup/Body/Pass:speed_scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -2617,7 +2928,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("SpriteContainer/BodyGroup/Pass:speed_scale")
+tracks/2/path = NodePath("SpriteContainer/BodyGroup/Body/Pass:speed_scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -2708,8 +3019,10 @@ _data = {
 &"SlowFloating": SubResource("Animation_hlpqi")
 }
 
+[sub_resource type="LabelSettings" id="LabelSettings_3ma4d"]
+font_size = 32
+
 [node name="Snake" unique_id=644033490 instance=ExtResource("1_aytpt")]
-position = Vector2(787, 296)
 script = ExtResource("2_gv3gm")
 
 [node name="CollisionShape2D" parent="." index="0" unique_id=604189463]
@@ -2795,6 +3108,18 @@ sprite_frames = SubResource("SpriteFrames_60f1h")
 animation = &"floating"
 speed_scale = 0.75
 
+[node name="Scarf" type="Sprite2D" parent="SpriteContainer/BodyGroup/Body" index="4" unique_id=424025751]
+z_index = 1
+position = Vector2(-12, -80)
+texture = SubResource("AtlasTexture_u3ofr")
+
+[node name="Pass" type="AnimatedSprite2D" parent="SpriteContainer/BodyGroup/Body" index="5" unique_id=1806218900]
+z_index = 2
+position = Vector2(-52, -79)
+sprite_frames = SubResource("SpriteFrames_xuar8")
+animation = &"floating"
+speed_scale = 0.75
+
 [node name="ScarfBack" type="Sprite2D" parent="SpriteContainer/BodyGroup" index="3" unique_id=517426527]
 position = Vector2(-5, -51)
 texture = SubResource("AtlasTexture_1e483")
@@ -2805,21 +3130,11 @@ position = Vector2(-5, -51)
 texture = SubResource("AtlasTexture_iabhh")
 offset = Vector2(5, 15)
 
-[node name="Scarf" type="Sprite2D" parent="SpriteContainer/BodyGroup" index="5" unique_id=424025751]
-position = Vector2(-12, -80)
-texture = SubResource("AtlasTexture_u3ofr")
-
-[node name="Pass" type="AnimatedSprite2D" parent="SpriteContainer/BodyGroup" index="6" unique_id=1806218900]
-z_index = 1
-position = Vector2(-53, -82)
-sprite_frames = SubResource("SpriteFrames_xuar8")
-animation = &"floating"
-speed_scale = 0.75
-
 [node name="HeadGroup" type="Node2D" parent="SpriteContainer" parent_id_path=PackedInt32Array(791091049) index="2" unique_id=1953395391]
+z_index = 1
 
 [node name="Ponytail" type="AnimatedSprite2D" parent="SpriteContainer/HeadGroup" index="0" unique_id=99170171]
-z_index = -1
+z_index = -2
 position = Vector2(-28, -145)
 sprite_frames = SubResource("SpriteFrames_28kfq")
 animation = &"floating"
@@ -2905,7 +3220,7 @@ animation = &"active"
 offset = Vector2(38, 7)
 
 [node name="ShootingStarTailFront" type="AnimatedSprite2D" parent="SpriteContainer/ArmFront" index="1" unique_id=1907325850]
-position = Vector2(-205.59521, -41.135498)
+position = Vector2(-205.59523, -41.135506)
 rotation = 0.8061472
 scale = Vector2(0.9999995, 0.9999995)
 sprite_frames = SubResource("SpriteFrames_nyjmh")
@@ -2913,7 +3228,7 @@ animation = &"active"
 offset = Vector2(15, -3)
 
 [node name="HandFront" type="AnimatedSprite2D" parent="SpriteContainer/ArmFront" index="2" unique_id=857022757]
-position = Vector2(-173.60345, -15.010284)
+position = Vector2(-173.60349, -15.0103)
 rotation = 0.8061472
 scale = Vector2(0.9999995, 0.9999995)
 sprite_frames = SubResource("SpriteFrames_2rtc6")
@@ -3100,6 +3415,12 @@ metadata/_custom_type_script = "uid://6lekj6yg62r6"
 script = ExtResource("12_4k7xw")
 anim_sm_names = Array[StringName]([&"AnimationNodeStateMachine", &"AnimationNodeStateMachine 2", &"AnimationNodeStateMachine 3"])
 
+[node name="StateAnimationManager" type="Node" parent="AnimationManagerComponent" index="1" unique_id=597733682 node_paths=PackedStringArray("state_machine")]
+script = ExtResource("10_4k7xw")
+play_mode = 2
+state_machine = NodePath("../../StateMachine")
+metadata/_custom_type_script = "uid://dgi2a2c0lt17u"
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5" unique_id=1387048882]
 reset_on_save = false
 libraries/ = SubResource("AnimationLibrary_rro0k")
@@ -3113,18 +3434,11 @@ parameters/OneShot/internal_active = false
 parameters/OneShot/request = 0
 parameters/Blend2/blend_amount = 0.0
 
-[node name="StateAnimationManager" type="Node" parent="AnimationTree" index="0" unique_id=597733682 node_paths=PackedStringArray("state_machine")]
-script = ExtResource("10_4k7xw")
-play_mode = 2
-state_machine = NodePath("../../StateMachine")
-metadata/_custom_type_script = "uid://dgi2a2c0lt17u"
-
 [node name="AnimationPlayerSprites" type="AnimationPlayer" parent="." index="7" unique_id=349286697]
 reset_on_save = false
 libraries/ = SubResource("AnimationLibrary_upub7")
 
 [node name="VelocityComponent" parent="." index="8" unique_id=1212142288 instance=ExtResource("2_u3ofr")]
-suffer_gravity = false
 
 [node name="ScaleXFaceInverser" parent="VelocityComponent" index="0" unique_id=1314762492 node_paths=PackedStringArray("facing_nodes")]
 facing_nodes = [NodePath("../../SpellManager"), NodePath("../../Skeleton2D")]
@@ -3193,5 +3507,16 @@ state_machine = NodePath("../StateMachine")
 jump_state = NodePath("../StateMachine/Jump")
 fall_state = NodePath("../StateMachine/Fall")
 metadata/_custom_type_script = "uid://dhau74o4l0rjm"
+
+[node name="AnimStateMachineLabel" type="Label" parent="." index="15" unique_id=553741244 node_paths=PackedStringArray("anim_tree")]
+offset_left = -36.0
+offset_top = 121.0
+offset_right = 40.0
+offset_bottom = 165.66667
+text = "affze"
+label_settings = SubResource("LabelSettings_3ma4d")
+script = ExtResource("13_3ma4d")
+anim_tree = NodePath("../AnimationTree")
+state_machine_name = &"AnimationNodeStateMachine 2"
 
 [editable path="VelocityComponent"]

@@ -11,6 +11,8 @@ var tween: Tween
 @onready var spell: GeyserSpell= owner
 @onready var damage_interval: Timer = $DamageInterval
 
+@onready var animation_state_machine: StateMachine = $"../../AnimationStateMachine"
+
 var target_lenght: float
 
 var ratio: float= 1.0
@@ -38,6 +40,8 @@ func exit() -> void:
 	_tween_target_lenght(0.0)
 	tween.tween_callback(func():
 		spell.state_machine.set_state_with_string("Desactivate"))
+	
+	animation_state_machine.set_state_with_string("Void")
 
 
 #### LOGIC ####

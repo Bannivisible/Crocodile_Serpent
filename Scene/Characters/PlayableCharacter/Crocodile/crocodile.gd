@@ -1,9 +1,7 @@
-extends Character
+extends PlayableCharacter
 class_name Crocodile
 
 
-@onready var velocity_component: VelocityComponent = $VelocityComponent
-@onready var controler: Controler = $PlayerControler
 @onready var weapon_manager: Node2D = $WeaponManager
 @onready var state_machine: CharacStateMachine = $StateMachine
 @onready var animation_tree: AnimationTree = $AnimationTree
@@ -23,13 +21,6 @@ func _ready() -> void:
 
 
 #### LOGIC ####
-func immobilize() -> void:
-	velocity_component.dir = Vector2.ZERO
-	controler.active = false
-
-
-func free_immobolize() -> void:
-	controler.active = true
 
 
 func _on_Event_combat_skill_selected(cs_data: CombatSkillData) -> void:
