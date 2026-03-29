@@ -44,6 +44,11 @@ func _set_stal_collision(stalactite: Stalactite, to_project: bool= false) -> voi
 	stalactite.set_collision_mask_value(Game.COLLISION_MASK.HURT_BOX, to_project)
 
 
+func _set_stal_attack_data(stalactite: Stalactite) -> void:
+	stalactite.attack_data = stalactite.attack_data.duplicate()
+	stalactite.attack_data.mult_damage = float(len(stalactites))
+
+
 func _cast_stalactites() -> void:
 	for stalactite in stalactites:
 		_set_stal_collision(stalactite, true)
@@ -58,6 +63,7 @@ func _on_spawn_projectile_state_projectile_spawn(projectile: Projectile) -> void
 	current_stalactite = projectile
 	_set_stal_collision(projectile)
 	stalactites.append(projectile)
+	_set_stal_attack_data(projectile)
 	
 	state_machine.set_state_with_string("PlaceStalactite")
 
@@ -68,5 +74,5 @@ func _on_timer_timeout() -> void:
 	stalactites = []
 
 
-func _on_stalactite_destination_reached(_pos: Vector2 ,stalactite: Stalactite) -> void:
+func _on_stalactite_destination_reached(stalactite: Stalactite) -> void:
 	stalactite.queue_free()

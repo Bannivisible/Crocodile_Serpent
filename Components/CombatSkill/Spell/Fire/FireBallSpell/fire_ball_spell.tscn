@@ -7,11 +7,13 @@
 [ext_resource type="Script" uid="uid://dyglpbhv533ei" path="res://Ressources/ConditionForAction/condition_for_action.gd" id="4_xdj86"]
 [ext_resource type="Resource" uid="uid://bhmjl8h8ocfri" path="res://Components/CombatSkill/Spell/Fire/FireBallSpell/cast_fire_ball.tres" id="5_c7yar"]
 [ext_resource type="Script" uid="uid://bcmokx1bwyftw" path="res://StateMachine/state_machine.gd" id="6_72s2d"]
-[ext_resource type="Script" uid="uid://bey7t8h4m0yyp" path="res://StateMachine/state.gd" id="7_01ugg"]
 [ext_resource type="Script" uid="uid://cwmi3g3xc85au" path="res://StateMachine/States/spawn_projectile_state.gd" id="8_u73ff"]
 [ext_resource type="PackedScene" uid="uid://b56xaxpssthc3" path="res://Scene/Projectile/FireBall/projectile_fire_ball.tscn" id="9_dor2y"]
 [ext_resource type="Script" uid="uid://doagmyu4ylk33" path="res://Ressources/Attack/AttackData/spell_attack_data.gd" id="10_xriss"]
 [ext_resource type="Script" uid="uid://dowccynms6628" path="res://Components/CombatSkill/Spell/Fire/FireBallSpell/controler.gd" id="11_2l11m"]
+[ext_resource type="Script" uid="uid://6lekj6yg62r6" path="res://Components/animation_manager/animation_manager_component.gd" id="13_xdj86"]
+[ext_resource type="Resource" uid="uid://c4jeioubu2xem" path="res://Ressources/AnimationConnection/snake_connections.tres" id="14_c7yar"]
+[ext_resource type="Script" uid="uid://dgi2a2c0lt17u" path="res://Components/animation_manager/state_animation_manager.gd" id="15_c7yar"]
 
 [sub_resource type="Resource" id="Resource_cokb3"]
 script = ExtResource("3_pf3qg")
@@ -30,16 +32,19 @@ charac_stat = ExtResource("4_6co0t")
 conditions_for_actions_array = Array[ExtResource("4_xdj86")]([ExtResource("5_c7yar")])
 metadata/_custom_type_script = "uid://1ntq0e44578q"
 
-[node name="StateMachine" type="Node" parent="." unique_id=205570562 node_paths=PackedStringArray("current_state")]
+[node name="StateMachine" type="Node" parent="." unique_id=205570562]
 script = ExtResource("6_72s2d")
-current_state = NodePath("Idle")
 metadata/_custom_type_script = "uid://bcmokx1bwyftw"
 
-[node name="Idle" type="Node" parent="StateMachine" unique_id=1830373602]
-script = ExtResource("7_01ugg")
+[node name="Cast" type="Node" parent="StateMachine" unique_id=1384810449 node_paths=PackedStringArray("combat_skill")]
+script = ExtResource("8_u73ff")
+combat_skill = NodePath("../..")
+projectile_scene = ExtResource("9_dor2y")
+cs_stat = ExtResource("2_6co0t")
+attack_data = SubResource("Resource_ffqhb")
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 
-[node name="SpawnProjectile" type="Node" parent="StateMachine" unique_id=1384810449 node_paths=PackedStringArray("combat_skill")]
+[node name="Cast2" type="Node" parent="StateMachine" unique_id=1947539712 node_paths=PackedStringArray("combat_skill")]
 script = ExtResource("8_u73ff")
 combat_skill = NodePath("../..")
 projectile_scene = ExtResource("9_dor2y")
@@ -50,3 +55,15 @@ metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 [node name="Controler" type="Node" parent="." unique_id=249814805]
 script = ExtResource("11_2l11m")
 metadata/_custom_type_script = "uid://dhau74o4l0rjm"
+
+[node name="AnimationManagerComponent" type="Node" parent="." unique_id=321287161]
+script = ExtResource("13_xdj86")
+anim_connect_list = ExtResource("14_c7yar")
+remove_library_on_exit_tree = false
+metadata/_custom_type_script = "uid://6lekj6yg62r6"
+
+[node name="StateAnimationManager" type="Node" parent="AnimationManagerComponent" unique_id=507980775 node_paths=PackedStringArray("state_machine")]
+script = ExtResource("15_c7yar")
+play_mode = 1
+state_machine = NodePath("../../StateMachine")
+metadata/_custom_type_script = "uid://dgi2a2c0lt17u"

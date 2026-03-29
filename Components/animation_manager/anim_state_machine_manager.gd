@@ -19,11 +19,14 @@ func _set_anim_sm_names(value: Array[AnimStateMachineGlobalParameters]) -> void:
 	for sm_parameters in anim_sm_names:
 		var sm_name: StringName= sm_parameters.sm_name
 		var sm_playback :=anim_manager.get_state_machine_playback(sm_name)
+		var anim_sm: AnimationNodeStateMachine= anim_manager.get_animation_node(sm_name)
 		
 		sm_playback.state_started.connect(_on_state_machine_playback_state_start.bind(sm_name))
 		
 		if sm_parameters.active_all_transitions:
-			active_all_transitions(anim_manager.get_animation_node(sm_name))
+			active_all_transitions(anim_sm)
+		if sm_parameters.global_xfade_time >= 0.0:
+			set_all_transition_x_fade_time(anim_sm, sm_parameters.global_xfade_time)
 
 #### BUILT-IN ####
 func _ready() -> void:
@@ -40,6 +43,16 @@ func active_all_transitions(state_machine: AnimationNodeStateMachine) -> void:
 		var trans := state_machine.get_transition(trans_id)
 		active_transition(trans)
 
+
+func set_transition_x_fade_time(transition: AnimationNodeStateMachineTransition, amount: float) -> void:
+	transition.xfade_time = amount
+
+
+func set_all_transition_x_fade_time(state_machine: AnimationNodeStateMachine, amount: float) -> void:
+	for trans_id in state_machine.get_transition_count():
+		var trans := state_machine.get_transition(trans_id)
+		if trans.switch_mode == AnimationNodeStateMachineTransition.SWITCH_MODE_AT_END:
+			set_transition_x_fade_time(trans, amount)
 
 #### SIGNALS RESPONSES ####
 func _on_state_machine_playback_state_start(_state_name: StringName, anim_sm_name: StringName) -> void:

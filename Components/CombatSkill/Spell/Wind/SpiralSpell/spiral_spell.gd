@@ -4,6 +4,8 @@ class_name SpiralSpell
 @export var nb_wind_sphere: int= 1:
 	set = _set_nb_wind_sphere
 
+@export var max_wind_sphere: int= 8
+
 @export var spiral_radius: float= 200.0:
 	set = _set_spiral_radius
 
@@ -11,6 +13,7 @@ class_name SpiralSpell
 
 @onready var spriral_center: Node2D = $SpriralCenter
 @onready var state_machine: StateMachine = $StateMachine
+@onready var state_machine_animation: StateMachine = $StateMachineAnimation
 
 
 var ws_spiral: Array[WindSphereProjectile]
@@ -18,15 +21,27 @@ var ws_spiral: Array[WindSphereProjectile]
 
 #### SETTER ####
 func _set_spiral_radius(value: float) -> void:
+	if value > spiral_radius:
+		state_machine_animation.set_state_with_string("Control")
+	elif value < spiral_radius :
+		state_machine_animation.set_state_with_string("Charge")
+	
 	spiral_radius = value
 	_replace_wind_spheres()
 
 
 func _set_nb_wind_sphere(value: int) -> void:
+	if value > max_wind_sphere: return
 	nb_wind_sphere = value
+	if not is_node_ready(): await ready
 	_setup_spiral()
 
 #### BUILT-IN ####
+func _enter_tree() -> void:
+	await get_tree().process_frame
+	_setup_spiral()
+
+
 func _physics_process(delta: float) -> void:
 	spriral_center.rotation += spiral_rot_speed * delta
 

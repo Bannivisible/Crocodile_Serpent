@@ -2359,10 +2359,10 @@ states/ToGetUp/position = Vector2(783.3114, 171.88016)
 states/Torpedo/node = SubResource("AnimationNodeAnimation_k74ft")
 states/Torpedo/position = Vector2(578.1147, 169.04134)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_n380g"), "Jump", "Fall", SubResource("AnimationNodeStateMachineTransition_pvels"), "Idle", "Move", SubResource("AnimationNodeStateMachineTransition_wfuh6"), "Move", "Idle", SubResource("AnimationNodeStateMachineTransition_weadw"), "Idle", "ToBentDown", SubResource("AnimationNodeStateMachineTransition_l1deg"), "Idle", "End", SubResource("AnimationNodeStateMachineTransition_ooqhq"), "ToGetUp", "Idle", SubResource("AnimationNodeStateMachineTransition_4djef"), "BentDown-MoveB", "BentDown-IdleB", SubResource("AnimationNodeStateMachineTransition_kj3xj"), "BentDown-IdleB", "BentDown-MoveB", SubResource("AnimationNodeStateMachineTransition_nprca"), "BentDown-IdleB", "ToGetUp", SubResource("AnimationNodeStateMachineTransition_7ktkk"), "BentDown-MoveB", "ToGetUp", SubResource("AnimationNodeStateMachineTransition_36jn7"), "Idle", "Fall", SubResource("AnimationNodeStateMachineTransition_e5u65"), "ToBentDown", "BentDown-MoveB", SubResource("AnimationNodeStateMachineTransition_u4jyn"), "ToBentDown", "BentDown-IdleB", SubResource("AnimationNodeStateMachineTransition_0rnww"), "Fall", "FallLanding", SubResource("AnimationNodeStateMachineTransition_vsulq"), "FallLanding", "Idle", SubResource("AnimationNodeStateMachineTransition_sw307"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_w2kjd"), "Idle", "Torpedo", SubResource("AnimationNodeStateMachineTransition_ynjtu"), "Torpedo", "Idle", SubResource("AnimationNodeStateMachineTransition_iw2au")]
-graph_offset = Vector2(170.00098, -9.382762)
+graph_offset = Vector2(28.06828, -19.253983)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_7cm0d"]
-graph_offset = Vector2(-647.0445, 20.268799)
+graph_offset = Vector2(-905.29626, 2.99411)
 nodes/output/position = Vector2(700, 200)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_qvnx8")
 nodes/StateMachine/position = Vector2(-1053.3334, 80)
@@ -2952,7 +2952,7 @@ parameters/Blend2/blend_amount = 0.0
 script = ExtResource("22_jbjqy")
 play_mode = 2
 state_machine = NodePath("../../StateMachine")
-anim_state_machine_path = "StateMachine"
+anim_sm_name = "StateMachine"
 metadata/_custom_type_script = "uid://dgi2a2c0lt17u"
 
 [node name="VelocityComponent" parent="." index="9" unique_id=661764387 instance=ExtResource("2_pp85c")]

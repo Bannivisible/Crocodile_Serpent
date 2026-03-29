@@ -9,6 +9,8 @@ enum FACTIONS{
 
 const HEALTH_STAT_NAME: String= "health"
 
+const LABEL_FEED_BACK_Z_INDEX: int= 100
+
 @export var faction : FACTIONS
 
 @export var stat: CharacStatistics:
@@ -66,6 +68,8 @@ func _hurt_feed_back(damage: float, hurt_box: HurtBox, hit_box: HitBox) -> void:
 
 func _label_feed_back(damage: float, hurt_box: HurtBox, hit_box: HitBox) -> void:
 	var label := Label.new()
+	label.z_index = LABEL_FEED_BACK_Z_INDEX
+	
 	_custom_label(label, damage, hurt_box)
 	hurt_box._modify_label_damage(label)
 	hit_box.modify_label_damage(label)

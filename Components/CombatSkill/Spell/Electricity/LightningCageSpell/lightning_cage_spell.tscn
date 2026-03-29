@@ -13,6 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://7waxkd4kq5sy" path="res://Scene/Projectile/LightningSphere/lightning_sphere.tscn" id="11_aeu6h"]
 [ext_resource type="Script" uid="uid://d34pga1ehnp01" path="res://Components/CombatSkill/Spell/Electricity/LightningCageSpell/controler.gd" id="12_3xivn"]
 [ext_resource type="Script" uid="uid://doagmyu4ylk33" path="res://Ressources/Attack/AttackData/spell_attack_data.gd" id="12_skbvi"]
+[ext_resource type="Script" uid="uid://6lekj6yg62r6" path="res://Components/animation_manager/animation_manager_component.gd" id="14_6t54o"]
+[ext_resource type="Resource" uid="uid://c4jeioubu2xem" path="res://Ressources/AnimationConnection/snake_connections.tres" id="15_qhduj"]
+[ext_resource type="Script" uid="uid://dgi2a2c0lt17u" path="res://Components/animation_manager/state_animation_manager.gd" id="16_8ha51"]
 
 [sub_resource type="Resource" id="Resource_l5xkk"]
 script = ExtResource("8_0kds0")
@@ -66,6 +69,7 @@ stat = ExtResource("2_0kds0")
 type = SubResource("Resource_l5xkk")
 
 [node name="Cage" type="Node2D" parent="." unique_id=1531420479]
+z_index = 5
 
 [node name="Polygon2D" type="Polygon2D" parent="Cage" unique_id=1594420035]
 material = SubResource("ShaderMaterial_rc4ct")
@@ -97,7 +101,7 @@ metadata/_custom_type_script = "uid://bcmokx1bwyftw"
 script = ExtResource("10_3xivn")
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 
-[node name="SpawnProjectileState" type="Node" parent="StateMachine" unique_id=2019228098 node_paths=PackedStringArray("combat_skill")]
+[node name="Cast2" type="Node" parent="StateMachine" unique_id=2019228098 node_paths=PackedStringArray("combat_skill")]
 script = ExtResource("9_aeu6h")
 combat_skill = NodePath("../..")
 projectile_scene = ExtResource("11_aeu6h")
@@ -111,4 +115,15 @@ metadata/_custom_type_script = "uid://dhau74o4l0rjm"
 
 [node name="DamageIntervalTimer" type="Timer" parent="." unique_id=57727354]
 
-[connection signal="projectile_spawn" from="StateMachine/SpawnProjectileState" to="." method="_on_spawn_projectile_state_projectile_spawn"]
+[node name="AnimationManagerComponent" type="Node" parent="." unique_id=961518175]
+script = ExtResource("14_6t54o")
+anim_connect_list = ExtResource("15_qhduj")
+metadata/_custom_type_script = "uid://6lekj6yg62r6"
+
+[node name="StateAnimationManager" type="Node" parent="AnimationManagerComponent" unique_id=434622738 node_paths=PackedStringArray("state_machine")]
+script = ExtResource("16_8ha51")
+play_mode = 1
+state_machine = NodePath("../../StateMachine")
+metadata/_custom_type_script = "uid://dgi2a2c0lt17u"
+
+[connection signal="projectile_spawn" from="StateMachine/Cast2" to="." method="_on_spawn_projectile_state_projectile_spawn"]

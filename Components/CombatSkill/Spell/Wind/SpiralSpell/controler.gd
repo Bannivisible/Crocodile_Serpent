@@ -8,6 +8,8 @@ extends Controler
 
 @onready var min_radius: float= spiral_spell.spiral_radius
 
+@onready var state_machine_animation: StateMachine = $"../StateMachineAnimation"
+
 
 func _physics_process(delta: float) -> void:
 	if not active: return
@@ -16,6 +18,7 @@ func _physics_process(delta: float) -> void:
 		spiral_spell.immobilize_player()
 	elif Input.is_action_just_released("attack"):
 		spiral_spell.free_player()
+		state_machine_animation.set_state_with_string("Void")
 	
 	if Input.is_action_pressed("attack"):
 		var coef: float= Input.get_axis("left", "right")
@@ -24,7 +27,7 @@ func _physics_process(delta: float) -> void:
 		spiral_spell.spiral_radius = max(min_radius, spiral_spell.spiral_radius + add_radius)
 
 
-func _input(_event: InputEvent) -> void:
-	var coef: float= Input.get_axis("down", "up")
-	
-	spiral_spell.nb_wind_sphere += 1 * int(coef)
+#func _input(_event: InputEvent) -> void:
+	#var coef: float= Input.get_axis("down", "up")
+	#
+	#spiral_spell.nb_wind_sphere += 1 * int(coef)

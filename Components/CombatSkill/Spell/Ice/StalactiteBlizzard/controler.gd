@@ -6,6 +6,7 @@ extends Controler
 
 @onready var stal_blizz_spell: StalactiteBlizzard = owner
 @onready var state_machine: StateMachine = $"../StateMachine"
+@onready var timer: Timer = $"../Timer"
 
 
 #### BUILT-IN ####
@@ -24,6 +25,8 @@ func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("attack"):
 		if state == "Idle":
 			state_machine.set_state_with_string("SpawnProjectileState")
+			
+			if timer.is_stopped(): timer.start()
 		
 		elif state == "PlaceStalactite" and _can_place_stalactite():
 			state_machine.set_state_with_string("RotateStalactite")

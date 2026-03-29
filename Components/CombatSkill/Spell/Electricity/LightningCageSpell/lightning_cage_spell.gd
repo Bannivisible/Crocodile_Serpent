@@ -22,8 +22,7 @@ var cage_coll_shape: Node2D
 func _ready() -> void:
 	Events.object_dispawn.connect(_on_Event_object_dispawn)
 	
-	remove_child(cage)
-	get_tree().root.get_child(0).add_child(cage)
+	cage.set_as_top_level(true)
 
 
 #### LOGIC ####
@@ -123,4 +122,5 @@ func _on_Event_object_dispawn(sphere: Node2D) -> void:
 
 func _on_spawn_projectile_state_projectile_spawn(projectile: Projectile) -> void:
 	append_point()
+	projectile.z_index = cage.z_index + 1
 	lightning_sphere_array.append(projectile)

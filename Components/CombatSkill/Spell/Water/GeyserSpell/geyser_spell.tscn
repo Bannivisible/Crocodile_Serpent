@@ -111,8 +111,9 @@ one_shot = true
 [node name="DamageInterval" type="Timer" parent="StateMachine/Cast" unique_id=1772897159]
 wait_time = 0.25
 
-[node name="AnimationStateMachine" type="Node" parent="." unique_id=1783945020]
+[node name="AnimationStateMachine" type="Node" parent="." unique_id=1783945020 node_paths=PackedStringArray("current_state")]
 script = ExtResource("10_5ekjd")
+current_state = NodePath("Void")
 metadata/_custom_type_script = "uid://bcmokx1bwyftw"
 
 [node name="Charge" type="Node" parent="AnimationStateMachine" unique_id=1728012596]
