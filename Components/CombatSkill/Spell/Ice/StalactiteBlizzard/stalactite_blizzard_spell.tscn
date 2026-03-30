@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://6lekj6yg62r6" path="res://Components/animation_manager/animation_manager_component.gd" id="12_dk5h8"]
 [ext_resource type="Resource" uid="uid://c4jeioubu2xem" path="res://Ressources/AnimationConnection/snake_connections.tres" id="13_hun87"]
 [ext_resource type="Script" uid="uid://dgi2a2c0lt17u" path="res://Components/animation_manager/state_animation_manager.gd" id="14_jl0iu"]
+[ext_resource type="Script" uid="uid://bet70jp2lrgrr" path="res://Ui/HelpLabel/help_request.gd" id="15_hun87"]
 
 [sub_resource type="Resource" id="Resource_8afxq"]
 script = ExtResource("8_duwa7")
@@ -87,6 +88,12 @@ script = ExtResource("14_jl0iu")
 play_mode = 1
 state_machine = NodePath("../../StateMachineAnimation")
 metadata/_custom_type_script = "uid://dgi2a2c0lt17u"
+
+[node name="HelpRequest" type="Node" parent="." unique_id=39855265]
+script = ExtResource("15_hun87")
+text = "Entrer / Mannette action gauche (Y, ▢, X) : Ajouter / Placer / Arreter la rotation du stalactite
+←, ↑, →, ↓ / S, A, W, D : Déplacer le stalactite"
+metadata/_custom_type_script = "uid://bet70jp2lrgrr"
 
 [connection signal="projectile_spawn" from="StateMachine/SpawnProjectileState" to="." method="_on_spawn_projectile_state_projectile_spawn"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

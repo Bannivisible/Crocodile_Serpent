@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bwhtpqexuedyk" path="res://Scene/Arena/FightArena/ChimeraArena/TileSet/chimera_arena_tile_mapV4.png" id="9_i0p2h"]
 [ext_resource type="Script" uid="uid://wfeuuhcaqnee" path="res://Other/hider_area.gd" id="10_rtusd"]
 [ext_resource type="PackedScene" uid="uid://bgq8m2oikd1b7" path="res://Scene/Characters/PlayableCharacter/Snake/snake.tscn" id="13_5lqx4"]
+[ext_resource type="Script" uid="uid://bfvai1huhc2m0" path="res://Ui/HelpLabel/help_label.gd" id="14_vr7e4"]
 
 [sub_resource type="Gradient" id="Gradient_e5sod"]
 colors = PackedColorArray(0, 0.43137255, 1, 1, 1, 1, 1, 1)
@@ -102,6 +103,11 @@ region = Rect2(0, 0, 256, 256)
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rtusd"]
 radius = 170.0
 height = 362.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_5lqx4"]
+font_size = 32
+font_color = Color(0, 0, 0, 1)
+outline_size = 12
 
 [node name="FightArena" unique_id=929122509 instance=ExtResource("1_0264e")]
 script = ExtResource("2_1ato1")
@@ -587,3 +593,16 @@ shape = SubResource("CapsuleShape2D_rtusd")
 
 [node name="Snake" parent="." index="9" unique_id=644033490 instance=ExtResource("13_5lqx4")]
 position = Vector2(613, 185)
+
+[node name="Label" type="Label" parent="." index="10" unique_id=786051834]
+z_index = 100
+offset_right = 1051.0
+offset_bottom = 477.0
+text = "→, ← / D, S : Se déplacer
+Espace / Shift / Mannete action bas (B, X, A) : Sauter
+↓ / W : Se baisser (Crocodile uniquement)
+C : Afficher / Enlever le menu des compétences
+(L'attaque étoile filante est indisponible)
+M : Masquer l'aide"
+label_settings = SubResource("LabelSettings_5lqx4")
+script = ExtResource("14_vr7e4")

@@ -25,6 +25,10 @@ func _ready() -> void:
 	cage.set_as_top_level(true)
 
 
+func _exit_tree() -> void:
+	for lightning_sphere in lightning_sphere_array:
+		lightning_sphere.queue_free()
+
 #### LOGIC ####
 func append_point() -> void:
 	if points.size() >= max_lightning_sphere:
@@ -113,6 +117,7 @@ func _remove_first_point() -> void:
 #### SIGNALS RESPONSES ####
 
 func _on_Event_object_dispawn(sphere: Node2D) -> void:
+	if sphere == null: return
 	if not sphere in lightning_sphere_array: return
 	
 	points.erase(sphere.global_position)

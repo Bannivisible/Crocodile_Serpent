@@ -26,6 +26,9 @@ enum PLAY_MODE {
 @export var blend_node_name: StringName= "Blend2"
 @export var os_node_name: StringName= "OneShot"
 
+@export_group("OneShot")
+@export var o: StringName
+
 @export_group("Travel")
 @export var anim_sm_name: String= "AnimationNodeStateMachine":
 	set = _set_anim_sm_name
@@ -55,6 +58,11 @@ func _enter_tree() -> void:
 
 func _exit_tree() -> void:
 	_play_anim(AnimationManagerComponent.EXIT_ANIM_NAME)
+	
+	if play_mode == PLAY_MODE.BLEND:
+		anim_manager.reset_filter(blend_node_name)
+		anim_manager.set_blend_amount(blend_node_name, 0.0)
+		anim_manager.reset_filter(os_node_name)
 
 #### LOGIC ####
 func _get_anim_name(state: State) -> String:

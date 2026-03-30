@@ -12,3 +12,7 @@ signal request_spawn_object(node: Node2D)
 
 @warning_ignore("unused_signal")
 signal object_dispawn(node: Node2D)
+
+
+@warning_ignore("unused_signal")
+signal request_help(text: String)
