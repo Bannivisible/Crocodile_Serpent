@@ -117,7 +117,7 @@ func _remove_first_point() -> void:
 #### SIGNALS RESPONSES ####
 
 func _on_Event_object_dispawn(sphere: Node2D) -> void:
-	if sphere == null: return
+	if sphere is not LightningSphere: return
 	if not sphere in lightning_sphere_array: return
 	
 	points.erase(sphere.global_position)

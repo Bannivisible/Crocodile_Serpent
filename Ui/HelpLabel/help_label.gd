@@ -13,6 +13,6 @@ func _input(_event: InputEvent) -> void:
 		visible = !visible
 
 #### SIGNALS RESPONSES ####
-func _on_Events_request_help(new_text: String):
-	visible = true
+func _on_Events_request_help(new_text: String, show_help: bool):
+	if show_help: visible = true
 	text = new_text + "\n" + "-".repeat(80) + "\n" + base_text

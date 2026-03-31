@@ -112,9 +112,8 @@ one_shot = true
 [node name="DamageInterval" type="Timer" parent="StateMachine/Cast" unique_id=1772897159]
 wait_time = 0.25
 
-[node name="AnimationStateMachine" type="Node" parent="." unique_id=1783945020 node_paths=PackedStringArray("current_state")]
+[node name="AnimationStateMachine" type="Node" parent="." unique_id=1783945020]
 script = ExtResource("10_5ekjd")
-current_state = NodePath("Void")
 metadata/_custom_type_script = "uid://bcmokx1bwyftw"
 
 [node name="Charge" type="Node" parent="AnimationStateMachine" unique_id=1728012596]
@@ -143,7 +142,7 @@ metadata/_custom_type_script = "uid://dgi2a2c0lt17u"
 [node name="HelpRequest" type="Node" parent="." unique_id=1247220060]
 script = ExtResource("16_6phow")
 text = "Entrer / Mannette action gauche (Y, ▢, X) : Charger
--> Relacher : Tirer
+-> Relâcher : Tirer
 ↑, ↓ / A, W : Orienter"
 
 [connection signal="timeout" from="StateMachine/Cast/Timer" to="StateMachine/Cast" method="_on_timer_timeout"]

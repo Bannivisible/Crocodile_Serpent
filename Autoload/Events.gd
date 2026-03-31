@@ -15,4 +15,4 @@ signal object_dispawn(node: Node2D)
 
 
 @warning_ignore("unused_signal")
-signal request_help(text: String)
+signal request_help(text: String, show_help: bool)

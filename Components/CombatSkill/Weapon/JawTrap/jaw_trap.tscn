@@ -32,6 +32,7 @@
 [ext_resource type="Script" uid="uid://da3cqoomwyp1o" path="res://Components/CombatSkill/hit_box.gd" id="24_5rtpq"]
 [ext_resource type="Shape2D" uid="uid://dehxsdpvhda4g" path="res://Components/CombatSkill/Weapon/JawTrap/Ressources/ToGroundShape.tres" id="25_7etub"]
 [ext_resource type="Resource" uid="uid://b85xloi286pt1" path="res://Ressources/AnimationConnection/crocodile_animation_connections.tres" id="27_mkx5c"]
+[ext_resource type="Script" uid="uid://bet70jp2lrgrr" path="res://Ui/HelpLabel/help_request.gd" id="33_vpr7y"]
 
 [sub_resource type="Resource" id="Resource_5rtpq"]
 script = ExtResource("6_jeet7")
@@ -154,8 +155,8 @@ radius = 10.036705
 height = 88.18735
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_weadw"]
-radius = 154.05058
-height = 446.32965
+radius = 126.0
+height = 252.0
 
 [sub_resource type="Animation" id="Animation_2xqvd"]
 resource_name = "OnGround(EditorHelp)"
@@ -750,9 +751,8 @@ metadata/_custom_type_script = "uid://6lekj6yg62r6"
 
 [node name="StateAnimationManager" type="Node" parent="AnimationManagerComponent" unique_id=1041608812 node_paths=PackedStringArray("state_machine")]
 script = ExtResource("19_wdegu")
-play_mode = 1
+play_mode = 4
 state_machine = NodePath("../../StateMachine")
-states_for_one_shot = Array[StringName]([&"OnHand", &"OnJaw", &"OnGround"])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=652731362]
 rotation = 1.5707964
@@ -791,3 +791,46 @@ timer = NodePath("../../StateMachine/OnJaw/DynamicTimer")
 self_modulate = Color(1.5720325, 1.1789198, 0.053863578, 1)
 position = Vector2(78, 80)
 texture = SubResource("AtlasTexture_tlny7")
+
+[node name="HelpRequest" type="Node" parent="." unique_id=935749920]
+script = ExtResource("33_vpr7y")
+text = "Entrer / Mannette action gauche (Y, ▢, X) : Attaquer
+-> Après avoir attaquer un ennemi : 2ème attaque
+Maintenir Entrer / Mannette action gauche (Y, ▢, X) : tournoyer
+-> Relâcher : Lancer
+--> Entrer / Mannette action gauche (Y, ▢, X) : Récupérer
+--> Attendre : Changer de style
+Q / Mannette action gauche (A, O, B) :  Changer de style"
+metadata/_custom_type_script = "uid://bet70jp2lrgrr"
+
+[node name="HelpRequest4" type="Node" parent="." unique_id=1253271652 node_paths=PackedStringArray("request_states")]
+script = ExtResource("33_vpr7y")
+text = "Entrer / Mannette action gauche (Y, ▢, X) : Attaquer
+-> Après avoir attaquer un ennemi : 2ème attaque
+Maintenir Entrer / Mannette action gauche (Y, ▢, X) : tournoyer
+-> Relâcher : Lancer
+--> Entrer / Mannette action gauche (Y, ▢, X) : Récupérer
+--> Attendre : Changer de style
+Q / Mannette action gauche (A, O, B) :  Changer de style"
+request_on_enter_tree = false
+request_states = [NodePath("../StateMachine/OnHand")]
+show_help = false
+metadata/_custom_type_script = "uid://bet70jp2lrgrr"
+
+[node name="HelpRequest2" type="Node" parent="." unique_id=1444418601 node_paths=PackedStringArray("request_states")]
+script = ExtResource("33_vpr7y")
+text = "Entrer / Mannette action gauche (Y, ▢, X) : Croquer
+Maintenir Entrer / Mannette action gauche (Y, ▢, X) : Déchiqueter en torpille (BUG)"
+request_on_enter_tree = false
+request_states = [NodePath("../StateMachine/OnJaw")]
+show_help = false
+metadata/_custom_type_script = "uid://bet70jp2lrgrr"
+
+[node name="HelpRequest3" type="Node" parent="." unique_id=514260558 node_paths=PackedStringArray("request_states")]
+script = ExtResource("33_vpr7y")
+text = "Entrer / Mannette action gauche (Y, ▢, X) : Piéger
+Q / Mannette action gauche (A, O, B) :  Ramener"
+request_on_enter_tree = false
+request_states = [NodePath("../StateMachine/OnGround")]
+show_help = false
+metadata/_custom_type_script = "uid://bet70jp2lrgrr"

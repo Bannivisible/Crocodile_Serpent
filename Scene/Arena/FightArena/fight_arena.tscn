@@ -603,6 +603,6 @@ Espace / Shift / Mannete action bas (B, X, A) : Sauter
 ↓ / W : Se baisser (Crocodile uniquement)
 C : Afficher / Enlever le menu des compétences
 (L'attaque étoile filante est indisponible)
-M : Masquer l'aide"
+M : Masquer / Afficher l'aide"
 label_settings = SubResource("LabelSettings_5lqx4")
 script = ExtResource("14_vr7e4")

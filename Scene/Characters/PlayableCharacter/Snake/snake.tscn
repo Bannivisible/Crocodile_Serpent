@@ -1130,6 +1130,30 @@ tracks/16/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = false
+tracks/17/path = NodePath("SpriteContainer/ArmBack:modulate")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = false
+tracks/18/path = NodePath("SpriteContainer/ArmBack:visible")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_lac0c"]
 resource_name = "Choc"
@@ -3083,7 +3107,7 @@ _data = {
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_upub7"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_4k7xw"]
-graph_offset = Vector2(-1064.9775, -76.83179)
+graph_offset = Vector2(-966.38654, -14.767883)
 nodes/OneShot/node = SubResource("AnimationNodeOneShot_upub7")
 nodes/OneShot/position = Vector2(-26.666666, 226.66667)
 "nodes/AnimationNodeStateMachine 2/node" = ExtResource("8_wv1tt")
@@ -3816,24 +3840,26 @@ shape = SubResource("CapsuleShape2D_c8tis")
 position = Vector2(112, -106)
 
 [node name="TrailBack" type="AnimatedSprite2D" parent="SpriteContainer/ArmBack" index="0" unique_id=79303945]
-position = Vector2(-107, -52.000015)
-rotation = 0.36356562
+position = Vector2(-213, 50)
+rotation = -1.2247584
 sprite_frames = SubResource("SpriteFrames_u3ofr")
 animation = &"active"
 offset = Vector2(37, -10)
 flip_v = true
 
 [node name="ShootingStarTailBack" type="AnimatedSprite2D" parent="SpriteContainer/ArmBack" index="1" unique_id=561651213]
-position = Vector2(-24.223358, -33.344467)
-rotation = 0.9353798
+position = Vector2(-195.79814, -33.09088)
+rotation = -0.67319185
+scale = Vector2(1.0000001, 1.0000001)
 sprite_frames = SubResource("SpriteFrames_gv3gm")
 animation = &"active"
 offset = Vector2(15, 3)
 flip_v = true
 
 [node name="HandBack" type="AnimatedSprite2D" parent="SpriteContainer/ArmBack" index="2" unique_id=416047715]
-position = Vector2(10.573387, -8.062332)
-rotation = 0.9353798
+position = Vector2(-171.84818, -68.81763)
+rotation = -0.67319185
+scale = Vector2(1.0000001, 1.0000001)
 sprite_frames = SubResource("SpriteFrames_ox5u4")
 animation = &"active"
 offset = Vector2(7, 7)
@@ -3999,23 +4025,23 @@ z_index = 1
 position = Vector2(95, 16)
 
 [node name="TrailFront" type="AnimatedSprite2D" parent="SpriteContainer/ArmFront" index="0" unique_id=1197603258]
-position = Vector2(-85, -3.999999)
-rotation = -0.071208306
+position = Vector2(-278, -87)
+rotation = 0.43595326
 sprite_frames = SubResource("SpriteFrames_u6xdx")
 animation = &"active"
 offset = Vector2(38, 7)
 
 [node name="ShootingStarTailFront" type="AnimatedSprite2D" parent="SpriteContainer/ArmFront" index="1" unique_id=1907325850]
-position = Vector2(0.5672302, 0.92453384)
-rotation = -0.72671187
+position = Vector2(-205.59523, -41.135506)
+rotation = 0.8061472
 scale = Vector2(0.9999995, 0.9999995)
 sprite_frames = SubResource("SpriteFrames_nyjmh")
 animation = &"active"
 offset = Vector2(15, -3)
 
 [node name="HandFront" type="AnimatedSprite2D" parent="SpriteContainer/ArmFront" index="2" unique_id=857022757]
-position = Vector2(27.887024, -30.053316)
-rotation = -0.72671187
+position = Vector2(-173.60349, -15.0103)
+rotation = 0.8061472
 scale = Vector2(0.9999995, 0.9999995)
 sprite_frames = SubResource("SpriteFrames_2rtc6")
 animation = &"active"
@@ -4204,7 +4230,7 @@ anim_sm_names = Array[ExtResource("11_hlpqi")]([SubResource("Resource_lac0c"), S
 
 [node name="StateAnimationManager" type="Node" parent="AnimationManagerComponent" index="1" unique_id=597733682 node_paths=PackedStringArray("state_machine")]
 script = ExtResource("10_4k7xw")
-play_mode = 2
+play_mode = 3
 state_machine = NodePath("../../StateMachine")
 metadata/_custom_type_script = "uid://dgi2a2c0lt17u"
 
@@ -4305,5 +4331,16 @@ label_settings = SubResource("LabelSettings_3ma4d")
 script = ExtResource("13_3ma4d")
 anim_tree = NodePath("../AnimationTree")
 state_machine_name = &"AnimationNodeStateMachine 3"
+
+[node name="AnimStateMachineLabel2" type="Label" parent="." index="16" unique_id=535748361 node_paths=PackedStringArray("anim_tree")]
+offset_left = -35.0
+offset_top = 201.0
+offset_right = 41.0
+offset_bottom = 245.66667
+text = "affze"
+label_settings = SubResource("LabelSettings_3ma4d")
+script = ExtResource("13_3ma4d")
+anim_tree = NodePath("../AnimationTree")
+state_machine_name = &"AnimationNodeStateMachine 2"
 
 [editable path="VelocityComponent"]

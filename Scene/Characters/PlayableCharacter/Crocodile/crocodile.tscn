@@ -2935,6 +2935,13 @@ anim_connect_list = ExtResource("22_4djef")
 remove_library_on_exit_tree = false
 metadata/_custom_type_script = "uid://6lekj6yg62r6"
 
+[node name="StateAnimationManager" type="Node" parent="AnimationManagerComponent" index="0" unique_id=11466307 node_paths=PackedStringArray("state_machine")]
+script = ExtResource("22_jbjqy")
+play_mode = 3
+state_machine = NodePath("../../StateMachine")
+anim_sm_name = "StateMachine"
+metadata/_custom_type_script = "uid://dgi2a2c0lt17u"
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="7" unique_id=252078669]
 libraries/ = SubResource("AnimationLibrary_0ft5j")
 playback_default_blend_time = 2.0
@@ -2947,13 +2954,6 @@ parameters/OneShot/active = false
 parameters/OneShot/internal_active = false
 parameters/OneShot/request = 0
 parameters/Blend2/blend_amount = 0.0
-
-[node name="StateAnimationManager" type="Node" parent="AnimationTree" index="0" unique_id=11466307 node_paths=PackedStringArray("state_machine")]
-script = ExtResource("22_jbjqy")
-play_mode = 2
-state_machine = NodePath("../../StateMachine")
-anim_sm_name = "StateMachine"
-metadata/_custom_type_script = "uid://dgi2a2c0lt17u"
 
 [node name="VelocityComponent" parent="." index="9" unique_id=661764387 instance=ExtResource("2_pp85c")]
 

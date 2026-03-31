@@ -7,6 +7,11 @@ extends PlayableCharacter
 #func _input(_event: InputEvent) -> void:
 	#var playback: AnimationNodeStateMachinePlayback= animation_tree.get("parameters/AnimationNodeStateMachine 2/playback")
 	#if Input.is_action_just_pressed("up"):
+		#print(animation_manager_component.tracks_filter["OneShot"])
+		#print(animation_manager_component.tracks_filter["Blend2"])
+		#animation_manager_component.reset_filter("Blend2")
+		
+		
 		
 		
 	#elif Input.is_action_just_pressed("down"):
