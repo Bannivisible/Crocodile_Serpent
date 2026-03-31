@@ -8,4 +8,3 @@ class_name Spell
 
 const elements: Array[String]= ["water", "fire", "wind",
 "lightning", "ice"]
-

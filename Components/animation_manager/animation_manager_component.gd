@@ -575,5 +575,3 @@ func _on_animation_finished(anim_name: StringName) -> void:
 	if anim_name == EXIT_ANIM_NAME and remove_library_on_exit_tree:
 		reset_tree_with_lib()
 		remove_all_anim_library(library, animation_player.get_animation_library(""))
-
-

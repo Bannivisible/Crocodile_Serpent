@@ -105,6 +105,7 @@ radius = 170.0
 height = 362.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_5lqx4"]
+line_spacing = 0.0
 font_size = 32
 font_color = Color(0, 0, 0, 1)
 outline_size = 12
@@ -594,7 +595,7 @@ shape = SubResource("CapsuleShape2D_rtusd")
 [node name="Snake" parent="." index="9" unique_id=644033490 instance=ExtResource("13_5lqx4")]
 position = Vector2(613, 185)
 
-[node name="Label" type="Label" parent="." index="10" unique_id=786051834]
+[node name="HelpLabel" type="Label" parent="." index="10" unique_id=786051834]
 z_index = 100
 offset_right = 1051.0
 offset_bottom = 477.0

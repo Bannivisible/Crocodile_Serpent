@@ -91,4 +91,3 @@ func _on_dynamic_timer_timeout() -> void:
 func _on_hit_box_hit(_damage: float, _hurt_box: HurtBox) -> void:
 	if is_current_state():
 		dynamic_timer.add_time(bonus_time_amount)
-
