@@ -801,7 +801,7 @@ Maintenir Entrer / Mannette action gauche (Y, ▢, X) : tournoyer
 -> Relâcher : Lancer
 --> Entrer / Mannette action gauche (Y, ▢, X) : Récupérer
 --> Attendre : Changer de style
-Q / Mannette action gauche (A, O, B) :  Changer de style"
+Q / Mannette action droite (A, O, B) :  Changer de style"
 metadata/_custom_type_script = "uid://bet70jp2lrgrr"
 
 [node name="HelpRequest4" type="Node" parent="." unique_id=1253271652 node_paths=PackedStringArray("request_states")]
@@ -812,7 +812,7 @@ Maintenir Entrer / Mannette action gauche (Y, ▢, X) : tournoyer
 -> Relâcher : Lancer
 --> Entrer / Mannette action gauche (Y, ▢, X) : Récupérer
 --> Attendre : Changer de style
-Q / Mannette action gauche (A, O, B) :  Changer de style"
+Q / Mannette action droite (A, O, B) :  Changer de style"
 request_on_enter_tree = false
 request_states = [NodePath("../StateMachine/OnHand")]
 show_help = false
@@ -820,13 +820,8 @@ metadata/_custom_type_script = "uid://bet70jp2lrgrr"
 
 [node name="HelpRequest2" type="Node" parent="." unique_id=1444418601 node_paths=PackedStringArray("request_states")]
 script = ExtResource("33_vpr7y")
-text = "Entrer / Mannette action gauche (Y, ▢, X) : Attaquer
--> Après avoir attaquer un ennemi : 2ème attaque
-Maintenir Entrer / Mannette action gauche (Y, ▢, X) : tournoyer
--> Relâcher : Lancer
---> Entrer / Mannette action gauche (Y, ▢, X) : Récupérer
---> Attendre : Changer de style
-Q / Mannette action gauche (A, O, B) :  Changer de style"
+text = "Entrer / Mannette action gauche (Y, ▢, X) : Mordre
+Maintenir Entrer / Mannette action gauche (Y, ▢, X) : Déchiqueter en tournoyant"
 request_on_enter_tree = false
 request_states = [NodePath("../StateMachine/OnJaw")]
 show_help = false
@@ -834,13 +829,8 @@ metadata/_custom_type_script = "uid://bet70jp2lrgrr"
 
 [node name="HelpRequest3" type="Node" parent="." unique_id=514260558 node_paths=PackedStringArray("request_states")]
 script = ExtResource("33_vpr7y")
-text = "Entrer / Mannette action gauche (Y, ▢, X) : Attaquer
--> Après avoir attaquer un ennemi : 2ème attaque
-Maintenir Entrer / Mannette action gauche (Y, ▢, X) : tournoyer
--> Relâcher : Lancer
---> Entrer / Mannette action gauche (Y, ▢, X) : Récupérer
---> Attendre : Changer de style
-Q / Mannette action gauche (A, O, B) :  Changer de style"
+text = "Entrer / Mannette action gauche (Y, ▢, X) : Piéger
+Q / Mannette action droite (A, O, B) : Ramener"
 request_on_enter_tree = false
 request_states = [NodePath("../StateMachine/OnGround")]
 show_help = false
