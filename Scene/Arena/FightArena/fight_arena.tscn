@@ -105,7 +105,6 @@ radius = 170.0
 height = 362.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_5lqx4"]
-line_spacing = 0.0
 font_size = 32
 font_color = Color(0, 0, 0, 1)
 outline_size = 12

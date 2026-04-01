@@ -3840,26 +3840,21 @@ shape = SubResource("CapsuleShape2D_c8tis")
 position = Vector2(112, -106)
 
 [node name="TrailBack" type="AnimatedSprite2D" parent="SpriteContainer/ArmBack" index="0" unique_id=79303945]
-position = Vector2(-213, 50)
-rotation = -1.2247584
+position = Vector2(-135, 14)
 sprite_frames = SubResource("SpriteFrames_u3ofr")
 animation = &"active"
 offset = Vector2(37, -10)
 flip_v = true
 
 [node name="ShootingStarTailBack" type="AnimatedSprite2D" parent="SpriteContainer/ArmBack" index="1" unique_id=561651213]
-position = Vector2(-195.79814, -33.09088)
-rotation = -0.67319185
-scale = Vector2(1.0000001, 1.0000001)
+position = Vector2(-51, 2)
 sprite_frames = SubResource("SpriteFrames_gv3gm")
 animation = &"active"
 offset = Vector2(15, 3)
 flip_v = true
 
 [node name="HandBack" type="AnimatedSprite2D" parent="SpriteContainer/ArmBack" index="2" unique_id=416047715]
-position = Vector2(-171.84818, -68.81763)
-rotation = -0.67319185
-scale = Vector2(1.0000001, 1.0000001)
+position = Vector2(-10, -11)
 sprite_frames = SubResource("SpriteFrames_ox5u4")
 animation = &"active"
 offset = Vector2(7, 7)
@@ -4025,23 +4020,20 @@ z_index = 1
 position = Vector2(95, 16)
 
 [node name="TrailFront" type="AnimatedSprite2D" parent="SpriteContainer/ArmFront" index="0" unique_id=1197603258]
-position = Vector2(-278, -87)
-rotation = 0.43595326
+position = Vector2(-136, -3)
 sprite_frames = SubResource("SpriteFrames_u6xdx")
 animation = &"active"
 offset = Vector2(38, 7)
 
 [node name="ShootingStarTailFront" type="AnimatedSprite2D" parent="SpriteContainer/ArmFront" index="1" unique_id=1907325850]
-position = Vector2(-205.59523, -41.135506)
-rotation = 0.8061472
+position = Vector2(-51, 8)
 scale = Vector2(0.9999995, 0.9999995)
 sprite_frames = SubResource("SpriteFrames_nyjmh")
 animation = &"active"
 offset = Vector2(15, -3)
 
 [node name="HandFront" type="AnimatedSprite2D" parent="SpriteContainer/ArmFront" index="2" unique_id=857022757]
-position = Vector2(-173.60349, -15.0103)
-rotation = 0.8061472
+position = Vector2(-10.000015, 3.000002)
 scale = Vector2(0.9999995, 0.9999995)
 sprite_frames = SubResource("SpriteFrames_2rtc6")
 animation = &"active"

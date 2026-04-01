@@ -34,20 +34,20 @@ func _ready() -> void:
 
 
 func _enter_tree() -> void:
-	remove_child(remote_f)
+	if has_node(NodePath(remote_f.name)): remove_child(remote_f)
+	
 	var f_parent: Node= get_node_or_null(remote_f_parent_path)
 	if f_parent: f_parent.add_child(remote_f)
 	
-	remove_child(remote_b)
+	if has_node(NodePath(remote_b.name)): remove_child(remote_b)
+	
 	var b_parent: Node= get_node_or_null(remote_b_parent_path)
 	if b_parent: b_parent.add_child(remote_b)
 
 
 func _exit_tree() -> void:
 	remote_f.get_parent().remove_child(remote_f)
-	add_child(remote_f)
 	remote_b.get_parent().remove_child(remote_b)
-	add_child(remote_b)
 
 
 #### INHERITENCE ####

@@ -7,6 +7,5 @@ class_name JawTrap
 @onready var anim_manager: AnimationManagerComponent = $AnimationManagerComponent
 
 #func _input(_event: InputEvent) -> void:
-	#if Input.is_action_just_pressed("bent_down"):
-		#anim_manager.print_blendtree()
-		#anim_manager.print_all_connections()
+	#if Input.is_action_just_pressed("up"):
+		#print($StateMachine/OnHand/ConstantRotatingAttack.is_attack_currently_playing())

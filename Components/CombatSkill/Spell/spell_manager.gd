@@ -6,6 +6,8 @@ extends Node2D
 @export var charac_stat: CharacStatistics:
 	set = _set_charac_stat
 
+@export var current_spell_data: CombatSkillData:
+	set = _set_spell_data
 
 var current_spell: Spell:
 	set = _set_current_spell
@@ -46,6 +48,18 @@ func _set_charac_stat(value: CharacStatistics):
 	if current_spell:
 		current_spell.charac_stat = charac_stat
 
+
+func _set_spell_data(value: CombatSkillData) -> void:
+	if not value != current_spell_data: return
+	
+	current_spell_data = value
+	
+	if current_spell_data == null:
+		current_spell = null
+	else :
+		current_spell = current_spell_data.combat_skill_scene.instantiate()
+
+
 #### BUILT-IN ####
 func _ready() -> void:
 	Events.combat_skill_selected.connect(_on_Event_combat_skill_selected)
@@ -53,9 +67,10 @@ func _ready() -> void:
 
 #### SIGNALS RESPONSES ####
 func _on_Event_combat_skill_selected(cs_data: CombatSkillData) -> void:
+	if not cs_data.combat_skill_scene: return
 	var cs: CombatSkill= cs_data.combat_skill_scene.instantiate()
 	
 	if cs is Spell:
-		current_spell = cs
+		current_spell_data = cs_data
 		active = true
 	elif cs is Weapon: active = false

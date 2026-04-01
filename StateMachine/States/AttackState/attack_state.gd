@@ -109,10 +109,20 @@ func enter() -> void:
 ### COMBO ###
 func _combo_logic() -> void:
 	if previous_state is AttackState:
-		if _await_previous_attack_condition():
-			await animation_manager.animation_finished
+		var anim: Animation= animation_manager.get_animation(previous_state.anim_name)
+		
+		if anim.loop_mode == Animation.LOOP_NONE:
+			if _await_previous_attack_condition():
+				await animation_manager.animation_finished
+		
+			elif not is_combo_cooldown_running(): return
+		else:
+			if combo_timer:
+				if not previous_state.is_attack_currently_playing() and not is_combo_cooldown_running():
+					return
+			elif not previous_state.is_attack_currently_playing():
+				return
 	
-		elif not is_combo_cooldown_running(): return
 	
 	elif not previous_state.is_current_state():
 		return
@@ -246,7 +256,7 @@ func _set_idle_state() -> void:
 
 
 func is_combo_cooldown_running() -> bool:
-	if not combo_timer: return true
+	if not combo_timer: return false
 	return not combo_timer.is_stopped()
 
 

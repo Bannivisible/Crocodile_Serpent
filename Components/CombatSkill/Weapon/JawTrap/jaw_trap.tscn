@@ -21,13 +21,13 @@
 [ext_resource type="Script" uid="uid://dn31df61ur2vl" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/on_ground.gd" id="15_7x2u0"]
 [ext_resource type="Script" uid="uid://bey7t8h4m0yyp" path="res://StateMachine/state.gd" id="16_2tnll"]
 [ext_resource type="Script" uid="uid://dcjv5pdoy3ubs" path="res://Ui/timer_range.gd" id="16_fho1j"]
-[ext_resource type="Script" uid="uid://6lekj6yg62r6" path="res://Components/Animation_manager/animation_manager_component.gd" id="16_in3ot"]
+[ext_resource type="Script" uid="uid://6lekj6yg62r6" path="res://Components/animation_manager/animation_manager_component.gd" id="16_in3ot"]
 [ext_resource type="Script" uid="uid://e0ej46y7q5uy" path="res://Other/ProceduralNode/procedural_link.gd" id="16_kcwly"]
 [ext_resource type="Script" uid="uid://bsmm7c0f2k3hr" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/bite_attack.gd" id="18_5rtpq"]
 [ext_resource type="Script" uid="uid://x1tg260g65b0" path="res://Other/timer_label.gd" id="18_eaiaj"]
 [ext_resource type="Script" uid="uid://c78u4kmgq07op" path="res://Components/CombatSkill/Weapon/JawTrap/Scripts/devastating_attack.gd" id="19_mkx5c"]
 [ext_resource type="Script" uid="uid://byhe3mep5poar" path="res://Ressources/Statistics/Scripts/buff.gd" id="19_vpr7y"]
-[ext_resource type="Script" uid="uid://dgi2a2c0lt17u" path="res://Components/Animation_manager/state_animation_manager.gd" id="19_wdegu"]
+[ext_resource type="Script" uid="uid://dgi2a2c0lt17u" path="res://Components/animation_manager/state_animation_manager.gd" id="19_wdegu"]
 [ext_resource type="Texture2D" uid="uid://b5iu6elvpti77" path="res://Ui/Assets/UI1.png" id="21_tlny7"]
 [ext_resource type="Script" uid="uid://da3cqoomwyp1o" path="res://Components/CombatSkill/hit_box.gd" id="24_5rtpq"]
 [ext_resource type="Shape2D" uid="uid://dehxsdpvhda4g" path="res://Components/CombatSkill/Weapon/JawTrap/Ressources/ToGroundShape.tres" id="25_7etub"]
@@ -554,6 +554,7 @@ input_mode = 2
 hit_box = NodePath("../../../HitBox")
 attack_data = SubResource("Resource_rddj4")
 animation_manager = NodePath("../../../AnimationManagerComponent")
+combo_cooldown = 0.1
 previous_state = NodePath("../ConstantRotatingAttack")
 await_previous_attack_finished = false
 
@@ -819,8 +820,13 @@ metadata/_custom_type_script = "uid://bet70jp2lrgrr"
 
 [node name="HelpRequest2" type="Node" parent="." unique_id=1444418601 node_paths=PackedStringArray("request_states")]
 script = ExtResource("33_vpr7y")
-text = "Entrer / Mannette action gauche (Y, ▢, X) : Croquer
-Maintenir Entrer / Mannette action gauche (Y, ▢, X) : Déchiqueter en torpille (BUG)"
+text = "Entrer / Mannette action gauche (Y, ▢, X) : Attaquer
+-> Après avoir attaquer un ennemi : 2ème attaque
+Maintenir Entrer / Mannette action gauche (Y, ▢, X) : tournoyer
+-> Relâcher : Lancer
+--> Entrer / Mannette action gauche (Y, ▢, X) : Récupérer
+--> Attendre : Changer de style
+Q / Mannette action gauche (A, O, B) :  Changer de style"
 request_on_enter_tree = false
 request_states = [NodePath("../StateMachine/OnJaw")]
 show_help = false
@@ -828,8 +834,13 @@ metadata/_custom_type_script = "uid://bet70jp2lrgrr"
 
 [node name="HelpRequest3" type="Node" parent="." unique_id=514260558 node_paths=PackedStringArray("request_states")]
 script = ExtResource("33_vpr7y")
-text = "Entrer / Mannette action gauche (Y, ▢, X) : Piéger
-Q / Mannette action gauche (A, O, B) :  Ramener"
+text = "Entrer / Mannette action gauche (Y, ▢, X) : Attaquer
+-> Après avoir attaquer un ennemi : 2ème attaque
+Maintenir Entrer / Mannette action gauche (Y, ▢, X) : tournoyer
+-> Relâcher : Lancer
+--> Entrer / Mannette action gauche (Y, ▢, X) : Récupérer
+--> Attendre : Changer de style
+Q / Mannette action gauche (A, O, B) :  Changer de style"
 request_on_enter_tree = false
 request_states = [NodePath("../StateMachine/OnGround")]
 show_help = false

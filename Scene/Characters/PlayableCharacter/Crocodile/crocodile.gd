@@ -17,7 +17,7 @@ func _ready() -> void:
 
 #func _input(_event: InputEvent) -> void:
 	#if Input.is_action_just_pressed("up"):
-		#print(animation_player.current_animation)
+		#print(rotation)
 
 
 #### LOGIC ####
