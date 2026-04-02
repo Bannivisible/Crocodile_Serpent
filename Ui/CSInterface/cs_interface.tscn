@@ -36,8 +36,9 @@ metadata/_custom_type_script = "uid://bk1oc1ul33tnd"
 
 [sub_resource type="Resource" id="Resource_yj6c8"]
 script = ExtResource("8_5tmjq")
-name = "Piège A Machoire"
+name = "Piège A Mâchoire"
 icone = SubResource("AtlasTexture_djj2n")
+description = "Un piège à mâchoire converti en arme."
 stat = SubResource("Resource_ukgpr")
 combat_skill_scene = ExtResource("11_k8l66")
 metadata/_custom_type_script = "uid://db4jcia3pwpd3"
@@ -58,7 +59,7 @@ metadata/_custom_type_script = "uid://bk1oc1ul33tnd"
 script = ExtResource("8_5tmjq")
 name = "Test"
 icone = SubResource("GradientTexture2D_djj2n")
-description = "Arme innutilisable sui sert seulement à voir si les données se mettent à jour dans l'interface"
+description = "Arme innutilisable sui sert seulement à voir si les données se mettent à jour dans l'interface."
 stat = SubResource("Resource_uxvu1")
 metadata/_custom_type_script = "uid://db4jcia3pwpd3"
 

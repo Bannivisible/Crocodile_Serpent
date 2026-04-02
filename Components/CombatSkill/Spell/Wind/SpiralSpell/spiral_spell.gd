@@ -40,6 +40,18 @@ func _set_nb_wind_sphere(value: int) -> void:
 func _enter_tree() -> void:
 	await get_tree().process_frame
 	_setup_spiral()
+	
+	var scale_invers: ScaleXFaceInverser= object.velocity_component.scale_x_face_inverser
+	scale_invers.facing_nodes.erase(get_parent()) 
+	var pos_invers: PosXFaceInverser= object.velocity_component.pos_x_face_inverser
+	pos_invers.facing_nodes.erase(get_parent())
+
+
+func _exit_tree() -> void:
+	var scale_invers: ScaleXFaceInverser= object.velocity_component.scale_x_face_inverser
+	scale_invers.facing_nodes.append(get_parent())
+	var pos_invers: PosXFaceInverser= object.velocity_component.pos_x_face_inverser
+	pos_invers.facing_nodes.erase(get_parent())
 
 
 func _physics_process(delta: float) -> void:
