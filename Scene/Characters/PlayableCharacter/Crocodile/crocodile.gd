@@ -11,8 +11,8 @@ class_name Crocodile
 
 ##### BUILT-IN ####
 func _ready() -> void:
+	super._ready()
 	Events.combat_skill_selected.connect(_on_Event_combat_skill_selected)
-	Events.cs_interface_on_screen_changed.connect(_on_Events_cs_interface_on_screen_changed)
 
 
 #func _input(_event: InputEvent) -> void:
@@ -21,8 +21,11 @@ func _ready() -> void:
 
 
 #### LOGIC ####
+func _can_play() -> bool:
+	return weapon_manager.active
 
 
+#### SIGNALS RESPONSES ####
 func _on_Event_combat_skill_selected(cs_data: CombatSkillData) -> void:
 	if not cs_data.combat_skill_scene: return
 	var cs: CombatSkill= cs_data.combat_skill_scene.instantiate()
@@ -30,14 +33,6 @@ func _on_Event_combat_skill_selected(cs_data: CombatSkillData) -> void:
 	if cs is Weapon:
 		weapon_manager.current_weapon_data = cs_data
 		weapon_manager.active = true
-		controler.active = true
 	
 	elif cs is Spell:
 		weapon_manager.active = false
-		controler.active = false
-
-
-func _on_Events_cs_interface_on_screen_changed(on_screen: bool) -> void:
-	velocity_component.dir = Vector2.ZERO
-	if on_screen == true:
-		controler.active = false

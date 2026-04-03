@@ -90,9 +90,8 @@ amount_ratio = 0.3977
 texture = SubResource("GradientTexture2D_aqxpk")
 process_material = SubResource("ParticleProcessMaterial_k3fl0")
 
-[node name="StateMachine" type="Node" parent="." unique_id=1883089290 node_paths=PackedStringArray("current_state")]
+[node name="StateMachine" type="Node" parent="." unique_id=1883089290]
 script = ExtResource("10_5ekjd")
-current_state = NodePath("Desactivate")
 
 [node name="Desactivate" type="Node" parent="StateMachine" unique_id=1620008149]
 script = ExtResource("11_bf0ja")

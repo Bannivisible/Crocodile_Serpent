@@ -9,6 +9,7 @@ signal hitted(damage: float, hurt_box: HurtBox, hit_box: HitBox)
 
 var curr_add_res_mult: float= 0.0
 
+#### BUILT-IN ####
 func _ready() -> void:
 	monitoring = false
 	
@@ -16,9 +17,15 @@ func _ready() -> void:
 	set_collision_layer_value(3, true)
 	set_collision_mask_value(1, false)
 
+#### LOGIC ####
+func get_faction() -> HealthComponent.FACTIONS:
+	return owner.faction
+
+
 func hurt(raw_damage: float, hit_box: HitBox) -> void:
 	var damage = _compute_damage(raw_damage, hit_box.attack_data.type)
 	hitted.emit(damage, self, hit_box)
+
 
 func _compute_damage(damage: float, type: AttackType) -> float:
 	var resistance_add_multiplier: float= 0.0
@@ -28,6 +35,7 @@ func _compute_damage(damage: float, type: AttackType) -> float:
 	curr_add_res_mult = resistance_add_multiplier
 	
 	return damage * (damage_multiplier + curr_add_res_mult)
+
 
 func _modify_label_damage(label: Label) -> Label:
 	var label_settings: LabelSettings= label.label_settings
@@ -45,6 +53,7 @@ func _modify_label_damage(label: Label) -> Label:
 		label_settings.set_stacked_shadow_offset(id, Vector2.ONE * 2)
 	
 	return label
+
 
 func _compute_resistance(attack_type: AttackType, res_type: ResistanceType) -> float:
 	var result: float= 0.0

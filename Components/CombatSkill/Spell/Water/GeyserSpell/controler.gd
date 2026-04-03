@@ -55,7 +55,8 @@ func _can_rotate_geyser() -> bool:
 
 
 func _can_charge() -> bool:
-	return state_machine.get_state_name() == "Desactivate"
+	var state_name: StringName= state_machine.get_state_name()
+	return state_name == "Desactivate" or state_name == ""
 
 
 func _can_cast() -> bool:

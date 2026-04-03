@@ -58,19 +58,3 @@ func _set_spell_data(value: CombatSkillData) -> void:
 		current_spell = null
 	else :
 		current_spell = current_spell_data.combat_skill_scene.instantiate()
-
-
-#### BUILT-IN ####
-func _ready() -> void:
-	Events.combat_skill_selected.connect(_on_Event_combat_skill_selected)
-
-
-#### SIGNALS RESPONSES ####
-func _on_Event_combat_skill_selected(cs_data: CombatSkillData) -> void:
-	if not cs_data.combat_skill_scene: return
-	var cs: CombatSkill= cs_data.combat_skill_scene.instantiate()
-	
-	if cs is Spell:
-		current_spell_data = cs_data
-		active = true
-	elif cs is Weapon: active = false
