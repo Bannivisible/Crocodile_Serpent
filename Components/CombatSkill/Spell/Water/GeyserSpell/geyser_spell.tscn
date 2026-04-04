@@ -82,6 +82,7 @@ script = ExtResource("4_pb20s")
 combat_skill = NodePath("..")
 charac_stat = ExtResource("5_tvycw")
 attack_data = SubResource("Resource_lqyww")
+damage_inteval = 0.25
 metadata/_custom_type_script = "uid://da3cqoomwyp1o"
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1070517859]
@@ -107,9 +108,6 @@ metadata/_custom_type_script = "uid://bcmokx1bwyftw"
 
 [node name="Timer" type="Timer" parent="StateMachine/Cast" unique_id=1230834238]
 one_shot = true
-
-[node name="DamageInterval" type="Timer" parent="StateMachine/Cast" unique_id=1772897159]
-wait_time = 0.25
 
 [node name="AnimationStateMachine" type="Node" parent="." unique_id=1783945020]
 script = ExtResource("10_5ekjd")
@@ -145,4 +143,3 @@ text = "Entrer / Mannette action gauche (Y, ▢, X) : Charger
 ↑, ↓ / A, W : Orienter"
 
 [connection signal="timeout" from="StateMachine/Cast/Timer" to="StateMachine/Cast" method="_on_timer_timeout"]
-[connection signal="timeout" from="StateMachine/Cast/DamageInterval" to="StateMachine/Cast" method="_on_damage_interval_timeout"]

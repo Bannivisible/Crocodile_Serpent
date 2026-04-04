@@ -15,6 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Crocodile Serpent"
+config/description="Un crocodile qui veut devenir le roi de la chaîne alimentaire et un serpent qui veut être une étoile filante se battent contre une chymère, seigneur du règne animal."
 run/main_scene="uid://f188bqv4kk26"
 config/features=PackedStringArray("4.6", "Mobile")
 config/icon="res://icon.svg"

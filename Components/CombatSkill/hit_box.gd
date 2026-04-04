@@ -97,7 +97,8 @@ func _on_area_2d_exited(area: Area2D) -> void:
 
 
 func _on_damage_interval_timer_timeout() -> void:
-	for hurt_box in overlapping_hurt_box: _hit_hurt_box(hurt_box)
+	for hurt_box in overlapping_hurt_box:
+		_hit_hurt_box(hurt_box)
 
 
 func _on_combat_skill_charac_stat_changed(cs_charac_stat: CharacStatistics) -> void:

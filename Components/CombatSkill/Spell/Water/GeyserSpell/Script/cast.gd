@@ -9,15 +9,12 @@ var tween: Tween
 @export var trans_type: Tween.TransitionType
 
 @onready var spell: GeyserSpell= owner
-@onready var damage_interval: Timer = $DamageInterval
 
 @onready var animation_state_machine: StateMachine = $"../../AnimationStateMachine"
 
 var target_lenght: float
 
 var ratio: float= 1.0
-
-var colider: HurtBox
 
 #### INHERITANCE ####
 func enter() -> void:
@@ -31,11 +28,18 @@ func enter() -> void:
 
 
 func update(_delta: float) -> void:
-	_update_collide_lenght()
+	var ray_cast: RayCast2D = spell.ray_cast_2d
+	var ray_cast_colider = ray_cast.get_collider()
+	
+	if ray_cast_colider != null:
+		_on_ray_cast_collide(ray_cast_colider)
+	else :
+		_on_ray_cast_not_collide()
 
 
 func exit() -> void:
-	damage_interval.stop()
+	spell.hit_box.damage_inteval_timer.stop()
+	spell.hit_box.overlapping_hurt_box = []
 	
 	_tween_target_lenght(0.0)
 	tween.tween_callback(func():
@@ -52,38 +56,35 @@ func _tween_target_lenght(lenght: float) -> void:
 	tween.parallel().tween_property(spell, "target_lenght", lenght, APPEAR_ANIMMATION_DURATION)
 
 
+func _on_ray_cast_collide(ray_cast_colider: Node2D) -> void:
+	if not ray_cast_colider is HurtBox: return
+	if ray_cast_colider in spell.hit_box.overlapping_hurt_box: return
+	if spell.hit_box.faction == ray_cast_colider.get_faction(): return
+	
+	spell.hit_box.overlapping_hurt_box = [ray_cast_colider]
+	spell.hit_box.damage_inteval_timer.start()
+	_update_collide_lenght()
+
+
 func _update_collide_lenght() -> void:
 	var ray_cast: RayCast2D = spell.ray_cast_2d
 	
-	if ray_cast.is_colliding():
-		var collision_lenght: float= spell.global_position.distance_to(ray_cast.get_collision_point())
-		if collision_lenght != spell.target_lenght:
-			if tween: tween.kill()
-			spell.target_lenght = collision_lenght
-		
-		_on_ray_cast_collide(ray_cast.get_collider())
-	
-	elif spell.target_lenght != target_lenght:
-		_tween_target_lenght(target_lenght)
-		colider = null
+	var collision_lenght: float= spell.global_position.distance_to(ray_cast.get_collision_point())
+	if collision_lenght != spell.target_lenght:
+		if tween: tween.kill()
+		spell.target_lenght = collision_lenght
 
 
-func _on_ray_cast_collide(ray_cast_colider: Node2D) -> void:
-	if not ray_cast_colider is HurtBox: return
-	if colider == ray_cast_colider: return
-	
-	colider = ray_cast_colider
-	damage_interval.start()
+func _on_ray_cast_not_collide() -> void:
+	if spell.target_lenght == target_lenght: return
+	spell.hit_box.overlapping_hurt_box = []
+	spell.hit_box.damage_inteval_timer.stop()
+	_update_not_collide_lenght()
 
 
-func _hit_colider() -> void:
-	spell.hit_box._on_area_2d_entered(colider)
-
+func _update_not_collide_lenght() -> void:
+	_tween_target_lenght(target_lenght)
 
 #### SIGNALS RESPONSES ####
 func _on_timer_timeout() -> void:
 	spell.state_machine.current_state = null
-
-
-func _on_damage_interval_timeout() -> void:
-	if colider: _hit_colider()
