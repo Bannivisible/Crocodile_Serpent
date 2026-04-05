@@ -108,6 +108,8 @@ height = 362.0
 font_size = 32
 font_color = Color(0, 0, 0, 1)
 outline_size = 12
+shadow_size = 20
+shadow_color = Color(0, 0, 0, 1)
 
 [node name="FightArena" unique_id=929122509 instance=ExtResource("1_0264e")]
 script = ExtResource("2_1ato1")
@@ -589,12 +591,7 @@ metadata/_custom_type_script = "uid://wfeuuhcaqnee"
 position = Vector2(-8, -51)
 shape = SubResource("CapsuleShape2D_rtusd")
 
-[node name="CSInterface" parent="UI" parent_id_path=PackedInt32Array(1969216931) index="1" unique_id=784519379 instance=ExtResource("2_j78hf")]
-
-[node name="Snake" parent="." index="9" unique_id=644033490 instance=ExtResource("13_5lqx4")]
-position = Vector2(613, 185)
-
-[node name="HelpLabel" type="Label" parent="." index="10" unique_id=786051834]
+[node name="HelpLabel" type="Label" parent="UI" parent_id_path=PackedInt32Array(1969216931) index="0" unique_id=786051834]
 z_index = 100
 offset_right = 1051.0
 offset_bottom = 477.0
@@ -606,3 +603,8 @@ C : Afficher / Enlever le menu des compétences
 M : Masquer / Afficher l'aide"
 label_settings = SubResource("LabelSettings_5lqx4")
 script = ExtResource("14_vr7e4")
+
+[node name="CSInterface" parent="UI" parent_id_path=PackedInt32Array(1969216931) index="2" unique_id=784519379 instance=ExtResource("2_j78hf")]
+
+[node name="Snake" parent="." index="9" unique_id=644033490 instance=ExtResource("13_5lqx4")]
+position = Vector2(613, 185)

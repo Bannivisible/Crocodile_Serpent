@@ -413,6 +413,8 @@ theme = ExtResource("1_nh015")
 script = ExtResource("2_lhy7a")
 show_animation_ease = 1
 show_animation_trans = 11
+help_text = "Entrer / Espace / Mannette action droite (A, O, B) :  Confirmer
+Echap / ⟵ / Mannete action bas (B, X, A) : Retour"
 tab_first_buttons = [NodePath("Panel/DoublePageTabContainer/CSCategorySelection/RightPanel1/MarginContainer/VBoxContainer/MarginContainer/StarButton"), NodePath("Panel/DoublePageTabContainer/CSSelection/RightPanel2/MarginContainer/CSGridContainer/CSButton1")]
 metadata/_edit_lock_ = true
 

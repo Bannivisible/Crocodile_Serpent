@@ -16,6 +16,8 @@ const STATS_SHOW_ANIMATION_MIN_GAP: float= 20.0
 @export var stats_show_animation_ease: Tween.EaseType 
 @export var stats_show_animation_trans: Tween.TransitionType
 
+@export_multiline() var help_text: String
+
 @export var tab_first_buttons: Array[Button]
 var last_buttons_focus: Array[Button]
 
@@ -60,9 +62,6 @@ func _input(_event: InputEvent) -> void:
 		_return_page()
 		
 		_check_stat_to_unshow()
-	
-	elif Input.is_action_just_pressed("special"):
-		pass
 
 
 #### LOGIC ####
@@ -222,6 +221,7 @@ func _on_cs_selected(cs_data: CombatSkillData) -> void:
 func _on_on_scren_changed(_value: bool) -> void:
 	if on_screen:
 		_last_button_focus_grab_focus()
+		Events.request_help.emit(help_text, false)
 	else :
 		_last_button_focus_release_focus()
 
