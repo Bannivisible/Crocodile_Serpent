@@ -8,12 +8,23 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_v2h8a"]
 radius = 25.298222
 
+[sub_resource type="Gradient" id="Gradient_6imha"]
+colors = PackedColorArray(1, 0, 0, 1, 1, 1, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fq672"]
+gradient = SubResource("Gradient_6imha")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
 [node name="ProjectileDeflagration" unique_id=1801537751 instance=ExtResource("1_n0nvc")]
 script = ExtResource("2_0k2qt")
 p_ratio = 1.0
 
 [node name="CollisionShape2D" parent="." index="0" unique_id=1453953886]
 shape = SubResource("CircleShape2D_v2h8a")
+
+[node name="Sprite2D" parent="." index="1" unique_id=1876869771]
+texture = SubResource("GradientTexture2D_fq672")
 
 [node name="Appear" parent="StateMachine" parent_id_path=PackedInt32Array(1148728702) index="0" unique_id=1208750451]
 script = ExtResource("3_tejqg")

@@ -19,6 +19,7 @@ func enter() -> void:
 func _explode() -> void:
 	_explosed_animation()
 
+
 func _explosed_animation() -> void:
 	var tween: Tween= deflagration.tween
 	

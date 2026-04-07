@@ -24,6 +24,7 @@
 [ext_resource type="Script" uid="uid://ce11vnhaprxn2" path="res://Components/animation_manager/anim_state_machine_label.gd" id="13_3ma4d"]
 [ext_resource type="Script" uid="uid://d38qkfrf1wj1a" path="res://StateMachine/state_label.gd" id="13_x7o3y"]
 [ext_resource type="Script" uid="uid://dat1xibjdbka6" path="res://Components/Statistics/statistics_manager.gd" id="15_hd1gs"]
+[ext_resource type="Script" uid="uid://bcmokx1bwyftw" path="res://StateMachine/state_machine.gd" id="22_lac0c"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_c8tis"]
 radius = 39.0
@@ -4288,11 +4289,23 @@ velocity_component = NodePath("../../VelocityComponent")
 jump = NodePath("../Jump")
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 
-[node name="ChargeSpell" type="Node" parent="StateMachine" index="5" unique_id=319174219]
+[node name="BentDown" type="Node" parent="StateMachine" index="5" unique_id=902936336]
+script = ExtResource("22_lac0c")
+metadata/_custom_type_script = "uid://bcmokx1bwyftw"
+
+[node name="IdleB" type="Node" parent="StateMachine/BentDown" index="0" unique_id=2026019341]
 script = ExtResource("6_1e483")
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 
-[node name="CastSpell" type="Node" parent="StateMachine" index="6" unique_id=1674036642]
+[node name="MoveB" type="Node" parent="StateMachine/BentDown" index="1" unique_id=1247653279]
+script = ExtResource("6_1e483")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="ChargeSpell" type="Node" parent="StateMachine" index="6" unique_id=319174219]
+script = ExtResource("6_1e483")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="CastSpell" type="Node" parent="StateMachine" index="7" unique_id=1674036642]
 script = ExtResource("6_1e483")
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 

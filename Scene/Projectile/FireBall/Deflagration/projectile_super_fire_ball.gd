@@ -15,6 +15,10 @@ func _compute_dist_damage(area: Node2D, damage: float) -> float:
 	return damage * max(damage_min, 1.0 - (distance/rayon)**p_ratio)
 
 
+func can_cast() -> bool:
+	return state_machine.get_state_name() == "Appear"
+
+
 func cast() -> void:
 	state_machine.set_state_with_string("LinearMovement")
 
