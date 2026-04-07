@@ -6,7 +6,7 @@ extends Label
 #### BUILT-IN ####
 func _ready() -> void:
 	Events.request_help.connect(_on_Events_request_help)
-
+	label_settings.line_spacing = 0.0
 
 func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("hide_help"):

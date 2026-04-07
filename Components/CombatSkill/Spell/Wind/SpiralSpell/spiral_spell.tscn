@@ -9,8 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://d3ndrx3vqaap5" path="res://Scene/Projectile/WindSphere/wind_sphere.tscn" id="7_00sfu"]
 [ext_resource type="Script" uid="uid://doagmyu4ylk33" path="res://Ressources/Attack/AttackData/spell_attack_data.gd" id="8_3du21"]
 [ext_resource type="Script" uid="uid://c2tjl6yuq0a6" path="res://Components/CombatSkill/Spell/Wind/SpiralSpell/controler.gd" id="9_3du21"]
-[ext_resource type="Script" uid="uid://6lekj6yg62r6" path="res://Components/animation_manager/animation_manager_component.gd" id="10_fxa4u"]
-[ext_resource type="Script" uid="uid://dgi2a2c0lt17u" path="res://Components/animation_manager/state_animation_manager.gd" id="11_5iq0v"]
+[ext_resource type="Script" uid="uid://6lekj6yg62r6" path="res://Components/Animation_manager/animation_manager_component.gd" id="10_fxa4u"]
+[ext_resource type="Script" uid="uid://dgi2a2c0lt17u" path="res://Components/Animation_manager/state_animation_manager.gd" id="11_5iq0v"]
 [ext_resource type="Resource" uid="uid://c4jeioubu2xem" path="res://Ressources/AnimationConnection/snake_connections.tres" id="11_cs3q4"]
 [ext_resource type="Script" uid="uid://bet70jp2lrgrr" path="res://Ui/HelpLabel/help_request.gd" id="13_cs3q4"]
 
@@ -91,7 +91,7 @@ metadata/_custom_type_script = "uid://dgi2a2c0lt17u"
 
 [node name="HelpRequest" type="Node" parent="." unique_id=2146267095]
 script = ExtResource("13_cs3q4")
-text = "Entrer / Mannette action gauche (Y, ▢, X) + ←, → / S, D : Controler le rayon"
+text = "Entrer / Mannette action gauche (Y, ▢, X)  +  ←, → / S, D :  Controler le rayon"
 metadata/_custom_type_script = "uid://bet70jp2lrgrr"
 
 [connection signal="projectile_spawn" from="StateMachine/SpawnProjectileState" to="." method="_on_spawn_projectile_state_projectile_spawn"]

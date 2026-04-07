@@ -13,9 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://7waxkd4kq5sy" path="res://Scene/Projectile/LightningSphere/lightning_sphere.tscn" id="11_aeu6h"]
 [ext_resource type="Script" uid="uid://d34pga1ehnp01" path="res://Components/CombatSkill/Spell/Electricity/LightningCageSpell/controler.gd" id="12_3xivn"]
 [ext_resource type="Script" uid="uid://doagmyu4ylk33" path="res://Ressources/Attack/AttackData/spell_attack_data.gd" id="12_skbvi"]
-[ext_resource type="Script" uid="uid://6lekj6yg62r6" path="res://Components/animation_manager/animation_manager_component.gd" id="14_6t54o"]
+[ext_resource type="Script" uid="uid://6lekj6yg62r6" path="res://Components/Animation_manager/animation_manager_component.gd" id="14_6t54o"]
 [ext_resource type="Resource" uid="uid://c4jeioubu2xem" path="res://Ressources/AnimationConnection/snake_connections.tres" id="15_qhduj"]
-[ext_resource type="Script" uid="uid://dgi2a2c0lt17u" path="res://Components/animation_manager/state_animation_manager.gd" id="16_8ha51"]
+[ext_resource type="Script" uid="uid://dgi2a2c0lt17u" path="res://Components/Animation_manager/state_animation_manager.gd" id="16_8ha51"]
 [ext_resource type="Script" uid="uid://bet70jp2lrgrr" path="res://Ui/HelpLabel/help_request.gd" id="17_qhduj"]
 
 [sub_resource type="Resource" id="Resource_l5xkk"]
@@ -129,7 +129,7 @@ metadata/_custom_type_script = "uid://dgi2a2c0lt17u"
 
 [node name="HelpRequest" type="Node" parent="." unique_id=371183546]
 script = ExtResource("17_qhduj")
-text = "Entrer / Mannette action gauche (Y, ▢, X) : Ajouter un point"
+text = "Entrer / Mannette action gauche (Y, ▢, X) :  Ajouter un point"
 metadata/_custom_type_script = "uid://bet70jp2lrgrr"
 
 [connection signal="projectile_spawn" from="StateMachine/Cast2" to="." method="_on_spawn_projectile_state_projectile_spawn"]

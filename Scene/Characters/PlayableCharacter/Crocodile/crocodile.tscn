@@ -21,9 +21,9 @@
 [ext_resource type="Script" uid="uid://dat1xibjdbka6" path="res://Components/Statistics/statistics_manager.gd" id="11_xdqw8"]
 [ext_resource type="SkeletonModification2DLookAt" uid="uid://c8bnrs2ge68xr" path="res://Scene/Characters/PlayableCharacter/Crocodile/SkeletonModification/hand_front_skeleton_modification_2d_look_at.tres" id="14_umomj"]
 [ext_resource type="Animation" uid="uid://ccbyb3j0w0168" path="res://Scene/Characters/PlayableCharacter/Crocodile/AnimationTree/Idle.res" id="16_jlbrr"]
-[ext_resource type="Script" uid="uid://6lekj6yg62r6" path="res://Components/animation_manager/animation_manager_component.gd" id="21_w2kjd"]
+[ext_resource type="Script" uid="uid://6lekj6yg62r6" path="res://Components/Animation_manager/animation_manager_component.gd" id="21_w2kjd"]
 [ext_resource type="Resource" uid="uid://b85xloi286pt1" path="res://Ressources/AnimationConnection/crocodile_animation_connections.tres" id="22_4djef"]
-[ext_resource type="Script" uid="uid://dgi2a2c0lt17u" path="res://Components/animation_manager/state_animation_manager.gd" id="22_jbjqy"]
+[ext_resource type="Script" uid="uid://dgi2a2c0lt17u" path="res://Components/Animation_manager/state_animation_manager.gd" id="22_jbjqy"]
 [ext_resource type="Script" uid="uid://crj66obtl3821" path="res://Components/CombatSkill/Weapon/weapon_manager.gd" id="22_qvnx8"]
 [ext_resource type="Resource" uid="uid://cnl4cmnu6nf6p" path="res://Scene/Characters/PlayableCharacter/Crocodile/Ressources/crocodile_stat.tres" id="27_e5ikc"]
 [ext_resource type="Script" uid="uid://dpn7spt1k8imj" path="res://Scene/Characters/Scripts/BasicStates/state_machine.gd" id="28_yvpvj"]
@@ -2527,7 +2527,7 @@ texture = SubResource("AtlasTexture_6d12l")
 [node name="HeadGroup" type="Node2D" parent="SpriteContainer" parent_id_path=PackedInt32Array(791091049) index="5" unique_id=243440234]
 z_index = 3
 position = Vector2(0.00047871136, -267.9745)
-rotation = 0.0021072617
+rotation = 0.0021072624
 scale = Vector2(0.9997613, 0.9997613)
 
 [node name="Jaw" type="Sprite2D" parent="SpriteContainer/HeadGroup" index="0" unique_id=1671218072]
@@ -2603,7 +2603,7 @@ offset = Vector2(20.086979, -10.858177)
 
 [node name="StrandFront" type="Sprite2D" parent="SpriteContainer/HeadGroup" index="3" unique_id=1968218646]
 z_index = 3
-position = Vector2(13.3845825, -58.468872)
+position = Vector2(13.384586, -58.468872)
 scale = Vector2(0.9998737, 0.99956745)
 texture = SubResource("AtlasTexture_24sqv")
 offset = Vector2(3.8255405, 18.435066)
@@ -2613,7 +2613,7 @@ z_index = 3
 
 [node name="ArmFront" type="Sprite2D" parent="SpriteContainer/ArmFrontGroup" index="0" unique_id=1751966982]
 position = Vector2(-56.329815, -220.66077)
-rotation = -0.02197009
+rotation = -0.021970095
 scale = Vector2(0.99977654, 0.99977654)
 texture = SubResource("AtlasTexture_kwm2e")
 offset = Vector2(-10, 17.333)
@@ -2621,7 +2621,7 @@ offset = Vector2(-10, 17.333)
 [node name="ForearmFront" type="Sprite2D" parent="SpriteContainer/ArmFrontGroup" index="1" unique_id=189613157]
 z_index = 3
 position = Vector2(-77.276764, -187.86684)
-rotation = -0.07213891
+rotation = -0.07213892
 scale = Vector2(0.9996204, 0.9996204)
 texture = SubResource("AtlasTexture_l1deg")
 offset = Vector2(-14, 25.667)
@@ -2629,7 +2629,7 @@ offset = Vector2(-14, 25.667)
 [node name="HandFront" type="Sprite2D" parent="SpriteContainer/ArmFrontGroup" index="2" unique_id=950457284]
 z_index = 3
 position = Vector2(-100.40611, -138.08807)
-rotation = -0.25910038
+rotation = -0.2591004
 scale = Vector2(0.9996246, 0.9996246)
 texture = SubResource("AtlasTexture_fs2r1")
 offset = Vector2(-12, 15)
