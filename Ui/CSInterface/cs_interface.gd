@@ -50,6 +50,15 @@ func _ready() -> void:
 	%IceButton.pressed.connect(_on_spell_category_button_pressed)
 	%WeaponButton.pressed.connect(_on_weapon_category_button_pressed)
 	
+	%StarButton.pressed.connect(_on_button_focus_entered.bind(%StarButton))
+	%WaterButton.pressed.connect(_on_button_focus_entered.bind(%WaterButton))
+	%FireButton.pressed.connect(_on_button_focus_entered.bind(%FireButton))
+	%WindButton.pressed.connect(_on_button_focus_entered.bind(%WindButton))
+	%LightningButton.pressed.connect(_on_button_focus_entered.bind(%LightningButton))
+	%IceButton.pressed.connect(_on_button_focus_entered.bind(%IceButton))
+	%WeaponButton.pressed.connect(_on_button_focus_entered.bind(%WeaponButton))
+	_connect_cs_button()
+	
 	_innit_values()
 
 #### INPUTS ####
@@ -65,7 +74,22 @@ func _input(_event: InputEvent) -> void:
 
 
 #### LOGIC ####
+func _connect_cs_button() -> void:
+	var cs_button: Button= get_node_or_null("%CSButton1")
+	var n: int= 1
+	
+	while cs_button != null:
+		cs_button.focus_entered.connect(_on_button_focus_entered.bind(cs_button))
+		
+		n += 1
+		cs_button = get_node_or_null("%CSButton" + str(n))
+
+
 func _innit_values() -> void:
+	var tab_count: int= %DoublePageTabContainer.get_tab_count()
+	for i in range(tab_count):
+		last_buttons_focus.append(null)
+	
 	%DoublePageTabContainer.current_tab = 0
 	
 	%TWStardustPanelContainer.visible = false
@@ -140,7 +164,7 @@ func _emit_event_cs_selected_signal(cs_data) -> void:
 func _last_button_focus_grab_focus() -> void:
 	var tab: int= %DoublePageTabContainer.current_tab
 	
-	if last_buttons_focus.size() - 1 == tab:
+	if last_buttons_focus[tab] != null:
 		last_buttons_focus[tab].grab_focus()
 	else :
 		tab_first_buttons[tab].grab_focus()
@@ -149,7 +173,7 @@ func _last_button_focus_grab_focus() -> void:
 func _last_button_focus_release_focus() -> void:
 	var tab: int= %DoublePageTabContainer.current_tab
 	
-	if last_buttons_focus.size() - 1 == tab:
+	if last_buttons_focus[tab] != null:
 		last_buttons_focus[tab].release_focus()
 	else :
 		tab_first_buttons[tab].release_focus()
@@ -229,3 +253,9 @@ func _on_on_scren_changed(_value: bool) -> void:
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name.ends_with("Page"):
 		_last_button_focus_grab_focus()
+
+
+func _on_button_focus_entered(button: Button) -> void:
+	var tab: int= %DoublePageTabContainer.current_tab
+	
+	last_buttons_focus[tab] = button

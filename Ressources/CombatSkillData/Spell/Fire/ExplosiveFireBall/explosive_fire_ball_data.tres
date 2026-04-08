@@ -18,7 +18,7 @@ stardust_cost = 35.0
 name = "Déflagration"
 icone = SubResource("GradientTexture2D_bwmdh")
 description = "Une boule de feu qui déclenche une déflagration.
-(Bug trop pour être dsponible)"
+(Incomplet)"
 stat = ExtResource("3_gl4uw")
 combat_skill_scene = ExtResource("1_k8d5y")
 metadata/_custom_type_script = "uid://db4jcia3pwpd3"
