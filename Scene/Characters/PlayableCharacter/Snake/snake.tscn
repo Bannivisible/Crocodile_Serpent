@@ -3108,7 +3108,7 @@ _data = {
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_upub7"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_4k7xw"]
-graph_offset = Vector2(-966.38654, -14.767883)
+graph_offset = Vector2(-1379.4796, 0)
 nodes/OneShot/node = SubResource("AnimationNodeOneShot_upub7")
 nodes/OneShot/position = Vector2(-26.666666, 226.66667)
 "nodes/AnimationNodeStateMachine 2/node" = ExtResource("8_wv1tt")
@@ -3841,21 +3841,26 @@ shape = SubResource("CapsuleShape2D_c8tis")
 position = Vector2(112, -106)
 
 [node name="TrailBack" type="AnimatedSprite2D" parent="SpriteContainer/ArmBack" index="0" unique_id=79303945]
-position = Vector2(-135, 14)
+position = Vector2(-213, 50)
+rotation = -1.2247584
 sprite_frames = SubResource("SpriteFrames_u3ofr")
 animation = &"active"
 offset = Vector2(37, -10)
 flip_v = true
 
 [node name="ShootingStarTailBack" type="AnimatedSprite2D" parent="SpriteContainer/ArmBack" index="1" unique_id=561651213]
-position = Vector2(-51, 2)
+position = Vector2(-195.79814, -33.09088)
+rotation = -0.67319185
+scale = Vector2(1.0000001, 1.0000001)
 sprite_frames = SubResource("SpriteFrames_gv3gm")
 animation = &"active"
 offset = Vector2(15, 3)
 flip_v = true
 
 [node name="HandBack" type="AnimatedSprite2D" parent="SpriteContainer/ArmBack" index="2" unique_id=416047715]
-position = Vector2(-10, -11)
+position = Vector2(-171.84818, -68.81763)
+rotation = -0.67319185
+scale = Vector2(1.0000001, 1.0000001)
 sprite_frames = SubResource("SpriteFrames_ox5u4")
 animation = &"active"
 offset = Vector2(7, 7)
@@ -3867,14 +3872,14 @@ flip_v = true
 position = Vector2(-47, -54)
 sprite_frames = SubResource("SpriteFrames_wujim")
 animation = &"floating"
-speed_scale = 1.25
+speed_scale = 0.75
 offset = Vector2(-11, 38)
 
 [node name="SleeveFront" type="AnimatedSprite2D" parent="SpriteContainer/BodyGroup" index="1" unique_id=2017756368]
 position = Vector2(19, -51)
 sprite_frames = SubResource("SpriteFrames_20mi1")
 animation = &"floating"
-speed_scale = 1.25
+speed_scale = 0.75
 offset = Vector2(35, 7)
 
 [node name="Body" type="Node2D" parent="SpriteContainer/BodyGroup" index="2" unique_id=988212309]
@@ -3899,7 +3904,7 @@ metadata/_custom_type_script = "uid://lnbdh25h7yvf"
 position = Vector2(-1, -20)
 sprite_frames = SubResource("SpriteFrames_cm4y7")
 animation = &"floating"
-speed_scale = 1.25
+speed_scale = 0.75
 script = ExtResource("5_upub7")
 frame_pos = Array[Vector2]([Vector2(-1, -20), Vector2(-13, -21), Vector2(-19, -20), Vector2(-38, -46), Vector2(-65, -47), Vector2(-41, -37), Vector2(34, -47)])
 
@@ -3913,7 +3918,7 @@ rotation = -0.7853982
 scale = Vector2(0.99999994, 0.99999994)
 sprite_frames = SubResource("SpriteFrames_60f1h")
 animation = &"floating"
-speed_scale = 1.25
+speed_scale = 0.75
 
 [node name="Scarf" type="Sprite2D" parent="SpriteContainer/BodyGroup/Body" index="4" unique_id=424025751]
 z_index = 1
@@ -3925,7 +3930,7 @@ z_index = 2
 position = Vector2(-52, -79)
 sprite_frames = SubResource("SpriteFrames_xuar8")
 animation = &"floating"
-speed_scale = 1.25
+speed_scale = 0.75
 
 [node name="ScarfBack" type="Sprite2D" parent="SpriteContainer/BodyGroup" index="3" unique_id=517426527]
 position = Vector2(-5, -51)
@@ -3945,21 +3950,21 @@ z_index = -2
 position = Vector2(-28, -145)
 sprite_frames = SubResource("SpriteFrames_28kfq")
 animation = &"floating"
-speed_scale = 1.25
+speed_scale = 0.75
 offset = Vector2(-11, 70)
 
 [node name="FloatingBandageBack" type="AnimatedSprite2D" parent="SpriteContainer/HeadGroup" index="1" unique_id=1171928779]
 position = Vector2(-15, -126)
 sprite_frames = SubResource("SpriteFrames_qpqc1")
 animation = &"floating"
-speed_scale = 1.25
+speed_scale = 0.75
 offset = Vector2(-37, 2)
 
 [node name="FloatingBandageFront" type="AnimatedSprite2D" parent="SpriteContainer/HeadGroup" index="2" unique_id=1383888984]
 position = Vector2(19, -127)
 sprite_frames = SubResource("SpriteFrames_fdabd")
 animation = &"floating"
-speed_scale = 1.25
+speed_scale = 0.75
 offset = Vector2(11, 1)
 
 [node name="Jaw" type="Sprite2D" parent="SpriteContainer/HeadGroup" index="3" unique_id=734385116]
@@ -3997,7 +4002,7 @@ texture = SubResource("AtlasTexture_7nnaa")
 position = Vector2(45, -65)
 sprite_frames = SubResource("SpriteFrames_gqhqt")
 animation = &"floating"
-speed_scale = 1.25
+speed_scale = 0.75
 
 [node name="Cap" type="Sprite2D" parent="SpriteContainer/HeadGroup/Face" index="5" unique_id=1706001136]
 position = Vector2(51, -45)
@@ -4298,14 +4303,6 @@ script = ExtResource("6_1e483")
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 
 [node name="MoveB" type="Node" parent="StateMachine/BentDown" index="1" unique_id=1247653279]
-script = ExtResource("6_1e483")
-metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
-
-[node name="ChargeSpell" type="Node" parent="StateMachine" index="6" unique_id=319174219]
-script = ExtResource("6_1e483")
-metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
-
-[node name="CastSpell" type="Node" parent="StateMachine" index="7" unique_id=1674036642]
 script = ExtResource("6_1e483")
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 

@@ -16,6 +16,8 @@ enum PLAY_MODE {
 
 @export var play_mode := PLAY_MODE.PLAY
 
+@export var await_previous_anim: bool= true
+
 @export var state_machine: StateMachine:
 	set = _set_state_machine
 
@@ -82,6 +84,34 @@ func _get_state_machine_playback() -> AnimationNodeStateMachinePlayback:
 
 func _get_anim_state_machine() -> AnimationNodeStateMachine:
 	return anim_manager.get_animation_node(anim_sm_name)
+
+
+#func _get_current_anim() -> StringName:
+	#match play_mode:
+		#PLAY_MODE.PLAY:
+			#return anim_manager.get_current_animation_name()
+		#
+		#PLAY_MODE.BLEND:
+			#var anim_nd_name := anim_manager.get_connection_with_to_and_port(blend_node_name, 1).from
+			#var anim_node := anim_manager.get_animation_node(anim_nd_name)
+			#
+			#if anim_node is AnimationNodeAnimation:
+				#return anim_node.animation
+			#elif anim_node is AnimationNodeStateMachine:
+				#return anim_manager.get_anim_state_machine_current_anim_name(anim_nd_name)
+		#PLAY_MODE.SHOT:
+			#var anim_nd_name := anim_manager.get_connection_with_to_and_port(os_node_name, 1).from
+			#var anim_node := anim_manager.get_animation_node(anim_nd_name)
+			#
+			#if anim_node is AnimationNodeAnimation:
+				#return anim_node.animation
+			#elif anim_node is AnimationNodeStateMachine:
+				#return anim_manager.get_anim_state_machine_current_anim_name(anim_nd_name)
+		#
+		#PLAY_MODE.TRAVEL:
+			#return
+	#
+	#return ""
 
 
 func _play_state_anime(state: State) -> void:
@@ -166,3 +196,11 @@ func _match_mix(anim_name: StringName) -> void:
 #### SIGNAL RESPONSES ####
 func _on_state_machine_state_changed_recur(_state: State, deep_state: State) -> void:
 	if active: _play_state_anime(deep_state)
+
+
+#func _on_animation_manager_animation_finished(anim_name) -> void:
+	#pass
+#
+#
+#func _on_state_machine_playback_state_finished(state_name) -> void:
+	#pass
