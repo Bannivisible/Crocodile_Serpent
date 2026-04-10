@@ -38,6 +38,9 @@ enum PLAY_MODE {
 
 @onready var anim_manager: AnimationManagerComponent= get_node_or_null(anim_manager_path)
 
+var queue: Array[State]
+
+signal queue_reduce
 
 #### SETTERS ####
 func _set_state_machine(value: StateMachine) -> void:
@@ -52,6 +55,14 @@ func _set_anim_sm_name(value: String) -> void:
 	anim_sm_name = value
 
 #### BUILT IN ####
+#func _ready() -> void:
+	#queue_reduce.connect(_on_queue_reduce)
+	#anim_manager.animation_finished.connect(_on_animation_manager_animation_finished)
+	#
+	#await get_tree().process_frame
+	#_connect_sm_playback()
+
+
 func _enter_tree() -> void:
 	if not is_node_ready(): await get_tree().process_frame
 	
@@ -68,6 +79,26 @@ func _exit_tree() -> void:
 		os.filter_enabled = true
 
 #### LOGIC ####
+func _connect_sm_playback() -> void:
+	match play_mode:
+		PLAY_MODE.BLEND:
+			_connect_anim_blend_sm_playback(blend_node_name)
+		PLAY_MODE.SHOT:
+			_connect_anim_blend_sm_playback(os_node_name)
+		PLAY_MODE.TRAVEL:
+			var playback := anim_manager.get_state_machine_playback(anim_sm_name)
+			playback.state_finished.connect(_on_state_machine_playback_state_finished)
+
+
+func _connect_anim_blend_sm_playback(anim_blend_nd_name: StringName) -> void:
+	var anim_nd_name := anim_manager.get_connection_with_to_and_port(anim_blend_nd_name, 1).from
+	var anim_node := anim_manager.get_animation_node(anim_nd_name)
+	
+	if anim_node is AnimationNodeStateMachine:
+		var playback := anim_manager.get_state_machine_playback(anim_nd_name)
+		playback.state_finished.connect(_on_state_machine_playback_state_finished)
+
+
 func _get_anim_name(state: State) -> String:
 	var anim_name: String= state.get_chained_string()
 	anim_name = anim_name.substr(len(state_machine.name) + 1)
@@ -117,8 +148,13 @@ func _get_anim_state_machine() -> AnimationNodeStateMachine:
 func _play_state_anime(state: State) -> void:
 	if state == null: return
 	
-	var anim_name: StringName= _get_anim_name(state)
+	#queue.append(state)
+	#
+	#if queue == [state]:
+		#var anim_name: StringName= _get_anim_name(state)
+		#_play_anim(anim_name)
 	
+	var anim_name: StringName= _get_anim_name(state)
 	_play_anim(anim_name)
 
 
@@ -150,11 +186,11 @@ func _match_blend(anim_name: StringName) -> void:
 	if anim != null:
 		anim_manager.setup_blend_node(blend_node_name, anim_name)
 	
-	elif anim_manager is AnimationManagerComponent:
+	else:
 		var sm_name: StringName=anim_manager.get_connection_with_to_and_port(blend_node_name, 1).from
 		var anim_sm = anim_manager.get_animation_node(sm_name)
 		
-		if anim_sm is AnimationNodeStateMachine and anim_name in anim_sm.get_node_list():
+		if anim_sm is AnimationNodeStateMachine and anim_sm.has_node(anim_name):
 			var true_anim_name: StringName= anim_manager.get_animation_name_of_node(anim_sm.get_node(anim_name))
 		
 			anim_manager.setup_blend_node(blend_node_name, anim_name, true_anim_name)
@@ -165,11 +201,11 @@ func _match_one_shot(anim_name: StringName) -> void:
 	if anim != null and anim.loop_mode == Animation.LOOP_NONE:
 		anim_manager.setup_one_shot(os_node_name, anim_name)
 	
-	elif anim_manager is AnimationManagerComponent:
+	else:
 		var sm_name: StringName=anim_manager.get_connection_with_to_and_port(os_node_name, 1).from
 		var anim_sm = anim_manager.get_animation_node(sm_name)
 		
-		if anim_sm is AnimationNodeStateMachine and anim_name in anim_sm.get_node_list():
+		if anim_sm is AnimationNodeStateMachine and anim_sm.has_node(anim_name):
 			var true_anim_name: StringName= anim_manager.get_animation_name_of_node(anim_sm.get_node(anim_name))
 			if not anim_manager.get_animation(true_anim_name).loop_mode == Animation.LOOP_NONE: return
 			
@@ -198,9 +234,16 @@ func _on_state_machine_state_changed_recur(_state: State, deep_state: State) -> 
 	if active: _play_state_anime(deep_state)
 
 
-#func _on_animation_manager_animation_finished(anim_name) -> void:
-	#pass
-#
-#
-#func _on_state_machine_playback_state_finished(state_name) -> void:
-	#pass
+func _on_queue_reduce() -> void:
+	if queue != []:
+		_play_state_anime(queue[0])
+
+
+func _on_animation_manager_animation_finished(_anim_name) -> void:
+	queue.remove_at(0)
+	queue_reduce.emit()
+
+
+func _on_state_machine_playback_state_finished(_state_name) -> void:
+	queue.remove_at(0)
+	queue_reduce.emit()
