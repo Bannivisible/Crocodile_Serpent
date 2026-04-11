@@ -42,6 +42,8 @@ var queue: Array[StringName]
 
 signal queue_reduce
 
+@export var mybool: bool= false
+
 #### SETTERS ####
 func _set_state_machine(value: StateMachine) -> void:
 	if state_machine: state_machine.state_changed_recur.disconnect(_on_state_machine_state_changed_recur)
@@ -56,7 +58,7 @@ func _set_anim_sm_name(value: String) -> void:
 
 #### BUILT IN ####
 func _input(_event: InputEvent) -> void:
-	if Input.is_action_just_pressed("up"):
+	if Input.is_action_just_pressed("up") and mybool:
 		print(queue)
 
 
@@ -91,7 +93,10 @@ func _connect_sm_playback() -> void:
 		PLAY_MODE.SHOT:
 			_connect_anim_blend_sm_playback(os_node_name)
 		PLAY_MODE.TRAVEL:
+			var anim_sm : AnimationNodeStateMachine= anim_manager.get_animation_node(anim_sm_name)
 			var playback := anim_manager.get_state_machine_playback(anim_sm_name)
+			
+			playback.state_started.connect(_on_state_machine_playback_state_started.bind(anim_sm))
 			playback.state_finished.connect(_on_state_machine_playback_state_finished)
 
 
@@ -101,6 +106,7 @@ func _connect_anim_blend_sm_playback(anim_blend_nd_name: StringName) -> void:
 	
 	if anim_node is AnimationNodeStateMachine:
 		var playback := anim_manager.get_state_machine_playback(anim_nd_name)
+		playback.state_started.connect(_on_state_machine_playback_state_started.bind(anim_node))
 		playback.state_finished.connect(_on_state_machine_playback_state_finished)
 
 
@@ -245,14 +251,17 @@ func _on_animation_manager_animation_finished(anim_name) -> void:
 		queue_reduce.emit()
 
 
+func _on_state_machine_playback_state_started(state_name, anim_sm: AnimationNodeStateMachine) -> void:
+	if queue == [] or queue[0] != state_name: return
+	
+	var anim_name := anim_manager.get_animation_name_of_node(anim_sm.get_node(state_name))
+	var anim: Animation= anim_manager.get_animation(anim_name)
+	
+	if anim.loop_mode == Animation.LOOP_NONE:
+		queue.remove_at(0)
+
+
 func _on_state_machine_playback_state_finished(state_name) -> void:
 	if queue != [] and state_name == queue[0]:
 		queue.remove_at(0)
 		queue_reduce.emit()
-
-
-func _on_state_machine_playback_state_entered(state_name, sm: AnimationNodeStateMachine) -> void:
-	var anim_name := anim_manager.get_animation_name_of_node(sm.get_node(state_name))
-	var anim: Animation= anim_manager.get_animation(anim_name)
-	if anim.loop_mode == Animation.LOOP_NONE:
-		pass

@@ -15,9 +15,7 @@ func _input(_event: InputEvent) -> void:
 	elif Input.is_action_just_released("attack") and deflagration.can_cast_projectile():
 		var aim: float= _get_aim()
 		deflagration.current_projectile.rotation = aim
-		state_machine.set_state_with_string("Void")
-		
-		deflagration.cast_projectile()
+		state_machine.set_state_with_string("Cast2")
 
 
 
