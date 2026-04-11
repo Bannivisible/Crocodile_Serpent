@@ -38,7 +38,7 @@ enum PLAY_MODE {
 
 @onready var anim_manager: AnimationManagerComponent= get_node_or_null(anim_manager_path)
 
-var queue: Array[State]
+var queue: Array[StringName]
 
 signal queue_reduce
 
@@ -55,6 +55,11 @@ func _set_anim_sm_name(value: String) -> void:
 	anim_sm_name = value
 
 #### BUILT IN ####
+func _input(_event: InputEvent) -> void:
+	if Input.is_action_just_pressed("up"):
+		print(queue)
+
+
 #func _ready() -> void:
 	#queue_reduce.connect(_on_queue_reduce)
 	#anim_manager.animation_finished.connect(_on_animation_manager_animation_finished)
@@ -148,13 +153,8 @@ func _get_anim_state_machine() -> AnimationNodeStateMachine:
 func _play_state_anime(state: State) -> void:
 	if state == null: return
 	
-	#queue.append(state)
-	#
-	#if queue == [state]:
-		#var anim_name: StringName= _get_anim_name(state)
-		#_play_anim(anim_name)
-	
 	var anim_name: StringName= _get_anim_name(state)
+	queue.append(anim_name)
 	_play_anim(anim_name)
 
 
@@ -236,14 +236,23 @@ func _on_state_machine_state_changed_recur(_state: State, deep_state: State) -> 
 
 func _on_queue_reduce() -> void:
 	if queue != []:
-		_play_state_anime(queue[0])
+		_play_anim(queue[0])
 
 
-func _on_animation_manager_animation_finished(_anim_name) -> void:
-	queue.remove_at(0)
-	queue_reduce.emit()
+func _on_animation_manager_animation_finished(anim_name) -> void:
+	if queue != [] and anim_name == queue[0]:
+		queue.remove_at(0)
+		queue_reduce.emit()
 
 
-func _on_state_machine_playback_state_finished(_state_name) -> void:
-	queue.remove_at(0)
-	queue_reduce.emit()
+func _on_state_machine_playback_state_finished(state_name) -> void:
+	if queue != [] and state_name == queue[0]:
+		queue.remove_at(0)
+		queue_reduce.emit()
+
+
+func _on_state_machine_playback_state_entered(state_name, sm: AnimationNodeStateMachine) -> void:
+	var anim_name := anim_manager.get_animation_name_of_node(sm.get_node(state_name))
+	var anim: Animation= anim_manager.get_animation(anim_name)
+	if anim.loop_mode == Animation.LOOP_NONE:
+		pass
