@@ -3107,19 +3107,27 @@ _data = {
 
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_upub7"]
 
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_saffc"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_lac0c"]
+
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_4k7xw"]
-graph_offset = Vector2(-1534.4355, 0)
+graph_offset = Vector2(-546.59814, 43.036728)
 nodes/OneShot/node = SubResource("AnimationNodeOneShot_upub7")
 nodes/OneShot/position = Vector2(-26.666666, 226.66667)
 "nodes/AnimationNodeStateMachine 2/node" = ExtResource("8_wv1tt")
 "nodes/AnimationNodeStateMachine 2/position" = Vector2(-1186.6666, 320)
 "nodes/AnimationNodeStateMachine 3/node" = ExtResource("8_wv1tt")
-"nodes/AnimationNodeStateMachine 3/position" = Vector2(-573.3333, 386.66666)
+"nodes/AnimationNodeStateMachine 3/position" = Vector2(-746.6667, 386.66666)
 nodes/Blend2/node = SubResource("AnimationNodeBlend2_qrhud")
 nodes/Blend2/position = Vector2(-506.66666, 66.666664)
 nodes/AnimationNodeStateMachine/node = ExtResource("8_wv1tt")
 nodes/AnimationNodeStateMachine/position = Vector2(-1160, 100)
-node_connections = [&"output", 0, &"OneShot", &"OneShot", 0, &"Blend2", &"OneShot", 1, &"AnimationNodeStateMachine 3", &"Blend2", 0, &"AnimationNodeStateMachine", &"Blend2", 1, &"AnimationNodeStateMachine 2"]
+nodes/TimeScaleBlend/node = SubResource("AnimationNodeTimeScale_saffc")
+nodes/TimeScaleBlend/position = Vector2(-866.6667, 200)
+nodes/TimeScaleOneShot/node = SubResource("AnimationNodeTimeScale_lac0c")
+nodes/TimeScaleOneShot/position = Vector2(-346.66666, 373.33334)
+node_connections = [&"output", 0, &"OneShot", &"OneShot", 0, &"Blend2", &"OneShot", 1, &"TimeScaleOneShot", &"Blend2", 0, &"AnimationNodeStateMachine", &"Blend2", 1, &"TimeScaleBlend", &"TimeScaleBlend", 0, &"AnimationNodeStateMachine 2", &"TimeScaleOneShot", 0, &"AnimationNodeStateMachine 3"]
 
 [sub_resource type="Animation" id="Animation_bg8pu"]
 resource_name = "AccelerateSpeedFloating"
@@ -3867,14 +3875,14 @@ flip_v = true
 position = Vector2(-47, -54)
 sprite_frames = SubResource("SpriteFrames_wujim")
 animation = &"floating"
-speed_scale = 0.75
+speed_scale = 1.25
 offset = Vector2(-11, 38)
 
 [node name="SleeveFront" type="AnimatedSprite2D" parent="SpriteContainer/BodyGroup" index="1" unique_id=2017756368]
 position = Vector2(19, -51)
 sprite_frames = SubResource("SpriteFrames_20mi1")
 animation = &"floating"
-speed_scale = 0.75
+speed_scale = 1.25
 offset = Vector2(35, 7)
 
 [node name="Body" type="Node2D" parent="SpriteContainer/BodyGroup" index="2" unique_id=988212309]
@@ -3899,7 +3907,7 @@ metadata/_custom_type_script = "uid://lnbdh25h7yvf"
 position = Vector2(-1, -20)
 sprite_frames = SubResource("SpriteFrames_cm4y7")
 animation = &"floating"
-speed_scale = 0.75
+speed_scale = 1.25
 script = ExtResource("5_upub7")
 frame_pos = Array[Vector2]([Vector2(-1, -20), Vector2(-13, -21), Vector2(-19, -20), Vector2(-38, -46), Vector2(-65, -47), Vector2(-41, -37), Vector2(34, -47)])
 
@@ -3913,7 +3921,7 @@ rotation = -0.7853982
 scale = Vector2(0.99999994, 0.99999994)
 sprite_frames = SubResource("SpriteFrames_60f1h")
 animation = &"floating"
-speed_scale = 0.75
+speed_scale = 1.25
 
 [node name="Scarf" type="Sprite2D" parent="SpriteContainer/BodyGroup/Body" index="4" unique_id=424025751]
 z_index = 1
@@ -3925,7 +3933,7 @@ z_index = 2
 position = Vector2(-52, -79)
 sprite_frames = SubResource("SpriteFrames_xuar8")
 animation = &"floating"
-speed_scale = 0.75
+speed_scale = 1.25
 
 [node name="ScarfBack" type="Sprite2D" parent="SpriteContainer/BodyGroup" index="3" unique_id=517426527]
 position = Vector2(-5, -51)
@@ -3945,21 +3953,21 @@ z_index = -2
 position = Vector2(-28, -145)
 sprite_frames = SubResource("SpriteFrames_28kfq")
 animation = &"floating"
-speed_scale = 0.75
+speed_scale = 1.25
 offset = Vector2(-11, 70)
 
 [node name="FloatingBandageBack" type="AnimatedSprite2D" parent="SpriteContainer/HeadGroup" index="1" unique_id=1171928779]
 position = Vector2(-15, -126)
 sprite_frames = SubResource("SpriteFrames_qpqc1")
 animation = &"floating"
-speed_scale = 0.75
+speed_scale = 1.25
 offset = Vector2(-37, 2)
 
 [node name="FloatingBandageFront" type="AnimatedSprite2D" parent="SpriteContainer/HeadGroup" index="2" unique_id=1383888984]
 position = Vector2(19, -127)
 sprite_frames = SubResource("SpriteFrames_fdabd")
 animation = &"floating"
-speed_scale = 0.75
+speed_scale = 1.25
 offset = Vector2(11, 1)
 
 [node name="Jaw" type="Sprite2D" parent="SpriteContainer/HeadGroup" index="3" unique_id=734385116]
@@ -3997,7 +4005,7 @@ texture = SubResource("AtlasTexture_7nnaa")
 position = Vector2(45, -65)
 sprite_frames = SubResource("SpriteFrames_gqhqt")
 animation = &"floating"
-speed_scale = 0.75
+speed_scale = 1.25
 
 [node name="Cap" type="Sprite2D" parent="SpriteContainer/HeadGroup/Face" index="5" unique_id=1706001136]
 position = Vector2(51, -45)
@@ -4021,20 +4029,23 @@ z_index = 1
 position = Vector2(95, 16)
 
 [node name="TrailFront" type="AnimatedSprite2D" parent="SpriteContainer/ArmFront" index="0" unique_id=1197603258]
-position = Vector2(-136, -3)
+position = Vector2(-278, -87)
+rotation = 0.43595326
 sprite_frames = SubResource("SpriteFrames_u6xdx")
 animation = &"active"
 offset = Vector2(38, 7)
 
 [node name="ShootingStarTailFront" type="AnimatedSprite2D" parent="SpriteContainer/ArmFront" index="1" unique_id=1907325850]
-position = Vector2(-51, 8)
+position = Vector2(-205.59523, -41.135506)
+rotation = 0.8061472
 scale = Vector2(0.9999995, 0.9999995)
 sprite_frames = SubResource("SpriteFrames_nyjmh")
 animation = &"active"
 offset = Vector2(15, -3)
 
 [node name="HandFront" type="AnimatedSprite2D" parent="SpriteContainer/ArmFront" index="2" unique_id=857022757]
-position = Vector2(-10.000015, 3.000002)
+position = Vector2(-173.60349, -15.0103)
+rotation = 0.8061472
 scale = Vector2(0.9999995, 0.9999995)
 sprite_frames = SubResource("SpriteFrames_2rtc6")
 animation = &"active"
@@ -4239,6 +4250,8 @@ parameters/OneShot/active = false
 parameters/OneShot/internal_active = false
 parameters/OneShot/request = 0
 parameters/Blend2/blend_amount = 0.0
+parameters/TimeScaleBlend/scale = 1.0
+parameters/TimeScaleOneShot/scale = 1.0
 
 [node name="AnimationPlayerShortCut" type="AnimationPlayer" parent="." index="7" unique_id=349286697]
 reset_on_save = false

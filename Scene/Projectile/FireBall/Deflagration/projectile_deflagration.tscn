@@ -5,9 +5,6 @@
 [ext_resource type="Script" uid="uid://br2ifpft2i0xw" path="res://Scene/Projectile/FireBall/Deflagration/appear.gd" id="3_tejqg"]
 [ext_resource type="Script" uid="uid://dcwwwlr5gupk6" path="res://Scene/Projectile/FireBall/Deflagration/explode.gd" id="4_x73w7"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_v2h8a"]
-radius = 25.298222
-
 [sub_resource type="Gradient" id="Gradient_6imha"]
 colors = PackedColorArray(1, 0, 0, 1, 1, 1, 0, 1)
 
@@ -16,15 +13,18 @@ gradient = SubResource("Gradient_6imha")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_v2h8a"]
+radius = 33.01515
+
 [node name="ProjectileDeflagration" unique_id=1801537751 instance=ExtResource("1_n0nvc")]
 script = ExtResource("2_0k2qt")
-p_ratio = 1.0
+p_ratio = 2.0
 
-[node name="CollisionShape2D" parent="." index="0" unique_id=1453953886]
-shape = SubResource("CircleShape2D_v2h8a")
-
-[node name="Sprite2D" parent="." index="1" unique_id=1876869771]
+[node name="Sprite2D" parent="." index="0" unique_id=1876869771]
 texture = SubResource("GradientTexture2D_fq672")
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=1453953886]
+shape = SubResource("CircleShape2D_v2h8a")
 
 [node name="Appear" parent="StateMachine" parent_id_path=PackedInt32Array(1148728702) index="0" unique_id=1208750451]
 script = ExtResource("3_tejqg")

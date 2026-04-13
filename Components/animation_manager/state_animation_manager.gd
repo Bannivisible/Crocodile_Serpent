@@ -101,7 +101,7 @@ func _connect_sm_playback() -> void:
 
 
 func _connect_anim_blend_sm_playback(anim_blend_nd_name: StringName) -> void:
-	var anim_nd_name := anim_manager.get_connection_with_to_and_port(anim_blend_nd_name, 1).from
+	var anim_nd_name := anim_manager.get_deep_anim_node_connect_in(anim_blend_nd_name, 1)
 	var anim_node := anim_manager.get_animation_node(anim_nd_name)
 	
 	if anim_node is AnimationNodeStateMachine:
@@ -128,39 +128,11 @@ func _get_anim_state_machine() -> AnimationNodeStateMachine:
 	return anim_manager.get_animation_node(anim_sm_name)
 
 
-#func _get_current_anim() -> StringName:
-	#match play_mode:
-		#PLAY_MODE.PLAY:
-			#return anim_manager.get_current_animation_name()
-		#
-		#PLAY_MODE.BLEND:
-			#var anim_nd_name := anim_manager.get_connection_with_to_and_port(blend_node_name, 1).from
-			#var anim_node := anim_manager.get_animation_node(anim_nd_name)
-			#
-			#if anim_node is AnimationNodeAnimation:
-				#return anim_node.animation
-			#elif anim_node is AnimationNodeStateMachine:
-				#return anim_manager.get_anim_state_machine_current_anim_name(anim_nd_name)
-		#PLAY_MODE.SHOT:
-			#var anim_nd_name := anim_manager.get_connection_with_to_and_port(os_node_name, 1).from
-			#var anim_node := anim_manager.get_animation_node(anim_nd_name)
-			#
-			#if anim_node is AnimationNodeAnimation:
-				#return anim_node.animation
-			#elif anim_node is AnimationNodeStateMachine:
-				#return anim_manager.get_anim_state_machine_current_anim_name(anim_nd_name)
-		#
-		#PLAY_MODE.TRAVEL:
-			#return
-	#
-	#return ""
-
-
 func _play_state_anime(state: State) -> void:
 	if state == null: return
 	
 	var anim_name: StringName= _get_anim_name(state)
-	queue.append(anim_name)
+	#queue.append(anim_name)
 	_play_anim(anim_name)
 
 
@@ -193,7 +165,7 @@ func _match_blend(anim_name: StringName) -> void:
 		anim_manager.setup_blend_node(blend_node_name, anim_name)
 	
 	else:
-		var sm_name: StringName=anim_manager.get_connection_with_to_and_port(blend_node_name, 1).from
+		var sm_name: StringName= anim_manager.get_deep_anim_node_connect_in(blend_node_name, 1)
 		var anim_sm = anim_manager.get_animation_node(sm_name)
 		
 		if anim_sm is AnimationNodeStateMachine and anim_sm.has_node(anim_name):
@@ -208,7 +180,7 @@ func _match_one_shot(anim_name: StringName) -> void:
 		anim_manager.setup_one_shot(os_node_name, anim_name)
 	
 	else:
-		var sm_name: StringName=anim_manager.get_connection_with_to_and_port(os_node_name, 1).from
+		var sm_name: StringName=anim_manager.get_deep_anim_node_connect_in(os_node_name, 1)
 		var anim_sm = anim_manager.get_animation_node(sm_name)
 		
 		if anim_sm is AnimationNodeStateMachine and anim_sm.has_node(anim_name):

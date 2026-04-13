@@ -1,7 +1,8 @@
 extends State
 
 
-var add_speed_scale: float= 2.0
+@export var add_speed_scale: float= 1.0
+@export var time_scale_name: StringName
 
 @onready var deflagration: DeflagrationSpell = owner
 @onready var animation_manager: AnimationManagerComponent = $"../../AnimationManagerComponent"
@@ -13,14 +14,16 @@ func _ready() -> void:
 
 func enter() -> void:
 	owner.free_player()
-	animation_manager.animation_player.speed_scale += add_speed_scale
+	
+	var amount: float= animation_manager.get_time_scale_amount(time_scale_name)
+	amount += add_speed_scale
+	animation_manager.set_time_scale_amount(time_scale_name, amount)
 
 
 func exit() -> void:
-	animation_manager.animation_player.speed_scale -= add_speed_scale
-
-
-
+	var amount: float= animation_manager.get_time_scale_amount(time_scale_name)
+	amount -= add_speed_scale
+	animation_manager.set_time_scale_amount(time_scale_name, amount)
 
 func _on_animation_manager_animation_finished(anim_name: StringName) -> void:
 	if anim_name == name:

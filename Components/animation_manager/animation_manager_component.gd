@@ -108,7 +108,7 @@ func has_animation(anim_name: StringName) -> bool:
 
 ### BlendTree ###
 func setup_one_shot(one_shot_name: StringName, new_anim_name: StringName, filter_anim_name := new_anim_name) -> void:
-	var anim_node_name: StringName= get_connection_with_to_and_port(one_shot_name, 1).from
+	var anim_node_name: StringName= get_deep_anim_node_connect_in(one_shot_name, 1)
 	
 	change_filter(one_shot_name, get_animation(filter_anim_name))
 	change_animation(anim_node_name, new_anim_name)
@@ -116,7 +116,7 @@ func setup_one_shot(one_shot_name: StringName, new_anim_name: StringName, filter
 
 
 func setup_blend_node(blend_nd_name: StringName, new_anim_name: StringName, filter_anim_name := new_anim_name) -> void:
-	var anim_node_name: StringName= get_connection_with_to_and_port(blend_nd_name, 1).from
+	var anim_node_name: StringName= get_deep_anim_node_connect_in(blend_nd_name, 1)
 	
 	change_filter(blend_nd_name, get_animation(filter_anim_name))
 	change_animation(anim_node_name, new_anim_name)
@@ -194,7 +194,6 @@ func set_filter_with_all_track(blend_nd_name: StringName, anim: Animation, activ
 	blend_node.filter_enabled = activate
 
 
-
 func verif_filter(blend_nd_name: StringName, anime: Animation) -> Dictionary[NodePath, bool]:
 	var dict: Dictionary[NodePath, bool]
 	
@@ -259,6 +258,10 @@ func has_out_connection(anim_node_name: StringName) -> bool:
 	return get_connection_with_from(anim_node_name) != null
 
 
+func has_in_connection(anim_node_name: StringName, port := 0) -> bool:
+	return get_connection_with_to_and_port(anim_node_name, port) != null
+
+
 #func add_library_to_name(anim_name: StringName, lib: AnimationLibrary= library) -> StringName:
 	#var lib_name: StringName = Utiles.get_resource_name(lib)
 	#
@@ -289,7 +292,7 @@ func is_one_shot_active(one_shot: String) -> bool:
 
 ## BLEND ##
 func set_blend_amount(blend_node_name: StringName, amount: float) -> void:
-	amount = max(min(amount, 1.0), 0.0)
+	amount = clamp(amount, 0.0, 1.0)
 	animation_tree.set("parameters/%s/blend_amount" %blend_node_name, amount)
 
 
@@ -302,6 +305,7 @@ func tween_blend_amount(blend_node_name: StringName, duration: float, amount: fl
 
 func get_blend_amount(blend_node_name: StringName) -> float:
 	return animation_tree.get("parameters/%s/blend_amount" %blend_node_name)
+
 
 ## ADD ##
 func set_add_amount(add_node_name: StringName, amount: float) -> void:
@@ -319,6 +323,18 @@ func tween_add_amount(add_node_name: StringName, duration: float, amount: float=
 
 func get_add_amount(add_node_name: StringName) -> float:
 	return animation_tree.get("parameters/%s/add_amount" %add_node_name)
+
+
+## TIME SCALE ##
+func get_time_scale_amount(time_scale_name: StringName) -> float:
+	var property_path := "parameters/%s/scale" % time_scale_name
+	return animation_tree.get(property_path)
+
+
+func set_time_scale_amount(time_scale_name: StringName, amount: float) -> void:
+	var property_path := "parameters/%s/scale" % time_scale_name
+	animation_tree.set(property_path, amount)
+
 
 ## GETTER ##
 func get_anim_nd_name(anim_node: AnimationNode) -> StringName:
@@ -452,6 +468,15 @@ func get_anim_node_connect_in(anim_node_name: StringName) -> StringName:
 	#if library.has_animation(anim_name):
 		#return add_library_to_name(anim_name)
 	#return anim_name
+
+
+func get_deep_anim_node_connect_in(anim_node_name: StringName, port: int) -> StringName:
+	var curr_anim_nd_name: StringName= anim_node_name
+	
+	while has_in_connection(curr_anim_nd_name, port):
+		curr_anim_nd_name = get_connection_with_to_and_port(curr_anim_nd_name, port).from
+	
+	return curr_anim_nd_name
 
 
 func get_current_anim_names() -> Array[StringName]:

@@ -6,4 +6,5 @@
 script = ExtResource("1_xq51l")
 base_power = 80.0
 base_stardust_cost = 40.0
+base_duration = 10.0
 metadata/_custom_type_script = "uid://cn2f6xm4yt7hj"

@@ -66,19 +66,22 @@ func _init_damage_inteval_timer() -> void:
 		damage_inteval_timer.wait_time = damage_inteval
 
 #### LOGICS ####
+func _get_damage() -> float:
+	return attack_data.compute_damage(charac_stat ,cs_stat)
+
+
 func _hit_hurt_box(hurt_box: HurtBox) -> void:
-	var damage: float= attack_data.compute_damage(charac_stat ,cs_stat)
+	var damage: float= _get_damage()
 	hurt_box.hurt(damage, self)
 
 
-func modify_label_damage(_label: Label) -> void:
-	return
+func _is_area_valid(area: Area2D) -> bool:
+	if area is not HurtBox: return false
+	if area.owner.faction == faction: return false
+	return true
 
-#### SIGNAL RESPONSES ####
-
-func _on_area_2d_entered(hurt_box: Area2D) -> void:
-	if hurt_box is not HurtBox: return
-	if hurt_box.owner.faction == faction: return
+func _affect_hurt_box(hurt_box: Area2D) -> void:
+	if not _is_area_valid(hurt_box): return
 	
 	_hit_hurt_box(hurt_box)
 	
@@ -86,6 +89,15 @@ func _on_area_2d_entered(hurt_box: Area2D) -> void:
 		damage_inteval_timer.start()
 	
 	overlapping_hurt_box.append(hurt_box)
+
+
+func modify_label_damage(_label: Label) -> void:
+	return
+
+
+#### SIGNAL RESPONSES ####
+func _on_area_2d_entered(hurt_box: Area2D) -> void:
+	_affect_hurt_box(hurt_box)
 
 
 func _on_area_2d_exited(area: Area2D) -> void:

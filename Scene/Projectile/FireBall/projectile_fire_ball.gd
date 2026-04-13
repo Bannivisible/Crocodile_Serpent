@@ -17,6 +17,7 @@ func _ready() -> void:
 	scale = Vector2.ZERO
 	activate()
 
+
 func activate() -> void:
 	state_machine.set_state_with_string("Appear")
 

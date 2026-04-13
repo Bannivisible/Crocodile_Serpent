@@ -16,6 +16,7 @@ func enter() -> void:
 	
 	deflagration.damage_inteval = damage_interval
 
+
 func _explode() -> void:
 	_explosed_animation()
 

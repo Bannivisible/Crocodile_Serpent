@@ -6,13 +6,22 @@ class_name ProjectileDeflagration
 @onready var sprite_2d: Sprite2D = $Sprite2D
 
 var damage_min: float = 50.0
+var curr_hurt_box: HurtBox
 
 
-func _compute_dist_damage(area: Node2D, damage: float) -> float:
-	var distance: float= global_position.distance_to(area.global_position)
-	var rayon: float= collision_shape_2d.shape.radius
+func _compute_dist_damage(hurt_box: HurtBox) -> float:
+	var damage: float= super._get_damage()
+	var dist: float= global_position.distance_to(hurt_box.global_position)
+	var ray: float= collision_shape_2d.shape.radius
 	
-	return damage * max(damage_min, 1.0 - (distance/rayon)**p_ratio)
+	return damage * max(damage_min, 1.0 - (dist/ray) ** p_ratio)
+
+
+func _get_damage() -> float:
+	if state_machine.get_state_name() == "Explode":
+		return _compute_dist_damage(curr_hurt_box)
+	
+	return super._get_damage()
 
 
 func can_cast() -> bool:
@@ -23,19 +32,14 @@ func cast() -> void:
 	state_machine.set_state_with_string("LinearMovement")
 
 
-func _disapear() -> void:
-	pass
-
 ### SIGNAL RESPONSES ####
-#func _on_area_2d_entered(area: Area2D) -> void:
-	#super._on_area_2d_entered(area)
-	#
-	#var hurt_box: HurtBox= area
-	#if hurt_box.owner.faction == faction: return
-	#var raw_damage: float= _compute_raw_damage()
-	#var damage: float= _compute_damage(area, raw_damage)
-	#
-	#hurt_box.hurt(damage, self)
+func _on_area_2d_entered(area: Area2D) -> void:
+	if state_machine.get_state_name() == "LinearMovement":
+		super._on_area_2d_entered(area)
+	
+	elif state_machine.get_state_name() == "Explode" and _is_area_valid(area):
+		curr_hurt_box = area
+		_affect_hurt_box(area)
 
 
 func _on_LinearMovement_destination_reached() -> void:
