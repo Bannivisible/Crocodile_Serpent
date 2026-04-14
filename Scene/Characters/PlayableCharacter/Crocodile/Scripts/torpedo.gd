@@ -15,10 +15,10 @@ var pos_action: String= "down"
 ##### INHERITENCE ####
 
 func enter() -> void:
-	velocity_component.dir = Vector2.RIGHT
-	velocity_component.update_velocity()
-	velocity_component.scale_x_face_inverser.active = false
 	velocity_component.pos_x_face_inverser.active = false
+	velocity_component.scale_x_face_inverser.active = false
+	velocity_component.dir = velocity_component.face_dir
+	velocity_component.update_velocity()
 	velocity_component.rotation_leader.nodes.append(owner)
 	
 	controler.active = false
@@ -75,4 +75,3 @@ func _input(_event: InputEvent) -> void:
 		else :
 			neg_action = "down"
 			pos_action = "up"
-

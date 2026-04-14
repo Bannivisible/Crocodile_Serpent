@@ -11,10 +11,14 @@ var curr_hurt_box: HurtBox
 
 func _compute_dist_damage(hurt_box: HurtBox) -> float:
 	var damage: float= super._get_damage()
-	var dist: float= global_position.distance_to(hurt_box.global_position)
-	var ray: float= collision_shape_2d.shape.radius
 	
-	return damage * max(damage_min, 1.0 - (dist/ray) ** p_ratio)
+	var dist: float= global_position.distance_to(hurt_box.global_position)
+	
+	var ray: float= collision_shape_2d.shape.radius * 2.0
+	ray *= scale.x
+	
+	damage *= 1.0 - (dist/ray) ** p_ratio
+	return roundf(damage)
 
 
 func _get_damage() -> float:
@@ -34,14 +38,19 @@ func cast() -> void:
 
 ### SIGNAL RESPONSES ####
 func _on_area_2d_entered(area: Area2D) -> void:
-	if state_machine.get_state_name() == "LinearMovement":
-		super._on_area_2d_entered(area)
-	
-	elif state_machine.get_state_name() == "Explode" and _is_area_valid(area):
-		curr_hurt_box = area
-		_affect_hurt_box(area)
+	match state_machine.get_state_name():
+		"LinearMovement":
+			super._on_area_2d_entered(area)
+		
+		"Grow":
+			if not _is_area_valid(area): return
+			overlapping_hurt_box.append(area)
+		
+		"Explode":
+			if not _is_area_valid(area): return
+			curr_hurt_box = area
+			_affect_hurt_box(area)
 
 
 func _on_LinearMovement_destination_reached() -> void:
 	state_machine.set_state_with_string("Explode")
-

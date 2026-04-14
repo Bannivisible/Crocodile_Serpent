@@ -9,19 +9,19 @@
 [ext_resource type="Script" uid="uid://cs0ia4pib32so" path="res://Scene/Characters/PlayableCharacter/Snake/Scripts/blouse_back.gd" id="5_upub7"]
 [ext_resource type="Script" uid="uid://bey7t8h4m0yyp" path="res://StateMachine/state.gd" id="6_1e483"]
 [ext_resource type="Script" uid="uid://v7k2pc1yokl3" path="res://Components/CombatSkill/Spell/spell_manager.gd" id="7_ox5u4"]
-[ext_resource type="Script" uid="uid://6lekj6yg62r6" path="res://Components/animation_manager/animation_manager_component.gd" id="8_0epr8"]
+[ext_resource type="Script" uid="uid://6lekj6yg62r6" path="res://Components/Animation_manager/animation_manager_component.gd" id="8_0epr8"]
 [ext_resource type="Resource" uid="uid://cnl4cmnu6nf6p" path="res://Scene/Characters/PlayableCharacter/Crocodile/Ressources/crocodile_stat.tres" id="8_fymkc"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://b7174sswn82rk" path="res://Scene/Characters/PlayableCharacter/Snake/Ressources/snake_animation_node_state_machine.tres" id="8_wv1tt"]
 [ext_resource type="Resource" uid="uid://c4jeioubu2xem" path="res://Ressources/AnimationConnection/snake_connections.tres" id="9_wv1tt"]
 [ext_resource type="Script" uid="uid://dpn7spt1k8imj" path="res://Scene/Characters/Scripts/BasicStates/state_machine.gd" id="9_x7o3y"]
-[ext_resource type="Script" uid="uid://dgi2a2c0lt17u" path="res://Components/animation_manager/state_animation_manager.gd" id="10_4k7xw"]
+[ext_resource type="Script" uid="uid://dgi2a2c0lt17u" path="res://Components/Animation_manager/state_animation_manager.gd" id="10_4k7xw"]
 [ext_resource type="Script" uid="uid://wqohf18ow8uk" path="res://Components/Stardust/stardust_component.gd" id="10_qrhud"]
 [ext_resource type="Script" uid="uid://guy2iptn7imp" path="res://Scene/Characters/PlayableCharacter/Snake/Scripts/player_controler.gd" id="11_c8tis"]
 [ext_resource type="Script" uid="uid://dgka7nkes3osm" path="res://Ressources/AnimStateMachineGlobalParameters/anim_state_machine_globale_parameters.gd" id="11_hlpqi"]
 [ext_resource type="Script" uid="uid://vki8pd4tv00v" path="res://Scene/Characters/Scripts/BasicStates/jump.gd" id="11_v34ff"]
-[ext_resource type="Script" uid="uid://pwcimxmgku2j" path="res://Components/animation_manager/anim_state_machine_manager.gd" id="12_4k7xw"]
+[ext_resource type="Script" uid="uid://pwcimxmgku2j" path="res://Components/Animation_manager/anim_state_machine_manager.gd" id="12_4k7xw"]
 [ext_resource type="Script" uid="uid://v3l0uww2xr70" path="res://Scene/Characters/Scripts/BasicStates/fall.gd" id="12_x7o3y"]
-[ext_resource type="Script" uid="uid://ce11vnhaprxn2" path="res://Components/animation_manager/anim_state_machine_label.gd" id="13_3ma4d"]
+[ext_resource type="Script" uid="uid://ce11vnhaprxn2" path="res://Components/Animation_manager/anim_state_machine_label.gd" id="13_3ma4d"]
 [ext_resource type="Script" uid="uid://d38qkfrf1wj1a" path="res://StateMachine/state_label.gd" id="13_x7o3y"]
 [ext_resource type="Script" uid="uid://dat1xibjdbka6" path="res://Components/Statistics/statistics_manager.gd" id="15_hd1gs"]
 [ext_resource type="Script" uid="uid://bcmokx1bwyftw" path="res://StateMachine/state_machine.gd" id="22_lac0c"]
@@ -3357,6 +3357,22 @@ tracks/3/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_wn1gg"]
+resource_name = "Eye"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteContainer/HeadGroup/Face/EyeBack:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 0), Vector2(1, 1), Vector2(1, 1e-05)]
+}
+
 [sub_resource type="Animation" id="Animation_qrhud"]
 resource_name = "Floating"
 length = 0.1
@@ -3597,6 +3613,18 @@ tracks/8/keys = {
 "update": 0,
 "values": [1.0]
 }
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("SpriteContainer/HeadGroup/Face/EyeBack:scale")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_j4vrw"]
 resource_name = "ResetSpeedFloating"
@@ -3827,6 +3855,7 @@ _data = {
 &"AccelerateSpeedFloating": SubResource("Animation_bg8pu"),
 &"ActiveArmBack": SubResource("Animation_wv1tt"),
 &"ActiveArmFront": SubResource("Animation_upub7"),
+&"Eye": SubResource("Animation_wn1gg"),
 &"Floating": SubResource("Animation_qrhud"),
 &"RESET": SubResource("Animation_swrla"),
 &"ResetSpeedFloating": SubResource("Animation_j4vrw"),
@@ -3994,8 +4023,9 @@ position = Vector2(41, -50)
 texture = SubResource("AtlasTexture_xuar8")
 
 [node name="EyeBack" type="Sprite2D" parent="SpriteContainer/HeadGroup/Face" index="2" unique_id=2078201812]
-position = Vector2(32, -45)
+position = Vector2(35, -23)
 texture = SubResource("AtlasTexture_ji5tg")
+offset = Vector2(-3, -22)
 
 [node name="EyeFront" type="Sprite2D" parent="SpriteContainer/HeadGroup/Face" index="3" unique_id=2132390579]
 position = Vector2(66, -46)

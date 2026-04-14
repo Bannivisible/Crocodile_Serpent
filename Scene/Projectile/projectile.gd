@@ -16,5 +16,3 @@ func _get_factory() -> Factory:
 	if get_parent() is Factory:
 		return get_parent()
 	return null
-
-

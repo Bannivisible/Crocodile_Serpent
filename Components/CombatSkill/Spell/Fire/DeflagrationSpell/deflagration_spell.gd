@@ -18,4 +18,3 @@ func can_cast_projectile() -> bool:
 #### SIGNALS RESPONSES ####
 func _on_spawn_projectile_state_projectile_spawn(projectile: Projectile) -> void:
 	current_projectile = projectile
-

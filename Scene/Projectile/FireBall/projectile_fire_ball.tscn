@@ -58,5 +58,3 @@ metadata/_custom_type_script = "uid://de8bq1hhypgmu"
 [node name="Disapear" type="Node" parent="StateMachine" unique_id=209455624]
 script = ExtResource("5_b82d3")
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]

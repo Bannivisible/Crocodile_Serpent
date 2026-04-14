@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://b56xaxpssthc3" path="res://Scene/Projectile/FireBall/projectile_fire_ball.tscn" id="1_n0nvc"]
 [ext_resource type="Script" uid="uid://dhjrj2u16kcy3" path="res://Scene/Projectile/FireBall/Deflagration/projectile_super_fire_ball.gd" id="2_0k2qt"]
 [ext_resource type="Script" uid="uid://br2ifpft2i0xw" path="res://Scene/Projectile/FireBall/Deflagration/appear.gd" id="3_tejqg"]
+[ext_resource type="Script" uid="uid://4tro3r1pjatt" path="res://Scene/Projectile/FireBall/Deflagration/grow.gd" id="4_j7btg"]
 [ext_resource type="Script" uid="uid://dcwwwlr5gupk6" path="res://Scene/Projectile/FireBall/Deflagration/explode.gd" id="4_x73w7"]
 
 [sub_resource type="Gradient" id="Gradient_6imha"]
@@ -14,11 +15,11 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v2h8a"]
-radius = 33.01515
+radius = 33.0
 
 [node name="ProjectileDeflagration" unique_id=1801537751 instance=ExtResource("1_n0nvc")]
 script = ExtResource("2_0k2qt")
-p_ratio = 2.0
+p_ratio = 1.0
 
 [node name="Sprite2D" parent="." index="0" unique_id=1876869771]
 texture = SubResource("GradientTexture2D_fq672")
@@ -35,9 +36,14 @@ speed = 0.75
 ease_type = 0
 transition_type = 0
 
-[node name="Explode" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1148728702) index="2" unique_id=78518647]
+[node name="Grow" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1148728702) index="2" unique_id=459450510]
+script = ExtResource("4_j7btg")
+grow_mult_range = 8.0
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="Explode" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1148728702) index="3" unique_id=78518647]
 script = ExtResource("4_x73w7")
-explosion_mult_range = 6.0
+explosion_mult_range = 8.0
 damage_interval = 0.4
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 

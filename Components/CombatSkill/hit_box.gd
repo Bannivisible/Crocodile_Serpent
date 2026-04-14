@@ -62,6 +62,9 @@ func _init_damage_inteval_timer() -> void:
 			damage_inteval_timer = Timer.new()
 			add_child(damage_inteval_timer)
 			damage_inteval_timer.timeout.connect(_on_damage_interval_timer_timeout)
+			
+			if overlapping_hurt_box != []:
+				damage_inteval_timer.start()
 		
 		damage_inteval_timer.wait_time = damage_inteval
 
