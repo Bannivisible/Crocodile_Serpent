@@ -94,6 +94,7 @@ static func get_property_name_from_value(obj: Object, value_to_find) -> String:
 					return prop_name
 	return ""
 
+
 static func uppercase_first_letter(text: String) -> String:
 	if text.is_empty():
 		return text
@@ -112,6 +113,7 @@ static func snake_case_to_camel_case(string: String) -> String:
 	
 	return camel_case
 
+
 static func camel_case_to_snake_case(string: String) -> String:
 	var snake_case: String= string[0].to_lower()
 	
@@ -123,6 +125,7 @@ static func camel_case_to_snake_case(string: String) -> String:
 	
 	return snake_case
 
+
 static func compute_collision_height(collision: Node2D) -> float:
 	if collision is CollisionShape2D:
 		var shape: Shape2D= collision.shape
@@ -132,6 +135,7 @@ static func compute_collision_height(collision: Node2D) -> float:
 	
 	return 0.0
 
+
 static func compute_collision_lenght(collision: Node2D) -> float:
 	if collision is CollisionShape2D:
 		var shape: Shape2D= collision.shape
@@ -140,6 +144,7 @@ static func compute_collision_lenght(collision: Node2D) -> float:
 		if shape is CapsuleShape2D: return shape.radius/2
 	
 	return 0.0
+
 
 static func add_child_to_root(child: Node, root: Node= child.get_tree().root.get_child(0)) -> void:
 	var parent: Node= child.get_parent()
@@ -155,10 +160,12 @@ static func add_child_to_root(child: Node, root: Node= child.get_tree().root.get
 	
 	else : root.add_child(child)
 
+
 static func append_with_temp(list: Array, value: Variant) -> void:
 	var array: Array= list
 	array.append(value)
 	list = array
+
 
 static func get_last_string_of_path(path: String) -> String:
 	var name: String= path
@@ -169,10 +176,12 @@ static func get_last_string_of_path(path: String) -> String:
 	
 	return name
 
+
 static func get_resource_name(resource: Resource) -> String:
 	var resource_name := get_last_string_of_path(resource.resource_path)
 	resource_name = resource_name.erase(len(resource_name)-4, 4)
 	return resource_name
+
 
 static func start_substr_until_meet(string: String, charc: String) -> String:
 	var substr := string
@@ -186,6 +195,7 @@ static func start_substr_until_meet(string: String, charc: String) -> String:
 	
 	return string
 
+
 static func end_substr_until_meet(string: String, charc: String) -> String:
 	var substr := string
 	var i := len(string) - 1
@@ -198,6 +208,7 @@ static func end_substr_until_meet(string: String, charc: String) -> String:
 	
 	return string
 
+
 static func end_substr_multipy_until_meet(string: String, charc: String) -> String:
 	var substr := string
 	var i := len(string) - 1
@@ -209,6 +220,7 @@ static func end_substr_multipy_until_meet(string: String, charc: String) -> Stri
 		i -= 1
 	
 	return substr
+
 
 static func get_joy_dir(neutral_dir := Vector2.ZERO, left_stick := true ,device := 0, min_lenght := 0.2):
 	var joy_x = JOY_AXIS_LEFT_X if left_stick else JOY_AXIS_RIGHT_X

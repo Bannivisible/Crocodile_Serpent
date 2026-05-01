@@ -4,6 +4,7 @@ class_name ProjectileDeflagration
 @export_range(0.0, 5.0, 0.01) var p_ratio: float = 1.0
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var explode: Node = $StateMachine/Explode
 
 var damage_min: float = 50.0
 var curr_hurt_box: HurtBox
@@ -41,14 +42,10 @@ func _on_area_2d_entered(area: Area2D) -> void:
 	match state_machine.get_state_name():
 		"LinearMovement":
 			super._on_area_2d_entered(area)
-		
-		"Grow":
-			if not _is_area_valid(area): return
-			overlapping_hurt_box.append(area)
-		
 		"Explode":
 			if not _is_area_valid(area): return
 			curr_hurt_box = area
+			
 			_affect_hurt_box(area)
 
 

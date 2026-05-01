@@ -10,11 +10,19 @@
 [ext_resource type="Script" uid="uid://danh8ni44s3tn" path="res://Ressources/Attack/AttackType/ResistanceType/resistance_type.gd" id="4_ptyu4"]
 [ext_resource type="Shape2D" uid="uid://u46f2y7jqgsr" path="res://Scene/Characters/Enemies/Boss/Chimera/Ressources/chimera_body_shape.tres" id="5_bqe10"]
 [ext_resource type="Script" uid="uid://danilkv671r1y" path="res://Ressources/Attack/AttackType/attack_type.gd" id="5_q5ekc"]
+[ext_resource type="Script" uid="uid://vki8pd4tv00v" path="res://Scene/Characters/Scripts/BasicStates/jump.gd" id="5_s5d0m"]
+[ext_resource type="Script" uid="uid://v3l0uww2xr70" path="res://Scene/Characters/Scripts/BasicStates/fall.gd" id="6_euguf"]
 [ext_resource type="PackedScene" uid="uid://b74kbwhwtmiu5" path="res://Components/VelocityComponent/velocity_component.tscn" id="9_1puav"]
+[ext_resource type="Script" uid="uid://bgumvohyb5ahw" path="res://Scene/Characters/Enemies/Boss/Chimera/Scripts/net_grid.gd" id="9_ew4av"]
 [ext_resource type="Script" uid="uid://dat1xibjdbka6" path="res://Components/Statistics/statistics_manager.gd" id="11_6y6jt"]
 [ext_resource type="Resource" uid="uid://cngq3amwmuecp" path="res://Scene/Characters/Enemies/Boss/Chimera/chimera_statistics.tres" id="12_x4xdt"]
 [ext_resource type="Script" uid="uid://da3cqoomwyp1o" path="res://Components/CombatSkill/hit_box.gd" id="13_1g0bx"]
 [ext_resource type="Script" uid="uid://ce7ave72wm32j" path="res://Ressources/Attack/AttackData/attack_data.gd" id="14_1g0bx"]
+[ext_resource type="Script" uid="uid://bk11cm8j1yruf" path="res://Scene/Characters/BehaviourTree/jump_to.gd" id="16_076g2"]
+[ext_resource type="Script" uid="uid://bb0t2ovl7wifo" path="res://addons/beehave/nodes/beehave_tree.gd" id="19_euguf"]
+[ext_resource type="Script" uid="uid://cg016dbe7gs1x" path="res://addons/beehave/nodes/composites/sequence.gd" id="20_ew4av"]
+[ext_resource type="Script" uid="uid://b1ttjv27qrj0" path="res://addons/beehave/ActionLeaf/jump_to_action.gd" id="21_6wbw2"]
+[ext_resource type="Script" uid="uid://dd0r1tqbf7heo" path="res://addons/beehave/ConditionLeaf/signal_received.gd" id="21_gs3o1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1g0bx"]
 atlas = ExtResource("2_fddmp")
@@ -1267,7 +1275,17 @@ metadata/_custom_type_script = "uid://bcmokx1bwyftw"
 script = ExtResource("3_1puav")
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 
-[node name="Attack1" type="Node" parent="StateMachine" index="1" unique_id=1171645418]
+[node name="Jump" type="Node" parent="StateMachine" index="1" unique_id=1593830470]
+script = ExtResource("5_s5d0m")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="Fall" type="Node" parent="StateMachine" index="2" unique_id=1854361723 node_paths=PackedStringArray("velocity_component", "jump")]
+script = ExtResource("6_euguf")
+velocity_component = NodePath("../../VelocityComponent")
+jump = NodePath("../Jump")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="Attack1" type="Node" parent="StateMachine" index="3" unique_id=1171645418]
 script = ExtResource("3_1puav")
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 
@@ -1644,7 +1662,26 @@ scale = Vector2(0.9999998, 0.9999998)
 texture = SubResource("AtlasTexture_dyi22")
 offset = Vector2(30, 15)
 
-[node name="Skeleton2D" type="Skeleton2D" parent="." index="3" unique_id=285510262]
+[node name="Weapon" type="Node2D" parent="." index="3" unique_id=1117096899]
+position = Vector2(138, -114)
+
+[node name="Line2D2" type="Line2D" parent="Weapon" index="0" unique_id=973085282]
+points = PackedVector2Array(-22, 133, 135, 110, 211, 164, 143, 218, 72, 110, 0, 0, 0, 0, 25, 124, 39, 253)
+default_color = Color(0.8156863, 0.5411765, 0.7019608, 1)
+
+[node name="Line2D" type="Line2D" parent="Weapon" index="1" unique_id=916010353]
+points = PackedVector2Array(0, 0, -21, 129, -80, 243, 39, 253, 140, 224, 211, 164, 135, 110, 0, 0)
+width = 14.0
+default_color = Color(0.24705882, 0.13333334, 0.24705882, 1)
+
+[node name="NetGrid" type="Node2D" parent="." index="4" unique_id=328928220]
+visible = false
+z_index = -5
+script = ExtResource("9_ew4av")
+grid_size = 7
+square_size = Vector2(300, 300)
+
+[node name="Skeleton2D" type="Skeleton2D" parent="." index="5" unique_id=285510262]
 modulate = Color(1, 1, 1, 0.16470589)
 position = Vector2(0, -149)
 
@@ -1693,6 +1730,13 @@ bone_angle = 90.0
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Skeleton2D/Center/Body/ArmBack/ForArmBack/HandForward" index="0" unique_id=436594146]
 remote_path = NodePath("../../../../../../../SpriteContainer/ArmBackGroup/HandBackGroup")
+
+[node name="HandForwardTarget" type="Marker2D" parent="Skeleton2D/Center/Body/ArmBack/ForArmBack/HandForward" index="1" unique_id=295501768]
+position = Vector2(-0.99996984, 33.000027)
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Skeleton2D/Center/Body/ArmBack/ForArmBack/HandForward/HandForwardTarget" index="0" unique_id=134579287]
+remote_path = NodePath("../../../../../../../../Weapon")
+update_scale = false
 
 [node name="ArmForward" type="Bone2D" parent="Skeleton2D/Center/Body" index="3" unique_id=770360616]
 position = Vector2(-77, -132)
@@ -1857,7 +1901,7 @@ bone_angle = 144.99997
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Skeleton2D/Center/TightForward/LegForward/FootForward" index="0" unique_id=1783399729]
 remote_path = NodePath("../../../../../../SpriteContainer/LegForwardGroup/FootForward")
 
-[node name="HealthComponent" parent="." index="4" unique_id=807074996]
+[node name="HealthComponent" parent="." index="6" unique_id=807074996]
 stat = SubResource("Resource_ianam")
 
 [node name="HurtBox" parent="HealthComponent" index="0" unique_id=1017093875]
@@ -1868,9 +1912,9 @@ resistances = Array[ExtResource("4_ptyu4")]([SubResource("Resource_i6ags")])
 position = Vector2(10, -341)
 shape = ExtResource("5_bqe10")
 
-[node name="VelocityComponent" parent="." index="5" unique_id=174796900 instance=ExtResource("9_1puav")]
+[node name="VelocityComponent" parent="." index="7" unique_id=174796900 instance=ExtResource("9_1puav")]
 
-[node name="MoveSet" type="Node" parent="." index="6" unique_id=1502018066]
+[node name="MoveSet" type="Node" parent="." index="8" unique_id=1502018066]
 script = ExtResource("2_4ak7f")
 metadata/_custom_type_script = "uid://bcmokx1bwyftw"
 
@@ -1878,19 +1922,19 @@ metadata/_custom_type_script = "uid://bcmokx1bwyftw"
 script = ExtResource("3_1puav")
 metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
 
-[node name="SerpentTête" type="Sprite2D" parent="." index="7" unique_id=193081546]
+[node name="SerpentTête" type="Sprite2D" parent="." index="9" unique_id=193081546]
 position = Vector2(382, -270)
 texture = ExtResource("3_fddmp")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8" unique_id=1741184675]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="10" unique_id=1741184675]
 libraries/ = SubResource("AnimationLibrary_i1np0")
 
-[node name="StatisticsManager" type="Node" parent="." index="9" unique_id=1895657502]
+[node name="StatisticsManager" type="Node" parent="." index="11" unique_id=1895657502]
 script = ExtResource("11_6y6jt")
 statistiques = ExtResource("12_x4xdt")
 metadata/_custom_type_script = "uid://dat1xibjdbka6"
 
-[node name="HitBox" type="Area2D" parent="." index="11" unique_id=479007305]
+[node name="HitBox" type="Area2D" parent="." index="13" unique_id=479007305]
 z_index = 5
 script = ExtResource("13_1g0bx")
 charac_stat = ExtResource("12_x4xdt")
@@ -1903,6 +1947,36 @@ position = Vector2(-20, -112)
 rotation = 1.4957327
 shape = SubResource("CapsuleShape2D_1g0bx")
 debug_color = Color(0.9411765, 0.19607843, 0.20392157, 0.41960785)
+
+[node name="JumpTo" type="Node" parent="OffensiveBehaviourTree" parent_id_path=PackedInt32Array(1798115290) index="0" unique_id=291437385 node_paths=PackedStringArray("velocity_comp", "jump_state")]
+script = ExtResource("16_076g2")
+target = Vector2(830, 700)
+velocity_comp = NodePath("../../VelocityComponent")
+jump_state = NodePath("../../StateMachine/Jump")
+metadata/_custom_type_script = "uid://bey7t8h4m0yyp"
+
+[node name="BeehaveTree" type="Node" parent="." index="16" unique_id=1424499067 node_paths=PackedStringArray("blackboard", "actor")]
+script = ExtResource("19_euguf")
+actor_node_path = NodePath("..")
+blackboard = NodePath("@Node@18815")
+actor = NodePath("..")
+metadata/_custom_type_script = "uid://bb0t2ovl7wifo"
+
+[node name="SequenceComposite" type="Node" parent="BeehaveTree" index="0" unique_id=704833497]
+script = ExtResource("20_ew4av")
+metadata/_custom_type_script = "uid://cg016dbe7gs1x"
+
+[node name="SignalReceived" type="Node" parent="BeehaveTree/SequenceComposite" index="0" unique_id=1395381425]
+script = ExtResource("21_gs3o1")
+metadata/_custom_type_script = "uid://cbnbvj8prv63i"
+
+[node name="JumpToAction" type="Node" parent="BeehaveTree/SequenceComposite" index="1" unique_id=628222471 node_paths=PackedStringArray("jump_state", "vel_comp")]
+script = ExtResource("21_6wbw2")
+jump_state = NodePath("../../../StateMachine/Jump")
+vel_comp = NodePath("../../../VelocityComponent")
+to_pos = Vector2(835, 780)
+height = 1500.0
+metadata/_custom_type_script = "uid://cv74jjdrwevpr"
 
 [editable path="HealthComponent"]
 [editable path="VelocityComponent"]

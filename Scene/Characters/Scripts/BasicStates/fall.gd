@@ -1,4 +1,5 @@
 extends State
+class_name FallState
 
 @export var increase_gravity: float= 1000.0
 
@@ -19,3 +20,5 @@ func update(_delta: float) -> void:
 
 func exit() -> void:
 	velocity_component.gravity -= increase_gravity
+
+

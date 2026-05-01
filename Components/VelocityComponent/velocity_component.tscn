@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://c81bvv7rpwtss" path="res://Components/VelocityComponent/scale_x_face_inverser.gd" id="2_q24de"]
 [ext_resource type="Script" uid="uid://sanv8io0pqwr" path="res://Components/VelocityComponent/pos_x_face_inverser.gd" id="3_2un0o"]
 [ext_resource type="Script" uid="uid://d1nt3dd68r6ke" path="res://Components/VelocityComponent/rotation_leader.gd" id="4_2un0o"]
+[ext_resource type="Script" uid="uid://xl1ypj7k8snq" path="res://Components/VelocityComponent/path_manager.gd" id="5_olbuh"]
 
 [node name="VelocityComponent" type="Node2D" unique_id=1212142288]
 script = ExtResource("1_64anw")
@@ -16,5 +17,8 @@ script = ExtResource("3_2un0o")
 
 [node name="RotationLeader" type="Node" parent="." unique_id=2010313169]
 script = ExtResource("4_2un0o")
+
+[node name="PathManager" type="Node" parent="." unique_id=1972970443]
+script = ExtResource("5_olbuh")
 
 [connection signal="dir_changed" from="." to="." method="_on_dir_changed"]

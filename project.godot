@@ -24,6 +24,8 @@ config/icon="res://icon.svg"
 
 Game="*res://Autoload/Game.gd"
 Events="*res://Autoload/Events.gd"
+BeehaveGlobalMetrics="*uid://c3ktl6ontsdt7"
+BeehaveGlobalDebugger="*uid://bl3ma400hpvsh"
 
 [display]
 
@@ -31,6 +33,10 @@ window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/size/mode=2
 window/stretch/mode="canvas_items"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/beehave/plugin.cfg")
 
 [gui]
 

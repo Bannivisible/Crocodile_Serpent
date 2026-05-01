@@ -25,6 +25,7 @@ func exit() -> void:
 	amount -= add_speed_scale
 	animation_manager.set_time_scale_amount(time_scale_name, amount)
 
+
 func _on_animation_manager_animation_finished(anim_name: StringName) -> void:
 	if anim_name == name:
 		deflagration.cast_projectile()

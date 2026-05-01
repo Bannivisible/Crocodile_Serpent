@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://mmkgsg3lueu" path="res://Scene/Characters/character.tscn" id="1_ikawt"]
 [ext_resource type="PackedScene" uid="uid://dbkcfhn0j6tet" path="res://Components/Health/health_component.tscn" id="2_tegfp"]
 [ext_resource type="Script" uid="uid://clxc1eaoq168p" path="res://Scene/Characters/Enemies/enemy.gd" id="2_vvq5x"]
+[ext_resource type="Script" uid="uid://bcmokx1bwyftw" path="res://StateMachine/state_machine.gd" id="4_cgw2a"]
 
 [node name="Enemy" unique_id=737387642 groups=["Ennemy"] instance=ExtResource("1_ikawt")]
 script = ExtResource("2_vvq5x")
@@ -15,5 +16,13 @@ faction = 1
 
 [node name="CollisionShape2D" parent="HealthComponent/HurtBox" parent_id_path=PackedInt32Array(807074996, 1017093875) index="0" unique_id=414636330]
 position = Vector2(0, -128)
+
+[node name="OffensiveBehaviourTree" type="Node" parent="." index="4" unique_id=1798115290]
+script = ExtResource("4_cgw2a")
+metadata/_custom_type_script = "uid://bcmokx1bwyftw"
+
+[node name="DefensiveBehaviourTree" type="Node" parent="." index="5" unique_id=1255918761]
+script = ExtResource("4_cgw2a")
+metadata/_custom_type_script = "uid://bcmokx1bwyftw"
 
 [editable path="HealthComponent"]
